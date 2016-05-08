@@ -6,28 +6,25 @@
 #include <sstream>
 #include <iostream>
 
-#include "socket.h"
-
-#define MAX_CONEXIONES 4
+#include "common_socket.h"
+#include "server_procesador_servidor.h"
+#include "server_accept.h"
 
 int main(int argc, char *argv[]){
   char* puerto = argv[1];
 
-  Socket* conexion = new Socket(NULL, puerto);
-  (*conexion).bind(NULL, puerto);
-  (*conexion).listen(MAX_CONEXIONES);
+  Procesador_servidor server();
+  Accept aceptador(puerto, server);
+  aceptador.start();
 
-  //Acepto un nuevo socket
-  int nuevo_skt = (*skt).accept(NULL);
-  if (nuevo_skt < 0 && fin){
-    std::cout << "Problema en accept, ";
-    printf("%s \n", strerror(errno));
-    return 0;
+  std::getline(std::cin,linea_actual);
+  while (linea_actual.compare("q") != 0){
+    std::getline(std::cin,linea_actual);
   }
-  Socket* aceptado = new Socket(NULL, NULL, nuevo_skt);
 
+  aceptador.terminar();
+  aceptador.join();
 
   delete conexion;
-  delete aceptado;
   return 0;
 }
