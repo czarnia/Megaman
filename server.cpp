@@ -13,7 +13,7 @@
 int main(int argc, char *argv[]){
   char* puerto = argv[1];
 
-  Procesador_servidor server();
+  Procesador_servidor* server = new server();
   Accept aceptador(puerto, server);
   aceptador.start();
 
