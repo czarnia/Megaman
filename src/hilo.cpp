@@ -1,4 +1,4 @@
-#include "server_hilo.h"
+#include "hilo.h"
 
 #include <cstdlib>
 #include <string>

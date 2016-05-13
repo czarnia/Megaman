@@ -1,4 +1,4 @@
-#include "server_mutex.h"
+#include "mutex.h"
 #include <pthread.h>
 
 Mutex::Mutex(){

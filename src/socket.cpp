@@ -11,7 +11,7 @@
 
 #include <netdb.h>
 
-#include "common_socket.h"
+#include "socket.h"
 #include <stdlib.h>
 
 #include <cstdlib>
