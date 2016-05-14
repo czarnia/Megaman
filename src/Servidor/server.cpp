@@ -6,7 +6,7 @@
 #include <sstream>
 #include <iostream>
 
-#include "socket.h"
+#include "../Comun/socket.h"
 
 int main(int argc, char *argv[]){
   return 0;
