@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/servidor.dir/server.cpp.o  -o servidor -rdynamic ../Comun/libMegaman.a 

@@ -1,4 +1,4 @@
-#include "socket.h"
+#include "../Comun/socket.h"
 #include "accion_uno.h"
 #include "accion_dos.h"
 

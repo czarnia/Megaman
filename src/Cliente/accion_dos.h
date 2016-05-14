@@ -2,7 +2,7 @@
 #define ACCION_DOS_H
 
 #include <gtkmm.h>
-#include "socket.h"
+#include "../Comun/socket.h"
 
 class Accion_dos{
   private:

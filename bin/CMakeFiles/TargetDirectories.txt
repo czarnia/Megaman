@@ -1,0 +1,3 @@
+/home/eugenia/Documents/TALLER/Megaman/bin/src/Comun/CMakeFiles/Megaman.dir
+/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir
+/home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor/CMakeFiles/servidor.dir
