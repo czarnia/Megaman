@@ -26,6 +26,7 @@ Servidor::~Servidor(){
   for (size_t i = 0; i < claves_clientes.size(); i++){
     Conexion_cliente* cliente = clientes[claves_clientes[i]];
     clientes.erase(claves_clientes[i]);
+    cliente.terminar_ejecucion();
     cliente.join();
     delete cliente;
   }

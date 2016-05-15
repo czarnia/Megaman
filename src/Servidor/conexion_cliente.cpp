@@ -1,24 +1,37 @@
 #include "conexion_cliente.h"
 
-Conexion_cliente(Socket* conexion){
+#define EN_ESPERA " "
+
+Conexion_cliente::Conexion_cliente(Socket* conexion){
   skt = conexion;
+  fin = false;
 }
 
-virtual void ejecutar(){
+Conexion_cliente::~Conexion_cliente(){
+  delete skt;
+}
+
+
+void Conexion_cliente::ejecutar(){
   char buffer[MAX_TAM_BUFFER];
   if ((*skt).receive(buffer, MAX_TAM_BUFFER) < 0){
       std::cout << "-1 al recibir \n";
   }
-  while (strcmp(buffer, FIN_ENTRADA) != 0){
+  while (!fin){
     if (strcmp(buffer, EN_ESPERA) != 0){
       skt.send(buffer, strlen(buffer)); //sólo reenvio lo que recibí por ahora!
     }
     strncpy(buffer, EN_ESPERA, MAX_TAM_BUFFER);
     if ((*skt).receive(buffer, MAX_TAM_BUFFER) < 0){
-        std::cout << "-1 al recibir \n";
+      if (fin){
+        return;
+      }
+      std::cout << "-1 al recibir \n";
     }
   }
-  (*skt).shutdown(SHUT_RDWR);
-  //fin = true;
   return;
+}
+
+void Conexion_cliente::terminar_ejecucion(){
+  (*skt).shutdown(SHUT_RDWR);
 }

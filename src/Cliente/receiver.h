@@ -8,7 +8,10 @@ class Receiver: public Hilo{
   private:
     Socket* skt;
   public:
+    //Crea un receiver recibiendo como parametro un socket ya conectado.
     Receiver(Socket* conexion);
+    //"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo
+    //le indica el fin de la ejecucion.
     virtual void ejecutar();
 };
 

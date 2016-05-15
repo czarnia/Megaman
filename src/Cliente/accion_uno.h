@@ -10,9 +10,12 @@ class Accion_uno{
     Gtk::Button *boton;
     Socket* skt;
   public:
+    //Crea una accion_dos recibiendo como parametro un socket ya conectado.
     Accion_uno(Socket* conexion);
+    //Devuelve el boton asociado a la accion_uno (es decir, aquel que la lanza).
     Gtk::Button *devolver_boton();
   private:
+    //La accion que se ejecutara al clickear el boton asociado a la accion_uno.
     void on_button_clicked();
 };
 
