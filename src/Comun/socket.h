@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-
+#include <vector>
 
 class Socket{
   private:
@@ -24,7 +24,7 @@ class Socket{
     //Hace un bind, devuelve menor a cero en caso de error.
     int bind(char* id, char* puerto);
     //Hace un accept, devuelve menor a cero en caso de error.
-    int accept(struct sockaddr* dir_cliente);
+    Socket* accept(struct sockaddr* dir_cliente);
     //Hace un connect, devuelve menor a cero en caso de error.
     int conect(char* ip, char* puerto);
     //Hace un receive, recibe una cantidad "tamanio" de datos, devuelve menor a
@@ -36,6 +36,10 @@ class Socket{
   private:
     //Inicia un addrinfo.
     struct addrinfo* iniciar_addrinfo(char* ip, char* puerto);
+	std::vector<Socket*> creados;
+	char* ip; 
+	char* puerto; 
+	int sktc;
 };
 
 #endif // SOCKET_H

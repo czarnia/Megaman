@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/eugenia/Documents/TALLER/Megaman/src/Comun/hilo.h
+pthread.h
+-
+
 /home/eugenia/Documents/TALLER/Megaman/src/Comun/socket.h
 stddef.h
 -
@@ -17,20 +21,32 @@ netinet/in.h
 -
 netdb.h
 -
+vector
+-
 
-/home/eugenia/Documents/TALLER/Megaman/src/Servidor/server.cpp
-stdio.h
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/conexion_cliente.h
+../Comun/hilo.h
+/home/eugenia/Documents/TALLER/Megaman/src/Comun/hilo.h
+../Comun/socket.h
+/home/eugenia/Documents/TALLER/Megaman/src/Comun/socket.h
+
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.cpp
+servidor.h
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.h
+stdlib.h
 -
-string.h
+vector
 -
-cstdlib
+map
 -
 string
 -
-sstream
+
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.h
+map
 -
-iostream
+string
 -
-../Comun/socket.h
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/socket.h
+conexion_cliente.h
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/conexion_cliente.h
 

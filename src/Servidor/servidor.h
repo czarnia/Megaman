@@ -9,10 +9,10 @@ class Servidor {
   private:
     //guardo a cada cliente con su id!
     std::map<std::string, Conexion_cliente*> clientes;
-    Socket skt;
+	Socket *skt;
   public:
     //Crea un servidor.
-    Servidor();
+    Servidor(char *puerto);
     //Destruye un servidor.
     ~Servidor();
     //Acepto a los clientes del servidor (maximo cuatro).

@@ -18,7 +18,10 @@
 #include <sstream>
 #include <iostream>
 
-Socket::Socket(char* ip, char* puerto, int sktc){
+Socket::Socket(char* ip, char* puerto, int sktc):
+ip(ip), 
+puerto(puerto), 
+sktc(sktc){
   if (sktc > 0){
     this->skt = sktc;
   }else{
@@ -32,9 +35,9 @@ Socket::Socket(char* ip, char* puerto, int sktc){
 }
 
 Socket::~Socket(){
-  close(this->skt);
+	delete[] &this->creados;
+	close(this->skt);
 }
-
 
 int Socket::shutdown(int como){
   return ::shutdown(this->skt, como);
@@ -45,7 +48,6 @@ int Socket::listen(int conexiones){
   return ::listen(this->skt, conexiones);
 }
 
-
 int Socket::bind(char* ip, char* puerto){
   struct addrinfo* addr = iniciar_addrinfo(ip, puerto);
   int b = ::bind(this->skt, addr->ai_addr, addr->ai_addrlen);
@@ -53,10 +55,13 @@ int Socket::bind(char* ip, char* puerto){
   return b;
 }
 
-int Socket::accept(struct sockaddr* dir_cliente){
-  socklen_t tam_addr = sizeof(dir_cliente);
-  int nuevo_socket = ::accept(this->skt, dir_cliente, &tam_addr);
-  return nuevo_socket;
+Socket* Socket::accept(struct sockaddr* dir_cliente){
+	Socket *nuevo = new Socket(ip, puerto, sktc);
+	this->creados.push_back(nuevo);
+	socklen_t tam_addr = sizeof(dir_cliente);
+	int nuevo_socket = ::accept(this->skt, dir_cliente, &tam_addr);
+	nuevo->skt = nuevo_socket;
+	return nuevo;
 }
 
 int Socket::conect(char* ip, char* puerto){

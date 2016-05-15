@@ -17,6 +17,7 @@ class Conexion_cliente: public Hilo{
     virtual void ejecutar();
     //Le informa a la conexion_cliente que debe dejar de recibir datos.
     void terminar_ejecucion();
+    virtual ~Conexion_cliente();
 };
 
 #endif //CONEXION_CLIENTE_H

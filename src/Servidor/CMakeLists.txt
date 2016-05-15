@@ -9,4 +9,4 @@ file (GLOB SRCS  *.cpp *.h)
 #by file command.
 add_executable (servidor ${SRCS})
 
-target_link_libraries (servidor Megaman)
+target_link_libraries (servidor Megaman -pthread)

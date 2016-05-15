@@ -9,10 +9,10 @@
 #include "servidor.h"
 #include <string>
 
-#define MAX_CONEXIONES 4
+#define POS_PUERTO 1
 
 int main(int argc, char *argv[]){
-  Servidor server();
+  Servidor server(argv[POS_PUERTO]);
   server.aceptar_clientes();
 
   /*while (!server.termino_partida()){

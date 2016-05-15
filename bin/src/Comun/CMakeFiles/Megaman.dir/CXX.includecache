@@ -6,42 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/hilo.cpp
-hilo.h
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/hilo.h
-cstdlib
--
-string
--
-sstream
--
-iostream
--
-
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/hilo.h
-pthread.h
--
-
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/lock.cpp
-pthread.h
--
-lock.h
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/lock.h
-
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/lock.h
-mutex.h
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/mutex.h
-
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/mutex.cpp
-mutex.h
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/mutex.h
-pthread.h
--
-
-/home/eugenia/Documents/TALLER/Megaman/src/Comun/mutex.h
-pthread.h
--
-
 /home/eugenia/Documents/TALLER/Megaman/src/Comun/socket.cpp
 stdio.h
 -
@@ -84,5 +48,7 @@ sys/socket.h
 netinet/in.h
 -
 netdb.h
+-
+vector
 -
 

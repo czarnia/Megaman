@@ -4,7 +4,9 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/eugenia/Documents/TALLER/Megaman/src/Servidor/server.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor/CMakeFiles/servidor.dir/server.cpp.o"
+  "/home/eugenia/Documents/TALLER/Megaman/src/Servidor/conexion_cliente.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o"
+  "/home/eugenia/Documents/TALLER/Megaman/src/Servidor/main_server.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o"
+  "/home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

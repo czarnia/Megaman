@@ -115,29 +115,77 @@ servidor/fast:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/build
 .PHONY : servidor/fast
 
-server.o: server.cpp.o
-.PHONY : server.o
+conexion_cliente.o: conexion_cliente.cpp.o
+.PHONY : conexion_cliente.o
 
 # target to build an object file
-server.cpp.o:
-	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/server.cpp.o
-.PHONY : server.cpp.o
+conexion_cliente.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o
+.PHONY : conexion_cliente.cpp.o
 
-server.i: server.cpp.i
-.PHONY : server.i
+conexion_cliente.i: conexion_cliente.cpp.i
+.PHONY : conexion_cliente.i
 
 # target to preprocess a source file
-server.cpp.i:
-	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/server.cpp.i
-.PHONY : server.cpp.i
+conexion_cliente.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.i
+.PHONY : conexion_cliente.cpp.i
 
-server.s: server.cpp.s
-.PHONY : server.s
+conexion_cliente.s: conexion_cliente.cpp.s
+.PHONY : conexion_cliente.s
 
 # target to generate assembly for a file
-server.cpp.s:
-	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/server.cpp.s
-.PHONY : server.cpp.s
+conexion_cliente.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.s
+.PHONY : conexion_cliente.cpp.s
+
+main_server.o: main_server.cpp.o
+.PHONY : main_server.o
+
+# target to build an object file
+main_server.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o
+.PHONY : main_server.cpp.o
+
+main_server.i: main_server.cpp.i
+.PHONY : main_server.i
+
+# target to preprocess a source file
+main_server.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.i
+.PHONY : main_server.cpp.i
+
+main_server.s: main_server.cpp.s
+.PHONY : main_server.s
+
+# target to generate assembly for a file
+main_server.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.s
+.PHONY : main_server.cpp.s
+
+servidor.o: servidor.cpp.o
+.PHONY : servidor.o
+
+# target to build an object file
+servidor.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o
+.PHONY : servidor.cpp.o
+
+servidor.i: servidor.cpp.i
+.PHONY : servidor.i
+
+# target to preprocess a source file
+servidor.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.i
+.PHONY : servidor.cpp.i
+
+servidor.s: servidor.cpp.s
+.PHONY : servidor.s
+
+# target to generate assembly for a file
+servidor.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.s
+.PHONY : servidor.cpp.s
 
 # Help Target
 help:
@@ -148,9 +196,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... servidor"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
+	@echo "... conexion_cliente.o"
+	@echo "... conexion_cliente.i"
+	@echo "... conexion_cliente.s"
+	@echo "... main_server.o"
+	@echo "... main_server.i"
+	@echo "... main_server.s"
+	@echo "... servidor.o"
+	@echo "... servidor.i"
+	@echo "... servidor.s"
 .PHONY : help
 
 
