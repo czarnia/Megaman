@@ -35,6 +35,8 @@ servidor.h
 /home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.h
 stdlib.h
 -
+sstream
+-
 vector
 -
 map

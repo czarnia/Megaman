@@ -20,7 +20,7 @@ class Servidor {
   private:
     //Dado un socket conectado a un cliente y un id del mismo, se agrega un cliente
     //al servidor.
-    void agregar_cliente(Socket* cliente_nuevo, std::string id_cliente);
+    void agregar_cliente(Socket* cliente_nuevo);
 };
 
 #endif //SERVIDOR_H

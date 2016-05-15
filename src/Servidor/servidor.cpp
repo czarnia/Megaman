@@ -1,5 +1,6 @@
 #include "servidor.h"
 #include <stdlib.h>
+#include <sstream>
 #include <vector>
 #include <map>
 #include <string>
@@ -39,16 +40,19 @@ Servidor::~Servidor(){
 void Servidor::aceptar_clientes(){
   Address addr_aceptado = (Address)malloc(sizeof(struct sockaddr));
   Socket* aceptado = skt->accept(addr_aceptado);
-  //TODO: arreglar esto del id!
-  //std::string id((char*)addr_aceptado->sa_data);
-  std::string id("Aca va el id de cliente");
-  agregar_cliente(aceptado, id);
+  agregar_cliente(aceptado);
   free(addr_aceptado);
 
   skt->shutdown(SHUT_RDWR);
 }
 
-void Servidor::agregar_cliente(Socket* cliente_nuevo, std::string id_cliente){
+void Servidor::agregar_cliente(Socket* cliente_nuevo){
+  //Armo un id para el nuevo cliente con el numero de cliente.
+  std::stringstream	s;
+  s << (clientes.size() + 1);
+  std::string id_cliente(s.str());
+  
+  //Agrego al cliente:
   clientes[id_cliente] = new Conexion_cliente(cliente_nuevo);
   clientes[id_cliente]->start();
 }
