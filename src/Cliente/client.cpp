@@ -2,7 +2,6 @@
 #include "accion_uno.h"
 #include "accion_dos.h"
 
-#include <gtkmm.h>
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
@@ -12,7 +11,8 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <gtk/gtk.h>
+//#include <gtk/gtk.h>
+#include <gtkmm.h>
 
 int main(int argc, char *argv[]){
 	char* id = argv[1];
