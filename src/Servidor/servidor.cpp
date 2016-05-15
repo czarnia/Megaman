@@ -26,6 +26,7 @@ Servidor::~Servidor(){
   for (size_t i = 0; i < claves_clientes.size(); i++){
     Conexion_cliente* cliente = clientes[claves_clientes[i]];
     clientes.erase(claves_clientes[i]);
+    cliente.join();
     delete cliente;
   }
 }
@@ -42,4 +43,5 @@ void Servidor::aceptar_clientes(){
 
 void Servidor::agregar_cliente(Socket* cliente_nuevo, std::string id_cliente){
   clientes[id_cliente] = new Conexion_cliente(cliente_nuevo);
+  clientes[id_cliente].start();
 }
