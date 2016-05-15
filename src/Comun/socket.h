@@ -30,10 +30,6 @@ class Socket{
     //Hace un receive, recibe una cantidad "tamanio" de datos, devuelve menor a
     //cero en caso de error.
     int receive(char* buffer, size_t tamanio);
-    //Hace un receive, recibe datos hasta encontrar un fin_buffer o hasta llegar
-    //al tam_max, devuelve menor a cero en caso de error.
-    int receive(char* buffer, size_t tam_max, const char fin_buffer,
-	size_t tam_fin);
     //Hace un send, devuelve menor a cero en caso de error.
     int send(const char* buffer, size_t tamanio);
 

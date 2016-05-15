@@ -18,7 +18,7 @@ int main(int argc, char *argv[]){
 	char* id = argv[1];
 	char* puerto = argv[2];
 	Socket* cliente = new Socket(NULL, puerto);
-	
+
 	//Me conecto al servidor
 	if ((*cliente).conect(id, puerto) < 0){
 		std::cout << "Problema en conect \n";
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 
 	vbox->add(*uno.devolver_boton());
 	vbox->add(*dos.devolver_boton());
-	  
+
 	window.add(*vbox);
 
 	vbox->show_all();

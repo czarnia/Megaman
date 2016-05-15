@@ -82,25 +82,6 @@ int Socket::receive(char* buffer, size_t tamanio){
   return tam_actual;
 }
 
-int Socket::receive(char* buffer, size_t tam_max, const char fin_buffer,
-size_t tam_fin){
-  size_t tam_actual = 0;
-  size_t tam_rcv = 0;
-  while (tam_actual < tam_max){
-    tam_rcv = receive(&buffer[tam_actual],1);
-    if (tam_rcv <= 0){
-      std::cout << "Uya, no recibi!"<< "\n";
-      return -1;
-    }
-    tam_actual += tam_rcv;
-    if (buffer[tam_actual-1] == '\n'){
-      buffer[tam_actual-1] = '\0';
-      return tam_actual;
-    }
-  }
-  buffer[tam_actual-1] = '\0';
-  return tam_actual;
-}
 
 int Socket::send(const char* buffer, size_t tamanio){
   size_t tam_actual = 0; //el tamaño total de lo que ya envié.
