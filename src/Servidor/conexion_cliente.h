@@ -4,8 +4,6 @@
 #include "../Comun/hilo.h"
 #include "../Comun/socket.h"
 
-#include <bool>
-
 class Conexion_cliente: public Hilo{
   private:
     Socket* skt;
