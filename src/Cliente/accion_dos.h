@@ -6,11 +6,11 @@
 
 class Accion_dos{
   private:
-    Gtk::Button boton;
+    Gtk::Button *boton;
     Socket* skt;
   public:
     Accion_dos(Socket* conexion);
-    Gtk::Button devolver_boton();
+    Gtk::Button *devolver_boton();
   private:
     void on_button_clicked();
 };

@@ -1,8 +1,8 @@
 #ifndef RECEIVER_H
 #define RECEIVER_H
 
-#include "hilo.h"
-#include "socket.h"
+#include "../Comun/hilo.h"
+#include "../Comun/socket.h"
 
 class Receiver: public Hilo{
   private:

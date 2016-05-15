@@ -7,6 +7,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/accion_dos.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/accion_uno.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/client.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/client.cpp.o"
+  "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/prueba.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/prueba.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/receiver.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")

@@ -187,6 +187,30 @@ client.cpp.s:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/client.cpp.s
 .PHONY : client.cpp.s
 
+prueba.o: prueba.cpp.o
+.PHONY : prueba.o
+
+# target to build an object file
+prueba.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/prueba.cpp.o
+.PHONY : prueba.cpp.o
+
+prueba.i: prueba.cpp.i
+.PHONY : prueba.i
+
+# target to preprocess a source file
+prueba.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/prueba.cpp.i
+.PHONY : prueba.cpp.i
+
+prueba.s: prueba.cpp.s
+.PHONY : prueba.s
+
+# target to generate assembly for a file
+prueba.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/prueba.cpp.s
+.PHONY : prueba.cpp.s
+
 receiver.o: receiver.cpp.o
 .PHONY : receiver.o
 
@@ -229,6 +253,9 @@ help:
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"
+	@echo "... prueba.o"
+	@echo "... prueba.i"
+	@echo "... prueba.s"
 	@echo "... receiver.o"
 	@echo "... receiver.i"
 	@echo "... receiver.s"

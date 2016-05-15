@@ -12,43 +12,43 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <gtk/gtk.h>
 
 int main(int argc, char *argv[]){
-  char* id = argv[1];
-  char* puerto = argv[2];
-  Socket* cliente = new Socket(NULL, puerto);
+	char* id = argv[1];
+	char* puerto = argv[2];
+	Socket* cliente = new Socket(NULL, puerto);
+	
+	//Me conecto al servidor
+	if ((*cliente).conect(id, puerto) < 0){
+		std::cout << "Problema en conect \n";
+		printf("%s \n", strerror(errno));
+		return 0;
+	}
 
-  //Me conecto al servidor
-  if ((*cliente).conect(id, puerto) < 0){
-    std::cout << "Problema en conect \n";
-    printf("%s \n", strerror(errno));
-    return 0;
-  }
+	Accion_uno uno(cliente);
+	Accion_uno dos(cliente);
 
-  Accion_uno uno(cliente);
-  Accion_uno dos(cliente);
+	//Aca va el ciclo del cliente
 
-  //Aca va el ciclo del cliente
+	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
 
-  Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
+	Gtk::Window window;
+	window.set_title("Megaman");
+	window.set_default_size(200, 200);
 
-  Gtk::Window window;
-  window.set_title("Megaman");
-  window.set_default_size(200, 200);
+	Gtk::Box *vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 0));
 
-  Gtk::Box *vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 0));
-  window.add(*vbox);
+	vbox->add(*uno.devolver_boton());
+	vbox->add(*dos.devolver_boton());
+	  
+	window.add(*vbox);
 
-  (*vbox).add(uno.devolver_boton());
-  (*vbox).add(dos.devolver_boton());
+	vbox->show_all();
 
-  vbox->show_all();
+	app->run(window);
 
-  app->run(window);
-
-  //
-
-  (*cliente).shutdown(SHUT_RDWR);
-  delete cliente;
-  return 0;
+	(*cliente).shutdown(SHUT_RDWR);
+	delete cliente;
+	return 0;
 }
