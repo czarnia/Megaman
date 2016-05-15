@@ -7,6 +7,8 @@
 
 #define MAX_CONEXIONES 4
 typedef struct sockaddr* Address;
+
+
 //--------------->Auxiliares<---------------//
 std::vector<std::string> obtener_claves(std::map<std::string,
                                                 Conexion_cliente*> hash){
@@ -51,7 +53,7 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
   std::stringstream	s;
   s << (clientes.size() + 1);
   std::string id_cliente(s.str());
-  
+
   //Agrego al cliente:
   clientes[id_cliente] = new Conexion_cliente(cliente_nuevo);
   clientes[id_cliente]->start();

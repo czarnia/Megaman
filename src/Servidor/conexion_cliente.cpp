@@ -41,5 +41,7 @@ void Conexion_cliente::ejecutar(){
 }
 
 void Conexion_cliente::terminar_ejecucion(){
+  fin = true;
+  skt.send(FIN_ENTRADA);
   (*skt).shutdown(SHUT_RDWR);
 }
