@@ -13,6 +13,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include <gtkmm.h>
 
 int main(int argc, char *argv[]){
 	char* id = argv[1];
