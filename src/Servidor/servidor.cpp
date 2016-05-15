@@ -41,5 +41,5 @@ void Servidor::aceptar_clientes(){
 }
 
 void Servidor::agregar_cliente(Socket* cliente_nuevo, std::string id_cliente){
-  clientes[id_cliente] = cliente_nuevo;
+  clientes[id_cliente] = new Conexion_cliente(cliente_nuevo);
 }
