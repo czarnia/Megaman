@@ -19,8 +19,8 @@
 #include <iostream>
 
 Socket::Socket(char* ip, char* puerto, int sktc):
-ip(ip), 
-puerto(puerto), 
+ip(ip),
+puerto(puerto),
 sktc(sktc){
   if (sktc > 0){
     this->skt = sktc;
@@ -29,6 +29,7 @@ sktc(sktc){
     this->skt = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
     if (this->skt < 0){
       std::cout << "no tengo socket!! \n";
+      printf("%s \n", strerror(errno));
     }
     freeaddrinfo(addr);
   }
