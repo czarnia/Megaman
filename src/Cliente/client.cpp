@@ -14,6 +14,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 #include <gtkmm.h>
+#include <gtkmm/application.h>
 
 int main(int argc, char *argv[]){
 	char* hostname = argv[1];
@@ -37,12 +38,10 @@ int main(int argc, char *argv[]){
 	std::cout << buffer << "\n";
 
 	//Aca va el ciclo del cliente
-
+	argc = 1; //SIN ESTO NO ANDA EL Gtk::Application::create!!!!
 	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "Ventana.Megaman.Juego");
 
-
-	Gtk::ApplicationWindow window(app);
-	//Gtk::Window window(app);
+	Gtk::Window window;
 	window.set_title("Megaman");
 	window.set_default_size(200, 200);
 
@@ -58,7 +57,7 @@ int main(int argc, char *argv[]){
 
 	vbox->show_all();
 
-	app->run(window);*/
+	app->run(window);
 
 	(*cliente).shutdown(SHUT_RDWR);
 	delete cliente;

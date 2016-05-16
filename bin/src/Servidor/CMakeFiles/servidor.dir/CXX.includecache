@@ -21,7 +21,17 @@ netinet/in.h
 -
 netdb.h
 -
-vector
+
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/conexion_cliente.cpp
+conexion_cliente.h
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/conexion_cliente.h
+../Comun/socket.h
+/home/eugenia/Documents/TALLER/Megaman/src/Comun/socket.h
+iostream
+-
+stdio.h
+-
+string.h
 -
 
 /home/eugenia/Documents/TALLER/Megaman/src/Servidor/conexion_cliente.h
@@ -29,6 +39,24 @@ vector
 /home/eugenia/Documents/TALLER/Megaman/src/Comun/hilo.h
 ../Comun/socket.h
 /home/eugenia/Documents/TALLER/Megaman/src/Comun/socket.h
+
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/main_server.cpp
+stdio.h
+-
+string.h
+-
+cstdlib
+-
+string
+-
+sstream
+-
+iostream
+-
+servidor.h
+/home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.h
+string
+-
 
 /home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.cpp
 servidor.h
@@ -42,6 +70,10 @@ vector
 map
 -
 string
+-
+sstream
+-
+iostream
 -
 
 /home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.h

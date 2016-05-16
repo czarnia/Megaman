@@ -49,6 +49,4 @@ netinet/in.h
 -
 netdb.h
 -
-vector
--
 
