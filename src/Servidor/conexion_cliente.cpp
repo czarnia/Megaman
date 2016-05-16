@@ -22,9 +22,11 @@ Conexion_cliente::~Conexion_cliente(){
 
 void Conexion_cliente::ejecutar(){
   char buffer[MAX_TAM_BUFFER];
-  if ((*skt).receive(buffer, MAX_TAM_BUFFER) < 0){
-      std::cout << "-1 al recibir \n";
+  if ((*skt).receive(buffer, MAX_TAM_BUFFER) > 0){
+    std::cout << "-1 al recibir fuera \n";
   }
+  std::cout << "buffer: " << buffer << "\n";
+  std::cout << fin << "\n";
   while (!fin){
     if (strcmp(buffer, EN_ESPERA) != 0){
       skt->send(buffer, strlen(buffer)); //sólo reenvio lo que recibí por ahora!
@@ -34,7 +36,7 @@ void Conexion_cliente::ejecutar(){
       if (fin){
         return;
       }
-      std::cout << "-1 al recibir \n";
+      std::cout << "-1 al recibir dentro \n";
     }
   }
   return;

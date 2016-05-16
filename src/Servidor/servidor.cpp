@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <sstream>
+#include <iostream>
 
 #define MAX_CONEXIONES 4
 typedef struct sockaddr* Address;
@@ -40,10 +42,11 @@ Servidor::~Servidor(){
 }
 
 void Servidor::aceptar_clientes(){
-  Address addr_aceptado = (Address)malloc(sizeof(struct sockaddr));
-  Socket* aceptado = skt->accept(addr_aceptado);
+  Socket* aceptado = skt->accept(NULL);
+  /*char buffer[4];
+  aceptado->receive(buffer, 4);
+  std::cout << buffer << "\n";*/
   agregar_cliente(aceptado);
-  free(addr_aceptado);
 
   skt->shutdown(SHUT_RDWR);
 }
