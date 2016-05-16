@@ -30,12 +30,16 @@ int main(int argc, char *argv[]){
 		return 0;
 	}
 
-	Accion_uno uno(cliente);
-	Accion_uno dos(cliente);
+	char buffer[4];
+	cliente->send("Hola", 4);
+	cliente->receive(buffer, 4);
+
+	std::cout << buffer << "\n";
 
 	//Aca va el ciclo del cliente
-	
-	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
+
+	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "Ventana.Megaman.Juego");
+
 
 	Gtk::ApplicationWindow window(app);
 	//Gtk::Window window(app);
@@ -44,6 +48,9 @@ int main(int argc, char *argv[]){
 
 	Gtk::Box *vbox = Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 0));
 
+	Accion_uno uno(cliente);
+	Accion_uno dos(cliente);
+
 	vbox->add(*uno.devolver_boton());
 	vbox->add(*dos.devolver_boton());
 
@@ -51,7 +58,7 @@ int main(int argc, char *argv[]){
 
 	vbox->show_all();
 
-	app->run(window);
+	app->run(window);*/
 
 	(*cliente).shutdown(SHUT_RDWR);
 	delete cliente;
