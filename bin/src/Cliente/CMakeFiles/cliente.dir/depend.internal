@@ -2721,6 +2721,25 @@ src/Cliente/CMakeFiles/cliente.dir/client.cpp.o
  /usr/include/gtk-3.0/gdk/gdkversionmacros.h
  /usr/include/gtk-3.0/gdk/gdkvisual.h
  /usr/include/gtk-3.0/gdk/gdkwindow.h
+ /usr/include/gtk-3.0/gdk/gdkx.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11applaunchcontext.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11cursor.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11device-core.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11device-xi2.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11device.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager-core.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager-xi2.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11display.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11displaymanager.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11dnd.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11keys.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11property.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11screen.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11selection.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11utils.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11visual.h
+ /usr/include/gtk-3.0/gdk/x11/gdkx11window.h
  /usr/include/gtk-3.0/gtk/deprecated/gtkaction.h
  /usr/include/gtk-3.0/gtk/deprecated/gtkactiongroup.h
  /usr/include/gtk-3.0/gtk/deprecated/gtkactivatable.h

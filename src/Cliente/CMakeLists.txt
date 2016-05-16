@@ -27,4 +27,4 @@ file (GLOB SRCS  *.cpp *.h)
 #by file command.
 add_executable (cliente ${SRCS})
 
-target_link_libraries (cliente Megaman ${GTKMM_LIBRARIES} )
+target_link_libraries (cliente Megaman ${GTKMM_LIBRARIES})

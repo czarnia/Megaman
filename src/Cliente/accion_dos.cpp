@@ -1,4 +1,5 @@
 #include "accion_dos.h"
+#include <gtk/gtk.h>
 #include <iostream>
 
 Accion_dos::Accion_dos(Socket* conexion){

@@ -11,16 +11,20 @@
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
-//#include <gtk/gtk.h>
+#include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include <gtkmm.h>
 
 int main(int argc, char *argv[]){
-	char* id = argv[1];
+	char* hostname = argv[1];
 	char* puerto = argv[2];
 	Socket* cliente = new Socket(NULL, puerto);
-
+	gtk_init(NULL, NULL);
+	
+	Gtk::Main kit(NULL, NULL); 
+	
 	//Me conecto al servidor
-	if ((*cliente).conect(id, puerto) < 0){
+	if ((*cliente).conect(hostname, puerto) < 0){
 		std::cout << "Problema en conect \n";
 		printf("%s \n", strerror(errno));
 		return 0;
@@ -30,10 +34,11 @@ int main(int argc, char *argv[]){
 	Accion_uno dos(cliente);
 
 	//Aca va el ciclo del cliente
-
+	
 	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
 
-	Gtk::Window window;
+	Gtk::ApplicationWindow window(app);
+	//Gtk::Window window(app);
 	window.set_title("Megaman");
 	window.set_default_size(200, 200);
 

@@ -2,9 +2,16 @@ project (Megaman)
 cmake_minimum_required (VERSION 2.8.12.2)
 
 find_package (PkgConfig REQUIRED)
+
+#GTK, GTKMM, GLIB:
 pkg_check_modules (GTK3 REQUIRED gtk+-3.0)
 pkg_check_modules(GTKMM REQUIRED gtkmm-3.0)
 pkg_check_modules(GLIB_PKG REQUIRED glibmm-2.4)
+
+#SDL:
+#PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+#PKG_SEARCH_MODULE(SDL2_image REQUIRED sdl2_image)
+#INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIR})
 
 #Go into indicated subdirectory and look
 #for another CMakeLists.txt file:

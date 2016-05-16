@@ -43,7 +43,7 @@ void Servidor::aceptar_clientes(){
   Address addr_aceptado = (Address)malloc(sizeof(struct sockaddr));
   Socket* aceptado = skt->accept(addr_aceptado);
   agregar_cliente(aceptado);
-  free(addr_aceptado);
+  //free(addr_aceptado);
 
   skt->shutdown(SHUT_RDWR);
 }

@@ -23,7 +23,7 @@ class Socket{
     int listen(int conexiones);
     //Hace un bind, devuelve menor a cero en caso de error.
     int bind(char* id, char* puerto);
-    //Hace un accept, devuelve menor a cero en caso de error.
+    //Hace un accept, devuelve un nuevo socket o NULL en caso de error.
     Socket* accept(struct sockaddr* dir_cliente);
     //Hace un connect, devuelve menor a cero en caso de error.
     int conect(char* ip, char* puerto);
