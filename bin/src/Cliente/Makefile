@@ -211,6 +211,30 @@ receiver.cpp.s:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.s
 .PHONY : receiver.cpp.s
 
+ventana.o: ventana.cpp.o
+.PHONY : ventana.o
+
+# target to build an object file
+ventana.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o
+.PHONY : ventana.cpp.o
+
+ventana.i: ventana.cpp.i
+.PHONY : ventana.i
+
+# target to preprocess a source file
+ventana.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.i
+.PHONY : ventana.cpp.i
+
+ventana.s: ventana.cpp.s
+.PHONY : ventana.s
+
+# target to generate assembly for a file
+ventana.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.s
+.PHONY : ventana.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -232,6 +256,9 @@ help:
 	@echo "... receiver.o"
 	@echo "... receiver.i"
 	@echo "... receiver.s"
+	@echo "... ventana.o"
+	@echo "... ventana.i"
+	@echo "... ventana.s"
 .PHONY : help
 
 

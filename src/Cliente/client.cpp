@@ -1,6 +1,7 @@
 #include "../Comun/socket.h"
 #include "accion_uno.h"
 #include "accion_dos.h"
+#include "ventana.h"
 
 #include <sstream>
 #include <iostream>
@@ -15,6 +16,7 @@
 #include <gdk/gdkx.h>
 #include <gtkmm.h>
 #include <gtkmm/application.h>
+
 
 int main(int argc, char *argv[]){
 	char* hostname = argv[1];
@@ -36,7 +38,14 @@ int main(int argc, char *argv[]){
 	cliente->receive(buffer, 4);
 
 	std::cout << buffer << "\n";
-
+	
+	(*cliente).shutdown(SHUT_RDWR);
+	delete cliente;
+	
+	Ventana ventana;
+	ventana.run();
+	
+/*
 	//Aca va el ciclo del cliente
 	argc = 1; //SIN ESTO NO ANDA EL Gtk::Application::create!!!!
 	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "Ventana.Megaman.Juego");
@@ -58,8 +67,7 @@ int main(int argc, char *argv[]){
 	vbox->show_all();
 
 	app->run(window);
+*/
 
-	(*cliente).shutdown(SHUT_RDWR);
-	delete cliente;
 	return 0;
 }

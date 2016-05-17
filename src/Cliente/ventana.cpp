@@ -1,6 +1,7 @@
+#include "ventana.h"
 #include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_mixer.h"
+//#include "SDL_image.h"
+//#include "SDL_mixer.h"
 #include <iostream>
 #include <vector>
 
@@ -31,23 +32,24 @@ class Surface{
         }
 };
 
-int main(int argc, char **argv){
-
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window *window = NULL;
-    window = SDL_CreateWindow("Hello world!",
+Ventana::Ventana(){
+	SDL_Init(SDL_INIT_VIDEO);
+    this->window = SDL_CreateWindow("Hello world!",
                                 SDL_WINDOWPOS_UNDEFINED,
                                 SDL_WINDOWPOS_UNDEFINED,
                                 WIDTH,
                                 HEIGHT,
                                 SDL_WINDOW_RESIZABLE);
-
-    if(window == NULL){
+	//TODO: manejar con excepcion!
+    if (window == NULL){
         std::cout<<"Hubo un error inicilizando"<<std::endl;
         std::cout<< SDL_GetError()<<std::endl;
     }
 
-    Surface screen(window);
+	
+}
+int Ventana::run(){
+	Surface screen(window);
 
     // COLORES
     Uint32 white = SDL_MapRGB(screen.get_surface()->format, 255,255,255);
@@ -62,7 +64,7 @@ int main(int argc, char **argv){
     Uint32 f = SDL_MapRGB(screen.get_surface()->format, 10, 200, 125);
     Uint32 g = SDL_MapRGB(screen.get_surface()->format, 10, 150, 255);
 
- //   SDL_FillRect(screen.get_surface(), NULL, white);
+	//SDL_FillRect(screen.get_surface(), NULL, white);
 
 
     Uint32 starting_tick;
@@ -123,3 +125,4 @@ int main(int argc, char **argv){
     SDL_Quit();
     return 0;
 }
+

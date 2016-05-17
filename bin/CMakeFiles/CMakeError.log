@@ -1,0 +1,216 @@
+Determining if files pthread.h exist failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec109470478/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec109470478.dir/build.make CMakeFiles/cmTryCompileExec109470478.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec109470478.dir/CheckIncludeFiles.c.o
+/usr/bin/cc   -Wall -q -pedantic    -o CMakeFiles/cmTryCompileExec109470478.dir/CheckIncludeFiles.c.o   -c /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec109470478.dir/CheckIncludeFiles.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec109470478/fast] Error 2
+
+Source:
+/* */
+#include <pthread.h>
+
+
+int main(){return 0;}
+
+Determining if the function XOpenDisplay exists in the /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1336874550/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1336874550.dir/build.make CMakeFiles/cmTryCompileExec1336874550.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1336874550.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec1336874550.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec1336874550.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec1336874550/fast] Error 2
+
+
+Determining if the function dnet_ntoa exists in the dnet failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4014549710/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4014549710.dir/build.make CMakeFiles/cmTryCompileExec4014549710.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4014549710.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=dnet_ntoa   -o CMakeFiles/cmTryCompileExec4014549710.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec4014549710.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec4014549710/fast] Error 2
+
+
+Determining if the function dnet_ntoa exists in the dnet_stub failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2999446972/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2999446972.dir/build.make CMakeFiles/cmTryCompileExec2999446972.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2999446972.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=dnet_ntoa   -o CMakeFiles/cmTryCompileExec2999446972.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec2999446972.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec2999446972/fast] Error 2
+
+
+Determining if the function gethostbyname exists failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3986117865/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3986117865.dir/build.make CMakeFiles/cmTryCompileExec3986117865.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3986117865.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec3986117865.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec3986117865.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec3986117865/fast] Error 2
+
+
+Determining if the function gethostbyname exists in the nsl failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2975436311/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2975436311.dir/build.make CMakeFiles/cmTryCompileExec2975436311.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2975436311.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec2975436311.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec2975436311.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec2975436311/fast] Error 2
+
+
+Determining if the function gethostbyname exists in the bsd failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1519228255/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1519228255.dir/build.make CMakeFiles/cmTryCompileExec1519228255.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1519228255.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec1519228255.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec1519228255.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec1519228255/fast] Error 2
+
+
+Determining if the function connect exists failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec1077139640/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec1077139640.dir/build.make CMakeFiles/cmTryCompileExec1077139640.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1077139640.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec1077139640.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec1077139640.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec1077139640/fast] Error 2
+
+
+Determining if the function connect exists in the socket failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2594371722/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2594371722.dir/build.make CMakeFiles/cmTryCompileExec2594371722.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2594371722.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec2594371722.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec2594371722.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec2594371722/fast] Error 2
+
+
+Determining if the function remove exists failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4056193214/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4056193214.dir/build.make CMakeFiles/cmTryCompileExec4056193214.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4056193214.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec4056193214.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec4056193214.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec4056193214/fast] Error 2
+
+
+Determining if the function remove exists in the posix failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec4242543372/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec4242543372.dir/build.make CMakeFiles/cmTryCompileExec4242543372.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec4242543372.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec4242543372.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec4242543372.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec4242543372/fast] Error 2
+
+
+Determining if the function shmat exists failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3459591334/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3459591334.dir/build.make CMakeFiles/cmTryCompileExec3459591334.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3459591334.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec3459591334.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec3459591334.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec3459591334/fast] Error 2
+
+
+Determining if the function shmat exists in the ipc failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3502922295/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3502922295.dir/build.make CMakeFiles/cmTryCompileExec3502922295.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3502922295.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec3502922295.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec3502922295.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec3502922295/fast] Error 2
+
+
+Determining if the function IceConnectionNumber exists in the ICE failed with the following output:
+Change Dir: /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec3237613942/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3237613942.dir/build.make CMakeFiles/cmTryCompileExec3237613942.dir/build
+make[1]: Entering directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3237613942.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -q -pedantic -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec3237613942.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+cc: error: unrecognized command line option ‘-q’
+make[1]: *** [CMakeFiles/cmTryCompileExec3237613942.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory `/home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec3237613942/fast] Error 2
+
+

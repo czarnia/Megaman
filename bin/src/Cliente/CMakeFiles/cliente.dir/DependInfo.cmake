@@ -8,6 +8,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/accion_uno.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/client.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/client.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/receiver.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o"
+  "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/ventana.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -47,6 +48,7 @@ SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/lib/x86_64-linux-gnu/glibmm-2.4/include"
   "/usr/include/sigc++-2.0"
   "/usr/lib/x86_64-linux-gnu/sigc++-2.0/include"
+  "/usr/include/SDL2"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
 SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

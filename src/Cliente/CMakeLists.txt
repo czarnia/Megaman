@@ -19,6 +19,15 @@ find_path(GLIB_INCLUDE_DIR NAMES glib.h PATH_SUFFIXES glib-2.4)
 link_directories(${GLIB_PKG_LIBRARY_DIRS})
 include_directories(${GLIB_PKG_INCLUDE_DIRS})
 
+#Set up CMake to use SDL, SDL_image:
+include(FindPkgConfig)
+pkg_search_module(SDL2 REQUIRED sdl2)
+include_directories(${SDL2_INCLUDE_DIRS})
+#pkg_search_module(SDL2IMAGE REQUIRED SDL2_image)
+#include_directories(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS})
+
+
+
 #Declare variable that combines all *.cpp  and *.h files
 #in this directory.
 file (GLOB SRCS  *.cpp *.h)
@@ -27,4 +36,4 @@ file (GLOB SRCS  *.cpp *.h)
 #by file command.
 add_executable (cliente ${SRCS})
 
-target_link_libraries (cliente Megaman ${GTKMM_LIBRARIES})
+target_link_libraries (cliente Megaman ${GTKMM_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES}) 
