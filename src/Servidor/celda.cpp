@@ -1,10 +1,10 @@
 #include "celda.h"
 
-Celda(){
+Celda::Celda(){
   ocupada = false;
 }
 
-void ubicar(Ubicable ocupa){
+void Celda::ubicar(Ubicable ocupa){
   if (ocupada){
     return //se podria lanzar una excepcion tambien...
   }
@@ -12,7 +12,7 @@ void ubicar(Ubicable ocupa){
   ocupada = true;
 }
 
-Ubicable desocupar(){
+Ubicable Celda::desocupar(){
   if (!ocupada){
     return NULL; //TODO: agregar excepcion.
   }
@@ -20,13 +20,13 @@ Ubicable desocupar(){
   return ubicable;
 }
 
-Ubicable obtener_ubicable(){
+Ubicable Celda::obtener_ubicable(){
   if (!ocupada){
     return NULL;
   }
   return ubicable;
 }
 
-bool esta_ocupada(){
+bool Celda::esta_ocupada(){
   return ocupada;
 }
