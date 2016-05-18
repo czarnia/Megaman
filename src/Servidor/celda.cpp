@@ -4,7 +4,7 @@ Celda::Celda(){
   ocupada = false;
 }
 
-void Celda::ubicar(Ubicable ocupa){
+void Celda::ocupar(Ubicable ocupa){
   if (ocupada){
     return //se podria lanzar una excepcion tambien...
   }

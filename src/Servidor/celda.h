@@ -11,7 +11,7 @@ class Celda{
     //Crea una celda.
     Celda();
     //Dado un ubicable, lo ubica en la celda.
-    void ubicar(Ubicable ocupa);
+    void ocupar(Ubicable ocupa);
     //Saca al ubicable que estaba en una celda y lo devuelve.
     //TODO: agregar una excepcion en caso de que no haya ubicable.
     Ubicable desocupar();
