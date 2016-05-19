@@ -1,20 +1,40 @@
 #include "mapa.h"
+#include "coordenada.h"
 
 Mapa::Mapa(){
   //mapa.cargar();
 }
 
-void Mapa::ocupar(size_t x, size_t y, Ubicable nuevo_ubicable){
-  Celda posicion = celdas[x][y];
-  posicion.ocupar(nuevo_ubicable);
+bool Mapa::coordenada_es_ocupable(Coordenada &coordenada){
+	size_t x = coordenadas[pos].obtener_abscisa();
+	size_t y = coordenadas[pos].obtener_ordenada();
+	return celdas[x][y].esta_ocupada();
 }
 
-void Mapa::desocupar(size_t x, size_t y){
-  Celda posicion = celdas[x][y];
-  celda.desocupar();
+bool Mapa::ocupar(Ubicable nuevo_ubicable, std::vector<Coordenada*> &coordenadas){
+	bool ocupar_exitoso = true;
+	for (size_t pos = 0; pos < coordenadas.size(); pos++){
+		size_t x = coordenadas[pos].obtener_abscisa();
+		size_t y = coordenadas[pos].obtener_ordenada();
+		Celda posicion = celdas[x][y];
+		ocupar_exitoso = (ocupar_exitoso && posicion.ocupar(nuevo_ubicable));
+	}
+	return ocupar_exitoso;
 }
 
-Ubicable Mapa::obtener_ubicable(size_t x, size_t y){
-  Celda posicion = celdas[x][y];
-  return posicion.obtener_ubicable();
+void Mapa::desocupar(std::vector<Coordenada*> &coordenadas){
+	size_t x, y = 0;
+	for (size_t pos = 0; pos < coordenadas.size(); pos++){
+		x = coordenadas[pos].obtener_abscisa();
+		y = coordenadas[pos].obtener_ordenada();
+		Celda posicion = celdas[x][y];
+		posicion.desocupar();
+	}
+}
+
+Ubicable& Mapa::obtener_ubicable(Coordenada &coordenada){
+	size_t x = coordenada.obtener_abscisa();
+	size_t y = coordenada.obtener_ordenada();
+	Celda posicion = celdas[x][y];
+	return posicion.obtener_ubicable();
 }
