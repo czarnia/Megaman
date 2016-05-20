@@ -1,7 +1,7 @@
 #ifndef BLOQUE_H
 #define BLOQUE_H
 
-#include "mapa.h"
+#include "personaje.h"
 #include "obstaculo.h"
 #include "coordenada.h"
 
