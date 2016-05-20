@@ -9,10 +9,10 @@
 #include "defendible.h"
 #include "actualizable.h"
 
-class Personaje: 
-public Ubicable, 
-public Atacable, 
-public Defendible, 
+class Personaje:
+public Ubicable,
+public Atacable,
+public Defendible,
 public Actualizable{
 	public:
 		Personaje();

@@ -5,12 +5,6 @@ Mapa::Mapa(){
   //mapa.cargar();
 }
 
-bool Mapa::coordenada_es_ocupable(Coordenada &coordenada){
-	size_t x = coordenadas[pos].obtener_abscisa();
-	size_t y = coordenadas[pos].obtener_ordenada();
-	return celdas[x][y].esta_ocupada();
-}
-
 bool Mapa::ocupar(Ubicable &nuevo_ubicable, std::vector<Coordenada*> &coordenadas){
 	Celda posicion;
 	size_t x, y;
@@ -23,7 +17,7 @@ bool Mapa::ocupar(Ubicable &nuevo_ubicable, std::vector<Coordenada*> &coordenada
 		if (!posicion.puede_ocupar(nuevo_ubicable)){
 			return false;
 		}
-	}	
+	}
 	//Ocupo las celdas:
 	for (size_t pos = 0; pos < coordenadas.size(); pos++){
 		x = coordenadas[pos].obtener_abscisa();
@@ -46,9 +40,15 @@ void Mapa::desocupar(std::vector<Coordenada*> &coordenadas){
 	}
 }
 
-Ubicable& Mapa::obtener_ubicable(Coordenada &coordenada){
+/*Ubicable& Mapa::obtener_ubicable(Coordenada &coordenada){
 	size_t x = coordenada.obtener_abscisa();
 	size_t y = coordenada.obtener_ordenada();
 	Celda posicion = celdas[x][y];
 	return posicion.obtener_ubicable();
-}
+}*/
+
+/*bool Mapa::coordenada_es_ocupable(Coordenada &coordenada){
+	size_t x = coordenadas[pos].obtener_abscisa();
+	size_t y = coordenadas[pos].obtener_ordenada();
+	return celdas[x][y].esta_ocupada();
+}*/

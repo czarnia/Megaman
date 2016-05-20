@@ -1,20 +1,20 @@
-#ifndef BLOQUE_H
-#define BLOQUE_H
+#ifndef ESCALERA_H
+#define ESCALERA_H
 
 #include "personaje.h"
 #include "obstaculo.h"
 #include "coordenada.h"
 
-class Bloque: public Obstaculo{
+class Escalera: public Obstaculo{
 	private:
 		Coordenada coord;
 	public:
-		Bloque(Coordenada &coordenada);
+		Escalera(Coordenada &coordenada);
 		//Devuelve true sólo si el personaje recibido tiene permitido
 		//ubicarse en la misma celda.
 		bool puede_ocupar(Personaje* pj);
-		//Destructor del bloque.
-		~Bloque();
+		//Destructor de la Escalera.
+		~Escalera();
 }
 
-#endif //BLOQUE_H
+#endif //ESCALERA_H
