@@ -11,15 +11,29 @@ bool Mapa::coordenada_es_ocupable(Coordenada &coordenada){
 	return celdas[x][y].esta_ocupada();
 }
 
-bool Mapa::ocupar(Ubicable nuevo_ubicable, std::vector<Coordenada*> &coordenadas){
-	bool ocupar_exitoso = true;
+bool Mapa::ocupar(Ubicable &nuevo_ubicable, std::vector<Coordenada*> &coordenadas){
+	Celda posicion;
+	size_t x, y;
+	//Antes de ocupar un conjunto de celdas verifico que el
+	//la operacion es válida:
 	for (size_t pos = 0; pos < coordenadas.size(); pos++){
-		size_t x = coordenadas[pos].obtener_abscisa();
-		size_t y = coordenadas[pos].obtener_ordenada();
-		Celda posicion = celdas[x][y];
-		ocupar_exitoso = (ocupar_exitoso && posicion.ocupar(nuevo_ubicable));
+		x = coordenadas[pos].obtener_abscisa();
+		y = coordenadas[pos].obtener_ordenada();
+		posicion = celdas[x][y];
+		if (!posicion.puede_ocupar(nuevo_ubicable)){
+			return false;
+		}
+	}	
+	//Ocupo las celdas:
+	for (size_t pos = 0; pos < coordenadas.size(); pos++){
+		x = coordenadas[pos].obtener_abscisa();
+		y = coordenadas[pos].obtener_ordenada();
+		posicion = celdas[x][y];
+		if (!posicion.ocupar(nuevo_ubicable)){
+			return false; //desocupar celdas ocupadas...lanzar excepcion... (?)
+		}
 	}
-	return ocupar_exitoso;
+	return true;
 }
 
 void Mapa::desocupar(std::vector<Coordenada*> &coordenadas){

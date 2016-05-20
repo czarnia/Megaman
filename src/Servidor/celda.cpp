@@ -1,35 +1,56 @@
 #include "celda.h"
 
-Celda::Celda(Ubicable &obstaculo, int elemento = -1){
-	ocupada = false;
-	elemento = elemento;
+Celda::Celda(){
+	this->ocupada = false;
 }
 
-void Celda::ocupar(Ubicable ocupa){
-	if (ocupada){
-		return false;//se podria lanzar una excepcion tambien...
+Celda::Celda(Ubicable &ocupa){
+	this->ocupantes.push_back(&(*ocupa));
+	this->ocupada = !ocupa.puede_compartir_celda();
+}
+
+bool Celda::puede_ocupar(Ubicable &ocupa){
+	for (size_t i = 0; i < ocupantes.size(); i++){
+		if (!ocupantes[i].es_ubicable_con(ocupa)){
+			return false;
+		}
 	}
-	ocupante = ocupa;
-	ocupada = true;
+	return true;
 }
 
-Ubicable Celda::desocupar(){
+bool Celda::ocupar(Ubicable &ocupa){
+	if (ocupada || (!puede_ocupar(ocupa))){
+		return false;
+	}
+	this->ocupantes.push_back(&(*ocupa));
+	ocupada = (ocupada || !ocupa.puede_compartir_celda());
+	return true;
+}
+
+Ubicable *Celda::desocupar(){
 	if (!ocupada){
 		return NULL; //TODO: agregar excepcion.
 	}
-	ocupada = false;
-	return ubicable;
+	for (size_t i = 0; i < ocupantes.size(); i++){
+		if (!ocupantes[i].puede_compartir_celda()){
+			Ubicable *ocupa = ocupantes[i];
+			ocupantes.erase(ocupantes.begin() + i);
+			ocupada = false;
+			return ocupa;
+		}
+	}
 }
 
-Ubicable Celda::obtener_ubicable(){
+Ubicable *Celda::obtener_ubicable(){
 	if (!ocupada){
 		return NULL;
 	}
-	return ubicable;
-}
-
-bool Celda::esta_vacia(){
-	return (this->elemento != -1)
+	for (size_t i = 0; i < ocupantes.size(); i++){
+		if (!ocupantes[i].puede_compartir_celda()){
+			Ubicable *ocupa = ocupantes[i];
+			return ocupa;
+		}
+	}
 }
 
 bool Celda::esta_ocupada(){
