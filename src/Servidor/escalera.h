@@ -2,10 +2,10 @@
 #define ESCALERA_H
 
 #include "personaje.h"
-#include "obstaculo.h"
+#include "elemento.h"
 #include "coordenada.h"
 
-class Escalera: public Obstaculo{
+class Escalera: public Elemento{
 	private:
 		Coordenada coord;
 	public:

@@ -2,10 +2,10 @@
 #define PUAS_H
 
 #include "personaje.h"
-#include "obstaculo.h"
+#include "elemento.h"
 #include "coordenada.h"
 
-class Puas: public Obstaculo{
+class Puas: public Elemento{
 	private:
 		Coordenada coord;
 	public:

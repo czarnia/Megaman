@@ -1,4 +1,4 @@
-#include "Puas.h"
+#include "puas.h"
 
 Puas::Puas(Coordenada &coordenada){
 	coord = coordenada;
