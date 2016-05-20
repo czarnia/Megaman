@@ -21,6 +21,7 @@ public Actualizable{
 		virtual void recibir_ataque(/*Bala ataque*/) = 0;
 		virtual bool ubicar(Mapa &mapa) = 0;
 		//virtual void mover(Mapa &mapa, StrategyMover &accion_mover);
+		virtual void devolver_id() = 0;
 	private:
 		std::vector<Coordenada*> coordenadas_ocupadas;
 		//std::vector<Arma*> armas;
