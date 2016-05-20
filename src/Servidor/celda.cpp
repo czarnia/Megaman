@@ -1,58 +1,33 @@
 #include "celda.h"
 
-Celda::Celda(){
-	this->ocupada = false;
+Celda(Plataforma p = NULL, Obstaculo* o = NULL){
+	piso = p;
+	obs = o;
 }
 
-Celda::Celda(Ubicable &ocupa){
-	this->ocupantes.push_back(&(*ocupa));
-	this->ocupada = !ocupa.puede_compartir_celda();
+bool ocupar(Personaje* ocupa){
+	if (obs.puede_ocupar(ocupa)){
+		ocupantes[ocupa.obtener_id()] = ocupa;
+		return true;
+	}
+	return false;
 }
 
-bool Celda::puede_ocupar(Ubicable &ocupa){
-	for (size_t i = 0; i < ocupantes.size(); i++){
-		if (!ocupantes[i].es_ubicable_con(ocupa)){
-			return false;
-		}
+bool puede_ocupar(Personaje* ocupa){
+	if (!obs){
+		return true;
 	}
-	return true;
+	return obs.puede_ocupar(ocupa);
 }
 
-bool Celda::ocupar(Ubicable &ocupa){
-	if (ocupada || (!puede_ocupar(ocupa))){
-		return false;
+Personaje* desocupar(std::string id_personaje){
+	Personaje* ocupa = ocupantes[id_personaje]; //TODO: no devolver NULL, sino armar una excepcion
+	if (ocupa){
+		ocupantes.erase(id_personaje);
 	}
-	this->ocupantes.push_back(&(*ocupa));
-	ocupada = (ocupada || !ocupa.puede_compartir_celda());
-	return true;
+	return ocupa;
 }
 
-Ubicable *Celda::desocupar(){
-	if (!ocupada){
-		return NULL; //TODO: agregar excepcion.
-	}
-	for (size_t i = 0; i < ocupantes.size(); i++){
-		if (!ocupantes[i].puede_compartir_celda()){
-			Ubicable *ocupa = ocupantes[i];
-			ocupantes.erase(ocupantes.begin() + i);
-			ocupada = false;
-			return ocupa;
-		}
-	}
-}
-
-Ubicable *Celda::obtener_ubicable(){
-	if (!ocupada){
-		return NULL;
-	}
-	for (size_t i = 0; i < ocupantes.size(); i++){
-		if (!ocupantes[i].puede_compartir_celda()){
-			Ubicable *ocupa = ocupantes[i];
-			return ocupa;
-		}
-	}
-}
-
-bool Celda::esta_ocupada(){
-	return ocupada;
+Personaje* obtener_ocupante(std::string id_personaje){
+	return ocupantes[id_personaje];
 }
