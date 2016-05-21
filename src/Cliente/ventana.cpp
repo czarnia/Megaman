@@ -1,7 +1,7 @@
 #include "ventana.h"
 #include "SDL.h"
-//#include "SDL_image.h"
-//#include "SDL_mixer.h"
+#include "SDL_image.h"
+#include "SDL_mixer.h"
 #include <iostream>
 #include <vector>
 
@@ -46,7 +46,7 @@ Ventana::Ventana(){
         std::cout<< SDL_GetError()<<std::endl;
     }
 
-	
+
 }
 int Ventana::run(){
 	Surface screen(window);
@@ -125,4 +125,3 @@ int Ventana::run(){
     SDL_Quit();
     return 0;
 }
-
