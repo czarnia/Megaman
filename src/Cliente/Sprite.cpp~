@@ -19,6 +19,7 @@ void Sprite::set_Sprite(int posx, int posy, int width,
         rectangle.w = width;
         rectangle.h = height;
     }
+    origin = origin;
     crop.x = 0;
     crop.y = 0;
     crop.w = width/2;
@@ -44,9 +45,18 @@ int Sprite::getPosY(){
     return rectangle.y;
 }
 
+void Sprite::setPosX(int x){
+    rectangle.x = x;
+}
+
+void Sprite::setPosY(int y){
+    rectangle.y = y;
+}
+
 Sprite::~Sprite(){
     SDL_DestroyTexture(texture);
 }
+
 
 
 

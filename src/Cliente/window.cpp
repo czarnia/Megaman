@@ -34,9 +34,23 @@ Window::Window(int width, int height): width(width), height(height){
 void Window::run(){
     Renderer renderer(window);
 
+	// EN ALGUN LADO POR ACA LANZO EL THREAD QUE RECIBE LA INFORMACION DEL
+	// SERVIDOR Y LE ACTUALICE LA INFORMACION AL RENDERER PARA SABER QUE
+	// DIBUJAR Y DONDE HACERLO
+
+ 
+	// POR AHORA DIBUJO COSAS A MANO PARA QUE VEAN COMO FUNCIONA 
     // FONDO
+	// PRIMERO CARGO LA TEXTURA DE ALGUN ARCHIVO EXTERNO DIRECTAMENTE EN EL 
+	// CONSTRUCTOR DE SPRITE
     Sprite backround(renderer.get_renderer(), "backround.jpeg");
+	// LUEGO ESTABLEZCO LA POSICION INICIAL, ANCHO Y ALTO DE LO QUE VOY A DIBUJAR
+	// EN ESTE CASO COMO ES EL FONDO, CUBRO TODA LA PANTALLA
+	// ORIGIN_CORNER ES UN FLAG PARA SABER QUE PUNTO TOMO COMO ORIGEN DE LA FIGURA
+	// POR AHORA IGNORAR LOS ULTIMOS 2 PARAMETROS
     backround.set_Sprite(0, 0, width, height, ORIGIN_CORNER, 1, 1);
+	// POR ULTIMO TENGO QUE AGREGAR LA NUEVA FIGURA AL RENDERER PARA QUE ESTE
+	// LA PUEDA DIBUJAR
     renderer.add(&backround);
     //
 
@@ -87,9 +101,6 @@ void Window::run(){
                 }
             }
 		}
-		// En algun lado por aca recivo la informacion del servidor
-        // que me dara las nuevas posiciones de los objetos a dibujar
-
 
 
 		//ACTUALIZO TEXTURAS

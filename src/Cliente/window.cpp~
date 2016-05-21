@@ -38,7 +38,7 @@ void Window::run(){
 	// SERVIDOR Y LE ACTUALICE LA INFORMACION AL RENDERER PARA SABER QUE
 	// DIBUJAR Y DONDE HACERLO
 
-
+ 
 	// POR AHORA DIBUJO COSAS A MANO PARA QUE VEAN COMO FUNCIONA 
     // FONDO
 	// PRIMERO CARGO LA TEXTURA DE ALGUN ARCHIVO EXTERNO DIRECTAMENTE EN EL 
@@ -54,10 +54,9 @@ void Window::run(){
     renderer.add(&backround);
     //
 
-
     //PERSONAJES
     Sprite megaman(renderer.get_renderer(), "megaman.jpeg");
-    megaman.set_Sprite(15, height-25, 30, 50, ORIGIN_CENTERED, 1, 1);
+    megaman.set_Sprite(15, height-25, 30, 50, ORIGIN_CENTERED, 10, 5);
     renderer.add(&megaman);
     //
 
@@ -67,31 +66,30 @@ void Window::run(){
     // LOOP PRINCIPAL
 	while (running){
         starting_tick = SDL_GetTicks();
-		// DENTRO DE ESTE LOOP DETECTO LAS ENTRADAS POR TECLADO Y EL CIERRE DE
-		// LA VENTANA
 		while (SDL_PollEvent(&event)){
-			// CIERRE DE VENTANA
             if (event.type == SDL_QUIT){
                 running = false;
                 break;
-			// KEYDOWN
             }else if(event.type == SDL_KEYDOWN){
                 switch(event.key.keysym.sym){
                     case SDLK_UP:
                         std::cout<<"se apreto arriba"<<std::endl;
-						megaman
+                        megaman.setPosY(megaman.getPosY()-5);
                         // ACA ENVIO AL SERVIDOR LA INFO DE LA TECLA
                         break;
                     case SDLK_DOWN:
                         std::cout<<"se apreto abajo"<<std::endl;
+                        megaman.setPosY(megaman.getPosY()+5);
                         // ACA ENVIO AL SERVIDOR LA INFO DE LA TECLA
                         break;
                     case SDLK_LEFT:
                         std::cout<<"se apreto izquierda"<<std::endl;
+                        megaman.setPosX(megaman.getPosX()-5);
                         // ACA ENVIO AL SERVIDOR LA INFO DE LA TECLA
                         break;
                     case SDLK_RIGHT:
                         std::cout<<"se apreto derecha"<<std::endl;
+                        megaman.setPosX(megaman.getPosX()+5);
                         // ACA ENVIO AL SERVIDOR LA INFO DE LA TECLA
                         break;
                     case SDLK_a:
@@ -103,6 +101,7 @@ void Window::run(){
                 }
             }
 		}
+
 
 		//ACTUALIZO TEXTURAS
 		cap_framerate(starting_tick);
@@ -119,3 +118,4 @@ Window::~Window(){
 SDL_Window* Window::get_window(){
     return window;
 }
+
