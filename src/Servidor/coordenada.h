@@ -8,10 +8,10 @@ class Coordenada{
   public:
     //Dada una ordenada y una abscisa, crea una Coordenada.
     Coordenada(size_t ordenada, size_t abscisa);
-    //Suma delta_x a la ordenada a la coordenada x;
+    //Suma delta_x a la coordenada x;
     void sumar_abscisa(size_t delta_x);
-	  //Suma delta_y a la ordenada a la coordenada y;
-	  void sumar_ordenada(size_t delta_y);
+	//Suma delta_y a la coordenada y;
+	void sumar_ordenada(size_t delta_y);
     //Devuelve la ordenada de la Coordenada.
     size_t obtener_ordenada();
     //Devuelve la abscisa de la Coordenada.

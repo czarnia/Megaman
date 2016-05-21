@@ -98,7 +98,7 @@ src/Cliente/preinstall:
 src/Cliente/CMakeFiles/cliente.dir/all: src/Comun/CMakeFiles/Megaman.dir/all
 	$(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/depend
 	$(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles  5 6 7 8 9
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles  5 6 7 8 9 10 11 12
 	@echo "Built target cliente"
 .PHONY : src/Cliente/CMakeFiles/cliente.dir/all
 
@@ -108,7 +108,7 @@ all: src/Cliente/CMakeFiles/cliente.dir/all
 
 # Build rule for subdir invocation for target.
 src/Cliente/CMakeFiles/cliente.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 src/Cliente/CMakeFiles/cliente.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles 0
 .PHONY : src/Cliente/CMakeFiles/cliente.dir/rule
@@ -198,7 +198,7 @@ src/Servidor/preinstall:
 src/Servidor/CMakeFiles/servidor.dir/all: src/Comun/CMakeFiles/Megaman.dir/all
 	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/depend
 	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles  10 11 12
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles  13 14 15 16 17 18 19 20 21 22 23 24
 	@echo "Built target servidor"
 .PHONY : src/Servidor/CMakeFiles/servidor.dir/all
 
@@ -208,7 +208,7 @@ all: src/Servidor/CMakeFiles/servidor.dir/all
 
 # Build rule for subdir invocation for target.
 src/Servidor/CMakeFiles/servidor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles 16
 	$(MAKE) -f CMakeFiles/Makefile2 src/Servidor/CMakeFiles/servidor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles 0
 .PHONY : src/Servidor/CMakeFiles/servidor.dir/rule

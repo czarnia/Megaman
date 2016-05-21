@@ -115,6 +115,54 @@ servidor/fast:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/build
 .PHONY : servidor/fast
 
+celda_aire.o: celda_aire.cpp.o
+.PHONY : celda_aire.o
+
+# target to build an object file
+celda_aire.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o
+.PHONY : celda_aire.cpp.o
+
+celda_aire.i: celda_aire.cpp.i
+.PHONY : celda_aire.i
+
+# target to preprocess a source file
+celda_aire.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.i
+.PHONY : celda_aire.cpp.i
+
+celda_aire.s: celda_aire.cpp.s
+.PHONY : celda_aire.s
+
+# target to generate assembly for a file
+celda_aire.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.s
+.PHONY : celda_aire.cpp.s
+
+celda_tierra.o: celda_tierra.cpp.o
+.PHONY : celda_tierra.o
+
+# target to build an object file
+celda_tierra.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o
+.PHONY : celda_tierra.cpp.o
+
+celda_tierra.i: celda_tierra.cpp.i
+.PHONY : celda_tierra.i
+
+# target to preprocess a source file
+celda_tierra.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.i
+.PHONY : celda_tierra.cpp.i
+
+celda_tierra.s: celda_tierra.cpp.s
+.PHONY : celda_tierra.s
+
+# target to generate assembly for a file
+celda_tierra.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.s
+.PHONY : celda_tierra.cpp.s
+
 conexion_cliente.o: conexion_cliente.cpp.o
 .PHONY : conexion_cliente.o
 
@@ -139,6 +187,54 @@ conexion_cliente.cpp.s:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.s
 .PHONY : conexion_cliente.cpp.s
 
+coordenada.o: coordenada.cpp.o
+.PHONY : coordenada.o
+
+# target to build an object file
+coordenada.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o
+.PHONY : coordenada.cpp.o
+
+coordenada.i: coordenada.cpp.i
+.PHONY : coordenada.i
+
+# target to preprocess a source file
+coordenada.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.i
+.PHONY : coordenada.cpp.i
+
+coordenada.s: coordenada.cpp.s
+.PHONY : coordenada.s
+
+# target to generate assembly for a file
+coordenada.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.s
+.PHONY : coordenada.cpp.s
+
+escalera.o: escalera.cpp.o
+.PHONY : escalera.o
+
+# target to build an object file
+escalera.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o
+.PHONY : escalera.cpp.o
+
+escalera.i: escalera.cpp.i
+.PHONY : escalera.i
+
+# target to preprocess a source file
+escalera.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.i
+.PHONY : escalera.cpp.i
+
+escalera.s: escalera.cpp.s
+.PHONY : escalera.s
+
+# target to generate assembly for a file
+escalera.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.s
+.PHONY : escalera.cpp.s
+
 main_server.o: main_server.cpp.o
 .PHONY : main_server.o
 
@@ -162,6 +258,126 @@ main_server.s: main_server.cpp.s
 main_server.cpp.s:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.s
 .PHONY : main_server.cpp.s
+
+mapa.o: mapa.cpp.o
+.PHONY : mapa.o
+
+# target to build an object file
+mapa.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o
+.PHONY : mapa.cpp.o
+
+mapa.i: mapa.cpp.i
+.PHONY : mapa.i
+
+# target to preprocess a source file
+mapa.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.i
+.PHONY : mapa.cpp.i
+
+mapa.s: mapa.cpp.s
+.PHONY : mapa.s
+
+# target to generate assembly for a file
+mapa.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.s
+.PHONY : mapa.cpp.s
+
+megaman.o: megaman.cpp.o
+.PHONY : megaman.o
+
+# target to build an object file
+megaman.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o
+.PHONY : megaman.cpp.o
+
+megaman.i: megaman.cpp.i
+.PHONY : megaman.i
+
+# target to preprocess a source file
+megaman.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.i
+.PHONY : megaman.cpp.i
+
+megaman.s: megaman.cpp.s
+.PHONY : megaman.s
+
+# target to generate assembly for a file
+megaman.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.s
+.PHONY : megaman.cpp.s
+
+met.o: met.cpp.o
+.PHONY : met.o
+
+# target to build an object file
+met.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/met.cpp.o
+.PHONY : met.cpp.o
+
+met.i: met.cpp.i
+.PHONY : met.i
+
+# target to preprocess a source file
+met.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/met.cpp.i
+.PHONY : met.cpp.i
+
+met.s: met.cpp.s
+.PHONY : met.s
+
+# target to generate assembly for a file
+met.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/met.cpp.s
+.PHONY : met.cpp.s
+
+personaje.o: personaje.cpp.o
+.PHONY : personaje.o
+
+# target to build an object file
+personaje.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o
+.PHONY : personaje.cpp.o
+
+personaje.i: personaje.cpp.i
+.PHONY : personaje.i
+
+# target to preprocess a source file
+personaje.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.i
+.PHONY : personaje.cpp.i
+
+personaje.s: personaje.cpp.s
+.PHONY : personaje.s
+
+# target to generate assembly for a file
+personaje.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.s
+.PHONY : personaje.cpp.s
+
+puas.o: puas.cpp.o
+.PHONY : puas.o
+
+# target to build an object file
+puas.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o
+.PHONY : puas.cpp.o
+
+puas.i: puas.cpp.i
+.PHONY : puas.i
+
+# target to preprocess a source file
+puas.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/puas.cpp.i
+.PHONY : puas.cpp.i
+
+puas.s: puas.cpp.s
+.PHONY : puas.s
+
+# target to generate assembly for a file
+puas.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/puas.cpp.s
+.PHONY : puas.cpp.s
 
 servidor.o: servidor.cpp.o
 .PHONY : servidor.o
@@ -196,12 +412,39 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... servidor"
+	@echo "... celda_aire.o"
+	@echo "... celda_aire.i"
+	@echo "... celda_aire.s"
+	@echo "... celda_tierra.o"
+	@echo "... celda_tierra.i"
+	@echo "... celda_tierra.s"
 	@echo "... conexion_cliente.o"
 	@echo "... conexion_cliente.i"
 	@echo "... conexion_cliente.s"
+	@echo "... coordenada.o"
+	@echo "... coordenada.i"
+	@echo "... coordenada.s"
+	@echo "... escalera.o"
+	@echo "... escalera.i"
+	@echo "... escalera.s"
 	@echo "... main_server.o"
 	@echo "... main_server.i"
 	@echo "... main_server.s"
+	@echo "... mapa.o"
+	@echo "... mapa.i"
+	@echo "... mapa.s"
+	@echo "... megaman.o"
+	@echo "... megaman.i"
+	@echo "... megaman.s"
+	@echo "... met.o"
+	@echo "... met.i"
+	@echo "... met.s"
+	@echo "... personaje.o"
+	@echo "... personaje.i"
+	@echo "... personaje.s"
+	@echo "... puas.o"
+	@echo "... puas.i"
+	@echo "... puas.s"
 	@echo "... servidor.o"
 	@echo "... servidor.i"
 	@echo "... servidor.s"

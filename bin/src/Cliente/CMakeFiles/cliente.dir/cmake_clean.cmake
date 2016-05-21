@@ -1,7 +1,10 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/cliente.dir/client.cpp.o"
   "CMakeFiles/cliente.dir/ventana.cpp.o"
+  "CMakeFiles/cliente.dir/window.cpp.o"
   "CMakeFiles/cliente.dir/accion_uno.cpp.o"
+  "CMakeFiles/cliente.dir/Sprite.cpp.o"
+  "CMakeFiles/cliente.dir/Renderer.cpp.o"
   "CMakeFiles/cliente.dir/receiver.cpp.o"
   "CMakeFiles/cliente.dir/accion_dos.cpp.o"
   "cliente.pdb"

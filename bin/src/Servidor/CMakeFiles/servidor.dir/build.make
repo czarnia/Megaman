@@ -52,9 +52,78 @@ include src/Servidor/CMakeFiles/servidor.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/Servidor/CMakeFiles/servidor.dir/flags.make
 
+src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o: ../src/Servidor/celda_aire.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/celda_aire.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/celda_aire.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/celda_aire.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/celda_aire.cpp > CMakeFiles/servidor.dir/celda_aire.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/celda_aire.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/celda_aire.cpp -o CMakeFiles/servidor.dir/celda_aire.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o
+
+src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o: ../src/Servidor/megaman.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/megaman.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/megaman.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/megaman.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/megaman.cpp > CMakeFiles/servidor.dir/megaman.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/megaman.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/megaman.cpp -o CMakeFiles/servidor.dir/megaman.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o
+
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: ../src/Servidor/personaje.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/personaje.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/personaje.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/personaje.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/personaje.cpp > CMakeFiles/servidor.dir/personaje.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/personaje.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/personaje.cpp -o CMakeFiles/servidor.dir/personaje.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o
+
 src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
 src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o: ../src/Servidor/conexion_cliente.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o"
 	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/conexion_cliente.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/conexion_cliente.cpp
 
@@ -75,9 +144,32 @@ src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o.provides: src/Servid
 
 src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o
 
+src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o: ../src/Servidor/coordenada.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/coordenada.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/coordenada.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/coordenada.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/coordenada.cpp > CMakeFiles/servidor.dir/coordenada.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/coordenada.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/coordenada.cpp -o CMakeFiles/servidor.dir/coordenada.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o
+
 src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
 src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o: ../src/Servidor/main_server.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o"
 	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/main_server.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/main_server.cpp
 
@@ -100,7 +192,7 @@ src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o.provides.build: src/Servi
 
 src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
 src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o: ../src/Servidor/servidor.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o"
 	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/servidor.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/servidor.cpp
 
@@ -121,18 +213,151 @@ src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o.provides: src/Servidor/CMake
 
 src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o
 
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: ../src/Servidor/escalera.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_8)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/escalera.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/escalera.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/escalera.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/escalera.cpp > CMakeFiles/servidor.dir/escalera.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/escalera.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/escalera.cpp -o CMakeFiles/servidor.dir/escalera.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o
+
+src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o: ../src/Servidor/celda_tierra.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_9)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/celda_tierra.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/celda_tierra.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/celda_tierra.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/celda_tierra.cpp > CMakeFiles/servidor.dir/celda_tierra.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/celda_tierra.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/celda_tierra.cpp -o CMakeFiles/servidor.dir/celda_tierra.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o
+
+src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o: ../src/Servidor/puas.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_10)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/puas.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/puas.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/puas.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/puas.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/puas.cpp > CMakeFiles/servidor.dir/puas.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/puas.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/puas.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/puas.cpp -o CMakeFiles/servidor.dir/puas.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o
+
+src/Servidor/CMakeFiles/servidor.dir/met.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/met.cpp.o: ../src/Servidor/met.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/met.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/met.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/met.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/met.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/met.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/met.cpp > CMakeFiles/servidor.dir/met.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/met.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/met.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/met.cpp -o CMakeFiles/servidor.dir/met.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/met.cpp.o
+
+src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o: src/Servidor/CMakeFiles/servidor.dir/flags.make
+src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o: ../src/Servidor/mapa.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_12)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/servidor.dir/mapa.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Servidor/mapa.cpp
+
+src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/servidor.dir/mapa.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Servidor/mapa.cpp > CMakeFiles/servidor.dir/mapa.cpp.i
+
+src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/servidor.dir/mapa.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Servidor && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Servidor/mapa.cpp -o CMakeFiles/servidor.dir/mapa.cpp.s
+
+src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.requires:
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.requires
+
+src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.provides: src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.requires
+	$(MAKE) -f src/Servidor/CMakeFiles/servidor.dir/build.make src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.provides.build
+.PHONY : src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.provides
+
+src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.provides.build: src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o
+
 # Object files for target servidor
 servidor_OBJECTS = \
+"CMakeFiles/servidor.dir/celda_aire.cpp.o" \
+"CMakeFiles/servidor.dir/megaman.cpp.o" \
+"CMakeFiles/servidor.dir/personaje.cpp.o" \
 "CMakeFiles/servidor.dir/conexion_cliente.cpp.o" \
+"CMakeFiles/servidor.dir/coordenada.cpp.o" \
 "CMakeFiles/servidor.dir/main_server.cpp.o" \
-"CMakeFiles/servidor.dir/servidor.cpp.o"
+"CMakeFiles/servidor.dir/servidor.cpp.o" \
+"CMakeFiles/servidor.dir/escalera.cpp.o" \
+"CMakeFiles/servidor.dir/celda_tierra.cpp.o" \
+"CMakeFiles/servidor.dir/puas.cpp.o" \
+"CMakeFiles/servidor.dir/met.cpp.o" \
+"CMakeFiles/servidor.dir/mapa.cpp.o"
 
 # External object files for target servidor
 servidor_EXTERNAL_OBJECTS =
 
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o
 src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o
 src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o
 src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/met.cpp.o
+src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o
 src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/build.make
 src/Servidor/servidor: src/Comun/libMegaman.a
 src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/link.txt
@@ -143,9 +368,18 @@ src/Servidor/servidor: src/Servidor/CMakeFiles/servidor.dir/link.txt
 src/Servidor/CMakeFiles/servidor.dir/build: src/Servidor/servidor
 .PHONY : src/Servidor/CMakeFiles/servidor.dir/build
 
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/celda_aire.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/megaman.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o.requires
 src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/conexion_cliente.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/coordenada.cpp.o.requires
 src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o.requires
 src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/servidor.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/celda_tierra.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/met.cpp.o.requires
+src/Servidor/CMakeFiles/servidor.dir/requires: src/Servidor/CMakeFiles/servidor.dir/mapa.cpp.o.requires
 .PHONY : src/Servidor/CMakeFiles/servidor.dir/requires
 
 src/Servidor/CMakeFiles/servidor.dir/clean:

@@ -98,9 +98,32 @@ src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o.provides: src/Cliente/CMakeFile
 
 src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o.provides.build: src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o
 
+src/Cliente/CMakeFiles/cliente.dir/window.cpp.o: src/Cliente/CMakeFiles/cliente.dir/flags.make
+src/Cliente/CMakeFiles/cliente.dir/window.cpp.o: ../src/Cliente/window.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_3)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Cliente/CMakeFiles/cliente.dir/window.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cliente.dir/window.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Cliente/window.cpp
+
+src/Cliente/CMakeFiles/cliente.dir/window.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cliente.dir/window.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Cliente/window.cpp > CMakeFiles/cliente.dir/window.cpp.i
+
+src/Cliente/CMakeFiles/cliente.dir/window.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cliente.dir/window.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Cliente/window.cpp -o CMakeFiles/cliente.dir/window.cpp.s
+
+src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.requires:
+.PHONY : src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.requires
+
+src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.provides: src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.requires
+	$(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.provides.build
+.PHONY : src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.provides
+
+src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.provides.build: src/Cliente/CMakeFiles/cliente.dir/window.cpp.o
+
 src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o: src/Cliente/CMakeFiles/cliente.dir/flags.make
 src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o: ../src/Cliente/accion_uno.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o"
 	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cliente.dir/accion_uno.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Cliente/accion_uno.cpp
 
@@ -121,9 +144,55 @@ src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o.provides: src/Cliente/CMakeF
 
 src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o.provides.build: src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o
 
+src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o: src/Cliente/CMakeFiles/cliente.dir/flags.make
+src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o: ../src/Cliente/Sprite.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cliente.dir/Sprite.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Cliente/Sprite.cpp
+
+src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cliente.dir/Sprite.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Cliente/Sprite.cpp > CMakeFiles/cliente.dir/Sprite.cpp.i
+
+src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cliente.dir/Sprite.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Cliente/Sprite.cpp -o CMakeFiles/cliente.dir/Sprite.cpp.s
+
+src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.requires:
+.PHONY : src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.requires
+
+src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.provides: src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.requires
+	$(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.provides.build
+.PHONY : src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.provides
+
+src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.provides.build: src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o
+
+src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o: src/Cliente/CMakeFiles/cliente.dir/flags.make
+src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o: ../src/Cliente/Renderer.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cliente.dir/Renderer.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Cliente/Renderer.cpp
+
+src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/cliente.dir/Renderer.cpp.i"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/eugenia/Documents/TALLER/Megaman/src/Cliente/Renderer.cpp > CMakeFiles/cliente.dir/Renderer.cpp.i
+
+src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/cliente.dir/Renderer.cpp.s"
+	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/eugenia/Documents/TALLER/Megaman/src/Cliente/Renderer.cpp -o CMakeFiles/cliente.dir/Renderer.cpp.s
+
+src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.requires:
+.PHONY : src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.requires
+
+src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.provides: src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.requires
+	$(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.provides.build
+.PHONY : src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.provides
+
+src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.provides.build: src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o
+
 src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o: src/Cliente/CMakeFiles/cliente.dir/flags.make
 src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o: ../src/Cliente/receiver.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o"
 	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cliente.dir/receiver.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Cliente/receiver.cpp
 
@@ -146,7 +215,7 @@ src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o.provides.build: src/Cliente/CM
 
 src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o: src/Cliente/CMakeFiles/cliente.dir/flags.make
 src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o: ../src/Cliente/accion_dos.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Documents/TALLER/Megaman/bin/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o"
 	cd /home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/cliente.dir/accion_dos.cpp.o -c /home/eugenia/Documents/TALLER/Megaman/src/Cliente/accion_dos.cpp
 
@@ -171,7 +240,10 @@ src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o.provides.build: src/Cliente/
 cliente_OBJECTS = \
 "CMakeFiles/cliente.dir/client.cpp.o" \
 "CMakeFiles/cliente.dir/ventana.cpp.o" \
+"CMakeFiles/cliente.dir/window.cpp.o" \
 "CMakeFiles/cliente.dir/accion_uno.cpp.o" \
+"CMakeFiles/cliente.dir/Sprite.cpp.o" \
+"CMakeFiles/cliente.dir/Renderer.cpp.o" \
 "CMakeFiles/cliente.dir/receiver.cpp.o" \
 "CMakeFiles/cliente.dir/accion_dos.cpp.o"
 
@@ -180,7 +252,10 @@ cliente_EXTERNAL_OBJECTS =
 
 src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/client.cpp.o
 src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o
+src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/window.cpp.o
 src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o
+src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o
+src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o
 src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o
 src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o
 src/Cliente/cliente: src/Cliente/CMakeFiles/cliente.dir/build.make
@@ -195,7 +270,10 @@ src/Cliente/CMakeFiles/cliente.dir/build: src/Cliente/cliente
 
 src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/client.cpp.o.requires
 src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o.requires
+src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/window.cpp.o.requires
 src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o.requires
+src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o.requires
+src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o.requires
 src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o.requires
 src/Cliente/CMakeFiles/cliente.dir/requires: src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o.requires
 .PHONY : src/Cliente/CMakeFiles/cliente.dir/requires

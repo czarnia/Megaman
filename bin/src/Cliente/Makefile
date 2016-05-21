@@ -115,6 +115,54 @@ cliente/fast:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/build
 .PHONY : cliente/fast
 
+Renderer.o: Renderer.cpp.o
+.PHONY : Renderer.o
+
+# target to build an object file
+Renderer.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o
+.PHONY : Renderer.cpp.o
+
+Renderer.i: Renderer.cpp.i
+.PHONY : Renderer.i
+
+# target to preprocess a source file
+Renderer.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.i
+.PHONY : Renderer.cpp.i
+
+Renderer.s: Renderer.cpp.s
+.PHONY : Renderer.s
+
+# target to generate assembly for a file
+Renderer.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.s
+.PHONY : Renderer.cpp.s
+
+Sprite.o: Sprite.cpp.o
+.PHONY : Sprite.o
+
+# target to build an object file
+Sprite.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o
+.PHONY : Sprite.cpp.o
+
+Sprite.i: Sprite.cpp.i
+.PHONY : Sprite.i
+
+# target to preprocess a source file
+Sprite.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.i
+.PHONY : Sprite.cpp.i
+
+Sprite.s: Sprite.cpp.s
+.PHONY : Sprite.s
+
+# target to generate assembly for a file
+Sprite.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.s
+.PHONY : Sprite.cpp.s
+
 accion_dos.o: accion_dos.cpp.o
 .PHONY : accion_dos.o
 
@@ -235,6 +283,30 @@ ventana.cpp.s:
 	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.s
 .PHONY : ventana.cpp.s
 
+window.o: window.cpp.o
+.PHONY : window.o
+
+# target to build an object file
+window.cpp.o:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/window.cpp.o
+.PHONY : window.cpp.o
+
+window.i: window.cpp.i
+.PHONY : window.i
+
+# target to preprocess a source file
+window.cpp.i:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/window.cpp.i
+.PHONY : window.cpp.i
+
+window.s: window.cpp.s
+.PHONY : window.s
+
+# target to generate assembly for a file
+window.cpp.s:
+	cd /home/eugenia/Documents/TALLER/Megaman/bin && $(MAKE) -f src/Cliente/CMakeFiles/cliente.dir/build.make src/Cliente/CMakeFiles/cliente.dir/window.cpp.s
+.PHONY : window.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -244,6 +316,12 @@ help:
 	@echo "... cliente"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... Renderer.o"
+	@echo "... Renderer.i"
+	@echo "... Renderer.s"
+	@echo "... Sprite.o"
+	@echo "... Sprite.i"
+	@echo "... Sprite.s"
 	@echo "... accion_dos.o"
 	@echo "... accion_dos.i"
 	@echo "... accion_dos.s"
@@ -259,6 +337,9 @@ help:
 	@echo "... ventana.o"
 	@echo "... ventana.i"
 	@echo "... ventana.s"
+	@echo "... window.o"
+	@echo "... window.i"
+	@echo "... window.s"
 .PHONY : help
 
 
