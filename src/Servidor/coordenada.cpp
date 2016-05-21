@@ -28,3 +28,23 @@ size_t Coordenada::obtener_distancia(Coordenada &otra_coordenada){
 	size_t ycuadrado = por((y-otra_coordenada.y),2);
 	return sqrt(xcuadrado+ycuadrado);
 }
+
+Coordenada arriba(){
+	return Coordenada(x,y-1);
+}
+
+Coordenada abajo(){
+	return Coordenada(x,y+1);
+}
+
+Coordenada izquiera(){
+	return Coordenada(x-1,y);
+}
+
+Coordenada derecha(){
+	return Coordenada(x+1,y);
+}
+
+bool es_negativa(){
+	return ((x < 0) || (y < 0));
+}
