@@ -41,8 +41,8 @@ int main(int argc, char *argv[]){
 	// POR AHORA SOLO CORRE UNA VENTANA QUE IMPRIME POR 
 	// STDOUT LAS TECLAS INGRESADAS
 	Window main_window(WIDTH,HEIGHT);
+	// ACA ADENTRO OCURRE LA COMUNICACION ?
 	main_window.run();
-
 
 
 	SDL_Quit();

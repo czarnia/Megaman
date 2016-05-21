@@ -38,10 +38,11 @@ int main(int argc, char *argv[]){
 	(*cliente).shutdown(SHUT_RDWR);
 	delete cliente;
 	
-		
+	// POR AHORA SOLO CORRE UNA VENTANA QUE IMPRIME POR 
+	// STDOUT LAS TECLAS INGRESADAS
 	Window main_window(WIDTH,HEIGHT);
+	// ACA ADENTRO SE DEBERIA LANZAR EL THREAD QUE RECIBE LA INFO 
 	main_window.run();
-
 
 
 	SDL_Quit();
