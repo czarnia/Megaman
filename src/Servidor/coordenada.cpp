@@ -29,22 +29,22 @@ size_t Coordenada::obtener_distancia(Coordenada &otra_coordenada){
 	return sqrt(xcuadrado+ycuadrado);
 }
 
-Coordenada arriba(){
+Coordenada Coordenada::arriba(){
 	return Coordenada(x,y-1);
 }
 
-Coordenada abajo(){
+Coordenada Coordenada::abajo(){
 	return Coordenada(x,y+1);
 }
 
-Coordenada izquiera(){
+Coordenada Coordenada::izquiera(){
 	return Coordenada(x-1,y);
 }
 
-Coordenada derecha(){
+Coordenada Coordenada::derecha(){
 	return Coordenada(x+1,y);
 }
 
-bool es_negativa(){
+bool Coordenada::es_negativa(){
 	return ((x < 0) || (y < 0));
 }
