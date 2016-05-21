@@ -4,11 +4,14 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/Renderer.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/Renderer.cpp.o"
+  "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/Sprite.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/Sprite.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/accion_dos.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/accion_dos.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/accion_uno.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/accion_uno.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/client.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/client.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/receiver.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/receiver.cpp.o"
   "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/ventana.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/ventana.cpp.o"
+  "/home/eugenia/Documents/TALLER/Megaman/src/Cliente/window.cpp" "/home/eugenia/Documents/TALLER/Megaman/bin/src/Cliente/CMakeFiles/cliente.dir/window.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
