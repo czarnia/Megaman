@@ -13,9 +13,14 @@ class Celda_aire : public Celda{
     Elemento* elem;
     std::map<std::string, Personaje*> ocupantes;
   public:
+    //Crea una celda_aire dado un Elemento*, en caso de no proporcionarse uno,
+    //se la crea sin este.
     Celda_aire(Elemento* obstaculo);
+    //Agrega (ubica) a un personaje en la celda.
     bool agregar_personaje(Personaje* ocupa);
+    //Devuelve true si se puede ubicar un personaje en la celda.
     virtual bool puedo_ubicar();
+    //Destructor de la celda_aire.
     virtual ~Celda_aire();
 };
 
