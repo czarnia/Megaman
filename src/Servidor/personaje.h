@@ -8,6 +8,9 @@
 #include "atacable.h"
 #include "defendible.h"
 #include "actualizable.h"
+#include "vida.h"
+
+#define PERDER_VIDA -1
 
 class Personaje:
 public Ubicable,
@@ -22,10 +25,12 @@ public Actualizable{
 		virtual bool ubicar(Mapa &mapa) = 0;
 		//virtual void mover(Mapa &mapa, StrategyMover &accion_mover);
 		virtual void devolver_id() = 0;
+		virtual void perder_vida(int porcentaje = PERDER_VIDA);
+		virtual bool esta_vivo();
 	private:
 		std::vector<Coordenada*> coordenadas_ocupadas;
 		//std::vector<Arma*> armas;
-		//std::vector<Vida*> vidas;
+		std::vector<Vida*> vidas;
 }
 
 #endif //PERSONAJE_H

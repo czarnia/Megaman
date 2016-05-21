@@ -1,5 +1,7 @@
 #include "personaje.h"
 
+#define PERDER_VIDA -1
+
 bool Personaje::ubicar(Mapa &mapa){
 	mapa.ocupar(this, coordenadas_ocupadas);
 }
@@ -12,5 +14,17 @@ void Personaje::mover(Mapa &mapa, StrategyMover &accion_mover){
 	//if (accion_mover.mover(mapa, coordenadas_ocupadas)){ 
 		//this->ubicar(mapa, coordenadas_ocupadas); //Se actualiza el mapa.
 	//}
+}
+
+bool Personaje::esta_vivo(){
+	return vidas.empty();
+}
+
+void Personaje::perder_vida(int porcentaje = PERDER_VIDA){
+	if (porcentaje == PERDER_VIDA){
+		vidas.erase(0);
+	}else{
+		vidas[0].perder(porcentaje);
+	}
 }
 
