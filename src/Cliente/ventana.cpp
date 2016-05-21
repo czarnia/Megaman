@@ -46,7 +46,7 @@ Ventana::Ventana(){
         std::cout<< SDL_GetError()<<std::endl;
     }
 
-	
+
 }
 int Ventana::run(){
 	Surface screen(window);
@@ -125,4 +125,3 @@ int Ventana::run(){
     SDL_Quit();
     return 0;
 }
-
