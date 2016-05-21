@@ -1,6 +1,8 @@
 #ifndef CELDA_H
 #define CELDA_H
 
+#include <iosfwd>
+#include <cstddef>
 #include "coordenada.h"
 
 class Celda{
@@ -49,5 +51,5 @@ class Celda{
     virtual Coordenada celda_diagonal_izqarriba(){
       return coordenadas.izquierda().arriba();
     }
-}
+};
 #endif //CELDA_H

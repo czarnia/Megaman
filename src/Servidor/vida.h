@@ -12,6 +12,6 @@ class Vida{
 		void perder(int porcentaje_aumento = VIDA_INICIAL);
 	private:
 		int porcentaje;
-}
+};
 
 #endif //VIDA_H

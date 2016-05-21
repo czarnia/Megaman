@@ -2,18 +2,16 @@
 
 #define PERDER_VIDA -1
 
-bool Personaje::ubicar(Mapa &mapa){
-	mapa.ocupar(this, coordenadas_ocupadas);
+Personaje::Personaje(Mapa &mapa){
+	//estrategias.push_back() agregar estrategias nativas de cada personaje...
 }
 
-void Personaje::mover(Mapa &mapa, StrategyMover &accion_mover){
-	//Dentro del accion_mover hay que checkear si se puede actualizar
-	//cada coordenada que se quiere actualizar
-	//verificando si el objeto se esta "moviendo sobre su yo anterior" si es que el personaje 
-	//ocupa mas de una celda:
-	//if (accion_mover.mover(mapa, coordenadas_ocupadas)){ 
-		//this->ubicar(mapa, coordenadas_ocupadas); //Se actualiza el mapa.
-	//}
+bool Personaje::ubicar(std::vector<Coordenada*> &nuevas_coordenadas){
+	coordenadas_ocupadas = nuevas_coordenadas;
+}
+
+virtual void agregar_estrategia(StrategyMover &estrategia){
+	this->estrategias_adquiridas.push_back(estrategia);
 }
 
 bool Personaje::esta_vivo(){

@@ -1,4 +1,6 @@
 #include "celda_aire.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <map>
 
 Celda_aire::Celda_aire(Elemento* obstaculo = NULL){

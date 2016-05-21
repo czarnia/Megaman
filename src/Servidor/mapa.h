@@ -1,8 +1,10 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include <map>
 #include "celda.h"
 #include "ubicable.h"
+
 
 class Mapa{
   private:

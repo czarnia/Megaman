@@ -2,6 +2,6 @@
 
 class Elemento{
 	public:
-		virtual void interactuar(Personaje *pj);
-		virtual bool puede_ocupar(Personaje *pj);
-}
+		virtual void interactuar(Personaje *pj) = 0;
+		virtual bool puede_ocupar(Personaje *pj) = 0;
+};

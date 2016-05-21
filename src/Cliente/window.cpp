@@ -11,7 +11,7 @@
 #define DAMAGE 10
 #define BULLET_SPEED 20
 
-void cap_framerate(const Uint32 &starting_tick){
+void Window::cap_framerate(const Uint32 &starting_tick){
     if ((1000/FPS) > SDL_GetTicks() - starting_tick){
         SDL_Delay(1000/FPS - (SDL_GetTicks() - starting_tick));
     }
