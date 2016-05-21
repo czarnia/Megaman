@@ -28,13 +28,10 @@ void Renderer::add(Sprite* spr){
 
 void Renderer::drawAll(){
     for (int i = 0; i<textures.size(); i++){
-        if(textures[i] && rectangles[i] && crops[i]){
-            draw(textures[i],rectangles[i],crops[i]);
-        }
+        draw(textures[i],rectangles[i],crops[i]);
     }
 }
 
 Renderer::~Renderer(){
     SDL_DestroyRenderer(renderer);
 }
-
