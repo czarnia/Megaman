@@ -56,7 +56,3 @@ void Sprite::setPosY(int y){
 Sprite::~Sprite(){
     SDL_DestroyTexture(texture);
 }
-
-
-
-

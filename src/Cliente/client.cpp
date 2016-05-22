@@ -20,8 +20,8 @@ int main(int argc, char *argv[]){
 	Socket* cliente = new Socket(NULL, puerto);
 
 	// INICIALIZO TODO LO QUE TENGA QUE VER CON SDL
-	SDL_Init(SDL_INIT_EVERYTHING);	
-	
+	SDL_Init(SDL_INIT_EVERYTHING);
+
 	//Me conecto al servidor
 	if ((*cliente).conect(hostname, puerto) < 0){
 		std::cout << "Problema en conect \n";
@@ -34,11 +34,11 @@ int main(int argc, char *argv[]){
 	cliente->receive(buffer, 4);
 
 	std::cout << buffer << "\n";
-	
+
 	(*cliente).shutdown(SHUT_RDWR);
 	delete cliente;
-	
-	// POR AHORA SOLO CORRE UNA VENTANA QUE IMPRIME POR 
+
+	// POR AHORA SOLO CORRE UNA VENTANA QUE IMPRIME POR
 	// STDOUT LAS TECLAS INGRESADAS
 	Window main_window(WIDTH,HEIGHT);
 	// ACA ADENTRO OCURRE LA COMUNICACION ?
