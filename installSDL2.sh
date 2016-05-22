@@ -7,3 +7,17 @@ cd SDL2-2.0.4
 ./configure
 make
 make install
+cd ..
+wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.tar.gz
+tar -xvzf SDL2_image-2.0.1.tar.gz
+cd SDL2_image-2.0.1
+./configure
+make
+make install
+cd ..
+wget https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz
+tar -xvzf SDL2_mixer-2.0.1.tar.gz
+cd SDL2_mixer-2.0.1
+./configure
+make
+make install
