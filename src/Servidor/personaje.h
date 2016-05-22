@@ -35,9 +35,9 @@ public Actualizable{
 		std::string &id;
 		std::map<std::string*, StrategyMover*> estrategias;
 		std::map<std::string*, StrategyMover*> estrategias_adquiridas;
-		
+
 		virtual bool ubicar(std::vector<Coordenada*> &nuevas_coordenadas);
-		
+
 		friend void StrategyMover::mover(Personaje *personaje);
 };
 

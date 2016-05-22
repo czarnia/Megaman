@@ -1,5 +1,5 @@
 #include "personaje.h"
-#include "strategy_mover_izq.h"
+#include "strategy_mover_izquierda.h"
 
 #define PERDER_VIDA -1
 typedef std::pair<std::string*, StrategyMover*> nueva_estrategia;
