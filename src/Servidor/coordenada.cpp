@@ -7,6 +7,12 @@ Coordenada::Coordenada(size_t ordenada, size_t abscisa){
 	y = abscisa;
 }
 
+bool Coordenada::operator==(const Coordenada& otro) const{
+	bool x_iguales = (this->x == otro.x);
+	bool y_iguales = (this->y == otro.y);
+	return (x_iguales && y_iguales);
+}
+
 void Coordenada::sumar_abscisa(size_t delta_x){
 	this->x += delta_x;
 }

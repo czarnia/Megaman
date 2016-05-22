@@ -5,6 +5,9 @@
 #include "elemento.h"
 #include "puas.h"
 #include "escalera.h"
+#include "megaman.h"
+#include <vector>
+#include <sstream>
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
@@ -28,6 +31,12 @@ std::vector<Coordenada> coord_tierras(){
 	}
 
 	return tierras;
+}
+
+std::vector<Coordenada*> coord_personajes(){
+	std::vector<Coordenada*> personajes;
+	personajes.push_back(new Coordenada(9,6));
+	return personajes;
 }
 
 std::vector<Coordenada> coord_puas(){
@@ -60,7 +69,7 @@ Mapa::Mapa(size_t tamanio){
 	this->cargar();
 }
 
-void Mapa::ocupar_elemento(Elemento& elem, std::vector<Coordenada> coordenadas){
+void Mapa::ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas){
 	for (size_t i = 0; i < coordenadas.size(); i++){
 		Coordenada coord = coordenadas[i];
 		size_t x = coord.obtener_ordenada();
@@ -75,13 +84,26 @@ Celda* Mapa::obtener_celda(Coordenada &coord){
 	return celdas[x][y];
 }
 
-void Mapa::ocupar_tierra(std::vector<Coordenada> coordenadas){
+void Mapa::ocupar_tierra(std::vector<Coordenada> &coordenadas){
 	for (size_t i = 0; i < coordenadas.size(); i++){
 		Coordenada coord = coordenadas[i];
 		size_t x = coord.obtener_ordenada();
 		size_t y = coord.obtener_abscisa();
 		celdas[x][y] = new Celda_tierra(x,y);
 	}
+}
+
+void Mapa::ocupar_personajes(std::vector<Coordenada*> &coordenadas){
+	std::string nombre("megaman0");
+	Megaman *megaman = new Megaman(*this, nombre);
+	for (size_t i = 0; i < coordenadas.size(); i++){
+		Coordenada *coord = coordenadas[i];
+		size_t x = coord->obtener_ordenada();
+		size_t y = coord->obtener_abscisa();
+		Celda_aire *aire = (Celda_aire*)celdas[x][y];
+		aire->agregar_personaje(*this, megaman);
+	}
+	megaman->ubicar(coordenadas);
 }
 
 void Mapa::rellenar_aire(){
@@ -98,6 +120,7 @@ void Mapa::cargar(){
 	std::vector<Coordenada> tierras = coord_tierras();
 	std::vector<Coordenada> puas = coord_puas();
 	std::vector<Coordenada> escaleras = coord_escaleras();
+	std::vector<Coordenada*> personajes = coord_personajes();
 
 	Puas pinches;
 	Escalera esc;
@@ -106,4 +129,5 @@ void Mapa::cargar(){
 	ocupar_elemento(pinches, puas);
 	ocupar_elemento(esc, escaleras);
 	rellenar_aire();
+	ocupar_personajes(personajes);
 }

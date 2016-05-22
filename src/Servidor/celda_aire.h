@@ -17,6 +17,7 @@ class Celda_aire : public Celda{
     //Crea una celda_aire dado un Elemento*, en caso de no proporcionarse uno,
     //se la crea sin este.
     Celda_aire(size_t x, size_t y, Elemento* obstaculo = NULL);
+    Personaje* obtener_personaje(std::string &id);
     //Agrega (ubica) a un personaje en la celda.
     void agregar_personaje(Mapa &mapa, Personaje* ocupa);
     //Quira al personaje recibido de la celda.

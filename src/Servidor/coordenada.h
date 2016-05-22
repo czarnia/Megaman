@@ -30,6 +30,8 @@ class Coordenada{
     Coordenada izquierda();
     //Devuelve la coordenada de la derecha (tomando derecha como x+1).
     Coordenada derecha();
+    //Compara dos coordenadas.
+    bool operator==(const Coordenada& otro) const;
     //Devuelve true si la coordenada tiene algun miembro negativo, false en caso
     //contrario.
     bool es_negativa();

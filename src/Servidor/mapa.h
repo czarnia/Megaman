@@ -20,9 +20,10 @@ class Mapa{
     //Carga un mapa, por ahora, una versión por defecto chica.
     void cargar();
     //Recibe un elemento y las coordenadas donde se desea posicionar al mismo.
-    void ocupar_elemento(Elemento& elem, std::vector<Coordenada> coordenadas);
+    void ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas);
     //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
-    void ocupar_tierra(std::vector<Coordenada> coordenadas);
+    void ocupar_tierra(std::vector<Coordenada> &coordenadas);
+    void ocupar_personajes(std::vector<Coordenada*> &coordenadas);
     //Inicializa las celdas aereas del mapa:
     void rellenar_aire();
 };
