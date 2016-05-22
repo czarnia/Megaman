@@ -26,6 +26,7 @@ public Actualizable{
 		virtual void agregar_estrategia(StrategyMover &estrategia);
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
 		virtual bool esta_vivo();
+		virtual void remover_estrategias();
 		virtual std::vector<Coordenada*> &getCoordenadas();
 	private:
 		std::vector<Coordenada*> coordenadas_ocupadas;

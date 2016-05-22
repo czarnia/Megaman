@@ -4,6 +4,7 @@
 #include "personaje.h"
 #include "elemento.h"
 #include "coordenada.h"
+#include "mapa.h"
 
 class Puas: public Elemento{
 	public:
@@ -12,7 +13,7 @@ class Puas: public Elemento{
 		bool puede_ocupar(Personaje* pj);
 		//Recibe un personaje e interactúa con el mismo para
 		//ocasionarle daño.
-		void interactuar(Personaje *pj);
+		void interactuar(Mapa &mapa, Personaje *pj);
 		//Destructor de las Puas.
 		~Puas();
 };

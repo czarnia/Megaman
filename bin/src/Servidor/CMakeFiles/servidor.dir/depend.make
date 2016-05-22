@@ -42,6 +42,7 @@ src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: ../src/Servidor/escalera.h
 src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: ../src/Servidor/mapa.h
 src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: ../src/Servidor/personaje.h
 src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: ../src/Servidor/strategy_mover.h
+src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: ../src/Servidor/strategy_mover_arriba.h
 src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o: ../src/Servidor/vida.h
 
 src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o: ../src/Comun/hilo.h
@@ -79,6 +80,7 @@ src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: ../src/Servidor/mapa.h
 src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: ../src/Servidor/personaje.cpp
 src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: ../src/Servidor/personaje.h
 src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: ../src/Servidor/strategy_mover.h
+src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: ../src/Servidor/strategy_mover_izq.h
 src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o: ../src/Servidor/vida.h
 
 src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o: ../src/Servidor/actualizable.h

@@ -9,7 +9,6 @@
 class StrategyMoverIzquierda: public StrategyMover{
 	public:
 		StrategyMoverIzquierda(Mapa &mapa);
-		void mover(Personaje &personaje);
 		~StrategyMoverIzquierda();
 	private:
 		Coordenada *nueva_coordenada(Coordenada &coord);

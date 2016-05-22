@@ -10,7 +10,7 @@ class StrategyMover{
 	public:
 		StrategyMover(Mapa &mapa);
 		virtual std::string &get_nombre();
-		virtual void mover(Personaje *personaje) = 0;
+		virtual void mover(Personaje *personaje);
 		virtual ~StrategyMover() = 0;
 	protected:
 		Mapa &mapa;

@@ -43,6 +43,7 @@ src/Servidor/CMakeFiles/servidor.dir/escalera.cpp.o
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/mapa.h
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/personaje.h
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/strategy_mover.h
+ /home/eugenia/Documents/TALLER/Megaman/src/Servidor/strategy_mover_arriba.h
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/vida.h
 src/Servidor/CMakeFiles/servidor.dir/main_server.cpp.o
  /home/eugenia/Documents/TALLER/Megaman/src/Comun/hilo.h
@@ -80,6 +81,7 @@ src/Servidor/CMakeFiles/servidor.dir/personaje.cpp.o
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/personaje.cpp
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/personaje.h
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/strategy_mover.h
+ /home/eugenia/Documents/TALLER/Megaman/src/Servidor/strategy_mover_izq.h
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/vida.h
 src/Servidor/CMakeFiles/servidor.dir/puas.cpp.o
  /home/eugenia/Documents/TALLER/Megaman/src/Servidor/actualizable.h

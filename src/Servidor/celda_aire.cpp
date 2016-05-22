@@ -8,8 +8,11 @@ Celda(x, y){
 	elem = obstaculo;
 }
 
-void Celda_aire::agregar_personaje(Personaje* ocupa){
+void Celda_aire::agregar_personaje(Mapa &mapa, Personaje* ocupa){
 	ocupantes[ocupa->devolver_id()] = ocupa;
+	if (elem != NULL){
+		elem->interactuar(mapa, ocupa);
+	}
 }
 
 void Celda_aire::quitar_personaje(Personaje* ocupa){

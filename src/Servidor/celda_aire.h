@@ -4,6 +4,7 @@
 #include "celda.h"
 #include "elemento.h"
 #include "personaje.h"
+#include "mapa.h"
 
 #include <string>
 #include <map>
@@ -17,7 +18,7 @@ class Celda_aire : public Celda{
     //se la crea sin este.
     Celda_aire(size_t x, size_t y, Elemento* obstaculo = NULL);
     //Agrega (ubica) a un personaje en la celda.
-    void agregar_personaje(Personaje* ocupa);
+    void agregar_personaje(Mapa &mapa, Personaje* ocupa);
     //Quira al personaje recibido de la celda.
     void quitar_personaje(Personaje* ocupa);
     //Devuelve true si se puede ubicar un personaje en la celda.

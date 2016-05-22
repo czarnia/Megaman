@@ -34,7 +34,7 @@ void StrategyMover::mover(Personaje *pj){
 			nueva_coord = nueva_coordenada(*coordenadas_pj[i]);
 			nuevas_coordenadas_pj.push_back(nueva_coord);
 			celda_aire = (Celda_aire*)mapa.obtener_celda(*nueva_coord);
-			celda_aire->agregar_personaje(pj);
+			celda_aire->agregar_personaje(mapa, pj);
 		}
 		pj->ubicar(nuevas_coordenadas_pj);
 	}
