@@ -15,11 +15,11 @@ class Celda_aire : public Celda{
   public:
     //Crea una celda_aire dado un Elemento*, en caso de no proporcionarse uno,
     //se la crea sin este.
-    Celda_aire(Elemento* obstaculo);
+    Celda_aire(size_t x, size_t y, Elemento* obstaculo = NULL);
     //Agrega (ubica) a un personaje en la celda.
-    bool agregar_personaje(Personaje* ocupa);
+    void agregar_personaje(Personaje* ocupa);
     //Quira al personaje recibido de la celda.
-    bool quitar_personaje(Personaje* ocupa);
+    void quitar_personaje(Personaje* ocupa);
     //Devuelve true si se puede ubicar un personaje en la celda.
     virtual bool puedo_ubicar();
     //Destructor de la celda_aire.

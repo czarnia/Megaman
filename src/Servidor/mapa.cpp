@@ -9,8 +9,8 @@
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
 	std::vector<Coordenada> tierras;
-
-	for (size_t i = 0; i < 5; i++){
+	size_t i;
+	for (i = 0; i < 5; i++){
 		tierras.push_back(Coordenada(i,9));
 		tierras.push_back(Coordenada(i,1));
 	}
@@ -19,7 +19,7 @@ std::vector<Coordenada> coord_tierras(){
 	tierras.push_back(Coordenada(0,7));
 	tierras.push_back(Coordenada(4,8));
 
-	for (i = 5, i < 10; i++){
+	for (i = 5; i < 10; i++){
 		tierras.push_back(Coordenada(i,7));
 		tierras.push_back(Coordenada(i,4));
 	}
@@ -42,7 +42,7 @@ std::vector<Coordenada> coord_puas(){
 
 std::vector<Coordenada> coord_escaleras(){
 	std::vector<Coordenada> escaleras;
-
+	size_t i;
 	for (i = 0; i < 3; i++){
 		escaleras.push_back(Coordenada(0,i+4));
 		escaleras.push_back(Coordenada(5,i+1));
@@ -57,21 +57,21 @@ std::vector<Coordenada> coord_escaleras(){
 
 Mapa::Mapa(size_t tamanio){
 	tam = tamanio;
-	mapa.cargar();
+	this->cargar();
 }
 
 void Mapa::ocupar_elemento(Elemento& elem, std::vector<Coordenada> coordenadas){
 	for (size_t i = 0; i < coordenadas.size(); i++){
 		Coordenada coord = coordenadas[i];
 		size_t x = coord.obtener_ordenada();
-		size_t y = coord.obtener_abscisa()
-		celdas[x][y] = new Celda_aire(elem);
+		size_t y = coord.obtener_abscisa();
+		celdas[x][y] = new Celda_aire(x, y, &elem);
 	}
 }
 
-Celda* Mapa::obtener_celda(Coordenada &coordenada){
+Celda* Mapa::obtener_celda(Coordenada &coord){
 	size_t x = coord.obtener_ordenada();
-	size_t y = coord.obtener_abscisa()
+	size_t y = coord.obtener_abscisa();
 	return celdas[x][y];
 }
 
@@ -79,8 +79,8 @@ void Mapa::ocupar_tierra(std::vector<Coordenada> coordenadas){
 	for (size_t i = 0; i < coordenadas.size(); i++){
 		Coordenada coord = coordenadas[i];
 		size_t x = coord.obtener_ordenada();
-		size_t y = coord.obtener_abscisa()
-		celdas[x][y] = new Celda_tierra();
+		size_t y = coord.obtener_abscisa();
+		celdas[x][y] = new Celda_tierra(x,y);
 	}
 }
 
@@ -88,7 +88,7 @@ void Mapa::rellenar_aire(){
 	for (size_t i = 0; i < tam; i++){
 		for (size_t j = 0; j < tam; j++){
 			if (!celdas[i][j]){
-				celdas[i][j] = new Celda_aire();
+				celdas[i][j] = new Celda_aire(i, j);
 			}
 		}
 	}
@@ -104,6 +104,6 @@ void Mapa::cargar(){
 
 	ocupar_tierra(tierras);
 	ocupar_elemento(pinches, puas);
-	ocupar_elemento(es, escaleras);
+	ocupar_elemento(esc, escaleras);
 	rellenar_aire();
 }

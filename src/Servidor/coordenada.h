@@ -1,6 +1,9 @@
 #ifndef COORDENADA_H
 #define COORDENADA_H
 
+#include <iosfwd>
+#include <cstddef>
+
 class Coordenada{
   private:
     size_t x;
@@ -20,13 +23,13 @@ class Coordenada{
     //parametro.
     size_t obtener_distancia(Coordenada &otra_coordenada);
     //Devuelve la coordenada de arriba (tomando arriba como y-1).
-    Coordenada& arriba();
+    Coordenada arriba();
     //Devuelve la coordenada de abajo (tomando abajo como y+1).
-    Coordenada& abajo();
+    Coordenada abajo();
     //Devuelve la coordenada de la izquierda (tomando izquierda como x-1).
-    Coordenada& izquiera();
+    Coordenada izquierda();
     //Devuelve la coordenada de la derecha (tomando derecha como x+1).
-    Coordenada& derecha();
+    Coordenada derecha();
     //Devuelve true si la coordenada tiene algun miembro negativo, false en caso
     //contrario.
     bool es_negativa();

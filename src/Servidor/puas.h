@@ -15,6 +15,6 @@ class Puas: public Elemento{
 		void interactuar(Personaje *pj);
 		//Destructor de las Puas.
 		~Puas();
-}
+};
 
 #endif //PUAS_H

@@ -3,20 +3,21 @@
 #include <stdlib.h>
 #include <map>
 
-Celda_aire::Celda_aire(Elemento* obstaculo = NULL){
+Celda_aire::Celda_aire(size_t x, size_t y, Elemento* obstaculo):
+Celda(x, y){
 	elem = obstaculo;
 }
 
-bool Celda_aire::agregar_personaje(Personaje* ocupa){
-	ocupantes[ocupa.devolver_id()] = ocupa;
+void Celda_aire::agregar_personaje(Personaje* ocupa){
+	ocupantes[ocupa->devolver_id()] = ocupa;
 }
 
-bool Celda_aire::quitar_personaje(Personaje* ocupa){
-	ocupantes.erase(ocupa.devolver_id());
+void Celda_aire::quitar_personaje(Personaje* ocupa){
+	ocupantes.erase(ocupa->devolver_id());
 }
 
-virtual bool Celda_aire::puedo_ubicar(){
+bool Celda_aire::puedo_ubicar(){
 	return true;
 }
 
-virtual Celda_aire::~Celda_aire() {}
+Celda_aire::~Celda_aire() {}

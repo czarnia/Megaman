@@ -1,19 +1,17 @@
 #ifndef STRATEGY_MOVER_IZQ_H
 #define STRATEGY_MOVER_IZQ_H
 
-#include "strategy.h"
+#include "strategy_mover.h"
 #include "personaje.h"
 #include "mapa.h"
 #include <string>
 
-class StrategyMoverIzquierda: StrategyMover{
+class StrategyMoverIzquierda: public StrategyMover{
 	public:
-		StrategyMoverIzquierda::StrategyMoverIzquierda(Mapa &mapa);
+		StrategyMoverIzquierda(Mapa &mapa);
 		void mover(Personaje &personaje);
+		~StrategyMoverIzquierda();
 	private:
-		Mapa &mapa;
-		std::string nombre_senial;
-		
 		Coordenada *nueva_coordenada(Coordenada &coord);
 };
 

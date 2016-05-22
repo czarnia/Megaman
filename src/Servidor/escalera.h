@@ -15,6 +15,6 @@ class Escalera: public Elemento{
 		void interactuar(Personaje *pj);
 		//Destructor de la Escalera.
 		~Escalera();
-}
+};
 
 #endif //ESCALERA_H

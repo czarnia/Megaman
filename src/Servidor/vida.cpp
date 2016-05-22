@@ -10,7 +10,7 @@ int Vida::get_porcentaje(){
 	return porcentaje;
 }
 
-void Vida::ganar(int porcentaje_aumento = VIDA_INICIAL){
+void Vida::ganar(int porcentaje_aumento){
 	if ((porcentaje + porcentaje_aumento) > VIDA_INICIAL){
 		porcentaje_aumento = VIDA_INICIAL - porcentaje;
 	}
@@ -21,7 +21,7 @@ bool Vida::esta_vacia(){
 	return (porcentaje == 0);
 }
 
-void Vida::perder(int porcentaje_reduccion = VIDA_INICIAL){
+void Vida::perder(int porcentaje_reduccion){
 	if ((porcentaje - porcentaje_reduccion) < 0){
 		porcentaje_reduccion = porcentaje;
 	}

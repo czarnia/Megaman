@@ -1,16 +1,18 @@
 #ifndef STRATEGY_MOVER_H
 #define STRATEGY_MOVER_H
 
-#include "personaje.h"
 #include "mapa.h"
 #include <string>
 
+class Personaje;
+
 class StrategyMover{
 	public:
-		StrategyMover::StrategyMover(Mapa &mapa);
-		virutal void mover(Personaje *personaje) = 0;
+		StrategyMover(Mapa &mapa);
+		virtual std::string &get_nombre();
+		virtual void mover(Personaje *personaje) = 0;
 		virtual ~StrategyMover() = 0;
-	private:
+	protected:
 		Mapa &mapa;
 		std::string nombre_senial;
 		
