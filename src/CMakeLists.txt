@@ -1,5 +1,5 @@
 project (Megaman)
-cmake_minimum_required (VERSION 2.8.12.2)
+cmake_minimum_required (VERSION 2.8.7)
 
 find_package (PkgConfig REQUIRED)
 
@@ -13,4 +13,3 @@ pkg_check_modules(GLIB_PKG REQUIRED glibmm-2.4)
 add_subdirectory(Cliente)
 add_subdirectory(Comun)
 add_subdirectory(Servidor)
-
