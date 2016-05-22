@@ -1,6 +1,9 @@
 #ifndef COORDENADA_H
 #define COORDENADA_H
 
+#include <iosfwd>
+#include <cstddef>
+
 class Coordenada{
   private:
     size_t x;
@@ -10,8 +13,8 @@ class Coordenada{
     Coordenada(size_t ordenada, size_t abscisa);
     //Suma delta_x a la coordenada x;
     void sumar_abscisa(size_t delta_x);
-	  //Suma delta_y a la coordenada y;
-	  void sumar_ordenada(size_t delta_y);
+	//Suma delta_y a la coordenada y;
+	void sumar_ordenada(size_t delta_y);
     //Devuelve la ordenada de la Coordenada.
     size_t obtener_ordenada();
     //Devuelve la abscisa de la Coordenada.
@@ -24,10 +27,10 @@ class Coordenada{
     //Devuelve la coordenada de abajo (tomando abajo como y+1).
     Coordenada abajo();
     //Devuelve la coordenada de la izquierda (tomando izquierda como x-1).
-    Coordenada izquiera();
+    Coordenada izquierda();
     //Devuelve la coordenada de la derecha (tomando derecha como x+1).
     Coordenada derecha();
-    //Devuelve true si la coordenada tiene algun miembro negativo, true en caso
+    //Devuelve true si la coordenada tiene algun miembro negativo, false en caso
     //contrario.
     bool es_negativa();
 };

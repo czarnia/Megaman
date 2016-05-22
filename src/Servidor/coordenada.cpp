@@ -25,8 +25,8 @@ size_t Coordenada::obtener_abscisa(){
 
 size_t Coordenada::obtener_distancia(Coordenada &otra_coordenada){
 	size_t xcuadrado = pow((x-otra_coordenada.x),2);
-	size_t ycuadrado = por((y-otra_coordenada.y),2);
-	return sqrt(xcuadrado+ycuadrado);
+	size_t ycuadrado = pow((y-otra_coordenada.y),2);
+	return sqrt(xcuadrado + ycuadrado);
 }
 
 Coordenada Coordenada::arriba(){
@@ -37,7 +37,7 @@ Coordenada Coordenada::abajo(){
 	return Coordenada(x,y+1);
 }
 
-Coordenada Coordenada::izquiera(){
+Coordenada Coordenada::izquierda(){
 	return Coordenada(x-1,y);
 }
 

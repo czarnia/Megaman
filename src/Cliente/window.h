@@ -5,7 +5,8 @@
 #include <iostream>
 
 class Window{
-    private:
+	private:
+		void cap_framerate(const Uint32 &starting_tick);
 		SDL_Window *window;
 		int width;
 		int height;

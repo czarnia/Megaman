@@ -2,6 +2,7 @@
 #define UBICABLE_H
 
 #include "coordenada.h"
+#include "mapa.h"
 Class Mapa;
 
 class Ubicable{
