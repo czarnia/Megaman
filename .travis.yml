@@ -11,7 +11,7 @@ before_script:
   - sudo bash ./installSDL2.sh
 
 script:
-  - cmake /src
+  - cmake ./src
   - make
 
 after_success:
