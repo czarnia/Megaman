@@ -6,6 +6,10 @@ Personaje::Personaje(Mapa &mapa){
 	//estrategias.push_back() agregar estrategias nativas de cada personaje...
 }
 
+std::vector<Coordenada*>& Personaje::getCoordenadas(){
+	return coordenadas_ocupadas;
+}
+
 bool Personaje::ubicar(std::vector<Coordenada*> &nuevas_coordenadas){
 	coordenadas_ocupadas = nuevas_coordenadas;
 }

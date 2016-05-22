@@ -29,19 +29,19 @@ size_t Coordenada::obtener_distancia(Coordenada &otra_coordenada){
 	return sqrt(xcuadrado+ycuadrado);
 }
 
-Coordenada Coordenada::arriba(){
+Coordenada& Coordenada::arriba(){
 	return Coordenada(x,y-1);
 }
 
-Coordenada Coordenada::abajo(){
+Coordenada& Coordenada::abajo(){
 	return Coordenada(x,y+1);
 }
 
-Coordenada Coordenada::izquiera(){
+Coordenada& Coordenada::izquiera(){
 	return Coordenada(x-1,y);
 }
 
-Coordenada Coordenada::derecha(){
+Coordenada& Coordenada::derecha(){
 	return Coordenada(x+1,y);
 }
 

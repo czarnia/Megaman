@@ -4,15 +4,19 @@
 #include <map>
 
 Celda_aire::Celda_aire(Elemento* obstaculo = NULL){
-  elem = obstaculo;
+	elem = obstaculo;
 }
 
 bool Celda_aire::agregar_personaje(Personaje* ocupa){
-  ocupantes[ocupa.devolver_id()] = ocupa;
+	ocupantes[ocupa.devolver_id()] = ocupa;
+}
+
+bool Celda_aire::quitar_personaje(Personaje* ocupa){
+	ocupantes.erase(ocupa.devolver_id());
 }
 
 virtual bool Celda_aire::puedo_ubicar(){
-  return true;
+	return true;
 }
 
 virtual Celda_aire::~Celda_aire() {}

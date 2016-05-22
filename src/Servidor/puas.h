@@ -6,10 +6,7 @@
 #include "coordenada.h"
 
 class Puas: public Elemento{
-	private:
-		Coordenada coord;
 	public:
-		Puas(Coordenada &coordenada);
 		//Devuelve true sólo si el personaje recibido tiene permitido
 		//ubicarse en la misma celda.
 		bool puede_ocupar(Personaje* pj);
