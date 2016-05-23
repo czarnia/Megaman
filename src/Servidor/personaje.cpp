@@ -5,7 +5,7 @@
 #define PERDER_VIDA -1
 typedef std::pair<std::string, StrategyMover*> nueva_estrategia;
 
-Personaje::Personaje(Mapa &mapa, std::string &id):
+Personaje::Personaje(Mapa &mapa, std::string id):
 id(id){
 	StrategyMoverIzquierda *mover_izq = new StrategyMoverIzquierda(mapa);
 	estrategias.insert(nueva_estrategia(mover_izq->get_nombre(), mover_izq));
@@ -14,14 +14,11 @@ id(id){
 }
 
 void Personaje::mover(std::string nombre_senial){
-	std::cout << "Entre al mover!\n";
 	StrategyMover *mover = estrategias[nombre_senial];
-	std::cout << "Obtuve el strategy\n";
 	mover->mover(this);
 }
 
 std::vector<Coordenada*>& Personaje::getCoordenadas(){
-	std::cout << "Entre al getCoordenadas\n";
 	return coordenadas_ocupadas;
 }
 

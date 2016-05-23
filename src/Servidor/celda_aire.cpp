@@ -10,13 +10,7 @@ Celda(x, y){
 }
 
 void Celda_aire::agregar_personaje(Mapa &mapa, Personaje* ocupa){
-	if (!ocupa){
-		std::cout << "no tengo ocupa \n";
-	}else{
-		std::cout << "tengo ocupa! \n";
-	}
 	ocupantes[ocupa->devolver_id()] = ocupa;
-	std::cout << "no me rompí!! \n";
 	if (elem != NULL){
 		elem->interactuar(mapa, ocupa);
 	}

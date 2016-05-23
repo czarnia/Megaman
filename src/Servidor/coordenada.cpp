@@ -22,11 +22,11 @@ void Coordenada::sumar_ordenada(size_t delta_y){
 }
 
 size_t Coordenada::obtener_ordenada(){
-	return x;
+	return y;
 }
 
 size_t Coordenada::obtener_abscisa(){
-	return y;
+	return x;
 }
 
 size_t Coordenada::obtener_distancia(Coordenada &otra_coordenada){

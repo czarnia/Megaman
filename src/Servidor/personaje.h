@@ -18,7 +18,7 @@ public Atacable,
 public Defendible,
 public Actualizable{
 	public:
-		Personaje(Mapa &mapa, std::string &id);
+		Personaje(Mapa &mapa, std::string id);
 		virtual void atacar() = 0;
 		virtual void update(size_t tiempo) = 0;
 		virtual void recibir_ataque(/*Bala ataque*/) = 0;
@@ -33,7 +33,7 @@ public Actualizable{
 		std::vector<Coordenada*> coordenadas_ocupadas;
 		//std::vector<Arma*> armas;
 		std::vector<Vida*> vidas;
-		std::string &id;
+		std::string id;
 		std::map<std::string, StrategyMover*> estrategias;
 		std::map<std::string, StrategyMover*> estrategias_adquiridas;
 
