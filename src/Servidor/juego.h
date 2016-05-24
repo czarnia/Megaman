@@ -3,6 +3,9 @@
 
 #include "actualizable.h"
 #include "mapa.h"
+#include <iosfwd>
+#include <cstddef>
+
 
 class Juego: public Actualizable{
   private:
