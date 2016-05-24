@@ -1,9 +1,11 @@
 #ifndef JUEGO_H
 #define JUEGO_H
 
+#include "../Comun/mutex.h"
 #include "actualizable.h"
 #include "mapa.h"
-#include "../Comun/mutex.h"
+#include "evento.h"
+
 
 #include <iosfwd>
 #include <cstddef>
