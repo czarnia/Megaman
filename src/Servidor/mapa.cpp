@@ -116,6 +116,16 @@ void Mapa::rellenar_aire(){
 	}
 }
 
+bool Mapa::tiene_coordenada(Coordenada &coordenada){
+	size_t x = coordenada.obtener_abscisa();
+	size_t y = coordenada.obtener_ordenada();
+	bool tiene_coordenada = (celdas.find(x) !=  celdas.end());
+	if (tiene_coordenada){
+		tiene_coordenada = (celdas[x].find(y) !=  celdas[x].end());
+	}
+	return tiene_coordenada;
+}
+
 void Mapa::cargar(){
 	std::vector<Coordenada> tierras = coord_tierras();
 	std::vector<Coordenada> puas = coord_puas();

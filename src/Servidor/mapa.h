@@ -15,6 +15,7 @@ class Mapa{
   public:
     //Dado un tamanio, crea un mapa.
     Mapa(size_t tamanio);
+    bool tiene_coordenada(Coordenada &coordenada);
     Celda* obtener_celda(Coordenada &coordenada);
   private:
     //Carga un mapa, por ahora, una versión por defecto chica.

@@ -3,14 +3,23 @@
 #include <iostream>
 
 #define PERDER_VIDA -1
+#define VELOCIDAD 2
 typedef std::pair<std::string, StrategyMover*> nueva_estrategia;
 
 Personaje::Personaje(Mapa &mapa, std::string id):
 id(id){
+	//TODO:Pasar las estrategias por parametro desde una Factory:
 	StrategyMoverIzquierda *mover_izq = new StrategyMoverIzquierda(mapa);
 	estrategias.insert(nueva_estrategia(mover_izq->get_nombre(), mover_izq));
 	//estrategias.insert()
 	//agregar estrategias nativas de cada personaje en cada constructor...
+	
+	//TODO: levantar este dato de xml/json!!!
+	velocidad = VELOCIDAD; 
+}
+
+int& Personaje::getVelocidad(){
+	return this->velocidad;
 }
 
 void Personaje::mover(std::string nombre_senial){
@@ -24,6 +33,12 @@ std::vector<Coordenada*>& Personaje::getCoordenadas(){
 
 bool Personaje::ubicar(std::vector<Coordenada*> &nuevas_coordenadas){
 	coordenadas_ocupadas = nuevas_coordenadas;
+}
+
+bool Personaje::tiene_estrategia(std::string nombre_estrategia){
+	bool tiene_estrategia = (estrategias_adquiridas.find(nombre_estrategia) != estrategias_adquiridas.end());
+	tiene_estrategia = tiene_estrategia || (estrategias.find(nombre_estrategia) != estrategias.end());
+	return tiene_estrategia;
 }
 
 void Personaje::agregar_estrategia(StrategyMover &estrategia){

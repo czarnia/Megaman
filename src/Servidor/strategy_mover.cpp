@@ -14,22 +14,39 @@ std::string StrategyMover::get_nombre(){
 	return nombre_senial;
 }
 
-void StrategyMover::mover(Personaje *pj){
+bool StrategyMover::ejecutar(Personaje *personaje){
+	bool exito = true;
+	int celdas_a_mover = personaje->getVelocidad(); //POR EL MOMENTO ASUMIMOS QUE EL PERSONAJE TIENE VELOCIDAD EN CELDAS/ACTUALIZACION. 
+	for (int i = 0; i < celdas_a_mover; i++){
+		exito = exito && mover(personaje);
+	}
+	return exito;
+}
+
+bool StrategyMover::mover(Personaje *pj){
 	std::vector<Coordenada*> coordenadas_pj = pj->getCoordenadas();
 	bool puedo_mover = true;
 	Coordenada *coord;
 	size_t x, y;
 	Celda* celda;
 	for(size_t i = 0; i < coordenadas_pj.size(); i++){
+		//Verifico que las nuevas coordenadas estan dentro del mapa
+		//y que las celdas destino puedan alojar al personaje.
 		coord =  nueva_coordenada(*coordenadas_pj[i]);
-		celda = mapa.obtener_celda(*coord);
-		puedo_mover = puedo_mover && celda->puedo_ubicar();
+		puedo_mover = puedo_mover && mapa.tiene_coordenada(*coord);
+		if (puedo_mover){
+			celda = mapa.obtener_celda(*coord);
+			puedo_mover = puedo_mover && celda->puedo_ubicar();
+		}
 	}
 	if (puedo_mover){
+		//Si el movimiento es válido, se actualizan las
+		//coordenadas del personaje.
 		std::vector<Coordenada*> nuevas_coordenadas_pj;
 		Celda_aire* celda_aire;
 		Coordenada *nueva_coord;
 		for(size_t i = 0; i < coordenadas_pj.size(); i++){
+			//TODO: mover esto a la clase mapa:
 			celda_aire = (Celda_aire*)mapa.obtener_celda(*coord);
 			celda_aire->quitar_personaje(pj);
 			nueva_coord = nueva_coordenada(*coordenadas_pj[i]);
@@ -39,6 +56,7 @@ void StrategyMover::mover(Personaje *pj){
 		}
 		pj->ubicar(nuevas_coordenadas_pj);
 	}
+	return puedo_mover;
 }
 
 StrategyMover::~StrategyMover(){}

@@ -27,19 +27,22 @@ public Actualizable{
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
 		virtual bool esta_vivo();
 		virtual void remover_estrategias();
-		void mover(std::string nombre_senial);
+		virtual void mover(std::string nombre_senial);
+		virtual int &getVelocidad();
+		virtual bool tiene_estrategia(std::string nombre_estrategia);
 		virtual std::vector<Coordenada*> &getCoordenadas();
 	private:
 		std::vector<Coordenada*> coordenadas_ocupadas;
 		//std::vector<Arma*> armas;
 		std::vector<Vida*> vidas;
 		std::string id;
+		int velocidad;
 		std::map<std::string, StrategyMover*> estrategias;
 		std::map<std::string, StrategyMover*> estrategias_adquiridas;
 
 		virtual bool ubicar(std::vector<Coordenada*> &nuevas_coordenadas);
 		friend class Mapa;
-		friend void StrategyMover::mover(Personaje *personaje);
+		friend bool StrategyMover::mover(Personaje *personaje);
 };
 
 #endif //PERSONAJE_H
