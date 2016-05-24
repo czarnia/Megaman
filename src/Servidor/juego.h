@@ -3,6 +3,8 @@
 
 #include "actualizable.h"
 #include "mapa.h"
+#include "../Comun/mutex.h"
+
 #include <iosfwd>
 #include <cstddef>
 
@@ -10,6 +12,7 @@
 class Juego: public Actualizable{
   private:
     Mapa mundo;
+    Mutex proteccion;
 	public:
     //Crea un juego nuevo.
     Juego(size_t tamanio);
