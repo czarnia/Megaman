@@ -36,6 +36,7 @@ std::vector<Coordenada> coord_tierras(){
 std::vector<Coordenada*> coord_personajes(){
 	std::vector<Coordenada*> personajes;
 	personajes.push_back(new Coordenada(9,6));
+	personajes.push_back(new Coordenada(3,3));
 	return personajes;
 }
 
@@ -94,16 +95,20 @@ void Mapa::ocupar_tierra(std::vector<Coordenada> &coordenadas){
 }
 
 void Mapa::ocupar_personajes(std::vector<Coordenada*> &coordenadas){
-	std::string nombre("megaman0");
-	Megaman *megaman = new Megaman(*this, nombre);
+	Megaman *megaman;
 	for (size_t i = 0; i < coordenadas.size(); i++){
+		std::stringstream nombre;
+		nombre << "megaman" << i;
+		megaman = new Megaman(*this, nombre.str());
 		Coordenada *coord = coordenadas[i];
 		size_t x = coord->obtener_ordenada();
 		size_t y = coord->obtener_abscisa();
 		Celda_aire *aire = (Celda_aire*)celdas[x][y];
 		aire->agregar_personaje(*this, megaman);
+		std::vector<Coordenada*> coords_megaman;
+		coords_megaman.push_back(coord);
+		megaman->ubicar(coords_megaman);
 	}
-	megaman->ubicar(coordenadas);
 }
 
 void Mapa::rellenar_aire(){

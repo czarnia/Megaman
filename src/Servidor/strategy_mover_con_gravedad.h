@@ -13,7 +13,7 @@ class StrategyMoverConGravedad: public StrategyMover{
 		~StrategyMoverConGravedad();
 	private:
 		StrategyMover *movimiento;
-		StrategyMoverAbajo *caer;		
+		StrategyMoverAbajo *caer;
 };
 
 #endif //STRATEGY_MOVER_CON_GRAVEDAD_H

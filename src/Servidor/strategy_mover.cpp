@@ -20,27 +20,22 @@ bool StrategyMover::ejecutar(Personaje *personaje){
 }
 
 bool StrategyMover::mover(Personaje *pj){
-	std::cout << "EJECUTAR "<< this->get_nombre()<<" \n";
 	std::vector<Coordenada*> coordenadas_pj = pj->getCoordenadas();
 	bool puedo_mover = true;
 	Coordenada *coord;
 	size_t x, y;
 	Celda* celda;
 	for(size_t i = 0; i < coordenadas_pj.size(); i++){
-		std::cout << "COORDENADA " << i << "\n";
 		//Verifico que las nuevas coordenadas estan dentro del mapa
 		//y que las celdas destino puedan alojar al personaje.
 		coord =  nueva_coordenada(*coordenadas_pj[i]);
 		puedo_mover = puedo_mover && mapa.tiene_coordenada(*coord);
-		if(puedo_mover)	std::cout << "MAPA TIENE COORD\n";
 		if (puedo_mover){
 			celda = mapa.obtener_celda(*coord);
 			puedo_mover = puedo_mover && celda->puedo_ubicar();
-			if(puedo_mover)	std::cout << "CELDA PUEDE UBICAR\n";
 		}
 	}
 	if (puedo_mover){
-		if(puedo_mover)	std::cout << "MUEVO\n";
 		//Si el movimiento es válido, se actualizan las
 		//coordenadas del personaje.
 		std::vector<Coordenada*> nuevas_coordenadas_pj;

@@ -8,7 +8,6 @@ StrategyMover(mapa){
 }
 
 Coordenada* StrategyMoverAbajo::nueva_coordenada(Coordenada &coord){
-	std::cout << "GET COORD ABAJO\n";
 	Coordenada coord_abajo = coord.abajo();
 	size_t x = coord_abajo.obtener_abscisa();
 	size_t y = coord_abajo.obtener_ordenada();

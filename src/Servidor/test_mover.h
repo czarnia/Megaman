@@ -51,25 +51,50 @@ bool test_megaman_desplazamiento_lateral_con_gravedad(){
 	Mapa mapa(10);
 	std::string nombre("megaman0");
 	Coordenada coord_inicial(9,6);
-	Coordenada coord_final(4,7);
+	Coordenada coord_caida_1(4,7);
+	Coordenada coord_caida_2(3,8);
 	std::string mover_izquierda("<-");
 	Celda_aire *celda_p = (Celda_aire*)mapa.obtener_celda(coord_inicial);
 	Personaje *p = celda_p->obtener_personaje(nombre);
-	std::vector<Coordenada*> coords_iniciales = p->getCoordenadas();
-	int celdas_hasta_caida = coord_inicial.obtener_distancia(coord_final);
+	int celdas_hasta_caida = coord_inicial.obtener_distancia(coord_caida_1);
 	
-	for (int i = 0; i <= celdas_hasta_caida; i++){
+	for (int i = 0; i < celdas_hasta_caida; i++){
 		p->mover(mover_izquierda);
 	}
 	
 	std::vector<Coordenada*> coords_finales = p->getCoordenadas();
-	std::cout << coords_finales[0]->obtener_abscisa() << "," << coords_finales[0]->obtener_ordenada() << "\n";
-	return (*coords_finales[0]== coord_final);
+	passed = (*coords_finales[0] == coord_caida_1);
+	
+	p->mover(mover_izquierda);
+	coords_finales = p->getCoordenadas();
+	passed = passed && (*coords_finales[0] == coord_caida_2);
+	
+	return passed;
+}
+
+bool test_megaman_desplazamiento_y_caida(){
+	bool passed = true;
+	
+	Mapa mapa(10);
+	std::string nombre("megaman1");
+	Coordenada coord_inicial(3,3);
+	Coordenada coord_caida(4,7);
+	std::string mover_derecha("->");
+	Celda_aire *celda_p = (Celda_aire*)mapa.obtener_celda(coord_inicial);
+	Personaje *p = celda_p->obtener_personaje(nombre);
+	
+	p->mover(mover_derecha);
+	
+	std::vector<Coordenada*> coords_finales = p->getCoordenadas();
+	
+	return (*coords_finales[0] == coord_caida);
+	
 }
 
 void run_tests(){
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL", test_megaman_desplazamiento_lateral());
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL CON GRAVEDAD", test_megaman_desplazamiento_lateral_con_gravedad());
+    print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL Y CAIDA", test_megaman_desplazamiento_y_caida());
 }
 
 #endif //TEST_MOVER_H

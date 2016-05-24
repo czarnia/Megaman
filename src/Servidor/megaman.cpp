@@ -1,6 +1,6 @@
 #include "megaman.h"
 
-Megaman::Megaman(Mapa &mapa, std::string &id):
+Megaman::Megaman(Mapa &mapa, std::string id):
 Personaje(mapa,id){}
 
 void Megaman::atacar(){}
