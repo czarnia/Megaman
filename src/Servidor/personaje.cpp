@@ -5,7 +5,7 @@
 #include <iostream>
 
 #define PERDER_VIDA -1
-#define VELOCIDAD 2
+#define VELOCIDAD 1
 typedef std::pair<std::string, StrategyMover*> nueva_estrategia;
 
 Personaje::Personaje(Mapa &mapa, std::string id):
@@ -22,13 +22,13 @@ id(id){
 	velocidad = VELOCIDAD; 
 }
 
-int& Personaje::getVelocidad(){
+int Personaje::get_velocidad(){
 	return this->velocidad;
 }
 
 void Personaje::mover(std::string nombre_senial){
 	StrategyMover *mover = estrategias[nombre_senial];
-	mover->mover(this);
+	mover->ejecutar(this);
 }
 
 std::vector<Coordenada*>& Personaje::getCoordenadas(){

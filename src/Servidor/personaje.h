@@ -28,7 +28,7 @@ public Actualizable{
 		virtual bool esta_vivo();
 		virtual void remover_estrategias();
 		virtual void mover(std::string nombre_senial);
-		virtual int &getVelocidad();
+		virtual int get_velocidad();
 		virtual bool tiene_estrategia(std::string nombre_estrategia);
 		virtual std::vector<Coordenada*> &getCoordenadas();
 	private:
