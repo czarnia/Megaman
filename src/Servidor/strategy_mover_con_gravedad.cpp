@@ -1,9 +1,17 @@
 #include "strategy_mover_con_gravedad.h"
 
 StrategyMoverConGravedad::StrategyMoverConGravedad(Mapa &mapa, StrategyMover *movimiento):
-mapa(mapa),
+StrategyMover(mapa),
 movimiento(movimiento){
 	caer = new StrategyMoverAbajo(mapa);
+}
+
+std::string StrategyMoverConGravedad::get_nombre(){
+	return movimiento->get_nombre();
+}
+
+Coordenada* StrategyMoverConGravedad::nueva_coordenada(Coordenada &coord){
+	return movimiento->nueva_coordenada(coord);
 }
 
 bool StrategyMoverConGravedad::ejecutar(Personaje *personaje){

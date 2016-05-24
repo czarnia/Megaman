@@ -11,13 +11,13 @@ class StrategyMover{
 		StrategyMover(Mapa &mapa);
 		virtual std::string get_nombre();
 		virtual bool ejecutar(Personaje *personaje);
+		virtual Coordenada *nueva_coordenada(Coordenada &coord) = 0;
 		virtual ~StrategyMover() = 0;
 	protected:
 		Mapa &mapa;
 		std::string nombre_senial;
 		virtual bool mover(Personaje *personaje);
-
-		virtual Coordenada *nueva_coordenada(Coordenada &coord) = 0;
+				
 		friend class Personaje;
 };
 

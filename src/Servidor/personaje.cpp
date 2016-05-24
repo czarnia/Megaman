@@ -1,5 +1,6 @@
 #include "personaje.h"
 #include "strategy_mover_izquierda.h"
+#include "strategy_mover_con_gravedad.h"
 #include <iostream>
 
 #define PERDER_VIDA -1
@@ -9,7 +10,7 @@ typedef std::pair<std::string, StrategyMover*> nueva_estrategia;
 Personaje::Personaje(Mapa &mapa, std::string id):
 id(id){
 	//TODO:Pasar las estrategias por parametro desde una Factory:
-	StrategyMoverIzquierda *mover_izq = new StrategyMoverIzquierda(mapa);
+	StrategyMoverConGravedad *mover_izq = new StrategyMoverConGravedad(mapa, new StrategyMoverIzquierda(mapa));
 	estrategias.insert(nueva_estrategia(mover_izq->get_nombre(), mover_izq));
 	//estrategias.insert()
 	//agregar estrategias nativas de cada personaje en cada constructor...
