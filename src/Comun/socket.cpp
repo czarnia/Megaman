@@ -101,6 +101,24 @@ int Socket::send(const char* buffer, size_t tamanio){
   return tam_actual;
 }
 
+int Socket::sendInt(int* integer, size_t tamanio){
+  size_t tam_actual = 0; //el tamaño total de lo que ya envié.
+  int tam_send = 0; //el tamaño de lo que envio en cada ciclo.
+
+  std::cout << "Envio un: " << *integer << "\n";
+
+  while (tam_actual < tamanio){
+    int dif_tam = tamanio-tam_actual;
+    tam_send = ::send(this->skt, integer, dif_tam, MSG_NOSIGNAL);
+    if (tam_send <= 0){
+      return -1;
+    }
+    tam_actual += tam_send;
+  }
+
+  return tam_actual;
+}
+
 struct addrinfo* Socket::iniciar_addrinfo(char* ip, char* puerto){
   struct addrinfo hints;
   struct addrinfo* server;
