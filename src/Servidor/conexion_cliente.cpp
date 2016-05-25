@@ -4,11 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 
-//TODO:Definir estos valores!
-#define MAX_TAM_BUFFER 70
-#define FIN_ENTRADA "End"
-//
+#define TAM_INT 4
 #define EN_ESPERA " "
+//TODO: redefinir el fin...
+#define FIN_ENTRADA "End"
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id) : id_cliente(id),
 parser(id), handler(id){
@@ -20,27 +19,23 @@ Conexion_cliente::~Conexion_cliente(){
   delete skt;
 }
 
-
 void Conexion_cliente::ejecutar(){
-  char buffer[MAX_TAM_BUFFER];
-  if ((*skt).receive(buffer, MAX_TAM_BUFFER) > 0){
-    std::cout << "-1 al recibir fuera \n";
-  }
-  std::cout << "buffer: " << buffer << "\n";
-  std::cout << fin << "\n";
+  char comando[TAM_INT];
+  char argumento[TAM_INT];
+
   while (!fin){
-    if (strcmp(buffer, EN_ESPERA) != 0){
-      skt->send(buffer, strlen(buffer)); //sólo reenvio lo que recibí por ahora!
-    }
-    strncpy(buffer, EN_ESPERA, MAX_TAM_BUFFER);
-    if ((*skt).receive(buffer, MAX_TAM_BUFFER) < 0){
+    if ((skt->receive(comando, TAM_INT) < 0) || (skt->receive(argumento, TAM_INT) < 0)){
       if (fin){
         return;
       }
       std::cout << "-1 al recibir dentro \n";
     }
+    if (strcmp(comando, EN_ESPERA) != 0){
+      Evento* e = parser.crear_evento(*((int*)comando), *((int*)argumento));
+      handler.ejecutar_evento(e);
+    }
+    strncpy(comando, EN_ESPERA, TAM_INT);
   }
-  return;
 }
 
 void Conexion_cliente::terminar_ejecucion(){

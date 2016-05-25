@@ -4,6 +4,7 @@
 #include "evento.h"
 #include "creador_evento.h"
 #include <vector>
+#include <string>
 
 class Procesador_eventos{
   private:
@@ -14,7 +15,7 @@ class Procesador_eventos{
     Procesador_eventos(int id_procesador);
     //Dado un vector de ints que contiene el opcode de un evento, se crea al
     //mismo.
-    Evento* crear_evento(std::vector<int> mir);
+    Evento* crear_evento(int comando, int parametro);
   private:
     void generar_creadores();
 };

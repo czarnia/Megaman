@@ -3,18 +3,13 @@
 #include "creador_mover.h"
 #include "creador_cambiar_arma.h"
 #include <vector>
+#include <string>
 
 Procesador_eventos::Procesador_eventos(int id_procesador) : id(id_procesador){
   generar_creadores();
 }
 
-Evento* Procesador_eventos::crear_evento(std::vector<int> mir){
-  if (mir.size() != 2){
-    return NULL; //TODO: implementar excepcion.
-  }
-  int comando = mir[0];
-  int parametro = mir[1];
-
+Evento* Procesador_eventos::crear_evento(int comando, int parametro){
   Evento* e = creadores[comando-1]->crear(parametro); //TODO: if comando-1
   // < 0, lanzar excepcion.
 
