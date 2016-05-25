@@ -35,7 +35,6 @@ Servidor::~Servidor(){
     Conexion_cliente* cliente = clientes[claves_clientes[i]];
     clientes.erase(claves_clientes[i]);
     cliente->terminar_ejecucion();
-    cliente->join();
     delete cliente;
   }
 }
@@ -59,5 +58,4 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
 
   //Agrego al cliente:
   clientes[id_cliente] = new Conexion_cliente(cliente_nuevo, id);
-  clientes[id_cliente]->start();
 }
