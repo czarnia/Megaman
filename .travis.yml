@@ -1,0 +1,19 @@
+language: c
+
+compiler: gcc
+
+before_script:
+  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test # newer toolchain
+  - sudo apt-add-repository --yes ppa:zoogie/sdl2-snapshots # libsdl2
+  - export PATH=~/usr/bin:$PATH
+  - sudo apt-get update
+  - sudo apt-get install -y cmake make
+  - sudo bash ./installSDL2.sh
+
+script:
+  - cmake ./src
+  - make
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - bash execute.sh

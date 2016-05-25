@@ -1,31 +1,32 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include <map>
+#include <vector>
 #include "celda.h"
-#include "ubicable.h"
+#include "coordenada.h"
+
+class Elemento;
 
 class Mapa{
   private:
-    std::map<size_t, std::map<size_t, Celda>> celdas;
+    std::map<size_t, std::map<size_t, Celda*> > celdas;
+    size_t tam;
   public:
-    Mapa();
-    //Recibe un ubicable y las coordenadas donde se desea posicionar
-    //al nuevo_ubicable. Devuelve true si la ubicación fue realizada
-    //con éxito.
-    bool ocupar(Ubicable &nuevo_ubicable, std::vector<Coordenada*> &coordenadas);
-    //Devuelve true si la coordenada especificada esta desocupada.
-    bool coordenada_es_ocupable(Coordenada &coordenada);
-    //Recibe un vector de coordenadas a desocupar y
-    //extrae de la celda el elemento(personaje) que la ocupa.
-    //No se extraen los elementos propios del mapa que componen
-    //la celda como escaleras, puas, obstaculos, etc.
-    void desocupar(std::vector<Coordenada*> &coordenadas);
-    //Devuelve una referencia al ubicable contenido en
-    //una celda del mapa que se corresponde con la coordenada
-    //recibida.
-    Ubicable& obtener_ubicable(Coordenada &coordenada);
+    //Dado un tamanio, crea un mapa.
+    Mapa(size_t tamanio);
+    bool tiene_coordenada(Coordenada &coordenada);
+    Celda* obtener_celda(Coordenada &coordenada);
   private:
-    //TODO: void cargar();
+    //Carga un mapa, por ahora, una versión por defecto chica.
+    void cargar();
+    //Recibe un elemento y las coordenadas donde se desea posicionar al mismo.
+    void ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas);
+    //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
+    void ocupar_tierra(std::vector<Coordenada> &coordenadas);
+    void ocupar_personajes(std::vector<Coordenada*> &coordenadas);
+    //Inicializa las celdas aereas del mapa:
+    void rellenar_aire();
 };
 
 #endif //MAPA_H

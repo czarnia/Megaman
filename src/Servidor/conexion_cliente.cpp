@@ -10,7 +10,7 @@
 //
 #define EN_ESPERA " "
 
-Conexion_cliente::Conexion_cliente(Socket* conexion){
+Conexion_cliente::Conexion_cliente(Socket* conexion, int id) : id_cliente(id){
   skt = conexion;
   fin = false;
 }

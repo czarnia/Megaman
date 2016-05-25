@@ -4,17 +4,18 @@
 #include "personaje.h"
 #include "elemento.h"
 #include "coordenada.h"
+#include "mapa.h"
 
 class Puas: public Elemento{
-	private:
-		Coordenada coord;
 	public:
-		Puas(Coordenada &coordenada);
 		//Devuelve true sólo si el personaje recibido tiene permitido
 		//ubicarse en la misma celda.
 		bool puede_ocupar(Personaje* pj);
+		//Recibe un personaje e interactúa con el mismo para
+		//ocasionarle daño.
+		void interactuar(Mapa &mapa, Personaje *pj);
 		//Destructor de las Puas.
 		~Puas();
-}
+};
 
 #endif //PUAS_H

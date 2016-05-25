@@ -4,6 +4,7 @@
 #include "celda.h"
 #include "elemento.h"
 #include "personaje.h"
+#include "mapa.h"
 
 #include <string>
 #include <map>
@@ -13,9 +14,17 @@ class Celda_aire : public Celda{
     Elemento* elem;
     std::map<std::string, Personaje*> ocupantes;
   public:
-    Celda_aire(Elemento* obstaculo);
-    bool agregar_personaje(Personaje* ocupa);
+    //Crea una celda_aire dado un Elemento*, en caso de no proporcionarse uno,
+    //se la crea sin este.
+    Celda_aire(size_t x, size_t y, Elemento* obstaculo = NULL);
+    Personaje* obtener_personaje(std::string &id);
+    //Agrega (ubica) a un personaje en la celda.
+    void agregar_personaje(Mapa &mapa, Personaje* ocupa);
+    //Quira al personaje recibido de la celda.
+    void quitar_personaje(Personaje* ocupa);
+    //Devuelve true si se puede ubicar un personaje en la celda.
     virtual bool puedo_ubicar();
+    //Destructor de la celda_aire.
     virtual ~Celda_aire();
 };
 

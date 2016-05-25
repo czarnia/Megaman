@@ -58,6 +58,6 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
   std::string id_cliente(s.str());
 
   //Agrego al cliente:
-  clientes[id_cliente] = new Conexion_cliente(cliente_nuevo);
+  clientes[id_cliente] = new Conexion_cliente(cliente_nuevo, id_cliente);
   clientes[id_cliente]->start();
 }
