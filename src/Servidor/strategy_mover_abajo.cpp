@@ -1,10 +1,8 @@
 #include "strategy_mover_abajo.h"
 
-#include <iostream>
-
 StrategyMoverAbajo::StrategyMoverAbajo(Mapa &mapa):
 StrategyMover(mapa){
-	nombre_senial = std::string("_");
+	nombre_senial = std::string("ABAJO");
 }
 
 Coordenada* StrategyMoverAbajo::nueva_coordenada(Coordenada &coord){

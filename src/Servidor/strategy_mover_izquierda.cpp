@@ -2,7 +2,7 @@
 
 StrategyMoverIzquierda::StrategyMoverIzquierda(Mapa &mapa):
 StrategyMover(mapa){
-	nombre_senial = std::string("<-");
+	nombre_senial = std::string("IZQUIERDA");
 }
 
 Coordenada* StrategyMoverIzquierda::nueva_coordenada(Coordenada &coord){

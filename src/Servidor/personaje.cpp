@@ -26,8 +26,8 @@ int Personaje::get_velocidad(){
 	return this->velocidad;
 }
 
-void Personaje::mover(std::string nombre_senial){
-	StrategyMover *mover = estrategias[nombre_senial];
+void Personaje::agregar_evento(Evento_mover *mover){
+	StrategyMover *mover = estrategias[mover->get_direccion()];
 	mover->ejecutar(this);
 }
 

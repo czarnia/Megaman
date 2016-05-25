@@ -2,7 +2,7 @@
 
 StrategyMoverArriba::StrategyMoverArriba(Mapa &mapa): 
 StrategyMover(mapa){
-	nombre_senial = std::string("<-");
+	nombre_senial = std::string("ARRIBA");
 }
 
 Coordenada* StrategyMoverArriba::nueva_coordenada(Coordenada &coord){

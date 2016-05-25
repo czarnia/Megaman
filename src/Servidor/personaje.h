@@ -9,6 +9,7 @@
 #include "defendible.h"
 #include "actualizable.h"
 #include "strategy_mover.h"
+#include "evento_mover.h"
 #include "vida.h"
 
 #define PERDER_VIDA -1
@@ -27,7 +28,7 @@ public Actualizable{
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
 		virtual bool esta_vivo();
 		virtual void remover_estrategias();
-		virtual void mover(std::string nombre_senial);
+		virtual void agregar_evento(Evento_mover *mover);
 		virtual int get_velocidad();
 		virtual bool tiene_estrategia(std::string nombre_estrategia);
 		virtual std::vector<Coordenada*> &getCoordenadas();

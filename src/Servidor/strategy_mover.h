@@ -17,7 +17,7 @@ class StrategyMover{
 	protected:
 		Mapa &mapa;
 		std::string nombre_senial;
-				
+		
 		friend class Personaje;
 };
 

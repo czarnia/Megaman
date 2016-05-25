@@ -2,7 +2,7 @@
 
 StrategyMoverDerecha::StrategyMoverDerecha(Mapa &mapa):
 StrategyMover(mapa){
-	nombre_senial = std::string("->");
+	nombre_senial = std::string("DERECHA");
 }
 
 Coordenada* StrategyMoverDerecha::nueva_coordenada(Coordenada &coord){
