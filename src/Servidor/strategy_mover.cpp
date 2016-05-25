@@ -10,7 +10,7 @@
 StrategyMover::StrategyMover(Mapa &mapa):
 mapa(mapa){}
 
-std::string StrategyMover::get_nombre(){
+/*std::string StrategyMover::get_nombre(){
 	return nombre_senial;
 }
 
@@ -53,6 +53,6 @@ bool StrategyMover::mover(Personaje *pj){
 		pj->ubicar(nuevas_coordenadas_pj);
 	}
 	return puedo_mover;
-}
+}*/
 
 StrategyMover::~StrategyMover(){}

@@ -3,10 +3,10 @@
 
 typedef enum {ARRIBA, ABAJO, DERECHA, IZQUIERDA} Direccion;
 
-Evento_mover::Evento_mover(int id_personaje, int dir) : direccion(dir){
+Evento_mover::Evento_mover(int id, int dir) : direccion(dir){
 	std::stringstream	s;
-	s << "megaman" << id_personaje;
-	std::string id(s.str());
+	s << "megaman" <<id;
+	id_evento = s.str();
   	mis_direcciones[ARRIBA] = "ARRIBA";
 	mis_direcciones[ABAJO] = "ABAJO";
 	mis_direcciones[DERECHA] = "DERECHA";

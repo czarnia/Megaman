@@ -11,6 +11,8 @@
 #include "strategy_mover.h"
 #include "evento_mover.h"
 #include "vida.h"
+#include "mutex.h"
+#include "lock.h"
 
 #define PERDER_VIDA -1
 
@@ -30,17 +32,21 @@ public Actualizable{
 		virtual void remover_estrategias();
 		virtual void agregar_evento(Evento_mover *mover);
 		virtual int get_velocidad();
-		virtual bool tiene_estrategia(std::string nombre_estrategia);
+		//virtual bool tiene_estrategia(std::string nombre_estrategia);
 		virtual std::vector<Coordenada*> &getCoordenadas();
 	private:
 		std::vector<Coordenada*> coordenadas_ocupadas;
 		//std::vector<Arma*> armas;
 		std::vector<Vida*> vidas;
 		std::string id;
-		int velocidad;
+		int velocidad_y;
+		int velocidad_x;
 		std::map<std::string, StrategyMover*> estrategias;
 		std::map<std::string, StrategyMover*> estrategias_adquiridas;
-
+		
+		Mutex m;
+		std::queue<StrategyMover* strategy> acciones; //en el futuro seran acciones/strategies de todo tipo.
+		
 		virtual bool ubicar(std::vector<Coordenada*> &nuevas_coordenadas);
 		friend class Mapa;
 		friend bool StrategyMover::mover(Personaje *personaje);

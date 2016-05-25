@@ -18,17 +18,34 @@ id(id){
 	//estrategias.insert()
 	//agregar estrategias nativas de cada personaje en cada constructor...
 	
+	velocidad_y = 0; 
 	//TODO: levantar este dato de xml/json!!!
-	velocidad = VELOCIDAD; 
+	velocidad_x = VELOCIDAD; 
 }
 
 int Personaje::get_velocidad(){
 	return this->velocidad;
 }
 
-void Personaje::agregar_evento(Evento_mover *mover){
-	StrategyMover *mover = estrategias[mover->get_direccion()];
-	mover->ejecutar(this);
+void Personaje::update(size_t tiempo){
+	StrategyMover *accion;
+	Lock l(this->m);
+	while (!acciones.empty()){
+		accion = acciones.front();
+		acciones.pop();
+		accion->ejecutar(this);
+	}
+}
+
+void Personaje::agregar_evento(Evento_mover *movimiento){
+	std::string estrategia = movimiento->get_direccion();
+	if (estrategias_adquiridas.find(estrategia) != estrategias_adquiridas.end()){
+		acciones->push(estrategias_adquiridas[estrategia]);
+	}else{
+		if (estrategias.find(estrategia) != estrategias.end()){
+			acciones->push(estrategias[estrategia]);
+		}
+	}
 }
 
 std::vector<Coordenada*>& Personaje::getCoordenadas(){
@@ -39,11 +56,11 @@ bool Personaje::ubicar(std::vector<Coordenada*> &nuevas_coordenadas){
 	coordenadas_ocupadas = nuevas_coordenadas;
 }
 
-bool Personaje::tiene_estrategia(std::string nombre_estrategia){
+/*bool Personaje::tiene_estrategia(std::string nombre_estrategia){
 	bool tiene_estrategia = (estrategias_adquiridas.find(nombre_estrategia) != estrategias_adquiridas.end());
 	tiene_estrategia = tiene_estrategia || (estrategias.find(nombre_estrategia) != estrategias.end());
 	return tiene_estrategia;
-}
+}*/
 
 void Personaje::agregar_estrategia(StrategyMover &estrategia){
 	this->estrategias_adquiridas.insert( nueva_estrategia(estrategia.get_nombre(), &estrategia) );
