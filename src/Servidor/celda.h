@@ -13,7 +13,6 @@ class Celda{
     //Devuelve true si se puede ubicar un personaje o elemento en la celda, fal-
     //se en caso contrario.
     virtual bool puedo_ubicar() = 0;
-    
     //Devuelve la coordenada de la celda de la derecha a si misma.
     virtual Coordenada celda_derecha();
     //Devuelve la coordenada de la celda de la izquierda a si misma.
@@ -34,7 +33,6 @@ class Celda{
     //Devuelve la coordenada de la celda en diagonal arriba a la izquierda a si
     //misma.
     virtual Coordenada celda_diagonal_izqarriba();
-    
     //Destructor de la celda.
     virtual ~Celda() = 0;
 };
