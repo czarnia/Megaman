@@ -21,6 +21,7 @@ class Sprite{
         int getPosY();
         void setPosX(int x);
         void setPosY(int y);
+        void erase();
         ~Sprite();
 };
 
