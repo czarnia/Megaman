@@ -8,8 +8,11 @@ class Evento_atacar : class Evento{
     std::string id;
     int direccion;
   public:
+    //Crea un evento atacar dado un id y una direccion.
     Evento_atacar(int id, int dir);
+    //Destructor del evento atacar.
     ~Evento_atacar();
+    //Ejecuta un evento atacar dado un juego.
     virtual void ejecutar(Juego j);
 };
 

@@ -9,8 +9,11 @@ class Evento_mover : class Evento{
     std::string id;
     int direccion;
   public:
+    //Crea un evento mover dado un id y una direccion.
     Evento_mover(int id, int dir);
+    //Destructor del evento mover.
     ~Evento_mover();
+    //Ejecuta un evento mover dado un juego.
     virtual void ejecutar(Juego j);
 };
 
