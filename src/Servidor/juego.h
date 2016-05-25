@@ -22,8 +22,6 @@ class Juego: public Actualizable{
 		~Juego();
     //Dado un determinado tiempo, actualiza al juego.
     virtual void update(size_t tiempo);
-    //El juego recibe un evento y lo procesa.
-    void procesar_evento(Evento* e);
 };
 
 #endif //JUEGO_H
