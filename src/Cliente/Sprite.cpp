@@ -2,7 +2,7 @@
 #include <SDL2/SDL_image.h>
 
 Sprite::Sprite(SDL_Renderer *r, const char *file){
-    //texture = IMG_LoadTexture(r, file);
+    texture = IMG_LoadTexture(r, file);
 }
 
 void Sprite::set_Sprite(int posx, int posy, int width,

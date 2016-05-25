@@ -13,10 +13,12 @@
 
 #define WIDTH 640
 #define HEIGHT 480
+#define IP_POS 1
+#define PORT_POS 2
 
 int main(int argc, char *argv[]){
-	char* hostname = argv[1];
-	char* puerto = argv[2];
+	char* hostname = argv[IP_POS];
+	char* puerto = argv[PORT_POS];
 	Socket* cliente = new Socket(NULL, puerto);
 
 	// INICIALIZO TODO LO QUE TENGA QUE VER CON SDL
@@ -35,14 +37,11 @@ int main(int argc, char *argv[]){
 
 	std::cout << buffer << "\n";
 
+	Window main_window(WIDTH,HEIGHT);
+	main_window.run(cliente);
+
 	(*cliente).shutdown(SHUT_RDWR);
 	delete cliente;
-
-	// POR AHORA SOLO CORRE UNA VENTANA QUE IMPRIME POR
-	// STDOUT LAS TECLAS INGRESADAS
-	Window main_window(WIDTH,HEIGHT);
-	// ACA ADENTRO OCURRE LA COMUNICACION ?
-	main_window.run();
 
 
 	SDL_Quit();
