@@ -1,12 +1,14 @@
 #ifndef TEST_MOVER_H
-#define TEST_MOVE_H
+#define TEST_MOVER_H
 
 #include <string>
-#include <ostream>
+#include <iostream>
 #include <sstream>
-#include "mapa.h"
-#include "personaje.h"
-#include "celda_aire.h"
+
+#include "../Servidor/personaje.h"
+#include "../Servidor/celda_aire.h"
+#include "../Servidor/coordenada.h"
+#include "../Servidor/mapa.h"
 
 void print_test_result(std::string nombre_test, bool result){
   std::string state = result? "OK":"ERROR";
@@ -88,13 +90,44 @@ bool test_megaman_desplazamiento_y_caida(){
 	std::vector<Coordenada*> coords_finales = p->getCoordenadas();
 	
 	return (*coords_finales[0] == coord_caida);
+}
+
+bool test_megaman_pasa_puas_y_pierde_vida(){
+	bool passed = true;
 	
+	Mapa mapa(10);
+	std::string nombre("megaman1");
+	Coordenada coord_inicial(3,3);
+	std::string mover_izquierda("<-");
+	std::string mover_derecha("<-");
+	Celda_aire *celda_p = (Celda_aire*)mapa.obtener_celda(coord_inicial);
+	Personaje *p = celda_p->obtener_personaje(nombre);
+	
+	p->mover(mover_izquierda);
+	
+	//PIERDE 1 VIDA
+	p->mover(mover_izquierda);
+	p->mover(mover_derecha);
+
+	//PIERDE 1 VIDA
+	p->mover(mover_izquierda);	
+	p->mover(mover_derecha);
+	
+	//PIERDE 1 VIDA
+	p->mover(mover_izquierda);
+	
+	return !p->esta_vivo();
 }
 
 void run_tests(){
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL", test_megaman_desplazamiento_lateral());
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL CON GRAVEDAD", test_megaman_desplazamiento_lateral_con_gravedad());
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL Y CAIDA", test_megaman_desplazamiento_y_caida());
+    //print_test_result("TEST MEGAMAN PASA PUAS Y PIERDE VIDA", test_megaman_pasa_puas_y_pierde_vida());
 }
 
+
+int main(int argc, char *argv[]){
+	run_tests();
+}
 #endif //TEST_MOVER_H

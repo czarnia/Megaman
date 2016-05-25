@@ -1,0 +1,14 @@
+#Setting compilation flags:
+set (CMAKE_C_FLAGS "-Wall -q -pedantic")
+
+set(INCLUDE_H "../Servidor/*")
+
+#Declare variable that combines all *.cpp  and *.h files
+#in this directory.
+file (GLOB SRCS  *.cpp *.h)
+
+#Creates an executable with all files found
+#by file command.
+add_executable (tests ${SRCS})
+
+target_link_libraries (tests ${INCLUDE_H}) 
