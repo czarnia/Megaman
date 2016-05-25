@@ -53,8 +53,14 @@ void Sprite::setPosY(int y){
     rectangle.y = y;
 }
 
-Sprite::~Sprite(){
+void Sprite::erase(){
     SDL_DestroyTexture(texture);
+    texture = NULL;
+}
+
+Sprite::~Sprite(){
+    if(texture)
+        SDL_DestroyTexture(texture);
 }
 
 
