@@ -1,7 +1,7 @@
 #include "conexion_cliente.h"
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id) : skt(conexion), id_cliente(id),
-rcv(socket, id) {
+rcv(conexion, id) {
   rcv.start();
 }
 
