@@ -5,8 +5,8 @@
 
 class Creador_evento{
   public:
-    //Crea un evento dado un identificador y un parametro.
-    virtual Evento* crear(int id, int parametro) = 0;
+    //Crea un evento dado un parametro.
+    virtual Evento* crear(int parametro) = 0;
 };
 
 #endif //CREADOR_EVENTO_H

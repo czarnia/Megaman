@@ -8,8 +8,8 @@ class Creador_mover : class Creador_evento{
   private:
     int id;
   public:
-    //Crea un evento de tipo mover dado un id y un parametro.
-    virtual Evento* crear(int id, int parametro);
+    //Crea un evento de tipo mover dado un parametro.
+    virtual Evento* crear(int parametro);
 };
 
 #endif //CREADOR_MOVER_H

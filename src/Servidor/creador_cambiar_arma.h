@@ -8,8 +8,8 @@ class Creador_cambiar_arma : class Creador_evento{
   private:
     int id;
   public:
-    //Crea un evento de tipo cambiar_arma dado un id y un parametro.
-    virtual Evento* crear(int id, int parametro);
+    //Crea un evento de tipo cambiar_arma dado un parametro.
+    virtual Evento* crear(int parametro);
 };
 
 #endif //CREADOR_CAMBIAR_ARMA_H

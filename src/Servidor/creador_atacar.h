@@ -8,8 +8,8 @@ class Creador_atacar : class Creador_evento{
   private:
     int id;
   public:
-    //Crea un evento de tipo atacar dado un id y un parametro.
-    virtual Evento* crear(int id, int parametro);
+    //Crea un evento de tipo atacar dado un parametro.
+    virtual Evento* crear(int parametro);
 };
 
 #endif //CREADOR_ATACAR_H
