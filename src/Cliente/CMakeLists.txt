@@ -1,5 +1,5 @@
 #Setting compilation flags:
-set (CMAKE_C_FLAGS "-Wall -q -pedantic")
+set (CMAKE_C_FLAGS "-Wall -q -pedantic -Wextra -Werror")
 
 #Use the package PkgConfig to detect GTK+ headers/library files.
 #find_package (PkgConfig REQUIRED)
@@ -39,4 +39,4 @@ file (GLOB SRCS  *.cpp *.h)
 #by file command.
 add_executable (cliente ${SRCS})
 
-target_link_libraries (cliente Megaman ${SDL2_LIBRARIES} ${SDL_MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES}) 
+target_link_libraries (cliente Megaman ${SDL2_LIBRARIES} ${SDL_MIXER_LIBRARIES} ${SDL2IMAGE_LIBRARIES})

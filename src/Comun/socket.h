@@ -13,7 +13,7 @@ class Socket{
 
   public:
     //Dado un puerto y una ip, crea un socket.
-    Socket(char* puerto, char* ip);
+    explicit Socket(char* puerto, char* ip);
     //Destruye un socket (hace close).
     ~Socket();
     //Hace un shutdown, devuelve menor a cero en caso de error.
