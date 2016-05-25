@@ -1,9 +1,10 @@
 #include "evento_cambiar_arma.h"
+#include <sstream>
 
 Evento_cambiar_arma::Evento_cambiar_arma(int id, int arma) : num_arma(arma){
   std::stringstream	s;
   s << "megaman" <<id;
-  std::string id(s.str());
+  id_evento = s.str();
 }
 
 Evento_cambiar_arma::~Evento_cambiar_arma() {}

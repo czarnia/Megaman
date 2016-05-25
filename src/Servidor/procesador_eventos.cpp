@@ -1,4 +1,7 @@
 #include "procesador_eventos.h"
+#include "creador_atacar.h"
+#include "creador_mover.h"
+#include "creador_cambiar_arma.h"
 #include <vector>
 
 Procesador_eventos::Procesador_eventos(int id_procesador) : id(id_procesador){

@@ -13,7 +13,7 @@ class Manejador_eventos{
     //Destructor del manejador de eventos.
     ~Manejador_eventos();
     //Dado un evento, lo ejecuta.
-    void ejecutar_evento(Evento e);
+    void ejecutar_evento(Evento* e);
 };
 
 #endif //MANEJADOR_EVENTOS_H
