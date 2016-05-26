@@ -57,8 +57,8 @@ void Window::run(Socket *skt){
     //
 
     //PERSONAJES
-    Sprite megaman(renderer.get_renderer(), "megaman.jpeg");
-    megaman.set_Sprite(15, height-25, 30, 50, ORIGIN_CENTERED, 10, 5);
+    Sprite megaman(renderer.get_renderer(), "megaman.gif");
+    megaman.set_Sprite(15, height-25, 40, 50, ORIGIN_CENTERED, 10, 5);
     renderer.add(&megaman);
 
 
@@ -100,7 +100,7 @@ void Window::run(Socket *skt){
                         break;
                     case SDLK_a:
                         std::cout<<"Se disparo"<<std::endl;
-                        sender.send("attack");
+                        sender.send("attack","");
                         // ACA ENVIO AL SERVIDOR LA INFO DE LA TECLA
                         break;
                     case SDLK_1:

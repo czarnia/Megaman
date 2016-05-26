@@ -1,26 +1,28 @@
 #include "sender.h"
 #include <utility>
+#include <cstring>
+#include <iostream>
 
 
 #define TAM_INT 4
 // VER PROTOCOLO
 Sender::Sender(Socket *socket): skt(socket){
-    commands.insert(std::pair<const char*,int>("attack" ,1));
-    commands.insert(std::pair<const char*,int>("move"   ,2));
-    commands.insert(std::pair<const char*,int>("gunChange",3));
-    commands.insert(std::pair<const char*,int>("up"     ,1));
-    commands.insert(std::pair<const char*,int>("down"   ,2));
-    commands.insert(std::pair<const char*,int>("right"  ,3));
-    commands.insert(std::pair<const char*,int>("left"   ,4));
-    commands.insert(std::pair<const char*,int>("gun1"   ,1));
-    commands.insert(std::pair<const char*,int>("gun2"   ,2));
-    commands.insert(std::pair<const char*,int>("gun3"   ,3));
-    commands.insert(std::pair<const char*,int>("gun4"   ,4));
-    commands.insert(std::pair<const char*,int>("gun5"   ,5));
+    commands.insert(std::pair<std::string,int>("attack" ,1));
+    commands.insert(std::pair<std::string,int>("move"   ,2));
+    commands.insert(std::pair<std::string,int>("gunChange",3));
+    commands.insert(std::pair<std::string,int>("up"     ,1));
+    commands.insert(std::pair<std::string,int>("down"   ,2));
+    commands.insert(std::pair<std::string,int>("right"  ,3));
+    commands.insert(std::pair<std::string,int>("left"   ,4));
+    commands.insert(std::pair<std::string,int>("gun1"   ,1));
+    commands.insert(std::pair<std::string,int>("gun2"   ,2));
+    commands.insert(std::pair<std::string,int>("gun3"   ,3));
+    commands.insert(std::pair<std::string,int>("gun4"   ,4));
+    commands.insert(std::pair<std::string,int>("gun5"   ,5));
 }
 
-int Sender::send(const char* command, const char* option){
-    skt->sendInt(&commands[command], sizeof(int));
-    if(!strncmp(command, "attack"))
-        skt->sendInt(&commands[option], sizeof(int));
+int Sender::send(std::string command, std::string option){
+    skt->sendInt(&(commands[command]), sizeof(int));
+    if(!command.compare("attack"))
+        skt->sendInt(&(commands[option]), sizeof(int));
 }

@@ -3,14 +3,15 @@
 
 #include "../Comun/socket.h"
 #include <map>
+#include <string>
 
 class Sender{
     private:
         Socket *skt;
-        std::map<const char*,int> commands;
+        std::map<std::string,int> commands;
     public:
         Sender(Socket *socket);
-        int send(const char* command,const char* option);
+        int send(std::string command, std::string option);
 };
 
 

@@ -13,7 +13,7 @@ class Window{
 		int height;
 	public:
 		Window(int width, int height);
-		void run(Socket *skt);
+		void run(Socket *skt=0);
 		SDL_Window* get_window();
 		~Window();
 };
