@@ -82,6 +82,21 @@ int Socket::receive(char* buffer, size_t tam_max){
   return tam_actual;
 }
 
+int Socket::receiveInt(int *integer, size_t tam_max){
+  size_t tam_actual = 0; //el tamaño total de lo que ya recibí.
+  int tam_rcv = 0; //el tamaño de lo que recibo en cada ciclo.
+
+  while (tam_actual < tam_max){
+    int dif_tam = tam_max-tam_actual;
+    tam_rcv = ::recv(this->skt, integer, dif_tam, MSG_NOSIGNAL);
+    if (tam_rcv <= 0){
+      return tam_rcv;
+    }
+    tam_actual += tam_rcv;
+  }
+
+  return tam_actual;
+}
 
 int Socket::send(const char* buffer, size_t tamanio){
   size_t tam_actual = 0; //el tamaño total de lo que ya envié.
@@ -104,8 +119,6 @@ int Socket::send(const char* buffer, size_t tamanio){
 int Socket::sendInt(int* integer, size_t tamanio){
   size_t tam_actual = 0; //el tamaño total de lo que ya envié.
   int tam_send = 0; //el tamaño de lo que envio en cada ciclo.
-
-  std::cout << "Envio un: " << *integer << "\n";
 
   while (tam_actual < tamanio){
     int dif_tam = tamanio-tam_actual;

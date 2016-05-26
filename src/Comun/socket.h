@@ -13,7 +13,7 @@ class Socket{
 
   public:
     //Dado un puerto y una ip, crea un socket.
-    explicit Socket(char* puerto, char* ip);
+    Socket(char* puerto, char* ip);
     //Destruye un socket (hace close).
     ~Socket();
     //Hace un shutdown, devuelve menor a cero en caso de error.
@@ -29,6 +29,7 @@ class Socket{
     //Hace un receive, recibe una cantidad "tamanio" de datos, devuelve menor a
     //cero en caso de error.
     int receive(char* buffer, size_t tam_max);
+	int receiveInt(int* integer, size_t tam_max);
     //Hace un send, devuelve menor a cero en caso de error.
     int send(const char* buffer, size_t tamanio);
 	//Hace un send de un int en lugar de usar un buffer.
