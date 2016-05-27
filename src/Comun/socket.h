@@ -29,11 +29,11 @@ class Socket{
     //Hace un receive, recibe una cantidad "tamanio" de datos, devuelve menor a
     //cero en caso de error.
     int receive(char* buffer, size_t tam_max);
-	int receiveInt(int* integer, size_t tam_max);
+	  int receiveInt(int* integer, size_t tam_max);
     //Hace un send, devuelve menor a cero en caso de error.
     int send(const char* buffer, size_t tamanio);
-	//Hace un send de un int en lugar de usar un buffer.
-	int sendInt(int* integer, size_t tamanio);
+	  //Hace un send de un int en lugar de usar un buffer.
+	  int sendInt(int* integer, size_t tamanio);
 
   private:
     //Inicia un addrinfo.
