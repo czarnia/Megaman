@@ -25,6 +25,6 @@ Sender::Sender(Socket *socket): skt(socket){
 }
 
 int Sender::send(std::string command, std::string option){
-    skt->send((char*)&(commands[command]), sizeof(int));
-    skt->send((char*)&(commands[option]), sizeof(int));
+    skt->send((char*)&(commands[command]), 4);
+    skt->send((char*)&(commands[option]), 4);
 }
