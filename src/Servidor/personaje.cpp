@@ -17,9 +17,9 @@ id(id){
 	estrategias.insert(nueva_estrategia(mover_der->get_nombre(), mover_der));
 	//estrategias.insert()
 	//agregar estrategias nativas de cada personaje en cada constructor...
-	
+
 	//TODO: levantar este dato de xml/json!!!
-	velocidad = VELOCIDAD; 
+	velocidad = VELOCIDAD;
 }
 
 int Personaje::get_velocidad(){

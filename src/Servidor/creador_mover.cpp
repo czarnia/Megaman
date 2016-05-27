@@ -1,5 +1,7 @@
 #include "creador_mover.h"
 #include "evento_mover.h"
+#include <string>
+#include <iostream>
 
 Creador_mover::Creador_mover(int id_creador) : id(id_creador){}
 
