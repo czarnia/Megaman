@@ -41,9 +41,9 @@ Servidor::~Servidor(){
 
 void Servidor::aceptar_clientes(){
   Socket* aceptado = skt->accept(NULL);
-  /*char buffer[4];
-  aceptado->receive(buffer, 4);
-  std::cout << buffer << "\n";*/
+  if (!aceptado){
+    std::cout << "no acepté nada!"
+  }
   agregar_cliente(aceptado);
 
   skt->shutdown(SHUT_RDWR);

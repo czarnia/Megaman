@@ -21,5 +21,7 @@ int main(int argc, char *argv[]){
     clock
   }*/
 
+  sleep(60)
+
   return 0;
 }
