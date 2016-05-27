@@ -26,7 +26,11 @@ class Sprite{
 
 class Hp_bar: public Sprite{
     private:
+    public:
+        Hp_bar();
+        void set_hp(int hp);
 
 };
+
 
 #endif // SPRITE_H

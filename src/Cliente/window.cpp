@@ -6,6 +6,7 @@
 #include "sender.h"
 #include "receiver.h"
 #include "../Comun/mutex.h"
+#include "../Comun/hilo.h"
 
 #define FPS 60
 #define ORIGIN_CENTERED 1
@@ -104,6 +105,7 @@ void Window::run(Socket *skt){
     Uint32 starting_tick;
     SDL_Event event;
     bool running = true;
+    std::string direction;
     // LOOP PRINCIPAL
 	while (running){
         starting_tick = SDL_GetTicks();
@@ -127,19 +129,22 @@ void Window::run(Socket *skt){
                         std::cout<<"se apreto izquierda"<<std::endl;
                         megaman.setPosX(megaman.getPosX()-10);
                         sender.send("move", "left");  // ENVIO LA TECLA
+                        direction = "left";
                         break;
                     case SDLK_RIGHT:
                         std::cout<<"se apreto derecha"<<std::endl;
                         megaman.setPosX(megaman.getPosX()+10);
                         sender.send("move", "right");  // ENVIO LA TECLA
-                        break;
-                    case SDLK_a:
-                        std::cout<<"Se disparo"<<std::endl;
-                        sender.send("attack","");  // ENVIO LA TECLA
+                        direction = "right";
                         break;
                     case SDLK_s:
                         std::cout<<"Se salto"<<std::endl;
-                        sender.send("jump","");
+                        sender.send("move","jump");
+                        break;
+                    case SDLK_a:
+                        std::cout<<"Se disparo"<<std::endl;
+                        sender.send("attack",direction);  // ENVIO LA TECLA
+                        break;
                     case SDLK_1:
                         std::cout<<"Se cambio de arma 1"<<std::endl;
                         sender.send("gunChange","gun1");  // ENVIO LA TECLA
@@ -172,6 +177,7 @@ void Window::run(Socket *skt){
         renderer.drawAll();
         renderer.present();
 	}
+	//receiver.join();
 }
 
 Window::~Window(){
