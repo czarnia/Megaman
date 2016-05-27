@@ -30,4 +30,3 @@ class Hp_bar: public Sprite{
 };
 
 #endif // SPRITE_H
-

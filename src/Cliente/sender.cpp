@@ -22,7 +22,7 @@ Sender::Sender(Socket *socket): skt(socket){
 }
 
 int Sender::send(std::string command, std::string option){
-    skt->sendInt(&(commands[command]), sizeof(int));
+    skt->send(&(commands[command]), sizeof(int));
     if(!command.compare("attack") && !command.compare("jump"))
-        skt->sendInt(&(commands[option]), sizeof(int));
+        skt->send(&(commands[option]), sizeof(int));
 }
