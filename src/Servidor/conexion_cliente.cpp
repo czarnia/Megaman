@@ -20,7 +20,7 @@ rcv(conexion, id, m) {
   enviar_porcentaje_energia(100);
 
   enviar_victoria();
-  enviar_derrota();
+  enviar_gameover();
 }
 
 void Conexion_cliente::terminar_ejecucion(){
