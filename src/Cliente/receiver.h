@@ -3,16 +3,20 @@
 
 #include "../Comun/hilo.h"
 #include "../Comun/socket.h"
+#include "../Comun/mutex.h"
+#include "Renderer.h"
 
 class Receiver: public Hilo{
-  private:
-    Socket* skt;
-  public:
-    //Crea un receiver recibiendo como parametro un socket ya conectado.
-    Receiver(Socket* conexion);
-    //"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo
-    //le indica el fin de la ejecucion.
-    virtual void ejecutar();
+    private:
+        Socket* skt;
+        Renderer &renderer;
+        Mutex &mutex;
+    public:
+        //Crea un receiver recibiendo como parametro un socket ya conectado.
+        Receiver(Socket* conexion, Renderer &renderer, Mutex &mutex);
+        //"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo
+        //le indica el fin de la ejecucion.
+        virtual void ejecutar();
 };
 
 #endif //RECEIVER_H
