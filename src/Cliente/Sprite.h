@@ -24,6 +24,10 @@ class Sprite{
         ~Sprite();
 };
 
+class Hp_bar: public Sprite{
+    private:
+
+};
 
 #endif // SPRITE_H
 

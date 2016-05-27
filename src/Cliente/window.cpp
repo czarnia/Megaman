@@ -10,6 +10,14 @@
 #define FPS 60
 #define ORIGIN_CENTERED 1
 #define ORIGIN_CORNER 0
+#define FONDO 1
+#define FONDO_HP 2
+#define HP_BAR1 3
+#define HP_BAR2 4
+#define HP_BAR3 5
+#define HP_BAR4 6
+#define MEGAMAN 7
+
 
 Window::Window(int width, int height): width(width), height(height){
     window = NULL;
@@ -23,6 +31,14 @@ Window::Window(int width, int height): width(width), height(height){
     if (window == NULL){
         std::cout<<"Error al crear ventana"<<std::endl;
     }
+}
+
+int Window::get_width(){
+    return width;
+}
+
+int Window::get_height(){
+    return height;
 }
 
 void Window::cap_framerate(const Uint32 &starting_tick){
@@ -44,45 +60,45 @@ void Window::run(Socket *skt){
     //FONDO
     Sprite backround(renderer.get_renderer(), "backround.jpeg");
     backround.set_Sprite(width, height, ORIGIN_CORNER, 1, 1);
-    renderer.add("1fondo",&backround);
+    renderer.add(FONDO,&backround);
     //
 
     //FONDO VIDA
     Sprite hp_backround(renderer.get_renderer(), "hp_backround.jpeg");
     hp_backround.set_Sprite(width/5,height, ORIGIN_CORNER, 1, 1);
-    renderer.add("2hp_fondo", &hp_backround);
+    renderer.add(FONDO_HP, &hp_backround);
     //
 
 
     //PERSONAJES
     Sprite megaman(renderer.get_renderer(), "megaman.jpeg");
     megaman.set_Sprite(40, 50, ORIGIN_CENTERED, 10, 5);
-    renderer.add("3megaman",&megaman);
+    renderer.add(MEGAMAN,&megaman);
 
     //VIDA
-    Sprite hp_bar3(renderer.get_renderer(), "hp_bar.png");
-    hp_bar3.set_Sprite(width/6, 40, ORIGIN_CORNER, 1, 1);
-    hp_bar3.setPosX(10);
-    hp_bar3.setPosY(height/5);
-    renderer.add("4hp_bar3", &hp_bar3);
-
     Sprite hp_bar1(renderer.get_renderer(), "hp_bar.png");
     hp_bar1.set_Sprite(width/6, 40, ORIGIN_CORNER, 1, 1);
     hp_bar1.setPosX(10);
-    hp_bar1.setPosY(2*height/5);
-    renderer.add("4hp_bar1", &hp_bar1);
+    hp_bar1.setPosY(height/5);
+    renderer.add(HP_BAR1, &hp_bar1);
 
     Sprite hp_bar2(renderer.get_renderer(), "hp_bar.png");
     hp_bar2.set_Sprite(width/6, 40, ORIGIN_CORNER, 1, 1);
     hp_bar2.setPosX(10);
-    hp_bar2.setPosY(3*height/5);
-    renderer.add("4hp_bar2", &hp_bar2);
+    hp_bar2.setPosY(2*height/5);
+    renderer.add(HP_BAR2, &hp_bar2);
+
+    Sprite hp_bar3(renderer.get_renderer(), "hp_bar.png");
+    hp_bar3.set_Sprite(width/6, 40, ORIGIN_CORNER, 1, 1);
+    hp_bar3.setPosX(10);
+    hp_bar3.setPosY(3*height/5);
+    renderer.add(HP_BAR3, &hp_bar3);
 
     Sprite hp_bar4(renderer.get_renderer(), "hp_bar.png");
     hp_bar4.set_Sprite(width/6, 40, ORIGIN_CORNER, 1, 1);
     hp_bar4.setPosX(10);
     hp_bar4.setPosY(4*height/5);
-    renderer.add("4hp_bar4", &hp_bar4);
+    renderer.add(HP_BAR4, &hp_bar4);
     //
 
     Uint32 starting_tick;
@@ -121,6 +137,9 @@ void Window::run(Socket *skt){
                         std::cout<<"Se disparo"<<std::endl;
                         sender.send("attack","");  // ENVIO LA TECLA
                         break;
+                    case SDLK_s:
+                        std::cout<<"Se salto"<<std::endl;
+                        sender.send("jump","");
                     case SDLK_1:
                         std::cout<<"Se cambio de arma 1"<<std::endl;
                         sender.send("gunChange","gun1");  // ENVIO LA TECLA
@@ -142,12 +161,6 @@ void Window::run(Socket *skt){
                         sender.send("gunChange","gun5");  // ENVIO LA TECLA
                         break;
                     default:
-                        break;
-                }
-            }else if (event.type == SDL_KEYUP){
-                switch (event.key.keysym.sym){
-                    case SDLK_UP:
-                        std::cout<<"Se solto"<<std::endl;
                         break;
                 }
             }

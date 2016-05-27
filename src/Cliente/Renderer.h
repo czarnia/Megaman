@@ -12,12 +12,12 @@ class Renderer{
     private:
         SDL_Renderer *renderer;
         std::map<std::string,SDL_Texture*> textures;
-        std::map<std::string,Sprite*> sprites;
+        std::map<int,Sprite*> sprites;
     public:
         SDL_Renderer* get_renderer();
         Renderer(SDL_Window* w);
         void execute(int command, int option, std::pair<int,int> coord);
-        void add(std::string object, Sprite* spr);
+        void add(int objectid, Sprite* spr);
         void clear();
         void draw(Sprite *spr);
         void drawAll();
