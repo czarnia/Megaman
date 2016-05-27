@@ -16,6 +16,18 @@ class Conexion_cliente{
     void terminar_ejecucion();
     //Destructor del Conexion_cliente.
     virtual ~Conexion_cliente();
+    //
+    void enviar_cambio_posicion();
+    //Envia la nueva cantidad de vidas que tiene un jugador/cliente.
+    void enviar_cantidad_vidas(int cantidad);
+    //Envia el nuevo porcentaje de vida que tiene un jugador/cliente.
+    void enviar_porcentaje_vida(int porcentaje);
+    //Envia el nuevo porcentaje de energia que tiene un jugador/cliente.
+    void enviar_porcentaje_energia(int porcentaje);
+    //Envia un mensaje de victoria al jugador/cliente.
+    void enviar_victoria();
+    //Envia un mensaje de derrota al jugador/cliente.
+    void enviar_gameover();
 };
 
 #endif //CONEXION_CLIENTE_H
