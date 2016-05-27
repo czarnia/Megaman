@@ -37,7 +37,7 @@ void Conexion_cliente::enviar_cantidad_vidas(int cantidad){
   int cant_vidas = CANT_VIDAS;
   skt->send((char*)&cant_vidas, TAM_INT);
   skt->send((char*)&cantidad, TAM_INT);
-  skt->send("(char*)        ", TAM_INT*2);
+  skt->send("        ", TAM_INT*2);
   //Envio una cadena vacía de TAM_INT*2 caracteres.
 }
 
