@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "Sprite.h"
 #include <SDL2/SDL_image.h>
+#include <iostream>
 
 #define WIDTH 640
 #define HEIGHT 480
@@ -58,21 +59,26 @@ void Renderer::execute(int command, int option, std::pair<int,int> coord){
             sprites[option]->setPosY(coord.second);
             break;
         case BARRA_VIDA:
+            std::cout<<"Recibi nivel de vida: "<<option<<std::endl;
            // sprites[option]->setHP()
             break;
         case BARRA_ENERGIA:
+            std::cout<<"Recibi nivel de energia: "<<option<<std::endl;
             // sprites[option]->setMP()
             break;
         case VIDAS:
+            std::cout<<"Recibi vidas: "<<option<<std::endl;
             // sprites[option]->setLifeAmmount()
             break;
         case VICTORIA:{
+            std::cout<<"Recibi victoria: "<<std::endl;
             Sprite *victory = new Sprite(renderer, "victory.jpeg");
             victory->set_Sprite(WIDTH/4, HEIGHT/4,ORIGIN_CENTERED,1,1);
             add(VICTORIA, victory);
             break;
         }
         case GAMEOVER:{
+            std::cout<<"Recibi gameover: "<<std::endl;
             Sprite *gameover = new Sprite(renderer, "gameover.jpeg");
             gameover->set_Sprite(WIDTH/4, HEIGHT/4,ORIGIN_CENTERED,1,1);
             add(GAMEOVER, gameover);
