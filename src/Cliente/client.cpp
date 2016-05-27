@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 	char* puerto = argv[PORT_POS];
 
     Socket skt(hostname, puerto);
-    // skt.conect(hostname, puerto);
+    skt.conect(hostname, puerto);
 	// INICIALIZO TODO LO QUE TENGA QUE VER CON SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
 
