@@ -4,12 +4,14 @@
 #include <map>
 #include <string>
 #include "conexion_cliente.h"
+#include "juego.h"
 
 class Servidor {
   private:
     //guardo a cada cliente con su id!
     std::map<std::string, Conexion_cliente*> clientes;
-	Socket *skt;
+	  Socket *skt;
+    Juego mundo;
   public:
     //Crea un servidor.
     Servidor(char *puerto);

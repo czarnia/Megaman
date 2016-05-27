@@ -9,8 +9,8 @@
 //TODO: redefinir el fin...
 #define FIN_ENTRADA "End"
 
-Receiver_cliente::Receiver_cliente(Socket* conexion, int id) : id_cliente(id),
-parser(id), handler(id){
+Receiver_cliente::Receiver_cliente(Socket* conexion, int id, Juego m) : id_cliente(id),
+parser(id), handler(m){
   skt = conexion;
   fin = false;
 }

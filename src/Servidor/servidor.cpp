@@ -23,7 +23,7 @@ std::vector<std::string> obtener_claves(std::map<std::string,
 //------------------------------------------//
 
 
-Servidor::Servidor(char *puerto){
+Servidor::Servidor(char *puerto) : mundo(50){
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
@@ -57,5 +57,5 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
   std::string id_cliente(s.str());
 
   //Agrego al cliente:
-  clientes[id_cliente] = new Conexion_cliente(cliente_nuevo, id);
+  clientes[id_cliente] = new Conexion_cliente(cliente_nuevo, id, mundo);
 }
