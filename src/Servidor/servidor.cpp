@@ -42,7 +42,7 @@ Servidor::~Servidor(){
 void Servidor::aceptar_clientes(){
   Socket* aceptado = skt->accept(NULL);
   if (!aceptado){
-    std::cout << "no acepté nada!"
+    std::cout << "no acepté nada!";
   }
   agregar_cliente(aceptado);
 

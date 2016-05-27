@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "unistd.h"
 
 #include "servidor.h"
 #include <string>
@@ -21,7 +22,7 @@ int main(int argc, char *argv[]){
     clock
   }*/
 
-  sleep(60)
+  sleep(60);
 
   return 0;
 }
