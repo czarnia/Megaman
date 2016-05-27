@@ -7,6 +7,20 @@ enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego m) : skt(conexion), id_cliente(id),
 rcv(conexion, id, m) {
   rcv.start();
+  enviar_cantidad_vidas(5);
+  enviar_cantidad_vidas(0);
+  enviar_cantidad_vidas(1);
+
+  enviar_porcentaje_vida(10);
+  enviar_porcentaje_vida(90);
+  enviar_porcentaje_vida(100);
+
+  enviar_porcentaje_energia(10);
+  enviar_porcentaje_energia(90);
+  enviar_porcentaje_energia(100);
+
+  enviar_victoria();
+  enviar_derrota();
 }
 
 void Conexion_cliente::terminar_ejecucion(){
