@@ -19,29 +19,15 @@
 int main(int argc, char *argv[]){
 	char* hostname = argv[IP_POS];
 	char* puerto = argv[PORT_POS];
-	Socket* cliente = new Socket(NULL, puerto);
 
+    Socket skt(hostname, puerto);
+    // skt.conect(hostname, puerto);
 	// INICIALIZO TODO LO QUE TENGA QUE VER CON SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	//Me conecto al servidor
-	if ((*cliente).conect(hostname, puerto) < 0){
-		std::cout << "Problema en conect \n";
-		printf("%s \n", strerror(errno));
-		return 0;
-	}
-
-	char buffer[4];
-	cliente->send("Hola", 4);
-	cliente->receive(buffer, 4);
-
-	std::cout << buffer << "\n";
-
 	Window main_window(WIDTH,HEIGHT);
-	main_window.run(cliente);
-
-	(*cliente).shutdown(SHUT_RDWR);
-	delete cliente;
+	// ACA ADENTRO OCURRE LA COMUNICACION
+	main_window.run(&skt);
 
 
 	SDL_Quit();
