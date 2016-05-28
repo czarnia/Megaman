@@ -15,7 +15,7 @@ class Evento_atacar : public Evento{
     //Destructor del evento atacar.
     virtual ~Evento_atacar();
     //Ejecuta un evento atacar dado un juego.
-    virtual void ejecutar(Juego j);
+    virtual void ejecutar(Juego *j);
 };
 
 #endif //EVENTO_ATACAR_H
