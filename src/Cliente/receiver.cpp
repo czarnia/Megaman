@@ -4,29 +4,36 @@
 #include <string.h>
 
 //TODO:Definir estos valores!
-#define MAX_TAM_BUFFER 70
-#define FIN_ENTRADA "End"
-#define EN_ESPERA " "
+#define MAX_TAM_BUFFER 50
+#define FIN_ENTRADA 666
+#define MAPA 1
 
-Receiver::Receiver(Socket* conexion){
-  skt = conexion;
+Receiver::Receiver(Socket* conexion, Renderer &renderer, Mutex &mutex):
+                    skt(conexion), renderer(renderer), mutex(mutex){
 }
 
 void Receiver::ejecutar(){
-  char buffer[MAX_TAM_BUFFER];
-  if ((*skt).receive(buffer, MAX_TAM_BUFFER) < 0){
-      std::cout << "-1 al recibir \n";
-  }
-  while (strcmp(buffer, FIN_ENTRADA) != 0){
-    if (strcmp(buffer, EN_ESPERA) != 0){
-      std::cout << buffer << "\n";
+    char buffer[MAX_TAM_BUFFER] = "";
+    int command;
+    int option;
+    int coordX;
+    int coordY;
+    std::pair<int,int> coord;
+
+    while (command != FIN_ENTRADA){
+        skt->receiveInt(&command, sizeof(int));
+        skt->receiveInt(&option, sizeof(int));
+
+        if (command == MAPA){
+            skt->receiveInt(&coordX, sizeof(int));
+            skt->receiveInt(&coordY, sizeof(int));
+            coord = std::make_pair(coordX, coordY);
+        }
+
+        mutex.lock();
+        renderer.execute(command, option, coord);
+        mutex.unlock();
     }
-    strncpy(buffer, EN_ESPERA, MAX_TAM_BUFFER);
-    if ((*skt).receive(buffer, MAX_TAM_BUFFER) < 0){
-        std::cout << "-1 al recibir \n";
-    }
-  }
-  (*skt).shutdown(SHUT_RDWR);
-  //fin = true;
-  return;
+    skt->shutdown(SHUT_RDWR);
+    return;
 }

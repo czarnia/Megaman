@@ -1,50 +1,58 @@
 #include "conexion_cliente.h"
-#include "../Comun/socket.h"
-#include <iostream>
-#include <stdio.h>
-#include <string.h>
 
-//TODO:Definir estos valores!
-#define MAX_TAM_BUFFER 70
-#define FIN_ENTRADA "End"
-//
-#define EN_ESPERA " "
+#define TAM_INT 4
 
-Conexion_cliente::Conexion_cliente(Socket* conexion, int id) : id_cliente(id),
-parser(id), handler(id){
-  skt = conexion;
-  fin = false;
-}
+enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 
-Conexion_cliente::~Conexion_cliente(){
-  delete skt;
-}
-
-
-void Conexion_cliente::ejecutar(){
-  char buffer[MAX_TAM_BUFFER];
-  if ((*skt).receive(buffer, MAX_TAM_BUFFER) > 0){
-    std::cout << "-1 al recibir fuera \n";
-  }
-  std::cout << "buffer: " << buffer << "\n";
-  std::cout << fin << "\n";
-  while (!fin){
-    if (strcmp(buffer, EN_ESPERA) != 0){
-      skt->send(buffer, strlen(buffer)); //sólo reenvio lo que recibí por ahora!
-    }
-    strncpy(buffer, EN_ESPERA, MAX_TAM_BUFFER);
-    if ((*skt).receive(buffer, MAX_TAM_BUFFER) < 0){
-      if (fin){
-        return;
-      }
-      std::cout << "-1 al recibir dentro \n";
-    }
-  }
-  return;
+Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego m) : skt(conexion), id_cliente(id),
+rcv(conexion, id, m) {
+  rcv.start();
 }
 
 void Conexion_cliente::terminar_ejecucion(){
-  fin = true;
-  (*skt).send(FIN_ENTRADA, strlen(FIN_ENTRADA));
-  (*skt).shutdown(SHUT_RDWR);
+  rcv.terminar_ejecucion();
+}
+
+Conexion_cliente::~Conexion_cliente(){
+  rcv.join();
+}
+
+void Conexion_cliente::enviar_cambio_posicion() {}
+
+void Conexion_cliente::enviar_cantidad_vidas(int cantidad){
+  int cant_vidas = CANT_VIDAS;
+  skt->send((char*)&cant_vidas, TAM_INT);
+  skt->send((char*)&cantidad, TAM_INT);
+  skt->send("        ", TAM_INT*2);
+  //Envio una cadena vacía de TAM_INT*2 caracteres.
+}
+
+void Conexion_cliente::enviar_porcentaje_vida(int porcentaje){
+  int vida = VIDA;
+  skt->send((char*)&vida, TAM_INT);
+  skt->send((char*)&porcentaje, TAM_INT);
+  skt->send("        ", TAM_INT*2);
+  //Envio una cadena vacía de TAM_INT*2 caracteres.
+}
+
+void Conexion_cliente::enviar_porcentaje_energia(int porcentaje){
+  int energia = ENERGIA;
+  skt->send((char*)&energia, TAM_INT);
+  skt->send((char*)&porcentaje, TAM_INT);
+  skt->send("        ", TAM_INT*2);
+  //Envio una cadena vacía de TAM_INT*2 caracteres.
+}
+
+void Conexion_cliente::enviar_victoria(){
+  int victoria = VICTORIA;
+  skt->send((char*)&victoria, TAM_INT);
+  skt->send("            ", TAM_INT*3);
+  //Envio una cadena vacía de TAM_INT*3 caracteres.
+}
+
+void Conexion_cliente::enviar_gameover(){
+  int derrota = DERROTA;
+  skt->send((char*)&derrota, TAM_INT);
+  skt->send("            ", TAM_INT*3);
+  //Envio una cadena vacía de TAM_INT*3 caracteres.
 }

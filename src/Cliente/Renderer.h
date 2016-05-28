@@ -4,19 +4,22 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include "Sprite.h"
+#include <utility>
+#include <string>
+#include <map>
 
 class Renderer{
     private:
         SDL_Renderer *renderer;
-        std::vector<SDL_Texture*> textures;
-        std::vector<SDL_Rect*> rectangles;
-        std::vector<SDL_Rect*> crops;
+        std::map<std::string,SDL_Texture*> textures;
+        std::map<int,Sprite*> sprites;
     public:
         SDL_Renderer* get_renderer();
         Renderer(SDL_Window* w);
-        void add(Sprite* r);
+        void execute(int command, int option, std::pair<int,int> coord);
+        void add(int objectid, Sprite* spr);
         void clear();
-        void draw(SDL_Texture* texture, SDL_Rect* rect, SDL_Rect* crop);
+        void draw(Sprite *spr);
         void drawAll();
         void present();
         ~Renderer();

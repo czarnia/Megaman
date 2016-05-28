@@ -11,8 +11,7 @@ class Sprite{
         int origin;
     public:
         Sprite(SDL_Renderer *r, const char *file);
-        virtual void set_Sprite(int posx, int posy, int width,
-                                int height, int origin,
+        virtual void set_Sprite(int width,int height, int origin,
                                 int cropw, int croph);
         SDL_Rect* get_rectangle();
         SDL_Texture* get_texture();
@@ -21,9 +20,17 @@ class Sprite{
         int getPosY();
         void setPosX(int x);
         void setPosY(int y);
+        void erase();
         ~Sprite();
+};
+
+class Hp_bar: public Sprite{
+    private:
+    public:
+        Hp_bar();
+        void set_hp(int hp);
+
 };
 
 
 #endif // SPRITE_H
-

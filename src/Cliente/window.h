@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "../Comun/socket.h"
 
 class Window{
 	private:
@@ -12,10 +13,11 @@ class Window{
 		int height;
 	public:
 		Window(int width, int height);
-		void run();
+		void run(Socket *skt);
+		int get_width();
+		int get_height();
 		SDL_Window* get_window();
 		~Window();
 };
 
 #endif
-

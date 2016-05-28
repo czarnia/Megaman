@@ -23,7 +23,7 @@ std::vector<std::string> obtener_claves(std::map<std::string,
 //------------------------------------------//
 
 
-Servidor::Servidor(char *puerto){
+Servidor::Servidor(char *puerto) : mundo(50){
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
@@ -35,16 +35,15 @@ Servidor::~Servidor(){
     Conexion_cliente* cliente = clientes[claves_clientes[i]];
     clientes.erase(claves_clientes[i]);
     cliente->terminar_ejecucion();
-    cliente->join();
     delete cliente;
   }
 }
 
 void Servidor::aceptar_clientes(){
   Socket* aceptado = skt->accept(NULL);
-  /*char buffer[4];
-  aceptado->receive(buffer, 4);
-  std::cout << buffer << "\n";*/
+  if (!aceptado){
+    std::cout << "no acepté nada!";
+  }
   agregar_cliente(aceptado);
 
   skt->shutdown(SHUT_RDWR);
@@ -58,6 +57,5 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
   std::string id_cliente(s.str());
 
   //Agrego al cliente:
-  clientes[id_cliente] = new Conexion_cliente(cliente_nuevo, id);
-  clientes[id_cliente]->start();
+  clientes[id_cliente] = new Conexion_cliente(cliente_nuevo, id, mundo);
 }
