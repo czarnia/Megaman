@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/cliente.dir/receiver.cpp.o CMakeFiles/cliente.dir/window.cpp.o CMakeFiles/cliente.dir/client.cpp.o CMakeFiles/cliente.dir/sender.cpp.o CMakeFiles/cliente.dir/Sprite.cpp.o CMakeFiles/cliente.dir/Renderer.cpp.o  -o cliente -rdynamic ../Comun/libMegaman.a -lSDL2 -lSDL2_image -lSDL2 -lSDL2_image 

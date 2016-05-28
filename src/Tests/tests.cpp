@@ -43,6 +43,8 @@ void run_tests(){
 	run_tests_mapa();
 	std::cout << "------------TESTS COORDENADA--------\n";
 	run_tests_coordenadas();
+	std::cout << "---------TESTS STRATEGY MOVER-------\n";
+	run_tests_strategy_mover();
 	std::cout << "------------TESTS MEGAMAN-----------\n";
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL", test_megaman_desplazamiento_lateral());
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL CON GRAVEDAD", test_megaman_desplazamiento_lateral_con_gravedad());

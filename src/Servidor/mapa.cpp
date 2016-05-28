@@ -9,6 +9,7 @@
 #include <queue>
 
 typedef std::vector<Coordenada>::iterator ItBloques;
+typedef std::pair<std::string, Megaman*> IdPersonaje;
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
@@ -34,9 +35,18 @@ std::vector<Coordenada> coord_tierras(){
 
 std::vector<Coordenada*> coord_personajes(){
 	std::vector<Coordenada*> personajes;
-	personajes.push_back(new Coordenada(9,6));
+	personajes.push_back(new Coordenada(8,4));
 	personajes.push_back(new Coordenada(3,3));
 	return personajes;
+}
+
+void Mapa::cargar_personajes(std::vector<Coordenada*> &coord){
+	for (size_t i = 0; i < coord.size(); i++){
+		std::stringstream id_personaje;
+		id_personaje << "megaman" << i;
+		Megaman *megaman = new Megaman(this, coord[i], id_personaje.str());
+		personajes.insert(IdPersonaje(id_personaje.str(), megaman));
+	}
 }
 
 std::vector<Coordenada> coord_puas(){
@@ -86,7 +96,7 @@ bool Mapa::puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho){
 			//puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() <= (coord->abajo(alto/2).obtener_ordenada()));
 			
 			puedo_ocupar_ancho = ((*it).obtener_abscisa() < coord->izquierda(ancho/2).obtener_abscisa());
-			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord->izquierda(ancho/2).obtener_abscisa());
+			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord->derecha(ancho/2).obtener_abscisa());
 			
 			puedo_ocupar_alto = ((*it).obtener_ordenada() > (coord->arriba(alto/2).obtener_ordenada()));
 			puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() < (coord->abajo(alto/2).obtener_ordenada()));
@@ -116,6 +126,10 @@ void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto,
 	}
 }
 
+Personaje* Mapa::obtener_pj(std::string id_pj){
+	return personajes[id_pj];
+}
+
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	float x = coordenada.obtener_abscisa();
 	float y = coordenada.obtener_ordenada();
@@ -125,5 +139,7 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 
 void Mapa::cargar(){
 	bloques = coord_tierras();
+	std::vector<Coordenada*> coordenadas_personajes = coord_personajes();
+	cargar_personajes(coordenadas_personajes);
 }
 

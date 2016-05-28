@@ -1,0 +1,2 @@
+/usr/bin/ar cr libMegaman.a  CMakeFiles/Megaman.dir/hilo.cpp.o CMakeFiles/Megaman.dir/lock.cpp.o CMakeFiles/Megaman.dir/mutex.cpp.o CMakeFiles/Megaman.dir/socket.cpp.o
+/usr/bin/ranlib libMegaman.a
