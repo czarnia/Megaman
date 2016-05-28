@@ -33,6 +33,12 @@ void Personaje::agregar_evento(Evento_mover *mover){
 	movimiento->agregar_direccion(mover->get_direccion());
 }
 
+void Personaje::agregar_movimiento(int direccion){
+	movimiento->agregar_direccion(direccion);
+}
+
+void Personaje::agregar_ataque(int direccion) {}
+
 Coordenada* Personaje::get_coordenada(){
 	return coordenada;
 }

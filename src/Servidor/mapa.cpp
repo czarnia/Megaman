@@ -4,6 +4,7 @@
 #include "puas.h"
 #include "escalera.h"
 #include "megaman.h"
+#include "bala.h"
 #include <vector>
 #include <sstream>
 #include <queue>
@@ -136,6 +137,9 @@ std::vector<Actualizable*> Mapa::obtener_actualizables(){
   for (i = personajes.begin(); i != personajes.end(); i++){
     v.push_back(i->second);
   }
+	/*for (size_t j = 0; j < balas.size(); j++){
+		v.push_back(balas[j]);
+	}*/
   return v;
 }
 

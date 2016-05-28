@@ -8,8 +8,8 @@
 
 class Personaje;
 class Megaman;
-class Elemento;
 class Bala;
+class Elemento;
 
 class Mapa{
   private:
