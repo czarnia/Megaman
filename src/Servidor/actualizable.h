@@ -1,6 +1,8 @@
 #ifndef ACTUALIZABLE_H
 #define ACTUALIZABLE_H
 
+#include <cstddef>
+
 class Actualizable{
   public:
     //Hace que pase un tiempo para un actualizable.

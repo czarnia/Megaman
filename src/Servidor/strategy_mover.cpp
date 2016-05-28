@@ -6,7 +6,6 @@
 #include <string>
 #include <math.h>
 
-//#define GRAVEDAD -0.2
 #define GRAVEDAD -0.2
 
 
