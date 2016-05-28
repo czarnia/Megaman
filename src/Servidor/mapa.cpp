@@ -130,6 +130,15 @@ Personaje* Mapa::obtener_pj(std::string id_pj){
 	return personajes[id_pj];
 }
 
+std::vector<Actualizable*> Mapa::obtener_actualizables(){
+	std::vector<Actualizable*> v;
+  std::map<std::string,Personaje*>::iterator i;
+  for (i = personajes.begin(); i != personajes.end(); i++){
+    v.push_back(i->second);
+  }
+  return v;
+}
+
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	float x = coordenada.obtener_abscisa();
 	float y = coordenada.obtener_ordenada();
