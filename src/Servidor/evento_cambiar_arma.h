@@ -15,7 +15,7 @@ class Evento_cambiar_arma : public Evento{
     //Destructor del evento cambiar_arma.
     virtual ~Evento_cambiar_arma();
     //Ejecuta un evento cambiar_arma dado un juego.
-    virtual void ejecutar(Juego j);
+    virtual void ejecutar(Juego& j);
 };
 
 #endif //EVENTO_CAMBIAR_ARMA_H
