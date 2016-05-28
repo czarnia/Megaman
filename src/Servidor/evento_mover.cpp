@@ -13,4 +13,5 @@ Evento_mover::~Evento_mover() {}
 
 void Evento_mover::ejecutar(Juego j){
   std::cout << "me muevo en direcion " << direccion << "\n";
+  //j.personaje_mover(id_evento, direccion);
 }
