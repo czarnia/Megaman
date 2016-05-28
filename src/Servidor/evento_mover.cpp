@@ -9,6 +9,8 @@ Evento_mover::Evento_mover(int id, int dir) : direccion(dir){
 	id_evento = s.str();
 }
 
+Evento_mover::~Evento_mover(){}
+
 int Evento_mover::get_direccion(){
 	return direccion;
 }
