@@ -23,7 +23,7 @@ public Actualizable{
 		virtual void atacar() = 0;
 		virtual void update(size_t tiempo) = 0;
 		virtual void recibir_ataque(/*Bala ataque*/) = 0;
-		
+
 		virtual std::string &devolver_id();
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
 		virtual bool esta_vivo();
@@ -38,9 +38,8 @@ public Actualizable{
 		std::string id;
 		size_t tiempo_pasado;
 		StrategyMover *movimiento;
-		
+
 		friend class StrategyMover;
 };
 
 #endif //PERSONAJE_H
-

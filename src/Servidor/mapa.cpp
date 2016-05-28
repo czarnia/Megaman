@@ -17,11 +17,11 @@ std::vector<Coordenada> coord_tierras(){
 	//de tierra son las coordenadas internas
 	//ya que los bordes de los bloque
 	//pueden ser ocupados.
-	
+
 	std::vector<Coordenada> tierras;
-	
+
 	tierras.push_back(Coordenada(1,1));
-	tierras.push_back(Coordenada(2,1));	
+	tierras.push_back(Coordenada(2,1));
 	tierras.push_back(Coordenada(3,1));
 	tierras.push_back(Coordenada(1,2));
 	tierras.push_back(Coordenada(4,1));
@@ -84,20 +84,20 @@ bool Mapa::puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho){
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->derecha(ancho/2).abajo(alto/2)));
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).abajo(alto/2)));
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).arriba(alto/2)));
-	
+
 	bool puedo_ocupar_ancho, puedo_ocupar_alto = true;
-	
+
 	if (puedo_ocupar){
 		for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
 			//puedo_ocupar_ancho = ((*it).obtener_abscisa() <= coord->izquierda(ancho/2).obtener_abscisa());
 			//puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() >= coord->izquierda(ancho/2).obtener_abscisa());
-			
+
 			//puedo_ocupar_alto = ((*it).obtener_ordenada() >= (coord->arriba(alto/2).obtener_ordenada()));
 			//puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() <= (coord->abajo(alto/2).obtener_ordenada()));
-			
+
 			puedo_ocupar_ancho = ((*it).obtener_abscisa() < coord->izquierda(ancho/2).obtener_abscisa());
 			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord->derecha(ancho/2).obtener_abscisa());
-			
+
 			puedo_ocupar_alto = ((*it).obtener_ordenada() > (coord->arriba(alto/2).obtener_ordenada()));
 			puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() < (coord->abajo(alto/2).obtener_ordenada()));
 			puedo_ocupar = puedo_ocupar && puedo_ocupar_ancho && puedo_ocupar_alto;
@@ -111,18 +111,18 @@ void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto,
 	Coordenada::camino_minimo(origen, destino, &camino_minimo);
 	//Empiezo a recorrer desde el origen:
 	*destino = *origen; //definir = para coordenadas.
-	
+
 	bool destino_valido = true;
-	
+
 	while (destino_valido && (!camino_minimo.empty())){
-		Coordenada coord = camino_minimo.front(); 
+		Coordenada coord = camino_minimo.front();
 		camino_minimo.pop();
-		
+
 		destino_valido = puede_ubicarse_en(&coord, alto, ancho);
-		
+
 		if (destino_valido){
 			*destino = coord; //muevo
-		}		
+		}
 	}
 }
 
@@ -142,4 +142,3 @@ void Mapa::cargar(){
 	std::vector<Coordenada*> coordenadas_personajes = coord_personajes();
 	cargar_personajes(coordenadas_personajes);
 }
-

@@ -9,11 +9,11 @@
 #define ANCHO 2
 
 Personaje::Personaje(Mapa *mapa, Coordenada *c, std::string id):
-coordenada(c), 
-id(id){	
+coordenada(c),
+id(id){
 	movimiento = new StrategyMover(mapa, this, true);
 	tiempo_pasado = 0;
-	velocidad_y = 0; 
+	velocidad_y = 0;
 	//TODO: levantar estos datos de xml/json!!!
 	velocidad_x = VELOCIDAD;
 	alto = ALTO;
@@ -26,7 +26,7 @@ int Personaje::get_velocidad(){
 
 void Personaje::update(size_t tiempo){
 	tiempo_pasado += tiempo;
-	movimiento->mover(tiempo);	
+	movimiento->mover(tiempo);
 }
 
 void Personaje::agregar_evento(Evento_mover *mover){

@@ -47,7 +47,7 @@ void StrategyMover::mover(size_t tiempo){
 				break;
 		}
 	}
-	if (aplicar_gravedad){ 
+	if (aplicar_gravedad){
 		delta_y += GRAVEDAD*0.5*pow(tiempo,2);
 		personaje->velocidad_y += GRAVEDAD*tiempo + personaje->velocidad_y;
 	}
@@ -58,18 +58,16 @@ void StrategyMover::mover(size_t tiempo){
 	size_t x_actual = actual->obtener_abscisa();
 	size_t y_actual = actual->obtener_ordenada();
 	Coordenada nueva_coord(x_actual + delta_x, y_actual + delta_y);
-	
+
 	//El mapa posiciona nueva_coord en la coordenada mas cercana a la que puedo mover.
 	mapa->puede_moverse_a(actual, &nueva_coord, personaje->alto, personaje->ancho);
-	
+
 	//Si llegue a un piso hay que actualizar velocidad_y = 0!!!
 	bool no_cai = ((actual->obtener_ordenada() - nueva_coord.obtener_ordenada()) == 0);
 	if (no_cai){
 		personaje->velocidad_y = 0;
 	}
-	
+
 	*(personaje->coordenada) = nueva_coord;
 	direcciones.erase(direcciones.begin(), direcciones.end());
 }
-
-

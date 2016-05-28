@@ -30,7 +30,7 @@ class Mapa{
     //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
     void ocupar_tierra(std::vector<Coordenada> &coordenadas);
     void cargar_personajes(std::vector<Coordenada*> &coordenadas);
-    
+
 };
 
 #endif //MAPA_H
