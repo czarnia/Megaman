@@ -1,6 +1,7 @@
 #include "personaje.h"
 #include "strategy_mover.h"
 #include "evento_mover.h"
+#include "bala.h"
 #include <iostream>
 
 #define PERDER_VIDA -1

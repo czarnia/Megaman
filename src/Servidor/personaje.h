@@ -11,7 +11,8 @@
 #include "strategy_mover.h"
 #include "evento_mover.h"
 #include "vida.h"
-#include "bala.h"
+
+class Bala;
 
 #define PERDER_VIDA -1
 
