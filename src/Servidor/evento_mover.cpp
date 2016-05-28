@@ -1,20 +1,14 @@
 #include "evento_mover.h"
 #include <sstream>
 
-typedef enum {ARRIBA, ABAJO, DERECHA, IZQUIERDA} Direccion;
-
 Evento_mover::Evento_mover(int id, int dir) : direccion(dir){
 	std::stringstream	s;
 	s << "megaman" <<id;
 	id_evento = s.str();
-  	mis_direcciones[ARRIBA] = "ARRIBA";
-	mis_direcciones[ABAJO] = "ABAJO";
-	mis_direcciones[DERECHA] = "DERECHA";
-	mis_direcciones[IZQUIERDA] = "IZQUIERDA";
 }
 
-std::string Evento_mover::get_direccion(){
-	return mis_direcciones[direccion];
+int Evento_mover::get_direccion(){
+	return direccion;
 }
 
 void Evento_mover::ejecutar(Juego j){

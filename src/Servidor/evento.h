@@ -9,7 +9,7 @@ class Juego;
 class Evento{
 	public:
 		//Destructor del evento.
-		virtual ~Evento() = 0;
+		virtual ~Evento() {};
 		//Ejecuta un evento.
 		virtual void ejecutar(Juego j) = 0;
 };

@@ -11,8 +11,6 @@
 #include "strategy_mover.h"
 #include "evento_mover.h"
 #include "vida.h"
-#include "mutex.h"
-#include "lock.h"
 
 #define PERDER_VIDA -1
 
@@ -25,31 +23,24 @@ public Actualizable{
 		virtual void atacar() = 0;
 		virtual void update(size_t tiempo) = 0;
 		virtual void recibir_ataque(/*Bala ataque*/) = 0;
+		
 		virtual std::string &devolver_id();
-		virtual void agregar_estrategia(StrategyMover &estrategia);
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
 		virtual bool esta_vivo();
-		virtual void remover_estrategias();
 		virtual void agregar_evento(Evento_mover *mover);
 		virtual int get_velocidad();
-		//virtual bool tiene_estrategia(std::string nombre_estrategia);
-		virtual std::vector<Coordenada*> &getCoordenadas();
+		virtual Coordenada *get_coordenada();
 	private:
-		std::vector<Coordenada*> coordenadas_ocupadas;
-		//std::vector<Arma*> armas;
 		std::vector<Vida*> vidas;
 		std::string id;
-		int velocidad_y;
-		int velocidad_x;
-		std::map<std::string, StrategyMover*> estrategias;
-		std::map<std::string, StrategyMover*> estrategias_adquiridas;
+		int velocidad_y, velocidad_x;
+		size_t ancho, alto;
+		Coordenada *coordenada;
+		size_t tiempo_pasado;
+		StrategyMover *movimiento;
 		
-		Mutex m;
-		std::queue<StrategyMover* strategy> acciones; //en el futuro seran acciones/strategies de todo tipo.
-		
-		virtual bool ubicar(std::vector<Coordenada*> &nuevas_coordenadas);
-		friend class Mapa;
-		friend bool StrategyMover::mover(Personaje *personaje);
+		friend class StrategyMover;
 };
 
 #endif //PERSONAJE_H
+

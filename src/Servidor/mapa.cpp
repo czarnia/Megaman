@@ -1,35 +1,34 @@
 #include "mapa.h"
 #include "coordenada.h"
-#include "celda_aire.h"
-#include "celda_tierra.h"
 #include "elemento.h"
 #include "puas.h"
 #include "escalera.h"
 #include "megaman.h"
 #include <vector>
 #include <sstream>
+#include <queue>
+
+typedef std::vector<Coordenada>::iterator ItBloques;
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
+	//IMPORTANTE: las coordenadas de los bloques
+	//de tierra son las coordenadas internas
+	//ya que los bordes de los bloque
+	//pueden ser ocupados.
+	
 	std::vector<Coordenada> tierras;
-	size_t i;
-	for (i = 0; i < 5; i++){
-		tierras.push_back(Coordenada(i,9));
-		tierras.push_back(Coordenada(i,1));
-	}
-	tierras.push_back(Coordenada(0,8));
-	tierras.push_back(Coordenada(1,8));
-	tierras.push_back(Coordenada(0,7));
+	
+	tierras.push_back(Coordenada(1,1));
+	tierras.push_back(Coordenada(2,1));	
+	tierras.push_back(Coordenada(3,1));
+	tierras.push_back(Coordenada(1,2));
+	tierras.push_back(Coordenada(4,1));
+	tierras.push_back(Coordenada(8,1));
+	tierras.push_back(Coordenada(8,2));
+	tierras.push_back(Coordenada(2,8));
+	tierras.push_back(Coordenada(3,8));
 	tierras.push_back(Coordenada(4,8));
-
-	for (i = 5; i < 10; i++){
-		tierras.push_back(Coordenada(i,7));
-		tierras.push_back(Coordenada(i,4));
-	}
-	for(i = 1; i < 4; i++){
-		tierras.push_back(Coordenada(i,4));
-	}
-
 	return tierras;
 }
 
@@ -57,92 +56,74 @@ std::vector<Coordenada> coord_escaleras(){
 		escaleras.push_back(Coordenada(0,i+4));
 		escaleras.push_back(Coordenada(5,i+1));
 	}
-
 	return escaleras;
 }
 
 //------------------------------------//
-
-
 
 Mapa::Mapa(size_t tamanio){
 	tam = tamanio;
 	this->cargar();
 }
 
-void Mapa::ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas){
-	for (size_t i = 0; i < coordenadas.size(); i++){
-		Coordenada coord = coordenadas[i];
-		size_t x = coord.obtener_ordenada();
-		size_t y = coord.obtener_abscisa();
-		celdas[x][y] = new Celda_aire(x, y, &elem);
-	}
-}
-
-Celda* Mapa::obtener_celda(Coordenada &coord){
-	size_t x = coord.obtener_ordenada();
-	size_t y = coord.obtener_abscisa();
-	return celdas[x][y];
-}
-
-void Mapa::ocupar_tierra(std::vector<Coordenada> &coordenadas){
-	for (size_t i = 0; i < coordenadas.size(); i++){
-		Coordenada coord = coordenadas[i];
-		size_t x = coord.obtener_ordenada();
-		size_t y = coord.obtener_abscisa();
-		celdas[x][y] = new Celda_tierra(x,y);
-	}
-}
-
-void Mapa::ocupar_personajes(std::vector<Coordenada*> &coordenadas){
-	Megaman *megaman;
-	for (size_t i = 0; i < coordenadas.size(); i++){
-		std::stringstream nombre;
-		nombre << "megaman" << i;
-		megaman = new Megaman(*this, nombre.str());
-		Coordenada *coord = coordenadas[i];
-		size_t x = coord->obtener_ordenada();
-		size_t y = coord->obtener_abscisa();
-		Celda_aire *aire = (Celda_aire*)celdas[x][y];
-		aire->agregar_personaje(*this, megaman);
-		std::vector<Coordenada*> coords_megaman;
-		coords_megaman.push_back(coord);
-		megaman->ubicar(coords_megaman);
-	}
-}
-
-void Mapa::rellenar_aire(){
-	for (size_t i = 0; i < tam; i++){
-		for (size_t j = 0; j < tam; j++){
-			if (!celdas[i][j]){
-				celdas[i][j] = new Celda_aire(i, j);
-			}
+bool Mapa::puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho){
+	bool puedo_ocupar = true;
+	//Personajes *
+	//Verifico que el mapa tiene las coordenadas:
+	puedo_ocupar = (this->tiene_coordenada(coord->derecha(ancho/2).arriba(alto/2)));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->derecha(ancho/2).abajo(alto/2)));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).abajo(alto/2)));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).arriba(alto/2)));
+	
+	bool puedo_ocupar_ancho, puedo_ocupar_alto = true;
+	
+	if (puedo_ocupar){
+		for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
+			//puedo_ocupar_ancho = ((*it).obtener_abscisa() <= coord->izquierda(ancho/2).obtener_abscisa());
+			//puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() >= coord->izquierda(ancho/2).obtener_abscisa());
+			
+			//puedo_ocupar_alto = ((*it).obtener_ordenada() >= (coord->arriba(alto/2).obtener_ordenada()));
+			//puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() <= (coord->abajo(alto/2).obtener_ordenada()));
+			
+			puedo_ocupar_ancho = ((*it).obtener_abscisa() < coord->izquierda(ancho/2).obtener_abscisa());
+			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord->izquierda(ancho/2).obtener_abscisa());
+			
+			puedo_ocupar_alto = ((*it).obtener_ordenada() > (coord->arriba(alto/2).obtener_ordenada()));
+			puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() < (coord->abajo(alto/2).obtener_ordenada()));
+			puedo_ocupar = puedo_ocupar && puedo_ocupar_ancho && puedo_ocupar_alto;
 		}
 	}
+	return puedo_ocupar;
 }
 
-bool Mapa::tiene_coordenada(Coordenada &coordenada){
-	size_t x = coordenada.obtener_abscisa();
-	size_t y = coordenada.obtener_ordenada();
-	bool tiene_coordenada = (celdas.find(x) !=  celdas.end());
-	if (tiene_coordenada){
-		tiene_coordenada = (celdas[x].find(y) !=  celdas[x].end());
+void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto, size_t ancho){
+	std::queue<Coordenada> camino_minimo;
+	Coordenada::camino_minimo(origen, destino, &camino_minimo);
+	//Empiezo a recorrer desde el origen:
+	*destino = *origen; //definir = para coordenadas.
+	
+	bool destino_valido = true;
+	
+	while (destino_valido && (!camino_minimo.empty())){
+		Coordenada coord = camino_minimo.front(); 
+		camino_minimo.pop();
+		
+		destino_valido = puede_ubicarse_en(&coord, alto, ancho);
+		
+		if (destino_valido){
+			*destino = coord; //muevo
+		}		
 	}
+}
+
+bool Mapa::tiene_coordenada(Coordenada coordenada){
+	float x = coordenada.obtener_abscisa();
+	float y = coordenada.obtener_ordenada();
+	bool tiene_coordenada = (0 <= x) && (x <= tam) && (0 <= y) && (y <= tam);
 	return tiene_coordenada;
 }
 
 void Mapa::cargar(){
-	std::vector<Coordenada> tierras = coord_tierras();
-	std::vector<Coordenada> puas = coord_puas();
-	std::vector<Coordenada> escaleras = coord_escaleras();
-	std::vector<Coordenada*> personajes = coord_personajes();
-
-	Puas pinches;
-	Escalera esc;
-
-	ocupar_tierra(tierras);
-	ocupar_elemento(pinches, puas);
-	ocupar_elemento(esc, escaleras);
-	rellenar_aire();
-	ocupar_personajes(personajes);
+	bloques = coord_tierras();
 }
+

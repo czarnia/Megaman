@@ -8,17 +8,17 @@ class Personaje;
 
 class StrategyMover{
 	public:
-		StrategyMover(Mapa &mapa);
-		/*virtual std::string get_nombre();
-		virtual bool ejecutar(Personaje *personaje);
-		virtual bool mover(Personaje *personaje);
-		virtual Coordenada *nueva_coordenada(Coordenada &coord) = 0;*/
-		virtual ~StrategyMover() = 0;
+		StrategyMover(Mapa &mapa, Personaje *p, bool aplicar_gravedad);
+		void agregar_direccion(int dir);
+		void mover(size_t tiempo);
+		//virtual Coordenada *nueva_coordenada(Coordenada &coord);
 	protected:
 		Mapa &mapa;
-		std::string nombre_senial;
-		
-		friend class Personaje;
+		Personaje *personaje;
+		bool aplicar_gravedad;
+		float gravedad;
+		std::vector<int> direcciones;
 };
 
 #endif //STRATEGY_MOVER_H
+

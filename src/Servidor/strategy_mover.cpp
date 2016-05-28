@@ -1,58 +1,76 @@
 #include "strategy_mover.h"
-#include "celda.h"
-#include "celda_aire.h"
 #include "personaje.h"
 #include <vector>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <math.h>
 
-StrategyMover::StrategyMover(Mapa &mapa):
-mapa(mapa){}
+//#define GRAVEDAD -0.2
+#define GRAVEDAD -0.2
 
-/*std::string StrategyMover::get_nombre(){
-	return nombre_senial;
+
+typedef enum {ARRIBA, ABAJO, DERECHA, IZQUIERDA} Direccion; //definir bien los valores segun protocolo!!
+
+StrategyMover::StrategyMover(Mapa &mapa, Personaje *p, bool aplicar_gravedad):
+mapa(mapa),
+personaje(p),
+aplicar_gravedad(aplicar_gravedad){
+	gravedad = GRAVEDAD;
 }
 
-bool StrategyMover::ejecutar(Personaje *personaje){
-	//FALTA CONSIDERAR VELOCIDAD PARA MOVIMIENTOS SIN GRAVEDAD:
-	return mover(personaje);
+void StrategyMover::agregar_direccion(int dir){
+	bool incluir_dir = true;
+	for(size_t i = 0; i < direcciones.size(); i++){
+		if (direcciones[i] == dir){
+			incluir_dir = false;
+		}
+	}
+	if (incluir_dir) direcciones.push_back(dir);
 }
 
-bool StrategyMover::mover(Personaje *pj){
-	std::vector<Coordenada*> coordenadas_pj = pj->getCoordenadas();
-	bool puedo_mover = true;
-	Coordenada *coord;
-	size_t x, y;
-	Celda* celda;
-	for(size_t i = 0; i < coordenadas_pj.size(); i++){
-		//Verifico que las nuevas coordenadas estan dentro del mapa
-		//y que las celdas destino puedan alojar al personaje.
-		coord =  nueva_coordenada(*coordenadas_pj[i]);
-		puedo_mover = puedo_mover && mapa.tiene_coordenada(*coord);
-		if (puedo_mover){
-			celda = mapa.obtener_celda(*coord);
-			puedo_mover = puedo_mover && celda->puedo_ubicar();
+void StrategyMover::mover(size_t tiempo){
+	size_t delta_y = 0;
+	size_t delta_x = 0;
+	for(size_t i = 0; i < direcciones.size(); i++){
+		switch(direcciones[i]){
+			case ARRIBA:
+				delta_y += personaje->velocidad_y*tiempo;
+				break;
+			case ABAJO:
+				delta_y += personaje->velocidad_y*tiempo*(-1);
+				break;
+			case DERECHA:
+				delta_x += personaje->velocidad_x*tiempo;
+				break;
+			case IZQUIERDA:
+				delta_x += personaje->velocidad_x*tiempo*(-1);
+				break;
 		}
 	}
-	if (puedo_mover){
-		//Si el movimiento es válido, se actualizan las
-		//coordenadas del personaje.
-		std::vector<Coordenada*> nuevas_coordenadas_pj;
-		Celda_aire* celda_aire;
-		Coordenada *nueva_coord;
-		for(size_t i = 0; i < coordenadas_pj.size(); i++){
-			//TODO: mover esto a la clase mapa:
-			celda_aire = (Celda_aire*)mapa.obtener_celda(*coord);
-			celda_aire->quitar_personaje(pj);
-			nueva_coord = nueva_coordenada(*coordenadas_pj[i]);
-			nuevas_coordenadas_pj.push_back(nueva_coord);
-			celda_aire = (Celda_aire*)mapa.obtener_celda(*nueva_coord);
-			celda_aire->agregar_personaje(mapa, pj);
-		}
-		pj->ubicar(nuevas_coordenadas_pj);
+	if (aplicar_gravedad){ 
+		delta_y += GRAVEDAD*0.5*pow(tiempo,2);
+		personaje->velocidad_y += GRAVEDAD*tiempo + personaje->velocidad_y;
 	}
-	return puedo_mover;
-}*/
+	//verificar que puedo ubicar en Coordenada(x+delta_x, y+delta_y);
+	//si no ubicar en la posicion mas cercana.
+	//actualizar posicion del personaje.
+	Coordenada *actual = personaje->get_coordenada();
+	size_t x_actual = actual->obtener_abscisa();
+	size_t y_actual = actual->obtener_ordenada();
+	Coordenada nueva_coord(x_actual + delta_x, y_actual + delta_y);
+	
+	//El mapa posiciona nueva_coord en la coordenada mas cercana a la que puedo mover.
+	mapa.puede_moverse_a(actual, &nueva_coord, personaje->alto, personaje->ancho);
+	
+	//Si llegue a un piso hay que actualizar velocidad_y = 0!!!
+	bool no_cai = ((actual->obtener_ordenada() - nueva_coord.obtener_ordenada()) == 0);
+	if (no_cai){
+		personaje->velocidad_y = 0;
+	}
+	
+	*(personaje->coordenada) = nueva_coord;
+	direcciones.erase(direcciones.begin(), direcciones.end());
+}
 
-StrategyMover::~StrategyMover(){}
+

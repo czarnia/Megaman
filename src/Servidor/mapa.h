@@ -3,20 +3,21 @@
 
 #include <map>
 #include <vector>
-#include "celda.h"
 #include "coordenada.h"
 
 class Elemento;
 
 class Mapa{
   private:
-    std::map<size_t, std::map<size_t, Celda*> > celdas;
+    std::vector<Coordenada> bloques;
     size_t tam;
   public:
-    //Dado un tamanio, crea un mapa.
+    //Dado un tamanio, crea un mapa
+    //con tantas divisiones como indique el tamanio.
     Mapa(size_t tamanio);
-    bool tiene_coordenada(Coordenada &coordenada);
-    Celda* obtener_celda(Coordenada &coordenada);
+    bool tiene_coordenada(Coordenada coordenada);
+    bool puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho);
+    void puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto, size_t ancho);
   private:
     //Carga un mapa, por ahora, una versión por defecto chica.
     void cargar();
