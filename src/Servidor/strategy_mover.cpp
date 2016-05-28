@@ -11,7 +11,7 @@
 
 typedef enum {ARRIBA, ABAJO, DERECHA, IZQUIERDA} Direccion; //definir bien los valores segun protocolo!!
 
-StrategyMover::StrategyMover(Mapa &mapa, Personaje *p, bool aplicar_gravedad):
+StrategyMover::StrategyMover(Mapa *mapa, Personaje *p, bool aplicar_gravedad):
 mapa(mapa),
 personaje(p),
 aplicar_gravedad(aplicar_gravedad){
@@ -60,7 +60,7 @@ void StrategyMover::mover(size_t tiempo){
 	Coordenada nueva_coord(x_actual + delta_x, y_actual + delta_y);
 	
 	//El mapa posiciona nueva_coord en la coordenada mas cercana a la que puedo mover.
-	mapa.puede_moverse_a(actual, &nueva_coord, personaje->alto, personaje->ancho);
+	mapa->puede_moverse_a(actual, &nueva_coord, personaje->alto, personaje->ancho);
 	
 	//Si llegue a un piso hay que actualizar velocidad_y = 0!!!
 	bool no_cai = ((actual->obtener_ordenada() - nueva_coord.obtener_ordenada()) == 0);

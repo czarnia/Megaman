@@ -8,12 +8,12 @@ class Personaje;
 
 class StrategyMover{
 	public:
-		StrategyMover(Mapa &mapa, Personaje *p, bool aplicar_gravedad);
+		StrategyMover(Mapa *mapa, Personaje *p, bool aplicar_gravedad);
 		void agregar_direccion(int dir);
 		void mover(size_t tiempo);
 		//virtual Coordenada *nueva_coordenada(Coordenada &coord);
 	protected:
-		Mapa &mapa;
+		Mapa *mapa;
 		Personaje *personaje;
 		bool aplicar_gravedad;
 		float gravedad;

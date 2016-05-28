@@ -5,14 +5,19 @@
 
 #define PERDER_VIDA -1
 #define VELOCIDAD 1	  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
+#define ALTO 2
+#define ANCHO 2
 
-Personaje::Personaje(Mapa &mapa, std::string id):
+Personaje::Personaje(Mapa *mapa, Coordenada *c, std::string id):
+coordenada(c), 
 id(id){	
 	movimiento = new StrategyMover(mapa, this, true);
 	tiempo_pasado = 0;
 	velocidad_y = 0; 
-	//TODO: levantar este dato de xml/json!!!
-	velocidad_x = VELOCIDAD; 
+	//TODO: levantar estos datos de xml/json!!!
+	velocidad_x = VELOCIDAD;
+	alto = ALTO;
+	ancho = ANCHO;
 }
 
 int Personaje::get_velocidad(){
