@@ -7,6 +7,7 @@
 #include <iostream>
 
 #define MAX_CONEXIONES 4
+#define FIN_ENTRADA "q"
 typedef struct sockaddr* Address;
 
 
@@ -23,7 +24,7 @@ std::vector<std::string> obtener_claves(std::map<std::string,
 //------------------------------------------//
 
 
-Servidor::Servidor(char *puerto) : mundo(50){
+Servidor::Servidor(char *puerto) : mundo(50), entrada(FIN_ENTRADA){
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
@@ -37,6 +38,7 @@ Servidor::~Servidor(){
     cliente->terminar_ejecucion();
     delete cliente;
   }
+  entrada.join();
 }
 
 void Servidor::aceptar_clientes(){
@@ -58,4 +60,8 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
 
   //Agrego al cliente:
   clientes[id_cliente] = new Conexion_cliente(cliente_nuevo, id, mundo);
+}
+
+bool Servidor::termino_ejecucion(){
+  return entrada.termino();
 }
