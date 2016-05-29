@@ -4,9 +4,23 @@
 #include "juego.h"
 #include "../Comun/lock.h"
 
-Juego::Juego(size_t tamanio) : mundo(tamanio){}
+#define TIEMPO 5
+
+Juego::Juego(size_t tamanio) : mundo(tamanio){
+  fin_partida = false;
+}
 
 Juego::~Juego(){}
+
+void Juego::jugar(){
+  while (!fin_partida){
+    update(TIEMPO);
+  }
+}
+
+void Juego::terminar_partida(){
+  fin_partida = true;
+}
 
 void Juego::update(size_t tiempo){
   /*

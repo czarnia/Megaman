@@ -65,3 +65,7 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
 bool Servidor::termino_ejecucion(){
   return entrada.termino();
 }
+
+void Servidor::empezar_partida(){
+  mundo.jugar();
+}
