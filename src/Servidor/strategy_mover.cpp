@@ -6,8 +6,8 @@
 #include <string>
 #include <math.h>
 
+//#define GRAVEDAD -0.2
 #define GRAVEDAD -0.2
-
 
 typedef enum {ARRIBA, ABAJO, DERECHA, IZQUIERDA} Direccion; //definir bien los valores segun protocolo!!
 
@@ -29,46 +29,56 @@ void StrategyMover::agregar_direccion(int dir){
 }
 
 void StrategyMover::mover(size_t tiempo){
-	size_t delta_y = 0;
-	size_t delta_x = 0;
+	int delta_y = 0;
+	int delta_x = 0;
+	Coordenada *actual = personaje->get_coordenada();
+	
 	for(size_t i = 0; i < direcciones.size(); i++){
 		switch(direcciones[i]){
 			case ARRIBA:
-				delta_y += personaje->velocidad_y*tiempo;
+				delta_y += (personaje->velocidad_y*tiempo);
 				break;
 			case ABAJO:
-				delta_y += personaje->velocidad_y*tiempo*(-1);
+				delta_y += (personaje->velocidad_y*tiempo)*(-1);
 				break;
 			case DERECHA:
-				delta_x += personaje->velocidad_x*tiempo;
+				delta_x += (personaje->velocidad_x*tiempo);
+				std::cout << "DELTA X " << delta_x << "\n";
 				break;
 			case IZQUIERDA:
-				delta_x += personaje->velocidad_x*tiempo*(-1);
+				delta_x += (personaje->velocidad_x*tiempo)*(-1);
 				break;
 		}
-	}
-	if (aplicar_gravedad){ 
+	}	
+	Coordenada abajo = actual->abajo();
+	if (aplicar_gravedad && mapa->puede_ubicarse_en(&abajo, personaje->alto, personaje->ancho)){ 
 		delta_y += GRAVEDAD*0.5*pow(tiempo,2);
 		personaje->velocidad_y += GRAVEDAD*tiempo + personaje->velocidad_y;
+		std::cout << "DELTA Y " << delta_y << "\n";
 	}
-	//verificar que puedo ubicar en Coordenada(x+delta_x, y+delta_y);
-	//si no ubicar en la posicion mas cercana.
-	//actualizar posicion del personaje.
-	Coordenada *actual = personaje->get_coordenada();
-	size_t x_actual = actual->obtener_abscisa();
-	size_t y_actual = actual->obtener_ordenada();
-	Coordenada nueva_coord(x_actual + delta_x, y_actual + delta_y);
 	
+	int x_actual = actual->obtener_abscisa();
+	int y_actual = actual->obtener_ordenada();
+	Coordenada *nueva_coord = new Coordenada(x_actual + delta_x, y_actual + delta_y);
+	
+	//
+	std::cout << "ORIGEN: " << x_actual << "," << y_actual << "\n";
+	std::cout << "DESTINO: " << nueva_coord->obtener_abscisa() << "," << nueva_coord->obtener_ordenada() << "\n";
+	//
+		
 	//El mapa posiciona nueva_coord en la coordenada mas cercana a la que puedo mover.
-	mapa->puede_moverse_a(actual, &nueva_coord, personaje->alto, personaje->ancho);
+	mapa->puede_moverse_a(actual, nueva_coord, personaje->alto, personaje->ancho);
 	
 	//Si llegue a un piso hay que actualizar velocidad_y = 0!!!
-	bool no_cai = ((actual->obtener_ordenada() - nueva_coord.obtener_ordenada()) == 0);
+	bool no_cai = ((actual->obtener_ordenada() - nueva_coord->obtener_ordenada()) == 0);
 	if (no_cai){
 		personaje->velocidad_y = 0;
 	}
 	
-	*(personaje->coordenada) = nueva_coord;
+	//
+	std::cout << "MAS CERCANA: " << nueva_coord->obtener_abscisa() << "," << nueva_coord->obtener_ordenada() << "\n";
+	//
+	*(personaje->coordenada) = (*nueva_coord);
 	direcciones.erase(direcciones.begin(), direcciones.end());
 }
 

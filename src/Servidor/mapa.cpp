@@ -5,6 +5,7 @@
 #include "escalera.h"
 #include "megaman.h"
 #include <vector>
+#include <iostream>
 #include <sstream>
 #include <queue>
 
@@ -37,6 +38,7 @@ std::vector<Coordenada*> coord_personajes(){
 	std::vector<Coordenada*> personajes;
 	personajes.push_back(new Coordenada(8,4));
 	personajes.push_back(new Coordenada(3,3));
+	personajes.push_back(new Coordenada(1,4));
 	return personajes;
 }
 
@@ -76,7 +78,14 @@ Mapa::Mapa(size_t tamanio){
 	this->cargar();
 }
 
-bool Mapa::puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho){
+bool Mapa::hay_bloque(Coordenada *coord){
+	for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
+		if((*it) == (*coord)) return true;
+	}
+	return false;
+}
+
+bool Mapa::puede_ubicarse_en(Coordenada *coord, int alto, int ancho){
 	bool puedo_ocupar = true;
 	//Personajes *
 	//Verifico que el mapa tiene las coordenadas:
@@ -84,29 +93,25 @@ bool Mapa::puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho){
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->derecha(ancho/2).abajo(alto/2)));
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).abajo(alto/2)));
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).arriba(alto/2)));
-	
-	bool puedo_ocupar_ancho, puedo_ocupar_alto = true;
+
+	bool puedo_ocupar_ancho = true;
+	bool puedo_ocupar_alto = true;
 	
 	if (puedo_ocupar){
-		for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
-			//puedo_ocupar_ancho = ((*it).obtener_abscisa() <= coord->izquierda(ancho/2).obtener_abscisa());
-			//puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() >= coord->izquierda(ancho/2).obtener_abscisa());
-			
-			//puedo_ocupar_alto = ((*it).obtener_ordenada() >= (coord->arriba(alto/2).obtener_ordenada()));
-			//puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() <= (coord->abajo(alto/2).obtener_ordenada()));
-			
+		for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){			
 			puedo_ocupar_ancho = ((*it).obtener_abscisa() < coord->izquierda(ancho/2).obtener_abscisa());
 			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord->derecha(ancho/2).obtener_abscisa());
 			
 			puedo_ocupar_alto = ((*it).obtener_ordenada() > (coord->arriba(alto/2).obtener_ordenada()));
 			puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() < (coord->abajo(alto/2).obtener_ordenada()));
+			
 			puedo_ocupar = puedo_ocupar && puedo_ocupar_ancho && puedo_ocupar_alto;
 		}
-	}
+	}	
 	return puedo_ocupar;
 }
 
-void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto, size_t ancho){
+void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, int alto, int ancho){
 	std::queue<Coordenada> camino_minimo;
 	Coordenada::camino_minimo(origen, destino, &camino_minimo);
 	//Empiezo a recorrer desde el origen:
@@ -114,12 +119,13 @@ void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto,
 	
 	bool destino_valido = true;
 	
-	while (destino_valido && (!camino_minimo.empty())){
+	while (destino_valido){
 		Coordenada coord = camino_minimo.front(); 
 		camino_minimo.pop();
 		
 		destino_valido = puede_ubicarse_en(&coord, alto, ancho);
-		
+		std::cout << "COORD: " << coord.obtener_abscisa() << "," << coord.obtener_ordenada() << "\n";
+
 		if (destino_valido){
 			*destino = coord; //muevo
 		}		
@@ -131,8 +137,8 @@ Personaje* Mapa::obtener_pj(std::string id_pj){
 }
 
 bool Mapa::tiene_coordenada(Coordenada coordenada){
-	float x = coordenada.obtener_abscisa();
-	float y = coordenada.obtener_ordenada();
+	int x = coordenada.obtener_abscisa();
+	int y = coordenada.obtener_ordenada();
 	bool tiene_coordenada = (0 <= x) && (x <= tam) && (0 <= y) && (y <= tam);
 	return tiene_coordenada;
 }

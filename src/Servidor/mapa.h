@@ -19,9 +19,10 @@ class Mapa{
     //con tantas divisiones como indique el tamanio.
     Mapa(size_t tamanio);
     bool tiene_coordenada(Coordenada coordenada);
-    bool puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho);
-    void puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto, size_t ancho);
+    bool puede_ubicarse_en(Coordenada *coord, int alto, int ancho);
+    void puede_moverse_a(Coordenada *origen, Coordenada *destino, int alto, int ancho);
     Personaje *obtener_pj(std::string id_pj);
+    bool hay_bloque(Coordenada *coord);
   private:
     //Carga un mapa, por ahora, una versión por defecto chica.
     void cargar();

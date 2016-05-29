@@ -33,7 +33,7 @@ public Actualizable{
 	private:
 		std::vector<Vida*> vidas;
 		int velocidad_y, velocidad_x;
-		size_t ancho, alto;
+		int ancho, alto;
 		Coordenada *coordenada;
 		std::string id;
 		size_t tiempo_pasado;

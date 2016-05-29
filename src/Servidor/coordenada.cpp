@@ -5,7 +5,7 @@
 #define RETROCEDER -1
 #define AVANZAR 1
 
-Coordenada::Coordenada(size_t ordenada, size_t abscisa){
+Coordenada::Coordenada(int ordenada, int abscisa){
 	x = ordenada;
 	y = abscisa;
 }
@@ -13,10 +13,10 @@ Coordenada::Coordenada(size_t ordenada, size_t abscisa){
 void Coordenada::camino_minimo(Coordenada *origen, Coordenada *destino, std::queue<Coordenada> *camino){
 	signed int delta_x = 0, delta_y = 0, versor_x = 0, versor_y = 0;
 	
-	size_t x0 = origen->obtener_abscisa();
-	size_t y0 = origen->obtener_ordenada();
-	size_t xf = destino->obtener_abscisa();
-	size_t yf = destino->obtener_ordenada();
+	int x0 = origen->obtener_abscisa();
+	int y0 = origen->obtener_ordenada();
+	int xf = destino->obtener_abscisa();
+	int yf = destino->obtener_ordenada();
 		
 	if (x0 != xf){
 		versor_x = (x0 > xf)? RETROCEDER : AVANZAR; 
@@ -24,8 +24,8 @@ void Coordenada::camino_minimo(Coordenada *origen, Coordenada *destino, std::que
 	if (y0 != yf){
 		versor_y = (y0 > yf)? RETROCEDER : AVANZAR;
 	}
-	
-	while (((x0 + delta_x) != destino->obtener_abscisa()) && ((y0 + delta_y) != destino->obtener_ordenada())){
+
+	while (((x0 + delta_x) != destino->obtener_abscisa()) || ((y0 + delta_y) != destino->obtener_ordenada())){
 		delta_x += ((x0 + delta_x) != destino->obtener_abscisa())? versor_x : 0;
 		delta_y += ((y0 + delta_y) != destino->obtener_ordenada())? versor_y : 0;
 		
@@ -46,41 +46,41 @@ void Coordenada::operator=(const Coordenada& otro){
 	this->y = otro.y;
 }
 
-void Coordenada::sumar_abscisa(size_t delta_x){
+void Coordenada::sumar_abscisa(int delta_x){
 	this->x += delta_x;
 }
 
-void Coordenada::sumar_ordenada(size_t delta_y){
+void Coordenada::sumar_ordenada(int delta_y){
 	this->y += delta_y;
 }
 
-size_t Coordenada::obtener_ordenada(){
+int Coordenada::obtener_ordenada(){
 	return y;
 }
 
-size_t Coordenada::obtener_abscisa(){
+int Coordenada::obtener_abscisa(){
 	return x;
 }
 
-size_t Coordenada::obtener_distancia(Coordenada &otra_coordenada){
-	size_t xcuadrado = pow((x-otra_coordenada.x),2);
-	size_t ycuadrado = pow((y-otra_coordenada.y),2);
+int Coordenada::obtener_distancia(Coordenada &otra_coordenada){
+	int xcuadrado = pow((x-otra_coordenada.x),2);
+	int ycuadrado = pow((y-otra_coordenada.y),2);
 	return sqrt(xcuadrado + ycuadrado);
 }
 
-Coordenada Coordenada::arriba(size_t diferencial){
+Coordenada Coordenada::arriba(int diferencial){
 	return Coordenada(x,y-diferencial);
 }
 
-Coordenada Coordenada::abajo(size_t diferencial){
+Coordenada Coordenada::abajo(int diferencial){
 	return Coordenada(x,y+diferencial);
 }
 
-Coordenada Coordenada::izquierda(size_t diferencial){
+Coordenada Coordenada::izquierda(int diferencial){
 	return Coordenada(x-diferencial,y);
 }
 
-Coordenada Coordenada::derecha(size_t diferencial){
+Coordenada Coordenada::derecha(int diferencial){
 	return Coordenada(x+diferencial,y);
 }
 

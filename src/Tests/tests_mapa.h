@@ -45,9 +45,7 @@ bool test_mapa_puedo_mover(){
 	Coordenada mas_cercana(6, 3);
 	
 	mapa.puede_moverse_a(&origen, &destino, 2, 2);
-	
-	std::cout << destino.obtener_abscisa() << "," << destino.obtener_ordenada() << "\n";
-	
+		
 	return (destino == mas_cercana);
 }
 

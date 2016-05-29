@@ -4,7 +4,7 @@
 #include <iostream>
 
 #define PERDER_VIDA -1
-#define VELOCIDAD 1	  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
+#define VELOCIDAD 3	  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 2
 #define ANCHO 2
 
