@@ -16,11 +16,16 @@ class Juego: public Actualizable{
   private:
     Mapa mundo;
     Mutex proteccion;
+    bool fin_partida;
 	public:
     //Crea un juego nuevo.
     Juego(size_t tamanio);
     //Destructor del juego.
 		~Juego();
+    //Implementa el ciclo del juego.
+    void jugar();
+    //Termina la partida en marcha.
+    void terminar_partida();
     //Dado un determinado tiempo, actualiza al juego.
     virtual void update(size_t tiempo);
     //Dado el id de un personaje, hace que el mismo ataque en una direccion

@@ -6,7 +6,7 @@
 class Megaman: public Personaje{
   public:
     Megaman(Mapa *mapa, Coordenada *c, std::string id);
-    void atacar();
+    void atacar(int direccion);
     void update(size_t tiempo);
     void recibir_ataque(/*Bala ataque*/);
 };

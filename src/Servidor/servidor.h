@@ -5,13 +5,15 @@
 #include <string>
 #include "conexion_cliente.h"
 #include "juego.h"
+#include "entrada_estandar.h"
 
-class Servidor {
+class Servidor{
   private:
     //guardo a cada cliente con su id!
     std::map<std::string, Conexion_cliente*> clientes;
-	  Socket *skt;
+	Socket *skt;
     Juego mundo;
+    Entrada_estandar entrada;
   public:
     //Crea un servidor.
     Servidor(char *puerto);
@@ -19,6 +21,10 @@ class Servidor {
     ~Servidor();
     //Acepto a los clientes del servidor (maximo cuatro).
     void aceptar_clientes();
+    //Devuelve true si se cierra al servidor, false en caso contrario.
+    bool termino_ejecucion();
+    //Empieza una partida.
+    void empezar_partida();
   private:
     //Dado un socket conectado a un cliente y un id del mismo, se agrega un cliente
     //al servidor.

@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-Evento_cambiar_arma::Evento_cambiar_arma(int id, int arma) : 
+Evento_cambiar_arma::Evento_cambiar_arma(int id, int arma) :
 num_arma(arma){
   std::stringstream	s;
   s << "megaman" <<id;
@@ -12,7 +12,7 @@ num_arma(arma){
 
 Evento_cambiar_arma::~Evento_cambiar_arma() {}
 
-void Evento_cambiar_arma::ejecutar(Juego *j){
+void Evento_cambiar_arma::ejecutar(Juego& j){
   std::cout << "cambio el arma a " << num_arma << "\n";
   //j->cambiar_arma(id_evento, num_arma);
 }

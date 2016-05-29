@@ -81,5 +81,3 @@ void StrategyMover::mover(size_t tiempo){
 	*(personaje->coordenada) = (*nueva_coord);
 	direcciones.erase(direcciones.begin(), direcciones.end());
 }
-
-

@@ -14,15 +14,11 @@
 
 int main(int argc, char *argv[]){
   Servidor server(argv[POS_PUERTO]);
-  server.aceptar_clientes();
 
-  /*while (!server.termino_partida()){
-    server.actualizar_mundo();
-    server.enviar_datos();
-    clock
-  }*/
-
-  sleep(60);
+  while (!server.termino_ejecucion()){
+    /*server.aceptar_clientes();
+    server.empezar_partida();*/
+  }
 
   return 0;
 }

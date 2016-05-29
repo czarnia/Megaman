@@ -4,7 +4,6 @@
 #include "actualizable.h"
 #include "personaje.h"
 #include "elemento.h"
-#include "mapa.h"
 
 class Bala: public Actualizable, public Elemento{
 	public:

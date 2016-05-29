@@ -1,6 +1,7 @@
 #include "personaje.h"
 #include "strategy_mover.h"
 #include "evento_mover.h"
+#include "bala.h"
 #include <iostream>
 
 #define PERDER_VIDA -1
@@ -9,15 +10,16 @@
 #define ANCHO 2
 
 Personaje::Personaje(Mapa *mapa, Coordenada *c, std::string id):
-coordenada(c), 
-id(id){	
+coordenada(c),
+id(id){
 	movimiento = new StrategyMover(mapa, this, true);
 	tiempo_pasado = 0;
-	velocidad_y = 0; 
+	velocidad_y = 0;
 	//TODO: levantar estos datos de xml/json!!!
 	velocidad_x = VELOCIDAD;
 	alto = ALTO;
 	ancho = ANCHO;
+	agregar_observador(mapa);
 }
 
 int Personaje::get_velocidad(){
@@ -26,12 +28,18 @@ int Personaje::get_velocidad(){
 
 void Personaje::update(size_t tiempo){
 	tiempo_pasado += tiempo;
-	movimiento->mover(tiempo);	
+	movimiento->mover(tiempo);
 }
 
 void Personaje::agregar_evento(Evento_mover *mover){
 	movimiento->agregar_direccion(mover->get_direccion());
 }
+
+void Personaje::agregar_movimiento(int direccion){
+	movimiento->agregar_direccion(direccion);
+}
+
+void Personaje::agregar_ataque(int direccion) {}
 
 Coordenada* Personaje::get_coordenada(){
 	return coordenada;
