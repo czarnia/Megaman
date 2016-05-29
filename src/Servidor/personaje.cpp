@@ -4,6 +4,10 @@
 #include "bala.h"
 #include <iostream>
 
+#include <string>
+#include <iostream>
+#include <sstream>
+
 #define PERDER_VIDA -1
 #define ARRIBA 1
 #define ABAJO 2
@@ -13,8 +17,8 @@
 //TODO: levantar estos datos de xml/json!!!
 #define VELOCIDAD 1
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
-#define ALTO 2
-#define ANCHO 1
+#define ALTO 4
+#define ANCHO 2
 
 Personaje::Personaje(Mapa *mapa, Coordenada c, std::string id):
 coordenada(c),
@@ -33,13 +37,17 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 }
 
 void Personaje::agregar_movimiento(int direccion){
+	std::cout << "estoy en el agregar_movimiento \n";
 	if (direccion == SALTAR && !flotando){
+		std::cout << "caso salto \n";
 		velocidad_y -= VELOCIDAD_SALTO;
 	}
-	if (direccion = DERECHA){
+	if (direccion == DERECHA){
+		std::cout << "caso derecha \n";
 		velocidad_x += VELOCIDAD;
 	}
-	if (direccion = IZQUIERDA){
+	if (direccion == IZQUIERDA){
+		std::cout << "caso izquierda \n";
 		velocidad_x -= VELOCIDAD;
 	}
 }

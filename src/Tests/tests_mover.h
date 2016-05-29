@@ -21,7 +21,9 @@ bool test_mover_a_la_derecha_en_uno(){
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(DERECHA);
   m0->update(1, &mapa);
-  return (coord_m0 == (m0->get_coordenada()).derecha(1));
+  std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
+  << m0->get_coordenada().obtener_ordenada() << "\n";
+  return (coord_m0.derecha(1) == m0->get_coordenada());
 }
 
 bool test_mover_a_la_izquierda_en_uno(){
@@ -30,7 +32,9 @@ bool test_mover_a_la_izquierda_en_uno(){
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(IZQUIERDA);
   m0->update(1, &mapa);
-  return (coord_m0 == (m0->get_coordenada()).izquierda(1));
+  std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
+  << m0->get_coordenada().obtener_ordenada() << "\n";
+  return (coord_m0.izquierda(1) == m0->get_coordenada());
 }
 
 bool test_mover_a_la_derecha_dos_veces_me_caigo(){
@@ -42,7 +46,9 @@ bool test_mover_a_la_derecha_dos_veces_me_caigo(){
   m0->agregar_movimiento(DERECHA);
   m0->update(1, &mapa);
   m0->update(1, &mapa);
-  return (coord_m0 == (m0->get_coordenada()).derecha(2).abajo(1));
+  std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
+  << m0->get_coordenada().obtener_ordenada() << "\n";
+  return (coord_m0.derecha(2).abajo(1) == m0->get_coordenada());
 }
 
 bool test_mover_si_salto_me_despego_del_piso(){
@@ -51,7 +57,9 @@ bool test_mover_si_salto_me_despego_del_piso(){
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(SALTAR);
   m0->update(1, &mapa);
-  return (coord_m0 == (m0->get_coordenada()).arriba(1));
+  std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
+  << m0->get_coordenada().obtener_ordenada() << "\n";
+  return (coord_m0.arriba(1) == m0->get_coordenada());
 }
 
 bool test_mover_si_salto_me_despego_del_piso_y_vuelvo(){
@@ -81,8 +89,8 @@ bool test_mover_si_salto_vuelvo_y_no_atravieso_el_piso(){
 
 void run_tests_mover(){
 	print_test_result("TEST EL PJ NO SE MUEVE SIN VELOCIDAD", test_mover_sin_velocidad_no_me_muevo());
-	print_test_result("TEST ME MUEVO A LA IZQUIERDA EN UNA UNIDAD",test_mover_a_la_derecha_en_uno());
-	print_test_result("TEST ME MUEVO A LA DERECHA EN UNA UNIDAD", test_mover_a_la_izquierda_en_uno());
+	print_test_result("TEST ME MUEVO A LA DERECHA EN UNA UNIDAD",test_mover_a_la_derecha_en_uno());
+	print_test_result("TEST ME MUEVO A LA IZQUIERDA EN UNA UNIDAD", test_mover_a_la_izquierda_en_uno());
   print_test_result("TEST SI EL PJ SE MUEVE DONDE NO HAY BLOQUE SE CAE", test_mover_a_la_derecha_dos_veces_me_caigo());
   print_test_result("TEST SI SALTO ME DESPEGO DEL PISO", test_mover_si_salto_me_despego_del_piso());
   print_test_result("TEST SI SALTO ME DESPEGO DEL PISO Y VUELVO", test_mover_si_salto_me_despego_del_piso_y_vuelvo());
