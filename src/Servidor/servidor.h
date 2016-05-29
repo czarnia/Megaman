@@ -23,6 +23,7 @@ class Servidor {
     void aceptar_clientes();
     //Devuelve true si se cierra al servidor, false en caso contrario.
     bool termino_ejecucion();
+    //Empieza una partida.
     void empezar_partida();
   private:
     //Dado un socket conectado a un cliente y un id del mismo, se agrega un cliente
