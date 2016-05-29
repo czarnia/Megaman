@@ -8,7 +8,6 @@
 #include "atacable.h"
 #include "defendible.h"
 #include "actualizable.h"
-#include "strategy_mover.h"
 #include "evento_mover.h"
 #include "vida.h"
 
@@ -20,25 +19,25 @@ class Personaje:
 public Atacable,
 public Defendible,
 public Actualizable{
-	private:
-		friend class StrategyMover;
-
+	protected:
 		std::vector<Vida*> vidas;
 		int velocidad_y, velocidad_x;
 		size_t ancho, alto;
-		Coordenada *coordenada;
+		Coordenada coordenada;
 		std::string id;
 		size_t tiempo_pasado;
-		StrategyMover *movimiento;
+		bool flotando;
 
 	public:
 		//Dado un mapa, una coordenada y una cadena que usa como identificador, se
 		//crea un personaje.
-		Personaje(Mapa *mapa, Coordenada *c, std::string id);
+		Personaje(Mapa *mapa, Coordenada c, std::string id);
+		//Hace que el personaje se mueva;
+		virtual void mover(size_t tiempo, Mapa* mapa) = 0;
 		//Hace que el personaje ataque.
-		virtual void atacar(int direccion) = 0;
+		virtual void atacar(int direccion, Mapa* mapa) = 0;
 		//Le hace un update al personaje.
-		virtual void update(size_t tiempo) = 0;
+		virtual void update(size_t tiempo, Mapa* mapa);
 		//Dada una bala, recibe un ataque.
 		virtual void recibir_ataque(/*Bala* ataque*/) = 0;
 		//Devuelve el id de un personaje.
@@ -48,17 +47,14 @@ public Actualizable{
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
 		//Devuelve true si el personaje está vivo, false en caso contrario.
 		virtual bool esta_vivo();
-		virtual void agregar_evento(Evento_mover *mover);
 		//Dada una direccion representada como un int, agrega un movimiento en dicha
 		//direccion.
 		virtual void agregar_movimiento(int direccion);
 		//Dada una direccion representada como un int, agrega un ataque en dicha
 		//direccion.
 		virtual void agregar_ataque(int direccion);
-		//Devuelve la velocidad de un personaje.
-		virtual int get_velocidad();
 		//Devuelve la coordenada central de un personaje.
-		virtual Coordenada *get_coordenada();
+		virtual Coordenada get_coordenada();
 };
 
 #endif //PERSONAJE_H

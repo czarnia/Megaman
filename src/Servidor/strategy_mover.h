@@ -1,4 +1,4 @@
-#ifndef STRATEGY_MOVER_H
+/*#ifndef STRATEGY_MOVER_H
 #define STRATEGY_MOVER_H
 
 #include "mapa.h"
@@ -21,3 +21,4 @@ class StrategyMover{
 };
 
 #endif //STRATEGY_MOVER_H
+*/

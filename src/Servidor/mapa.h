@@ -26,16 +26,21 @@ class Mapa{
     bool tiene_coordenada(Coordenada coordenada);
     //Dada una coordenada central y el ancho y el alto de un objeto, determina
     //si el mismo puede ocupar dicho espacio.
-    bool puede_ubicarse_en(Coordenada *coord, size_t alto, size_t ancho);
-    //Dada una coordenada central origen y una coordenada central destino, el
+    bool puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho);
+    /*//Dada una coordenada central origen y una coordenada central destino, el
     //ancho y el alto de un objeto, determina si el mismo puedo hacer ese movi-
     //miento.
     void puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto,
-    size_t ancho);
+    size_t ancho);*/
     //Dado el id de un personaje, lo devuelve.
     Personaje *obtener_pj(std::string id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.
     std::vector<Actualizable*> obtener_actualizables();
+    //Devuelve true si abajo de un objeto de un alto determinado hay aire, false
+    //en caso contrario.
+    bool esta_en_aire(Coordenada coord, size_t alto);
+    //Devuelve true si hay tierra en dicha coordenada, false en caso contrario.
+    bool hay_tierra(Coordenada coord);
   private:
     //Carga un mapa, por ahora, una versión por defecto chica.
     void cargar();

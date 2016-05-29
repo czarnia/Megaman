@@ -5,42 +5,48 @@
 #include <iostream>
 
 #define PERDER_VIDA -1
-#define VELOCIDAD 1	  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
+#define ARRIBA 1
+#define ABAJO 2
+#define DERECHA 3
+#define IZQUIERDA 4
+#define SALTAR 5
+//TODO: levantar estos datos de xml/json!!!
+#define VELOCIDAD 1
+#define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 2
-#define ANCHO 2
+#define ANCHO 1
 
-Personaje::Personaje(Mapa *mapa, Coordenada *c, std::string id):
+Personaje::Personaje(Mapa *mapa, Coordenada c, std::string id):
 coordenada(c),
 id(id){
-	movimiento = new StrategyMover(mapa, this, true);
-	tiempo_pasado = 0;
 	velocidad_y = 0;
-	//TODO: levantar estos datos de xml/json!!!
-	velocidad_x = VELOCIDAD;
+	velocidad_x = 0;
 	alto = ALTO;
 	ancho = ANCHO;
+	flotando = false; //asumo siempre inicio al personaje no en el aire.
 }
 
-int Personaje::get_velocidad(){
-	return this->velocidad_x;
-}
-
-void Personaje::update(size_t tiempo){
+void Personaje::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
-	movimiento->mover(tiempo);
-}
-
-void Personaje::agregar_evento(Evento_mover *mover){
-	movimiento->agregar_direccion(mover->get_direccion());
+	mover(tiempo, mapa);
+	atacar(tiempo, mapa);
 }
 
 void Personaje::agregar_movimiento(int direccion){
-	movimiento->agregar_direccion(direccion);
+	if (direccion == SALTAR && !flotando){
+		velocidad_y -= VELOCIDAD_SALTO;
+	}
+	if (direccion = DERECHA){
+		velocidad_x += VELOCIDAD;
+	}
+	if (direccion = IZQUIERDA){
+		velocidad_x -= VELOCIDAD;
+	}
 }
 
 void Personaje::agregar_ataque(int direccion) {}
 
-Coordenada* Personaje::get_coordenada(){
+Coordenada Personaje::get_coordenada(){
 	return coordenada;
 }
 

@@ -5,10 +5,10 @@
 
 class Megaman: public Personaje{
   public:
-    Megaman(Mapa *mapa, Coordenada *c, std::string id);
-    void atacar(int direccion);
-    void update(size_t tiempo);
-    void recibir_ataque(/*Bala ataque*/);
+    Megaman(Mapa *mapa, Coordenada c, std::string id);
+    virtual void atacar(int direccion, Mapa* mapa);
+    virtual void mover(size_t tiempo, Mapa* mapa);
+    virtual void recibir_ataque(/*Bala ataque*/);
 };
 
 #endif //MEGAMAN_H
