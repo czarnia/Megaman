@@ -12,23 +12,24 @@ Coordenada::Coordenada(int ordenada, int abscisa){
 
 void Coordenada::camino_minimo(Coordenada *origen, Coordenada *destino, std::queue<Coordenada> *camino){
 	signed int delta_x = 0, delta_y = 0, versor_x = 0, versor_y = 0;
-	
-	int x0 = origen->obtener_abscisa();
-	int y0 = origen->obtener_ordenada();
-	int xf = destino->obtener_abscisa();
-	int yf = destino->obtener_ordenada();
-		
+
+	size_t x0 = origen->obtener_abscisa();
+	size_t y0 = origen->obtener_ordenada();
+	size_t xf = destino->obtener_abscisa();
+	size_t yf = destino->obtener_ordenada();
+
+
 	if (x0 != xf){
-		versor_x = (x0 > xf)? RETROCEDER : AVANZAR; 
+		versor_x = (x0 > xf)? RETROCEDER : AVANZAR;
 	}
 	if (y0 != yf){
 		versor_y = (y0 > yf)? RETROCEDER : AVANZAR;
 	}
 
-	while (((x0 + delta_x) != destino->obtener_abscisa()) || ((y0 + delta_y) != destino->obtener_ordenada())){
+	while (((x0 + delta_x) != destino->obtener_abscisa()) && ((y0 + delta_y) != destino->obtener_ordenada())){
 		delta_x += ((x0 + delta_x) != destino->obtener_abscisa())? versor_x : 0;
 		delta_y += ((y0 + delta_y) != destino->obtener_ordenada())? versor_y : 0;
-		
+
 		Coordenada coord(x0 + delta_x, y0 + delta_y);
 		camino->push(coord);
 	}

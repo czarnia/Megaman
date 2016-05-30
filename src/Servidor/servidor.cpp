@@ -10,7 +10,7 @@
 #define MAX_CONEXIONES 4
 #define FIN_ENTRADA "q"
 typedef struct sockaddr* Address;
-
+typedef std::map<std::string, Conexion_cliente*>::iterator ItClientes;
 
 //--------------->Auxiliares<---------------//
 std::vector<std::string> obtener_claves(std::map<std::string,
@@ -70,3 +70,10 @@ bool Servidor::termino_ejecucion(){
 void Servidor::empezar_partida(){
   mundo.jugar();
 }
+
+void Servidor::notificar_clientes_cambio_posicion(std::string id, int x, int y){
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(*it).second->enviar_cambio_posicion(id, x, y);
+	}
+}
+

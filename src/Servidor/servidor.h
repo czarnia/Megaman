@@ -25,6 +25,7 @@ class Servidor{
     bool termino_ejecucion();
     //Empieza una partida.
     void empezar_partida();
+    void notificar_clientes_cambio_posicion(std::string id, int x, int y);
   private:
     //Dado un socket conectado a un cliente y un id del mismo, se agrega un cliente
     //al servidor.

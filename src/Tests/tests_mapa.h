@@ -20,33 +20,20 @@ bool test_mapa_tiene_coordenada(){
 bool test_mapa_puedo_ubicar(){
 	bool passed = true;
 	Mapa mapa(10);
-	
-	Coordenada c0(3, 3);
-	passed = mapa.puede_ubicarse_en(&c0, 2, 2);
-	
-	Coordenada c1(2, 3);
-	passed = !mapa.puede_ubicarse_en(&c1, 2, 2);
-		
-	Coordenada c2(2, 2);
-	passed = passed && !mapa.puede_ubicarse_en(&c2, 2, 2);
-	
-	Coordenada c3(8, 1);
-	passed = passed && !mapa.puede_ubicarse_en(&c3, 2, 2);
-	
-	return passed;
-}
 
-bool test_mapa_puedo_mover(){
-	bool passed = true;
-	Mapa mapa(10);
-	
-	Coordenada origen(5, 4);
-	Coordenada destino(9, 1);
-	Coordenada mas_cercana(6, 3);
-	
-	mapa.puede_moverse_a(&origen, &destino, 2, 2);
-		
-	return (destino == mas_cercana);
+	Coordenada c0(3, 3);
+	passed = mapa.puede_ubicarse_en(c0, 2, 2);
+
+	Coordenada c1(2, 3);
+	passed = !mapa.puede_ubicarse_en(c1, 2, 2);
+
+	Coordenada c2(2, 2);
+	passed = passed && !mapa.puede_ubicarse_en(c2, 2, 2);
+
+	Coordenada c3(8, 1);
+	passed = passed && !mapa.puede_ubicarse_en(c3, 2, 2);
+
+	return passed;
 }
 
 bool test_mapa_obtener_personaje(){
@@ -56,8 +43,8 @@ bool test_mapa_obtener_personaje(){
 	Coordenada coord_m1(3,3);
 	Personaje *m0 = mapa.obtener_pj("megaman0");
 	Personaje *m1 = mapa.obtener_pj("megaman1");
-	passed = ((*m0->get_coordenada()) == coord_m0);
-	passed = passed && ((*m1->get_coordenada()) == coord_m1);
+	passed = ((m0->get_coordenada()) == coord_m0);
+	passed = passed && ((m1->get_coordenada()) == coord_m1);
 	return passed;
 }
 
@@ -65,7 +52,7 @@ void run_tests_mapa(){
 	print_test_result("TEST MAPA TIENE COORDENADAS", test_mapa_tiene_coordenada());
 	print_test_result("TEST MAPA PUEDE UBICARSE EN DEVUELVE FALSE SI HAY BLOQUE", test_mapa_puedo_ubicar());
 	print_test_result("TEST MAPA OBTENER PERSONAJE", test_mapa_obtener_personaje());
-	print_test_result("TEST MAPA PUEDE MOVERSE DEVUELVE COORDENADA MAS CERCANA A DESTINO", test_mapa_puedo_mover());
+	//print_test_result("TEST MAPA PUEDE MOVERSE DEVUELVE COORDENADA MAS CERCANA A DESTINO", test_mapa_puedo_mover());
 }
 
 #endif //TESTS_MAPA_H

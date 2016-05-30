@@ -12,7 +12,7 @@
 #include <cstddef>
 
 
-class Juego: public Actualizable{
+class Juego{
   private:
     Mapa mundo;
     Mutex proteccion;
@@ -30,10 +30,10 @@ class Juego: public Actualizable{
     virtual void update(size_t tiempo);
     //Dado el id de un personaje, hace que el mismo ataque en una direccion
     //dada.
-    void personaje_atacar(std::string id_pj, StrategyMover* direccion);
+    void personaje_atacar(std::string id_pj);
     //Dado el id de un personaje, hace que el mismo se mueva en una direccion
     //dada.
-    void personaje_mover(std::string id_pj, StrategyMover* direccion);
+    void personaje_mover(std::string id_pj);
     //Dado el id de un personaje y un numero de arma, hace que el mismo cambie a
     //la misma.
     void personaje_cambiar_arma(std::string id_pj, int arma);

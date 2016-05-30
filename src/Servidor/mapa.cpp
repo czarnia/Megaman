@@ -22,24 +22,22 @@ std::vector<Coordenada> coord_tierras(){
 
 	std::vector<Coordenada> tierras;
 
-	tierras.push_back(Coordenada(1,1));
-	tierras.push_back(Coordenada(2,1));
-	tierras.push_back(Coordenada(3,1));
-	tierras.push_back(Coordenada(1,2));
-	tierras.push_back(Coordenada(4,1));
-	tierras.push_back(Coordenada(8,1));
-	tierras.push_back(Coordenada(8,2));
-	tierras.push_back(Coordenada(2,8));
-	tierras.push_back(Coordenada(3,8));
-	tierras.push_back(Coordenada(4,8));
+	tierras.push_back(Coordenada(1,11));
+	tierras.push_back(Coordenada(3,11));
+	tierras.push_back(Coordenada(5,11));
+	tierras.push_back(Coordenada(7,11));
+	tierras.push_back(Coordenada(9,11));
+	tierras.push_back(Coordenada(11,11));
+	tierras.push_back(Coordenada(1,9));
+	tierras.push_back(Coordenada(3,9));
+	tierras.push_back(Coordenada(5,9));
 	return tierras;
 }
 
 std::vector<Coordenada*> coord_personajes(){
 	std::vector<Coordenada*> personajes;
-	personajes.push_back(new Coordenada(8,4));
-	personajes.push_back(new Coordenada(3,3));
-	personajes.push_back(new Coordenada(1,4));
+	personajes.push_back(new Coordenada(3,6));
+
 	return personajes;
 }
 
@@ -47,7 +45,7 @@ void Mapa::cargar_personajes(std::vector<Coordenada*> &coord){
 	for (size_t i = 0; i < coord.size(); i++){
 		std::stringstream id_personaje;
 		id_personaje << "megaman" << i;
-		Megaman *megaman = new Megaman(this, coord[i], id_personaje.str());
+		Megaman *megaman = new Megaman(this, *coord[i], id_personaje.str());
 		personajes.insert(IdPersonaje(id_personaje.str(), megaman));
 	}
 }
@@ -74,38 +72,46 @@ std::vector<Coordenada> coord_escaleras(){
 
 //------------------------------------//
 
-Mapa::Mapa(size_t tamanio){
+Mapa::Mapa(Servidor *s, size_t tamanio){
 	tam = tamanio;
+	servidor = s;
 	this->cargar();
 }
 
-bool Mapa::puede_ubicarse_en(Coordenada *coord, int alto, int ancho){
+bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 	bool puedo_ocupar = true;
 	//Personajes *
 	//Verifico que el mapa tiene las coordenadas:
-	puedo_ocupar = (this->tiene_coordenada(coord->derecha(ancho/2).arriba(alto/2)));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->derecha(ancho/2).abajo(alto/2)));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).abajo(alto/2)));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord->izquierda(ancho/2).arriba(alto/2)));
+	puedo_ocupar = (this->tiene_coordenada(coord.derecha(ancho/2).arriba(alto/2)));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord.derecha(ancho/2).abajo(alto/2)));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord.izquierda(ancho/2).abajo(alto/2)));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord.izquierda(ancho/2).arriba(alto/2)));
 
 	bool puedo_ocupar_ancho = true;
 	bool puedo_ocupar_alto = true;
 	
 	if (puedo_ocupar){
-		for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){			
-			puedo_ocupar_ancho = ((*it).obtener_abscisa() < coord->izquierda(ancho/2).obtener_abscisa());
-			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord->derecha(ancho/2).obtener_abscisa());
+		for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
+			//puedo_ocupar_ancho = ((*it).obtener_abscisa() <= coord.izquierda(ancho/2).obtener_abscisa());
+			//puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() >= coord.izquierda(ancho/2).obtener_abscisa());
 
-			puedo_ocupar_alto = ((*it).obtener_ordenada() > (coord->arriba(alto/2).obtener_ordenada()));
-			puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() < (coord->abajo(alto/2).obtener_ordenada()));
-			
+			//puedo_ocupar_alto = ((*it).obtener_ordenada() >= (coord.arriba(alto/2).obtener_ordenada()));
+			//puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() <= (coord.abajo(alto/2).obtener_ordenada()));
+
+			puedo_ocupar_ancho = ((*it).obtener_abscisa() < coord.izquierda(ancho/2).obtener_abscisa());
+			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord.derecha(ancho/2).obtener_abscisa());
+
+			puedo_ocupar_alto = ((*it).obtener_ordenada() > (coord.arriba(alto/2).obtener_ordenada()));
+			puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() < (coord.abajo(alto/2).obtener_ordenada()));
+
 			puedo_ocupar = puedo_ocupar && puedo_ocupar_ancho && puedo_ocupar_alto;
 		}
 	}	
 	return puedo_ocupar;
 }
 
-void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, int alto, int ancho){
+
+/*void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto, size_t ancho){
 	std::queue<Coordenada> camino_minimo;
 	Coordenada::camino_minimo(origen, destino, &camino_minimo);
 	//Empiezo a recorrer desde el origen:
@@ -124,7 +130,7 @@ void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, int alto, in
 			*destino = coord; //muevo
 		}
 	}
-}
+}*/
 
 Personaje* Mapa::obtener_pj(std::string id_pj){
 	return personajes[id_pj];
@@ -136,10 +142,23 @@ std::vector<Actualizable*> Mapa::obtener_actualizables(){
   for (i = personajes.begin(); i != personajes.end(); i++){
     v.push_back(i->second);
   }
-	/*for (size_t j = 0; j < balas.size(); j++){
+	for (size_t j = 0; j < balas.size(); j++){
 		v.push_back(balas[j]);
-	}*/
+	}
   return v;
+}
+
+bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
+	hay_tierra(coord.abajo(alto/2+1)); //asumo los bloques son de tamaño 2
+}
+
+bool Mapa::hay_tierra(Coordenada coord){
+	for (size_t i = 0; i < bloques.size(); i++){
+		if (bloques[i] == coord){
+			return true;
+		}
+	}
+	return false;
 }
 
 bool Mapa::tiene_coordenada(Coordenada coordenada){
@@ -153,4 +172,13 @@ void Mapa::cargar(){
 	bloques = coord_tierras();
 	std::vector<Coordenada*> coordenadas_personajes = coord_personajes();
 	cargar_personajes(coordenadas_personajes);
+}
+
+void Mapa::update(Observable *obs){
+	Personaje *personaje = (Personaje*)obs;
+	//Un personaje p actualizo su posicion.
+	std::string id = personaje->obtener_id();
+	int x = (int)personaje->get_coordenada().obtener_abscisa();
+	int y = (int)personaje->get_coordenada().obtener_ordenada();
+	servidor->notificar_clientes_cambio_posicion(id, x, y);
 }

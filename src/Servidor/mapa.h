@@ -5,18 +5,20 @@
 #include <vector>
 #include "coordenada.h"
 #include "actualizable.h"
-#include "observador_personaje.h"
+#include "observador.h"
 class Personaje;
 class Megaman;
 class Elemento;
 class Bala;
 
-class Mapa: public ObservadorPersonaje{
+class Mapa: public Observador, 
+public Observable{
   private:
     std::vector<Coordenada> bloques;
     std::vector<Bala*> balas;
     std::map<std::string, Personaje*> personajes;
     size_t tam;
+    Servidor *servidor;
     //Carga un mapa, por ahora, una versión por defecto chica.
     void cargar();
     //Recibe un elemento y las coordenadas donde se desea posicionar al mismo.
@@ -24,26 +26,37 @@ class Mapa: public ObservadorPersonaje{
     //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
     void ocupar_tierra(std::vector<Coordenada> &coordenadas);
     void cargar_personajes(std::vector<Coordenada*> &coordenadas);
+    
   public:
     //Dado un tamanio, crea un mapa
     //con tantas divisiones como indique el tamanio.
-    Mapa(size_t tamanio);
+    Mapa(Servidor *s, size_t tamanio);
     //Devuelve true si la coordenada pertenece al mapa y false en el caso con-
     //trario.
+    
     bool tiene_coordenada(Coordenada coordenada);
     //Dada una coordenada central y el ancho y el alto de un objeto, determina
     //si el mismo puede ocupar dicho espacio.
-    bool puede_ubicarse_en(Coordenada *coord, int alto, int ancho);
-    //Dada una coordenada central origen y una coordenada central destino, el
+
+    bool puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho);
+    /*//Dada una coordenada central origen y una coordenada central destino, el
     //ancho y el alto de un objeto, determina si el mismo puedo hacer ese movi-
     //miento.
-    void puede_moverse_a(Coordenada *origen, Coordenada *destino, int alto, 
-    int ancho);
+    void puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto,
+    size_t ancho);*/
+
     //Dado el id de un personaje, lo devuelve.
     Personaje *obtener_pj(std::string id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.
     std::vector<Actualizable*> obtener_actualizables();
 
+    //Devuelve true si abajo de un objeto de un alto determinado hay aire, false
+    //en caso contrario.
+    bool esta_en_aire(Coordenada coord, size_t alto);
+    //Devuelve true si hay tierra en dicha coordenada, false en caso contrario.
+    bool hay_tierra(Coordenada coord);
+    //Realiza el update de la posicion del personaje;
+	virtual void update(Personaje *p);
 };
 
 #endif //MAPA_H

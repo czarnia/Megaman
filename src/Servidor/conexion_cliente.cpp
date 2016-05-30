@@ -17,16 +17,13 @@ Conexion_cliente::~Conexion_cliente(){
   rcv.join();
 }
 
-void Conexion_cliente::enviar_cambio_posicion(Personaje *p, Coordenada *nueva_coord){
+void Conexion_cliente::enviar_cambio_posicion(std::string id, int x, int y){
 	int posicion = POSICION;
-	std::string id_pj = p->devolver_id();
-	int abscisa = nueva_coord->obtener_abscisa();
-	int ordenada = nueva_coord->obtener_ordenada();
 	
 	skt->send((char*)&posicion, TAM_INT);
-	skt->send((char*)&id_pj, TAM_INT);
-	skt->send(&abscisa, TAM_INT);
-	skt->send(&ordenada, TAM_INT);
+	skt->send((char*)&id, TAM_INT);
+	skt->send(&x, TAM_INT);
+	skt->send(&y, TAM_INT);
 }
 
 void Conexion_cliente::enviar_cantidad_vidas(int cantidad){
