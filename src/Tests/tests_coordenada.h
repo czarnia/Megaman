@@ -3,7 +3,7 @@
 
 #include <queue>
 
-bool test_coordenada_camino_minimo(){
+/*bool test_coordenada_camino_minimo(){
 	bool passed = true;
 	Coordenada origen(5, 4);
 	Coordenada destino(10, 2);
@@ -31,6 +31,6 @@ bool test_coordenada_camino_minimo(){
 
 void run_tests_coordenadas(){
 	print_test_result("TEST COORDENADAS CAMINO MINIMO", test_coordenada_camino_minimo());
-}
+}*/
 
 #endif //TESTS_COORDENADA_H

@@ -1,5 +1,10 @@
 #include "megaman.h"
 
+#include <string>
+#include <iostream>
+#include <sstream>
+
+
 Megaman::Megaman(Mapa *mapa, Coordenada c, std::string id):
 Personaje(mapa, c, id){}
 
@@ -15,12 +20,15 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
   }
   Coordenada nueva_coordenada = coordenada;
   if (velocidad_x > 0){
+    std::cout << "derecha \n";
     nueva_coordenada = nueva_coordenada.derecha(1);
   }
   if (velocidad_x < 0){
+    std::cout << "izquierda \n";
     nueva_coordenada = nueva_coordenada.izquierda(1);
   }
   if (velocidad_y < 0){
+    std::cout << "arriba \n";
     nueva_coordenada = nueva_coordenada.arriba(1);
   }
   if (velocidad_y > 0){
@@ -28,8 +36,11 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
   }
 
   if (mapa->puede_ubicarse_en(nueva_coordenada, alto, ancho)){
+    std::cout << "hola \n";
     coordenada = nueva_coordenada;
   }else{
+    std::cout << "mi coordenada rechazada: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
+    << nueva_coordenada.obtener_ordenada() << "\n";
     if (nueva_coordenada.obtener_abscisa() > 0){
       velocidad_x = 0;
     }

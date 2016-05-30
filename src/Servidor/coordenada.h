@@ -11,15 +11,15 @@ class Coordenada{
     int y;
   public:
     //Dada una ordenada y una abscisa, crea una Coordenada.
-    Coordenada(int ordenada, int abscisa);
-    //Dada una coordenada origen y una coordenada destino, 
+    Coordenada(size_t ordenada, size_t abscisa);
+    /*//Dada una coordenada origen y una coordenada destino,
+
     //agrega a la cola las coordenadas que conforman el camino mínimo entre ambas.
-    static void camino_minimo(Coordenada *origen, Coordenada *destino, std::queue<Coordenada> *camino);
-    
+    static void camino_minimo(Coordenada *origen, Coordenada *destino, std::queue<Coordenada> *camino);*/
     //Suma delta_x a la coordenada x;
-    void sumar_abscisa(int delta_x);
-	//Suma delta_y a la coordenada y;
-	void sumar_ordenada(int delta_y);
+    void sumar_abscisa(size_t delta_x);
+	  //Suma delta_y a la coordenada y;
+	  void sumar_ordenada(size_t delta_y);
     //Devuelve la ordenada de la Coordenada.
     int obtener_ordenada();
     //Devuelve la abscisa de la Coordenada.
@@ -41,6 +41,9 @@ class Coordenada{
     //Devuelve true si la coordenada tiene algun miembro negativo, false en caso
     //contrario.
     bool es_negativa();
+    //Devuelve true si la coordenada está en el cuadrante formado por xi, xf, yi
+    //e yf.
+    bool esta_en_rango(int xi, int xf, int yi, int yf);
 };
 
 #endif //COORDENADA_H

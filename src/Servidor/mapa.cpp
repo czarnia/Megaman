@@ -10,6 +10,8 @@
 #include <sstream>
 #include <queue>
 
+#define TAM_BLOQUE 1
+
 typedef std::vector<Coordenada>::iterator ItBloques;
 typedef std::pair<std::string, Megaman*> IdPersonaje;
 
@@ -79,35 +81,40 @@ Mapa::Mapa(Servidor *s, size_t tamanio){
 }
 
 bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
-	bool puedo_ocupar = true;
+	bool puedo_ocupar;
 	//Personajes *
 	//Verifico que el mapa tiene las coordenadas:
-	puedo_ocupar = (this->tiene_coordenada(coord.derecha(ancho/2).arriba(alto/2)));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord.derecha(ancho/2).abajo(alto/2)));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord.izquierda(ancho/2).abajo(alto/2)));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(coord.izquierda(ancho/2).arriba(alto/2)));
+	Coordenada superior_derecha = coord.arriba(alto/2).derecha(ancho/2);
+	Coordenada superior_izquierda = coord.arriba(alto/2).izquierda(ancho/2);
+	Coordenada inferior_derecha = coord.abajo(alto/2).derecha(ancho/2);
+	Coordenada inferior_izquierda = coord.abajo(alto/2).izquierda(ancho/2);
 
-	bool puedo_ocupar_ancho = true;
-	bool puedo_ocupar_alto = true;
-	
-	if (puedo_ocupar){
-		for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
-			//puedo_ocupar_ancho = ((*it).obtener_abscisa() <= coord.izquierda(ancho/2).obtener_abscisa());
-			//puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() >= coord.izquierda(ancho/2).obtener_abscisa());
 
-			//puedo_ocupar_alto = ((*it).obtener_ordenada() >= (coord.arriba(alto/2).obtener_ordenada()));
-			//puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() <= (coord.abajo(alto/2).obtener_ordenada()));
+	puedo_ocupar = (this->tiene_coordenada(superior_derecha));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(superior_izquierda));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(inferior_derecha));
+	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(inferior_izquierda));
 
-			puedo_ocupar_ancho = ((*it).obtener_abscisa() < coord.izquierda(ancho/2).obtener_abscisa());
-			puedo_ocupar_ancho = puedo_ocupar_ancho || ((*it).obtener_abscisa() > coord.derecha(ancho/2).obtener_abscisa());
+	if (!puedo_ocupar){
+		return false;
+	}
 
-			puedo_ocupar_alto = ((*it).obtener_ordenada() > (coord.arriba(alto/2).obtener_ordenada()));
-			puedo_ocupar_alto = puedo_ocupar_alto || ((*it).obtener_ordenada() < (coord.abajo(alto/2).obtener_ordenada()));
+	for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
+		Coordenada coord_bloque_central = (*it);
+		int ymax = coord_bloque_central.obtener_ordenada()+TAM_BLOQUE;
+		int ymin = coord_bloque_central.obtener_ordenada()-TAM_BLOQUE;
+		int xmax = coord_bloque_central.obtener_abscisa()+TAM_BLOQUE;
+		int xmin = coord_bloque_central.obtener_abscisa()-TAM_BLOQUE;
 
-			puedo_ocupar = puedo_ocupar && puedo_ocupar_ancho && puedo_ocupar_alto;
+		if ((superior_derecha.esta_en_rango(xmin, xmax, ymin, ymax)) ||
+		(superior_izquierda.esta_en_rango(xmin, xmax, ymin, ymax)) ||
+		(inferior_derecha.esta_en_rango(xmin, xmax, ymin, ymax)) ||
+		(superior_izquierda.esta_en_rango(xmin, xmax, ymin, ymax)) ||
+		(coord.esta_en_rango(xmin, xmax, ymin, ymax))){
+			return false;
 		}
-	}	
-	return puedo_ocupar;
+	}
+	return true;
 }
 
 
