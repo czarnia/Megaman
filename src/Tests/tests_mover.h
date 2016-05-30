@@ -6,6 +6,7 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 #define SALTAR 5
+#define REPOSO -1
 
 bool test_mover_sin_velocidad_no_me_muevo(){
   Mapa mapa(12);
@@ -43,8 +44,8 @@ bool test_mover_a_la_derecha_dos_veces_me_caigo(){
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(DERECHA);
   m0->update(1, &mapa);
-  m0->agregar_movimiento(DERECHA);
   m0->update(1, &mapa);
+  m0->agregar_movimiento(REPOSO);
   m0->update(1, &mapa);
   std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
   << m0->get_coordenada().obtener_ordenada() << "\n";
