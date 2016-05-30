@@ -111,7 +111,7 @@ bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 			return false;
 		}
 	}
-	return false;
+	return true;
 }
 
 /*void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto, size_t ancho){
