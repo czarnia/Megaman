@@ -12,7 +12,7 @@ include_directories(${INCLUDE_SERVER})
 file (GLOB SRCS  *.cpp *.h)
 file (GLOB	SERVER "${INCLUDE_SERVER}/*.h"
 
-			"${INCLUDE_SERVER}/mapa.cpp" 
+			"${INCLUDE_SERVER}/mapa.cpp"
 			"${INCLUDE_SERVER}/coordenada.cpp"
 			"${INCLUDE_SERVER}/puas.cpp"
 			"${INCLUDE_SERVER}/megaman.cpp"
@@ -23,6 +23,21 @@ file (GLOB	SERVER "${INCLUDE_SERVER}/*.h"
 			"${INCLUDE_SERVER}/megaman.cpp"
 			"${INCLUDE_SERVER}/strategy_mover.cpp"
 			"${INCLUDE_SERVER}/vida.cpp"
+			"${INCLUDE_SERVER}/servidor.cpp"
+			"${INCLUDE_SERVER}/juego.cpp"
+			"${INCLUDE_SERVER}/entrada_estandar.cpp"
+			"${INCLUDE_SERVER}/conexion_cliente.cpp"
+			"${INCLUDE_SERVER}/receiver_cliente.cpp"
+			"${INCLUDE_SERVER}/observable.cpp"
+			"${INCLUDE_SERVER}/procesador_eventos.cpp"
+			"${INCLUDE_SERVER}/manejador_eventos.cpp"
+			"${INCLUDE_SERVER}/creador_atacar.cpp"
+			"${INCLUDE_SERVER}/creador_cambiar_arma.cpp"
+			"${INCLUDE_SERVER}/creador_mover.cpp"
+			"${INCLUDE_SERVER}/evento_atacar.cpp"
+			"${INCLUDE_SERVER}/evento_cambiar_arma.cpp"
+			"${INCLUDE_SERVER}/evento_mover.cpp"
+			"${INCLUDE_SERVER}/observador_personaje.cpp"
 			)
 file (GLOB COM "${INCLUDE_COM}/*")
 

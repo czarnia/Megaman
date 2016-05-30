@@ -8,8 +8,13 @@
 #define SALTAR 5
 #define REPOSO -1
 
+#include "servidor.h"
+
+char puerto[5] = "5050";
+
 bool test_mover_sin_velocidad_no_me_muevo(){
-  Mapa mapa(12);
+  Servidor server(puerto);
+  Mapa mapa(&server, 12);
   Personaje *m0 = mapa.obtener_pj("megaman0");
   Coordenada coord_m0 = m0->get_coordenada();
   m0->update(1, &mapa);
@@ -17,7 +22,8 @@ bool test_mover_sin_velocidad_no_me_muevo(){
 }
 
 bool test_mover_a_la_derecha_en_uno(){
-  Mapa mapa(12);
+  Servidor server(puerto);
+  Mapa mapa(&server, 12);
   Personaje *m0 = mapa.obtener_pj("megaman0");
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(DERECHA);
@@ -28,7 +34,8 @@ bool test_mover_a_la_derecha_en_uno(){
 }
 
 bool test_mover_a_la_izquierda_en_uno(){
-  Mapa mapa(12);
+  Servidor server(puerto);
+  Mapa mapa(&server, 12);
   Personaje *m0 = mapa.obtener_pj("megaman0");
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(IZQUIERDA);
@@ -39,7 +46,8 @@ bool test_mover_a_la_izquierda_en_uno(){
 }
 
 bool test_mover_a_la_derecha_dos_veces_me_caigo(){
-  Mapa mapa(12);
+  Servidor server(puerto);
+  Mapa mapa(&server, 12);
   Personaje *m0 = mapa.obtener_pj("megaman0");
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(DERECHA);
@@ -54,7 +62,8 @@ bool test_mover_a_la_derecha_dos_veces_me_caigo(){
 }
 
 bool test_mover_si_salto_me_despego_del_piso(){
-  Mapa mapa(12);
+  Servidor server(puerto);
+  Mapa mapa(&server, 12);
   Personaje *m0 = mapa.obtener_pj("megaman0");
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(SALTAR);
@@ -65,7 +74,8 @@ bool test_mover_si_salto_me_despego_del_piso(){
 }
 
 bool test_mover_si_salto_me_despego_del_piso_y_vuelvo(){
-  Mapa mapa(12);
+  Servidor server(puerto);
+  Mapa mapa(&server, 12);
   Personaje *m0 = mapa.obtener_pj("megaman0");
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(SALTAR);
@@ -79,7 +89,8 @@ bool test_mover_si_salto_me_despego_del_piso_y_vuelvo(){
 }
 
 bool test_mover_si_salto_vuelvo_y_no_atravieso_el_piso(){
-  Mapa mapa(12);
+  Servidor server(puerto);
+  Mapa mapa(&server, 12);
   Personaje *m0 = mapa.obtener_pj("megaman0");
   Coordenada coord_m0 = m0->get_coordenada();
   m0->agregar_movimiento(SALTAR);

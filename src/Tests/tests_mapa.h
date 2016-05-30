@@ -1,6 +1,6 @@
 #ifndef TESTS_MAPA_H
 #define TESTS_MAPA_H
-
+/*
 bool test_mapa_tiene_coordenada(){
 	bool passed = true;
 	Mapa mapa(10);
@@ -54,5 +54,5 @@ void run_tests_mapa(){
 	print_test_result("TEST MAPA OBTENER PERSONAJE", test_mapa_obtener_personaje());
 	//print_test_result("TEST MAPA PUEDE MOVERSE DEVUELVE COORDENADA MAS CERCANA A DESTINO", test_mapa_puedo_mover());
 }
-
+*/
 #endif //TESTS_MAPA_H
