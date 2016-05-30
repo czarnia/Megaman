@@ -83,6 +83,7 @@ bool test_mover_si_salto_me_despego_del_piso_y_vuelvo(){
   m0->update(1, &mapa);
   m0->update(1, &mapa);
   m0->update(1, &mapa);
+  m0->update(1, &mapa);
   std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
   << m0->get_coordenada().obtener_ordenada() << "\n";
   return (coord_m0 == m0->get_coordenada());
@@ -99,6 +100,9 @@ bool test_mover_si_salto_vuelvo_y_no_atravieso_el_piso(){
   m0->update(1, &mapa);
   m0->update(1, &mapa);
   m0->update(1, &mapa);
+  m0->update(1, &mapa);
+  std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
+  << m0->get_coordenada().obtener_ordenada() << "\n";
   return (coord_m0 == m0->get_coordenada());
 }
 

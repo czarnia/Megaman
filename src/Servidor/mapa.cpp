@@ -76,6 +76,17 @@ std::vector<Coordenada> coord_escaleras(){
 	return escaleras;
 }
 
+//TODO: que esto sea una funcion de una interface "colisionable" o algo así
+//que la implementen todos los ex ubicables.
+bool colisionan(size_t x1, size_t y1, size_t ancho1, size_t alto1,
+size_t x2, size_t y2, size_t ancho2, size_t alto2){
+	if ((x1 + ancho1 < x2) || (y1 + alto1 < y2) || (x1 > x2 + ancho2) ||
+	(y1 > y2 + alto2)){
+		return false;
+	}
+	return true;
+}
+
 //------------------------------------//
 
 Mapa::Mapa(Servidor *s, size_t tamanio){
@@ -92,7 +103,6 @@ bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 	Coordenada inferior_derecha = coord.abajo(alto/2).derecha(ancho/2);
 	Coordenada inferior_izquierda = coord.abajo(alto/2).izquierda(ancho/2);
 
-
 	puedo_ocupar = (this->tiene_coordenada(superior_derecha));
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(superior_izquierda));
 	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(inferior_derecha));
@@ -102,18 +112,15 @@ bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 		return false;
 	}
 
+	size_t xobj = superior_izquierda.obtener_abscisa();
+	size_t yobj = superior_izquierda.obtener_ordenada();
+
 	for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
 		Coordenada coord_bloque_central = (*it);
-		int ymax = coord_bloque_central.obtener_ordenada()+TAM_BLOQUE;
-		int ymin = coord_bloque_central.obtener_ordenada()-TAM_BLOQUE;
-		int xmax = coord_bloque_central.obtener_abscisa()+TAM_BLOQUE;
-		int xmin = coord_bloque_central.obtener_abscisa()-TAM_BLOQUE;
+		size_t xbloque = coord_bloque_central.arriba(TAM_BLOQUE).izquierda(TAM_BLOQUE).obtener_abscisa();
+		size_t ybloque = coord_bloque_central.arriba(TAM_BLOQUE).izquierda(TAM_BLOQUE).obtener_ordenada();
 
-		if ((superior_derecha.esta_en_rango(xmin, xmax, ymin, ymax)) ||
-		(superior_izquierda.esta_en_rango(xmin, xmax, ymin, ymax)) ||
-		(inferior_derecha.esta_en_rango(xmin, xmax, ymin, ymax)) ||
-		(superior_izquierda.esta_en_rango(xmin, xmax, ymin, ymax)) ||
-		(coord.esta_en_rango(xmin, xmax, ymin, ymax))){
+		if (colisionan(xobj, yobj, ancho, alto, xbloque, ybloque, TAM_BLOQUE*2, TAM_BLOQUE*2)){
 			return false;
 		}
 	}

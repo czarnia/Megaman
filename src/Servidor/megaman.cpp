@@ -38,7 +38,7 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
   }
   if (velocidad_y > 0){
     std::cout << "abajo \n";
-    nueva_coordenada = nueva_coordenada.abajo(1);
+    nueva_coordenada = nueva_coordenada.abajo(2);
   }
 
   if (mapa->puede_ubicarse_en(nueva_coordenada, alto, ancho)){
