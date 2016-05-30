@@ -1,5 +1,6 @@
 #include "mapa.h"
 #include "coordenada.h"
+#include "observador_personaje.h"
 #include "elemento.h"
 #include "puas.h"
 #include "escalera.h"
@@ -9,6 +10,7 @@
 #include <iostream>
 #include <sstream>
 #include <queue>
+
 
 #define TAM_BLOQUE 1
 
@@ -43,12 +45,14 @@ std::vector<Coordenada*> coord_personajes(){
 	return personajes;
 }
 
-void Mapa::cargar_personajes(std::vector<Coordenada*> &coord){
+void Mapa::cargar_personajes(Servidor *servidor, std::vector<Coordenada*> &coord){
 	for (size_t i = 0; i < coord.size(); i++){
 		std::stringstream id_personaje;
 		id_personaje << "megaman" << i;
 		Megaman *megaman = new Megaman(this, *coord[i], id_personaje.str());
 		personajes.insert(IdPersonaje(id_personaje.str(), megaman));
+		ObservadorPersonaje *obs = new ObservadorPersonaje(this, servidor);
+		megaman->agregar_observador(obs);
 	}
 }
 
@@ -76,8 +80,7 @@ std::vector<Coordenada> coord_escaleras(){
 
 Mapa::Mapa(Servidor *s, size_t tamanio){
 	tam = tamanio;
-	servidor = s;
-	this->cargar();
+	this->cargar(s);
 }
 
 bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
@@ -175,17 +178,12 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 	return tiene_coordenada;
 }
 
-void Mapa::cargar(){
+void Mapa::cargar(Servidor *servidor){
 	bloques = coord_tierras();
 	std::vector<Coordenada*> coordenadas_personajes = coord_personajes();
-	cargar_personajes(coordenadas_personajes);
+	cargar_personajes(servidor, coordenadas_personajes);
 }
 
-void Mapa::update(Observable *obs){
-	Personaje *personaje = (Personaje*)obs;
-	//Un personaje p actualizo su posicion.
-	std::string id = personaje->obtener_id();
-	int x = (int)personaje->get_coordenada().obtener_abscisa();
-	int y = (int)personaje->get_coordenada().obtener_ordenada();
-	servidor->notificar_clientes_cambio_posicion(id, x, y);
+void Mapa::quitar_personaje(std::string id){
+	personajes.erase(id);
 }

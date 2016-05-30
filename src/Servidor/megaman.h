@@ -4,11 +4,14 @@
 #include "personaje.h"
 
 class Megaman: public Personaje{
-  public:
-    Megaman(Mapa *mapa, Coordenada c, std::string id);
-    virtual void atacar(int direccion, Mapa* mapa);
-    virtual void mover(size_t tiempo, Mapa* mapa);
-    virtual void recibir_ataque(/*Bala ataque*/);
+	private:
+		Mapa *mapa;
+	public:
+		Megaman(Mapa *mapa, Coordenada c, std::string id);
+		virtual void atacar(int direccion, Mapa* mapa);
+		virtual void mover(size_t tiempo, Mapa* mapa);
+		virtual void recibir_ataque(/*Bala ataque*/);
+		virtual void update(size_t tiempo);
 };
 
 #endif //MEGAMAN_H

@@ -1,4 +1,6 @@
 #include "observable.h"
+#include <iosfwd>
+#include <cstddef>
 
 void Observable::agregar_observador(Observador *observador){
 	observadores.push_back(observador);
@@ -11,3 +13,5 @@ void Observable::quitar_observador(Observador *observador){
 		}
 	}
 }
+
+Observable::~Observable(){}

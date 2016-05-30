@@ -60,6 +60,13 @@ public Observable{
 		//Notifica a los objetos que observan al personaje de un cambio 
 		//en el estado del mismo.
 		virtual void notificar_observadores();
+		//Devuelve la cantidad de vidas del personaje.
+		int get_cantidad_vidas();
+		//Devuelve el porcentaje de vida de la vida en uso
+		//o 0 si no hay vidas.
+		int get_porcentaje_vida();
+		//Devuelve el porcentaje de energia actual del persoanje.
+		int get_energia();
 };
 
 #endif //PERSONAJE_H

@@ -27,11 +27,10 @@ id(id){
 	velocidad_x = 0;
 	alto = ALTO;
 	ancho = ANCHO;
-	agregar_observador(mapa);
 	flotando = false; //asumo siempre inicio al personaje no en el aire.
 }
 
-void notificar_observadores(){
+void Personaje::notificar_observadores(){
 	for (size_t i = 0; i < observadores.size(); i++){
 		observadores[i]->update(this);
 	}
@@ -71,6 +70,22 @@ std::string& Personaje::devolver_id(){
 
 bool Personaje::esta_vivo(){
 	return vidas.empty();
+}
+
+int Personaje::get_cantidad_vidas(){
+	return vidas.size();
+}
+
+int Personaje::get_porcentaje_vida(){
+	int porcentaje = 0;
+	if (!vidas.empty()){
+		porcentaje = vidas[0]->get_porcentaje();
+	}
+	return porcentaje;
+}
+
+int Personaje::get_energia(){
+	return 0; //TODO: cambiar al valor de la energia actual!
 }
 
 void Personaje::perder_vida(int porcentaje){

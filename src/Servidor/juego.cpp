@@ -6,7 +6,8 @@
 
 #define TIEMPO 5
 
-Juego::Juego(size_t tamanio) : mundo(tamanio){
+Juego::Juego(Servidor *s, size_t tamanio): 
+mundo(s, tamanio){
   fin_partida = false;
 }
 

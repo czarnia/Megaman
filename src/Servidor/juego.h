@@ -11,7 +11,6 @@
 #include <iosfwd>
 #include <cstddef>
 
-
 class Juego{
   private:
     Mapa mundo;
@@ -19,7 +18,7 @@ class Juego{
     bool fin_partida;
 	public:
     //Crea un juego nuevo.
-    Juego(size_t tamanio);
+    Juego(Servidor *s, size_t tamanio);
     //Destructor del juego.
 		~Juego();
     //Implementa el ciclo del juego.

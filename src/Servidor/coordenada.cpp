@@ -9,7 +9,7 @@
 #define RETROCEDER -1
 #define AVANZAR 1
 
-Coordenada::Coordenada(int ordenada, int abscisa){
+Coordenada::Coordenada(size_t ordenada, size_t abscisa){
 	x = ordenada;
 	y = abscisa;
 }
@@ -51,11 +51,11 @@ void Coordenada::operator=(const Coordenada& otro){
 	this->y = otro.y;
 }
 
-void Coordenada::sumar_abscisa(int delta_x){
+void Coordenada::sumar_abscisa(size_t delta_x){
 	this->x += delta_x;
 }
 
-void Coordenada::sumar_ordenada(int delta_y){
+void Coordenada::sumar_ordenada(size_t delta_y){
 	this->y += delta_y;
 }
 

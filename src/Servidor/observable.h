@@ -2,9 +2,10 @@
 #define OBSERVABLE_H
 
 #include "observador.h"
+#include <vector>
 
 class Observable{
-	private:
+	protected:
 		std::vector<Observador*> observadores;
 	public:
 		virtual void agregar_observador(Observador *observador);

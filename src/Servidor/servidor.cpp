@@ -25,7 +25,9 @@ std::vector<std::string> obtener_claves(std::map<std::string,
 //------------------------------------------//
 
 
-Servidor::Servidor(char *puerto) : mundo(50), entrada(FIN_ENTRADA){
+Servidor::Servidor(char *puerto) : 
+mundo(this, 50), 
+entrada(FIN_ENTRADA){
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
@@ -71,9 +73,41 @@ void Servidor::empezar_partida(){
   mundo.jugar();
 }
 
-void Servidor::notificar_clientes_cambio_posicion(std::string id, int x, int y){
+void Servidor::enviar_porcentaje_energia(std::string id, int energia){
+	ItClientes it = clientes.find(id);
+	if ((it->first).compare(id) == 0){
+		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
+		(it->second)->enviar_porcentaje_energia(energia);
+	}
+}
+
+void Servidor::enviar_porcentaje_vida(std::string id, int vida){
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO VIDA
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(*it).second->enviar_cambio_posicion(id, x, y);
+		(it->second)->enviar_porcentaje_vida(id, vida);
+	}
+}
+
+void Servidor::enviar_cantidad_vidas(std::string id, int cant_vidas){
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO PORCENTAJE DE VIDA
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(it->second)->enviar_cantidad_vidas(id, cant_vidas);
+	}
+}
+
+void Servidor::enviar_cambio_posicion(std::string id, int x, int y){
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(it->second)->enviar_cambio_posicion(id, x, y);
+	}
+}
+
+void Servidor::enviar_gameover(std::string id){
+	ItClientes it = clientes.find(id);
+	if ((it->first).compare(id) == 0){
+		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
+		(it->second)->enviar_gameover();
+		(it->second)->terminar_ejecucion();
+		clientes.erase(id);
 	}
 }
 
