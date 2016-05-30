@@ -11,6 +11,10 @@ Personaje(mapa, c, id){}
 void Megaman::atacar(int direccion, Mapa* mapa){}
 
 void Megaman::mover(size_t tiempo, Mapa* mapa){
+  if (mapa->esta_en_aire(coordenada, alto)){
+    flotando = true;
+    velocidad_y += 1; //valor gravedad.
+  }
   if (velocidad_x == 0 && velocidad_y == 0){
     std::cout << "las velocidades son 0 \n";
     return;
@@ -18,17 +22,18 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
   Coordenada nueva_coordenada = coordenada;
   if (velocidad_x > 0){
     std::cout << "derecha \n";
-    nueva_coordenada = nueva_coordenada.derecha(1);
+    nueva_coordenada = nueva_coordenada.derecha(2);
   }
   if (velocidad_x < 0){
     std::cout << "izquierda \n";
-    nueva_coordenada = nueva_coordenada.izquierda(1);
+    nueva_coordenada = nueva_coordenada.izquierda(2);
   }
   if (velocidad_y < 0){
     std::cout << "arriba \n";
-    nueva_coordenada = nueva_coordenada.arriba(1);
+    nueva_coordenada = nueva_coordenada.arriba(2);
   }
   if (velocidad_y > 0){
+    std::cout << "abajo \n";
     nueva_coordenada = nueva_coordenada.abajo(1);
   }
 
@@ -45,11 +50,6 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
       velocidad_y = 0;
     }
   }
-  if (mapa->esta_en_aire(nueva_coordenada, alto)){
-    flotando = true;
-    velocidad_y += 1; //valor gravedad.
-  }
-
 }
 
 void Megaman::recibir_ataque(/*Bala ataque*/){}

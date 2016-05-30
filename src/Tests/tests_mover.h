@@ -24,7 +24,7 @@ bool test_mover_a_la_derecha_en_uno(){
   m0->update(1, &mapa);
   std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
   << m0->get_coordenada().obtener_ordenada() << "\n";
-  return (coord_m0.derecha(1) == m0->get_coordenada());
+  return (coord_m0.derecha(2) == m0->get_coordenada());
 }
 
 bool test_mover_a_la_izquierda_en_uno(){
@@ -35,7 +35,7 @@ bool test_mover_a_la_izquierda_en_uno(){
   m0->update(1, &mapa);
   std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
   << m0->get_coordenada().obtener_ordenada() << "\n";
-  return (coord_m0.izquierda(1) == m0->get_coordenada());
+  return (coord_m0.izquierda(2) == m0->get_coordenada());
 }
 
 bool test_mover_a_la_derecha_dos_veces_me_caigo(){
@@ -47,9 +47,10 @@ bool test_mover_a_la_derecha_dos_veces_me_caigo(){
   m0->update(1, &mapa);
   m0->agregar_movimiento(REPOSO);
   m0->update(1, &mapa);
+  m0->update(1, &mapa);
   std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
   << m0->get_coordenada().obtener_ordenada() << "\n";
-  return (coord_m0.derecha(2).abajo(1) == m0->get_coordenada());
+  return (coord_m0.derecha(4).abajo(2) == m0->get_coordenada());
 }
 
 bool test_mover_si_salto_me_despego_del_piso(){
@@ -60,7 +61,7 @@ bool test_mover_si_salto_me_despego_del_piso(){
   m0->update(1, &mapa);
   std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
   << m0->get_coordenada().obtener_ordenada() << "\n";
-  return (coord_m0.arriba(1) == m0->get_coordenada());
+  return (coord_m0.arriba(2) == m0->get_coordenada());
 }
 
 bool test_mover_si_salto_me_despego_del_piso_y_vuelvo(){
@@ -72,6 +73,8 @@ bool test_mover_si_salto_me_despego_del_piso_y_vuelvo(){
   m0->update(1, &mapa);
   m0->update(1, &mapa);
   m0->update(1, &mapa);
+  std::cout <<  "x: " << m0->get_coordenada().obtener_abscisa() << "y: "
+  << m0->get_coordenada().obtener_ordenada() << "\n";
   return (coord_m0 == m0->get_coordenada());
 }
 

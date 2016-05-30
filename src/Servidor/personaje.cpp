@@ -15,7 +15,7 @@
 #define IZQUIERDA 4
 #define SALTAR 5
 //TODO: levantar estos datos de xml/json!!!
-#define VELOCIDAD 1
+#define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 4
 #define ANCHO 2
