@@ -159,7 +159,7 @@ std::vector<Actualizable*> Mapa::obtener_actualizables(){
 }
 
 bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
-	hay_tierra(coord.abajo(alto/2+1)); //asumo los bloques son de tamaño 2
+	return !hay_tierra(coord.abajo((alto/2)+1)); //asumo los bloques son de tamaño 2
 }
 
 bool Mapa::hay_tierra(Coordenada coord){

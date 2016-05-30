@@ -15,7 +15,7 @@
 #define IZQUIERDA 4
 #define SALTAR 5
 //TODO: levantar estos datos de xml/json!!!
-#define VELOCIDAD 1
+#define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 4
 #define ANCHO 2
@@ -43,7 +43,9 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 }
 
 void Personaje::agregar_movimiento(int direccion){
-	std::cout << "estoy en el agregar_movimiento \n";
+	if (direccion == -1){
+		velocidad_x = 0;
+	}
 	if (direccion == SALTAR && !flotando){
 		std::cout << "caso salto \n";
 		velocidad_y -= VELOCIDAD_SALTO;

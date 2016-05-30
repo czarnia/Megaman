@@ -15,47 +15,45 @@ void Megaman::update(size_t tiempo){
 void Megaman::atacar(int direccion, Mapa* mapa){}
 
 void Megaman::mover(size_t tiempo, Mapa* mapa){
-	Coordenada pos_vieja = coordenada;
-	if (velocidad_x == 0 && velocidad_y == 0){
-		return;
-	}
-	Coordenada nueva_coordenada = coordenada;
-	if (velocidad_x > 0){
-		std::cout << "derecha \n";
-		nueva_coordenada = nueva_coordenada.derecha(1);
-	}
-	if (velocidad_x < 0){
-		std::cout << "izquierda \n";
-		nueva_coordenada = nueva_coordenada.izquierda(1);
-	}
-	if (velocidad_y < 0){
-		std::cout << "arriba \n";
-		nueva_coordenada = nueva_coordenada.arriba(1);
-	}
-	if (velocidad_y > 0){
-		nueva_coordenada = nueva_coordenada.abajo(1);
-	}
+  if (mapa->esta_en_aire(coordenada, alto)){
+    flotando = true;
+    velocidad_y += 1; //valor gravedad.
+  }
+  if (velocidad_x == 0 && velocidad_y == 0){
+    std::cout << "las velocidades son 0 \n";
+    return;
+  }
+  Coordenada nueva_coordenada = coordenada;
+  if (velocidad_x > 0){
+    std::cout << "derecha \n";
+    nueva_coordenada = nueva_coordenada.derecha(2);
+  }
+  if (velocidad_x < 0){
+    std::cout << "izquierda \n";
+    nueva_coordenada = nueva_coordenada.izquierda(2);
+  }
+  if (velocidad_y < 0){
+    std::cout << "arriba \n";
+    nueva_coordenada = nueva_coordenada.arriba(2);
+  }
+  if (velocidad_y > 0){
+    std::cout << "abajo \n";
+    nueva_coordenada = nueva_coordenada.abajo(1);
+  }
 
-	if (mapa->puede_ubicarse_en(nueva_coordenada, alto, ancho)){
-		std::cout << "hola \n";
-		coordenada = nueva_coordenada;
-	}else{
-		std::cout << "mi coordenada rechazada: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
-		<< nueva_coordenada.obtener_ordenada() << "\n";
-		if (nueva_coordenada.obtener_abscisa() > 0){
-			velocidad_x = 0;
-		}
-		if (nueva_coordenada.obtener_ordenada() > 0){
-			velocidad_y = 0;
-		}
-	}
-	if (mapa->esta_en_aire(nueva_coordenada, alto)){
-		flotando = true;
-		velocidad_y += 1; //valor gravedad.
-	}
-	if (!(pos_vieja == coordenada)){
-		notificar_observadores();
-	}
+  if (mapa->puede_ubicarse_en(nueva_coordenada, alto, ancho)){
+    std::cout << "hola \n";
+    coordenada = nueva_coordenada;
+  }else{
+    std::cout << "mi coordenada rechazada: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
+    << nueva_coordenada.obtener_ordenada() << "\n";
+    if (nueva_coordenada.obtener_abscisa() > 0){
+      velocidad_x = 0;
+    }
+    if (nueva_coordenada.obtener_ordenada() > 0){
+      velocidad_y = 0;
+    }
+  }
 }
 
 void Megaman::recibir_ataque(/*Bala ataque*/){}
