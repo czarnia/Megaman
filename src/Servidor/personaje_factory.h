@@ -12,7 +12,7 @@ public Observador{
 	protected:
 		Juego *juego;
 	public:
-		PersonajeFactory(Juego *juego);
+		PersonajeFactory(Juego *juego):juego(juego){};
 		virtual Personaje *crear(Mapa* mapa) = 0;
 		virtual void update(Observable *obs) = 0;
 };

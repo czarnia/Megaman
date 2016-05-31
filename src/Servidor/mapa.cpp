@@ -10,6 +10,8 @@
 #include <sstream>
 #include <queue>
 
+#include <algorithm>
+
 
 #define TAM_BLOQUE 1
 
@@ -68,11 +70,11 @@ std::vector<Coordenada> coord_escaleras(){
 //que la implementen todos los ex ubicables.
 bool colisionan(size_t x1, size_t y1, size_t ancho1, size_t alto1,
 size_t x2, size_t y2, size_t ancho2, size_t alto2){
-	if ((x1 + ancho1 < x2) || (y1 + alto1 < y2) || (x1 > x2 + ancho2) ||
-	(y1 > y2 + alto2)){
-		return false;
-	}
-	return true;
+	int x_aux = std::min(x1+ancho1, x2+ancho2) - std::max(x1, x2);
+	int y_aux = std::min(y1+alto1, y2+alto2) - std::max(y1,y2);
+	size_t x_colision = std::max(0, x_aux);
+	size_t y_colision = std::max(0, y_aux);
+	return ((x_colision*y_colision) != 0);
 }
 
 //------------------------------------//

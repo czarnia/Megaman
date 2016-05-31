@@ -4,25 +4,26 @@
 #include "../Comun/mutex.h"
 #include "actualizable.h"
 #include "mapa.h"
-#include "servidor.h"
+#include "juego.h"
+#include "juego_observable.h"
 #include "personaje_factory.h"
 #include <string>
 #include <iosfwd>
 #include <cstddef>
 
-class Juego{
+class Juego: 
+public Juego_observable{
 	private:
 		Mapa mundo;
 		Mutex proteccion;
 		bool fin_partida;
 		int cant_jugadores;
-		Servidor *s;
 		std::map<std::string, PersonajeFactory*> factories;
 		
 		void inicializar_partida();
 	public:
 		//Crea un juego nuevo.
-		Juego(Servidor *s, size_t tamanio, int cant_jugadores);
+		Juego(size_t tamanio, int cant_jugadores);
 		//Implementa el ciclo del juego.
 		void jugar();
 		//Termina la partida en marcha.
@@ -39,20 +40,20 @@ class Juego{
 		//la misma.
 		void personaje_cambiar_arma(std::string id_pj, int arma);
 		//Recibe el id de un personaje muerto y actualiza la partida
+		void quitar_observador(Observador_juego *observador);
+		void agregar_observador(Observador_juego *observador);
+		void notificar_termino_partida();
+		void notificar_gameover(std::string id);
+		void notificar_murio_personaje(std::string id);
+		void notificar_cantidad_vidas(std::string id, int vidas);
+		void notificar_porcentaje_vida(std::string id, int cant_vida);
+		void notificar_energia(std::string id, int energia);
+		void notificar_posicion(std::string id, int x, int y);
 		void murio_personaje(std::string id);
-		//Recibe el id de un personaje cuya cantidad de vidas fue modificada
-		//y actualiza la partida.
-		void actualizo_cantidad_vidas(std::string id, int cantidad_vidas);
-		//Recibe el id de un personaje cuyo porcentaje de vida fue modificado
-		//y actualiza la partida.
-		void actualizo_porcentaje_vida(std::string id, int porcentaje_vida);
-		//Recibe el id de un personaje cuya energia fue modificada
-		//y actualiza la partida.
+		void actualizo_cantidad_vidas(std::string id, int vidas);
+		void actualizo_porcentaje_vida(std::string id, int cant_vida);
 		void actualizo_energia(std::string id, int energia);
-		//Recibe el id de un personaje que se movio y su nueva posicion
-		//y actualiza la partida.
 		void actualizo_posicion(std::string id, int x, int y);
-		//Destructor del juego.
 		~Juego();
 };
 

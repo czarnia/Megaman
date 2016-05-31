@@ -37,7 +37,6 @@ file (GLOB	SERVER "${INCLUDE_SERVER}/*.h"
 			"${INCLUDE_SERVER}/evento_cambiar_arma.cpp"
 			"${INCLUDE_SERVER}/evento_mover.cpp"
 			"${INCLUDE_SERVER}/observador_personaje.cpp"
-			"${INCLUDE_SERVER}/megaman_factory.cpp"
 			)
 file (GLOB COM "${INCLUDE_COM}/*")
 

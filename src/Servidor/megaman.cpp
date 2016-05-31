@@ -1,5 +1,7 @@
 #include "megaman.h"
 
+#include "bala.h"
+
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -56,4 +58,6 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
   }
 }
 
-void Megaman::recibir_ataque(/*Bala ataque*/){}
+void Megaman::recibir_ataque(Bala* ataque){
+	ataque->daniar(this);
+}

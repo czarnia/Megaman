@@ -1,5 +1,4 @@
 #include "megaman_factory.h"
-#include "observador_personaje.h"
 #include "megaman.h"
 #include <sstream>
 

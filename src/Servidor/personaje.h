@@ -41,7 +41,7 @@ public Observable{
 		//Le hace un update al personaje.
 		virtual void update(size_t tiempo, Mapa* mapa);
 		//Dada una bala, recibe un ataque.
-		virtual void recibir_ataque(/*Bala* ataque*/) = 0;
+		virtual void recibir_ataque(Bala* ataque) = 0;
 		//Devuelve el id de un personaje.
 		virtual std::string &devolver_id();
 		//Dado un porcentaje de vida a perder, se la resta al personaje, en caso de
@@ -57,7 +57,7 @@ public Observable{
 		virtual void agregar_ataque(int direccion);
 		//Devuelve la coordenada central de un personaje.
 		virtual Coordenada get_coordenada();
-		//Notifica a los objetos que observan al personaje de un cambio 
+		//Notifica a los objetos que observan al personaje de un cambio
 		//en el estado del mismo.
 		virtual void notificar_observadores();
 		//Devuelve la cantidad de vidas del personaje.

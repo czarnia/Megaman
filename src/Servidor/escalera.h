@@ -13,7 +13,7 @@ class Escalera: public Elemento{
 		bool puede_ocupar(Personaje* pj);
 		//Recibe un personaje e interactúa con el mismo
 		//para actualizar sus coordenadas:
-		void interactuar(Mapa &mapa, Personaje *pj);
+		void interactuar(Personaje *pj);
 		//Destructor de la Escalera.
 		~Escalera();
 };

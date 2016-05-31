@@ -8,6 +8,7 @@
 #include "unistd.h"
 
 #include "servidor.h"
+#include "juego.h"
 #include <string>
 
 #define POS_PUERTO 1

@@ -69,40 +69,25 @@ bool Servidor::termino_ejecucion(){
 }
 
 void Servidor::empezar_partida(){
-	mundo = new Juego(this, 50, clientes.size());
+	mundo = new Juego(50, clientes.size());
+	mundo->agregar_observador(this);
 	mundo->jugar();
 }
 
-void Servidor::enviar_porcentaje_energia(std::string id, int energia){
-	ItClientes it = clientes.find(id);
-	if ((it->first).compare(id) == 0){
-		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
-		(it->second)->enviar_porcentaje_energia(energia);
+void Servidor::update(Observable *obs){}
+
+void Servidor::update_fin_partida(){
+	std::vector<std::string> claves_clientes = obtener_claves(clientes);
+	for (size_t i = 0; i < claves_clientes.size(); i++){
+		Conexion_cliente* cliente = clientes[claves_clientes[i]];
+		clientes.erase(claves_clientes[i]);
+		cliente->terminar_ejecucion();
+		delete cliente;
 	}
+	delete mundo;
 }
 
-void Servidor::enviar_porcentaje_vida(std::string id, int vida){
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO VIDA
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_porcentaje_vida(id, vida);
-	}
-}
-
-void Servidor::enviar_cantidad_vidas(std::string id, int cant_vidas){
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO PORCENTAJE DE VIDA
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cantidad_vidas(id, cant_vidas);
-	}
-}
-
-void Servidor::enviar_cambio_posicion(std::string id, int x, int y){
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cambio_posicion(id, x, y);
-	}
-}
-
-void Servidor::enviar_gameover(std::string id){
+void Servidor::update_gameover(std::string id){
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN JUGADOR PERDIO.
 	ItClientes it = clientes.find(id);
 	if ((it->first).compare(id) == 0){
@@ -110,5 +95,42 @@ void Servidor::enviar_gameover(std::string id){
 		(it->second)->enviar_gameover();
 		(it->second)->terminar_ejecucion();
 		clientes.erase(id);
+	}
+}
+
+void Servidor::update_murio_personaje(std::string id) {
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE MURIO
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(it->second)->enviar_cambio_posicion(id, -1, -1);
+	}
+}
+
+void Servidor::update_cantidad_vidas(std::string id, int vidas) {
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO
+	// PORCENTAJE DE VIDA
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(it->second)->enviar_cantidad_vidas(id, vidas);
+	}
+}
+
+void Servidor::update_porcentaje_vida(std::string id, int vida){
+//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO VIDA
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(it->second)->enviar_porcentaje_vida(id, vida);
+	}
+}
+
+void Servidor::update_energia(std::string id, int energia){
+	ItClientes it = clientes.find(id);
+	if ((it->first).compare(id) == 0){
+		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
+		(it->second)->enviar_porcentaje_energia(energia);
+	}
+}
+
+void Servidor::update_posicion(std::string id, int x, int y){
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(it->second)->enviar_cambio_posicion(id, x, y);
 	}
 }
