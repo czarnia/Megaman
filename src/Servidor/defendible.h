@@ -6,7 +6,7 @@ class Mapa;
 class Defendible{
   public:
     //Hace que un defendible ataque.
-    virtual void atacar(int direccion, Mapa* mapa) = 0;
+    virtual void atacar(size_t tiempo, Mapa* mapa) = 0;
     //Destructor del defendible.
     virtual ~Defendible() {}
 };
