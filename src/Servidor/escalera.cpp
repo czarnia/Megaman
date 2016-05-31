@@ -4,7 +4,7 @@ bool Escalera::puede_ocupar(Personaje* pj){
 	return true;
 }
 
-void Escalera::interactuar(Mapa &mapa, Personaje *pj){
+void Escalera::interactuar(Personaje *pj){
 }
 
 Escalera::~Escalera() {}

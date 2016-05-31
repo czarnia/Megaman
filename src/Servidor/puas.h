@@ -13,7 +13,7 @@ class Puas: public Elemento{
 		bool puede_ocupar(Personaje* pj);
 		//Recibe un personaje e interactúa con el mismo para
 		//ocasionarle daño.
-		void interactuar(Mapa &mapa, Personaje *pj);
+		void interactuar(Personaje *pj);
 		//Destructor de las Puas.
 		~Puas();
 };
