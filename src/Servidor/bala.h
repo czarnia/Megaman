@@ -3,25 +3,27 @@
 
 #include "actualizable.h"
 #include "personaje.h"
+#include "megaman.h"
+#include "met.h"
 #include "elemento.h"
 
 class Bala: public Actualizable, public Elemento{
 	public:
     //Destructor de la bala.
-		virtual ~Bala();
+		virtual ~Bala() {};
     //Dado un personaje y un mapa, interactua con el personaje.
     virtual void interactuar(Personaje* pj);
     //Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
     //este.
 		virtual bool puede_ocupar(Personaje* pj);
     //Hace que pasa el tiempo para la bala.
-    virtual void update(size_t tiempo) = 0;
+    virtual void update(size_t tiempo, Mapa* mapa) = 0;
 		//Daña a un Personaje (caso por defecto).
 		virtual void daniar(Personaje* pj) = 0;
 		//Daña a un Megaman.
 		virtual void daniar(Megaman* mega) = 0;
 		//Daña a un Met.
-		//virtual void dañar(Met* met) = 0;
+		virtual void daniar(Met* met) = 0;
 
 };
 
