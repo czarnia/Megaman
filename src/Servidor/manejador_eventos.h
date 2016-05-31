@@ -1,15 +1,15 @@
 #ifndef MANEJADOR_EVENTOS_H
 #define MANEJADOR_EVENTOS_H
 
-#include "juego.h"
+class Juego;
 #include "evento.h"
 
 class Manejador_eventos{
   private:
-    Juego mundo;
+    Juego *mundo;
   public:
     //Dado un juego, crea un manejador de eventos.
-    Manejador_eventos(Juego m);
+    Manejador_eventos(Juego *m);
     //Destructor del manejador de eventos.
     ~Manejador_eventos();
     //Dado un evento, lo ejecuta.

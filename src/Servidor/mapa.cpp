@@ -1,6 +1,5 @@
 #include "mapa.h"
 #include "coordenada.h"
-#include "observador_personaje.h"
 #include "elemento.h"
 #include "puas.h"
 #include "escalera.h"
@@ -45,17 +44,6 @@ std::vector<Coordenada*> coord_personajes(){
 	return personajes;
 }
 
-void Mapa::cargar_personajes(Servidor *servidor, std::vector<Coordenada*> &coord){
-	for (size_t i = 0; i < coord.size(); i++){
-		std::stringstream id_personaje;
-		id_personaje << "megaman" << i;
-		Megaman *megaman = new Megaman(this, *coord[i], id_personaje.str());
-		personajes.insert(IdPersonaje(id_personaje.str(), megaman));
-		ObservadorPersonaje *obs = new ObservadorPersonaje(this, servidor);
-		megaman->agregar_observador(obs);
-	}
-}
-
 std::vector<Coordenada> coord_puas(){
 	std::vector<Coordenada> puas;
 
@@ -89,9 +77,9 @@ size_t x2, size_t y2, size_t ancho2, size_t alto2){
 
 //------------------------------------//
 
-Mapa::Mapa(Servidor *s, size_t tamanio){
+Mapa::Mapa(size_t tamanio){
 	tam = tamanio;
-	this->cargar(s);
+	this->cargar();
 }
 
 bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
@@ -126,28 +114,6 @@ bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 	}
 	return true;
 }
-
-
-/*void Mapa::puede_moverse_a(Coordenada *origen, Coordenada *destino, size_t alto, size_t ancho){
-	std::queue<Coordenada> camino_minimo;
-	Coordenada::camino_minimo(origen, destino, &camino_minimo);
-	//Empiezo a recorrer desde el origen:
-	*destino = *origen; //definir = para coordenadas.
-
-	bool destino_valido = true;
-
-	while (destino_valido && (!camino_minimo.empty())){
-		Coordenada coord = camino_minimo.front();
-		camino_minimo.pop();
-
-		destino_valido = puede_ubicarse_en(&coord, alto, ancho);
-		std::cout << "COORD: " << coord.obtener_abscisa() << "," << coord.obtener_ordenada() << "\n";
-
-		if (destino_valido){
-			*destino = coord; //muevo
-		}
-	}
-}*/
 
 Personaje* Mapa::obtener_pj(std::string id_pj){
 	return personajes[id_pj];
@@ -185,10 +151,13 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 	return tiene_coordenada;
 }
 
-void Mapa::cargar(Servidor *servidor){
+void Mapa::cargar(){
 	bloques = coord_tierras();
-	std::vector<Coordenada*> coordenadas_personajes = coord_personajes();
-	cargar_personajes(servidor, coordenadas_personajes);
+	coord_iniciales_personajes = coord_personajes(); 
+}
+
+void Mapa::agregar_personaje(Personaje *p){
+	personajes.insert(std::pair<std::string, Personaje*>(p->devolver_id(), p));
 }
 
 void Mapa::quitar_personaje(std::string id){

@@ -25,8 +25,7 @@ std::vector<std::string> obtener_claves(std::map<std::string,
 //------------------------------------------//
 
 
-Servidor::Servidor(char *puerto) :
-mundo(this, 50),
+Servidor::Servidor(char *puerto):
 entrada(FIN_ENTRADA){
 	/*skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
@@ -70,7 +69,8 @@ bool Servidor::termino_ejecucion(){
 }
 
 void Servidor::empezar_partida(){
-  mundo.jugar();
+	mundo = new Juego(this, 50, clientes.size());
+	mundo->jugar();
 }
 
 void Servidor::enviar_porcentaje_energia(std::string id, int energia){
@@ -96,12 +96,14 @@ void Servidor::enviar_cantidad_vidas(std::string id, int cant_vidas){
 }
 
 void Servidor::enviar_cambio_posicion(std::string id, int x, int y){
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		(it->second)->enviar_cambio_posicion(id, x, y);
 	}
 }
 
 void Servidor::enviar_gameover(std::string id){
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN JUGADOR PERDIO.
 	ItClientes it = clientes.find(id);
 	if ((it->first).compare(id) == 0){
 		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)

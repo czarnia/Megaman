@@ -1,21 +1,19 @@
 #ifndef OBSERVADOR_PERSONAJE_H
 #define OBSERVADOR_PERSONAJE_H
 
-#include "servidor.h"
 #include "observador.h"
 #include "personaje.h"
-#include "mapa.h"
+#include "juego.h"
 
 class ObservadorPersonaje: public Observador{
 	private:
-		Mapa* mapa;
-		Servidor *servidor;
+		Juego* juego;
 		Coordenada coordenada;
 		int cantidad_vidas;
 		int porcentaje_vida;
 		int energia;
 	public:
-		ObservadorPersonaje(Mapa* mapa, Servidor* servidor);
+		ObservadorPersonaje(Juego* juego);
 		virtual void update(Observable *obs);
 };
 

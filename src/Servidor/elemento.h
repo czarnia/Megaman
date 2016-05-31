@@ -2,7 +2,8 @@
 #define ELEMENTO_H
 
 #include "personaje.h"
-#include "mapa.h"
+
+class Mapa;
 
 class Elemento{
 	public:

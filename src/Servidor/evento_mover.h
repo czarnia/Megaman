@@ -2,9 +2,10 @@
 #define EVENTO_MOVER_H
 
 #include "evento.h"
-#include "juego.h"
 #include <string>
 #include <map>
+
+class Juego;
 
 class Evento_mover : public Evento{
   private:

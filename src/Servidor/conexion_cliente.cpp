@@ -4,7 +4,7 @@
 
 enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 
-Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego m) : skt(conexion), id_cliente(id),
+Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m) : skt(conexion), id_cliente(id),
 rcv(conexion, id, m) {
   rcv.start();
 }
