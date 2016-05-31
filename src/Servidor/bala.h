@@ -10,12 +10,19 @@ class Bala: public Actualizable, public Elemento{
     //Destructor de la bala.
 		virtual ~Bala();
     //Dado un personaje y un mapa, interactua con el personaje.
-    virtual void interactuar(Personaje *pj) = 0;
+    virtual void interactuar(Personaje* pj);
     //Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
     //este.
-		virtual bool puede_ocupar(Personaje *pj);
+		virtual bool puede_ocupar(Personaje* pj);
     //Hace que pasa el tiempo para la bala.
-    virtual void update(size_t tiempo);
+    virtual void update(size_t tiempo) = 0;
+		//Daña a un Personaje (caso por defecto).
+		virtual void daniar(Personaje* pj) = 0;
+		//Daña a un Megaman.
+		virtual void daniar(Megaman* mega) = 0;
+		//Daña a un Met.
+		//virtual void dañar(Met* met) = 0;
+
 };
 
 #endif //BALA_H
