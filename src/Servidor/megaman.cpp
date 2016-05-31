@@ -1,6 +1,7 @@
 #include "megaman.h"
 
 #include "bala.h"
+#include "arma_megaman.h"
 
 #include <string>
 #include <iostream>
@@ -8,7 +9,10 @@
 
 
 Megaman::Megaman(Mapa *mapa, Coordenada c, std::string id):
-Personaje(mapa, c, id){}
+Personaje(mapa, c, id){
+	arma_act = 1;
+	armas.push_back(new Arma_megaman());
+}
 
 void Megaman::update(size_t tiempo){
 	Personaje::update(tiempo, mapa);

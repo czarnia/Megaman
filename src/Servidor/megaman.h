@@ -3,9 +3,13 @@
 
 #include "personaje.h"
 
+class Arma;
+
 class Megaman: public Personaje{
 	private:
 		Mapa *mapa;
+		std::vector<Arma*> armas;
+		size_t arma_act;
 
 	public:
 		Megaman(Mapa *mapa, Coordenada c, std::string id);
