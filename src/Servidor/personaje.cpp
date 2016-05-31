@@ -28,6 +28,7 @@ id(id){
 	alto = ALTO;
 	ancho = ANCHO;
 	flotando = false; //asumo siempre inicio al personaje no en el aire.
+	tiempo_pasado = 0;
 }
 
 void Personaje::notificar_observadores(){

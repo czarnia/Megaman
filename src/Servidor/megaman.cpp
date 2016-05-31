@@ -14,7 +14,7 @@ void Megaman::update(size_t tiempo){
 	Personaje::update(tiempo, mapa);
 }
 
-void Megaman::atacar(int direccion, Mapa* mapa){}
+void Megaman::atacar(size_t tiempo, Mapa* mapa){}
 
 void Megaman::mover(size_t tiempo, Mapa* mapa){
   if (mapa->esta_en_aire(coordenada, alto)){

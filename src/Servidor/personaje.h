@@ -27,8 +27,8 @@ public Observable{
 		size_t ancho, alto;
 		Coordenada coordenada;
 		std::string id;
-		size_t tiempo_pasado;
 		bool flotando;
+		size_t tiempo_pasado;
 
 	public:
 		//Dado un mapa, una coordenada y una cadena que usa como identificador, se
@@ -37,7 +37,7 @@ public Observable{
 		//Hace que el personaje se mueva;
 		virtual void mover(size_t tiempo, Mapa* mapa) = 0;
 		//Hace que el personaje ataque.
-		virtual void atacar(int direccion, Mapa* mapa) = 0;
+		virtual void atacar(size_t tiempo, Mapa* mapa) = 0;
 		//Le hace un update al personaje.
 		virtual void update(size_t tiempo, Mapa* mapa);
 		//Dada una bala, recibe un ataque.
