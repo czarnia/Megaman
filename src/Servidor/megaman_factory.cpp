@@ -30,7 +30,7 @@ void MegamanFactory::update(Observable *observado){
 	if (!megaman->esta_vivo()){
 		obs = creados[megaman];
 		creados.erase(creados.find(megaman));
+		delete megaman;
+		delete obs;
 	}
-	delete megaman;
-	delete obs;
 }
