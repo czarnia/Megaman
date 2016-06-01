@@ -6,7 +6,7 @@
 
 #define TIEMPO 5
 
-Juego::Juego(size_t tamanio, int jugadores): 
+Juego::Juego(size_t tamanio, int jugadores):
 mundo(tamanio),
 cant_jugadores(jugadores){
   fin_partida = false;
@@ -35,10 +35,10 @@ void Juego::update(size_t tiempo){
 	mundo.update(tiempo);
 }
 
-void Juego::personaje_atacar(std::string id_pj, int direccion){
+void Juego::personaje_atacar(std::string id_pj, int direccion){ //debería ser sólo para megaman!
 	Lock candado(proteccion);
 	Personaje* pj = mundo.obtener_pj(id_pj);
-	//pj->agregar_ataque(direccion);
+  pj->atacar(0, direccion, &mundo);
 }
 
 void Juego::personaje_mover(std::string id_pj, int direccion){
@@ -86,6 +86,7 @@ void Juego::notificar_murio_personaje(std::string id){
 		observadores[i]->update_murio_personaje(id);
 		if (cant_jugadores == 0){
 			notificar_termino_partida();
+      terminar_partida();
 		}
 	}
 }

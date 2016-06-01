@@ -17,8 +17,8 @@ int main(int argc, char *argv[]){
   Servidor server(argv[POS_PUERTO]);
 
   while (!server.termino_ejecucion()){
-    /*server.aceptar_clientes();
-    server.empezar_partida();*/
+    server.aceptar_clientes();
+    server.empezar_partida();
   }
 
   return 0;
