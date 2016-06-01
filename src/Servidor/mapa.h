@@ -7,7 +7,6 @@
 #include "actualizable.h"
 
 class Personaje;
-class Megaman;
 class Elemento;
 class Bala;
 
@@ -47,7 +46,12 @@ class Mapa{
     //Recibe el id de un personaje y lo remueve del mapa.
     void quitar_personaje(std::string id);
     //Recibe un personaje y lo agrega al mapa.
-    void agregar_personaje(Personaje *p);
+    void agregar_personaje(std::string id, Personaje *p);
+    //Recibe uns bala y lo agrega al mapa.
+    void agregar_bala(Bala *b);
+    //Recibe un tiempo de update y actualiza el estado de
+    //todos los actualizables en el mapa.
+    void update(size_t tiempo);
 };
 
 #endif //MAPA_H

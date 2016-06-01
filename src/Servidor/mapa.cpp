@@ -3,8 +3,6 @@
 #include "elemento.h"
 #include "puas.h"
 #include "escalera.h"
-#include "megaman.h"
-#include "bala.h"
 #include <vector>
 #include <iostream>
 #include <sstream>
@@ -16,7 +14,7 @@
 #define TAM_BLOQUE 1
 
 typedef std::vector<Coordenada>::iterator ItBloques;
-typedef std::pair<std::string, Megaman*> IdPersonaje;
+typedef std::map<std::string, Personaje*>::iterator ItPersonaje;
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
@@ -58,8 +56,7 @@ std::vector<Coordenada> coord_puas(){
 
 std::vector<Coordenada> coord_escaleras(){
 	std::vector<Coordenada> escaleras;
-	size_t i;
-	for (i = 0; i < 3; i++){
+	for (size_t i = 0; i < 3; i++){
 		escaleras.push_back(Coordenada(0,i+4));
 		escaleras.push_back(Coordenada(5,i+1));
 	}
@@ -121,16 +118,13 @@ Personaje* Mapa::obtener_pj(std::string id_pj){
 	return personajes[id_pj];
 }
 
-std::vector<Actualizable*> Mapa::obtener_actualizables(){
-	std::vector<Actualizable*> v;
-  std::map<std::string,Personaje*>::iterator i;
-  for (i = personajes.begin(); i != personajes.end(); i++){
-    v.push_back(i->second);
-  }
-	for (size_t j = 0; j < balas.size(); j++){
-		v.push_back(balas[j]);
+void Mapa::update(size_t tiempo){
+	for (ItPersonaje it= personajes.begin(); it != personajes.end(); ++it){
+		//(*it).second->update(tiempo, this);
 	}
-  return v;
+	for (size_t j = 0; j < balas.size(); j++){
+		//balas[j]->update(tiempo, this);
+	}
 }
 
 bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
@@ -158,8 +152,12 @@ void Mapa::cargar(){
 	coord_iniciales_personajes = coord_personajes(); 
 }
 
-void Mapa::agregar_personaje(Personaje *p){
-	personajes.insert(std::pair<std::string, Personaje*>(p->devolver_id(), p));
+void Mapa::agregar_bala(Bala *b){
+	balas.push_back(b);
+}
+
+void Mapa::agregar_personaje(std::string id, Personaje *p){
+	personajes.insert(std::pair<std::string, Personaje*>(id, p));
 }
 
 void Mapa::quitar_personaje(std::string id){

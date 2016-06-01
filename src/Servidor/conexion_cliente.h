@@ -18,7 +18,8 @@ class Conexion_cliente{
     void terminar_ejecucion();
     //Destructor del Conexion_cliente.
     virtual ~Conexion_cliente();
-    //
+    //Recibe el id de un personaje y notifica al cliente
+    //de su nueva posicion.
     void enviar_cambio_posicion(std::string id, int x, int y);
     //Envia la nueva cantidad de vidas que tiene un jugador/cliente.
     void enviar_cantidad_vidas(std::string id, int cantidad);

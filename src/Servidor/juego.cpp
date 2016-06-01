@@ -28,32 +28,23 @@ void Juego::jugar(){
 }
 
 void Juego::terminar_partida(){
-  fin_partida = true;
+	fin_partida = true;
 }
 
 void Juego::update(size_t tiempo){
-  /*
-  std::vector<Actualizable*> actualizables = mundo.obtener_actualizables();
-  for (size_t i = 0; i < actualizables.size(); i++){
-    actualizables[i]->update(tiempo, mapa);
-  }
-  */
+	mundo.update(tiempo);
 }
 
-void Juego::personaje_atacar(std::string id_pj){
-  Lock candado(proteccion);
-  /*
-  Personaje* pj = mundo.obtener_pj(id_pj);
-  personaje.atacar(mundo, direccion);
-  */
+void Juego::personaje_atacar(std::string id_pj, int direccion){
+	Lock candado(proteccion);
+	Personaje* pj = mundo.obtener_pj(id_pj);
+	//pj->agregar_ataque(direccion);
 }
 
-void Juego::personaje_mover(std::string id_pj){
+void Juego::personaje_mover(std::string id_pj, int direccion){
   Lock candado(proteccion);
-  /*
   Personaje* pj = mundo.obtener_pj(id_pj);
-  personaje.mover(mundo, direccion);
-  */
+  pj->agregar_movimiento(direccion);
 }
 
 void Juego::personaje_cambiar_arma(std::string id_pj, int arma){

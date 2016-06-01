@@ -1,12 +1,11 @@
 #include "megaman.h"
-
-#include "bala.h"
 #include "arma_megaman.h"
-
 #include <string>
 #include <iostream>
 #include <sstream>
 
+#define DERECHA 3
+#define IZQUIERDA 4
 
 Megaman::Megaman(Mapa *mapa, Coordenada c, std::string id):
 Personaje(mapa, c, id){
@@ -18,7 +17,19 @@ void Megaman::update(size_t tiempo){
 	Personaje::update(tiempo, mapa);
 }
 
-void Megaman::atacar(size_t tiempo, Mapa* mapa){}
+void Megaman::atacar(size_t tiempo, int dir, Mapa* mapa){
+	Bala* bala;
+	Coordenada pos_inicial(-1, -1);
+	if (dir == DERECHA){
+		bala = armas[arma_act-1]->atacar(1, 0);
+		pos_inicial = coordenada.derecha(ancho/2);
+	}
+	if (dir == IZQUIERDA){
+		bala = armas[arma_act-1]->atacar(-1, 0);
+		pos_inicial = coordenada.izquierda(ancho/2);
+	}
+	mapa->agregar_bala(bala);
+}
 
 void Megaman::mover(size_t tiempo, Mapa* mapa){
   if (mapa->esta_en_aire(coordenada, alto)){
@@ -54,10 +65,10 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
     std::cout << "mi coordenada rechazada: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
     << nueva_coordenada.obtener_ordenada() << "\n";
     if (nueva_coordenada.obtener_abscisa() > 0){
-      velocidad_x = 0;
+		velocidad_x = 0;
     }
     if (nueva_coordenada.obtener_ordenada() > 0){
-      velocidad_y = 0;
+		velocidad_y = 0;
     }
   }
 }

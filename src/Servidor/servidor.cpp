@@ -27,20 +27,13 @@ std::vector<std::string> obtener_claves(std::map<std::string,
 
 Servidor::Servidor(char *puerto):
 entrada(FIN_ENTRADA){
-	/*skt = new Socket(NULL, puerto);
+	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
-	skt->listen(MAX_CONEXIONES);*/
+	skt->listen(MAX_CONEXIONES);
 }
 
 Servidor::~Servidor(){
-  /*std::vector<std::string> claves_clientes = obtener_claves(clientes);
-  for (size_t i = 0; i < claves_clientes.size(); i++){
-    Conexion_cliente* cliente = clientes[claves_clientes[i]];
-    clientes.erase(claves_clientes[i]);
-    cliente->terminar_ejecucion();
-    delete cliente;
-  }
-  entrada.join();*/
+  entrada.join();
 }
 
 void Servidor::aceptar_clientes(){

@@ -1,10 +1,8 @@
 #ifndef ESCALERA_H
 #define ESCALERA_H
 
-#include "personaje.h"
 #include "elemento.h"
-#include "coordenada.h"
-#include "mapa.h"
+class Personaje;
 
 class Escalera: public Elemento{
 	public:

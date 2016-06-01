@@ -15,7 +15,7 @@ Personaje* MegamanFactory::crear(Mapa* mapa){
 	creados.insert(std::pair<Megaman*, ObservadorPersonaje*>(megaman, obs));
 	megaman->agregar_observador(obs);
 	megaman->agregar_observador(this);
-	mapa->agregar_personaje(megaman);
+	mapa->agregar_personaje(megaman->devolver_id(), megaman);
 	//ACA PODEMOS LEVANTAR LOS DATOS DEL MEGAMAN DEL XML/JSON
 	//VELOCIDAD, ETC...
 }

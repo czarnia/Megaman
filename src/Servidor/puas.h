@@ -1,10 +1,9 @@
 #ifndef PUAS_H
 #define PUAS_H
 
-#include "personaje.h"
 #include "elemento.h"
-#include "coordenada.h"
-#include "mapa.h"
+
+class Personaje;
 
 class Puas: public Elemento{
 	public:

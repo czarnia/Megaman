@@ -1,7 +1,7 @@
 #ifndef ELEMENTO_H
 #define ELEMENTO_H
 
-#include "personaje.h"
+class Personaje;
 
 class Elemento{
 	public:

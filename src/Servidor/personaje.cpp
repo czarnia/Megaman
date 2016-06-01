@@ -13,7 +13,6 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 #define SALTAR 5
-//TODO: levantar estos datos de xml/json!!!
 #define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 4
@@ -39,7 +38,7 @@ void Personaje::notificar_observadores(){
 void Personaje::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	mover(tiempo, mapa);
-	atacar(tiempo, mapa);
+	//atacar(tiempo, mapa);
 }
 
 void Personaje::agregar_movimiento(int direccion){

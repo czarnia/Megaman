@@ -5,7 +5,8 @@ bool Puas::puede_ocupar(Personaje* pj){
 }
 
 void Puas::interactuar(Personaje *pj){
-	pj->perder_vida();
+	//COMENTADO POR PROBLEMAS CON REFERENCIAS CIRCULARES:
+	//pj->perder_vida();
 }
 
 Puas::~Puas() {}
