@@ -1,13 +1,13 @@
-#include "bala_normal.h"
+#include "bala_met.h"
 
 #define TIEMPO_MOVER 1
 
-Bala_normal::Bala_normal(int dir_x, int dir_y, Coordenada c):
+Bala_met::Bala_met(int dir_x, int dir_y, Coordenada c):
 Bala(dir_x, dir_y, c){}
 
-Bala_normal::~Bala_normal() {}
+Bala_met::~Bala_met() {}
 
-void Bala_normal::update(size_t tiempo, Mapa* mapa) {
+void Bala_met::update(size_t tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){
@@ -27,21 +27,21 @@ void Bala_normal::update(size_t tiempo, Mapa* mapa) {
 	}
 
 	if (mapa->puede_ubicarse_en(nueva_coordenada, 0, 0)){
-		//coordenada = nueva_coordenada;
+		coord = nueva_coordenada;
 	}else{
 		//TODO: Mover al mapa.
 		//mapa->quitar_bala(this);
 	}
 }
 
-void Bala_normal::daniar(Personaje* pj) {
-	pj->perder_vida(-1); //le saca una vida
+void Bala_met::daniar(Personaje* pj) {
+	pj->perder_vida(0); //sólo le saca vida a megaman.
 }
 
-void Bala_normal::daniar(Megaman* mega) {
-	mega->perder_vida(0); //es una bala de megaman, no puede lastimarse a si mismo.
+void Bala_met::daniar(Megaman* mega) {
+	mega->perder_vida(0.2);
 }
 
-void Bala_normal::daniar(Met* met) {
-	met->perder_vida(-1); //el met tiene una sóla vida.
+void Bala_met::daniar(Met* met) {
+	met->perder_vida(0);
 }

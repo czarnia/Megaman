@@ -8,16 +8,17 @@ class Met;
 class Megaman;
 //class Personaje;
 
-class Bala: 
-public Actualizable, 
+class Bala:
+public Actualizable,
 public Elemento{
 	protected:
 		int direccion_x;
 		int direccion_y;
 		size_t tiempo_pasado;
+		Coordenada coord;
 	public:
-		Bala(int dir_x, int dir_y): direccion_x(dir_x), 
-		direccion_y(dir_y){}
+		Bala(int dir_x, int dir_y, Coordenada c): direccion_x(dir_x),
+		direccion_y(dir_y), coord(c){}
 		//Destructor de la bala.
 		virtual ~Bala() {};
 		//Dado un personaje y un mapa, interactua con el personaje.
