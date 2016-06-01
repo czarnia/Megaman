@@ -2,7 +2,6 @@
 #define EVENTO_ATACAR_H
 
 #include "evento.h"
-#include "juego.h"
 #include <string>
 
 class Evento_atacar : public Evento{

@@ -1,4 +1,5 @@
 #include "evento_cambiar_arma.h"
+#include "juego.h"
 #include <sstream>
 #include <string>
 #include <iostream>

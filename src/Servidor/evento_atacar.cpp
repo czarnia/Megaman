@@ -1,4 +1,5 @@
 #include "evento_atacar.h"
+#include "juego.h"
 #include <sstream>
 #include <string>
 #include <iostream>
