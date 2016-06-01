@@ -4,7 +4,6 @@
 #include "../Comun/mutex.h"
 #include "actualizable.h"
 #include "mapa.h"
-#include "juego.h"
 #include "juego_observable.h"
 #include "personaje_factory.h"
 #include <string>

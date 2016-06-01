@@ -3,9 +3,6 @@
 
 #include "evento.h"
 #include <string>
-#include <map>
-
-class Juego;
 
 class Evento_mover : public Evento{
   private:

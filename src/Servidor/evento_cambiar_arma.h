@@ -2,7 +2,6 @@
 #define EVENTO_CAMBIAR_ARMA_H
 
 #include "evento.h"
-#include "juego.h"
 #include <string>
 
 class Evento_cambiar_arma : public Evento{
