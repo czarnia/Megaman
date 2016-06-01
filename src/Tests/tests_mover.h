@@ -110,10 +110,10 @@ void run_tests_mover(){
 	print_test_result("TEST EL PJ NO SE MUEVE SIN VELOCIDAD", test_mover_sin_velocidad_no_me_muevo());
 	print_test_result("TEST ME MUEVO A LA DERECHA EN UNA UNIDAD",test_mover_a_la_derecha_en_uno());
 	print_test_result("TEST ME MUEVO A LA IZQUIERDA EN UNA UNIDAD", test_mover_a_la_izquierda_en_uno());
-  print_test_result("TEST SI EL PJ SE MUEVE DONDE NO HAY BLOQUE SE CAE", test_mover_a_la_derecha_dos_veces_me_caigo());
-  print_test_result("TEST SI SALTO ME DESPEGO DEL PISO", test_mover_si_salto_me_despego_del_piso());
-  print_test_result("TEST SI SALTO ME DESPEGO DEL PISO Y VUELVO", test_mover_si_salto_me_despego_del_piso_y_vuelvo());
-  print_test_result("TEST LA GRAVEDAD NO ME HACE ATRAVESAR COSAS", test_mover_si_salto_vuelvo_y_no_atravieso_el_piso());
+	print_test_result("TEST SI EL PJ SE MUEVE DONDE NO HAY BLOQUE SE CAE", test_mover_a_la_derecha_dos_veces_me_caigo());
+	print_test_result("TEST SI SALTO ME DESPEGO DEL PISO", test_mover_si_salto_me_despego_del_piso());
+	print_test_result("TEST SI SALTO ME DESPEGO DEL PISO Y VUELVO", test_mover_si_salto_me_despego_del_piso_y_vuelvo());
+	print_test_result("TEST LA GRAVEDAD NO ME HACE ATRAVESAR COSAS", test_mover_si_salto_vuelvo_y_no_atravieso_el_piso());
 }
 
 #endif //TESTS_MOVER_H

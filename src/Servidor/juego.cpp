@@ -86,7 +86,7 @@ void Juego::notificar_murio_personaje(std::string id){
 		observadores[i]->update_murio_personaje(id);
 		if (cant_jugadores == 0){
 			notificar_termino_partida();
-      terminar_partida();
+			terminar_partida();
 		}
 	}
 }

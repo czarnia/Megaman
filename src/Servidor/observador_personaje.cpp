@@ -8,6 +8,10 @@ coordenada(0,0){
 	energia = 0;
 }
 
+Coordenada ObservadorPersonaje::get_coordenada(){
+	return coordenada;
+}
+
 void ObservadorPersonaje::update(Observable *obs){
 	Personaje *personaje = (Personaje*)obs;
 	std::string id = personaje->devolver_id();
@@ -32,6 +36,7 @@ void ObservadorPersonaje::update(Observable *obs){
 			int x = (int)personaje->get_coordenada().obtener_abscisa();
 			int y = (int)personaje->get_coordenada().obtener_ordenada();
 			juego->actualizo_posicion(id, x, y);
+			coordenada = personaje->get_coordenada();
 		}
 	}
 }

@@ -37,7 +37,12 @@ void Personaje::notificar_observadores(){
 
 void Personaje::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
+	Coordenada pos_inicial(-1, -1);
+	pos_inicial = coordenada;
 	mover(tiempo, mapa);
+	if (!(coordenada == pos_inicial)){
+		notificar_observadores();
+	}
 	//atacar(tiempo, mapa);
 }
 
