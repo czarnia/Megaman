@@ -38,7 +38,7 @@ void Juego::update(size_t tiempo){
 void Juego::personaje_atacar(std::string id_pj, int direccion){
 	Lock candado(proteccion);
 	Personaje* pj = mundo.obtener_pj(id_pj);
-	//pj->agregar_ataque(direccion);
+  pj->atacar(0, direccion, &mundo);
 }
 
 void Juego::personaje_mover(std::string id_pj, int direccion){
