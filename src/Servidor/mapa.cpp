@@ -115,6 +115,7 @@ bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 }
 
 Personaje* Mapa::obtener_pj(std::string id_pj){
+	//std::cout << "MAPA TIENE:"+personajes[0]+" PERSONAJES\n";
 	std::cout << "MAPA TIENE AL PERSONAJE?"+id_pj+"\n";
 	if (personajes.find(id_pj) != personajes.end()){std::cout << "SI\n";}
 	return personajes[id_pj];
@@ -143,8 +144,8 @@ bool Mapa::hay_tierra(Coordenada coord){
 }
 
 bool Mapa::tiene_coordenada(Coordenada coordenada){
-	int x = coordenada.obtener_abscisa();
-	int y = coordenada.obtener_ordenada();
+	unsigned int x = coordenada.obtener_abscisa();
+	unsigned int y = coordenada.obtener_ordenada();
 	bool tiene_coordenada = (0 <= x) && (x <= tam) && (0 <= y) && (y <= tam);
 	return tiene_coordenada;
 }
