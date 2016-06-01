@@ -1,18 +1,18 @@
-#ifndef BALA_NORMAL_H
-#define BALA_NORMAL_H
+#ifndef BALA_MET_H
+#define BALA_MET_H
 
 #include "bala.h"
 #include "personaje.h"
 #include "megaman.h"
 #include "met.h"
 
-class Bala_normal: public Bala {
+class Bala_met: public Bala {
 	public:
-		//Recibe una direccion en 'x', una
+    //Recibe una direccion en 'x', una
 		//direccion en 'y' y una coordenada inicial y construye una bala.
-		Bala_normal(int dir_x, int dir_y, Coordenada c);
+		Bala_met(int dir_x, int dir_y, Coordenada c);
 		//Destructor de la bala.
-		virtual ~Bala_normal();
+		virtual ~Bala_met();
 		//Hace que pasa el tiempo para la bala.
 		virtual void update(size_t tiempo, Mapa* mapa);
 		//Daña a un Personaje (caso por defecto).
@@ -24,4 +24,4 @@ class Bala_normal: public Bala {
 
 };
 
-#endif //BALA_NORMAL_H
+#endif //BALA_MET_H

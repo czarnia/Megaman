@@ -6,7 +6,7 @@
 class Arma{
   public:
     //Ataca, es decir, crea una bala.
-    virtual Bala* atacar(int dir_x, int dir_y) = 0;
+    virtual Bala* atacar(int dir_x, int dir_y, Coordenada c) = 0;
     //Destructor de la arma.
     virtual ~Arma() {}
 };

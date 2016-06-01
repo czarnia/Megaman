@@ -21,12 +21,12 @@ void Megaman::atacar(size_t tiempo, int dir, Mapa* mapa){
 	Bala* bala;
 	Coordenada pos_inicial(-1, -1);
 	if (dir == DERECHA){
-		bala = armas[arma_act-1]->atacar(1, 0);
 		pos_inicial = coordenada.derecha(ancho/2);
+		bala = armas[arma_act-1]->atacar(1, 0, pos_inicial);
 	}
 	if (dir == IZQUIERDA){
-		bala = armas[arma_act-1]->atacar(-1, 0);
 		pos_inicial = coordenada.izquierda(ancho/2);
+		bala = armas[arma_act-1]->atacar(-1, 0, pos_inicial);
 	}
 	mapa->agregar_bala(bala);
 }

@@ -2,12 +2,14 @@
 #define MET_H
 
 #include "personaje.h"
+#include "arma.h"
 
 class Met: public Personaje{
 	private:
 		Mapa *mapa;
     bool tras_escudo;
     size_t tiempo_pasado;
+		Arma* arma;
 	public:
 		Met(Mapa *mapa, Coordenada c, std::string id);
 		virtual void atacar(size_t tiempo, int dir, Mapa* mapa);

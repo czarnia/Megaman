@@ -1,11 +1,13 @@
 #include "met.h"
 #include "bala.h"
+#include "arma_met.h"
 
 #define TIEMPO_ATAQUE 2
 
 Met::Met(Mapa *mapa, Coordenada c, std::string id) : Personaje(mapa, c, id){
   tras_escudo = false;
   tiempo_pasado = 0;
+  arma = new Arma_met();
 }
 
 void Met::atacar(size_t tiempo, int dir, Mapa* mapa){
@@ -14,10 +16,9 @@ void Met::atacar(size_t tiempo, int dir, Mapa* mapa){
 	}
 	Bala *bala1, *bala2, *bala3;
 	Coordenada pos_inicial = coordenada.izquierda(ancho/2);
-	//el met no tiene armas(?)
-	//bala1 = armas[arma_act-1]->atacar(-1, 0);
-	//bala2 = armas[arma_act-1]->atacar(-1, 1);
-	//bala3 = armas[arma_act-1]->atacar(-1, -1);
+	bala1 = arma->atacar(-1, 0, pos_inicial);
+	bala2 = arma->atacar(-1, 1, pos_inicial);
+	bala3 = arma->atacar(-1, -1, pos_inicial);
 	mapa->agregar_bala(bala1);
 	mapa->agregar_bala(bala2);
 	mapa->agregar_bala(bala3);
