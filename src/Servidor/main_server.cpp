@@ -20,6 +20,5 @@ int main(int argc, char *argv[]){
     server.aceptar_clientes();
     server.empezar_partida();
   }
-
   return 0;
 }

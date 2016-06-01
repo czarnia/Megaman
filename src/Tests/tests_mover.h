@@ -13,12 +13,14 @@
 char puerto[5] = "5050";
 
 bool test_mover_sin_velocidad_no_me_muevo(){
-  Servidor server(puerto);
-  Mapa mapa(12);
-  Personaje *m0 = mapa.obtener_pj("megaman0");
-  Coordenada coord_m0 = m0->get_coordenada();
-  m0->update(1, &mapa);
-  return (coord_m0 == m0->get_coordenada());
+	Servidor server(puerto);
+	Mapa mapa(12);
+	Personaje *m0 = mapa.obtener_pj("megaman0");
+	Coordenada coord_m0 = m0->get_coordenada();
+	std::cout << "MUEVO\n";
+	m0->update(1, &mapa);
+	std::cout << "TERMINE MOVER\n";
+	return (coord_m0 == m0->get_coordenada());
 }
 
 bool test_mover_a_la_derecha_en_uno(){

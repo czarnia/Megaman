@@ -41,6 +41,8 @@ file (GLOB	SERVER "${INCLUDE_SERVER}/*.h"
 			"${INCLUDE_SERVER}/arma_megaman.cpp"
 			"${INCLUDE_SERVER}/bala.cpp"
 			"${INCLUDE_SERVER}/bala_normal.cpp"
+			"${INCLUDE_SERVER}/observador.cpp"
+			"${INCLUDE_SERVER}/observador_personaje.cpp"
 			"${INCLUDE_SERVER}/met.cpp"
 			)
 file (GLOB COM "${INCLUDE_COM}/*")

@@ -62,6 +62,7 @@ bool Servidor::termino_ejecucion(){
 }
 
 void Servidor::empezar_partida(){
+	std::cout << "INICIO PARTIDA\n";
 	mundo = new Juego(50, clientes.size());
 	mundo->agregar_observador(this);
 	mundo->jugar();

@@ -115,6 +115,8 @@ bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 }
 
 Personaje* Mapa::obtener_pj(std::string id_pj){
+	std::cout << "MAPA TIENE AL PERSONAJE?"+id_pj+"\n";
+	if (personajes.find(id_pj) != personajes.end()){std::cout << "SI\n";}
 	return personajes[id_pj];
 }
 
@@ -157,7 +159,8 @@ void Mapa::agregar_bala(Bala *b){
 }
 
 void Mapa::agregar_personaje(std::string id, Personaje *p){
-	personajes.insert(std::pair<std::string, Personaje*>(id, p));
+	std::cout << "AGREGO AL MAPA "+id+"\n";
+	personajes[id] = p;
 }
 
 void Mapa::quitar_personaje(std::string id){

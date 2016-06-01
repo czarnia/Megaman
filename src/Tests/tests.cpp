@@ -8,6 +8,7 @@
 #include "../Servidor/personaje.h"
 #include "../Servidor/coordenada.h"
 #include "../Servidor/mapa.h"
+#include "../Servidor/observador_personaje.h"
 
 void print_test_result(std::string nombre_test, bool result){
   std::string state = result? "OK":"ERROR";
@@ -17,7 +18,7 @@ void print_test_result(std::string nombre_test, bool result){
 #include "tests_mapa.h"
 #include "tests_mover.h"
 #include "tests_coordenada.h"
-
+#include "tests_observadores.h"
 
 bool test_megaman_desplazamiento_lateral(){
 	bool passed = false;
@@ -46,6 +47,8 @@ void run_tests(){
 	run_tests_coordenadas();*/
 	std::cout << "---------TESTS MOVER-------\n";
 	run_tests_mover();
+	std::cout << "-----TESTS OBSERVADORES-----\n";
+	run_tests_observadores();
 	/*std::cout << "------------TESTS MEGAMAN-----------\n";
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL", test_megaman_desplazamiento_lateral());
     print_test_result("TEST MEGAMAN DESPLAZAMIENTO LATERAL CON GRAVEDAD", test_megaman_desplazamiento_lateral_con_gravedad());

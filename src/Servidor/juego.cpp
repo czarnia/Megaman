@@ -3,18 +3,19 @@
 #include <iosfwd>
 #include "../Comun/lock.h"
 #include "megaman_factory.h"
+#include <iostream>
 
 #define TIEMPO 5
 
 Juego::Juego(size_t tamanio, int jugadores):
 mundo(tamanio),
 cant_jugadores(jugadores){
-  fin_partida = false;
-  factories.insert(std::pair<std::string, PersonajeFactory*>("MEGAMAN", new MegamanFactory(this)));
+	fin_partida = false;
+	factories.insert(std::pair<std::string, PersonajeFactory*>("MEGAMAN", new MegamanFactory(this)));
 }
 
 void Juego::inicializar_partida(){
-	for (int i = 0; i < cant_jugadores; i++){
+	for (int i = 0; i < cant_jugadores; ++i){
 		factories["MEGAMAN"]->crear(&mundo);
 	}
 	//ACA SE PUEDEN CREAR LOS OTROS PERSONAJES.
@@ -38,12 +39,14 @@ void Juego::update(size_t tiempo){
 void Juego::personaje_atacar(std::string id_pj, int direccion){ //debería ser sólo para megaman!
 	Lock candado(proteccion);
 	Personaje* pj = mundo.obtener_pj(id_pj);
-  pj->atacar(0, direccion, &mundo);
+	pj->atacar(0, direccion, &mundo);
 }
 
 void Juego::personaje_mover(std::string id_pj, int direccion){
   Lock candado(proteccion);
+  std::cout << "JUEGO: OBTENGO AL PERSONAJE\n";
   Personaje* pj = mundo.obtener_pj(id_pj);
+  std::cout << "JUEGO: MUEVO AL PERSONAJE\n";
   pj->agregar_movimiento(direccion);
 }
 
