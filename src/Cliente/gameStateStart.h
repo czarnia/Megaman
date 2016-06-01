@@ -19,6 +19,13 @@ class gameStateStart: public GameState{
         void cap_framerate(const Uint32 &starting_tick);
         ///
 
+        /// Teclas
+        bool up;
+        bool down;
+        bool left;
+        bool right;
+        bool jump;
+
         /// Estados
         bool quit;
         bool victory;

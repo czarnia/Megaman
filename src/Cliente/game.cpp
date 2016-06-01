@@ -30,8 +30,6 @@ Game::Game(char* hostname,char* port):
     renderer = NULL;
     renderer = new Renderer(window);
     currentState = new MainMenu(window, renderer);
-
-
 }
 
 void Game::cap_framerate(const Uint32 &starting_tick){
@@ -44,13 +42,13 @@ void Game::run(){
     bool running = true;
     while (running){
         GameState::StateCode whatToDo;
-                        std::cout<<"TODO OK"<<std::endl;
         whatToDo = currentState->update();
         switch (whatToDo){
             case GameState::MAIN_MENU:
                 break;
             case GameState::BOSS_SELECT:
                 delete currentState;
+                renderer->clearSprites();
 
                 skt.conect(hostname,port);
                 currentState = new gameStateStart(window,renderer, &skt);

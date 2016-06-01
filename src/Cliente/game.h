@@ -19,7 +19,6 @@ class Game{
 	public:
 		Game(char* hostname,char* port);
 		void run();
-	//	void mainLoop();
 		~Game();
 };
 

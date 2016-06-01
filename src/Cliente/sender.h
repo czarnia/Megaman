@@ -8,10 +8,10 @@
 class Sender{
     private:
         Socket *skt;
-        std::map<std::string,int> commands;
     public:
         Sender(Socket *socket);
-        int send(std::string command, std::string option);
+        std::map<std::string,int> commands;
+        int send(std::string command, std::string option, std::string state);
 };
 
 

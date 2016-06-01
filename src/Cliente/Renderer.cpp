@@ -3,10 +3,6 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
-#define WIDTH 640
-#define HEIGHT 480
-#define ORIGIN_CENTERED 1
-#define ORIGIN_CORNER 0
 #define MAPA 1
 #define BARRA_VIDA 2
 #define BARRA_ENERGIA 3
@@ -23,6 +19,9 @@ SDL_Renderer* Renderer::get_renderer(){
 }
 
 void Renderer::clearSprites(){
+    std::map<int,Sprite*>::iterator it = sprites.begin();
+    for(; it != sprites.end() ; ++it)
+        delete it->second;
     sprites.clear();
 }
 
@@ -38,8 +37,17 @@ void Renderer::present(){
     SDL_RenderPresent(renderer);
 }
 
-void Renderer::add(int objectid, Sprite* spr){
+void Renderer::addSprite(int objectid, Sprite* spr){
     sprites.insert(std::pair<int,Sprite*>(objectid,spr));
+}
+
+void Renderer::setMapSize(int width, int height){
+    map_size.first = width;
+    map_size.second = height;
+}
+
+void Renderer::addMapSprite(int objectid, Sprite* spr){
+    map_sprites.insert(std::pair<int,Sprite*>(objectid,spr));
 }
 
 void Renderer::drawAll(){
@@ -51,12 +59,6 @@ void Renderer::drawAll(){
 
 void Renderer::execute(int command, int option, std::pair<int,int> coord){
     switch (command){
-        case MAPA:
-            //si no existe el sprite lo creo
-
-            //si existe seteo posicion
-
-            break;
         case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<option<<std::endl;
            // sprites[option]->setHP()
@@ -76,14 +78,12 @@ void Renderer::execute(int command, int option, std::pair<int,int> coord){
         }
         case GAMEOVER:{
             std::cout<<"Recibi gameover: "<<std::endl;
-            Sprite *gameover = new Sprite(renderer, "gameover.jpeg");
-            gameover->set_Sprite(WIDTH/4, HEIGHT/4,1,1);
-            add(GAMEOVER, gameover);
             break;
         }
     }
 }
 
 Renderer::~Renderer(){
+    clearSprites();
     SDL_DestroyRenderer(renderer);
 }

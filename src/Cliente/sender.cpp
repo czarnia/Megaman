@@ -2,6 +2,8 @@
 #include <utility>
 #include <iostream>
 
+#define TAM_INT 4
+
 // VER PROTOCOLO
 Sender::Sender(Socket *socket): skt(socket){
     commands.insert(std::pair<std::string,int>("attack" ,1));
@@ -22,9 +24,15 @@ Sender::Sender(Socket *socket): skt(socket){
     commands.insert(std::pair<std::string,int>("gun3"   ,3));
     commands.insert(std::pair<std::string,int>("gun4"   ,4));
     commands.insert(std::pair<std::string,int>("gun5"   ,5));
+
+    commands.insert(std::pair<std::string,int>("keydown",1));
+    commands.insert(std::pair<std::string,int>("keyup"  ,0));
 }
 
-int Sender::send(std::string command, std::string option){
-    skt->send((char*)&(commands[command]), 4);
-    skt->send((char*)&(commands[option]), 4);
+
+
+int Sender::send(std::string command, std::string option, std::string state){
+    skt->send((char*)&(commands[command]), TAM_INT);
+    skt->send((char*)&(commands[option]), TAM_INT);
+    skt->send((char*)&(commands[state]), TAM_INT);
 }

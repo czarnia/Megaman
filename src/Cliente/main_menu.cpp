@@ -28,18 +28,15 @@ void MainMenu::updateInput(){
 }
 
 void MainMenu::load(int stack){
-    Sprite *spr = new Sprite(renderer->get_renderer(), "menu_backround.jpeg");
-    spr->set_Sprite(640,480,1,1);
+    Sprite *spr = new Backround_sprite(renderer->get_renderer(), "menu_backround.jpeg");
+    spr->setPosX(0);
+    spr->setPosY(0);
     sprites.push_back(spr);
-    renderer->add(0,*(sprites.end()-1));
+    renderer->addSprite(0,*(sprites.end()-1));
 }
 
 int MainMenu::unload(){
-    std::vector<Sprite*>::iterator it = sprites.begin();
-    for(; it != sprites.end(); ++it)
-        delete (*it);
-    sprites.clear();
-    renderer->clearSprites();
+
     return 0;
 }
 

@@ -10,11 +10,8 @@ class Sprite{
         SDL_Texture *texture;
         SDL_Surface *surface;
         SDL_Rect crop;
-        int origin;
     public:
         Sprite(SDL_Renderer *r, const char* file);
-        virtual void set_Sprite(int width,int height,
-                                int cropw, int croph);
         SDL_Rect* get_rectangle();
         SDL_Texture* get_texture();
         SDL_Rect* get_crop();
@@ -26,5 +23,21 @@ class Sprite{
         virtual ~Sprite();
 };
 
+class Backround_sprite: public Sprite{
+    private:
+        static int width;
+        static int height;
+    public:
+        Backround_sprite(SDL_Renderer *r, const char* file);
+};
+
+
+class Block_sprite: public Sprite{
+    private:
+        static int width;
+        static int height;
+    public:
+        Block_sprite(SDL_Renderer *r, const char* file);
+};
 
 #endif // SPRITE_H

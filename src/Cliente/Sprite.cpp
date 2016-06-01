@@ -9,13 +9,6 @@ Sprite::Sprite(SDL_Renderer *r, const char* file){
         std::cout<<"No se pudo cargar textura"<<std::endl;
 }
 
-void Sprite::set_Sprite(int width, int height,
-                        int cropw, int croph){
-    rectangle.x = 0;
-    rectangle.y = 0;
-    rectangle.w = width;
-    rectangle.h = height;
-}
 
 SDL_Rect* Sprite::get_rectangle(){
     return &rectangle;
@@ -53,3 +46,24 @@ Sprite::~Sprite(){
     if(texture)
         SDL_DestroyTexture(texture);
 }
+
+int Backround_sprite::width = 640;
+int Backround_sprite::height = 480;
+
+Backround_sprite::Backround_sprite(SDL_Renderer *r, const char* file):
+    Sprite(r,file)
+{
+    rectangle.w = width;
+    rectangle.h = height;
+}
+
+int Block_sprite::width = 15;
+int Block_sprite::height = 15;
+
+Block_sprite::Block_sprite(SDL_Renderer *r, const char* file):
+    Sprite(r,file)
+{
+    rectangle.w = width;
+    rectangle.h = height;
+}
+

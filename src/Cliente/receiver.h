@@ -14,6 +14,8 @@ class Receiver: public Hilo{
     public:
         //Crea un receiver recibiendo como parametro un socket ya conectado.
         Receiver(Socket* conexion, Renderer &renderer, Mutex &mutex);
+        void receiveMap();
+        void receiveMapSize();
         //"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo
         //le indica el fin de la ejecucion.
         virtual void ejecutar();

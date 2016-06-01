@@ -1,6 +1,8 @@
 #include "gameStateStart.h"
 #include <iostream>
 #include "sender.h"
+#include "../Comun/mutex.h"
+#include "receiver.h"
 
 #define FPS 60
 
@@ -8,6 +10,11 @@ gameStateStart::gameStateStart(SDL_Window *window, Renderer *renderer, Socket *s
     window(window),
     renderer(renderer),
     skt(skt),
+    up(false),
+    down(false),
+    left(false),
+    right(false),
+    jump(false),
     quit(false),
     victory(false),
     ko(false)
@@ -25,7 +32,6 @@ void gameStateStart::load(int stack){
 }
 
 int gameStateStart::unload(){
-
     return 0;
 }
 
@@ -41,50 +47,92 @@ void gameStateStart::updateInput(bool *running){
         }else if (event.type == SDL_KEYDOWN){
             switch (event.key.keysym.sym){
                 case SDLK_UP:
-                    std::cout<<"se apreto arriba"<<std::endl;
-                    sender.send("move", "up"); // ENVIO LA TECLA
+                    if(!up){
+                        std::cout<<"se apreto arriba"<<std::endl;
+                        sender.send("move", "up", "keydown"); // ENVIO LA TECLA
+                        up = true;
+                    }
                     break;
                 case SDLK_DOWN:
-                    std::cout<<"se apreto abajo"<<std::endl;
-                    sender.send("move", "down");  // ENVIO LA TECLA
+                    if(!down){
+                        std::cout<<"se apreto abajo"<<std::endl;
+                        sender.send("move", "down", "keydown");  // ENVIO LA TECLA
+                        down = true;
+                    }
                     break;
                 case SDLK_LEFT:
-                    std::cout<<"se apreto izquierda"<<std::endl;
-                    sender.send("move", "left");  // ENVIO LA TECLA
-                    direction = "left";
+                    if(!left){
+                        std::cout<<"se apreto izquierda"<<std::endl;
+                        sender.send("move", "left", "keydown");  // ENVIO LA TECLA
+                        direction = "left";
+                        left = true;
+                    }
                     break;
                 case SDLK_RIGHT:
-                    std::cout<<"se apreto derecha"<<std::endl;
-                    sender.send("move", "right");  // ENVIO LA TECLA
-                    direction = "right";
+                    if(!right){
+                        std::cout<<"se apreto derecha"<<std::endl;
+                        sender.send("move", "right", "keydown");  // ENVIO LA TECLA
+                        direction = "right";
+                        right = true;
+                    }
                     break;
                 case SDLK_s:
-                    std::cout<<"Se salto"<<std::endl;
-                    sender.send("move","jump");
+                    if(!jump){
+                        std::cout<<"Se salto"<<std::endl;
+                        sender.send("move","jump", "keydown");
+                        jump = true;
+                    }
                     break;
                 case SDLK_a:
                     std::cout<<"Se disparo"<<std::endl;
-                    sender.send("attack",direction);  // ENVIO LA TECLA
+                    sender.send("attack", direction, "keydown");  // ENVIO LA TECLA
                     break;
                 case SDLK_1:
                     std::cout<<"Se cambio de arma 1"<<std::endl;
-                    sender.send("gunChange","gun1");  // ENVIO LA TECLA
+                    sender.send("gunChange","gun1", "keydown");  // ENVIO LA TECLA
                     break;
                 case SDLK_2:
                     std::cout<<"Se cambio de arma 2"<<std::endl;
-                    sender.send("gunChange","gun2");  // ENVIO LA TECLA
+                    sender.send("gunChange","gun2", "keydown");  // ENVIO LA TECLA
                     break;
                 case SDLK_3:
                     std::cout<<"Se cambio de arma 3"<<std::endl;
-                    sender.send("gunChange","gun3");  // ENVIO LA TECLA
+                    sender.send("gunChange","gun3", "keydown");  // ENVIO LA TECLA
                     break;
                 case SDLK_4:
                     std::cout<<"Se cambio de arma 4"<<std::endl;
-                    sender.send("gunChange","gun4");  // ENVIO LA TECLA
+                    sender.send("gunChange","gun4", "keydown");  // ENVIO LA TECLA
                     break;
                 case SDLK_5:
                     std::cout<<"Se cambio de arma 5"<<std::endl;
-                    sender.send("gunChange","gun5");  // ENVIO LA TECLA
+                    sender.send("gunChange","gun5", "keydown");  // ENVIO LA TECLA
+                    break;
+                default:
+                    break;
+            }
+        }else if (event.type == SDL_KEYUP){
+            switch (event.key.keysym.sym){
+                case SDLK_UP:
+                    sender.send("move", "up", "keyup"); // ENVIO LA TECLA
+                    up = false;
+                    break;
+                case SDLK_DOWN:
+                    sender.send("move", "down", "keyup");  // ENVIO LA TECLA
+                    down = false;
+                    break;
+                case SDLK_LEFT:
+                    sender.send("move", "left", "keyup");  // ENVIO LA TECLA
+                    direction = "left";
+                    left = false;
+                    break;
+                case SDLK_RIGHT:
+                    sender.send("move", "right", "keyup");  // ENVIO LA TECLA
+                    direction = "right";
+                    right = false;
+                    break;
+                case SDLK_s:
+                    sender.send("move","jump", "keyup");
+                    jump = false;
                     break;
                 default:
                     break;
@@ -101,10 +149,16 @@ GameState::StateCode gameStateStart::update(){
         return GameState::VICTORY;
     else if(ko)
         return GameState::GAME_OVER;
+    else
+        return GameState::CONTINUE;
 }
 
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
+    Mutex mutex;
+
+    Receiver receiver(skt, *renderer, mutex);
+    receiver.start();
     bool running = true;
 
     while (running){
@@ -116,6 +170,7 @@ void gameStateStart::mainLoop(){
         renderer->drawAll();
         renderer->present();
 	}
+	receiver.join();
 }
 
 gameStateStart::~gameStateStart(){
