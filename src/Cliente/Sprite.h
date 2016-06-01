@@ -2,16 +2,18 @@
 #define _RECTANGLE_H_
 
 #include <SDL2/SDL.h>
+#include <string>
 
 class Sprite{
     protected:
         SDL_Rect rectangle;
         SDL_Texture *texture;
+        SDL_Surface *surface;
         SDL_Rect crop;
         int origin;
     public:
-        Sprite(SDL_Renderer *r, const char *file);
-        virtual void set_Sprite(int width,int height, int origin,
+        Sprite(SDL_Renderer *r, const char* file);
+        virtual void set_Sprite(int width,int height,
                                 int cropw, int croph);
         SDL_Rect* get_rectangle();
         SDL_Texture* get_texture();
@@ -21,15 +23,7 @@ class Sprite{
         void setPosX(int x);
         void setPosY(int y);
         void erase();
-        ~Sprite();
-};
-
-class Hp_bar: public Sprite{
-    private:
-    public:
-        Hp_bar();
-        void set_hp(int hp);
-
+        virtual ~Sprite();
 };
 
 

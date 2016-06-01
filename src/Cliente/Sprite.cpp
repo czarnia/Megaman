@@ -1,17 +1,20 @@
 #include "Sprite.h"
 #include <SDL2/SDL_image.h>
+#include <iostream>
 
-Sprite::Sprite(SDL_Renderer *r, const char *file){
-  texture = IMG_LoadTexture(r, file);
+Sprite::Sprite(SDL_Renderer *r, const char* file){
+    texture = NULL;
+    texture = IMG_LoadTexture(r, file);
+    if(!texture)
+        std::cout<<"No se pudo cargar textura"<<std::endl;
 }
 
-void Sprite::set_Sprite(int width, int height, int origin,
+void Sprite::set_Sprite(int width, int height,
                         int cropw, int croph){
     rectangle.x = 0;
     rectangle.y = 0;
     rectangle.w = width;
     rectangle.h = height;
-    origin = origin;
 }
 
 SDL_Rect* Sprite::get_rectangle(){

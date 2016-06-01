@@ -22,6 +22,10 @@ SDL_Renderer* Renderer::get_renderer(){
     return renderer;
 }
 
+void Renderer::clearSprites(){
+    sprites.clear();
+}
+
 void Renderer::clear(){
     SDL_RenderClear(renderer);
 }
@@ -49,14 +53,9 @@ void Renderer::execute(int command, int option, std::pair<int,int> coord){
     switch (command){
         case MAPA:
             //si no existe el sprite lo creo
-            if(sprites.find(option) != sprites.end()){
-                Sprite megaman(renderer, "megaman.jpeg");
-                megaman.set_Sprite(40, 50, ORIGIN_CENTERED, 10, 5);
-                add(option, &megaman);
-            }
+
             //si existe seteo posicion
-            sprites[option]->setPosX(coord.first);
-            sprites[option]->setPosY(coord.second);
+
             break;
         case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<option<<std::endl;
@@ -72,15 +71,13 @@ void Renderer::execute(int command, int option, std::pair<int,int> coord){
             break;
         case VICTORIA:{
             std::cout<<"Recibi victoria: "<<std::endl;
-            Sprite *victory = new Sprite(renderer, "victory.jpeg");
-            victory->set_Sprite(WIDTH/4, HEIGHT/4,ORIGIN_CENTERED,1,1);
-            add(VICTORIA, victory);
+
             break;
         }
         case GAMEOVER:{
             std::cout<<"Recibi gameover: "<<std::endl;
             Sprite *gameover = new Sprite(renderer, "gameover.jpeg");
-            gameover->set_Sprite(WIDTH/4, HEIGHT/4,ORIGIN_CENTERED,1,1);
+            gameover->set_Sprite(WIDTH/4, HEIGHT/4,1,1);
             add(GAMEOVER, gameover);
             break;
         }

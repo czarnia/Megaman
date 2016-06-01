@@ -36,5 +36,4 @@ file (GLOB SRCS  *.cpp *.h)
 #Creates an executable with all files found
 #by file command.
 add_executable (cliente ${SRCS})
-
-target_link_libraries (cliente Megaman ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES})
+target_link_libraries (cliente Megaman -pthread ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES})

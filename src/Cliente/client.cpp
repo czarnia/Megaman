@@ -1,5 +1,5 @@
 #include "../Comun/socket.h"
-#include "window.h"
+#include "game.h"
 
 #include <sstream>
 #include <iostream>
@@ -11,26 +11,16 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#define WIDTH 640
-#define HEIGHT 480
 #define IP_POS 1
 #define PORT_POS 2
 
 int main(int argc, char *argv[]){
 	char* hostname = argv[IP_POS];
-	char* puerto = argv[PORT_POS];
-
-    Socket skt(hostname, puerto);
-    skt.conect(hostname, puerto);
-	// INICIALIZO TODO LO QUE TENGA QUE VER CON SDL
+	char* port = argv[PORT_POS];
 	SDL_Init(SDL_INIT_EVERYTHING);
+	Game game(hostname,port);
 
-	Window main_window(WIDTH,HEIGHT);
-	// ACA ADENTRO OCURRE LA COMUNICACION
-	main_window.run(&skt);
-
-
+	game.run();
 	SDL_Quit();
-
 	return 0;
 }

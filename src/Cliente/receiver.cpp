@@ -19,7 +19,7 @@ void Receiver::ejecutar(){
     int coordX;
     int coordY;
     std::pair<int,int> coord;
-
+	std::cout<<"Se comenzo a recibir cosas"<<std::endl;
     while (command != FIN_ENTRADA){
         skt->receiveInt(&command, sizeof(int));
         skt->receiveInt(&option, sizeof(int));
