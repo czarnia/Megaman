@@ -6,7 +6,7 @@
 
 #define TIEMPO 5
 
-Juego::Juego(size_t tamanio, int jugadores): 
+Juego::Juego(size_t tamanio, int jugadores):
 mundo(tamanio),
 cant_jugadores(jugadores){
   fin_partida = false;
@@ -86,6 +86,7 @@ void Juego::notificar_murio_personaje(std::string id){
 		observadores[i]->update_murio_personaje(id);
 		if (cant_jugadores == 0){
 			notificar_termino_partida();
+      terminar_partida();
 		}
 	}
 }

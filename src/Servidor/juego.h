@@ -11,7 +11,7 @@
 #include <iosfwd>
 #include <cstddef>
 
-class Juego: 
+class Juego:
 public Juego_observable{
 	private:
 		Mapa mundo;
@@ -19,7 +19,7 @@ public Juego_observable{
 		bool fin_partida;
 		int cant_jugadores;
 		std::map<std::string, PersonajeFactory*> factories;
-		
+
 		void inicializar_partida();
 	public:
 		//Crea un juego nuevo.
