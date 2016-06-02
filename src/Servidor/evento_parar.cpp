@@ -14,9 +14,9 @@ int Evento_parar::get_direccion(){
 	return direccion;
 }
 
-void Evento_parar::ejecutar(Juego& j){
+void Evento_parar::ejecutar(Juego* j){
   std::cout << "me muevo en direcion " << direccion << "\n";
-  j.personaje_parar(id_evento, direccion);
+  j->personaje_parar(id_evento, direccion);
 }
 
 Evento_parar::~Evento_parar(){}

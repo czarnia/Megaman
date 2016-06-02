@@ -52,7 +52,7 @@ void Juego::personaje_mover(std::string id_pj, int direccion){
 void Juego::personaje_parar(std::string id_pj, int direccion){
   Lock candado(proteccion);
   std::cout << "JUEGO: OBTENGO AL PERSONAJE\n";
-  Personaje* pj = mundo.obtener_pj(id_pj);
+  Personaje* pj = mundo->obtener_pj(id_pj);
   std::cout << "JUEGO: LE DIGO AL PERSONAJE QUE DEJE DE MOVERSE\n";
   pj->sacar_movimiento(direccion);
 }
