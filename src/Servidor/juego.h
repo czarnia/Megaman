@@ -38,21 +38,35 @@ public Juego_observable{
 		//Dado el id de un personaje y un numero de arma, hace que el mismo cambie a
 		//la misma.
 		void personaje_cambiar_arma(std::string id_pj, int arma);
-		//Recibe el id de un personaje muerto y actualiza la partida
+		//Quita un observador del juego.
 		void quitar_observador(Observador_juego *observador);
+		//Agrega un observador al juego.
 		void agregar_observador(Observador_juego *observador);
+		//Notifica a los observadores que finalizo la partida.
 		void notificar_termino_partida();
+		//Notifica a los observadores que se produjo un gameover.
 		void notificar_gameover(std::string id);
+		//Notifica a los observadores que murio un determinado pj.
 		void notificar_murio_personaje(std::string id);
+		//Notifica a los observadores que se modifico la cantidad de vidas de un
+		//personaje.
 		void notificar_cantidad_vidas(std::string id, int vidas);
+		//Notifica a los observadores que se modifico el porcentaje de vida de un
+		//personaje.
 		void notificar_porcentaje_vida(std::string id, int cant_vida);
+		//Notifica a los observadores que se modifico el porcentaje de energia de un
+		//personaje.
 		void notificar_energia(std::string id, int energia);
+		//Notifica a los observadores que se modifico la posicion de un personaje.
 		void notificar_posicion(std::string id, int x, int y);
+
 		void murio_personaje(std::string id);
 		void actualizo_cantidad_vidas(std::string id, int vidas);
 		void actualizo_porcentaje_vida(std::string id, int cant_vida);
 		void actualizo_energia(std::string id, int energia);
 		void actualizo_posicion(std::string id, int x, int y);
+
+		//Destructor de juego.
 		~Juego();
 };
 

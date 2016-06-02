@@ -1,5 +1,7 @@
 #include "main_menu.h"
 #include "gameState.h"
+#include "backround_sprite.h"
+#define BACKROUND 0
 
 MainMenu::MainMenu(SDL_Window *window, Renderer *renderer):
     window(window),
@@ -28,11 +30,10 @@ void MainMenu::updateInput(){
 }
 
 void MainMenu::load(int stack){
-    Sprite *spr = new Backround_sprite(renderer->get_renderer(), "menu_backround.jpeg");
+    Sprite *spr = new Backround_sprite(renderer->get_renderer(), "sprites/menu_backround.jpeg");
     spr->setPosX(0);
     spr->setPosY(0);
-    sprites.push_back(spr);
-    renderer->addSprite(0,*(sprites.end()-1));
+    renderer->addSprite(BACKROUND,spr);
 }
 
 int MainMenu::unload(){

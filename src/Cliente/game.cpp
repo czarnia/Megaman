@@ -55,14 +55,12 @@ void Game::run(){
                 std::cout<<"Entre al juego"<<std::endl;
                 break;
             case GameState::GAME_START:
-
                 break;
             case GameState::GAME_OVER:
                 break;
             case GameState::VICTORY:
                 break;
             case GameState::CONTINUE:
-                std::cout<<"Continuo"<<std::endl;
                 break;
             case GameState::QUIT:
                 running = false;
@@ -76,8 +74,6 @@ void Game::run(){
     }
 
 }
-
-
 
 Game::~Game(){
     SDL_DestroyWindow(window);

@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+/// Esta clase contiene todo lo necesario para poder
+/// dibujar un objeto en pantalla a traves de renderer
+
 class Sprite{
     protected:
         SDL_Rect rectangle;
@@ -12,32 +15,22 @@ class Sprite{
         SDL_Rect crop;
     public:
         Sprite(SDL_Renderer *r, const char* file);
+        /// getters de los atributos de sdl
         SDL_Rect* get_rectangle();
         SDL_Texture* get_texture();
         SDL_Rect* get_crop();
+
+        /// devuelve posicion global
         int getPosX();
         int getPosY();
+
+        /// establece la posicion global
         void setPosX(int x);
         void setPosY(int y);
+
+        /// libera la memoria pedida
         void erase();
         virtual ~Sprite();
-};
-
-class Backround_sprite: public Sprite{
-    private:
-        static int width;
-        static int height;
-    public:
-        Backround_sprite(SDL_Renderer *r, const char* file);
-};
-
-
-class Block_sprite: public Sprite{
-    private:
-        static int width;
-        static int height;
-    public:
-        Block_sprite(SDL_Renderer *r, const char* file);
 };
 
 #endif // SPRITE_H

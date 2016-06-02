@@ -11,11 +11,10 @@ class MainMenu: public GameState{
         bool start;
         bool quit;
         void updateInput();
-        std::vector<Sprite*> sprites;
     public:
         MainMenu(SDL_Window *window, Renderer *renderer);
 
-        // Carga sprites, musica etc
+        /// Carga sprites, musica etc
         void load(int stack = 0);
         int unload();
         StateCode update();
