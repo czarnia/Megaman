@@ -1,4 +1,6 @@
 #include "observador_personaje.h"
+#include <iostream>
+#include <sstream>
 
 ObservadorPersonaje::ObservadorPersonaje(Juego* juego):
 juego(juego),
@@ -32,11 +34,19 @@ void ObservadorPersonaje::update(Observable *obs){
 			juego->actualizo_energia(id, energia);
 		}
 		if (!(coordenada == personaje->get_coordenada())){
+			std::cout << "PERSONAJE " + id + "ACTUALIZO POSICION:\n";
+			std::stringstream inicial;
+			inicial << coordenada.obtener_abscisa() << "," << coordenada.obtener_ordenada() << "\n";
+			std::cout << "POS INICIAL " + inicial.str() + "\n";
 			//Un personaje p actualizo su posicion.
 			int x = (int)personaje->get_coordenada().obtener_abscisa();
 			int y = (int)personaje->get_coordenada().obtener_ordenada();
+			std::stringstream pos_final;
+			pos_final << x << "," << y << "\n";
+			std::cout << "POS FINAL " + pos_final.str() + "\n";
 			juego->actualizo_posicion(id, x, y);
 			coordenada = personaje->get_coordenada();
+			
 		}
 	}
 }

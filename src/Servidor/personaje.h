@@ -42,7 +42,7 @@ public Observable{
 		//Dada una bala, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque) = 0;
 		//Devuelve el id de un personaje.
-		virtual std::string &devolver_id();
+		virtual std::string devolver_id();
 		//Dado un porcentaje de vida a perder, se la resta al personaje, en caso de
 		//ser -1 (por defecto) le resta una vida completa.
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
