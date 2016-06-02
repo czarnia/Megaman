@@ -51,6 +51,9 @@ public Observable{
 		//Dada una direccion representada como un int, agrega un movimiento en dicha
 		//direccion.
 		virtual void agregar_movimiento(int direccion);
+		//Dada una direccion representada como un int, saca un movimiento en dicha
+		//direccion.
+		virtual void sacar_movimiento(int direccion);
 		//Dada una direccion representada como un int, agrega un ataque en dicha
 		//direccion.
 		virtual void agregar_ataque(int direccion);

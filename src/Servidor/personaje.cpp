@@ -66,6 +66,20 @@ void Personaje::agregar_movimiento(int direccion){
 	}
 }
 
+void Personaje::sacar_movimiento(int direccion){
+	if (direccion == -1){
+		velocidad_x = 0;
+	}
+	if (direccion == DERECHA){
+		std::cout << "caso dejo de apretar derecha \n";
+		velocidad_x -= VELOCIDAD;
+	}
+	if (direccion == IZQUIERDA){
+		std::cout << "caso dejar de apretar izquierda \n";
+		velocidad_x += VELOCIDAD;
+	}
+}
+
 void Personaje::agregar_ataque(int direccion) {}
 
 Coordenada Personaje::get_coordenada(){
