@@ -74,6 +74,8 @@ public Juego_observable{
 		void actualizo_energia(std::string id, int energia);
 		void actualizo_posicion(std::string id, int x, int y);
 
+		std::vector<Coordenada> bloques();
+
 		//Destructor de juego.
 		~Juego();
 };

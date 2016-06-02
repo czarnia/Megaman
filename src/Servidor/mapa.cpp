@@ -179,3 +179,7 @@ void Mapa::quitar_personaje(std::string id_pj){
 		personajes.erase(id_pj);
 	}
 }
+
+std::vector<Coordenada> Mapa::coord_bloques(){
+	return bloques;
+}

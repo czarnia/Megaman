@@ -152,4 +152,8 @@ void Juego::actualizo_posicion(std::string id, int x, int y){
 	notificar_posicion(id, x, y);
 }
 
+std::vector<Coordenada> Juego::bloques(){
+	return mundo->coord_bloques();
+}
+
 Juego::~Juego(){}

@@ -10,6 +10,19 @@
 
 enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 
+void Conexion_cliente::mandar_bloques(std::vector<Coordenada> b){
+	int codigo_bloque = 100;
+	int fin_mapa = 6666;
+	for(size_t i = 0; i < b.size(); i++){
+		int x = b[i].obtener_abscisa();
+		int y = b[i].obtener_ordenada();
+		skt->send((char*)&codigo_bloque, TAM_INT);
+		skt->send((char*)&x, TAM_INT);
+		skt->send((char*)&y, TAM_INT);
+	}
+	skt->send((char*)&fin_mapa, TAM_INT);
+}
+
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m) : skt(conexion), id_cliente(id),
 rcv(conexion, id, m) {
 	char largo_nombre[TAM_INT];
@@ -27,7 +40,10 @@ rcv(conexion, id, m) {
 	skt->send((char*)&long_x, TAM_INT);
 	skt->send((char*)&long_y, TAM_INT);
 
+	mandar_bloques(m->bloques());
 }
+
+
 
 void Conexion_cliente::iniciar_ejecucion(){
 	rcv.start();
