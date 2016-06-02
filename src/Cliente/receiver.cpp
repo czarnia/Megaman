@@ -5,8 +5,8 @@
 #include "response_handler.h"
 #include "gameState.h"
 //TODO:Definir estos valores!
-#define END_OF_MAP 666
-#define END_OF_RESPONSE 666
+#define END_OF_MAP 6666
+#define END_OF_RESPONSE 6666
 
 #define TAM_INT 4
 #define VICTORY 5
@@ -15,8 +15,7 @@
 #define STAIR_BLOCK 1000
 #define SPIKE_BLOCK 1200
 #define MET 8
-#define BLOCK_WIDTH 15
-#define BLOCK_HEIGHT 15
+
 
 Receiver::Receiver(Socket* conexion, Renderer &renderer,
                     Mutex &mutex, bool *running,
@@ -104,15 +103,21 @@ void Receiver::receiveMapSize(){
     level_height = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
     renderer.setMapSize(level_width, level_height);
+    std::cout<<"Recibi tamanio del mapa: "<<level_width<<"x"<<level_height<<std::endl;
 }
 
 void Receiver::receiveMap(){
     char buffer[TAM_INT] = "";
+    int command;
     int object;
     int coordX = 0;
     int coordY = 0;
     Sprite *spr = NULL;
     do{
+        /// recibo COMANDO y lo ignoro aca
+        skt->receive(buffer,TAM_INT);
+        command = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
         /// Recibo OBJETO
         skt->receive(buffer,TAM_INT);
         object = *((int*)buffer);
@@ -129,6 +134,7 @@ void Receiver::receiveMap(){
         }
 
     }while (object != END_OF_MAP);
+    std::cout<<"Recibi MAPA: "<< object<< " " << coordX << " " << coordY<<std::endl;
     /// CARGO EL OBJETO QUE RECIBI
     switch (object){
         case EARTH_BLOCK:
@@ -144,12 +150,13 @@ void Receiver::receiveMap(){
             renderer.addMapSprite(STAIR_BLOCK, spr);
             break;
         case SPIKE_BLOCK:
-            spr = new Block_sprite(renderer.get_renderer(), "spike_block.png");\
+            spr = new Block_sprite(renderer.get_renderer(), "spike_block.png");
             spr->setPosX(coordX);
             spr->setPosY(coordY);
             renderer.addMapSprite(SPIKE_BLOCK, spr);
             break;
         case MET:
+            /// Recibo el met y luego QUE met
             spr = new Sprite(renderer.get_renderer(), "");
             break;
         default:

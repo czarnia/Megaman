@@ -13,7 +13,7 @@ class Sender{
         std::map<std::string,int> commands;
         /// Doble funcion, primero convierte la accion a el protocolo de
         /// comunicacion correspondiente y luego lo envia al servidor
-        int send(std::string command, std::string option, std::string state);
+        int send(std::string command, std::string option);
 };
 
 
