@@ -15,7 +15,7 @@ class ObservadorPersonaje: public Observador{
 	public:
 		ObservadorPersonaje(Juego* juego);
 		virtual void update(Observable *obs);
-		
+
 		//para testear:
 		Coordenada get_coordenada();
 };

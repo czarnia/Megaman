@@ -17,6 +17,7 @@ class Procesador_eventos{
     //mismo.
     Evento* crear_evento(int comando, int parametro);
   private:
+    //Crea los generadores de los eventos.
     void generar_creadores();
 };
 

@@ -17,13 +17,6 @@ class Mapa{
     std::vector<Bala*> balas;
     std::map<std::string, Personaje*> personajes;
     size_t tam;
-    //Carga un mapa, por ahora, una versión por defecto chica.
-    void cargar();
-    //Recibe un elemento y las coordenadas donde se desea posicionar al mismo.
-    void ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas);
-    //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
-    void ocupar_tierra(std::vector<Coordenada> &coordenadas);
-
   public:
     //Dados un tamanio crea un mapa
     //con tantas divisiones como indique el tamanio.
@@ -52,6 +45,13 @@ class Mapa{
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(size_t tiempo);
+  private:
+    //Carga un mapa, por ahora, una versión por defecto chica.
+    void cargar();
+    //Recibe un elemento y las coordenadas donde se desea posicionar al mismo.
+    void ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas);
+    //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
+    void ocupar_tierra(std::vector<Coordenada> &coordenadas);
 };
 
 #endif //MAPA_H

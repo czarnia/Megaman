@@ -17,6 +17,8 @@ public Elemento{
 		size_t tiempo_pasado;
 		Coordenada coord;
 	public:
+		//Dada una direccion en x, una en y (hacia donde se movera) y una coordenada
+		//inicial, crea una bala.
 		Bala(int dir_x, int dir_y, Coordenada c): direccion_x(dir_x),
 		direccion_y(dir_y), coord(c){}
 		//Destructor de la bala.
