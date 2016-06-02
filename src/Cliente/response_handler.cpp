@@ -23,7 +23,7 @@ int ResponseHandler::execute(int command, int option, std::pair<int,int> coord){
             case MAPA:
                 std::cout<<"Recibi nueva posicion para: "<<option<<"y es";
                 std::cout<<coord.first<<","<<coord.second<<std::endl;
-                spr = new Main_character(renderer.get_renderer(),"megaman.jpeg");
+                spr = new Main_character(renderer.get_renderer(),"../sprite/megaman.jpeg");
                 spr->setPosX(coord.first);
                 spr->setPosY(coord.second);
                 mutex.lock();
