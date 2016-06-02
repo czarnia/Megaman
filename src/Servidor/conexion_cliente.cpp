@@ -1,14 +1,28 @@
 #include "conexion_cliente.h"
 #include <sstream>
+
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+
+
 #define TAM_INT 4
 
 enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m) : skt(conexion), id_cliente(id),
 rcv(conexion, id, m) {
+	char largo_nombre[TAM_INT];
+	skt->receive(largo_nombre, TAM_INT);
+	int tam = *((int*) largo_nombre);
+	char nombre[tam];
+	skt->receive(nombre, tam);
+
+	std::cout << "nombre_cliente: " << nombre << "\n";
+
 	skt->send((char*)&id, TAM_INT);
-	int long_y = long_y_mapa();
-	int long_x = long_x_mapa();
+	int long_y = m->long_y_mapa();
+	int long_x = m->long_x_mapa();
 
 	skt->send((char*)&long_x, TAM_INT);
 	skt->send((char*)&long_y, TAM_INT);
