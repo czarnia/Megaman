@@ -22,15 +22,14 @@ Personaje* MegamanFactory::crear(Mapa* mapa){
 	mapa->agregar_personaje(nombre, megaman);
 	//ACA PODEMOS LEVANTAR LOS DATOS DEL MEGAMAN DEL XML/JSON
 	//VELOCIDAD, ETC...
+	return megaman;
 }
 
 void MegamanFactory::update(Observable *observado){
 	Megaman *megaman = (Megaman*)observado;
-	ObservadorPersonaje* obs;
 	if (!megaman->esta_vivo()){
-		obs = creados[megaman];
 		creados.erase(creados.find(megaman));
+		delete megaman;
+		//delete creados[megaman];
 	}
-	delete megaman;
-	delete obs;
 }

@@ -78,7 +78,7 @@ void Servidor::update_fin_partida(){
 		cliente->terminar_ejecucion();
 		delete cliente;
 	}
-	delete mundo;
+	//delete mundo;
 }
 
 void Servidor::update_gameover(std::string id){
