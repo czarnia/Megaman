@@ -65,6 +65,14 @@ void Juego::personaje_cambiar_arma(std::string id_pj, int arma){
   */
 }
 
+int Juego::alto_mapa(){
+	return mundo->obtener_alto();
+}
+
+int Juego::ancho_mapa(){
+	return mundo->obtener_alto();
+}
+
 void Juego::agregar_observador(Observador_juego *observador){
 	observadores.push_back(observador);
 }

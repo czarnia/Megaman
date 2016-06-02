@@ -20,8 +20,9 @@ public Juego_observable{
 		std::map<std::string, PersonajeFactory*> factories;
 
 	public:
-		//Crea un juego nuevo.
+		//Dado un tamanio, crea un juego nuevo.
 		Juego(size_t tamanio);
+		//Dada una cantidad de jugadores, inicializa una partida.
 		void inicializar_partida(int cant_jugadores);
 		//Implementa el ciclo del juego.
 		void jugar();
@@ -41,6 +42,10 @@ public Juego_observable{
 		//Dado el id de un personaje y un numero de arma, hace que el mismo cambie a
 		//la misma.
 		void personaje_cambiar_arma(std::string id_pj, int arma);
+
+		int alto_mapa();
+		int ancho_mapa();
+
 		//Quita un observador del juego.
 		void quitar_observador(Observador_juego *observador);
 		//Agrega un observador al juego.

@@ -9,6 +9,7 @@
 #include <sstream>
 #include <queue>
 
+#include <math.h>
 #include <algorithm>
 
 
@@ -80,6 +81,14 @@ size_t x2, size_t y2, size_t ancho2, size_t alto2){
 Mapa::Mapa(size_t tamanio){
 	tam = tamanio;
 	this->cargar();
+}
+
+int Mapa::obtener_alto(){
+	return sqrt(tam)/2;
+}
+
+int Mapa::obtener_ancho(){
+	return sqrt(tam)/2;
 }
 
 bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
@@ -154,7 +163,7 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 
 void Mapa::cargar(){
 	bloques = coord_tierras();
-	coord_iniciales_personajes = coord_personajes(); 
+	coord_iniciales_personajes = coord_personajes();
 }
 
 void Mapa::agregar_bala(Bala *b){

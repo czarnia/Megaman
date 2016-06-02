@@ -23,6 +23,8 @@ class Mapa{
     //Dados un tamanio crea un mapa
     //con tantas divisiones como indique el tamanio.
     Mapa(size_t tamanio);
+    int obtener_alto();
+    int obtener_ancho();
     //Devuelve true si la coordenada pertenece al mapa y false en el caso con-
     //trario.
     bool tiene_coordenada(Coordenada coordenada);
