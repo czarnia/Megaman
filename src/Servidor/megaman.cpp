@@ -37,7 +37,6 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
     velocidad_y += 1; //valor gravedad.
   }
   if (velocidad_x == 0 && velocidad_y == 0){
-    std::cout << "las velocidades son 0 \n";
     return;
   }
   Coordenada nueva_coordenada = coordenada;

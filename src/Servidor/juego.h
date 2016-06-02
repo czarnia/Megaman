@@ -13,16 +13,16 @@
 class Juego:
 public Juego_observable{
 	private:
-		Mapa mundo;
+		Mapa *mundo;
 		Mutex proteccion;
 		bool fin_partida;
 		int cant_jugadores;
 		std::map<std::string, PersonajeFactory*> factories;
 
-		void inicializar_partida();
 	public:
 		//Crea un juego nuevo.
-		Juego(size_t tamanio, int cant_jugadores);
+		Juego(size_t tamanio);
+		void inicializar_partida(int cant_jugadores);
 		//Implementa el ciclo del juego.
 		void jugar();
 		//Termina la partida en marcha.

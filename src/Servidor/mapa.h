@@ -5,6 +5,7 @@
 #include <vector>
 #include "coordenada.h"
 #include "actualizable.h"
+#include "personaje.h"
 
 class Personaje;
 class Elemento;
@@ -16,6 +17,7 @@ class Mapa{
     std::vector<Coordenada*> coord_iniciales_personajes;
     std::vector<Bala*> balas;
     std::map<std::string, Personaje*> personajes;
+    //std::map<std::string, Personaje*> personajes;
     size_t tam;
     //Carga un mapa, por ahora, una versión por defecto chica.
     void cargar();

@@ -7,22 +7,22 @@
 
 #define TIEMPO 5
 
-Juego::Juego(size_t tamanio, int jugadores):
-mundo(tamanio),
-cant_jugadores(jugadores){
+Juego::Juego(size_t tamanio){
+	mundo = new Mapa(tamanio);
 	fin_partida = false;
+	cant_jugadores = 0;
 	factories.insert(std::pair<std::string, PersonajeFactory*>("MEGAMAN", new MegamanFactory(this)));
 }
 
-void Juego::inicializar_partida(){
+void Juego::inicializar_partida(int num_jugadores){
+	cant_jugadores = num_jugadores;
 	for (int i = 0; i < cant_jugadores; ++i){
-		factories["MEGAMAN"]->crear(&mundo);
+		factories["MEGAMAN"]->crear(mundo);
 	}
 	//ACA SE PUEDEN CREAR LOS OTROS PERSONAJES.
 }
 
 void Juego::jugar(){
-	inicializar_partida();
 	while (!fin_partida){
 		update(TIEMPO);
 	}
@@ -33,20 +33,19 @@ void Juego::terminar_partida(){
 }
 
 void Juego::update(size_t tiempo){
-	mundo.update(tiempo);
+	mundo->update(tiempo);
 }
 
 void Juego::personaje_atacar(std::string id_pj, int direccion){ //debería ser sólo para megaman!
 	Lock candado(proteccion);
-	Personaje* pj = mundo.obtener_pj(id_pj);
-	pj->atacar(0, direccion, &mundo);
+	Personaje* pj = mundo->obtener_pj(id_pj);
+	pj->atacar(0, direccion, mundo);
 }
 
 void Juego::personaje_mover(std::string id_pj, int direccion){
   Lock candado(proteccion);
-  std::cout << "JUEGO: OBTENGO AL PERSONAJE\n";
-  Personaje* pj = mundo.obtener_pj(id_pj);
-  std::cout << "JUEGO: MUEVO AL PERSONAJE\n";
+  Personaje* pj = mundo->obtener_pj(id_pj);
+  std::cout << "JUEGO: AGREGAR MOVIMIENTO PERSONAJE\n";
   pj->agregar_movimiento(direccion);
 }
 
@@ -83,8 +82,7 @@ void Juego::notificar_gameover(std::string id){
 }
 
 void Juego::notificar_murio_personaje(std::string id){
-	mundo.quitar_personaje(id);
-	cant_jugadores--;
+	mundo->quitar_personaje(id);
 	for (size_t i = 0; i < observadores.size(); i++){
 		observadores[i]->update_murio_personaje(id);
 		if (cant_jugadores == 0){

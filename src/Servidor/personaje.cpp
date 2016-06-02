@@ -36,7 +36,6 @@ void Personaje::notificar_observadores(){
 }
 
 void Personaje::update(size_t tiempo, Mapa* mapa){
-	std::cout << "UPDATE PERSONAJE\n";
 	tiempo_pasado += tiempo;
 	Coordenada pos_inicial(-1, -1);
 	pos_inicial = coordenada;
@@ -49,6 +48,7 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 }
 
 void Personaje::agregar_movimiento(int direccion){
+	std::cout << "PERSONAJE: AGREGAR MOVIMIENTO PERSONAJE\n";
 	if (direccion == -1){
 		velocidad_x = 0;
 	}
@@ -72,7 +72,7 @@ Coordenada Personaje::get_coordenada(){
 	return coordenada;
 }
 
-std::string& Personaje::devolver_id(){
+std::string Personaje::devolver_id(){
 	return id;
 }
 

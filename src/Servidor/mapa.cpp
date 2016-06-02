@@ -1,6 +1,7 @@
 #include "mapa.h"
 #include "coordenada.h"
 #include "elemento.h"
+#include "../Comun/lock.h"
 #include "puas.h"
 #include "escalera.h"
 #include <vector>
@@ -38,10 +39,10 @@ std::vector<Coordenada> coord_tierras(){
 }
 
 std::vector<Coordenada*> coord_personajes(){
-	std::vector<Coordenada*> personajes;
-	personajes.push_back(new Coordenada(3,6));
+	std::vector<Coordenada*> c_personajes;
+	c_personajes.push_back(new Coordenada(3,6));
 
-	return personajes;
+	return c_personajes;
 }
 
 std::vector<Coordenada> coord_puas(){
@@ -115,19 +116,20 @@ bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
 }
 
 Personaje* Mapa::obtener_pj(std::string id_pj){
-	//std::cout << "MAPA TIENE:"+personajes[0]+" PERSONAJES\n";
-	std::cout << "MAPA TIENE AL PERSONAJE?"+id_pj+"\n";
-	if (personajes.find(id_pj) != personajes.end()){std::cout << "SI\n";}
-	return personajes[id_pj];
+	Personaje *p = NULL;
+	if (personajes.find(id_pj) != personajes.end()){
+		p = personajes[id_pj];
+	}
+	return p;
 }
 
 void Mapa::update(size_t tiempo){
 	for (ItPersonaje it= personajes.begin(); it != personajes.end(); ++it){
-		//(*it).second->update(tiempo, this);
+		(*it).second->update(tiempo, this);
 	}
-	for (size_t j = 0; j < balas.size(); j++){
+	//for (size_t j = 0; j < balas.size(); j++){
 		//balas[j]->update(tiempo, this);
-	}
+	//}
 }
 
 bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
@@ -160,10 +162,11 @@ void Mapa::agregar_bala(Bala *b){
 }
 
 void Mapa::agregar_personaje(std::string id, Personaje *p){
-	std::cout << "AGREGO AL MAPA "+id+"\n";
-	personajes[id] = p;
+	personajes.insert(std::pair<std::string, Personaje*>(id, p));
 }
 
-void Mapa::quitar_personaje(std::string id){
-	personajes.erase(id);
+void Mapa::quitar_personaje(std::string id_pj){
+	if (personajes.find(id_pj) != personajes.end()){
+		personajes.erase(id_pj);
+	}
 }

@@ -4,7 +4,7 @@
 #define DERECHA 3
 
 bool test_observador_personaje_observa_mover(){
-	Juego juego(12, 1);
+	Juego juego(12);
 	ObservadorPersonaje obs(&juego);
 	Mapa mapa(12);
 	Personaje *m0 = mapa.obtener_pj("megaman0");
