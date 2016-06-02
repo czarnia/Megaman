@@ -17,18 +17,25 @@ class Renderer{
         int camX;
         int camY;
     public:
+        /// Devuelve el atributo renderer
         SDL_Renderer* get_renderer();
         Renderer(SDL_Window* w);
-        void execute(int command, int option, std::pair<int,int> coord);
+
+        /// Por cuestion de comodidad diferencio entre sprites regulares
+        /// y sprites de mapas
         void addSprite(int objectid, Sprite* spr);
         void addMapSprite(int objectid, Sprite* spr);
+        /// limpia todos los sprites liberando la memoria de cada uno
         void clearSprites();
-
+        /// Establece el tamanio del mapa
         void setMapSize(int width, int height);
-
+        /// prepara para la impresion en pantalla
         void clear();
+        /// dibuja un sprite
         void draw(Sprite *spr);
+        /// dibuja todos los sprites cargados en los atributos
         void drawAll();
+        /// presenta lo dibujado
         void present();
         ~Renderer();
 };

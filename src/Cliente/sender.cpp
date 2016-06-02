@@ -35,4 +35,5 @@ int Sender::send(std::string command, std::string option, std::string state){
     skt->send((char*)&(commands[command]), TAM_INT);
     skt->send((char*)&(commands[option]), TAM_INT);
     skt->send((char*)&(commands[state]), TAM_INT);
+    return 0;
 }

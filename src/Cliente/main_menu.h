@@ -14,7 +14,7 @@ class MainMenu: public GameState{
     public:
         MainMenu(SDL_Window *window, Renderer *renderer);
 
-        // Carga sprites, musica etc
+        /// Carga sprites, musica etc
         void load(int stack = 0);
         int unload();
         StateCode update();
