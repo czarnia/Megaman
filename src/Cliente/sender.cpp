@@ -8,7 +8,8 @@
 Sender::Sender(Socket *socket): skt(socket){
     commands.insert(std::pair<std::string,int>("attack" ,1));
     commands.insert(std::pair<std::string,int>("move"   ,2));
-    commands.insert(std::pair<std::string,int>("gunChange",3));
+    commands.insert(std::pair<std::string,int>("stop"   ,3));
+    commands.insert(std::pair<std::string,int>("gunChange",4));
     //ATTACK
     commands.insert(std::pair<std::string,int>("left",4));
     commands.insert(std::pair<std::string,int>("right",3));
@@ -24,16 +25,12 @@ Sender::Sender(Socket *socket): skt(socket){
     commands.insert(std::pair<std::string,int>("gun3"   ,3));
     commands.insert(std::pair<std::string,int>("gun4"   ,4));
     commands.insert(std::pair<std::string,int>("gun5"   ,5));
-
-    commands.insert(std::pair<std::string,int>("keydown",1));
-    commands.insert(std::pair<std::string,int>("keyup"  ,0));
 }
 
 
 
-int Sender::send(std::string command, std::string option, std::string state){
+int Sender::send(std::string command, std::string option){
     skt->send((char*)&(commands[command]), TAM_INT);
     skt->send((char*)&(commands[option]), TAM_INT);
-    skt->send((char*)&(commands[state]), TAM_INT);
     return 0;
 }

@@ -19,7 +19,8 @@
 Game::Game(char* hostname,char* port):
     skt(hostname,port),
     hostname(hostname),
-    port(port){
+    port(port)
+{
     window = NULL;
     window = SDL_CreateWindow("Main menu",
                                 SDL_WINDOWPOS_UNDEFINED, // POS X
@@ -51,6 +52,10 @@ void Game::run(){
                 renderer->clearSprites();
 
                 skt.conect(hostname,port);
+                ////////////////////////////
+                //skt.send(cantdebytesdelnombre,)
+               // skt.send("Axel",TAM_INT);
+                ///////////////////////////
                 currentState = new gameStateStart(window,renderer, &skt);
                 std::cout<<"Entre al juego"<<std::endl;
                 break;
