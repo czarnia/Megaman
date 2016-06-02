@@ -132,36 +132,35 @@ void Receiver::receiveMap(){
             coordY = *((int*)buffer);
             strncpy(buffer,"    ",TAM_INT);
         }
-
+        std::cout<<"Recibi MAPA: "<< object<< " " << coordX << " " << coordY<<std::endl;
+        /// CARGO EL OBJETO QUE RECIBI
+        switch (object){
+            case EARTH_BLOCK:
+                spr = new Block_sprite(renderer.get_renderer(), "../sprite/block.png");
+                spr->setPosX(coordX);
+                spr->setPosY(coordY);
+                renderer.addMapSprite(EARTH_BLOCK, spr);
+                break;
+            case STAIR_BLOCK:
+                spr = new Block_sprite(renderer.get_renderer(), "../sprite/stair_block.png");
+                spr->setPosX(coordX);
+                spr->setPosY(coordY);
+                renderer.addMapSprite(STAIR_BLOCK, spr);
+                break;
+            case SPIKE_BLOCK:
+                spr = new Block_sprite(renderer.get_renderer(), "../sprite/spike_block.png");
+                spr->setPosX(coordX);
+                spr->setPosY(coordY);
+                renderer.addMapSprite(SPIKE_BLOCK, spr);
+                break;
+            case MET:
+                /// Recibo el met y luego QUE met
+                spr = new Sprite(renderer.get_renderer(), "");
+                break;
+            default:
+                break;
+        }
     }while (object != END_OF_MAP);
-    std::cout<<"Recibi MAPA: "<< object<< " " << coordX << " " << coordY<<std::endl;
-    /// CARGO EL OBJETO QUE RECIBI
-    switch (object){
-        case EARTH_BLOCK:
-            spr = new Block_sprite(renderer.get_renderer(), "../sprite/block.png");
-            spr->setPosX(coordX);
-            spr->setPosY(coordY);
-            renderer.addMapSprite(EARTH_BLOCK, spr);
-            break;
-        case STAIR_BLOCK:
-            spr = new Block_sprite(renderer.get_renderer(), "../sprite/stair_block.png");
-            spr->setPosX(coordX);
-            spr->setPosY(coordY);
-            renderer.addMapSprite(STAIR_BLOCK, spr);
-            break;
-        case SPIKE_BLOCK:
-            spr = new Block_sprite(renderer.get_renderer(), "../sprite/spike_block.png");
-            spr->setPosX(coordX);
-            spr->setPosY(coordY);
-            renderer.addMapSprite(SPIKE_BLOCK, spr);
-            break;
-        case MET:
-            /// Recibo el met y luego QUE met
-            spr = new Sprite(renderer.get_renderer(), "");
-            break;
-        default:
-            break;
-    }
 }
 
 
