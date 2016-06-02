@@ -148,7 +148,7 @@ GameState::StateCode gameStateStart::update(){
     /// Recibo mi numero de jugador
     skt->receive(buffer, TAM_INT);
     playerno = *((int*)buffer);
-
+    std::cout<<"Recibi mi numero de jugador: "<<playerno<<std::endl;
     mainLoop();
     if (quit)
         return GameState::QUIT;
