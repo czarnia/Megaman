@@ -30,7 +30,7 @@ void MainMenu::updateInput(){
 }
 
 void MainMenu::load(int stack){
-    Sprite *spr = new Backround_sprite(renderer->get_renderer(), "sprites/menu_backround.jpeg");
+    Sprite *spr = new Backround_sprite(renderer->get_renderer(), "../sprites/menu_backround.jpeg");
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(BACKROUND,spr);
