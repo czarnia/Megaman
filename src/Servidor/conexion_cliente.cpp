@@ -7,11 +7,11 @@ enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m) : skt(conexion), id_cliente(id),
 rcv(conexion, id, m) {
 	skt->send((char*)&id, TAM_INT);
-	int alto = m->alto_mapa();
-	int ancho = m->ancho_mapa();
+	int long_y = long_y_mapa();
+	int long_x = long_x_mapa();
 
-	skt->send((char*)&ancho, TAM_INT);
-	skt->send((char*)&alto, TAM_INT);
+	skt->send((char*)&long_x, TAM_INT);
+	skt->send((char*)&long_y, TAM_INT);
 
 }
 

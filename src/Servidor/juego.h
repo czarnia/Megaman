@@ -43,8 +43,8 @@ public Juego_observable{
 		//la misma.
 		void personaje_cambiar_arma(std::string id_pj, int arma);
 
-		int alto_mapa();
-		int ancho_mapa();
+		int long_y_mapa();
+		int long_x_mapa();
 
 		//Quita un observador del juego.
 		void quitar_observador(Observador_juego *observador);

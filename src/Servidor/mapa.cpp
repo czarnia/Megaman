@@ -83,12 +83,12 @@ Mapa::Mapa(size_t tamanio){
 	this->cargar();
 }
 
-int Mapa::obtener_alto(){
-	return sqrt(tam)/2;
+int Mapa::obtener_long_x(){
+	return sqrt(tam);
 }
 
-int Mapa::obtener_ancho(){
-	return sqrt(tam)/2;
+int Mapa::obtener_long_y(){
+	return sqrt(tam);
 }
 
 bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
