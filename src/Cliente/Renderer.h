@@ -14,6 +14,8 @@ class Renderer{
         std::map<int,Sprite*> sprites;
         std::map<int,Sprite*> map_sprites;
         std::pair<int,int> map_size;
+        int camX;
+        int camY;
     public:
         SDL_Renderer* get_renderer();
         Renderer(SDL_Window* w);

@@ -11,9 +11,14 @@ class Receiver: public Hilo{
         Socket* skt;
         Renderer &renderer;
         Mutex &mutex;
+        bool *running;
+        bool *victory;
+        bool *ko;
     public:
         //Crea un receiver recibiendo como parametro un socket ya conectado.
-        Receiver(Socket* conexion, Renderer &renderer, Mutex &mutex);
+        Receiver(Socket* conexion, Renderer &renderer,
+                    Mutex &mutex, bool *running,
+                    bool *victory, bool *ko);
         void receiveMap();
         void receiveMapSize();
         //"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo

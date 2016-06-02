@@ -11,7 +11,6 @@ class MainMenu: public GameState{
         bool start;
         bool quit;
         void updateInput();
-        std::vector<Sprite*> sprites;
     public:
         MainMenu(SDL_Window *window, Renderer *renderer);
 

@@ -23,21 +23,4 @@ class Sprite{
         virtual ~Sprite();
 };
 
-class Backround_sprite: public Sprite{
-    private:
-        static int width;
-        static int height;
-    public:
-        Backround_sprite(SDL_Renderer *r, const char* file);
-};
-
-
-class Block_sprite: public Sprite{
-    private:
-        static int width;
-        static int height;
-    public:
-        Block_sprite(SDL_Renderer *r, const char* file);
-};
-
 #endif // SPRITE_H

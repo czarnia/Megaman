@@ -36,7 +36,7 @@ int gameStateStart::unload(){
 }
 
 void gameStateStart::updateInput(bool *running){
-    Sender sender(skt);
+    static Sender sender(skt);
     SDL_Event event;
     std::string direction;
     while (SDL_PollEvent(&event)){
@@ -146,7 +146,7 @@ GameState::StateCode gameStateStart::update(){
     if (quit)
         return GameState::QUIT;
     else if(victory)
-        return GameState::VICTORY;
+        return GameState::BOSS_SELECT;
     else if(ko)
         return GameState::GAME_OVER;
     else
@@ -156,11 +156,12 @@ GameState::StateCode gameStateStart::update(){
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
     Mutex mutex;
-
-    Receiver receiver(skt, *renderer, mutex);
-    receiver.start();
     bool running = true;
 
+    Receiver receiver(skt, *renderer, mutex, &running, &victory, &ko);
+    receiver.start();
+
+    SDL_Delay(2000);
     while (running){
         starting_tick = SDL_GetTicks();
         updateInput(&running);
