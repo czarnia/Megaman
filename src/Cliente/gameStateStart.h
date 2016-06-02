@@ -7,6 +7,7 @@
 
 class gameStateStart: public GameState{
     private:
+        int playerno;
         /// variables tecnicas
         SDL_Window *window;
         Renderer *renderer;

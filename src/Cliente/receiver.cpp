@@ -92,8 +92,8 @@ void Receiver::ejecutar(){
 
 void Receiver::receiveMapSize(){
     char buffer[TAM_INT] = "";
-    int level_width;
-    int level_height;
+    int level_width = 0;
+    int level_height = 0;
     /// ANCHO
     skt->receive(buffer,TAM_INT);
     level_width = *((int*)buffer);

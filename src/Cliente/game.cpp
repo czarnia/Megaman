@@ -14,6 +14,7 @@
 #define FONDO_HP 2
 #define WIDTH 640
 #define HEIGHT 480
+#define TAM_INT 4
 
 
 Game::Game(char* hostname,char* port):
@@ -41,6 +42,7 @@ void Game::cap_framerate(const Uint32 &starting_tick){
 
 void Game::run(){
     bool running = true;
+    int namebytes = 4;
     while (running){
         GameState::StateCode whatToDo;
         whatToDo = currentState->update();
@@ -53,9 +55,10 @@ void Game::run(){
 
                 skt.conect(hostname,port);
                 ////////////////////////////
-                //skt.send(cantdebytesdelnombre,)
-               // skt.send("Axel",TAM_INT);
+                skt.send((char*)&namebytes, TAM_INT);
+                skt.send("Axel", namebytes);
                 ///////////////////////////
+                //ACA RECIBO MI NUMERO DE JUGADOR
                 currentState = new gameStateStart(window,renderer, &skt);
                 std::cout<<"Entre al juego"<<std::endl;
                 break;
