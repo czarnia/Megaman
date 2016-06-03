@@ -50,7 +50,7 @@ void Game::run(){
             case GameState::MAIN_MENU:
                 break;
             case GameState::BOSS_SELECT:
-                delete currentState;
+            //    delete currentState;
                 renderer->clearSprites();
 
                 skt.conect(hostname,port);
@@ -58,7 +58,7 @@ void Game::run(){
                 skt.send((char*)&namebytes, TAM_INT);
                 skt.send("Axel", namebytes);
                 ///////////////////////////
-                //ACA RECIBO MI NUMERO DE JUGADOR
+
                 currentState = new gameStateStart(window,renderer, &skt);
                 std::cout<<"Entre al juego"<<std::endl;
                 break;
@@ -76,11 +76,9 @@ void Game::run(){
             default:
                 break;
 		}
-        renderer->clear();
-        renderer->drawAll();
-        renderer->present();
+		currentState->render();
     }
-
+    skt.shutdown(SHUT_RDWR);
 }
 
 Game::~Game(){

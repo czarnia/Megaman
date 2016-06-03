@@ -3,12 +3,15 @@
 #include <string.h>
 #include "block_sprite.h"
 #include "response_handler.h"
+#include "character_sprite.h"
+#include "backround_sprite.h"
 #include "gameState.h"
 //TODO:Definir estos valores!
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
 
 #define TAM_INT 4
+#define MEGAMAN 1
 #define VICTORY 5
 #define GAMEOVER 6
 #define EARTH_BLOCK 100
@@ -17,76 +20,58 @@
 #define MET 8
 
 
-Receiver::Receiver(Socket* conexion, Renderer &renderer,
-                    Mutex &mutex, bool *running,
+Receiver::Receiver(Socket* conexion, Renderer *renderer,
                     bool *victory, bool *ko):
     skt(conexion),
     renderer(renderer),
-    mutex(mutex),
-    running(running),
     victory(victory),
     ko(ko)
 {
 }
 
-void Receiver::ejecutar(){
-    /// Recibo el tamanio del mapa
-    receiveMapSize();
-    /// Primero recibo el mapa
-    /// Las posiciones de los bloques,escaleras,puas, etc
-    receiveMap();
-
+void Receiver::update(){
     /// Ahora recibo las actualizaciones de las cosas movibles
     /// o que pueden cambiar
-    ResponseHandler handler(renderer, mutex);
+    static ResponseHandler handler(renderer);
     int command;
     int option;
     int coordX;
     int coordY;
     std::pair<int,int> coord;
 	std::cout<<"Se comenzo a recibir cosas"<<std::endl;
-    while (command != END_OF_RESPONSE){
-        char buffer[TAM_INT] = "";
-        /// COMANDO
+
+    char buffer[TAM_INT] = "";
+    /// COMANDO
+    skt->receive(buffer, TAM_INT);
+    command = *((int*)buffer);
+    strncpy(buffer,"    ",TAM_INT);
+    /// OPCION
+    skt->receive(buffer, TAM_INT);
+    option = *((int*)buffer);
+    strncpy(buffer,"    ",TAM_INT);
+
+    if ( (command != VICTORY) && (command != GAMEOVER)){
+        /// COORDX
         skt->receive(buffer, TAM_INT);
-        command = *((int*)buffer);
+        coordX = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
-        /// OPCION
+        /// COORDY
         skt->receive(buffer, TAM_INT);
-        option = *((int*)buffer);
+        coordY = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
-
-        if ( (command != VICTORY) && (command != GAMEOVER)){
-            /// COORDX
-            skt->receive(buffer, TAM_INT);
-            coordX = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            /// COORDY
-            skt->receive(buffer, TAM_INT);
-            coordY = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            coord = std::make_pair(coordX, coordY);
-        }
-
-        switch (handler.execute(command, option, coord)){
-            case GameState::BOSS_SELECT:
-                mutex.lock();
-                *victory = true;
-                SDL_Delay(100);
-                *running = false;
-                mutex.unlock();
-                break;
-            case GameState::GAME_OVER:
-                mutex.lock();
-                *ko = true;
-                SDL_Delay(100);
-                *running = false;
-                mutex.unlock();
-                break;
-        }
-
+        coord = std::make_pair(coordX, coordY);
     }
-    skt->shutdown(SHUT_RDWR);
+
+    switch (handler.execute(command, option, coord)){
+        case GameState::BOSS_SELECT:
+            *victory = true;
+            break;
+        case GameState::GAME_OVER:
+            *ko = true;
+            break;
+    }
+
+
     return;
 }
 
@@ -102,7 +87,7 @@ void Receiver::receiveMapSize(){
     skt->receive(buffer,TAM_INT);
     level_height = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
-    renderer.setMapSize(level_width, level_height);
+    renderer->setMapSize(level_width, level_height);
     std::cout<<"Recibi tamanio del mapa: "<<level_width<<"x"<<level_height<<std::endl;
 }
 
@@ -115,9 +100,9 @@ void Receiver::receiveMap(){
     Sprite *spr = NULL;
     do{
         /// recibo COMANDO y lo ignoro aca
-        skt->receive(buffer,TAM_INT);
+        /*skt->receive(buffer,TAM_INT);
         command = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);
+        strncpy(buffer,"    ",TAM_INT);*/
         /// Recibo OBJETO
         skt->receive(buffer,TAM_INT);
         object = *((int*)buffer);
@@ -132,39 +117,45 @@ void Receiver::receiveMap(){
             coordY = *((int*)buffer);
             strncpy(buffer,"    ",TAM_INT);
         }
-
+        std::cout<<"Recibi MAPA: "<< object<< " " << coordX << " " << coordY<<std::endl;
+        /// CARGO EL OBJETO QUE RECIBI
+        switch (object){
+            case MEGAMAN:
+                spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.jpeg");
+                spr->setPosX(coordX*15);
+                spr->setPosY(coordY*15);
+                renderer->addSprite(MEGAMAN,spr);
+            case EARTH_BLOCK:
+                spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
+                spr->setPosX(coordX*15);
+                spr->setPosY(coordY*15);
+                renderer->addMapSprite(EARTH_BLOCK, spr);
+                break;
+            case STAIR_BLOCK:
+                spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair_block.png");
+                spr->setPosX(coordX);
+                spr->setPosY(coordY);
+                renderer->addMapSprite(STAIR_BLOCK, spr);
+                break;
+            case SPIKE_BLOCK:
+                spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike_block.png");
+                spr->setPosX(coordX);
+                spr->setPosY(coordY);
+                renderer->addMapSprite(SPIKE_BLOCK, spr);
+                break;
+            case MET:
+                /// Recibo el met y luego QUE met
+                spr = new Sprite(renderer->get_renderer(), "");
+                break;
+            default:
+                break;
+        }
     }while (object != END_OF_MAP);
-    std::cout<<"Recibi MAPA: "<< object<< " " << coordX << " " << coordY<<std::endl;
-    /// CARGO EL OBJETO QUE RECIBI
-    switch (object){
-        case EARTH_BLOCK:
-            spr = new Block_sprite(renderer.get_renderer(), "../sprite/block.png");
-            spr->setPosX(coordX);
-            spr->setPosY(coordY);
-            renderer.addMapSprite(EARTH_BLOCK, spr);
-            break;
-        case STAIR_BLOCK:
-            spr = new Block_sprite(renderer.get_renderer(), "../sprite/stair_block.png");
-            spr->setPosX(coordX);
-            spr->setPosY(coordY);
-            renderer.addMapSprite(STAIR_BLOCK, spr);
-            break;
-        case SPIKE_BLOCK:
-            spr = new Block_sprite(renderer.get_renderer(), "../sprite/spike_block.png");
-            spr->setPosX(coordX);
-            spr->setPosY(coordY);
-            renderer.addMapSprite(SPIKE_BLOCK, spr);
-            break;
-        case MET:
-            /// Recibo el met y luego QUE met
-            spr = new Sprite(renderer.get_renderer(), "");
-            break;
-        default:
-            break;
-    }
 }
 
-
+Receiver::~Receiver(){
+    skt->shutdown(SHUT_RDWR);
+}
 
 
 

@@ -29,6 +29,8 @@ void Renderer::clear(){
 }
 
 void Renderer::draw(Sprite *spr){
+    std::cout<<spr->getPosX()<<","<<spr->getPosY();
+    std::cout<<"    "<<spr->get_rectangle()->w<<","<<spr->get_rectangle()->h<<std::endl;
     SDL_RenderCopy(renderer, spr->get_texture(), NULL, spr->get_rectangle());
 }
 
@@ -37,6 +39,9 @@ void Renderer::present(){
 }
 
 void Renderer::addSprite(int objectid, Sprite* spr){
+    while(sprites.find(objectid) != sprites.end()){
+        objectid += 1;
+    }
     sprites.insert(std::pair<int,Sprite*>(objectid,spr));
 }
 
@@ -53,6 +58,8 @@ void Renderer::addMapSprite(int objectid, Sprite* spr){
 }
 
 void Renderer::drawAll(){
+    std::cout<<map_sprites.size()<<std::endl;
+    std::cout<<sprites.size()<<std::endl;
     std::map<int,Sprite*>::iterator it = sprites.begin();
     for (; it != sprites.end() ; ++it){
         draw(it->second);

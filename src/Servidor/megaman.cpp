@@ -17,7 +17,7 @@ void Megaman::update(size_t tiempo){
 	Personaje::update(tiempo, mapa);
 }
 
-void Megaman::atacar(size_t tiempo, int dir, Mapa* mapa){
+void Megaman::atacar(int dir, Mapa* mapa){
 	Bala* bala;
 	Coordenada pos_inicial(-1, -1);
 	if (dir == DERECHA){

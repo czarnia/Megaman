@@ -1,23 +1,18 @@
 #ifndef RECEIVER_H
 #define RECEIVER_H
 
-#include "../Comun/hilo.h"
 #include "../Comun/socket.h"
-#include "../Comun/mutex.h"
 #include "Renderer.h"
 
-class Receiver: public Hilo{
+class Receiver{
     private:
         Socket* skt;
-        Renderer &renderer;
-        Mutex &mutex;
-        bool *running;
+        Renderer *renderer;
         bool *victory;
         bool *ko;
     public:
         ///Crea un receiver recibiendo como parametro un socket ya conectado.
-        Receiver(Socket* conexion, Renderer &renderer,
-                    Mutex &mutex, bool *running,
+        Receiver(Socket* conexion, Renderer *renderer,
                     bool *victory, bool *ko);
         /// Recibo bloques, minions, escaleras, puas etc...
         void receiveMap();
@@ -25,7 +20,8 @@ class Receiver: public Hilo{
         void receiveMapSize();
         ///"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo
         ///le indica el fin de la ejecucion.
-        virtual void ejecutar();
+        void update();
+        ~Receiver();
 };
 
 #endif //RECEIVER_H

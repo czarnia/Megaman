@@ -11,9 +11,8 @@
 #define GAMEOVER 6
 #define MEGAMAN 1
 
-ResponseHandler::ResponseHandler(Renderer &renderer, Mutex &mutex):
-    renderer(renderer),
-    mutex(mutex)
+ResponseHandler::ResponseHandler(Renderer *renderer):
+    renderer(renderer)
 {
 }
 
@@ -23,12 +22,10 @@ int ResponseHandler::execute(int command, int option, std::pair<int,int> coord){
             case MAPA:
                 std::cout<<"Recibi nueva posicion para: "<<option<<"y es";
                 std::cout<<coord.first<<","<<coord.second<<std::endl;
-                spr = new Main_character(renderer.get_renderer(),"../sprite/megaman.jpeg");
+                spr = new Main_character(renderer->get_renderer(),"../sprite/megaman.jpeg");
                 spr->setPosX(coord.first);
                 spr->setPosY(coord.second);
-                mutex.lock();
-                renderer.addSprite(MEGAMAN, spr);
-                mutex.unlock();
+                renderer->addSprite(MEGAMAN, spr);
                 break;
             case BARRA_VIDA:
                 std::cout<<"Recibi nivel de vida: "<<option<<std::endl;

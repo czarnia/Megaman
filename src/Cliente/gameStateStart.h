@@ -3,7 +3,9 @@
 
 #include "gameState.h"
 #include "Renderer.h"
+#include "../Comun/mutex.h"
 #include "../Comun/socket.h"
+#include "receiver.h"
 
 class gameStateStart: public GameState{
     private:
@@ -12,6 +14,8 @@ class gameStateStart: public GameState{
         SDL_Window *window;
         Renderer *renderer;
         Socket *skt;
+        Mutex mutex;
+        Receiver *receiver;
         ///
 
         /// Manejo del flujo
@@ -19,6 +23,8 @@ class gameStateStart: public GameState{
         void mainLoop();
         void cap_framerate(const Uint32 &starting_tick);
         ///
+
+        void render();
 
         /// Teclas
         bool up;

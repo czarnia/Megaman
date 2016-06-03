@@ -6,10 +6,9 @@
 
 class ResponseHandler{
     private:
-        Renderer &renderer;
-        Mutex &mutex;
+        Renderer *renderer;
     public:
-        ResponseHandler(Renderer &renderer, Mutex &mutex);
+        ResponseHandler(Renderer *renderer);
         /// Ejecuta la accion que recibe desde el servidor
         int execute(int command, int option, std::pair<int,int> coord);
         ~ResponseHandler();

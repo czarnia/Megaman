@@ -10,7 +10,7 @@ Met::Met(Mapa *mapa, Coordenada c, std::string id) : Personaje(mapa, c, id){
   arma = new Arma_met();
 }
 
-void Met::atacar(size_t tiempo, int dir, Mapa* mapa){
+void Met::atacar(int dir, Mapa* mapa){
 	if (tras_escudo){
 		return;
 	}

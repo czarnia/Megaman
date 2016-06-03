@@ -39,7 +39,7 @@ void Juego::update(size_t tiempo){
 void Juego::personaje_atacar(std::string id_pj, int direccion){ //debería ser sólo para megaman!
 	Lock candado(proteccion);
 	Personaje* pj = mundo->obtener_pj(id_pj);
-	pj->atacar(0, direccion, mundo);
+	pj->atacar(direccion, mundo);
 }
 
 void Juego::personaje_mover(std::string id_pj, int direccion){
