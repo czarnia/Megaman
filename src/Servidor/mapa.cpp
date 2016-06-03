@@ -137,13 +137,32 @@ void Mapa::update(size_t tiempo){
 	for (ItPersonaje it= personajes.begin(); it != personajes.end(); ++it){
 		(*it).second->update(tiempo, this);
 	}
-	//for (size_t j = 0; j < balas.size(); j++){
-		//balas[j]->update(tiempo, this);
-	//}
+	for (size_t j = 0; j < balas.size(); j++){
+		balas[j]->update(tiempo, this);
+	}
 }
 
 bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
 	return !hay_tierra(coord.abajo((alto/2)+1)); //asumo los bloques son de tamaño 2
+}
+
+bool Mapa::hay_personaje(Coordenada *coord){
+	size_t x = coord->obtener_abscisa();
+	size_t y = coord->obtener_ordenada();
+	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
+		Personaje *p = it->second;
+		Coordenada coord_personaje = p->get_coordenada();
+		size_t alto = p->get_alto();
+		size_t ancho = p->get_ancho();
+		size_t ancho_max = coord_personaje.derecha(ancho/2).obtener_abscisa();
+		size_t ancho_min = coord_personaje.izquierda(ancho/2).obtener_abscisa();
+		size_t alto_max = coord_personaje.arriba(alto/2).obtener_ordenada();
+		size_t alto_min = coord_personaje.abajo(alto/2).obtener_ordenada();
+		if ( (x > ancho_min) && (ancho_min < x) && (y > alto_min) && (y < alto_max) ){
+			return true;
+		}
+	}
+	return false;
 }
 
 bool Mapa::hay_tierra(Coordenada coord){

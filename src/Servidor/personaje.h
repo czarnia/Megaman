@@ -36,7 +36,7 @@ public Observable{
 		//Hace que el personaje se mueva;
 		virtual void mover(size_t tiempo, Mapa* mapa) = 0;
 		//Hace que el personaje ataque.
-		virtual void atacar(size_t tiempo, int dir, Mapa* mapa) = 0;
+		virtual void atacar(int dir, Mapa* mapa) = 0;
 		//Le hace un update al personaje.
 		virtual void update(size_t tiempo, Mapa* mapa);
 		//Dada una bala, recibe un ataque.
@@ -56,7 +56,7 @@ public Observable{
 		virtual void sacar_movimiento(int direccion);
 		//Dada una direccion representada como un int, agrega un ataque en dicha
 		//direccion.
-		virtual void agregar_ataque(int direccion);
+		//virtual void agregar_ataque(int direccion);
 		//Devuelve la coordenada central de un personaje.
 		virtual Coordenada get_coordenada();
 		//Notifica a los objetos que observan al personaje de un cambio
@@ -69,6 +69,10 @@ public Observable{
 		int get_porcentaje_vida();
 		//Devuelve el porcentaje de energia actual del persoanje.
 		int get_energia();
+		//Devuelve el alto del personaje.
+		size_t get_alto();
+		//Devuelve el ancho del personaje.
+		size_t get_ancho();
 };
 
 #endif //PERSONAJE_H

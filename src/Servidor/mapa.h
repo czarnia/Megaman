@@ -54,7 +54,10 @@ class Mapa{
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(size_t tiempo);
-
+	//Recibe una coordenada y devuelve true si hay un personaje
+	//posicionado en ella.
+	bool hay_personaje(Coordenada *coord);
+	
     std::vector<Coordenada> coord_bloques();
   private:
     //Carga un mapa, por ahora, una versión por defecto chica.
