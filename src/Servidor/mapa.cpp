@@ -1,9 +1,14 @@
 #include "mapa.h"
-#include "coordenada.h"
-#include "elemento.h"
 #include "../Comun/lock.h"
+
+#include "coordenada.h"
+
+#include "elemento.h"
+#include "bloque.h"
 #include "puas.h"
+#include "puas_asesinas.h"
 #include "escalera.h"
+
 #include <vector>
 #include <iostream>
 #include <sstream>
@@ -66,17 +71,6 @@ std::vector<Coordenada> coord_escaleras(){
 	return escaleras;
 }
 
-//TODO: que esto sea una funcion de una interface "colisionable" o algo así
-//que la implementen todos los ex ubicables.
-bool colisionan(size_t x1, size_t y1, size_t ancho1, size_t alto1,
-size_t x2, size_t y2, size_t ancho2, size_t alto2){
-	int x_aux = std::min(x1+ancho1, x2+ancho2) - std::max(x1, x2);
-	int y_aux = std::min(y1+alto1, y2+alto2) - std::max(y1,y2);
-	size_t x_colision = std::max(0, x_aux);
-	size_t y_colision = std::max(0, y_aux);
-	return ((x_colision*y_colision) != 0);
-}
-
 //------------------------------------//
 
 Mapa::Mapa(size_t long_x, size_t long_y):
@@ -93,33 +87,14 @@ int Mapa::obtener_long_y(){
 	return long_y;
 }
 
-bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
-	bool puedo_ocupar;
-	//Personajes *
-	//Verifico que el mapa tiene las coordenadas:
-	Coordenada superior_derecha = coord.arriba(alto/2).derecha(ancho/2);
-	Coordenada superior_izquierda = coord.arriba(alto/2).izquierda(ancho/2);
-	Coordenada inferior_derecha = coord.abajo(alto/2).derecha(ancho/2);
-	Coordenada inferior_izquierda = coord.abajo(alto/2).izquierda(ancho/2);
-
-	puedo_ocupar = (this->tiene_coordenada(superior_derecha));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(superior_izquierda));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(inferior_derecha));
-	puedo_ocupar = puedo_ocupar && (this->tiene_coordenada(inferior_izquierda));
-
-	if (!puedo_ocupar){
-		return false;
-	}
-
-	size_t xobj = superior_izquierda.obtener_abscisa();
-	size_t yobj = superior_izquierda.obtener_ordenada();
-
-	for (ItBloques it = bloques.begin(); it != bloques.end(); ++it){
-		Coordenada coord_bloque_central = (*it);
-		size_t xbloque = coord_bloque_central.arriba(TAM_BLOQUE).izquierda(TAM_BLOQUE).obtener_abscisa();
-		size_t ybloque = coord_bloque_central.arriba(TAM_BLOQUE).izquierda(TAM_BLOQUE).obtener_ordenada();
-
-		if (colisionan(xobj, yobj, ancho, alto, xbloque, ybloque, TAM_BLOQUE*2, TAM_BLOQUE*2)){
+bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
+	std::vector<Coordenada> coordenadas = ubic->coordenadas(c);
+	for (size_t i = 0; i < coordenadas.size(); i++){
+		Coordenada c_act = coordenadas[i];
+		int x = c_act.obtener_abscisa();
+		int y = c_act.obtener_ordenada();
+		Elemento* elem = elementos[x][y];
+		if ((!elem->puede_ocupar(ubic)) || (!tiene_coordenada(c_act))){
 			return false;
 		}
 	}
@@ -155,7 +130,7 @@ bool Mapa::hay_personaje(Coordenada *coord){
 		Coordenada coord_personaje = p->get_coordenada();
 		size_t alto = p->get_alto();
 		size_t ancho = p->get_ancho();
-		size_t ancho_max = coord_personaje.derecha(ancho/2).obtener_abscisa();
+		//size_t ancho_max = coord_personaje.derecha(ancho/2).obtener_abscisa();
 		size_t ancho_min = coord_personaje.izquierda(ancho/2).obtener_abscisa();
 		size_t alto_max = coord_personaje.arriba(alto/2).obtener_ordenada();
 		size_t alto_min = coord_personaje.abajo(alto/2).obtener_ordenada();
@@ -178,12 +153,24 @@ bool Mapa::hay_tierra(Coordenada coord){
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	unsigned int x = coordenada.obtener_abscisa();
 	unsigned int y = coordenada.obtener_ordenada();
-	bool tiene_coordenada = (0 <= x) && (x <= long_x) && (0 <= y) && (y <= long_y);
-	return tiene_coordenada;
+	return ((0 <= x) && (x <= long_x) && (0 <= y) && (y <= long_y));
 }
 
 void Mapa::cargar(){
 	bloques = coord_tierras();
+
+	for (size_t i = 0; i < bloques.size(); i++){
+		Coordenada c1 = bloques[i];
+		Bloque* b = new Bloque(c1);
+		std::vector<Coordenada> coordenadas_bloque = b->coordenadas();
+		for (size_t j = 0; j < coordenadas_bloque.size(); j++){
+			Coordenada c2 = coordenadas_bloque[i];
+			int x = c2.obtener_abscisa();
+			int y = c2.obtener_ordenada();
+
+			elementos[x][y] = b;
+		}
+	}
 	coord_iniciales_personajes = coord_personajes();
 }
 
@@ -207,27 +194,16 @@ std::vector<Coordenada> Mapa::coord_bloques(){
 
 void Mapa::interactuar_con_entorno(Personaje* pj){
 	std::set<Elemento*> interactivos;
+	std::vector<Coordenada> coordenadas = pj->coordenadas();
 
-	int alto = pj->get_alto();
-	int ancho = pj->get_ancho();
+	for (size_t i = 0; i < coordenadas.size(); i++){
+		Coordenada c_act = coordenadas[i];
+		int x = c_act.obtener_abscisa();
+		int y = c_act.obtener_ordenada();
 
-	Coordenada central = pj->get_coordenada();
-	Coordenada sup_der = central.arriba(alto/2).derecha(ancho/2);
-	Coordenada sup_izq = central.arriba(alto/2).izquierda(ancho/2);
-	Coordenada inf_der = central.abajo(alto/2).derecha(ancho/2);
-	Coordenada inf_izq = central.abajo(alto/2).izquierda(ancho/2);
-
-	Elemento* elem;
-	elem = elementos[central.obtener_abscisa()][central.obtener_ordenada()];
-	interactivos.insert(elem);
-	elem = elementos[sup_der.obtener_abscisa()][sup_der.obtener_ordenada()];
-	interactivos.insert(elem);
-	elem = elementos[sup_izq.obtener_abscisa()][sup_izq.obtener_ordenada()];
-	interactivos.insert(elem);
-	elem = elementos[inf_der.obtener_abscisa()][inf_der.obtener_ordenada()];
-	interactivos.insert(elem);
-	elem = elementos[inf_izq.obtener_abscisa()][inf_izq.obtener_ordenada()];
-	interactivos.insert(elem);
+		Elemento* elem = elementos[x][y];
+		interactivos.insert(elem);
+	}
 
 	std::set<Elemento*>::iterator it;
 	for(it = interactivos.begin(); it != interactivos.end(); it++){

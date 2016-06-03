@@ -46,6 +46,10 @@ bool Coordenada::operator==(const Coordenada& otro) const{
 	return (x_iguales && y_iguales);
 }
 
+bool Coordenada::operator<(const Coordenada& otro) const{
+	return ((this->x < otro.x) && (this->y < otro.y));
+}
+
 void Coordenada::operator=(const Coordenada& otro){
 	this->x = otro.x;
 	this->y = otro.y;

@@ -8,6 +8,7 @@
 #include "coordenada.h"
 #include "actualizable.h"
 #include "personaje.h"
+#include "ubicable.h"
 
 class Personaje;
 class Elemento;
@@ -33,9 +34,9 @@ class Mapa{
     //Devuelve true si la coordenada pertenece al mapa y false en el caso con-
     //trario.
     bool tiene_coordenada(Coordenada coordenada);
-    //Dada una coordenada central y el ancho y el alto de un objeto, determina
-    //si el mismo puede ocupar dicho espacio.
-    bool puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho);
+    //Dado un personaje y una coordenada, devuelve true si el mismo puede
+    //ubicarse en la misma.
+    bool puede_ubicarse(Ubicable* ubic, Coordenada c);
     //Dado el id de un personaje, lo devuelve.
     Personaje *obtener_pj(std::string id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.

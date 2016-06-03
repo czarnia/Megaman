@@ -26,7 +26,7 @@ void Bala_met::update(size_t tiempo, Mapa* mapa) {
 		nueva_coordenada = nueva_coordenada.abajo(2);
 	}
 
-	if (mapa->puede_ubicarse_en(nueva_coordenada, 0, 0)){
+	if (mapa->puede_ubicarse(this, nueva_coordenada)){
 		coord = nueva_coordenada;
 	}else{
 		//TODO: Mover al mapa.

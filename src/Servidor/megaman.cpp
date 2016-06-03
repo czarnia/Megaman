@@ -57,7 +57,7 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
     nueva_coordenada = nueva_coordenada.abajo(2);
   }
 
-  if (mapa->puede_ubicarse_en(nueva_coordenada, alto, ancho)){
+  if (mapa->puede_ubicarse(this, nueva_coordenada)){
     std::cout << "MEGAMAN MOVER: PUEDE UBICARSE\n";
     coordenada = nueva_coordenada;
   }else{

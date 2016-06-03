@@ -1,7 +1,7 @@
 #include "personaje.h"
 #include "evento_mover.h"
 #include "bala.h"
-#include <iostream>
+#include <set>
 
 #include <string>
 #include <iostream>
@@ -121,4 +121,22 @@ int Personaje::get_alto(){
 
 int Personaje::get_ancho(){
 	return ancho;
+}
+
+std::vector<Coordenada> Personaje::coordenadas(Coordenada c){
+	std::set<Coordenada> s_coord;
+	for (size_t i = 0; i < alto/2; i++){
+		for (size_t j = 0; j < ancho/2; j++){
+			s_coord.insert(c.arriba(i).izquierda(j));
+			s_coord.insert(c.arriba(i).derecha(j));
+			s_coord.insert(c.abajo(i).izquierda(j));
+			s_coord.insert(c.abajo(i).derecha(j));
+		}
+	}
+	std::vector<Coordenada> v(s_coord.begin(), s_coord.end());
+	return v;
+}
+
+std::vector<Coordenada> Personaje::coordenadas(){
+	return coordenadas(coordenada);
 }

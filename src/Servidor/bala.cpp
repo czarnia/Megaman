@@ -12,7 +12,7 @@
 #define SUBE 1
 #define BAJA -1
 
-bool Bala::puede_ocupar(Personaje *pj){
+bool Bala::puede_ocupar(Ubicable *ubic){
 	return true;
 }
 
@@ -33,13 +33,13 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 				actual = (direccion_x == ABAJO)? actual.abajo() : actual.arriba();
 				delta_y += (direccion_y == ABAJO)? BAJA : SUBE;
 			}
-			llegue = !(((direccion_x != 0) && (delta_x != VELOCIDAD)) 
+			llegue = !(((direccion_x != 0) && (delta_x != VELOCIDAD))
 					    || ((direccion_y != 0) && (delta_y != VELOCIDAD)));
-					
+
 			if (!llegue){
-				llegue = !mapa->puede_ubicarse_en(actual, 0, 0);
+				llegue = !mapa->puede_ubicarse(this, actual);
 				llegue = llegue || mapa->hay_personaje(&actual);
-				if (llegue){ 
+				if (llegue){
 					direccion_x = 0;
 					direccion_y = 0;
 				}
@@ -56,4 +56,14 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 
 void Bala::interactuar(Personaje* pj){
 	pj->recibir_ataque(this);
+}
+
+std::vector<Coordenada> Bala::coordenadas(){
+	return coordenadas(coord);
+}
+
+std::vector<Coordenada> Bala::coordenadas(Coordenada c){
+	std::vector<Coordenada> v;
+	v.push_back(c);
+	return v;
 }

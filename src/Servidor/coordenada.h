@@ -39,6 +39,8 @@ class Coordenada{
     bool operator==(const Coordenada& otro) const;
     //Hace una copia de la coordenada.
     void operator=(const Coordenada& otro);
+    //Compara dos coordenadas.
+    bool operator<(const Coordenada& otro) const;
     //Devuelve true si la coordenada tiene algun miembro negativo, false en caso
     //contrario.
     bool es_negativa();

@@ -20,7 +20,8 @@ class Personaje:
 public Atacable,
 public Defendible,
 public Actualizable,
-public Observable{
+public Observable,
+public Ubicable{
 	protected:
 		std::vector<Vida*> vidas;
 		int velocidad_y, velocidad_x;
@@ -73,6 +74,12 @@ public Observable{
 		int get_ancho();
 		//Devuelve el alto del personaje.
 		int get_alto();
+		//Devuelve todas las coordenadas que ocupa un personaje dada una coordenada
+		//c central, en caso de no pasarse ninguna, se toma la como central a la
+		//actual.
+		std::vector<Coordenada> coordenadas(Coordenada c);
+		std::vector<Coordenada> coordenadas();
+
 };
 
 #endif //PERSONAJE_H
