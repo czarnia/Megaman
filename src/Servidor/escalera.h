@@ -4,6 +4,8 @@
 #include "elemento.h"
 class Personaje;
 
+//TODO: LAS ESCALERAS DEBERÍAN TENER UNA COORDENADA DE INICIO Y UNA DE FIN.
+
 class Escalera: public Elemento{
 	public:
 		Escalera(Coordenada c) : Elemento(c) {}
