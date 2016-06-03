@@ -5,6 +5,8 @@
 #include "receiver_cliente.h"
 #include "juego.h"
 
+#include <string>
+
 class Conexion_cliente{
   private:
     Socket* skt;
@@ -15,6 +17,7 @@ class Conexion_cliente{
     //do y un id que lo identifica.
     Conexion_cliente(Socket* conexion, int id, Juego *m);
 
+    //Inicia la ejecución, es decir, empieza a recibir información del cliente.
     void iniciar_ejecucion();
     //Le informa a la conexion_cliente que debe dejar de recibir datos.
     void terminar_ejecucion();
@@ -34,7 +37,15 @@ class Conexion_cliente{
     //Envia un mensaje de derrota al jugador/cliente.
     void enviar_gameover();
 
-    void mandar_bloques(std::vector<Coordenada> b);
+  private:
+    //Envia la informacion del mapa inicial.
+    void enviar_mapa_inicial(Juego* m, int id);
+    //Obtiene el nombre del jugador.
+    std::string obtener_nombre_jugador();
+    //Envia el tamaño del mapa.
+    void enviar_tamanio_mapa(Juego* m);
+
+    void mandar_bloques(std::vector<Coordenada> b); //TODO: fletar.
 };
 
 #endif //CONEXION_CLIENTE_H
