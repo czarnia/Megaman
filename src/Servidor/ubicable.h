@@ -14,6 +14,9 @@ class Ubicable{
 		//virtual int devolver_id() = 0;              Euge, te dejo los nombres :)
 		//virtual int devolver_id_clase() = 0;
 
+		//virtual int devolver_ancho() = 0;
+		//virtual int devolver_alto() = 0;
+
 		//Destructor del ubicable.
     virtual ~Ubicable() {}
 };

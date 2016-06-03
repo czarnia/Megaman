@@ -22,7 +22,7 @@ class Mapa{
     std::vector<Bala*> balas;
     std::map<std::string, Personaje*> personajes;
     std::map<int, std::map<int, Elemento*> > elementos;
-    size_t tam;
+    size_t tam; //TODO: cambiar por long_x y long_y
   public:
     //Dados un tamanio crea un mapa
     //con tantas divisiones como indique el tamanio.
@@ -55,11 +55,13 @@ class Mapa{
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(size_t tiempo);
-	//Recibe una coordenada y devuelve true si hay un personaje
-	//posicionado en ella.
-	bool hay_personaje(Coordenada *coord);
+	  //Recibe una coordenada y devuelve true si hay un personaje
+	  //posicionado en ella.
+    bool hay_personaje(Coordenada *coord);
     //Dado un personaje, hace que el mismo interactue con su entorno.
     void interactuar_con_entorno(Personaje* pj);
+    //Devuelve todos los ubicables que tiene un mapa.
+    std::vector<Ubicable*> devolver_ubicables();
 
     std::vector<Coordenada> coord_bloques(); //TODO: quizas se flete.
   private:
