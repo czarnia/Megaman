@@ -21,7 +21,7 @@ public Juego_observable{
 
 	public:
 		//Dado un tamanio, crea un juego nuevo.
-		Juego(size_t tamanio);
+		Juego(size_t long_x, size_t long_y);
 		//Dada una cantidad de jugadores, inicializa una partida.
 		void inicializar_partida(int cant_jugadores);
 		//Implementa el ciclo del juego.

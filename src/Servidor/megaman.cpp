@@ -41,32 +41,32 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
   }
   Coordenada nueva_coordenada = coordenada;
   if (velocidad_x > 0){
-    std::cout << "derecha \n";
+    std::cout << "MEGAMAN MOVER: derecha \n";
     nueva_coordenada = nueva_coordenada.derecha(2);
   }
   if (velocidad_x < 0){
-    std::cout << "izquierda \n";
+    std::cout << "MEGAMAN MOVER: izquierda \n";
     nueva_coordenada = nueva_coordenada.izquierda(2);
   }
   if (velocidad_y < 0){
-    std::cout << "arriba \n";
+    std::cout << "MEGAMAN MOVER: arriba \n";
     nueva_coordenada = nueva_coordenada.arriba(2);
   }
   if (velocidad_y > 0){
-    std::cout << "abajo \n";
+    std::cout << "MEGAMAN MOVER: abajo \n";
     nueva_coordenada = nueva_coordenada.abajo(2);
   }
 
   if (mapa->puede_ubicarse_en(nueva_coordenada, alto, ancho)){
-    std::cout << "hola \n";
+    std::cout << "MEGAMAN MOVER: PUEDE UBICARSE\n";
     coordenada = nueva_coordenada;
   }else{
-    std::cout << "mi coordenada rechazada: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
+    std::cout << "MEGAMAN MOVER: COORDENADA RECHAZADA: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
     << nueva_coordenada.obtener_ordenada() << "\n";
-    if (nueva_coordenada.obtener_abscisa() > 0){
+    if (velocidad_x != 0){
 		velocidad_x = 0;
     }
-    if (nueva_coordenada.obtener_ordenada() > 0){
+    if (velocidad_y != 0){
 		velocidad_y = 0;
     }
   }

@@ -7,8 +7,8 @@
 
 #define TIEMPO 5
 
-Juego::Juego(size_t tamanio){
-	mundo = new Mapa(tamanio);
+Juego::Juego(size_t long_x, size_t long_y){
+	mundo = new Mapa(long_x, long_y);
 	fin_partida = false;
 	cant_jugadores = 0;
 	factories.insert(std::pair<std::string, PersonajeFactory*>("MEGAMAN", new MegamanFactory(this)));

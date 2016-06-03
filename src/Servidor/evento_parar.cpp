@@ -15,7 +15,7 @@ int Evento_parar::get_direccion(){
 }
 
 void Evento_parar::ejecutar(Juego* j){
-  std::cout << "me muevo en direcion " << direccion << "\n";
+  std::cout << "EVENTO: pare de moverme\n";
   j->personaje_parar(id_evento, direccion);
 }
 

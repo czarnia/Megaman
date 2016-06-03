@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <queue>
+#include <set>
 
 #include <math.h>
 #include <algorithm>
@@ -78,17 +79,18 @@ size_t x2, size_t y2, size_t ancho2, size_t alto2){
 
 //------------------------------------//
 
-Mapa::Mapa(size_t tamanio){
-	tam = tamanio;
+Mapa::Mapa(size_t long_x, size_t long_y):
+long_x(long_x),
+long_y(long_y){
 	this->cargar();
 }
 
 int Mapa::obtener_long_x(){
-	return sqrt(tam);
+	return long_x;
 }
 
 int Mapa::obtener_long_y(){
-	return sqrt(tam);
+	return long_y;
 }
 
 bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
@@ -157,7 +159,7 @@ bool Mapa::hay_tierra(Coordenada coord){
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	unsigned int x = coordenada.obtener_abscisa();
 	unsigned int y = coordenada.obtener_ordenada();
-	bool tiene_coordenada = (0 <= x) && (x <= tam) && (0 <= y) && (y <= tam);
+	bool tiene_coordenada = (0 <= x) && (x <= long_x) && (0 <= y) && (y <= long_y);
 	return tiene_coordenada;
 }
 
@@ -182,4 +184,34 @@ void Mapa::quitar_personaje(std::string id_pj){
 
 std::vector<Coordenada> Mapa::coord_bloques(){
 	return bloques;
+}
+
+void Mapa::interactuar_con_entorno(Personaje* pj){
+	std::set<Elemento*> interactivos;
+
+	int alto = pj->get_alto();
+	int ancho = pj->get_ancho();
+
+	Coordenada central = pj->get_coordenada();
+	Coordenada sup_der = central.arriba(alto/2).derecha(ancho/2);
+	Coordenada sup_izq = central.arriba(alto/2).izquierda(ancho/2);
+	Coordenada inf_der = central.abajo(alto/2).derecha(ancho/2);
+	Coordenada inf_izq = central.abajo(alto/2).izquierda(ancho/2);
+
+	Elemento* elem;
+	elem = elementos[central.obtener_abscisa()][central.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[sup_der.obtener_abscisa()][sup_der.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[sup_izq.obtener_abscisa()][sup_izq.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[inf_der.obtener_abscisa()][inf_der.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[inf_izq.obtener_abscisa()][inf_izq.obtener_ordenada()];
+	interactivos.insert(elem);
+
+	std::set<Elemento*>::iterator it;
+	for(it = interactivos.begin(); it != interactivos.end(); it++){
+		(*it)->interactuar(pj);
+	}
 }

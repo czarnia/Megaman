@@ -13,7 +13,7 @@ class ObservadorPersonaje: public Observador{
 		int porcentaje_vida;
 		int energia;
 	public:
-		ObservadorPersonaje(Juego* juego);
+		ObservadorPersonaje(Juego* juego, Coordenada *coordenada);
 		virtual void update(Observable *obs);
 
 		//para testear:

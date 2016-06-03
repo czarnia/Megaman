@@ -41,6 +41,11 @@ rcv(conexion, id, m) {
 	skt->send((char*)&long_y, TAM_INT);
 
 	mandar_bloques(m->bloques());
+	int megaman_x = 3; //hardcodeo para que axel pruebe hoy.
+	int megaman_y = 6;
+	skt->send((char*)&id, TAM_INT);
+	skt->send((char*)&megaman_x, TAM_INT);
+	skt->send((char*)&megaman_y, TAM_INT);
 }
 
 

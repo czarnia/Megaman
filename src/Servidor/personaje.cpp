@@ -41,7 +41,7 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 	pos_inicial = coordenada;
 	mover(tiempo, mapa);
 	if (!(coordenada == pos_inicial)){
-		std::cout << "NOTIFICO OBSERVADORES\n";
+		std::cout << "PERSONAJE: NOTIFICO OBSERVADORES\n";
 		notificar_observadores();
 	}
 	//atacar(tiempo, mapa);
@@ -53,15 +53,15 @@ void Personaje::agregar_movimiento(int direccion){
 		velocidad_x = 0;
 	}
 	if (direccion == SALTAR && !flotando){
-		std::cout << "caso salto \n";
+		std::cout << "PERSONAJE agregar_mov:caso salto \n";
 		velocidad_y -= VELOCIDAD_SALTO;
 	}
 	if (direccion == DERECHA){
-		std::cout << "caso derecha \n";
+		std::cout << "PERSONAJE agregar_mov:caso derecha \n";
 		velocidad_x += VELOCIDAD;
 	}
 	if (direccion == IZQUIERDA){
-		std::cout << "caso izquierda \n";
+		std::cout << "PERSONAJE agregar_mov:caso izquierda \n";
 		velocidad_x -= VELOCIDAD;
 	}
 }
@@ -71,12 +71,12 @@ void Personaje::sacar_movimiento(int direccion){
 		velocidad_x = 0;
 	}
 	if (direccion == DERECHA){
-		std::cout << "caso dejo de apretar derecha \n";
-		velocidad_x -= VELOCIDAD;
+		std::cout << "PERSONAJE sacar_mov: interrumpo mov derecha\n";
+		velocidad_x = 0;
 	}
 	if (direccion == IZQUIERDA){
-		std::cout << "caso dejar de apretar izquierda \n";
-		velocidad_x += VELOCIDAD;
+		std::cout << "PERSONAJE sacar_mov: interrumpo mov izquierda \n";
+		velocidad_x = 0;
 	}
 }
 
@@ -116,4 +116,12 @@ void Personaje::perder_vida(int porcentaje){
 	}else{
 		vidas[0]->perder(porcentaje);
 	}
+}
+
+int Personaje::get_ancho(){
+	return ancho;
+}
+
+int Personaje::get_alto(){
+	return alto;
 }

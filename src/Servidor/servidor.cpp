@@ -30,7 +30,7 @@ entrada(FIN_ENTRADA){
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
-	mundo = new Juego(50);
+	mundo = new Juego(12, 12);
 }
 
 Servidor::~Servidor(){
