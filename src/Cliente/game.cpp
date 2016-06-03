@@ -1,17 +1,13 @@
 #include "game.h"
-#include "Renderer.h"
-#include "Sprite.h"
+
+
 #include "main_menu.h"
 #include "gameStateStart.h"
-#include "../Comun/mutex.h"
-#include <vector>
-#include <exception>
+#include "gameStateLobby.h"
+
 
 #define FPS 60
-#define ORIGIN_CENTERED 1
-#define ORIGIN_CORNER 0
-#define FONDO 1
-#define FONDO_HP 2
+
 #define WIDTH 640
 #define HEIGHT 480
 #define TAM_INT 4
@@ -23,14 +19,9 @@ Game::Game(char* hostname,char* port):
     port(port)
 {
     window = NULL;
-    window = SDL_CreateWindow("Main menu",
-                                SDL_WINDOWPOS_UNDEFINED, // POS X
-                                SDL_WINDOWPOS_UNDEFINED, // POS Y
-                                WIDTH,
-                                HEIGHT,
-                                SDL_WINDOW_SHOWN);
+    window = new Window(WIDTH,HEIGHT);
     renderer = NULL;
-    renderer = new Renderer(window);
+    renderer = new Renderer(window->get_window());
     currentState = new MainMenu(window, renderer);
 }
 
@@ -50,19 +41,22 @@ void Game::run(){
             case GameState::MAIN_MENU:
                 break;
             case GameState::BOSS_SELECT:
-            //    delete currentState;
+                delete currentState;
                 renderer->clearSprites();
 
                 skt.conect(hostname,port);
-                ////////////////////////////
+                ///////////////
                 skt.send((char*)&namebytes, TAM_INT);
                 skt.send("Axel", namebytes);
                 ///////////////////////////
-
-                currentState = new gameStateStart(window,renderer, &skt);
+                currentState = new gameStateStart(window, renderer, &skt);
                 std::cout<<"Entre al juego"<<std::endl;
+               // currentState = new gameStateLobby(window, renderer, &skt);
                 break;
             case GameState::GAME_START:
+
+
+
                 break;
             case GameState::GAME_OVER:
                 break;
@@ -82,7 +76,7 @@ void Game::run(){
 }
 
 Game::~Game(){
-    SDL_DestroyWindow(window);
+    delete window;
     delete renderer;
     window = NULL;
 

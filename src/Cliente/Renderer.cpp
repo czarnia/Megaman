@@ -28,10 +28,26 @@ void Renderer::clear(){
     SDL_RenderClear(renderer);
 }
 
+void Renderer::erase(int key){
+    std::map<int,Sprite*>::iterator it;
+    it = sprites.find(key);
+    if( it != sprites.end() ){
+        delete it->second;
+        sprites.erase(it);
+    }
+}
+
+bool Renderer::find(int key){
+    std::map<int,Sprite*>::iterator it;
+    it = sprites.find(key);
+    if( it != sprites.end() )
+        return true;
+    else
+        return false;
+}
+
 void Renderer::draw(Sprite *spr){
-    std::cout<<spr->getPosX()<<","<<spr->getPosY();
-    std::cout<<"    "<<spr->get_rectangle()->w<<","<<spr->get_rectangle()->h<<std::endl;
-    SDL_RenderCopy(renderer, spr->get_texture(), NULL, spr->get_rectangle());
+    SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), spr->get_rectangle());
 }
 
 void Renderer::present(){
@@ -58,8 +74,6 @@ void Renderer::addMapSprite(int objectid, Sprite* spr){
 }
 
 void Renderer::drawAll(){
-    std::cout<<map_sprites.size()<<std::endl;
-    std::cout<<sprites.size()<<std::endl;
     std::map<int,Sprite*>::iterator it = sprites.begin();
     for (; it != sprites.end() ; ++it){
         draw(it->second);

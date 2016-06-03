@@ -23,11 +23,14 @@ class Sprite{
         /// devuelve posicion global
         int getPosX();
         int getPosY();
+        int getWidth();
+        int getHeight();
 
         /// establece la posicion global
         void setPosX(int x);
         void setPosY(int y);
-
+        void setWidth(int w);
+        void setHeight(int h);
         /// libera la memoria pedida
         void erase();
         virtual ~Sprite();
