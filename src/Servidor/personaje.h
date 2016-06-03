@@ -69,10 +69,10 @@ public Observable{
 		int get_porcentaje_vida();
 		//Devuelve el porcentaje de energia actual del persoanje.
 		int get_energia();
-		//Devuelve el alto del personaje.
-		size_t get_alto();
 		//Devuelve el ancho del personaje.
-		size_t get_ancho();
+		int get_ancho();
+		//Devuelve el alto del personaje.
+		int get_alto();
 };
 
 #endif //PERSONAJE_H

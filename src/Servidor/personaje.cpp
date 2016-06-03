@@ -115,11 +115,10 @@ void Personaje::perder_vida(int porcentaje){
 	}
 }
 
-size_t Personaje::get_alto(){
+int Personaje::get_alto(){
 	return alto;
 }
 
-size_t Personaje::get_ancho(){
+int Personaje::get_ancho(){
 	return ancho;
 }
-
