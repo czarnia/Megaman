@@ -21,7 +21,7 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	size_t delta_x = 0;
 	size_t delta_y = 0;
-	bool llegue = false;
+	bool llegue = ((direccion_x == 0) && (direccion_y == 0));
 	Coordenada actual = coord;
 	if (tiempo_pasado >= TIEMPO_MOVER){
 		while (!llegue){
@@ -39,6 +39,10 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 			if (!llegue){
 				llegue = !mapa->puede_ubicarse_en(actual, 0, 0);
 				llegue = llegue || mapa->hay_personaje(&actual);
+				if (llegue){ 
+					direccion_x = 0;
+					direccion_y = 0;
+				}
 			}
 		}
 		if (!(actual == coord)){
