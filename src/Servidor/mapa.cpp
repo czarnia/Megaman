@@ -78,17 +78,18 @@ size_t x2, size_t y2, size_t ancho2, size_t alto2){
 
 //------------------------------------//
 
-Mapa::Mapa(size_t tamanio){
-	tam = tamanio;
+Mapa::Mapa(size_t long_x, size_t long_y):
+long_x(long_x),
+long_y(long_y){
 	this->cargar();
 }
 
 int Mapa::obtener_long_x(){
-	return sqrt(tam);
+	return long_x;
 }
 
 int Mapa::obtener_long_y(){
-	return sqrt(tam);
+	return long_y;
 }
 
 bool Mapa::puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho){
@@ -157,7 +158,7 @@ bool Mapa::hay_tierra(Coordenada coord){
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	unsigned int x = coordenada.obtener_abscisa();
 	unsigned int y = coordenada.obtener_ordenada();
-	bool tiene_coordenada = (0 <= x) && (x <= tam) && (0 <= y) && (y <= tam);
+	bool tiene_coordenada = (0 <= x) && (x <= long_x) && (0 <= y) && (y <= long_y);
 	return tiene_coordenada;
 }
 

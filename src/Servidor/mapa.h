@@ -1,6 +1,8 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include <iosfwd>
+#include <cstddef>
 #include <map>
 #include <vector>
 #include "coordenada.h"
@@ -13,6 +15,7 @@ class Bala;
 
 class Mapa{
   private:
+	size_t long_x, long_y;
     std::vector<Coordenada> bloques;
     std::vector<Coordenada*> coord_iniciales_personajes;
     std::vector<Bala*> balas;
@@ -22,8 +25,10 @@ class Mapa{
   public:
     //Dados un tamanio crea un mapa
     //con tantas divisiones como indique el tamanio.
-    Mapa(size_t tamanio);
+    Mapa(size_t long_x, size_t long_y);
+    //Devuelve el ancho del mapa.
     int obtener_long_y();
+    //Devuelve el ancho del mapa.
     int obtener_long_x();
     //Devuelve true si la coordenada pertenece al mapa y false en el caso con-
     //trario.

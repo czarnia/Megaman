@@ -10,7 +10,7 @@ Personaje* MegamanFactory::crear(Mapa* mapa){
 	int x = 3; 
 	int y = 6;
 	Coordenada coord(x, y); //LAS COORDENADAS INICIALES SE OBTIENEN DE UN ARCHIVO Y SE PIDEN AL MAPA...
-	ObservadorPersonaje *obs = new ObservadorPersonaje(juego);
+	ObservadorPersonaje *obs = new ObservadorPersonaje(juego, &coord);
 	std::stringstream id;
 	id << (creados.size() + 1);
 	std::string nombre("megaman");
