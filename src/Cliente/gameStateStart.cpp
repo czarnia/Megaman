@@ -1,11 +1,31 @@
 #include "gameStateStart.h"
 #include <iostream>
 #include "sender.h"
-#include "../Comun/mutex.h"
-#include "receiver.h"
+#include "block_sprite.h"
 
 #define FPS 60
 #define TAM_INT 4
+
+
+
+#define TAM_INT 4
+#define VICTORY 5
+#define GAMEOVER 6
+#define EARTH_BLOCK 100
+#define STAIR_BLOCK 1000
+#define SPIKE_BLOCK 1200
+#define MET 8
+#define END_OF_MAP 6666
+#define END_OF_RESPONSE 6666
+
+
+
+
+
+
+
+
+
 
 gameStateStart::gameStateStart(SDL_Window *window, Renderer *renderer, Socket *skt):
     playerno(0),
@@ -21,6 +41,8 @@ gameStateStart::gameStateStart(SDL_Window *window, Renderer *renderer, Socket *s
     victory(false),
     ko(false)
 {
+    receiver = new Receiver(skt, renderer, &victory, &ko);
+    load();
 }
 
 void gameStateStart::cap_framerate(const Uint32 &starting_tick){
@@ -30,10 +52,18 @@ void gameStateStart::cap_framerate(const Uint32 &starting_tick){
 }
 
 void gameStateStart::load(int stack){
-
+    /// Recibo mi numero de jugador
+    char buffer[TAM_INT];
+    skt->receive(buffer, TAM_INT);
+    playerno = *((int*)buffer);
+    std::cout<<"Recibi mi numero de jugador: "<<playerno<<std::endl;
+    /// Recibo el mapa
+    receiver->receiveMapSize();
+    receiver->receiveMap();
 }
 
 int gameStateStart::unload(){
+
     return 0;
 }
 
@@ -144,11 +174,6 @@ void gameStateStart::updateInput(bool *running){
 }
 
 GameState::StateCode gameStateStart::update(){
-    char buffer[TAM_INT];
-    /// Recibo mi numero de jugador
-    skt->receive(buffer, TAM_INT);
-    playerno = *((int*)buffer);
-    std::cout<<"Recibi mi numero de jugador: "<<playerno<<std::endl;
     mainLoop();
     if (quit)
         return GameState::QUIT;
@@ -162,25 +187,27 @@ GameState::StateCode gameStateStart::update(){
 
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
-    Mutex mutex;
     bool running = true;
 
-    Receiver receiver(skt, *renderer, mutex, &running, &victory, &ko);
-    receiver.start();
-
-    SDL_Delay(5000);
     while (running){
         starting_tick = SDL_GetTicks();
+        /// COMUNICACION
         updateInput(&running);
-
+   //     receiver->update();
+        ///
 		cap_framerate(starting_tick);
-        renderer->clear();
-        renderer->drawAll();
-        renderer->present();
+        render();
 	}
-	receiver.join();
+
+}
+
+void gameStateStart::render(){
+    renderer->clear();
+    renderer->drawAll();
+    renderer->present();
 }
 
 gameStateStart::~gameStateStart(){
-
+    unload();
+    delete receiver;
 }
