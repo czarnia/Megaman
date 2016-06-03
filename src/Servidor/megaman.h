@@ -13,7 +13,7 @@ class Megaman: public Personaje{
 		size_t arma_act;
 	public:
 		Megaman(Mapa *mapa, Coordenada c, std::string id);
-		virtual void atacar(size_t tiempo, int dir, Mapa* mapa);
+		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
 		virtual void update(size_t tiempo);

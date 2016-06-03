@@ -44,7 +44,6 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 		std::cout << "PERSONAJE: NOTIFICO OBSERVADORES\n";
 		notificar_observadores();
 	}
-	//atacar(tiempo, mapa);
 }
 
 void Personaje::agregar_movimiento(int direccion){
@@ -79,8 +78,6 @@ void Personaje::sacar_movimiento(int direccion){
 		velocidad_x = 0;
 	}
 }
-
-void Personaje::agregar_ataque(int direccion) {}
 
 Coordenada Personaje::get_coordenada(){
 	return coordenada;
@@ -118,10 +115,10 @@ void Personaje::perder_vida(int porcentaje){
 	}
 }
 
-int Personaje::get_ancho(){
-	return ancho;
-}
-
 int Personaje::get_alto(){
 	return alto;
+}
+
+int Personaje::get_ancho(){
+	return ancho;
 }
