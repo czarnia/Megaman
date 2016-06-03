@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 #include <queue>
+#include <set>
 
 #include <math.h>
 #include <algorithm>
@@ -183,4 +184,34 @@ void Mapa::quitar_personaje(std::string id_pj){
 
 std::vector<Coordenada> Mapa::coord_bloques(){
 	return bloques;
+}
+
+void Mapa::interactuar_con_entorno(Personaje* pj){
+	std::set<Elemento*> interactivos;
+
+	int alto = pj->get_alto();
+	int ancho = pj->get_ancho();
+
+	Coordenada central = pj->get_coordenada();
+	Coordenada sup_der = central.arriba(alto/2).derecha(ancho/2);
+	Coordenada sup_izq = central.arriba(alto/2).izquierda(ancho/2);
+	Coordenada inf_der = central.abajo(alto/2).derecha(ancho/2);
+	Coordenada inf_izq = central.abajo(alto/2).izquierda(ancho/2);
+
+	Elemento* elem;
+	elem = elementos[central.obtener_abscisa()][central.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[sup_der.obtener_abscisa()][sup_der.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[sup_izq.obtener_abscisa()][sup_izq.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[inf_der.obtener_abscisa()][inf_der.obtener_ordenada()];
+	interactivos.insert(elem);
+	elem = elementos[inf_izq.obtener_abscisa()][inf_izq.obtener_ordenada()];
+	interactivos.insert(elem);
+
+	std::set<Elemento*>::iterator it;
+	for(it = interactivos.begin(); it != interactivos.end(); it++){
+		(*it)->interactuar(pj);
+	}
 }

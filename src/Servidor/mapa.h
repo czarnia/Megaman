@@ -16,11 +16,11 @@ class Bala;
 class Mapa{
   private:
 	size_t long_x, long_y;
-    std::vector<Coordenada> bloques;
+    std::vector<Coordenada> bloques; //borrar estos bloques!
     std::vector<Coordenada*> coord_iniciales_personajes;
     std::vector<Bala*> balas;
     std::map<std::string, Personaje*> personajes;
-    //std::map<std::string, Personaje*> personajes;
+    std::map<int, std::map<int, Elemento*> > elementos;
     size_t tam;
   public:
     //Dados un tamanio crea un mapa
@@ -54,8 +54,10 @@ class Mapa{
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(size_t tiempo);
+    //Dado un personaje, hace que el mismo interactue con su entorno.
+    void interactuar_con_entorno(Personaje* pj);
 
-    std::vector<Coordenada> coord_bloques();
+    std::vector<Coordenada> coord_bloques(); //TODO: quizas se flete.
   private:
     //Carga un mapa, por ahora, una versión por defecto chica.
     void cargar();
