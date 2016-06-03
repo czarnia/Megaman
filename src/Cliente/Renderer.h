@@ -11,12 +11,15 @@
 class Renderer{
     private:
         SDL_Renderer *renderer;
-        std::map<int,Sprite*> sprites;
-        std::map<int,Sprite*> map_sprites;
+
         std::pair<int,int> map_size;
         int camX;
         int camY;
     public:
+        /// vectores que guardan los sprites
+        std::map<int,Sprite*> sprites;
+        std::map<int,Sprite*> map_sprites;
+
         /// Devuelve el atributo renderer
         SDL_Renderer* get_renderer();
         Renderer(SDL_Window* w);
@@ -31,6 +34,10 @@ class Renderer{
         void setMapSize(int width, int height);
         /// prepara para la impresion en pantalla
         void clear();
+        /// Borra un sprite
+        void erase(int key);
+        /// devuelve true si existe
+        bool find(int key);
         /// dibuja un sprite
         void draw(Sprite *spr);
         /// dibuja todos los sprites cargados en los atributos

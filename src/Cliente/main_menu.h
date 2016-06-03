@@ -3,16 +3,22 @@
 
 #include "gameState.h"
 #include "Renderer.h"
+#include <string>
+#include "window.h"
 
 class MainMenu: public GameState{
     private:
-        SDL_Window* window;
+        ///
+        Window* window;
         Renderer *renderer;
+        ///
         bool start;
         bool quit;
+        ///
         void updateInput();
+        std::string playerName;
     public:
-        MainMenu(SDL_Window *window, Renderer *renderer);
+        MainMenu(Window *window, Renderer *renderer);
 
         /// Carga sprites, musica etc
         void load(int stack = 0);

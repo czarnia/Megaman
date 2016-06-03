@@ -29,12 +29,28 @@ int Sprite::getPosY(){
     return rectangle.y;
 }
 
+int Sprite::getWidth(){
+    return rectangle.w;
+}
+
+int Sprite::getHeight(){
+    return rectangle.h;
+}
+
 void Sprite::setPosX(int x){
     rectangle.x = x;
 }
 
 void Sprite::setPosY(int y){
     rectangle.y = y;
+}
+
+void Sprite::setWidth(int w){
+    rectangle.w = w;
+}
+
+void Sprite::setHeight(int h){
+    rectangle.h = h;
 }
 
 void Sprite::erase(){

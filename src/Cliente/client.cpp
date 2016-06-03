@@ -17,10 +17,12 @@
 int main(int argc, char *argv[]){
 	char* hostname = argv[IP_POS];
 	char* port = argv[PORT_POS];
-	SDL_Init(SDL_INIT_EVERYTHING);
-	Game game(hostname,port);
 
+	SDL_Init(SDL_INIT_EVERYTHING);
+
+	Game game(hostname,port);
 	game.run();
+
 	SDL_Quit();
 	return 0;
 }

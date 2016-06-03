@@ -19,15 +19,7 @@
 #define END_OF_RESPONSE 6666
 
 
-
-
-
-
-
-
-
-
-gameStateStart::gameStateStart(SDL_Window *window, Renderer *renderer, Socket *skt):
+gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt):
     playerno(0),
     window(window),
     renderer(renderer),
@@ -154,12 +146,10 @@ void gameStateStart::updateInput(bool *running){
                     break;
                 case SDLK_LEFT:
                     sender.send("stop", "left");  // ENVIO LA TECLA
-                    direction = "left";
                     left = false;
                     break;
                 case SDLK_RIGHT:
                     sender.send("stop", "right");  // ENVIO LA TECLA
-                    direction = "right";
                     right = false;
                     break;
                 case SDLK_s:
@@ -193,7 +183,7 @@ void gameStateStart::mainLoop(){
         starting_tick = SDL_GetTicks();
         /// COMUNICACION
         updateInput(&running);
-   //     receiver->update();
+        receiver->update(&running);
         ///
 		cap_framerate(starting_tick);
         render();
