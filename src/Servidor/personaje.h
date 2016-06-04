@@ -44,8 +44,8 @@ public Ubicable{
 		virtual void recibir_ataque(Bala* ataque) = 0;
 		//Devuelve el id de un personaje.
 		virtual std::string devolver_id();
-		//Dado un porcentaje de vida a perder, se la resta al personaje, en caso de
-		//ser -1 (por defecto) le resta una vida completa.
+		//Dado un porcentaje de vida a perder, se la reste al personaje, en caso de
+		//ser -1 (por defecto) le reste una vida completa.
 		virtual void perder_vida(int porcentaje = PERDER_VIDA);
 		//Devuelve true si el personaje está vivo, false en caso contrario.
 		virtual bool esta_vivo();
@@ -61,7 +61,7 @@ public Ubicable{
 		//Devuelve la coordenada central de un personaje.
 		virtual Coordenada get_coordenada();
 		//Notifica a los objetos que observan al personaje de un cambio
-		//en el estado del mismo.
+		//en el estedo del mismo.
 		virtual void notificar_observadores();
 		//Devuelve la cantidad de vidas del personaje.
 		int get_cantidad_vidas();
@@ -79,6 +79,31 @@ public Ubicable{
 		//actual.
 		std::vector<Coordenada> coordenadas(Coordenada c);
 		std::vector<Coordenada> coordenadas();
+
+		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Ubicable* ubic);
+		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Personaje* pj);
+		//Dado un elemento, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Elemento* pj);
+		//Dada una bala, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Bala* bala);
+		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Escalera* esc);
+		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Bloque* bloque);
+		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Puas* puas);
+		//Dadas unas puas_asesinas, dice si puede ubicarse en las mismas coordenadas que
+		//este.
+		virtual bool puede_ocupar(Puas_asesinas* puas);
 
 };
 

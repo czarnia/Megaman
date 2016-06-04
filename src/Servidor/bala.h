@@ -24,9 +24,30 @@ public Elemento{
 		virtual ~Bala() {};
 		//Dado un personaje y un mapa, interactua con el personaje.
 		virtual void interactuar(Personaje* pj);
-		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
-		//este.
+		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
 		virtual bool puede_ocupar(Ubicable* ubic);
+		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
+		virtual bool puede_ocupar(Personaje* pj);
+		//Dado un elemento, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
+		virtual bool puede_ocupar(Elemento* pj);
+		//Dada una bala, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
+		virtual bool puede_ocupar(Bala* bala);
+		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
+		virtual bool puede_ocupar(Escalera* esc);
+		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
+		virtual bool puede_ocupar(Bloque* bloque);
+		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
+		virtual bool puede_ocupar(Puas* puas);
+		//Dadas unas puas_asesinas, dice si puede ubicarse en las mismas coordenadas que
+		//esta.
+		virtual bool puede_ocupar(Puas_asesinas* puas);
 		//Devuelve todas las coordenadas que ocupa una bala.
 		virtual std::vector<Coordenada> coordenadas();
 		//Devuelve todas las coordenadas que ocuparía una bala si su centro estuvie-

@@ -1,6 +1,9 @@
 #include "personaje.h"
-#include "evento_mover.h"
+#include "escalera.h"
 #include "bala.h"
+#include "puas.h"
+#include "puas_asesinas.h"
+#include "bloque.h"
 #include <set>
 
 #include <string>
@@ -139,4 +142,36 @@ std::vector<Coordenada> Personaje::coordenadas(Coordenada c){
 
 std::vector<Coordenada> Personaje::coordenadas(){
 	return coordenadas(coordenada);
+}
+
+bool Personaje::puede_ocupar(Ubicable* ubic){
+	return ubic->puede_ocupar(this);
+}
+
+bool Personaje::puede_ocupar(Personaje* pj){
+	return true;
+}
+
+bool Personaje::puede_ocupar(Elemento* pj){
+	return pj->puede_ocupar(this);
+}
+
+bool Personaje::puede_ocupar(Bala* bala){
+	return true;
+}
+
+bool Personaje::puede_ocupar(Escalera* esc){
+	return true;
+}
+
+bool Personaje::puede_ocupar(Bloque* bloque){
+	return false;
+}
+
+bool Personaje::puede_ocupar(Puas* puas){
+	return true;
+}
+
+bool Personaje::puede_ocupar(Puas_asesinas* puas){
+	return true;
 }

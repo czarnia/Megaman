@@ -1,4 +1,9 @@
 #include "bala.h"
+#include "escalera.h"
+#include "personaje.h"
+#include "puas.h"
+#include "puas_asesinas.h"
+#include "bloque.h"
 
 #define TIEMPO_MOVER 5
 #define VELOCIDAD 4
@@ -12,10 +17,37 @@
 #define SUBE 1
 #define BAJA -1
 
-bool Bala::puede_ocupar(Ubicable *ubic){
+bool Bala::puede_ocupar(Ubicable* ubic){
+	return ubic->puede_ocupar(this);
+}
+
+bool Bala::puede_ocupar(Personaje* pj){
 	return true;
 }
 
+bool Bala::puede_ocupar(Elemento* pj){
+	return pj->puede_ocupar(this);
+}
+
+bool Bala::puede_ocupar(Bala* bala){
+	return true;
+}
+
+bool Bala::puede_ocupar(Escalera* esc){
+	return true;
+}
+
+bool Bala::puede_ocupar(Bloque* bloque){
+	return false;
+}
+
+bool Bala::puede_ocupar(Puas* puas){
+	return true;
+}
+
+bool Bala::puede_ocupar(Puas_asesinas* puas){
+	return true;
+}
 
 void Bala::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
