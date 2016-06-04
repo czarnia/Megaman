@@ -1,4 +1,5 @@
 #include "bala_met.h"
+#include "personaje.h"
 
 #define TIEMPO_MOVER 1
 

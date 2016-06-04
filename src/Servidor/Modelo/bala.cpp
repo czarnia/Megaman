@@ -18,9 +18,9 @@
 #define BAJA -1
 
 
-Bala::Bala(int dir_x, int dir_y, Coordenada c, int id): 
+Bala::Bala(int dir_x, int dir_y, Coordenada c, int id):
 direccion_x(dir_x),
-direccion_y(dir_y), 
+direccion_y(dir_y),
 coord(c),
 id(id){}
 
@@ -119,4 +119,8 @@ std::vector<Coordenada> Bala::coordenadas(Coordenada c){
 	std::vector<Coordenada> v;
 	v.push_back(c);
 	return v;
+}
+
+Coordenada Bala::get_coordenada(){
+	return coord;
 }
