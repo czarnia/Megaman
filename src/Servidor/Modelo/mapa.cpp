@@ -119,7 +119,7 @@ bool ubicar(Elemento* elem, Coordenada c){
 	return true;
 }
 
-bool ubicar(Bala* bala, Coordenada c){
+bool Mapa::ubicar(Bala* bala, Coordenada c){
 	if (!puede_ubicarse(bala, c)){
 		return false;
 	}

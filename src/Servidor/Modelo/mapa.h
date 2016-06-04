@@ -23,7 +23,7 @@ class Mapa{
     std::vector<Bala*> balas;
     std::map<int, Personaje*> personajes;
     std::map<int, std::map<int, Elemento*> > elementos;
-    size_t tam; //TODO: cambiar por long_x y long_y
+    size_t tam; //TODO: cambiar por long_x y long_y.
   public:
     //Dados un tamanio crea un mapa
     //con tantas divisiones como indique el tamanio.

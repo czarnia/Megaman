@@ -3,14 +3,12 @@
 
 #include "coordenada.h"
 #include "ubicable.h"
-#include "ubicable.h"
-#include "observador_ubicable.h"
 
 class Elemento;
-class Observador_ubicable;
 class Personaje;
 
-class Elemento : public Ubicable{
+class Elemento: 
+public Ubicable{
 	protected:
 		Coordenada coord;
 		size_t ancho;
