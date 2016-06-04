@@ -9,16 +9,21 @@
 class gameStateLobby: public GameState{
     private:
         int playerno;
-
+        ///
         SDL_Window *window;
         Renderer *renderer;
         Socket *skt;
-
-        void mainLoop();
+        ///
+        void updateInput();
     public:
+        gameStateLobby(SDL_Window *window, Renderer *renderer, Socket *skt);
+
+        ///
         void load(int stack = 0);
         int unload();
         StateCode update();
+        void render();
+        ~gameStateLobby();
 
 };
 

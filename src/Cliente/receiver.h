@@ -20,7 +20,7 @@ class Receiver{
         void receiveMapSize();
         ///"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo
         ///le indica el fin de la ejecucion.
-        void update();
+        void update(bool *running);
         ~Receiver();
 };
 

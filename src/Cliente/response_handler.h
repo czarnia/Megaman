@@ -10,7 +10,7 @@ class ResponseHandler{
     public:
         ResponseHandler(Renderer *renderer);
         /// Ejecuta la accion que recibe desde el servidor
-        int execute(int command, int option, std::pair<int,int> coord);
+        int execute(int command, int objectType, int objectID, std::pair<int,int> coord);
         ~ResponseHandler();
 };
 

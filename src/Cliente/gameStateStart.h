@@ -6,12 +6,13 @@
 #include "../Comun/mutex.h"
 #include "../Comun/socket.h"
 #include "receiver.h"
+#include "window.h"
 
 class gameStateStart: public GameState{
     private:
         int playerno;
         /// variables tecnicas
-        SDL_Window *window;
+        Window *window;
         Renderer *renderer;
         Socket *skt;
         Mutex mutex;
@@ -39,7 +40,7 @@ class gameStateStart: public GameState{
         bool ko;
 
     public:
-        gameStateStart(SDL_Window *window, Renderer *renderer, Socket *skt);
+        gameStateStart(Window *window, Renderer *renderer, Socket *skt);
         void load(int stack = 0);
         int unload();
         StateCode update();

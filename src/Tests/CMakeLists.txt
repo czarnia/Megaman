@@ -17,6 +17,8 @@ file (GLOB	SERVER "${INCLUDE_SERVER}/*.h"
 			"${INCLUDE_SERVER}/puas.cpp"
 			"${INCLUDE_SERVER}/megaman.cpp"
 			"${INCLUDE_SERVER}/escalera.cpp"
+			"${INCLUDE_SERVER}/bloque.cpp"
+			"${INCLUDE_SERVER}/puas_asesinas.cpp"
 			"${INCLUDE_SERVER}/personaje.cpp"
 			"${INCLUDE_SERVER}/evento_mover.cpp"
 			"${INCLUDE_SERVER}/evento_parar.cpp"
@@ -48,6 +50,7 @@ file (GLOB	SERVER "${INCLUDE_SERVER}/*.h"
 			"${INCLUDE_SERVER}/observador_personaje.cpp"
 			"${INCLUDE_SERVER}/bala_met.cpp"
 			"${INCLUDE_SERVER}/met.cpp"
+
 			)
 file (GLOB COM "${INCLUDE_COM}/*")
 

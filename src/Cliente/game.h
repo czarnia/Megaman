@@ -6,19 +6,25 @@
 #include "../Comun/socket.h"
 #include "Renderer.h"
 #include "gameState.h"
+#include "window.h"
 
 class Game{
 	private:
+        /// variables tecnicas
         Socket skt;
-        SDL_Window *window;
+        Window *window;
         Renderer *renderer;
         /// Esta clase establece los cambios entre estados de juegos
         /// usando esta variable
         GameState* currentState;
+        /// para poder conectarme al servidor en distintos puntos
         char *hostname;
         char *port;
         /// Limitar los FPS para que sean constantes
 		void cap_framerate(const Uint32 &starting_tick);
+
+
+
 	public:
 		Game(char* hostname,char* port);
 		/// Esta funcion corre el juego
