@@ -10,7 +10,7 @@ class Bala_normal: public Bala {
 	public:
 		//Recibe una direccion en 'x', una
 		//direccion en 'y' y una coordenada inicial y construye una bala.
-		Bala_normal(int dir_x, int dir_y, Coordenada c);
+		Bala_normal(int dir_x, int dir_y, Coordenada c, int id);
 		//Destructor de la bala.
 		virtual ~Bala_normal();
 		//Hace que pasa el tiempo para la bala.

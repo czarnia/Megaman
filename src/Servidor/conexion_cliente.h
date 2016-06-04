@@ -22,13 +22,13 @@ class Conexion_cliente{
     virtual ~Conexion_cliente();
     //Recibe el id de un personaje y notifica al cliente
     //de su nueva posicion.
-    void enviar_cambio_posicion(std::string id, int x, int y);
+    void enviar_cambio_posicion(int tipo, int id, int x, int y);
     //Envia la nueva cantidad de vidas que tiene un jugador/cliente.
-    void enviar_cantidad_vidas(std::string id, int cantidad);
+    void enviar_cantidad_vidas(int tipo, int id, int cantidad);
     //Envia el nuevo porcentaje de vida que tiene un jugador/cliente.
-    void enviar_porcentaje_vida(std::string id, int porcentaje);
+    void enviar_porcentaje_vida(int tipo, int id, int porcentaje);
     //Envia el nuevo porcentaje de energia que tiene un jugador/cliente.
-    void enviar_porcentaje_energia(int porcentaje);
+    void enviar_porcentaje_energia(int tipo, int id, int porcentaje);
     //Envia un mensaje de victoria al jugador/cliente.
     void enviar_victoria();
     //Envia un mensaje de derrota al jugador/cliente.

@@ -3,14 +3,17 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include "bala.h"
 
 #define DERECHA 3
 #define IZQUIERDA 4
+#define MEGAMAN 1
 
-Megaman::Megaman(Mapa *mapa, Coordenada c, std::string id):
+Megaman::Megaman(Mapa *mapa, Coordenada c, int id):
 Personaje(mapa, c, id){
 	arma_act = 1;
 	armas.push_back(new Arma_megaman());
+	tipo = MEGAMAN;
 }
 
 void Megaman::update(size_t tiempo){

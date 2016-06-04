@@ -8,6 +8,7 @@
 #include "coordenada.h"
 #include "actualizable.h"
 #include "personaje.h"
+#include "bala.h"
 
 class Personaje;
 class Elemento;
@@ -19,7 +20,7 @@ class Mapa{
     std::vector<Coordenada> bloques; //borrar estos bloques!
     std::vector<Coordenada*> coord_iniciales_personajes;
     std::vector<Bala*> balas;
-    std::map<std::string, Personaje*> personajes;
+    std::map<int, Personaje*> personajes;
     std::map<int, std::map<int, Elemento*> > elementos;
     size_t tam;
   public:
@@ -37,7 +38,7 @@ class Mapa{
     //si el mismo puede ocupar dicho espacio.
     bool puede_ubicarse_en(Coordenada coord, size_t alto, size_t ancho);
     //Dado el id de un personaje, lo devuelve.
-    Personaje *obtener_pj(std::string id_pj);
+    Personaje *obtener_pj(int id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.
     std::vector<Actualizable*> obtener_actualizables();
     //Devuelve true si abajo de un objeto de un alto determinado hay aire, false
@@ -46,9 +47,9 @@ class Mapa{
     //Devuelve true si hay tierra en dicha coordenada, false en caso contrario.
     bool hay_tierra(Coordenada coord);
     //Recibe el id de un personaje y lo remueve del mapa.
-    void quitar_personaje(std::string id);
+    void quitar_personaje(int id);
     //Recibe un personaje y lo agrega al mapa.
-    void agregar_personaje(std::string id, Personaje *p);
+    void agregar_personaje(Personaje *p);
     //Recibe uns bala y lo agrega al mapa.
     void agregar_bala(Bala *b);
     //Recibe un tiempo de update y actualiza el estado de

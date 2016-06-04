@@ -6,7 +6,7 @@
 
 class Evento_atacar : public Evento{
   private:
-    std::string id_evento;
+    int id_evento;
     int direccion;
   public:
     //Crea un evento atacar dado un id y una direccion.

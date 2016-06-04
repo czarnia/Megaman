@@ -4,12 +4,9 @@
 #include <string>
 #include <iostream>
 
-Evento_cambiar_arma::Evento_cambiar_arma(int id, int arma) :
-num_arma(arma){
-  std::stringstream	s;
-  s << "megaman" <<id;
-  id_evento = s.str();
-}
+Evento_cambiar_arma::Evento_cambiar_arma(int id, int arma):
+id_evento(id),
+num_arma(arma){}
 
 Evento_cambiar_arma::~Evento_cambiar_arma() {}
 

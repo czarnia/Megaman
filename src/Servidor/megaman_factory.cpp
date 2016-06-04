@@ -1,35 +1,39 @@
 #include "megaman_factory.h"
-#include "megaman.h"
 #include <sstream>
 #include <iostream>
+#include "observador_ubicable.h"
+#include "observador_personaje.h"
+#include "megaman.h"
 
 MegamanFactory::MegamanFactory(Juego *juego):
-PersonajeFactory(juego){}
+juego(juego){
+	creados = 0;
+}
 
 Personaje* MegamanFactory::crear(Mapa* mapa){
 	int x = 3; 
 	int y = 6;
 	Coordenada coord(x, y); //LAS COORDENADAS INICIALES SE OBTIENEN DE UN ARCHIVO Y SE PIDEN AL MAPA...
-	ObservadorPersonaje *obs = new ObservadorPersonaje(juego, &coord);
-	std::stringstream id;
-	id << (creados.size() + 1);
-	std::string nombre("megaman");
-	nombre += id.str() + "\0";
-	Megaman *megaman = new Megaman(mapa, coord, nombre);
-	creados.insert(std::pair<Megaman*, ObservadorPersonaje*>(megaman, obs));
+	Observador_personaje *obs = new Observador_personaje(juego);
+	Observador_ubicable *obs_ubicable = new Observador_ubicable(juego, &coord);
+	int id = (creados + 1);
+	Megaman *megaman = new Megaman(mapa, coord, id);
 	megaman->agregar_observador(obs);
-	megaman->agregar_observador(this);
-	mapa->agregar_personaje(nombre, megaman);
+	megaman->agregar_observador(obs_ubicable);
+	//megaman->agregar_observador(this);
+	mapa->agregar_personaje(megaman);
+	creados++;
+	//creados.insert(std::pair<Megaman*, Observador*>(megaman, obs));
+	//creados.insert(std::pair<Megaman*, Observador*>(megaman, obs_ubicable));
 	//ACA PODEMOS LEVANTAR LOS DATOS DEL MEGAMAN DEL XML/JSON
 	//VELOCIDAD, ETC...
 	return megaman;
 }
 
-void MegamanFactory::update(Observable *observado){
+/*void MegamanFactory::update(Observable *observado){
 	Megaman *megaman = (Megaman*)observado;
 	if (!megaman->esta_vivo()){
-		creados.erase(creados.find(megaman));
-		//delete megaman;
-		//delete creados[megaman];
+		//delete megamans!
+		//delete observadores!
 	}
-}
+}*/

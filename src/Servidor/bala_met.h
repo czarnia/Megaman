@@ -6,11 +6,11 @@
 #include "megaman.h"
 #include "met.h"
 
-class Bala_met: public Bala {
+class Bala_met: public Bala{
 	public:
-    //Recibe una direccion en 'x', una
+		//Recibe una direccion en 'x', una
 		//direccion en 'y' y una coordenada inicial y construye una bala.
-		Bala_met(int dir_x, int dir_y, Coordenada c);
+		Bala_met(int dir_x, int dir_y, Coordenada c, int id);
 		//Destructor de la bala.
 		virtual ~Bala_met();
 		//Hace que pasa el tiempo para la bala.

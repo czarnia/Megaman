@@ -17,7 +17,7 @@
 #define TAM_BLOQUE 1
 
 typedef std::vector<Coordenada>::iterator ItBloques;
-typedef std::map<int, Personaje*>::iterator ItPersonaje;
+typedef std::map<std::string, Personaje*>::iterator ItPersonaje;
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
@@ -159,7 +159,7 @@ bool Mapa::hay_personaje(Coordenada *coord){
 		size_t ancho_min = coord_personaje.izquierda(ancho/2).obtener_abscisa();
 		size_t alto_max = coord_personaje.arriba(alto/2).obtener_ordenada();
 		size_t alto_min = coord_personaje.abajo(alto/2).obtener_ordenada();
-		if ( (x > ancho_min) && (x < ancho_max) && (y > alto_min) && (y < alto_max) ){
+		if ( (x > ancho_min) && (ancho_min < x) && (y > alto_min) && (y < alto_max) ){
 			return true;
 		}
 	}
@@ -192,7 +192,7 @@ void Mapa::agregar_bala(Bala *b){
 }
 
 void Mapa::agregar_personaje(Personaje *p){
-	personajes.insert(std::pair<int, Personaje*>(p->get_id(), p));
+	personajes.insert(std::pair<std::string, Personaje*>(p->get_id(), p));
 }
 
 void Mapa::quitar_personaje(int id_pj){

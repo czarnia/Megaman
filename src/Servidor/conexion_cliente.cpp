@@ -62,7 +62,7 @@ Conexion_cliente::~Conexion_cliente(){
   rcv.join();
 }
 
-void Conexion_cliente::enviar_cambio_posicion(std::string id, int x, int y){
+void Conexion_cliente::enviar_cambio_posicion(int tipo, int id, int x, int y){
 	int posicion = POSICION;
 	std::stringstream pos_x, pos_y;
 	pos_x << x;
@@ -70,34 +70,39 @@ void Conexion_cliente::enviar_cambio_posicion(std::string id, int x, int y){
 	std::string abscisa = pos_x.str();
 	std::string ordenada = pos_y.str();
 	skt->send((char*)&posicion, TAM_INT);
+	skt->send((char*)&tipo, TAM_INT);
 	skt->send((char*)&id, TAM_INT);
 	skt->send((char*)&abscisa, TAM_INT);
 	skt->send((char*)&ordenada, TAM_INT);
 }
 
-void Conexion_cliente::enviar_cantidad_vidas(std::string id, int cantidad){
+void Conexion_cliente::enviar_cantidad_vidas(int tipo, int id, int cantidad){
   int cant_vidas = CANT_VIDAS;
   skt->send((char*)&cant_vidas, TAM_INT);
+  skt->send((char*)&tipo, TAM_INT);
   skt->send((char*)&id, TAM_INT);
   skt->send((char*)&cantidad, TAM_INT);
   skt->send("        ", TAM_INT);
   //Envio una cadena vacía de TAM_INT caracteres.
 }
 
-void Conexion_cliente::enviar_porcentaje_vida(std::string id, int porcentaje){
+void Conexion_cliente::enviar_porcentaje_vida(int tipo, int id, int porcentaje){
   int vida = VIDA;
   skt->send((char*)&vida, TAM_INT);
+  skt->send((char*)&tipo, TAM_INT);
   skt->send((char*)&id, TAM_INT);
   skt->send((char*)&porcentaje, TAM_INT);
   skt->send("        ", TAM_INT);
   //Envio una cadena vacía de TAM_INT caracteres.
 }
 
-void Conexion_cliente::enviar_porcentaje_energia(int porcentaje){
+void Conexion_cliente::enviar_porcentaje_energia(int tipo, int id, int porcentaje){
   int energia = ENERGIA;
   skt->send((char*)&energia, TAM_INT);
+  skt->send((char*)&tipo, TAM_INT);
+  skt->send((char*)&id, TAM_INT);
   skt->send((char*)&porcentaje, TAM_INT);
-  skt->send("        ", TAM_INT*2);
+  skt->send("        ", TAM_INT);
   //Envio una cadena vacía de TAM_INT*2 caracteres.
 }
 

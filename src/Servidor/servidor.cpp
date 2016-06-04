@@ -10,13 +10,12 @@
 #define MAX_CONEXIONES 4
 #define FIN_ENTRADA "q"
 typedef struct sockaddr* Address;
-typedef std::map<std::string, Conexion_cliente*>::iterator ItClientes;
+typedef std::map<int, Conexion_cliente*>::iterator ItClientes;
 
 //--------------->Auxiliares<---------------//
-std::vector<std::string> obtener_claves(std::map<std::string,
-                                                Conexion_cliente*> hash){
-  std::vector<std::string> v;
-  std::map<std::string,Conexion_cliente*>::iterator i;
+std::vector<int> obtener_claves(std::map<int, Conexion_cliente*> hash){
+  std::vector<int> v;
+  std::map<int,Conexion_cliente*>::iterator i;
   for (i = hash.begin(); i != hash.end(); i++){
     v.push_back(i->first);
   }
@@ -49,10 +48,8 @@ void Servidor::aceptar_clientes(){
 void Servidor::agregar_cliente(Socket* cliente_nuevo){
   //Armo un id para el nuevo cliente con el numero de cliente.
   int id = (clientes.size() + 1);
-  std::stringstream id_cliente;
-  id_cliente << id;
   //Agrego al cliente:
-  clientes[id_cliente.str()] = new Conexion_cliente(cliente_nuevo, id, mundo);
+  clientes[id] = new Conexion_cliente(cliente_nuevo, id, mundo);
 }
 
 bool Servidor::termino_ejecucion(){
@@ -69,10 +66,10 @@ void Servidor::empezar_partida(){
 	mundo->jugar();
 }
 
-void Servidor::update(Observable *obs){}
+void update(Observable *obs){}
 
 void Servidor::update_fin_partida(){
-	std::vector<std::string> claves_clientes = obtener_claves(clientes);
+	std::vector<int> claves_clientes = obtener_claves(clientes);
 	for (size_t i = 0; i < claves_clientes.size(); i++){
 		Conexion_cliente* cliente = clientes[claves_clientes[i]];
 		clientes.erase(claves_clientes[i]);
@@ -82,10 +79,10 @@ void Servidor::update_fin_partida(){
 	//delete mundo;
 }
 
-void Servidor::update_gameover(std::string id){
+void Servidor::update_gameover(int id){
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN JUGADOR PERDIO.
 	ItClientes it = clientes.find(id);
-	if ((it->first).compare(id) == 0){
+	if (it->first == id){
 		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
 		(it->second)->enviar_gameover();
 		(it->second)->terminar_ejecucion();
@@ -93,39 +90,39 @@ void Servidor::update_gameover(std::string id){
 	}
 }
 
-void Servidor::update_murio_personaje(std::string id) {
+void Servidor::update_murio_personaje(int tipo, int id) {
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE MURIO
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cambio_posicion(id, -1, -1);
+		(it->second)->enviar_cambio_posicion(tipo, id, -1, -1);
 	}
 }
 
-void Servidor::update_cantidad_vidas(std::string id, int vidas) {
+void Servidor::update_cantidad_vidas(int tipo, int id, int vidas) {
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO
 	// PORCENTAJE DE VIDA
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cantidad_vidas(id, vidas);
+		(it->second)->enviar_cantidad_vidas(tipo, id, vidas);
 	}
 }
 
-void Servidor::update_porcentaje_vida(std::string id, int vida){
+void Servidor::update_porcentaje_vida(int tipo, int id, int vida){
 //LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO VIDA
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_porcentaje_vida(id, vida);
+		(it->second)->enviar_porcentaje_vida(tipo, id, vida);
 	}
 }
 
-void Servidor::update_energia(std::string id, int energia){
+void Servidor::update_energia(int tipo, int id, int energia){
 	ItClientes it = clientes.find(id);
-	if ((it->first).compare(id) == 0){
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
-		(it->second)->enviar_porcentaje_energia(energia);
+		(it->second)->enviar_porcentaje_energia(tipo, id, energia);
 	}
 }
 
-void Servidor::update_posicion(std::string id, int x, int y){
+void Servidor::update_posicion(int tipo, int id, int x, int y){
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cambio_posicion(id, x, y);
+		(it->second)->enviar_cambio_posicion(tipo, id, x, y);
 	}
 }

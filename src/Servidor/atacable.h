@@ -1,7 +1,7 @@
 #ifndef ATACABLE_H
 #define ATACABLE_H
 
-#include "bala.h"
+class Bala;
 
 class Atacable{
   public:

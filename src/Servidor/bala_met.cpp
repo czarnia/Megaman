@@ -2,8 +2,8 @@
 
 #define TIEMPO_MOVER 1
 
-Bala_met::Bala_met(int dir_x, int dir_y, Coordenada c):
-Bala(dir_x, dir_y, c){}
+Bala_met::Bala_met(int dir_x, int dir_y, Coordenada c, int id):
+Bala(dir_x, dir_y, c, id){}
 
 Bala_met::~Bala_met() {}
 

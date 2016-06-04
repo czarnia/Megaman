@@ -2,8 +2,8 @@
 
 #define TIEMPO_MOVER 1
 
-Bala_normal::Bala_normal(int dir_x, int dir_y, Coordenada c):
-Bala(dir_x, dir_y, c){}
+Bala_normal::Bala_normal(int dir_x, int dir_y, Coordenada c, int id):
+Bala(dir_x, dir_y, c, id){}
 
 Bala_normal::~Bala_normal() {}
 

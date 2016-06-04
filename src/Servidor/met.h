@@ -7,11 +7,11 @@
 class Met: public Personaje{
 	private:
 		Mapa *mapa;
-    bool tras_escudo;
-    size_t tiempo_pasado;
+		bool tras_escudo;
+		size_t tiempo_pasado;
 		Arma* arma;
 	public:
-		Met(Mapa *mapa, Coordenada c, std::string id);
+		Met(Mapa *mapa, Coordenada c, int id);
 		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);

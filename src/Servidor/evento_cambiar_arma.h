@@ -6,7 +6,7 @@
 
 class Evento_cambiar_arma : public Evento{
   private:
-    std::string id_evento;
+    int id_evento;
     int num_arma;
   public:
     //Crea un evento cambiar_arma dado un id y un numero de arma.

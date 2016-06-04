@@ -6,7 +6,7 @@
 
 class Evento_mover : public Evento{
   private:
-    std::string id_evento;
+    int id_evento;
     int direccion;
   public:
     //Crea un evento mover dado un id y una direccion.

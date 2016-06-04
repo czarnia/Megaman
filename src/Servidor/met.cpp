@@ -4,7 +4,7 @@
 
 #define TIEMPO_ATAQUE 2
 
-Met::Met(Mapa *mapa, Coordenada c, std::string id) : Personaje(mapa, c, id){
+Met::Met(Mapa *mapa, Coordenada c, int id) : Personaje(mapa, c, id){
   tras_escudo = false;
   tiempo_pasado = 0;
   arma = new Arma_met();

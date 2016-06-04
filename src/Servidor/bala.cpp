@@ -12,10 +12,16 @@
 #define SUBE 1
 #define BAJA -1
 
+
+Bala::Bala(int dir_x, int dir_y, Coordenada c, int id): 
+direccion_x(dir_x),
+direccion_y(dir_y), 
+coord(c),
+id(id){}
+
 bool Bala::puede_ocupar(Personaje *pj){
 	return true;
 }
-
 
 void Bala::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
@@ -57,3 +63,21 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 void Bala::interactuar(Personaje* pj){
 	pj->recibir_ataque(this);
 }
+
+Coordenada Bala::get_coordenada(){
+	return coord;
+}
+
+int Bala::get_id(){
+	return id;
+}
+
+void Bala::agregar_observador(Observador_ubicable *observador){
+	Observable::agregar_observador(observador);
+}
+
+void Bala::quitar_observador(Observador_ubicable *observador){
+	Observable::quitar_observador(observador);
+}
+
+void Bala::notificar_observadores(){}

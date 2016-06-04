@@ -18,7 +18,7 @@
 #define ALTO 4
 #define ANCHO 2
 
-Personaje::Personaje(Mapa *mapa, Coordenada c, int id):
+Personaje::Personaje(Mapa *mapa, Coordenada c, std::string id):
 coordenada(c),
 id(id){
 	velocidad_y = 0;
@@ -27,7 +27,6 @@ id(id){
 	ancho = ANCHO;
 	flotando = false; //asumo siempre inicio al personaje no en el aire.
 	tiempo_pasado = 0;
-	tipo = 0;
 }
 
 void Personaje::notificar_observadores(){
@@ -42,9 +41,10 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 	pos_inicial = coordenada;
 	mover(tiempo, mapa);
 	if (!(coordenada == pos_inicial)){
-		std::cout << "PERSONAJE: NOTIFICO OBSERVADORES\n";
+		std::cout << "NOTIFICO OBSERVADORES\n";
 		notificar_observadores();
 	}
+	//atacar(tiempo, mapa);
 }
 
 void Personaje::agregar_movimiento(int direccion){
@@ -53,15 +53,15 @@ void Personaje::agregar_movimiento(int direccion){
 		velocidad_x = 0;
 	}
 	if (direccion == SALTAR && !flotando){
-		std::cout << "PERSONAJE agregar_mov:caso salto \n";
+		std::cout << "caso salto \n";
 		velocidad_y -= VELOCIDAD_SALTO;
 	}
 	if (direccion == DERECHA){
-		std::cout << "PERSONAJE agregar_mov:caso derecha \n";
+		std::cout << "caso derecha \n";
 		velocidad_x += VELOCIDAD;
 	}
 	if (direccion == IZQUIERDA){
-		std::cout << "PERSONAJE agregar_mov:caso izquierda \n";
+		std::cout << "caso izquierda \n";
 		velocidad_x -= VELOCIDAD;
 	}
 }
@@ -71,25 +71,23 @@ void Personaje::sacar_movimiento(int direccion){
 		velocidad_x = 0;
 	}
 	if (direccion == DERECHA){
-		std::cout << "PERSONAJE sacar_mov: interrumpo mov derecha\n";
-		velocidad_x = 0;
+		std::cout << "caso dejo de apretar derecha \n";
+		velocidad_x -= VELOCIDAD;
 	}
 	if (direccion == IZQUIERDA){
-		std::cout << "PERSONAJE sacar_mov: interrumpo mov izquierda \n";
-		velocidad_x = 0;
+		std::cout << "caso dejar de apretar izquierda \n";
+		velocidad_x += VELOCIDAD;
 	}
 }
+
+void Personaje::agregar_ataque(int direccion) {}
 
 Coordenada Personaje::get_coordenada(){
 	return coordenada;
 }
 
-int Personaje::get_id(){
+std::string Personaje::devolver_id(){
 	return id;
-}
-
-int Personaje::get_tipo(){
-	return tipo;
 }
 
 bool Personaje::esta_vivo(){
@@ -119,28 +117,3 @@ void Personaje::perder_vida(int porcentaje){
 		vidas[0]->perder(porcentaje);
 	}
 }
-
-int Personaje::get_alto(){
-	return alto;
-}
-
-int Personaje::get_ancho(){
-	return ancho;
-}
-
-void Personaje::agregar_observador(Observador_ubicable *observador){
-	Observable::agregar_observador(observador);
-}
-
-void Personaje::quitar_observador(Observador_ubicable *observador){
-	Observable::quitar_observador(observador);
-}
-
-void Personaje::agregar_observador(Observador_personaje *observador){
-	Observable::agregar_observador(observador);
-}
-
-void Personaje::quitar_observador(Observador_personaje *observador){
-	Observable::quitar_observador(observador);
-}
-

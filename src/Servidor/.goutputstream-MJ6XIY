@@ -1,0 +1,13 @@
+#ifndef UBICABLE_H
+#define UBICABLE_H
+
+#include "coordenada.h"
+#include <string>
+
+class Ubicable{
+	public:
+		Coordenada *get_coordenada();
+		std::string devolver_id();
+}
+
+#endif UBICABLE_H

@@ -4,11 +4,9 @@
 #include <string>
 #include <iostream>
 
-Evento_atacar::Evento_atacar(int id, int dir) : direccion(dir){
-  std::stringstream	s;
-  s << "megaman" <<id;
-  id_evento = s.str();
-}
+Evento_atacar::Evento_atacar(int id, int dir): 
+id_evento(id),
+direccion(dir){}
 
 Evento_atacar::~Evento_atacar() {}
 

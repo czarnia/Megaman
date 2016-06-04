@@ -1,9 +1,8 @@
 #ifndef MEGAMAN_H
 #define MEGAMAN_H
 
-#include "personaje.h"
-#include "bala.h"
-
+#include "mapa.h"
+//#include "personaje.h"
 class Arma;
 
 class Megaman: public Personaje{
@@ -12,7 +11,7 @@ class Megaman: public Personaje{
 		std::vector<Arma*> armas;
 		size_t arma_act;
 	public:
-		Megaman(Mapa *mapa, Coordenada c, std::string id);
+		Megaman(Mapa *mapa, Coordenada c, int id);
 		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);

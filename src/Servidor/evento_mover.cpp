@@ -4,11 +4,9 @@
 #include <string>
 #include <iostream>
 
-Evento_mover::Evento_mover(int id, int dir) : direccion(dir){
-	std::stringstream	s;
-	s << "megaman" <<id;
-	id_evento = s.str();
-}
+Evento_mover::Evento_mover(int id, int dir):
+id_evento(id),
+direccion(dir){}
 
 int Evento_mover::get_direccion(){
 	return direccion;
