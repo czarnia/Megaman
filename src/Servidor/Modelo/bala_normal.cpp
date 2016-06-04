@@ -2,9 +2,10 @@
 #include "personaje.h"
 
 #define TIEMPO_MOVER 1
+#define TIPO_BALA_NORMAL 10
 
 Bala_normal::Bala_normal(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, id){}
+Bala(dir_x, dir_y, c, TIPO_BALA_NORMAL, id){}
 
 Bala_normal::~Bala_normal() {}
 

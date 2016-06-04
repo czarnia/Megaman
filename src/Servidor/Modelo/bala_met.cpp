@@ -2,9 +2,10 @@
 #include "personaje.h"
 
 #define TIEMPO_MOVER 1
+#define TIPO_BALA_MET 11
 
 Bala_met::Bala_met(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, id){}
+Bala(dir_x, dir_y, c, TIPO_BALA_MET, id){}
 
 Bala_met::~Bala_met() {}
 

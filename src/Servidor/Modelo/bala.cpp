@@ -17,12 +17,10 @@
 #define SUBE 1
 #define BAJA -1
 
-
-Bala::Bala(int dir_x, int dir_y, Coordenada c, int id):
+Bala::Bala(int dir_x, int dir_y, Coordenada c, int tipo, int id):
 direccion_x(dir_x),
 direccion_y(dir_y),
-coord(c),
-id(id){}
+Elemento(c, tipo, id){}
 
 bool Bala::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);
@@ -121,6 +119,3 @@ std::vector<Coordenada> Bala::coordenadas(Coordenada c){
 	return v;
 }
 
-Coordenada Bala::get_coordenada(){
-	return coord;
-}

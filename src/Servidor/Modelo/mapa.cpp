@@ -109,7 +109,7 @@ bool Mapa::ubicar(Personaje* pj, Coordenada c){
 	return true;
 }
 
-bool ubicar(Elemento* elem, Coordenada c){
+bool Mapa::ubicar(Elemento* elem, Coordenada c){
 	if (!puede_ubicarse(elem, c)){
 		return false;
 	}

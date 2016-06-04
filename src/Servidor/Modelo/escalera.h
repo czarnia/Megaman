@@ -8,7 +8,7 @@ class Personaje;
 
 class Escalera: public Elemento{
 	public:
-		Escalera(Coordenada c) : Elemento(c) {}
+		Escalera(Coordenada c);
 		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Ubicable* ubic);

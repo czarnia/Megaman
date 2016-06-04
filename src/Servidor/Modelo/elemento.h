@@ -16,7 +16,8 @@ public Ubicable{
 		int tipo;
 		int id;
 	public:
-		Elemento(Coordenada c) : coord(c) {};
+		Elemento(Coordenada c, int tipo, int id = 0): 
+		coord(c), tipo(tipo), id(id){};
 		//Dado un personaje, interactua con el mismo.
 		virtual void interactuar(Personaje *pj) = 0;
 		//Devuelve todas las coordenadas que ocupa un elemento.

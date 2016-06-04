@@ -7,7 +7,7 @@ class Personaje;
 
 class Puas: public Elemento{
 	public:
-		Puas(Coordenada c) : Elemento(c) {}
+		Puas(Coordenada c);
 		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Ubicable* ubic);

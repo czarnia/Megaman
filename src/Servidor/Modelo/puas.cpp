@@ -4,6 +4,9 @@
 #include "bala.h"
 #include "puas_asesinas.h"
 #include "bloque.h"
+#define TIPO_PUAS 3
+
+Puas::Puas(Coordenada c) : Elemento(c, TIPO_PUAS) {}
 
 bool Puas::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);

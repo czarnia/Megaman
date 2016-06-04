@@ -4,6 +4,9 @@
 #include "puas.h"
 #include "puas_asesinas.h"
 #include "bloque.h"
+#define TIPO_ESCALERA 2
+
+Escalera::Escalera(Coordenada c) : Elemento(c, TIPO_ESCALERA) {}
 
 bool Escalera::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);

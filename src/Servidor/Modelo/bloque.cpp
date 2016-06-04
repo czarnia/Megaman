@@ -7,12 +7,9 @@
 
 #define ALTO 2
 #define ANCHO 2
-#define TIPO_BLOQUE 0
+#define TIPO_BLOQUE 1
 
-Bloque::Bloque(Coordenada c) : Elemento(c) {
-	id = 0;
-	tipo = TIPO_BLOQUE;
-}
+Bloque::Bloque(Coordenada c) : Elemento(c, TIPO_BLOQUE) {}
 
 bool Bloque::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);

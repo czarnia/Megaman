@@ -18,9 +18,8 @@ public Elemento{
 		size_t tiempo_pasado;
 	public:
 		//Dada una direccion en x, una en y (hacia donde se movera) y una coordenada
-		//inicial, crea una bala.
-		//Bala(int dir_x, int dir_y, Coordenada c): Elemento(c), direccion_x(dir_x),
-		//direccion_y(dir_y) {}
+		//inicial y un id, crea una bala.
+		Bala(int dir_x, int dir_y, Coordenada c, int tipo, int id);
 		//Destructor de la bala.
 		virtual ~Bala() {};
 		//Dado un personaje y un mapa, interactua con el personaje.
