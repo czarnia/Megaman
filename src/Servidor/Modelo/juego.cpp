@@ -1,7 +1,7 @@
 #include "juego.h"
 #include <cstddef>
 #include <iosfwd>
-#include "../Comun/lock.h"
+#include "../../Comun/lock.h"
 #include "megaman_factory.h"
 #include <iostream>
 

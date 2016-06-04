@@ -18,9 +18,10 @@
 #define BAJA -1
 
 Bala::Bala(int dir_x, int dir_y, Coordenada c, int tipo, int id):
+Elemento(c, tipo, id),
 direccion_x(dir_x),
-direccion_y(dir_y),
-Elemento(c, tipo, id){}
+direccion_y(dir_y)
+{}
 
 bool Bala::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);
@@ -118,4 +119,3 @@ std::vector<Coordenada> Bala::coordenadas(Coordenada c){
 	v.push_back(c);
 	return v;
 }
-
