@@ -51,6 +51,10 @@ bool Bala::puede_ocupar(Puas_asesinas* puas){
 	return true;
 }
 
+bool Bala::puede_ocupar(Personaje* pj){
+	return true;
+}
+
 void Bala::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	size_t delta_x = 0;
@@ -98,6 +102,10 @@ Coordenada Bala::get_coordenada(){
 
 int Bala::get_id(){
 	return id;
+}
+
+int Bala::get_tipo(){
+	return 0;
 }
 
 void Bala::agregar_observador(Observador_ubicable *observador){
