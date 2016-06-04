@@ -21,7 +21,6 @@ class Bala_met: public Bala{
 		virtual void daniar(Megaman* mega);
 		//Daña a un Met.
 		virtual void daniar(Met* met);
-
 };
 
 #endif //BALA_MET_H

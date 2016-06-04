@@ -3,11 +3,11 @@
 
 #include "actualizable.h"
 #include "elemento.h"
-#include "personaje.h"
+
 
 class Met;
 class Megaman;
-//class Personaje;
+class Personaje;
 
 class Bala:
 public Actualizable,
@@ -69,11 +69,13 @@ public Elemento{
 		//Recibe un observador de ubicables y lo agrega a
 		//la lista de ubicables:
 		void agregar_observador(Observador_ubicable *observador);
-		//Recibe un puntero a observador de ubicables 
+		//Recibe un puntero a observador de ubicables
 		//y lo remueve de la lista de ubicables:
 		void quitar_observador(Observador_ubicable *observador);
 		//Notifica a sus observadores de un cambio de estado.
 		virtual void notificar_observadores();
+		//Devuelve la coordenada de una bala.
+		virtual Coordenada get_coordenada();
 };
 
 #endif //BALA_H
