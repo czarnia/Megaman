@@ -34,9 +34,18 @@ class Mapa{
     //Devuelve true si la coordenada pertenece al mapa y false en el caso con-
     //trario.
     bool tiene_coordenada(Coordenada coordenada);
-    //Dado un personaje y una coordenada, devuelve true si el mismo puede
+    //Dado un ubicable y una coordenada, devuelve true si el mismo puede
     //ubicarse en la misma.
     bool puede_ubicarse(Ubicable* ubic, Coordenada c);
+    //Dado un personaje y una coordenada, lo ubica en la misma, en caso de no
+    //ser posible, devuelve false.
+    bool ubicar(Personaje* pj, Coordenada c);
+    //Dado un elemento y una coordenada, lo ubica en la misma, en caso de no
+    //ser posible, devuelve false.
+    virtual bool ubicar(Elemento* elem, Coordenada c);
+    //Dado una bala y una coordenada, la ubica en la misma, en caso de no
+    //ser posible, devuelve false.
+    virtual bool ubicar(Bala* bala, Coordenada c);
     //Dado el id de un personaje, lo devuelve.
     Personaje *obtener_pj(std::string id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.

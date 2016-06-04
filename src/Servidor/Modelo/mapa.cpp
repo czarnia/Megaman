@@ -101,6 +101,35 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 	return true;
 }
 
+bool Mapa::ubicar(Personaje* pj, Coordenada c){
+	if (!puede_ubicarse(pj, c)){
+		return false;
+	}
+	personajes[pj->devolver_id()] = pj; //TODO: euge, mirate esto vos que estabas
+	return true;												//con los ids!
+}
+
+bool ubicar(Elemento* elem, Coordenada c){
+	if (!puede_ubicarse(elem, c)){
+		return false;
+	}
+	int x = c.obtener_abscisa();
+	int y = c.obtener_ordenada();
+	elementos[x][y] = elem;
+	return true;
+}
+
+bool ubicar(Bala* bala, Coordenada c){
+	if (!puede_ubicarse(bala, c)){
+		return false;
+	}
+	int x = c.obtener_abscisa();
+	int y = c.obtener_ordenada();
+	elementos[x][y] = bala;
+	balas.push_back(bala);
+	return true;
+}
+
 Personaje* Mapa::obtener_pj(std::string id_pj){
 	Personaje *p = NULL;
 	if (personajes.find(id_pj) != personajes.end()){

@@ -4,8 +4,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "../Servidor/coordenada.h"
-#include "../Servidor/mapa.h"
+#include "../Servidor/Modelo/coordenada.h"
+#include "../Servidor/Modelo/mapa.h"
 
 class Escritor_mapa{
   private:
