@@ -86,6 +86,7 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 		if (!(actual == coord)){
 			coord = actual;
 			//notificar cambio posicion
+			notificar_observadores();
 		}else{
 			//notificar colision y destruir
 		}
@@ -116,7 +117,11 @@ void Bala::quitar_observador(Observador_ubicable *observador){
 	Observable::quitar_observador(observador);
 }
 
-void Bala::notificar_observadores(){}
+void Bala::notificar_observadores(){
+	for (size_t i = 0; i < observadores.size(); i++){
+		observadores[i]->update(this);
+	}
+}
 
 std::vector<Coordenada> Bala::coordenadas(){
 	return coordenadas(coord);

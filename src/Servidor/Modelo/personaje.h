@@ -12,7 +12,9 @@
 #include "personaje_observable.h"
 #include "observador_personaje.h"
 #include "observador_ubicable.h"
+#include "factory_observador_ubicable.h"
 
+class Factory_observador_ubicable;
 class Observador_personaje;
 class Bala;
 
@@ -32,10 +34,11 @@ public Personaje_observable{
 		int tipo;
 		bool flotando;
 		size_t tiempo_pasado;
+		Factory_observador_ubicable *fact_obs;
 	public:
 		//Dado un mapa, una coordenada y una cadena que usa como identificador, se
 		//crea un personaje.
-		Personaje(Mapa *mapa, Coordenada c, int id);
+		Personaje(Mapa *mapa, Coordenada c, int id, Factory_observador_ubicable *fact_obs);
 		//Hace que el personaje se mueva;
 		virtual void mover(size_t tiempo, Mapa* mapa) = 0;
 		//Hace que el personaje ataque.

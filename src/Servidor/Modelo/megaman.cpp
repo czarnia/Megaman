@@ -9,10 +9,10 @@
 #define IZQUIERDA 4
 #define MEGAMAN 1
 
-Megaman::Megaman(Mapa *mapa, Coordenada c, int id):
-Personaje(mapa, c, id){
+Megaman::Megaman(Mapa *mapa, Coordenada c, int id, Factory_observador_ubicable *fact_obs):
+Personaje(mapa, c, id, fact_obs){
 	arma_act = 1;
-	armas.push_back(new Arma_megaman());
+	armas.push_back(new Arma_megaman(fact_obs));
 	tipo = MEGAMAN;
 }
 

@@ -11,7 +11,7 @@ class Megaman: public Personaje{
 		std::vector<Arma*> armas;
 		size_t arma_act;
 	public:
-		Megaman(Mapa *mapa, Coordenada c, int id);
+		Megaman(Mapa *mapa, Coordenada c, int id, Factory_observador_ubicable *fact_obs);
 		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
