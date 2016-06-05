@@ -25,12 +25,6 @@ Game::Game(char* hostname,char* port):
     currentState = new MainMenu(window, renderer);
 }
 
-void Game::cap_framerate(const Uint32 &starting_tick){
-    if ((1000/FPS) > SDL_GetTicks() - starting_tick){
-        SDL_Delay(1000/FPS - (SDL_GetTicks() - starting_tick));
-    }
-}
-
 void Game::run(){
     bool running = true;
     int namebytes = 4;

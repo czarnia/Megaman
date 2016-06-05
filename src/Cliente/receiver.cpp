@@ -7,21 +7,29 @@
 #include "backround_sprite.h"
 #include "minion_sprite.h"
 #include "gameState.h"
-//TODO:Definir estos valores!
+
+#define MAPA 1
+/// PARA PROTOCOLO
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
-
-#define BLOCK 0
+#define BLOCK_EARTH 10
+#define BLOCK_SPIKES 11
+#define BLOCK_STAIR 12
 #define MEGAMAN 1
-#define BULLET 2
+#define MEGAMAN_BULLET 2
 #define MET 8
 
+/// PARA ALMACENAMIENTO
+#define BLOCK_EARTHN 100
+#define BLOCK_SPIKESN 1000
+#define BLOCK_STAIRN 1500
+#define MEGAMANN 0
+#define MEGAMAN_BULLETN 10000
+#define METN 2000
+
 #define TAM_INT 4
-#define VICTORY 5
-#define GAMEOVER 6
-
-
-
+#define VICTORY 2
+#define GAMEOVER 3
 
 Receiver::Receiver(Socket* conexion, Renderer *renderer,
                     bool *victory, bool *ko):
@@ -50,12 +58,12 @@ void Receiver::update(bool *running){
     command = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
 
-    if ( (command != VICTORY) && (command != GAMEOVER) && (command != END_OF_RESPONSE)){
+    if ( command == MAPA ){
         /// Tipo de objeto
         skt->receive(buffer, TAM_INT);
         objectType = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
-        /// numero de objeto
+        /// ID objeto
         skt->receive(buffer, TAM_INT);
         objectID = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
@@ -67,6 +75,7 @@ void Receiver::update(bool *running){
         skt->receive(buffer, TAM_INT);
         coordY = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
+
         coord = std::make_pair(coordX, coordY);
     }else{
         objectType = -1;
@@ -75,12 +84,12 @@ void Receiver::update(bool *running){
         coordY = -1;
     }
     /// Etapa de clasificacion de objetos
-    if (objectType == BLOCK){
-        objectType += 100;
-    }else if (objectType == MEGAMAN){
-        objectType -= 1;
-    }else if (objectType == BULLET){
-        objectType += 48;
+    if (objectType == MEGAMAN){
+        objectType = MEGAMANN;
+    }else if (objectType == MEGAMAN_BULLET){
+        objectType = MEGAMAN_BULLETN;
+    }else if (objectType == MET){
+        objectType = METN;
     }
 
     switch (handler.execute(command, objectType, objectID, coord)){
@@ -120,18 +129,18 @@ void Receiver::receiveMap(){
     Sprite *spr = NULL;
     do{
         /// recibo COMANDO y lo ignoro aca
-      /*  skt->receive(buffer,TAM_INT);
+        skt->receive(buffer,TAM_INT);
         command = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);*/
-        /// Recibo el tipo de OBJETO
-        skt->receive(buffer,TAM_INT);
-        objectType = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
-        /// Recibo el id del OBJETO
-        skt->receive(buffer,TAM_INT);
-        objectID = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);
-        if (objectType != END_OF_MAP){
+        if (command != END_OF_MAP){
+            /// Recibo el tipo de OBJETO
+            skt->receive(buffer,TAM_INT);
+            objectType = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);
+            /// Recibo el id del OBJETO
+            skt->receive(buffer,TAM_INT);
+            objectID = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);
             /// Recibo COORD X
             skt->receive(buffer,TAM_INT);
             coordX = *((int*)buffer);
@@ -140,31 +149,44 @@ void Receiver::receiveMap(){
             skt->receive(buffer,TAM_INT);
             coordY = *((int*)buffer);
             strncpy(buffer,"    ",TAM_INT);
+
+            std::cout<<"Recibi MAPA: "<< objectType<< " " << coordX << " " << coordY<<std::endl;
+            /// CARGO EL OBJETO QUE RECIBI
+            switch (objectType){
+                case BLOCK_EARTH:
+                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
+                    spr->setPosX(coordX*30);
+                    spr->setPosY(coordY*30);
+                    renderer->addMapSprite(BLOCK_EARTHN, spr);
+                    break;
+                case BLOCK_SPIKES:
+                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
+                    spr->setPosX(coordX*30);
+                    spr->setPosY(coordY*30);
+                    renderer->addMapSprite(BLOCK_SPIKESN, spr);
+                    break;
+                case BLOCK_STAIR:
+                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
+                    spr->setPosX(coordX*30);
+                    spr->setPosY(coordY*30);
+                    renderer->addMapSprite(BLOCK_STAIRN, spr);
+                    break;
+                case MEGAMAN:
+                    spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.png");
+                    spr->setPosX(coordX*30);
+                    spr->setPosY(coordY*30);
+                    renderer->addSprite(MEGAMANN+objectID,spr);
+                case MET:
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
+                    spr->setPosX(coordX*30);
+                    spr->setPosY(coordY*30);
+                    renderer->addMapSprite(METN+objectID, spr);
+                    break;
+                default:
+                    break;
+            }
         }
-        std::cout<<"Recibi MAPA: "<< objectType<< " " << coordX << " " << coordY<<std::endl;
-        /// CARGO EL OBJETO QUE RECIBI
-        switch (objectType){
-            case BLOCK:
-                spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
-                spr->setPosX(coordX*30);
-                spr->setPosY(coordY*30);
-                renderer->addMapSprite(BLOCK+100, spr);
-                break;
-            case MEGAMAN:
-                spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.jpeg");
-                spr->setPosX(coordX*30);
-                spr->setPosY(coordY*30);
-                renderer->addSprite(MEGAMAN+objectID-1,spr);
-            case MET:
-                spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
-                spr->setPosX(coordX*30);
-                spr->setPosY(coordY*30);
-                renderer->addMapSprite(MET+objectID, spr);
-                break;
-            default:
-                break;
-        }
-    }while (objectType != END_OF_MAP);
+    }while (command != END_OF_MAP);
 }
 
 Receiver::~Receiver(){
