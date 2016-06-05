@@ -17,7 +17,8 @@ Juego::Juego(size_t long_x, size_t long_y){
 void Juego::inicializar_partida(int num_jugadores){
 	cant_jugadores = num_jugadores;
 	for (int i = 0; i < cant_jugadores; ++i){
-		factories["MEGAMAN"]->crear(mundo);
+		Coordenada c = Coordenada(0,0);
+		factories["MEGAMAN"]->crear(mundo, c);
 	}
 	//ACA SE PUEDEN CREAR LOS OTROS PERSONAJES.
 }
