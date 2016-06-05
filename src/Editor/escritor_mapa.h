@@ -1,4 +1,4 @@
-#ifndef ESCRITOR_MAPA_H
+/*#ifndef ESCRITOR_MAPA_H
 #define ESCRITOR_MAPA_H
 
 #include <iostream>
@@ -30,4 +30,4 @@ class Escritor_mapa{
     void agregar_inicio_megamans(Coordenada coord_central);
 };
 
-#endif //ESCRITOR_MAPA_H
+#endif //ESCRITOR_MAPA_H*/

@@ -20,7 +20,7 @@ gameStateEditor::gameStateEditor(Window *window, Renderer* renderer):
 }
 
 void gameStateEditor::chooseBlock(SDL_Event *event){
-    /*switch(event->key.keysym.sym){
+    switch(event->key.keysym.sym){
         case SDLK_b:/// BLOQUE
             object = gameStateEditor::BLOCK;
             std::cout<<"Se eligio un blocke"<<std::endl;
@@ -43,11 +43,11 @@ void gameStateEditor::chooseBlock(SDL_Event *event){
             break;
         default:
             break;
-    }*/
+    }
 }
 
 void gameStateEditor::updateInput(SDL_Event *event){
-    /*Sprite *spr;
+    Sprite *spr;
     if ( event->button.button == SDL_BUTTON_LEFT && object != gameStateEditor::NOTHING){
         int x = (event->button.x + renderer->camX)/Block_sprite::width*Block_sprite::width;
         int y = (event->button.y + renderer->camY)/Block_sprite::height*Block_sprite::height;
@@ -102,7 +102,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
         if(renderer->ocupied(x,y)){
             renderer->erase(x,y);
         }
-    }*/
+    }
 }
 
 void gameStateEditor::load(int stack){
