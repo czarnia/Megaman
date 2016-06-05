@@ -97,8 +97,8 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 break;
         }
     }else if (event->button.button == SDL_BUTTON_RIGHT){
-        int x = event->button.x/Block_sprite::width*Block_sprite::width;
-        int y = event->button.y/Block_sprite::width*Block_sprite::width;
+        int x = (event->button.x + renderer->camX)/Block_sprite::width*Block_sprite::width;
+        int y = (event->button.y + renderer->camY)/Block_sprite::width*Block_sprite::width;
         if(renderer->ocupied(x,y)){
             renderer->erase(x,y);
         }
@@ -116,12 +116,18 @@ int gameStateEditor::unload(){
 void gameStateEditor::updateCameraPos(SDL_Event *event){
     if (event->button.x < window->get_width()/4){
         renderer->camX -= CAM_SPEEDX;
+        if(renderer->camX < 0){
+            renderer->camX = 0;
+        }
     }
     if (event->button.x > window->get_width()*3/4){
         renderer->camX += CAM_SPEEDX;
     }
     if (event->button.y < window->get_height()/4){
         renderer->camY -= CAM_SPEEDX;
+        if(renderer->camY < 0){
+            renderer->camY = 0;
+        }
     }
     if (event->button.y > window->get_height()*3/4){
         renderer->camY += CAM_SPEEDX;
