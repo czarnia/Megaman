@@ -54,3 +54,13 @@ std::vector<Coordenada> Escalera::coordenadas(Coordenada c){
 }
 
 Escalera::~Escalera() {}
+
+void Escalera::notificar_observadores(){}
+
+void Escalera::agregar_observador(Observador_ubicable *observador){
+	Observable::agregar_observador(observador);
+}
+
+void Escalera::quitar_observador(Observador_ubicable *observador){
+	Observable::agregar_observador(observador);
+}

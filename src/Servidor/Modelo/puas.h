@@ -42,6 +42,13 @@ class Puas: public Elemento{
 		virtual std::vector<Coordenada> coordenadas(Coordenada c);
 		//Destructor de las Puas.
 		~Puas();
+
+		virtual void notificar_observadores();
+
+		virtual void agregar_observador(Observador_ubicable *observador);
+
+		virtual void quitar_observador(Observador_ubicable *observador);
+
 };
 
 #endif //PUAS_H

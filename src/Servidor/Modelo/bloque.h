@@ -40,7 +40,7 @@ class Bloque: public Elemento{
 		//Devuelve todas las coordenadas que ocuparía un bloque si su centro es-
 		//tuviera en c.
 		virtual std::vector<Coordenada> coordenadas(Coordenada c);
-		
+
 		virtual void notificar_observadores();
 
 		virtual void agregar_observador(Observador_ubicable *observador);

@@ -52,8 +52,8 @@ Mapa* Cargador_mapa::cargar(){
 }
 
 void Cargador_mapa::agregar_met(Coordenada coord_central){
-  Met* nuevo_met = new Met(mapa_real, coord_central, 0);
-  mapa_real->ubicar(nuevo_met, coord_central);
+  //Met* nuevo_met = new Met(mapa_real, coord_central, 0);
+  //mapa_real->ubicar(nuevo_met, coord_central);
 }
 
 void Cargador_mapa::agregar_bloque(Coordenada coord_central){
