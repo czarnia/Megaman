@@ -8,6 +8,7 @@
 #define BLOCKN 0
 #define MEGAMANN 1
 #define METN 8
+#define CAM_SPEEDX 3
 
 gameStateEditor::gameStateEditor(Window *window, Renderer* renderer):
     window(window),
@@ -22,7 +23,7 @@ void gameStateEditor::chooseBlock(SDL_Event *event){
     /*switch(event->key.keysym.sym){
         case SDLK_b:/// BLOQUE
             object = gameStateEditor::BLOCK;
-            std::cout<<"Se eligio un bloque"<<std::endl;
+            std::cout<<"Se eligio un blocke"<<std::endl;
             break;
         case SDLK_s:/// PUAS
             object = gameStateEditor::SPIKES;
@@ -48,8 +49,8 @@ void gameStateEditor::chooseBlock(SDL_Event *event){
 void gameStateEditor::updateInput(SDL_Event *event){
     /*Sprite *spr;
     if ( event->button.button == SDL_BUTTON_LEFT && object != gameStateEditor::NOTHING){
-        int x = event->button.x/Block_sprite::width*Block_sprite::width;
-        int y = event->button.y/Block_sprite::width*Block_sprite::width;
+        int x = (event->button.x + renderer->camX)/Block_sprite::width*Block_sprite::width;
+        int y = (event->button.y + renderer->camY)/Block_sprite::height*Block_sprite::height;
 
         switch(object){
             case gameStateEditor::BLOCK:
@@ -77,7 +78,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 }
                 break;
             case gameStateEditor::MEGAMAN:
-                if (!renderer->ocupied(x,y)){
+                if (!renderer->ocupied(x,y) && !renderer->ocupied(x,y+Block_sprite::width)){
                     spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.png");
                     spr->setPosX(x);
                     spr->setPosY(y);
@@ -96,8 +97,8 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 break;
         }
     }else if (event->button.button == SDL_BUTTON_RIGHT){
-        int x = event->button.x/Block_sprite::width*Block_sprite::width;
-        int y = event->button.y/Block_sprite::width*Block_sprite::width;
+        int x = (event->button.x + renderer->camX)/Block_sprite::width*Block_sprite::width;
+        int y = (event->button.y + renderer->camY)/Block_sprite::width*Block_sprite::width;
         if(renderer->ocupied(x,y)){
             renderer->erase(x,y);
         }
@@ -112,6 +113,27 @@ int gameStateEditor::unload(){
     return 0;
 }
 
+void gameStateEditor::updateCameraPos(SDL_Event *event){
+    if (event->button.x < window->get_width()/4){
+        renderer->camX -= CAM_SPEEDX;
+        if(renderer->camX < 0){
+            renderer->camX = 0;
+        }
+    }
+    if (event->button.x > window->get_width()*3/4){
+        renderer->camX += CAM_SPEEDX;
+    }
+    if (event->button.y < window->get_height()/4){
+        renderer->camY -= CAM_SPEEDX;
+        if(renderer->camY < 0){
+            renderer->camY = 0;
+        }
+    }
+    if (event->button.y > window->get_height()*3/4){
+        renderer->camY += CAM_SPEEDX;
+    }
+}
+
 GameState::StateCode gameStateEditor::update(){
 
     SDL_Event event;
@@ -123,6 +145,8 @@ GameState::StateCode gameStateEditor::update(){
             chooseBlock(&event);
         }else if (event.type == SDL_MOUSEBUTTONDOWN){
             updateInput(&event);
+        }else if (event.type == SDL_MOUSEMOTION){
+            updateCameraPos(&event);
         }
     }
     return GameState::CONTINUE;

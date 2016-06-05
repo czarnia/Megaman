@@ -68,8 +68,10 @@ bool Renderer::find(int key){
 }
 
 void Renderer::draw(Sprite *spr){
-
-    SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), spr->get_rectangle());
+    auxRect = *(spr->get_rectangle());
+    auxRect.x = spr->getPosX() - camX;
+    auxRect.y = spr->getPosY() - camY;
+    SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), &auxRect);
 }
 
 void Renderer::present(){

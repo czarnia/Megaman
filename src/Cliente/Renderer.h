@@ -11,11 +11,12 @@
 class Renderer{
     private:
         SDL_Renderer *renderer;
-
+        SDL_Rect auxRect;
         std::pair<int,int> map_size;
+    public:
+        /// Posiciones de camara
         int camX;
         int camY;
-    public:
         /// vectores que guardan los sprites
         std::map<int,Sprite*> sprites;
         std::map<int,Sprite*> map_sprites;

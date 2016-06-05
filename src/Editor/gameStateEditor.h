@@ -22,6 +22,7 @@ class gameStateEditor: public GameState{
         int unload();
         StateCode update();
         void render();
+        void updateCameraPos(SDL_Event *event);
         void exportMap();
         ~gameStateEditor();
 };
