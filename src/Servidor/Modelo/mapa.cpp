@@ -244,7 +244,9 @@ std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	std::set<Ubicable*> ubicables;
 	for (size_t i = 0; i < long_x; i++){ //aca va long_x
 		for (size_t j = 0; j < long_y; j++){ //aca va long_y
-			ubicables.insert(elementos[i][j]);
+			if(elementos[i].find(j) != elementos[i].end()){
+				ubicables.insert(elementos[i][j]);
+			}
 		}
 	}
 	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
