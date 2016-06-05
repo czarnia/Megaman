@@ -1,5 +1,6 @@
 #include "arma_megaman.h"
 #include "bala_normal.h"
+#include "factory_observador_ubicable.h"
 
 Arma_megaman::Arma_megaman(Factory_observador_ubicable *fact_ubicables):
 Arma(fact_ubicables){

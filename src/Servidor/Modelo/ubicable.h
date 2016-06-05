@@ -46,18 +46,23 @@ public Observable{
 		//Dadas unas puas_asesinas, dice si el mismo puedo ubicarse en una posicion donde
 		//hay un elemento.
 		virtual bool puede_ocupar(Puas_asesinas* puas) = 0;
-
+		//Agrega un observador a la lista de observadores del ubicable.
 		virtual void agregar_observador(Observador_ubicable *observador) = 0;
+		//Remueve un observador de la lista de observadores del ubicable.
 		virtual void quitar_observador(Observador_ubicable *observador) = 0;
+		//Devuelve la coordenada central del ubicable.
 		virtual Coordenada get_coordenada() = 0;
+		//Devuelve un entero que representa el tipo de ubicable.
 		virtual int get_tipo() = 0;
+		//Devuelve un entero que identifica al ubicable dentro
+		//de su tipo.
 		virtual int get_id() = 0;
-
-		//virtual int get_ancho() = 0;
-		//virtual int get_alto() = 0;
-
+		//Devuelve el ancho del ubicable.
+		virtual int get_ancho() = 0;
+		//Devuelve el alto del ubicable.
+		virtual int get_alto() = 0;
 		//Destructor del ubicable.
-    virtual ~Ubicable() {}
+		virtual ~Ubicable() {}
 };
 
 #endif //UBICABLE_H

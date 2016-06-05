@@ -9,7 +9,10 @@
 #define ANCHO 2
 #define TIPO_BLOQUE 10
 
-Bloque::Bloque(Coordenada c) : Elemento(c, TIPO_BLOQUE) {}
+Bloque::Bloque(Coordenada c) : Elemento(c, TIPO_BLOQUE) {
+	alto = ALTO;
+	ancho = ANCHO;
+}
 
 bool Bloque::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);
@@ -68,17 +71,5 @@ void Bloque::agregar_observador(Observador_ubicable *observador){
 void Bloque::quitar_observador(Observador_ubicable *observador){
 	Observable::agregar_observador(observador);
 }
-
-Coordenada Bloque::get_coordenada(){
-	return coord;
-}
-
-int Bloque::get_tipo(){
-	return tipo;
-}
-		
-int Bloque::get_id(){
-	return id;
-}	
 
 Bloque::~Bloque() {}

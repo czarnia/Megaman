@@ -47,15 +47,6 @@ class Bloque: public Elemento{
 
 		virtual void quitar_observador(Observador_ubicable *observador);
 
-		virtual Coordenada get_coordenada();
-
-		virtual int get_tipo();
-		
-		virtual int get_id();	
-		
-		//virtual int get_ancho();
-		//virtual int get_alto();
-		
 		//Destructor del bloque.
 		~Bloque();
 };
