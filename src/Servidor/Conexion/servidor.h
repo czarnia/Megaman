@@ -7,6 +7,7 @@
 #include "entrada_estandar.h"
 #include "observador_juego.h"
 #include "../Modelo/juego.h"
+#include "../../Comun/socket.h"
 
 class Servidor:
 public Observador_juego{
@@ -20,13 +21,14 @@ public Observador_juego{
     //Crea un servidor.
     Servidor(char *puerto);
     //Destruye un servidor.
-    ~Servidor();
+    virtual ~Servidor();
     //Acepto a los clientes del servidor (maximo cuatro).
     void aceptar_clientes();
     //Devuelve true si se cierra al servidor, false en caso contrario.
     bool termino_ejecucion();
     //Empieza una partida.
     void empezar_partida();
+    
     virtual void update(Observable *obs);
     virtual void update_fin_partida();
     virtual void update_gameover(int id);

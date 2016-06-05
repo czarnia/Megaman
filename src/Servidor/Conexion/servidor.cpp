@@ -23,7 +23,6 @@ std::vector<int> obtener_claves(std::map<int, Conexion_cliente*> hash){
 }
 //------------------------------------------//
 
-
 Servidor::Servidor(char *puerto){
 	entrada = new Entrada_estandar(FIN_ENTRADA);
 	skt = new Socket(NULL, puerto);
@@ -45,15 +44,15 @@ void Servidor::aceptar_clientes(){
   skt->shutdown(SHUT_RDWR);
 }
 
+bool Servidor::termino_ejecucion(){
+  return entrada->termino();
+}
+
 void Servidor::agregar_cliente(Socket* cliente_nuevo){
   //Armo un id para el nuevo cliente con el numero de cliente.
   int id = (clientes.size() + 1);
   //Agrego al cliente:
   clientes[id] = new Conexion_cliente(cliente_nuevo, id, mundo);
-}
-
-bool Servidor::termino_ejecucion(){
-  return entrada->termino();
 }
 
 void Servidor::empezar_partida(){
@@ -66,7 +65,7 @@ void Servidor::empezar_partida(){
 	mundo->jugar();
 }
 
-void update(Observable *obs){}
+void Servidor::update(Observable *obs){}
 
 void Servidor::update_fin_partida(){
 	std::vector<int> claves_clientes = obtener_claves(clientes);
