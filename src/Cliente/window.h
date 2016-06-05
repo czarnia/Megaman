@@ -14,6 +14,8 @@ class Window{
         Window(int width, int height);
         void maximize();
         void setTitle(std::string title);
+        int get_width();
+        int get_height();
         SDL_Window* get_window();
 };
 

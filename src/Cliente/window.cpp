@@ -1,7 +1,10 @@
 #include "window.h"
 #include <iostream>
 
-Window::Window(int width, int height){
+Window::Window(int width, int height):
+    width(width),
+    height(height)
+{
     window = SDL_CreateWindow("Window",
                                 SDL_WINDOWPOS_UNDEFINED, // POS X
                                 SDL_WINDOWPOS_UNDEFINED, // POS Y
@@ -14,6 +17,14 @@ Window::Window(int width, int height){
 void Window::maximize(){
    // SDL_MaximizeWindow(window);
     SDL_SetWindowSize(window, 800, 600);
+}
+
+int Window::get_width(){
+    return width;
+}
+
+int Window::get_height(){
+    return height;
 }
 
 void Window::setTitle(std::string title){
