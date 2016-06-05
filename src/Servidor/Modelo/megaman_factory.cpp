@@ -17,7 +17,8 @@ Personaje* MegamanFactory::crear(Mapa* mapa){
 	Observador_personaje *obs = new Observador_personaje(juego);
 	Observador_ubicable *obs_ubicable = new Observador_ubicable(juego, &coord);
 	int id = (creados + 1);
-	Megaman *megaman = new Megaman(mapa, coord, id);
+	Factory_observador_ubicable *fact_obs = new Factory_observador_ubicable(juego);
+	Megaman *megaman = new Megaman(mapa, coord, id, fact_obs);
 	megaman->agregar_observador(obs);
 	megaman->agregar_observador(obs_ubicable);
 	//megaman->agregar_observador(this);

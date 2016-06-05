@@ -16,6 +16,7 @@ public Elemento{
 		int direccion_x;
 		int direccion_y;
 		size_t tiempo_pasado;
+		bool impacto;
 	public:
 		//Dada una direccion en x, una en y (hacia donde se movera) y una coordenada
 		//inicial y un id, crea una bala.

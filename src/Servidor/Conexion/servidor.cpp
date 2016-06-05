@@ -68,6 +68,7 @@ void Servidor::empezar_partida(){
 void Servidor::update(Observable *obs){}
 
 void Servidor::update_fin_partida(){
+	std::cout << "FIN PARTIDA\n";
 	std::vector<int> claves_clientes = obtener_claves(clientes);
 	for (size_t i = 0; i < claves_clientes.size(); i++){
 		Conexion_cliente* cliente = clientes[claves_clientes[i]];
@@ -112,7 +113,6 @@ void Servidor::update_porcentaje_vida(int tipo, int id, int vida){
 }
 
 void Servidor::update_energia(int tipo, int id, int energia){
-	ItClientes it = clientes.find(id);
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
 		(it->second)->enviar_porcentaje_energia(tipo, id, energia);
@@ -120,6 +120,9 @@ void Servidor::update_energia(int tipo, int id, int energia){
 }
 
 void Servidor::update_posicion(int tipo, int id, int x, int y){
+	std::stringstream s;
+	s << id;
+	std::cout << "PERSONAJE "+s.str()+"ACTUALIZA POSICION\n";
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		(it->second)->enviar_cambio_posicion(tipo, id, x, y);

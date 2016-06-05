@@ -5,7 +5,7 @@
 
 class Arma_megaman : public Arma{
   public:
-	Arma_megaman();
+	Arma_megaman(Factory_observador_ubicable *fact_ubicables);
     //Ataca, es decir, crea una bala normal.
     virtual Bala* atacar(int dir_x, int dir_y, Coordenada c);
     //Destructor de la arma.

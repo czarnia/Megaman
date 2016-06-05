@@ -7,7 +7,7 @@
 
 #define ALTO 2
 #define ANCHO 2
-#define TIPO_BLOQUE 1
+#define TIPO_BLOQUE 10
 
 Bloque::Bloque(Coordenada c) : Elemento(c, TIPO_BLOQUE) {}
 

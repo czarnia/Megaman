@@ -169,4 +169,8 @@ std::vector<Coordenada> Juego::bloques(){
 	return mundo->coord_bloques();
 }
 
+std::vector<Ubicable*> Juego::devolver_ubicables(){
+	return mundo->devolver_ubicables();
+}
+
 Juego::~Juego(){}

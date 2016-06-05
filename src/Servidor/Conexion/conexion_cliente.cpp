@@ -12,12 +12,16 @@
 enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 
 void Conexion_cliente::mandar_bloques(std::vector<Coordenada> b){
-	int codigo_bloque = 100;
+	int codigo_mapa = POSICION;
+	int tipo_bloque = 100;
+	int id_bloque = 0;
 	int fin_mapa = 6666;
 	for(size_t i = 0; i < b.size(); i++){
 		int x = b[i].obtener_abscisa();
 		int y = b[i].obtener_ordenada();
-		skt->send((char*)&codigo_bloque, TAM_INT);
+		skt->send((char*)&codigo_mapa, TAM_INT);
+		skt->send((char*)&tipo_bloque, TAM_INT);
+		skt->send((char*)&id_bloque, TAM_INT);
 		skt->send((char*)&x, TAM_INT);
 		skt->send((char*)&y, TAM_INT);
 	}
@@ -41,27 +45,29 @@ void Conexion_cliente::enviar_mapa_inicial(Juego* m, int id){
 	skt->send((char*)&megaman_x, TAM_INT);
 	skt->send((char*)&megaman_y, TAM_INT);
 
-	/*
-	std::vector<Ubicables*> ubicables = m->obtener_ubicables();
+	
+/* int fin_mapa = 6666;
+ * std::vector<Ubicable*> ubicables = m->devolver_ubicables();
+	int codigo_mapa = POSICION;
 	for (size_t i = 0; i < ubicables.size(); i++){
 		Ubicable* ubicable = ubicables[i];
+		int tipo = ubicable->get_tipo();
+		int id = ubicable->get_id();
 
-		int id_clase = ubicable.devolver_id_clase();
-		int id = ubicable.devolver_id();
-
-		Coordenada central = ubicable.devolver_coordenada_central();
-		int alto = ubicable.devolver_alto();
-		int ancho = ubicable.devolver_ancho();
+		Coordenada central = ubicable->get_coordenada();
+		int alto = ubicable->get_alto();
+		int ancho = ubicable->get_ancho();
 		Coordenada a_enviar = central.arriba(alto).izquierda(ancho);
-		int coord_x = a_enviar.obtener_abscisa();
-		int coord_y = a_enviar.obtener_ordenada();
-
-		skt->send((char*)&id_clase, TAM_INT);
+		int x = a_enviar.obtener_abscisa();
+		int y = a_enviar.obtener_ordenada();
+		
+		skt->send((char*)&codigo_mapa, TAM_INT);
+		skt->send((char*)&tipo, TAM_INT);
 		skt->send((char*)&id, TAM_INT);
 		skt->send((char*)&x, TAM_INT);
 		skt->send((char*)&y, TAM_INT);
 	}
-	*/
+	skt->send((char*)&fin_mapa, TAM_INT);*/
 }
 
 std::string Conexion_cliente::obtener_nombre_jugador(){

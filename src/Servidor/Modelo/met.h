@@ -11,7 +11,7 @@ class Met: public Personaje{
 		size_t tiempo_pasado;
 		Arma* arma;
 	public:
-		Met(Mapa *mapa, Coordenada c, int id);
+		Met(Mapa *mapa, Coordenada c, int id, Factory_observador_ubicable *fact_obs);
 		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);

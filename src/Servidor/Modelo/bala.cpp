@@ -21,7 +21,9 @@ Bala::Bala(int dir_x, int dir_y, Coordenada c, int tipo, int id):
 Elemento(c, tipo, id),
 direccion_x(dir_x),
 direccion_y(dir_y)
-{}
+{
+	impacto = false;
+}
 
 bool Bala::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);
@@ -60,9 +62,15 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 	size_t delta_x = 0;
 	size_t delta_y = 0;
 	bool llegue = ((direccion_x == 0) && (direccion_y == 0));
+	bool hay_colision = false;
 	Coordenada actual = coord;
 	if (tiempo_pasado >= TIEMPO_MOVER){
-		while (!llegue){
+		if (impacto){
+			//si la bala impacto con un objeto en el update anterior
+			//se destruye en este update;
+			actual = Coordenada(-1, -1);
+		}
+		while (!impacto && !llegue && !hay_colision){
 			if ((direccion_x != 0) && (delta_x != VELOCIDAD)){
 				actual = (direccion_x == DERECHA)? actual.derecha() : actual.izquierda();
 				delta_x += (direccion_x == DERECHA)? AVANZA : RETROCEDE;
@@ -75,9 +83,10 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 					    || ((direccion_y != 0) && (delta_y != VELOCIDAD)));
 
 			if (!llegue){
-				llegue = !mapa->puede_ubicarse(this, actual);
-				llegue = llegue || mapa->hay_personaje(&actual);
-				if (llegue){
+				hay_colision = !mapa->puede_ubicarse(this, actual);
+				hay_colision = hay_colision || mapa->hay_personaje(&actual);
+				if (hay_colision){
+					impacto = true;
 					direccion_x = 0;
 					direccion_y = 0;
 				}
@@ -85,9 +94,7 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 		}
 		if (!(actual == coord)){
 			coord = actual;
-			//notificar cambio posicion
-		}else{
-			//notificar colision y destruir
+			notificar_observadores();
 		}
 	}
 }
@@ -116,7 +123,11 @@ void Bala::quitar_observador(Observador_ubicable *observador){
 	Observable::quitar_observador(observador);
 }
 
-void Bala::notificar_observadores(){}
+void Bala::notificar_observadores(){
+	for (size_t i = 0; i < observadores.size(); i++){
+		observadores[i]->update(this);
+	}
+}
 
 std::vector<Coordenada> Bala::coordenadas(){
 	return coordenadas(coord);
