@@ -6,19 +6,6 @@
 #define FPS 60
 #define TAM_INT 4
 
-
-
-#define TAM_INT 4
-#define VICTORY 5
-#define GAMEOVER 6
-#define EARTH_BLOCK 100
-#define STAIR_BLOCK 1000
-#define SPIKE_BLOCK 1200
-#define MET 8
-#define END_OF_MAP 6666
-#define END_OF_RESPONSE 6666
-
-
 gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt):
     playerno(0),
     window(window),

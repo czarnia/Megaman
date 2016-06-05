@@ -20,10 +20,6 @@ class Game{
         /// para poder conectarme al servidor en distintos puntos
         char *hostname;
         char *port;
-        /// Limitar los FPS para que sean constantes
-		void cap_framerate(const Uint32 &starting_tick);
-
-
 
 	public:
 		Game(char* hostname,char* port);
