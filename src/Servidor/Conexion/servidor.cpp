@@ -24,8 +24,8 @@ std::vector<int> obtener_claves(std::map<int, Conexion_cliente*> hash){
 //------------------------------------------//
 
 
-Servidor::Servidor(char *puerto):
-entrada(FIN_ENTRADA){
+Servidor::Servidor(char *puerto){
+	entrada = new Entrada_estandar(FIN_ENTRADA);
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
@@ -33,7 +33,7 @@ entrada(FIN_ENTRADA){
 }
 
 Servidor::~Servidor(){
-  entrada.join();
+  entrada->join();
 }
 
 void Servidor::aceptar_clientes(){
@@ -53,7 +53,7 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
 }
 
 bool Servidor::termino_ejecucion(){
-  return entrada.termino();
+  return entrada->termino();
 }
 
 void Servidor::empezar_partida(){
@@ -126,3 +126,4 @@ void Servidor::update_posicion(int tipo, int id, int x, int y){
 		(it->second)->enviar_cambio_posicion(tipo, id, x, y);
 	}
 }
+

@@ -4,6 +4,7 @@ add_definitions("-g -o0 -Wall -pedantic")
 #Declare variable that combines all *.cpp and *.h files
 #in this directory.
 file (GLOB SRCS *.cpp *.h)
+file (GLOB CONEXION ../Conexion/*.cpp ../Conexion/*.h)
 
 #Creates an executable with all files found
 #by file command.

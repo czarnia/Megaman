@@ -1,5 +1,5 @@
 #include "receiver_cliente.h"
-#include "../Comun/socket.h"
+#include "../../Comun/socket.h"
 #include <iostream>
 #include <stdio.h>
 #include <string.h>

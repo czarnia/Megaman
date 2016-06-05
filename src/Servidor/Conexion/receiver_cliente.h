@@ -1,8 +1,8 @@
 #ifndef RECEIVER_CLIENTE_H
 #define RECEIVER_CLIENTE_H
 
-#include "../Comun/hilo.h"
-#include "../Comun/socket.h"
+#include "../../Comun/hilo.h"
+#include "../../Comun/socket.h"
 #include "procesador_eventos.h"
 #include "manejador_eventos.h"
 

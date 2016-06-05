@@ -12,7 +12,7 @@ class Servidor:
 public Observador_juego{
   private:
     Juego *mundo;
-    Entrada_estandar entrada;
+    Entrada_estandar *entrada;
     //guardo a cada cliente con su id!
     std::map<int, Conexion_cliente*> clientes;
 	Socket *skt;
