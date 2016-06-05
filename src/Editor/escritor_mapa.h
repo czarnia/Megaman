@@ -9,12 +9,12 @@
 
 class Escritor_mapa{
   private:
-    ofstream mapa_arch;
+    std::ofstream mapa_arch;
     Mapa mapa_real;
   public:
     //Dado un path para un nuevo archivo donde se guardará un mapa y una longi-
     //tud en x y otra en y para el mismo, se crea un escritor_mapa.
-    Escritor_mapa(std::string path, size_t long_x, size_t long_y);
+    Escritor_mapa(std::string path, int long_x, int long_y);
     //Destructor del escritor_mapa.
     ~Escritor_mapa();
     //Dada una coordenada, agrega a un met en la misma.

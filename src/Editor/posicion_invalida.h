@@ -8,10 +8,10 @@ class Posicion_invalida{
   private:
     std::string error;
   public:
-    Posicion_invalida(std::string msj) : error(msj) {}
+    /*Posicion_invalida(std::string msj) : error(msj) {}
     virtual const char* what() const throw(){
       return error;
-    }
+    }*/
 };
 
 #endif //POSICION_INVALIDA_H

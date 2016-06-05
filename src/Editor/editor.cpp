@@ -14,7 +14,7 @@ Editor::Editor(){
 
 void Editor::run(){
 
-    GameState *currentState = NULL;
+    /*GameState *currentState = NULL;
     currentState = new gameStateEditor(window, renderer);
 
     GameState::StateCode whatToDo;
@@ -34,12 +34,12 @@ void Editor::run(){
         currentState->render();
     }
 
-    delete currentState;
+    delete currentState;*/
 }
 
 
 Editor::~Editor(){
-    delete renderer;
+    /*delete renderer;
     delete window;
-    SDL_Quit();
+    SDL_Quit();*/
 }
