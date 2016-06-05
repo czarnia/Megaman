@@ -47,6 +47,9 @@ public Juego_observable{
 		//Dado el id de un personaje y un numero de arma, hace que el mismo cambie a
 		//la misma.
 		void personaje_cambiar_arma(int id_pj, int arma);
+		
+		//Devuelve todos los ubicables del mapa.
+		std::vector<Ubicable*> devolver_ubicables();
 
 		int long_y_mapa();
 		int long_x_mapa();

@@ -242,8 +242,8 @@ void Mapa::interactuar_con_entorno(Personaje* pj){
 
 std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	std::set<Ubicable*> ubicables;
-	for (size_t i = 0; i < tam; i++){ //aca va long_x
-		for (size_t j = 0; j < tam; j++){ //aca va long_y
+	for (size_t i = 0; i < long_x; i++){ //aca va long_x
+		for (size_t j = 0; j < long_y; j++){ //aca va long_y
 			ubicables.insert(elementos[i][j]);
 		}
 	}

@@ -85,6 +85,7 @@ void Receiver::update(bool *running){
     }
     /// Etapa de clasificacion de objetos
     if (objectType == MEGAMAN){
+		std::cout<<"RECIBI MEGAMAN\n";
         objectType = MEGAMANN;
     }else if (objectType == MEGAMAN_BULLET){
         objectType = MEGAMAN_BULLETN;
@@ -154,6 +155,7 @@ void Receiver::receiveMap(){
             /// CARGO EL OBJETO QUE RECIBI
             switch (objectType){
                 case BLOCK_EARTH:
+					std::cout<<"RECIBI BLOQUE\n";
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
                     spr->setPosX(coordX*30);
                     spr->setPosY(coordY*30);
@@ -172,6 +174,7 @@ void Receiver::receiveMap(){
                     renderer->addMapSprite(BLOCK_STAIRN, spr);
                     break;
                 case MEGAMAN:
+					std::cout<<"RECIBI MEGAMAN\n";
                     spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.png");
                     spr->setPosX(coordX*30);
                     spr->setPosY(coordY*30);
@@ -187,6 +190,7 @@ void Receiver::receiveMap(){
             }
         }
     }while (command != END_OF_MAP);
+    std::cout<<"RECIBI FIN MAPA\n";
 }
 
 Receiver::~Receiver(){

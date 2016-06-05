@@ -53,8 +53,8 @@ public Observable{
 		virtual int get_tipo() = 0;
 		virtual int get_id() = 0;
 
-		//virtual int devolver_ancho() = 0;
-		//virtual int devolver_alto() = 0;
+		//virtual int get_ancho() = 0;
+		//virtual int get_alto() = 0;
 
 		//Destructor del ubicable.
     virtual ~Ubicable() {}
