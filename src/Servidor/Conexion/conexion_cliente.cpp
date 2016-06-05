@@ -28,7 +28,8 @@ void Conexion_cliente::mandar_bloques(std::vector<Coordenada> b){
 	skt->send((char*)&fin_mapa, TAM_INT);
 }
 
-Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m) : skt(conexion), id_cliente(id),
+Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m): 
+skt(conexion), id_cliente(id),
 rcv(conexion, id, m) {
 	obtener_nombre_jugador();
 	skt->send((char*)&id, TAM_INT); //le envio al jugador su id
