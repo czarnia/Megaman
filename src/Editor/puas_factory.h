@@ -1,9 +1,16 @@
-#include "puas_factory.h"
-#include "../Servidor/Modelo/puas.h"
+#ifndef PUAS_FACTORY_H
+#define PUAS_FACTORY_H
 
-Puas_factory::Puas_factory() {}
+#include "ubicable_factory.h"
+#include "../Servidor/Modelo/juego.h"
+#include <map>
 
-Ubicable* Puas_factory::crear(Mapa* mapa, Coordenada coord){
-  Puas* puas = new Puas(coord);
-  return puas;
-}
+class Puas_factory : public Ubicable_factory{
+	public:
+		//Crea un megaman factory.
+		Puas_factory();
+		//Dado un mapa y una coordenada, crea a un Puas.
+		virtual Ubicable* crear(Mapa* mapa, Coordenada coord);
+};
+
+#endif //PUAS_FACTORY_H

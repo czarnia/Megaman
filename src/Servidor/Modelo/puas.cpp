@@ -28,11 +28,11 @@ bool Puas::puede_ocupar(Escalera* esc){
 	return true;
 }
 
-bool Puas::puede_ocupar(Bloque* bloque){
+bool Puas::puede_ocupar(Puas* Puas){
 	return false;
 }
 
-bool Puas::puede_ocupar(Puas* puas){
+bool Puas::puede_ocupar(Bloque* bloque){
 	return false;
 }
 
@@ -54,3 +54,14 @@ std::vector<Coordenada> Puas::coordenadas(){
 }
 
 Puas::~Puas() {}
+
+
+void Puas::notificar_observadores(){}
+
+void Puas::agregar_observador(Observador_ubicable *observador){
+	Observable::agregar_observador(observador);
+}
+
+void Puas::quitar_observador(Observador_ubicable *observador){
+	Observable::agregar_observador(observador);
+}
