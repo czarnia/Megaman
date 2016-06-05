@@ -5,10 +5,18 @@
 #include <iostream>
 #include <fstream>
 
-#define BLOCKN 0
+#define BLOCK_EARTH 100
+#define BLOCK_SPIKE 1000
+#define BLOCK_STAIR 1500
 #define MEGAMANN 1
 #define METN 8
-#define CAM_SPEEDX 3
+#define CAM_SPEEDX 20
+
+#define PBLOCK_EARTH 10
+#define PBLOCK_SPIKE 11
+#define PBLOCK_STAIR 12
+#define PMEGAMAN 1
+#define PMET 8
 
 gameStateEditor::gameStateEditor(Window *window, Renderer* renderer):
     window(window),
@@ -58,7 +66,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
                     spr->setPosX(x);
                     spr->setPosY(y);
-                    renderer->addMapSprite(BLOCKN+100, spr);
+                    renderer->addMapSprite(BLOCK_EARTH, spr);
                 }
                 break;
             case gameStateEditor::SPIKES:
@@ -66,7 +74,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
                     spr->setPosX(x);
                     spr->setPosY(y);
-                    renderer->addMapSprite(BLOCKN+100, spr);
+                    renderer->addMapSprite(BLOCK_SPIKE, spr);
                 }
                 break;
             case gameStateEditor::STAIR:
@@ -74,15 +82,19 @@ void gameStateEditor::updateInput(SDL_Event *event){
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
                     spr->setPosX(x);
                     spr->setPosY(y);
-                    renderer->addMapSprite(BLOCKN+100, spr);
+                    renderer->addMapSprite(BLOCK_STAIR, spr);
                 }
                 break;
             case gameStateEditor::MEGAMAN:
                 if (!renderer->ocupied(x,y) && !renderer->ocupied(x,y+Block_sprite::width)){
-                    spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.png");
-                    spr->setPosX(x);
-                    spr->setPosY(y);
-                    renderer->addSprite(MEGAMANN, spr);
+                    if(renderer->find(MEGAMANN)){
+                        std::cout<< "Ya se coloco un megaman"<<std::endl;
+                    }else{
+                        spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.png");
+                        spr->setPosX(x);
+                        spr->setPosY(y);
+                        renderer->addSprite(MEGAMANN, spr);
+                    }
                 }
                 break;
             case gameStateEditor::MET:
@@ -114,16 +126,30 @@ int gameStateEditor::unload(){
 }
 
 void gameStateEditor::updateCameraPos(SDL_Event *event){
-    if (event->button.x < window->get_width()/4){
+    switch(event->key.keysym.sym){
+        case SDLK_LEFT:
+            if (renderer->camX > 0)
+                renderer->camX -= CAM_SPEEDX;
+            else
+                renderer->camX = 0;
+            break;
+        case SDLK_RIGHT:
+            renderer->camX += CAM_SPEEDX;
+            break;
+        default:
+            break;
+    }
+
+   /* if (event->button.x < window->get_width()*1/6){
         renderer->camX -= CAM_SPEEDX;
         if(renderer->camX < 0){
             renderer->camX = 0;
         }
     }
-    if (event->button.x > window->get_width()*3/4){
+    if (event->button.x > window->get_width()*5/6){
         renderer->camX += CAM_SPEEDX;
-    }
-    if (event->button.y < window->get_height()/4){
+    }*/
+  /*  if (event->button.y < window->get_height()/4){
         renderer->camY -= CAM_SPEEDX;
         if(renderer->camY < 0){
             renderer->camY = 0;
@@ -131,23 +157,32 @@ void gameStateEditor::updateCameraPos(SDL_Event *event){
     }
     if (event->button.y > window->get_height()*3/4){
         renderer->camY += CAM_SPEEDX;
-    }
+    }*/
 }
 
 GameState::StateCode gameStateEditor::update(){
-
+    SDL_Keysym pressed;
     SDL_Event event;
     while (SDL_PollEvent(&event)){
+
         if (event.type == SDL_QUIT){
             return GameState::QUIT;
             break;
+
         }else if (event.type == SDL_KEYDOWN){
-            chooseBlock(&event);
+            pressed.sym = event.key.keysym.sym;
+            if( pressed.sym == SDLK_UP || pressed.sym == SDLK_DOWN ||
+                pressed.sym == SDLK_LEFT || pressed.sym == SDLK_RIGHT)
+                updateCameraPos(&event);
+            else
+                chooseBlock(&event);
+
         }else if (event.type == SDL_MOUSEBUTTONDOWN){
             updateInput(&event);
-        }else if (event.type == SDL_MOUSEMOTION){
-            updateCameraPos(&event);
         }
+      /*  }else if (event.type == SDL_MOUSEMOTION){
+            updateCameraPos(&event);
+        }*/
     }
     return GameState::CONTINUE;
 }
@@ -162,23 +197,39 @@ void gameStateEditor::exportMap(){
     std::string fileName;
     std::ofstream ofile;
     std::cout<<"Ingrese un nombre para el nuevo mapa:"<<std::endl;
-
+    int block_type;
+    int char_type;
     std::cin>>fileName;
     ofile.open(fileName.c_str());
 
     std::map<int,Sprite*>::iterator it;
     it = renderer->map_sprites.begin();
 
-    for(; it != renderer->map_sprites.end(); ++it){
-        ofile << it->first << " ";
+    for (; it != renderer->map_sprites.end(); ++it){
+
+        if (it->first < BLOCK_SPIKE)
+            block_type = PBLOCK_EARTH;
+        else if (it->first > BLOCK_SPIKE && it->first < BLOCK_STAIR)
+            block_type = PBLOCK_SPIKE;
+        else
+            block_type = PBLOCK_STAIR;
+
+        ofile << block_type << " ";
         ofile << it->second->getPosX() << " ";
         ofile << it->second->getPosY() << " ";
         ofile << std::endl;
     }
 
     it = renderer->sprites.begin();
-    for(; it != renderer->sprites.end(); ++it){
-        ofile << it->first << " ";
+    for (; it != renderer->sprites.end(); ++it){
+
+        if (it-> first == MEGAMANN)
+            char_type = PMEGAMAN;
+        else if (it->first == METN)
+            char_type = PMET;
+        else {}
+
+        ofile << char_type << " ";
         ofile << it->second->getPosX() << " ";
         ofile << it->second->getPosY() << " ";
         ofile << std::endl;
