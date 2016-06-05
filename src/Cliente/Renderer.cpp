@@ -35,6 +35,27 @@ void Renderer::erase(int key){
         delete it->second;
         sprites.erase(it);
     }
+    it = map_sprites.find(key);
+    if( it != map_sprites.end() ){
+        delete it->second;
+        map_sprites.erase(it);
+    }
+}
+
+void Renderer::erase(int x, int y){
+    std::map<int,Sprite*>::iterator it = map_sprites.begin();
+    it = map_sprites.begin();
+    for(; it != map_sprites.end(); ++it){
+        if((it->second->getPosX() == x))
+            if((it->second->getPosY() == y))
+                erase(it->first);
+    }
+    it = sprites.begin();
+    for(; it != sprites.end(); ++it){
+        if((it->second->getPosX() == x))
+            if((it->second->getPosY() == y))
+                erase(it->first);
+    }
 }
 
 bool Renderer::find(int key){
@@ -47,6 +68,7 @@ bool Renderer::find(int key){
 }
 
 void Renderer::draw(Sprite *spr){
+
     SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), spr->get_rectangle());
 }
 
@@ -81,6 +103,31 @@ void Renderer::drawAll(){
     it = map_sprites.begin();
     for (; it != map_sprites.end() ; ++it){
         draw(it->second);
+    }
+}
+
+bool Renderer::ocupied(int x, int y){
+    bool ocupied = false;
+    std::map<int,Sprite*>::iterator it = map_sprites.begin();
+    it = map_sprites.begin();
+    for(; it != map_sprites.end(); ++it){
+        if((it->second->getPosX() == x))
+            if((it->second->getPosY() == y))
+                ocupied = true;
+    }
+
+    it = sprites.begin();
+    for(; it != sprites.end(); ++it){
+        if((it->second->getPosX() == x))
+            if((it->second->getPosY() == y))
+                ocupied = true;
+    }
+
+
+    if(ocupied){
+        return true;
+    }else{
+        return false;
     }
 }
 

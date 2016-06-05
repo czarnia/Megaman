@@ -8,8 +8,5 @@ Main_character::Main_character(SDL_Renderer *r, const char* file):
 {
     rectangle.w = Main_character::width;
     rectangle.h = Main_character::height;
-    crop.x = 0;
-    crop.w = 33;
-    crop.h = 27;
-    crop.y = 0;
+    crop = NULL;
 }

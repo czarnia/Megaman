@@ -15,6 +15,10 @@ class gameStateLobby: public GameState{
         Socket *skt;
         ///
         void updateInput();
+
+        bool start;
+        bool quit;
+
     public:
         gameStateLobby(SDL_Window *window, Renderer *renderer, Socket *skt);
 

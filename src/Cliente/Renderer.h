@@ -34,14 +34,18 @@ class Renderer{
         void setMapSize(int width, int height);
         /// prepara para la impresion en pantalla
         void clear();
-        /// Borra un sprite
+        /// Borra un sprite con una clave
         void erase(int key);
+        /// Se usa en el editor
+        void erase(int x, int y);
         /// devuelve true si existe
         bool find(int key);
         /// dibuja un sprite
         void draw(Sprite *spr);
         /// dibuja todos los sprites cargados en los atributos
         void drawAll();
+        /// Se usa en el editor
+        bool ocupied(int x, int y);
         /// presenta lo dibujado
         void present();
         ~Renderer();

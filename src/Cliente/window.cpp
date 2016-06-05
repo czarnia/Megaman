@@ -1,13 +1,23 @@
 #include "window.h"
+#include <iostream>
 
 Window::Window(int width, int height){
-    window = SDL_CreateWindow("Main menu",
+    window = SDL_CreateWindow("Window",
                                 SDL_WINDOWPOS_UNDEFINED, // POS X
                                 SDL_WINDOWPOS_UNDEFINED, // POS Y
                                 width,
                                 height,
                                 SDL_WINDOW_SHOWN);
 
+}
+
+void Window::maximize(){
+   // SDL_MaximizeWindow(window);
+    SDL_SetWindowSize(window, 800, 600);
+}
+
+void Window::setTitle(std::string title){
+    SDL_SetWindowTitle(window, title.c_str());
 }
 
 SDL_Window* Window::get_window(){

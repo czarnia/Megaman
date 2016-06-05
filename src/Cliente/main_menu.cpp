@@ -9,6 +9,7 @@ MainMenu::MainMenu(Window *window, Renderer *renderer):
     window(window),
     renderer(renderer)
 {
+    window->setTitle("Megaman: Main menu");
     playerName = std::string("");
     start = false;
     quit = false;

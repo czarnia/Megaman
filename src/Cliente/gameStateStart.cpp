@@ -33,6 +33,8 @@ gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt):
     victory(false),
     ko(false)
 {
+    window->setTitle("Megaman: Playing");
+    window->maximize();
     receiver = new Receiver(skt, renderer, &victory, &ko);
     load();
 }

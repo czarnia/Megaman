@@ -18,8 +18,33 @@ int gameStateLobby::unload(){
     return 0;
 }
 
-GameState::StateCode gameStateLobby::update(){
+void gameStateLobby::updateInput(){
+    SDL_Event event;
+    while (SDL_PollEvent(&event)){
+        if (event.type == SDL_QUIT){
+            quit = true;
+        }else if (event.type == SDL_KEYDOWN){
+            switch (event.key.keysym.sym){
 
+
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+GameState::StateCode gameStateLobby::update(){
+    updateInput();
+
+    if (start){
+       // start = false;
+        return GameState::BOSS_SELECT;
+    }else if (quit){
+        return GameState::QUIT;
+    }else{
+        return GameState::CONTINUE;
+    }
     return GameState::CONTINUE;
 }
 

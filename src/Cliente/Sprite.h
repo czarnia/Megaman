@@ -12,7 +12,7 @@ class Sprite{
         SDL_Rect rectangle;
         SDL_Texture *texture;
         SDL_Surface *surface;
-        SDL_Rect crop;
+        SDL_Rect *crop;
     public:
         Sprite(SDL_Renderer *r, const char* file);
         /// getters de los atributos de sdl

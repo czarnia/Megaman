@@ -5,6 +5,7 @@
 Sprite::Sprite(SDL_Renderer *r, const char* file){
     texture = NULL;
     texture = IMG_LoadTexture(r, file);
+    crop = NULL;
     if(!texture)
         std::cout<<"No se pudo cargar textura"<<std::endl;
 }
@@ -19,7 +20,7 @@ SDL_Texture* Sprite::get_texture(){
 }
 
 SDL_Rect* Sprite::get_crop(){
-    return &crop;
+    return crop;
 }
 
 int Sprite::getPosX(){

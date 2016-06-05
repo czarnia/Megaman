@@ -8,7 +8,5 @@ Backround_sprite::Backround_sprite(SDL_Renderer *r, const char* file):
 {
     rectangle.w = Backround_sprite::width;
     rectangle.h = Backround_sprite::height;
-    crop.w = 1920;
-    crop.h = 1080;
-
+    crop = NULL;
 }

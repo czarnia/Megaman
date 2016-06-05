@@ -1,6 +1,5 @@
 #include "block_sprite.h"
 
-
 int Block_sprite::width = 30;
 int Block_sprite::height = 30;
 

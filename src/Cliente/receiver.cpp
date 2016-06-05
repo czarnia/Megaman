@@ -146,19 +146,19 @@ void Receiver::receiveMap(){
         switch (objectType){
             case BLOCK:
                 spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
-                spr->setPosX(coordX*15);
-                spr->setPosY(coordY*15);
+                spr->setPosX(coordX*30);
+                spr->setPosY(coordY*30);
                 renderer->addMapSprite(BLOCK+100, spr);
                 break;
             case MEGAMAN:
                 spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.jpeg");
-                spr->setPosX(coordX*15);
-                spr->setPosY(coordY*15);
+                spr->setPosX(coordX*30);
+                spr->setPosY(coordY*30);
                 renderer->addSprite(MEGAMAN+objectID-1,spr);
             case MET:
                 spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
-                spr->setPosX(coordX*15);
-                spr->setPosY(coordY*15);
+                spr->setPosX(coordX*30);
+                spr->setPosY(coordY*30);
                 renderer->addMapSprite(MET+objectID, spr);
                 break;
             default:
