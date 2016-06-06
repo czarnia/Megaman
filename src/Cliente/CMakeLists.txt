@@ -28,7 +28,7 @@ include_directories(
 	${SDL2_INCLUDE_DIRS}
 	${SDL2IMAGE_INCLUDE_DIRS}
 	${SDL_MIXER_INCLUDE_DIRS}
-	${SDL2_TTF_INCLUDE_DIR}
+	${SDL2_TTF_INCLUDE_DIRS}
 )
 
 #Declare variable that combines all *.cpp  and *.h files
