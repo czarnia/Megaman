@@ -9,7 +9,7 @@
 class MainMenu: public GameState{
     private:
         ///
-        Window* window;
+        Window *window;
         Renderer *renderer;
         ///
         bool start;
@@ -18,7 +18,7 @@ class MainMenu: public GameState{
         void updateInput();
         std::string playerName;
     public:
-        MainMenu(Window *window, Renderer *renderer);
+        MainMenu(Window *window, Renderer *renderer, std::string &player);
 
         /// Carga sprites, musica etc
         void load(int stack = 0);

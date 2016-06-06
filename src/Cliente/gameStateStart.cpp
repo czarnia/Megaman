@@ -172,12 +172,12 @@ void gameStateStart::mainLoop(){
         starting_tick = SDL_GetTicks();
         /// COMUNICACION
         updateInput(&running);
+        renderer->updateCamPos(playerno);
         receiver->update(&running);
         ///
 		cap_framerate(starting_tick);
         render();
 	}
-
 }
 
 void gameStateStart::render(){

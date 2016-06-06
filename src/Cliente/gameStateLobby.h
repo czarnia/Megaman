@@ -2,15 +2,15 @@
 #define _GAMESTATELOBBY_H_
 
 #include "gameState.h"
-
+#include <string>
 #include "Renderer.h"
 #include "../Comun/socket.h"
 
 class gameStateLobby: public GameState{
     private:
-        int playerno;
+        int selectorPos;
         ///
-        SDL_Window *window;
+        Window *window;
         Renderer *renderer;
         Socket *skt;
         ///
@@ -19,9 +19,12 @@ class gameStateLobby: public GameState{
         bool start;
         bool quit;
 
+        std::string playername;
+        int playernumber;
     public:
-        gameStateLobby(SDL_Window *window, Renderer *renderer, Socket *skt);
-
+        gameStateLobby(Window *window, Renderer *renderer,
+                        Socket *skt, std::string &player);
+        void moveSelector(std::string direction);
         ///
         void load(int stack = 0);
         int unload();

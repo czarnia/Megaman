@@ -1,12 +1,12 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
-#include <SDL2/SDL.h>
 #include <iostream>
 #include "../Comun/socket.h"
 #include "Renderer.h"
 #include "gameState.h"
 #include "window.h"
+#include <string>
 
 class Game{
 	private:
@@ -21,6 +21,7 @@ class Game{
         char *hostname;
         char *port;
 
+        std::string playername;
 	public:
 		Game(char* hostname,char* port);
 		/// Esta funcion corre el juego

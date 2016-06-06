@@ -9,7 +9,7 @@
 Editor::Editor(){
     SDL_Init(SDL_INIT_EVERYTHING);
     window = new Window(WIDTH,HEIGHT);
-    renderer = new Renderer(window->get_window());
+    renderer = new Renderer(window);
 }
 
 void Editor::run(){

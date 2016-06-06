@@ -79,7 +79,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 break;
             case gameStateEditor::STAIR:
                 if (!renderer->ocupied(x,y)){
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
+                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/ladder.png");
                     spr->setPosX(x);
                     spr->setPosY(y);
                     renderer->addMapSprite(BLOCK_STAIR, spr);
@@ -90,7 +90,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                     if(renderer->find(MEGAMANN)){
                         std::cout<< "Ya se coloco un megaman"<<std::endl;
                     }else{
-                        spr = new Main_character(renderer->get_renderer(), "../sprites/megaman.png");
+                        spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
                         spr->setPosX(x);
                         spr->setPosY(y);
                         renderer->addSprite(MEGAMANN, spr);
@@ -139,25 +139,6 @@ void gameStateEditor::updateCameraPos(SDL_Event *event){
         default:
             break;
     }
-
-   /* if (event->button.x < window->get_width()*1/6){
-        renderer->camX -= CAM_SPEEDX;
-        if(renderer->camX < 0){
-            renderer->camX = 0;
-        }
-    }
-    if (event->button.x > window->get_width()*5/6){
-        renderer->camX += CAM_SPEEDX;
-    }*/
-  /*  if (event->button.y < window->get_height()/4){
-        renderer->camY -= CAM_SPEEDX;
-        if(renderer->camY < 0){
-            renderer->camY = 0;
-        }
-    }
-    if (event->button.y > window->get_height()*3/4){
-        renderer->camY += CAM_SPEEDX;
-    }*/
 }
 
 GameState::StateCode gameStateEditor::update(){
@@ -180,9 +161,6 @@ GameState::StateCode gameStateEditor::update(){
         }else if (event.type == SDL_MOUSEBUTTONDOWN){
             updateInput(&event);
         }
-      /*  }else if (event.type == SDL_MOUSEMOTION){
-            updateCameraPos(&event);
-        }*/
     }
     return GameState::CONTINUE;
 }

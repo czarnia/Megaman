@@ -1,16 +1,17 @@
 #include "main_menu.h"
 #include "gameState.h"
 #include "backround_sprite.h"
+
 #define BACKROUND 0
 
 #include <iostream>
 
-MainMenu::MainMenu(Window *window, Renderer *renderer):
+MainMenu::MainMenu(Window *window, Renderer *renderer, std::string &player):
     window(window),
-    renderer(renderer)
+    renderer(renderer),
+    playerName(player)
 {
     window->setTitle("Megaman: Main menu");
-    playerName = std::string("");
     start = false;
     quit = false;
     load();
@@ -47,17 +48,10 @@ void MainMenu::load(int stack){
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(BACKROUND,spr);
-    /// MENSAJE
-    spr = new Sprite(renderer->get_renderer(), "../sprites/menu_message.jpeg");
-    spr->setWidth(600);
-    spr->setHeight(200);
-    spr->setPosX(320-spr->getWidth()/2);
-    spr->setPosY(3/4*480);
-    renderer->addSprite(BACKROUND,spr);
 }
 
 int MainMenu::unload(){
-
+    renderer->clearSprites();
     return 0;
 }
 
@@ -65,7 +59,6 @@ GameState::StateCode MainMenu::update(){
     updateInput();
 
     if (start){
-       // start = false;
         return GameState::BOSS_SELECT;
     }else if (quit){
         return GameState::QUIT;

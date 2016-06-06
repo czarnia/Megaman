@@ -26,6 +26,7 @@ SDL_Rect* Sprite::get_crop(){
 int Sprite::getPosX(){
     return rectangle.x;
 }
+
 int Sprite::getPosY(){
     return rectangle.y;
 }

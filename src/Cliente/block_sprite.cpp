@@ -8,4 +8,5 @@ Block_sprite::Block_sprite(SDL_Renderer *r, const char* file):
 {
     rectangle.w = Block_sprite::width;
     rectangle.h = Block_sprite::height;
+    crop = NULL;
 }

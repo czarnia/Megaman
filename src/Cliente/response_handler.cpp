@@ -7,6 +7,7 @@
 
 #define MAPA 1
 /// PARA PROTOCOLO
+#define IDLE 4
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
 #define VICTORY 2
@@ -30,7 +31,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
     switch (command){
         case MAPA:
             std::cout<<"Recibi nueva posicion para: "<<objectType
-            <<"nro: "<<objectID<<" y es";
+            <<"nro:"<<objectID<<"y es";
             std::cout<<coord.first<<","<<coord.second<<std::endl;
             /// SI recibi coordenadas negativas destruyo el objeto
             if (coord.first < 0){
@@ -43,7 +44,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             }else{
                 switch (objectType){
                     case MEGAMANN:
-                        spr = new Main_character(renderer->get_renderer(),"../sprites/megaman.png");
+                        spr = new Character_sprite(renderer->get_renderer(),"../sprites/megaman.png");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr);
@@ -85,6 +86,8 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             break;
         }
         case END_OF_RESPONSE:
+            break;
+        case IDLE:
             break;
         default:
             return GameState::CONTINUE;
