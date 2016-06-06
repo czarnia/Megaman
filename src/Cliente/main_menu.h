@@ -19,7 +19,7 @@ class MainMenu: public GameState{
         bool quit;
         ///
         void updateInput();
-        std::string playerName;
+        std::string &playerName;
     public:
         MainMenu(Window *window, Renderer *renderer, std::string &player);
 
