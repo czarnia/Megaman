@@ -1,4 +1,4 @@
-#include "text_sprite.h"
+/*#include "text_sprite.h"
 #include <SDL2/SDL_ttf.h>
 
 Text_sprite::Text_sprite(SDL_Renderer *r, std::string text, int fontSize){
@@ -23,3 +23,4 @@ Text_sprite::Text_sprite(SDL_Renderer *r, std::string text, int fontSize){
 Text_sprite::~Text_sprite(){
 
 }
+*/
