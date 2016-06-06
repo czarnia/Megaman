@@ -22,11 +22,13 @@ add_definitions("-g -o0 -Wall -pedantic")
 #Set up CMake to use SDL, SDL_image:
 include(FindPkgConfig)
 pkg_search_module(SDL2 REQUIRED sdl2)
+find_package(SDL2_ttf REQUIRED)
 pkg_search_module(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 include_directories(
 	${SDL2_INCLUDE_DIRS}
 	${SDL2IMAGE_INCLUDE_DIRS}
 	${SDL_MIXER_INCLUDE_DIRS}
+	${SDL2_TTF_INCLUDE_DIR}
 )
 
 #Declare variable that combines all *.cpp  and *.h files
@@ -36,4 +38,4 @@ file (GLOB SRCS  *.cpp *.h)
 #Creates an executable with all files found
 #by file command.
 add_executable (cliente ${SRCS})
-target_link_libraries (cliente Megaman -pthread ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES})
+target_link_libraries (cliente Megaman -pthread ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES} ${SDL2_TTF_INCLUDE_DIR})
