@@ -15,7 +15,9 @@ class gameStateLobby: public GameState{
         Socket *skt;
         ///
         void updateInput();
+        bool buttonPress(int x, int y, Sprite* spr);
 
+        bool startSelect;
         bool start;
         bool quit;
 
