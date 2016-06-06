@@ -44,8 +44,6 @@ class Conexion_cliente{
     std::string obtener_nombre_jugador();
     //Envia el tamaño del mapa.
     void enviar_tamanio_mapa(Juego* m);
-
-    void mandar_bloques(std::vector<Coordenada> b); //TODO: fletar.
 };
 
 #endif //CONEXION_CLIENTE_H

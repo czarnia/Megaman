@@ -13,16 +13,16 @@ juego(juego){
 Personaje* MegamanFactory::crear(Mapa* mapa){
 	int x = 3;
 	int y = 6;
+	int id = creados;
 	Coordenada coord(x, y); //LAS COORDENADAS INICIALES SE OBTIENEN DE UN ARCHIVO Y SE PIDEN AL MAPA...
 	Observador_personaje *obs = new Observador_personaje(juego);
-	Observador_ubicable *obs_ubicable = new Observador_ubicable(juego, &coord);
-	int id = (creados + 1);
 	Factory_observador_ubicable *fact_obs = new Factory_observador_ubicable(juego);
 	Megaman *megaman = new Megaman(mapa, coord, id, fact_obs);
 	megaman->agregar_observador(obs);
-	megaman->agregar_observador(obs_ubicable);
-	//megaman->agregar_observador(this);
+	fact_obs->crear(megaman);
 	mapa->agregar_personaje(megaman);
+	//Notifico a los observadores de la creacion del personaje:
+	megaman->notificar_observadores();
 	creados++;
 	//creados.insert(std::pair<Megaman*, Observador*>(megaman, obs));
 	//creados.insert(std::pair<Megaman*, Observador*>(megaman, obs_ubicable));

@@ -187,7 +187,7 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 
 void Mapa::cargar(){
 	bloques = coord_tierras();
-
+	coord_iniciales_personajes = coord_personajes();
 	for (size_t i = 0; i < bloques.size(); i++){
 		Coordenada c1 = bloques[i];
 		Bloque* b = new Bloque(c1);
@@ -196,11 +196,9 @@ void Mapa::cargar(){
 			Coordenada c2 = coordenadas_bloque[i];
 			int x = c2.obtener_abscisa();
 			int y = c2.obtener_ordenada();
-
 			elementos[x][y] = b;
 		}
 	}
-	coord_iniciales_personajes = coord_personajes();
 }
 
 void Mapa::agregar_bala(Bala *b){

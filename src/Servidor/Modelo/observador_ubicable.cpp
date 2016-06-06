@@ -2,16 +2,15 @@
 #include <iostream>
 #include <sstream>
 
-Observador_ubicable::Observador_ubicable(Juego* juego, 
-Coordenada *coord_inicial): juego(juego),
-coordenada(coord_inicial->obtener_abscisa(),
-coord_inicial->obtener_ordenada()){}
+Observador_ubicable::Observador_ubicable(Juego* juego, Coordenada *coord): 
+juego(juego),
+coordenada(coord->obtener_abscisa(),
+coord->obtener_ordenada()){}
 
 void Observador_ubicable::update(Observable *obs){
 	Ubicable *ubicable = (Ubicable*)obs;
 	int id = ubicable->get_id();
 	int tipo = ubicable->get_tipo();
-	//HAY QUE AVISARLE AL CLIENTE QUE SE ACTUALIZO LA COORDENADA VIEJA TAMBIEN.
 	if (!(coordenada == ubicable->get_coordenada())){
 		std::cout << "OBSERVER_UBICABLE: UBICABLE ACTUALIZO POSICION\n";
 		std::stringstream inicial;

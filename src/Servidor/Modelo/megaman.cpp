@@ -76,5 +76,5 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
 }
 
 void Megaman::recibir_ataque(Bala* ataque){
-	ataque->daniar(this);
+	//ataque->daniar(this);
 }

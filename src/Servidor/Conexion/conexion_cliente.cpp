@@ -10,7 +10,7 @@
 #define TAM_INT 4
 
 enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
-
+/*
 void Conexion_cliente::mandar_bloques(std::vector<Coordenada> b){
 	int codigo_mapa = POSICION;
 	int tipo_bloque = 100;
@@ -26,7 +26,7 @@ void Conexion_cliente::mandar_bloques(std::vector<Coordenada> b){
 		skt->send((char*)&y, TAM_INT);
 	}
 	skt->send((char*)&fin_mapa, TAM_INT);
-}
+}*/
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m): 
 skt(conexion), id_cliente(id),
@@ -38,8 +38,8 @@ rcv(conexion, id, m) {
 
 void Conexion_cliente::enviar_mapa_inicial(Juego* m, int id){
 	enviar_tamanio_mapa(m);
-	mandar_bloques(m->bloques());
-/*
+/*	mandar_bloques(m->bloques());
+
 	int megaman_x = 3; //hardcodeo para que axel pruebe hoy.
 	int megaman_y = 6;
 	skt->send((char*)&id, TAM_INT);

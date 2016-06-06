@@ -100,7 +100,7 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 }
 
 void Bala::interactuar(Personaje* pj){
-	pj->recibir_ataque(this);
+	//pj->recibir_ataque(this);
 }
 
 Coordenada Bala::get_coordenada(){
