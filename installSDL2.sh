@@ -21,3 +21,10 @@ cd SDL2_mixer-2.0.1
 ./configure
 make
 make install
+cd ..
+wget https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.tar.gz
+tar -xvzf SDL2_ttf-2.0.14.tar.gz
+cd SDL2_ttf-2.0.14
+./configure
+make
+make install
