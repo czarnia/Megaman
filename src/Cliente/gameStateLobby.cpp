@@ -3,11 +3,15 @@
 #include "boss_icon_sprite.h"
 #include "selector_sprite.h"
 
+#include <iostream>
 
 #define BACKROUND 0
+#define STARTING_SELECTION 5
 #define ICON 10
+#define BUTTON 5
 #define SELECTOR 100
 #define TAM_INT 4
+
 
 gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
                                 Socket *skt, std::pair<int, std::string> &playerData):
@@ -19,6 +23,7 @@ gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
     window->setTitle("Megaman: Lobby");
     start = false;
     quit = false;
+    startSelect = false;
     playerData.first = 1;
     selectorPos = 1;
     load();
@@ -72,12 +77,20 @@ void gameStateLobby::load(int stack){
     spr->setPosX(9*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
     renderer->addSprite(ICON, spr);
-    /// CARGO SELECTOR
+
     if(playerData.first == 1){
+        /// CARGO SELECTOR
         spr = new Selector_sprite(renderer->get_renderer(), "../sprites/selector.png");
         spr->setPosX((selectorPos*2-1)*Boss_icon_sprite::width-5);
         spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
         renderer->addSprite(SELECTOR, spr);
+        /// BOTON START
+        spr = new Sprite(renderer->get_renderer(), "../sprites/start_button.png");
+        spr->setWidth(100);
+        spr->setHeight(100);
+        spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
+        spr->setPosY(window->get_height()*3/5);
+        renderer->addSprite(BUTTON, spr);
     }
 }
 
@@ -94,20 +107,41 @@ void gameStateLobby::updateInput(){
         }else if (event.type == SDL_KEYDOWN){
             switch (event.key.keysym.sym){
                 case SDLK_RIGHT:
-                    moveSelector("right");
+                    if(startSelect)
+                        moveSelector("right");
                     break;
                 case SDLK_LEFT:
-                    moveSelector("left");
+                    if(startSelect)
+                        moveSelector("left");
                     break;
                 case SDLK_RETURN:
-                    start = true;
+                    if(startSelect)
+                        start = true;
                     /// ACA ENVIO EL NUMERO DE BOSS
                     break;
                 default:
                     break;
             }
+        }else if (event.type == SDL_MOUSEBUTTONDOWN){
+            if(event.button.button == SDL_BUTTON_LEFT){
+                int Xpressed = event.button.x;
+                int Ypressed = event.button.y;
+                if(buttonPress(Xpressed,Ypressed,renderer->sprites[BUTTON])){
+                    int command = STARTING_SELECTION;
+                    /// POR AHORA LO COMENTO
+                   // skt->send((char*)&command, TAM_INT);
+                    startSelect = true;
+                }
+            }
         }
     }
+}
+
+bool gameStateLobby::buttonPress(int x, int y, Sprite *spr){
+    if (x > spr->getPosX() && x < spr->getPosX()+spr->getWidth())
+        if (y > spr->getPosY() && y < spr->getPosY()+spr->getHeight())
+            return true;
+    return false;
 }
 
 void gameStateLobby::moveSelector(std::string direction){
