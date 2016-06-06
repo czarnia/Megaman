@@ -2,7 +2,7 @@
 #include "../Modelo/coordenada.h"
 #include "../Modelo/juego.h"
 #include <sstream>
-
+#include <cstring>
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -106,16 +106,12 @@ Conexion_cliente::~Conexion_cliente(){
 
 void Conexion_cliente::enviar_cambio_posicion(int tipo, int id, int x, int y){
 	int posicion = POSICION;
-	std::stringstream pos_x, pos_y;
-	pos_x << x;
-	pos_y << y;
-	std::string abscisa = pos_x.str();
-	std::string ordenada = pos_y.str();
+	
 	skt->send((char*)&posicion, TAM_INT);
 	skt->send((char*)&tipo, TAM_INT);
 	skt->send((char*)&id, TAM_INT);
-	skt->send((char*)&abscisa, TAM_INT);
-	skt->send((char*)&ordenada, TAM_INT);
+	skt->sendInt(&x, TAM_INT);
+	skt->sendInt(&y, TAM_INT);
 }
 
 void Conexion_cliente::enviar_cantidad_vidas(int tipo, int id, int cantidad){

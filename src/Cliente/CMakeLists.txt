@@ -1,5 +1,5 @@
 #Setting compilation flags:
-set (CMAKE_C_FLAGS "-Wall -g -o0 -pedantic -Wextra -Werror")
+add_definitions("-g -o0 -Wall -pedantic")
 
 #Use the package PkgConfig to detect GTK+ headers/library files.
 #find_package (PkgConfig REQUIRED)

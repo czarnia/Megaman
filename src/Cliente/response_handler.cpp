@@ -30,7 +30,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
     switch (command){
         case MAPA:
             std::cout<<"Recibi nueva posicion para: "<<objectType
-            <<"nro:"<<objectID<<"y es";
+            <<"nro: "<<objectID<<" y es";
             std::cout<<coord.first<<","<<coord.second<<std::endl;
             /// SI recibi coordenadas negativas destruyo el objeto
             if (coord.first < 0){

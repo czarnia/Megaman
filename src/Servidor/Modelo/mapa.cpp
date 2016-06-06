@@ -23,6 +23,7 @@
 
 typedef std::vector<Coordenada>::iterator ItBloques;
 typedef std::map<int, Personaje*>::iterator ItPersonaje;
+typedef std::map<int, Elemento*>::iterator ItElementos;
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
@@ -240,11 +241,9 @@ void Mapa::interactuar_con_entorno(Personaje* pj){
 
 std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	std::set<Ubicable*> ubicables;
-	for (size_t i = 0; i < long_x; i++){ //aca va long_x
-		for (size_t j = 0; j < long_y; j++){ //aca va long_y
-			if(elementos[i].find(j) != elementos[i].end()){
-				ubicables.insert(elementos[i][j]);
-			}
+	for (size_t i = 0; i < long_x; i++){
+		for (ItElementos it = elementos[i].begin(); it != elementos[i].end(); ++it){
+			ubicables.insert(it->second);
 		}
 	}
 	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
