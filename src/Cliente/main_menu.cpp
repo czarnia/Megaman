@@ -1,7 +1,7 @@
 #include "main_menu.h"
 #include "backround_sprite.h"
 #include "text_sprite.h"
-#include <SDL2/SDL_ttf.h>
+//#include <SDL2/SDL_ttf.h>
 
 #define BACKROUND 0
 #define TEXT 100
@@ -34,20 +34,20 @@ void MainMenu::updateInput(){
                 start = true;
             if (event.key.keysym.sym == SDLK_BACKSPACE && playerData.second.size() > 0){
                 playerData.second.erase(playerData.second.size()-1);
-                Sprite *spr = new Text_sprite(renderer->get_renderer(), playerData.second, 25);
+              /*  Sprite *spr = new Text_sprite(renderer->get_renderer(), playerData.second, 25);
                 spr->setPosX(window->get_width()/2);
                 spr->setPosY(window->get_height()*1/9+10);
                 renderer->erase(TEXT);
-                renderer->addSprite(TEXT, spr);
+                renderer->addSprite(TEXT, spr);*/
             }
         }else if (event.type == SDL_TEXTINPUT){
             playerData.second.append(event.text.text);
 
-            Sprite *spr = new Text_sprite(renderer->get_renderer(), playerData.second, 25);
+          /*  Sprite *spr = new Text_sprite(renderer->get_renderer(), playerData.second, 25);
             spr->setPosX(window->get_width()/2);
             spr->setPosY(window->get_height()*1/9+10);
             renderer->erase(TEXT);
-            renderer->addSprite(TEXT, spr);
+            renderer->addSprite(TEXT, spr);*/
         }
     }
     SDL_StopTextInput();
