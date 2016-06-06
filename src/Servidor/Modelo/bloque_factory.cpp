@@ -1,5 +1,5 @@
 #include "bloque_factory.h"
-#include "../Servidor/Modelo/bloque.h"
+#include "bloque.h"
 
 Bloque_factory::Bloque_factory() {}
 

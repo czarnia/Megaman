@@ -2,7 +2,7 @@
 #define ESCALERA_FACTORY_H
 
 #include "ubicable_factory.h"
-#include "../Servidor/Modelo/juego.h"
+#include "juego.h"
 #include <map>
 
 class Escalera_factory : public Ubicable_factory{

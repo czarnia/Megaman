@@ -1,5 +1,5 @@
 #include "escalera_factory.h"
-#include "../Servidor/Modelo/escalera.h"
+#include "escalera.h"
 
 Escalera_factory::Escalera_factory() {}
 

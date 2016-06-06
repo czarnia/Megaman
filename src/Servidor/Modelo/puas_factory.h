@@ -2,7 +2,7 @@
 #define PUAS_FACTORY_H
 
 #include "ubicable_factory.h"
-#include "../Servidor/Modelo/juego.h"
+#include "juego.h"
 #include <map>
 
 class Puas_factory : public Ubicable_factory{

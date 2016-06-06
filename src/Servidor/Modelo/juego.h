@@ -5,10 +5,10 @@
 #include "actualizable.h"
 #include "mapa.h"
 #include "juego_observable.h"
-#include "megaman_factory.h"
 #include <string>
 #include <iosfwd>
 #include <cstddef>
+
 class PersonajeFactory;
 class MegamanFactory;
 
@@ -32,7 +32,7 @@ public Juego_observable{
 		void terminar_partida();
 		//Dado un determinado tiempo, actualiza al juego.
 		virtual void update(size_t tiempo);
-		
+
 		void notificar_observadores();
 		virtual void update(Observable *obs);
 		//Dado el id de un personaje, hace que el mismo ataque en una direccion
@@ -47,7 +47,7 @@ public Juego_observable{
 		//Dado el id de un personaje y un numero de arma, hace que el mismo cambie a
 		//la misma.
 		void personaje_cambiar_arma(int id_pj, int arma);
-		
+
 		//Devuelve todos los ubicables del mapa.
 		std::vector<Ubicable*> devolver_ubicables();
 
@@ -79,15 +79,15 @@ public Juego_observable{
 		//notifica al servidor de la muerte del mismo.
 		void murio_personaje(int tipo, int id);
 		//Recibe id y tipo correspondiente a un personaje y
-		//una cantidad de vidas y notifica al servidor 
+		//una cantidad de vidas y notifica al servidor
 		//de la nueva cantidad de vidas del mismo.
 		void actualizo_cantidad_vidas(int tipo, int id, int vidas);
 		//Recibe id y tipo correspondiente a un personaje y
-		//un porcentaje de vida y notifica al servidor 
+		//un porcentaje de vida y notifica al servidor
 		//cantidad de vida del mismo.
 		void actualizo_porcentaje_vida(int tipo, int id, int cant_vida);
 		//Recibe id y tipo correspondiente a un personaje y
-		//un porcentaje de energia y notifica al servidor 
+		//un porcentaje de energia y notifica al servidor
 		//cantidad de energia del mismo.
 		void actualizo_energia(int tipo, int id, int energia);
 		//Recibe id y tipo correspondiente a un personaje y

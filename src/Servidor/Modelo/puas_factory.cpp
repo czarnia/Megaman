@@ -1,5 +1,5 @@
 #include "puas_factory.h"
-#include "../Servidor/Modelo/puas.h"
+#include "puas.h"
 
 Puas_factory::Puas_factory() {}
 

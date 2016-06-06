@@ -1,7 +1,7 @@
 #include "met_factory.h"
-#include "../Servidor/Modelo/observador_ubicable.h"
-#include "../Servidor/Modelo/observador_personaje.h"
-#include "../Servidor/Modelo/met.h"
+#include "observador_ubicable.h"
+#include "observador_personaje.h"
+#include "met.h"
 
 Met_factory::Met_factory(Juego *juego):
 juego(juego){
