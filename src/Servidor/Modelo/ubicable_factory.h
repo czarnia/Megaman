@@ -1,8 +1,8 @@
 #ifndef UBICABLE_FACTORY_H
 #define UBICABLE_FACTORY_H
 
-#include "../Servidor/Modelo/mapa.h"
-#include "../Servidor/Modelo/ubicable.h"
+#include "mapa.h"
+#include "ubicable.h"
 
 class Ubicable_factory{
 	public:

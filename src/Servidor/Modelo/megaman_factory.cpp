@@ -10,7 +10,7 @@ juego(juego){
 	creados = 0;
 }
 
-Personaje* MegamanFactory::crear(Mapa* mapa){
+Ubicable* MegamanFactory::crear(Mapa* mapa, Coordenada c){
 	int x = 3;
 	int y = 6;
 	int id = creados;
