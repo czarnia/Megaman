@@ -5,9 +5,9 @@ Text_sprite::Text_sprite(SDL_Renderer *r, std::string text, int fontSize){
     crop = NULL;
     SDL_Color color;
     color.a = 255;
-    color.b = 0;
-    color.g = 0;
-    color.r = 0;
+    color.b = 25;
+    color.g = 10;
+    color.r = 10;
 
     TTF_Font *font = TTF_OpenFont("../sprites/font.ttf", fontSize);
     SDL_Surface *textSurface = TTF_RenderText_Solid(font, text.c_str(), color);

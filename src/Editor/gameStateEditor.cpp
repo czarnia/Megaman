@@ -193,8 +193,8 @@ void gameStateEditor::exportMap(){
             block_type = PBLOCK_STAIR;
 
         ofile << block_type << " ";
-        ofile << it->second->getPosX() << " ";
-        ofile << it->second->getPosY() << " ";
+        ofile << it->second->getPosX() + Block_sprite::width/2<< " ";
+        ofile << it->second->getPosY() + Block_sprite::height/2<< " ";
         ofile << std::endl;
     }
 
@@ -208,9 +208,15 @@ void gameStateEditor::exportMap(){
         else {}
 
         ofile << char_type << " ";
-        ofile << it->second->getPosX() << " ";
-        ofile << it->second->getPosY() << " ";
-        ofile << std::endl;
+        if (char_type == PMEGAMAN){
+            ofile << it->second->getPosX() + Block_sprite::width/2<< " ";
+            ofile << it->second->getPosY() + Block_sprite::height<< " ";
+            ofile << std::endl;
+        }else{
+            ofile << it->second->getPosX() + Block_sprite::width/2<< " ";
+            ofile << it->second->getPosY() + Block_sprite::height/2<< " ";
+            ofile << std::endl;
+        }
     }
 
     ofile.close();

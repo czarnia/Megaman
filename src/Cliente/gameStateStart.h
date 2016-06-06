@@ -10,7 +10,7 @@
 
 class gameStateStart: public GameState{
     private:
-        int playerno;
+        std::pair<int,std::string> &playerData;
         /// variables tecnicas
         Window *window;
         Renderer *renderer;
@@ -40,7 +40,8 @@ class gameStateStart: public GameState{
         bool ko;
 
     public:
-        gameStateStart(Window *window, Renderer *renderer, Socket *skt);
+        gameStateStart(Window *window, Renderer *renderer, Socket *skt,
+                        std::pair<int,std::string> &playerData);
         void load(int stack = 0);
         int unload();
         StateCode update();

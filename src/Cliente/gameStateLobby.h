@@ -19,11 +19,10 @@ class gameStateLobby: public GameState{
         bool start;
         bool quit;
 
-        std::string playername;
-        int playernumber;
+        std::pair<int,std::string> playerData;
     public:
         gameStateLobby(Window *window, Renderer *renderer,
-                        Socket *skt, std::string &player);
+                        Socket *skt, std::pair<int, std::string> &playerData);
         void moveSelector(std::string direction);
         ///
         void load(int stack = 0);

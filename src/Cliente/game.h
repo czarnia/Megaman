@@ -7,6 +7,7 @@
 #include "gameState.h"
 #include "window.h"
 #include <string>
+#include <utility>
 
 class Game{
 	private:
@@ -21,7 +22,7 @@ class Game{
         char *hostname;
         char *port;
 
-        std::string playername;
+        std::pair<int,std::string> playerData;
 	public:
 		Game(char* hostname,char* port);
 		/// Esta funcion corre el juego

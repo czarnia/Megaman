@@ -6,8 +6,9 @@
 #define FPS 60
 #define TAM_INT 4
 
-gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt):
-    playerno(0),
+gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
+                                std::pair<int,std::string> &playerData):
+    playerData(playerData),
     window(window),
     renderer(renderer),
     skt(skt),
@@ -33,11 +34,6 @@ void gameStateStart::cap_framerate(const Uint32 &starting_tick){
 }
 
 void gameStateStart::load(int stack){
-
-    char buffer[TAM_INT];
-    skt->receive(buffer, TAM_INT);
-    playerno = *((int*)buffer);
-    std::cout<<"Recibi mi numero de jugador: "<<playerno<<std::endl;
     /// Recibo el mapa
     receiver->receiveMapSize();
     receiver->receiveMap();
@@ -172,7 +168,7 @@ void gameStateStart::mainLoop(){
         starting_tick = SDL_GetTicks();
         /// COMUNICACION
         updateInput(&running);
-        renderer->updateCamPos(playerno);
+        renderer->updateCamPos(playerData.first);
         receiver->update(&running);
         ///
 		cap_framerate(starting_tick);

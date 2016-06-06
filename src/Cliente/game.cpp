@@ -3,6 +3,7 @@
 #include "main_menu.h"
 #include "gameStateStart.h"
 #include "gameStateLobby.h"
+#include <SDL2/SDL_ttf.h>
 
 #define FPS 60
 #define WIDTH 640
@@ -21,7 +22,7 @@ Game::Game(char* hostname,char* port):
     window = new Window(WIDTH,HEIGHT);
     renderer = NULL;
     renderer = new Renderer(window);
-    currentState = new MainMenu(window, renderer, playername);
+    currentState = new MainMenu(window, renderer, playerData);
 }
 
 void Game::run(){
@@ -36,7 +37,7 @@ void Game::run(){
 
                 delete currentState;
                 skt.conect(hostname,port);
-                currentState = new gameStateLobby(window, renderer, &skt, playername);
+                currentState = new gameStateLobby(window, renderer, &skt, playerData);
 
                 break;
             case GameState::GAME_START:
@@ -44,7 +45,7 @@ void Game::run(){
                 ///////////////
 
                 ///////////////////////////
-                currentState = new gameStateStart(window, renderer, &skt);
+                currentState = new gameStateStart(window, renderer, &skt, playerData);
                 std::cout<<"Entre al juego"<<std::endl;
                 break;
             case GameState::GAME_OVER:

@@ -3,36 +3,41 @@
 #include "boss_icon_sprite.h"
 #include "selector_sprite.h"
 
+
 #define BACKROUND 0
 #define ICON 10
 #define SELECTOR 100
 #define TAM_INT 4
 
 gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
-                                Socket *skt, std::string &player):
+                                Socket *skt, std::pair<int, std::string> &playerData):
     window(window),
     renderer(renderer),
     skt(skt),
-    playername(player)
+    playerData(playerData)
 {
     window->setTitle("Megaman: Lobby");
     start = false;
     quit = false;
-    playernumber = 1;
+    playerData.first = 1;
     selectorPos = 1;
     load();
 }
 
 void gameStateLobby::load(int stack){
-    int namebytes = playername.size();
+    /// MANDO EL NOMBRE QUE SE INGRESO
+    int namebytes = playerData.second.size();
+    if(namebytes == 0)
+        playerData.second = "unnamed";
+    namebytes = playerData.second.size();
     skt->send((char*)&namebytes, TAM_INT);
-    skt->send((char*)playername.c_str(), namebytes);
+    skt->send((char*)playerData.second.c_str(), namebytes);
     /// ACA RECIBO MI NUMERO DE JUGADOR
     char buffer[TAM_INT];
     skt->receive(buffer, TAM_INT);
-    playernumber = *((int*)buffer);
+    playerData.first = *((int*)buffer);
     /// POR AHORA
-    playernumber = 1;
+    playerData.first = 1;
 
     Sprite *spr;
     /// CARGO FONDO
@@ -68,7 +73,7 @@ void gameStateLobby::load(int stack){
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
     renderer->addSprite(ICON, spr);
     /// CARGO SELECTOR
-    if(playernumber == 1){
+    if(playerData.first == 1){
         spr = new Selector_sprite(renderer->get_renderer(), "../sprites/selector.png");
         spr->setPosX((selectorPos*2-1)*Boss_icon_sprite::width-5);
         spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
@@ -122,7 +127,7 @@ void gameStateLobby::moveSelector(std::string direction){
 
 GameState::StateCode gameStateLobby::update(){
     /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
-    if (playernumber == 1){
+    if (playerData.first == 1){
         updateInput();
     }else{
         char buffer[TAM_INT];

@@ -4,8 +4,8 @@
 #include "gameState.h"
 #include "Renderer.h"
 #include <string>
+#include <utility>
 #include "window.h"
-#include <SDL2/SDL_ttf.h>
 
 class MainMenu: public GameState{
     private:
@@ -19,9 +19,10 @@ class MainMenu: public GameState{
         bool quit;
         ///
         void updateInput();
-        std::string &playerName;
+        std::pair<int, std::string> &playerData;
     public:
-        MainMenu(Window *window, Renderer *renderer, std::string &player);
+        MainMenu(Window *window, Renderer *renderer,
+                    std::pair<int, std::string> &playerData);
 
         /// Carga sprites, musica etc
         void load(int stack = 0);

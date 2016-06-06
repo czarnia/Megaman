@@ -1,16 +1,18 @@
 #include "main_menu.h"
 #include "backround_sprite.h"
 #include "text_sprite.h"
+#include <SDL2/SDL_ttf.h>
 
 #define BACKROUND 0
 #define TEXT 100
 
 #include <iostream>
 
-MainMenu::MainMenu(Window *window, Renderer *renderer, std::string &player):
+MainMenu::MainMenu(Window *window, Renderer *renderer,
+                    std::pair<int, std::string> &playerData):
     window(window),
     renderer(renderer),
-    playerName(player)
+    playerData(playerData)
 {
     window->setTitle("Megaman: Main menu");
     start = false;
@@ -30,20 +32,20 @@ void MainMenu::updateInput(){
         }else if (event.type == SDL_KEYDOWN){
             if (event.key.keysym.sym == SDLK_RETURN)
                 start = true;
-            if (event.key.keysym.sym == SDLK_BACKSPACE && playerName.size() > 0){
-                playerName.erase(playerName.size()-1);
-                Sprite *spr = new Text_sprite(renderer->get_renderer(), playerName, 20);
-                spr->setPosX(window->get_width()/2-spr->getWidth()/2);
-                spr->setPosY(window->get_height()*1/9);
+            if (event.key.keysym.sym == SDLK_BACKSPACE && playerData.second.size() > 0){
+                playerData.second.erase(playerData.second.size()-1);
+                Sprite *spr = new Text_sprite(renderer->get_renderer(), playerData.second, 25);
+                spr->setPosX(window->get_width()/2);
+                spr->setPosY(window->get_height()*1/9+10);
                 renderer->erase(TEXT);
                 renderer->addSprite(TEXT, spr);
             }
         }else if (event.type == SDL_TEXTINPUT){
-            playerName.append(event.text.text);
+            playerData.second.append(event.text.text);
 
-            Sprite *spr = new Text_sprite(renderer->get_renderer(), playerName, 20);
-            spr->setPosX(window->get_width()/2-spr->getWidth()/2);
-            spr->setPosY(window->get_height()*1/9);
+            Sprite *spr = new Text_sprite(renderer->get_renderer(), playerData.second, 25);
+            spr->setPosX(window->get_width()/2);
+            spr->setPosY(window->get_height()*1/9+10);
             renderer->erase(TEXT);
             renderer->addSprite(TEXT, spr);
         }
@@ -57,14 +59,21 @@ void MainMenu::load(int stack){
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(BACKROUND,spr);
-    /// RECTANGULO PARA ESCRIBIR
-    spr = new Sprite(renderer->get_renderer(), "../sprites/white_rectangle.jpeg");
-    spr->setWidth(300);
-    spr->setHeight(40);
-    spr->setPosX(window->get_width()/2-spr->getWidth()/2);
-    spr->setPosY(window->get_height()*1/9);
-    renderer->addSprite(BACKROUND,spr);
 
+    /// ETCs
+    spr = new Sprite(renderer->get_renderer(), "../sprites/nickname_sign.png");
+    spr->setWidth(80);
+    spr->setHeight(60);
+    spr->setPosX(window->get_width()/2 -spr->getWidth()-5);
+    spr->setPosY(window->get_height()*1/9);
+    renderer->addSprite(BACKROUND, spr);
+
+    spr = new Sprite(renderer->get_renderer(), "../sprites/mensaje.png");
+    spr->setWidth(400);
+    spr->setHeight(50);
+    spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
+    spr->setPosY(window->get_height()*3/4);
+    renderer->addSprite(BACKROUND, spr);
 }
 
 int MainMenu::unload(){
