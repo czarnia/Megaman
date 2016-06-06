@@ -1,13 +1,10 @@
 #include "game.h"
 
-
 #include "main_menu.h"
 #include "gameStateStart.h"
 #include "gameStateLobby.h"
 
-
 #define FPS 60
-
 #define WIDTH 640
 #define HEIGHT 480
 
@@ -18,6 +15,8 @@ Game::Game(char* hostname,char* port):
     hostname(hostname),
     port(port)
 {
+	SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
     window = NULL;
     window = new Window(WIDTH,HEIGHT);
     renderer = NULL;
@@ -69,6 +68,7 @@ Game::~Game(){
     delete window;
     delete renderer;
     window = NULL;
-
+    TTF_Quit();
+    SDL_Quit();
 }
 

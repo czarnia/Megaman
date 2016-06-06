@@ -24,11 +24,15 @@ gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
 }
 
 void gameStateLobby::load(int stack){
-    /// VER ESTO
-    int namebytes = 4;
+    int namebytes = playername.size();
     skt->send((char*)&namebytes, TAM_INT);
-    skt->send("Axel", namebytes);
+    skt->send((char*)playername.c_str(), namebytes);
     /// ACA RECIBO MI NUMERO DE JUGADOR
+    char buffer[TAM_INT];
+    skt->receive(buffer, TAM_INT);
+    playernumber = *((int*)buffer);
+    /// POR AHORA
+    playernumber = 1;
 
     Sprite *spr;
     /// CARGO FONDO

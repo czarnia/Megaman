@@ -10,6 +10,8 @@ Sprite::Sprite(SDL_Renderer *r, const char* file){
         std::cout<<"No se pudo cargar textura"<<std::endl;
 }
 
+Sprite::Sprite(){
+}
 
 SDL_Rect* Sprite::get_rectangle(){
     return &rectangle;

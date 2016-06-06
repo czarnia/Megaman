@@ -33,7 +33,7 @@ void gameStateStart::cap_framerate(const Uint32 &starting_tick){
 }
 
 void gameStateStart::load(int stack){
-    /// Recibo mi numero de jugador
+
     char buffer[TAM_INT];
     skt->receive(buffer, TAM_INT);
     playerno = *((int*)buffer);

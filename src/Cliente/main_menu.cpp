@@ -1,8 +1,9 @@
 #include "main_menu.h"
-#include "gameState.h"
 #include "backround_sprite.h"
+#include "text_sprite.h"
 
 #define BACKROUND 0
+#define TEXT 100
 
 #include <iostream>
 
@@ -18,28 +19,36 @@ MainMenu::MainMenu(Window *window, Renderer *renderer, std::string &player):
 }
 
 void MainMenu::updateInput(){
+
     SDL_Event event;
+    SDL_StartTextInput();
     while (SDL_PollEvent(&event)){
+
         if (event.type == SDL_QUIT){
             quit = true;
+
         }else if (event.type == SDL_KEYDOWN){
-            switch (event.key.keysym.sym){
-                case SDLK_RETURN:
-                    start = true;
-                    break;
-                case SDLK_n:{
-                    SDL_StartTextInput();
-                    if(event.type == SDL_TEXTINPUT)
-                        playerName += event.text.text;
-                    SDL_StopTextInput();
-                    std::cout << playerName <<std::endl;
-                    break;
-                }
-                default:
-                    break;
+            if (event.key.keysym.sym == SDLK_RETURN)
+                start = true;
+            if (event.key.keysym.sym == SDLK_BACKSPACE && playerName.size() > 0){
+                playerName.erase(playerName.size()-1);
+                Sprite *spr = new Text_sprite(renderer->get_renderer(), playerName, 20);
+                spr->setPosX(window->get_width()/2-spr->getWidth()/2);
+                spr->setPosY(window->get_height()*1/9);
+                renderer->erase(TEXT);
+                renderer->addSprite(TEXT, spr);
             }
+        }else if (event.type == SDL_TEXTINPUT){
+            playerName.append(event.text.text);
+
+            Sprite *spr = new Text_sprite(renderer->get_renderer(), playerName, 20);
+            spr->setPosX(window->get_width()/2-spr->getWidth()/2);
+            spr->setPosY(window->get_height()*1/9);
+            renderer->erase(TEXT);
+            renderer->addSprite(TEXT, spr);
         }
     }
+    SDL_StopTextInput();
 }
 
 void MainMenu::load(int stack){
@@ -48,6 +57,14 @@ void MainMenu::load(int stack){
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(BACKROUND,spr);
+    /// RECTANGULO PARA ESCRIBIR
+    spr = new Sprite(renderer->get_renderer(), "../sprites/white_rectangle.jpeg");
+    spr->setWidth(300);
+    spr->setHeight(40);
+    spr->setPosX(window->get_width()/2-spr->getWidth()/2);
+    spr->setPosY(window->get_height()*1/9);
+    renderer->addSprite(BACKROUND,spr);
+
 }
 
 int MainMenu::unload(){

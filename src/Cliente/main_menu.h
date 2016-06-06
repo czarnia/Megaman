@@ -5,12 +5,15 @@
 #include "Renderer.h"
 #include <string>
 #include "window.h"
+#include <SDL2/SDL_ttf.h>
 
 class MainMenu: public GameState{
     private:
         ///
         Window *window;
         Renderer *renderer;
+        ///
+
         ///
         bool start;
         bool quit;

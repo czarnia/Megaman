@@ -15,6 +15,7 @@ class Sprite{
         SDL_Rect *crop;
     public:
         Sprite(SDL_Renderer *r, const char* file);
+        Sprite();
         /// getters de los atributos de sdl
         SDL_Rect* get_rectangle();
         SDL_Texture* get_texture();
