@@ -128,9 +128,11 @@ void gameStateLobby::updateInput(){
                 int Ypressed = event.button.y;
                 if(buttonPress(Xpressed,Ypressed,renderer->sprites[BUTTON])){
                     int command = STARTING_SELECTION;
-                    /// POR AHORA LO COMENTO
-                   // skt->send((char*)&command, TAM_INT);
-                    startSelect = true;
+
+                    if(!startSelect){
+                        skt->send((char*)&command, TAM_INT);
+                        startSelect = true;
+                    }
                 }
             }
         }
