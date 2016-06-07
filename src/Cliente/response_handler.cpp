@@ -56,8 +56,9 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr);
                         break;
-                }
+              }
             }
+            break;
 
   /*      case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<objectType<<std::endl;
@@ -92,4 +93,3 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
 
 ResponseHandler::~ResponseHandler(){
 }
-
