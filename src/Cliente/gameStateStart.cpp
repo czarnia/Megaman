@@ -2,6 +2,7 @@
 #include <iostream>
 #include "sender.h"
 #include "block_sprite.h"
+#include "response_handler.h"
 
 #define FPS 60
 #define TAM_INT 4
@@ -23,7 +24,7 @@ gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
 {
     window->setTitle("Megaman: Playing");
     window->maximize();
-    receiver = new Receiver(skt, renderer, &victory, &ko);
+    receiver = new Receiver(skt, renderer, &victory, &ko, &mutex);
     load();
 }
 
@@ -163,19 +164,38 @@ GameState::StateCode gameStateStart::update(){
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
     bool running = true;
+    static ResponseHandler handler(renderer);
+    receiver->start();
 
     while (running){
         starting_tick = SDL_GetTicks();
         /// COMUNICACION
         updateInput(&running);
-        std::cout << playerData.first<<std::endl;
         if (renderer->find(playerData.first))
             renderer->updateCamPos(playerData.first);
-        receiver->update(&running);
+        mutex.lock();
+        if (!receiver->r_queue.empty()){
+            int command = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            int objectType = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            int objectID = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            int posX = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            int posY = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            std::pair<int,int> coord;
+            coord.first = posX;
+            coord.second = posY;
+            handler.execute(command,objectType,objectID,coord);
+        }
+        mutex.unlock();
         ///
 		cap_framerate(starting_tick);
         render();
 	}
+	receiver->join();
 }
 
 void gameStateStart::render(){

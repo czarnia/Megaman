@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string.h>
 #include "block_sprite.h"
-#include "response_handler.h"
+
 #include "character_sprite.h"
 #include "backround_sprite.h"
 #include "minion_sprite.h"
@@ -32,18 +32,20 @@
 #define GAMEOVER 3
 
 Receiver::Receiver(Socket* conexion, Renderer *renderer,
-                    bool *victory, bool *ko):
+                    bool *victory, bool *ko, Mutex *mutex):
     skt(conexion),
     renderer(renderer),
     victory(victory),
-    ko(ko)
+    ko(ko),
+    mutex(mutex)
 {
 }
 
-void Receiver::update(bool *running){
+/// HILO
+void Receiver::ejecutar(){
     /// Ahora recibo las actualizaciones de las cosas movibles
     /// o que pueden cambiar
-    static ResponseHandler handler(renderer);
+
     int command;
     int objectType;
     int objectID;
@@ -57,6 +59,10 @@ void Receiver::update(bool *running){
     skt->receive(buffer, TAM_INT);
     command = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
+
+    mutex->lock();
+    r_queue.push(command);
+    mutex->unlock();
 
     if ( command == MAPA ){
         /// Tipo de objeto
@@ -78,34 +84,30 @@ void Receiver::update(bool *running){
 
         coordX *= 30;
         coordY *= 30;
-        coord = std::make_pair(coordX, coordY);
-
-            /// Etapa de clasificacion de objetos
+        /// Etapa de clasificacion de objetos
         if (objectType == MEGAMAN){
-            objectType = MEGAMANN;
+                objectType = MEGAMANN;
         }else if (objectType == MEGAMAN_BULLET){
-            objectType = MEGAMAN_BULLETN;
+                objectType = MEGAMAN_BULLETN;
         }else if (objectType == MET){
-            objectType = METN;
-        }
-    }else{
+                objectType = METN;
+        }else{
         objectType = -1;
         objectID = -1;
         coordX = -1;
         coordY = -1;
+        }
+        mutex->lock();
+        r_queue.push(objectType);
+        r_queue.push(objectID);
+        r_queue.push(coordX);
+        r_queue.push(coordY);
+        mutex->unlock();
     }
+}
 
-    switch (handler.execute(command, objectType, objectID, coord)){
-        case GameState::BOSS_SELECT:
-            *victory = true;
-            break;
-        case GameState::GAME_OVER:
-            *ko = true;
-            break;
-        default:
-            break;
-    }
-    return;
+void Receiver::update(bool *running){
+
 }
 
 void Receiver::receiveMapSize(){
