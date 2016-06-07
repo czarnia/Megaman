@@ -50,16 +50,16 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr);
+                        break;
                     case MEGAMAN_BULLETN:
                         spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bullet.png");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr);
                         break;
-              }
+                }
             }
             break;
-
   /*      case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<objectType<<std::endl;
 
@@ -72,6 +72,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             std::cout<<"Recibi vidas: "<<objectType<<std::endl;
 
             break;*/
+
         case VICTORY:{
             std::cout<<"Recibi victoria: Vuelvo a boss select"<<std::endl;
             return GameState::BOSS_SELECT;
@@ -93,3 +94,4 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
 
 ResponseHandler::~ResponseHandler(){
 }
+

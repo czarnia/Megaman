@@ -214,6 +214,7 @@ void gameStateStart::mainLoop(){
             }
         }
         mutex.unlock();
+        render();
 	}
 	cap_framerate(starting_tick);
 }
