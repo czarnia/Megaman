@@ -188,6 +188,7 @@ void Receiver::receiveMap(){
             }
         }
     }while (command != END_OF_MAP);
+    std::cout<<"Recibi fin de mapa\n"; 
 }
 
 Receiver::~Receiver(){

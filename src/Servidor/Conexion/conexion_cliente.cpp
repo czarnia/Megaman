@@ -68,7 +68,7 @@ void Conexion_cliente::enviar_mapa_inicial(Juego* m, int id){
 		skt->send((char*)&x, TAM_INT);
 		skt->send((char*)&y, TAM_INT);
 	}
-	skt->send((char*)&fin_mapa, TAM_INT);
+	skt->sendInt(&fin_mapa, TAM_INT);
 }
 
 std::string Conexion_cliente::obtener_nombre_jugador(){
