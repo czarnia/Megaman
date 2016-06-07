@@ -57,11 +57,11 @@ void Conexion_cliente::enviar_mapa_inicial(Juego* m, int id){
 		Coordenada central = ubicable->get_coordenada();
 		int alto = ubicable->get_alto();
 		int ancho = ubicable->get_ancho();
-		Coordenada a_enviar = central.arriba(alto).izquierda(ancho);
+		Coordenada a_enviar = central.arriba(alto/2).izquierda(ancho/2);
 		int x = a_enviar.obtener_abscisa();
 		int y = a_enviar.obtener_ordenada();
-		std::cout << "ENVIO tipo: " << (char*)&tipo << "id: " << (char*)&id;
-		std::cout << "coord: " << (char*)&x << "," << (char*)&y << "\n";
+		std::cout << "ENVIO tipo: " << tipo << "id: " << id;
+		std::cout << "coord: " << x << "," << y << "\n";
 		skt->send((char*)&codigo_mapa, TAM_INT);
 		skt->send((char*)&tipo, TAM_INT);
 		skt->send((char*)&id, TAM_INT);

@@ -17,7 +17,7 @@ Ubicable* MegamanFactory::crear(Mapa* mapa, Coordenada c){
 	Coordenada coord(x, y); //LAS COORDENADAS INICIALES SE OBTIENEN DE UN ARCHIVO Y SE PIDEN AL MAPA...
 	Observador_personaje *obs = new Observador_personaje(juego);
 	Factory_observador_ubicable *fact_obs = new Factory_observador_ubicable(juego);
-	Megaman *megaman = new Megaman(mapa, coord, id, fact_obs);
+	Megaman *megaman = new Megaman(mapa, coord, id+1, fact_obs);
 	megaman->agregar_observador(obs);
 	fact_obs->crear(megaman);
 	mapa->agregar_personaje(megaman);

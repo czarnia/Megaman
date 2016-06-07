@@ -45,8 +45,12 @@ void Juego::personaje_atacar(int id_pj, int direccion){ //debería ser sólo par
 
 void Juego::personaje_mover(int id_pj, int direccion){
   Lock candado(proteccion);
+	std::cout << "JUEGO: AGREGAR MOVIMIENTO PERSONAJE\n";
+	std::cout << "ID PERSONAJE: " << id_pj << "\n";
   Personaje* pj = mundo->obtener_pj(id_pj);
-  std::cout << "JUEGO: AGREGAR MOVIMIENTO PERSONAJE\n";
+	if (pj == NULL){
+		std::cout << "PJ ES NULL \n";
+	}
   pj->agregar_movimiento(direccion);
 }
 

@@ -95,7 +95,7 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 		int x = c_act.obtener_abscisa();
 		int y = c_act.obtener_ordenada();
 		Elemento* elem = elementos[x][y];
-		if ((!elem->puede_ocupar(ubic)) || (!tiene_coordenada(c_act))){
+		if ((elem==NULL) || (!elem->puede_ocupar(ubic)) || (!tiene_coordenada(c_act))){
 			return false;
 		}
 	}
@@ -106,7 +106,7 @@ bool Mapa::ubicar(Personaje* pj, Coordenada c){
 	if (!puede_ubicarse(pj, c)){
 		return false;
 	}
-	personajes[pj->get_id()] = pj; 
+	personajes[pj->get_id()] = pj;
 	return true;
 }
 
@@ -194,7 +194,7 @@ void Mapa::cargar(){
 		Bloque* b = new Bloque(c1);
 		std::vector<Coordenada> coordenadas_bloque = b->coordenadas();
 		for (size_t j = 0; j < coordenadas_bloque.size(); j++){
-			Coordenada c2 = coordenadas_bloque[i];
+			Coordenada c2 = coordenadas_bloque[j];
 			int x = c2.obtener_abscisa();
 			int y = c2.obtener_ordenada();
 			elementos[x][y] = b;
@@ -208,6 +208,7 @@ void Mapa::agregar_bala(Bala *b){
 
 void Mapa::agregar_personaje(Personaje *p){
 	personajes.insert(std::pair<int, Personaje*>(p->get_id(), p));
+	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
 }
 
 void Mapa::quitar_personaje(int id_pj){
@@ -242,8 +243,10 @@ void Mapa::interactuar_con_entorno(Personaje* pj){
 std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	std::set<Ubicable*> ubicables;
 	for (size_t i = 0; i < long_x; i++){
-		for (ItElementos it = elementos[i].begin(); it != elementos[i].end(); ++it){
-			ubicables.insert(it->second);
+		for (size_t j = 0; j < long_y; j++){
+			if (elementos[i].find(j) != elementos[i].end()){
+				ubicables.insert(elementos[i][j]);
+			}
 		}
 	}
 	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){

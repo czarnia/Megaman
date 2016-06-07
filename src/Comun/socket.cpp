@@ -102,10 +102,8 @@ int Socket::send(const char* buffer, size_t tamanio){
   size_t tam_actual = 0; //el tamaño total de lo que ya envié.
   int tam_send = 0; //el tamaño de lo que envio en cada ciclo.
 /***/
-  std::stringstream tam;
-  tam << tamanio;
-  std::cout << "SOCKET: Envio un: " << buffer << "\n";
-  std::cout << "SOCKET: TAM BUFFER: " << tam.str() << "\n";
+  //std::cout << "SOCKET: Envio un: " << buffer << "\n";
+  //std::cout << "SOCKET: TAM BUFFER: " << tamanio << "\n";
 /***/
   while (tam_actual < tamanio){
     int dif_tam = tamanio-tam_actual;

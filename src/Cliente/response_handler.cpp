@@ -7,7 +7,6 @@
 
 #define MAPA 1
 /// PARA PROTOCOLO
-#define IDLE 4
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
 #define VICTORY 2
@@ -30,9 +29,6 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
     Sprite *spr = NULL;
     switch (command){
         case MAPA:
-            std::cout<<"Recibi nueva posicion para: "<<objectType
-            <<"nro:"<<objectID<<"y es";
-            std::cout<<coord.first<<","<<coord.second<<std::endl;
             /// SI recibi coordenadas negativas destruyo el objeto
             if (coord.first < 0){
                 renderer->erase(objectType+objectID);
@@ -54,6 +50,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr);
+                        break;
                     case MEGAMAN_BULLETN:
                         spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bullet.png");
                         spr->setPosX(coord.first);
@@ -62,7 +59,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         break;
                 }
             }
-
+            break;
   /*      case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<objectType<<std::endl;
 
@@ -75,19 +72,18 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             std::cout<<"Recibi vidas: "<<objectType<<std::endl;
 
             break;*/
+
         case VICTORY:{
-            std::cout<<"Recibi victoria: "<<std::endl;
+            std::cout<<"Recibi victoria: Vuelvo a boss select"<<std::endl;
             return GameState::BOSS_SELECT;
             break;
         }
         case GAMEOVER:{
-            std::cout<<"Recibi gameover: "<<std::endl;
+            std::cout<<"Recibi gameover: Vuelvo al menu inicio"<<std::endl;
             return GameState::GAME_OVER;
             break;
         }
         case END_OF_RESPONSE:
-            break;
-        case IDLE:
             break;
         default:
             return GameState::CONTINUE;

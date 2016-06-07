@@ -4,7 +4,8 @@
 #include "bala.h"
 #include "puas.h"
 #include "puas_asesinas.h"
-
+#include <algorithm>
+#include <vector>
 #define ALTO 2
 #define ANCHO 2
 #define TIPO_BLOQUE 10
@@ -49,13 +50,31 @@ bool Bloque::puede_ocupar(Puas_asesinas* puas){
 void Bloque::interactuar(Personaje *pj){} //Los bloques no interactuan!
 
 std::vector<Coordenada> Bloque::coordenadas(Coordenada c){
-	std::vector<Coordenada> v;
-	v.push_back(c);
-	v.push_back(c.arriba(ALTO/2).izquierda(ANCHO/2));
-	v.push_back(c.arriba(ALTO/2).derecha(ANCHO/2));
-	v.push_back(c.abajo(ALTO/2).izquierda(ANCHO/2));
-	v.push_back(c.abajo(ALTO/2).derecha(ANCHO/2));
-	return v;
+	std::vector<Coordenada> s_coord;
+	Coordenada coord_aux(0,0);
+	for (int i = 0; i <= alto/2; i++){
+		for (int j = 0; j <= ancho/2; j++){
+			coord_aux = c.arriba(i).izquierda(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(c.arriba(i).izquierda(j));
+			} 
+			coord_aux = c.arriba(i).derecha(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(c.arriba(i).derecha(j));
+			}
+			coord_aux = c.abajo(i).izquierda(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(c.abajo(i).izquierda(j));
+			}
+			coord_aux = c.abajo(i).derecha(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(c.abajo(i).derecha(j));
+			}
+			
+		}
+	}
+	
+	return s_coord;
 }
 
 std::vector<Coordenada> Bloque::coordenadas(){
