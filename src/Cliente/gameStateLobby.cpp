@@ -130,7 +130,7 @@ void gameStateLobby::updateInput(){
                     int command = STARTING_SELECTION;
 
                     if(!startSelect){
-                        skt->send((char*)&command, TAM_INT);
+                      //  skt->send((char*)&command, TAM_INT);
                         startSelect = true;
                     }
                 }

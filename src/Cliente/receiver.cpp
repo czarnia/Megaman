@@ -76,6 +76,8 @@ void Receiver::update(bool *running){
         coordY = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
 
+        coordX *= 30;
+        coordY *= 30;
         coord = std::make_pair(coordX, coordY);
 
             /// Etapa de clasificacion de objetos
@@ -99,6 +101,8 @@ void Receiver::update(bool *running){
             break;
         case GameState::GAME_OVER:
             *ko = true;
+            break;
+        default:
             break;
     }
     return;
