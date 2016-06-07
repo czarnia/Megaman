@@ -86,8 +86,8 @@ void Receiver::ejecutar(){
         << objectType << " ID de objeto: "<<objectID <<" Pos: "
         <<coordX<<","<<coordY<<std::endl;
         ///////////////
-        coordX *= 30;
-        coordY *= 30;
+        coordX *= 15;
+        coordY *= 15;
         /// Etapa de clasificacion de objetos
         if (objectType == MEGAMAN){
             objectType = MEGAMANN;
@@ -124,7 +124,7 @@ void Receiver::receiveMapSize(){
     skt->receive(buffer,TAM_INT);
     level_height = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
-    renderer->setMapSize(level_width*30, level_height*30);
+    renderer->setMapSize(level_width*15, level_height*15);
     std::cout<<"Recibi tamanio del mapa: "<<level_width<<"x"<<level_height<<std::endl;
 }
 
@@ -167,31 +167,31 @@ void Receiver::receiveMap(){
             switch (objectType){
                 case BLOCK_EARTH:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
-                    spr->setPosX(coordX*30);
-                    spr->setPosY(coordY*30);
+                    spr->setPosX(coordX*15);
+                    spr->setPosY(coordY*15);
                     renderer->addMapSprite(BLOCK_EARTHN, spr);
                     break;
                 case BLOCK_SPIKES:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
-                    spr->setPosX(coordX*30);
-                    spr->setPosY(coordY*30);
+                    spr->setPosX(coordX*15);
+                    spr->setPosY(coordY*15);
                     renderer->addMapSprite(BLOCK_SPIKESN, spr);
                     break;
                 case BLOCK_STAIR:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
-                    spr->setPosX(coordX*30);
-                    spr->setPosY(coordY*30);
+                    spr->setPosX(coordX*15);
+                    spr->setPosY(coordY*15);
                     renderer->addMapSprite(BLOCK_STAIRN, spr);
                     break;
                 case MEGAMAN:
                     spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
-                    spr->setPosX(coordX*30);
-                    spr->setPosY(coordY*30);
+                    spr->setPosX(coordX*15);
+                    spr->setPosY(coordY*15);
                     renderer->addSprite(MEGAMANN+objectID,spr);
                 case MET:
                     spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
-                    spr->setPosX(coordX*30);
-                    spr->setPosY(coordY*30);
+                    spr->setPosX(coordX*15);
+                    spr->setPosY(coordY*15);
                     renderer->addMapSprite(METN+objectID, spr);
                     break;
                 default:
@@ -199,7 +199,6 @@ void Receiver::receiveMap(){
             }
         }
     }while (command != END_OF_MAP);
-    std::cout<<"Recibi fin de mapa\n"; 
 }
 
 Receiver::~Receiver(){
