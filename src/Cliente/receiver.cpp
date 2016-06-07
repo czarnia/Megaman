@@ -63,52 +63,52 @@ void Receiver::ejecutar(){
     mutex->lock();
     r_queue.push(command);
     mutex->unlock();
-
-    if ( command == MAPA ){
-        /// Tipo de objeto
-        skt->receive(buffer, TAM_INT);
-        objectType = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);
-        /// ID objeto
-        skt->receive(buffer, TAM_INT);
-        objectID = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);
-        /// COORDX
-        skt->receive(buffer, TAM_INT);
-        coordX = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);
-        /// COORDY
-        skt->receive(buffer, TAM_INT);
-        coordY = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);
-        ////////////////
-        std::cout<<"Recibi comando: "<<command << " Tipo de Objeto: "
-        << objectType << " ID de objeto: "<<objectID <<" Pos: "
-        <<coordX<<","<<coordY<<std::endl;
-        ///////////////
-        coordX *= 15;
-        coordY *= 15;
-        /// Etapa de clasificacion de objetos
-        if (objectType == MEGAMAN){
-            objectType = MEGAMANN;
-        }else if (objectType == MEGAMAN_BULLET){
-            objectType = MEGAMAN_BULLETN;
-        }else if (objectType == MET){
-            objectType = METN;
+    while (command != END_OF_RESPONSE){
+        if ( command == MAPA ){
+            /// Tipo de objeto
+            skt->receive(buffer, TAM_INT);
+            objectType = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);
+            /// ID objeto
+            skt->receive(buffer, TAM_INT);
+            objectID = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);
+            /// COORDX
+            skt->receive(buffer, TAM_INT);
+            coordX = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);
+            /// COORDY
+            skt->receive(buffer, TAM_INT);
+            coordY = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);
+            ////////////////
+            std::cout<<"Recibi comando: "<<command << " Tipo de Objeto: "
+            << objectType << " ID de objeto: "<<objectID <<" Pos: "
+            <<coordX<<","<<coordY<<std::endl;
+            ///////////////
+            coordX *= 15;
+            coordY *= 15;
+            /// Etapa de clasificacion de objetos
+            if (objectType == MEGAMAN){
+                objectType = MEGAMANN;
+            }else if (objectType == MEGAMAN_BULLET){
+                objectType = MEGAMAN_BULLETN;
+            }else if (objectType == MET){
+                objectType = METN;
+            }else{
+                objectType = -1;
+                objectID = -1;
+                coordX = -1;
+                coordY = -1;
+            }
+            mutex->lock();
+            r_queue.push(objectType);
+            r_queue.push(objectID);
+            r_queue.push(coordX);
+            r_queue.push(coordY);
+            mutex->unlock();
         }else{
-            objectType = -1;
-            objectID = -1;
-            coordX = -1;
-            coordY = -1;
         }
-        mutex->lock();
-        r_queue.push(objectType);
-        r_queue.push(objectID);
-        r_queue.push(coordX);
-        r_queue.push(coordY);
-        mutex->unlock();
-    }else{
-        return;
     }
 }
 
