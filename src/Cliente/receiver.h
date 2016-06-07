@@ -27,7 +27,6 @@ class Receiver: public Hilo{
         ///"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo
         ///le indica el fin de la ejecucion.
         void ejecutar();
-        void update(bool *running);
         ~Receiver();
 };
 

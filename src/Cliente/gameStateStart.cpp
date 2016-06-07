@@ -6,6 +6,7 @@
 
 #define FPS 60
 #define TAM_INT 4
+#define MAPA 1
 
 gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
                                 std::pair<int,std::string> &playerData):
@@ -41,7 +42,8 @@ void gameStateStart::load(int stack){
 }
 
 int gameStateStart::unload(){
-
+    receiver->join();
+    renderer->clearSprites();
     return 0;
 }
 
@@ -166,36 +168,54 @@ void gameStateStart::mainLoop(){
     bool running = true;
     static ResponseHandler handler(renderer);
     receiver->start();
-
     while (running){
         starting_tick = SDL_GetTicks();
-        /// COMUNICACION
+        /// Recibo la entrada y envio al servidor
         updateInput(&running);
+        /// Actualizo la posicion de camara
         if (renderer->find(playerData.first))
             renderer->updateCamPos(playerData.first);
+        /// Si hay algun mensaje del servidor lo recibo
         mutex.lock();
         if (!receiver->r_queue.empty()){
-            int command = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            int objectType = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            int objectID = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            int posX = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            int posY = receiver->r_queue.front();
-            receiver->r_queue.pop();
+            int command = 0;
+            int objectType = -1;
+            int objectID = -1;
+            int posX = -1;
+            int posY = -1;
             std::pair<int,int> coord;
-            coord.first = posX;
-            coord.second = posY;
-            handler.execute(command,objectType,objectID,coord);
+            command = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            if( command == MAPA){
+                objectType = receiver->r_queue.front();
+                receiver->r_queue.pop();
+                objectID = receiver->r_queue.front();
+                receiver->r_queue.pop();
+                posX = receiver->r_queue.front();
+                receiver->r_queue.pop();
+                posY = receiver->r_queue.front();
+                receiver->r_queue.pop();
+
+                coord.first = posX;
+                coord.second = posY;
+            }
+            switch(handler.execute(command,objectType,objectID,coord)){
+                case GameState::BOSS_SELECT:
+                    running = false;
+                    victory = true;
+                    break;
+                case GameState::GAME_OVER:
+                    running = false;
+                    ko = true;
+                    break;
+                default:
+                    break;
+
+            }
         }
         mutex.unlock();
-        ///
-		cap_framerate(starting_tick);
-        render();
 	}
-	receiver->join();
+	cap_framerate(starting_tick);
 }
 
 void gameStateStart::render(){

@@ -27,6 +27,7 @@ Game::Game(char* hostname,char* port):
 
 void Game::run(){
     bool running = true;
+    skt.conect(hostname,port);
     while (running){
         GameState::StateCode whatToDo;
         whatToDo = currentState->update();
@@ -36,21 +37,27 @@ void Game::run(){
             case GameState::BOSS_SELECT:
 
                 delete currentState;
-                skt.conect(hostname,port);
                 currentState = new gameStateLobby(window, renderer, &skt, playerData);
 
                 break;
             case GameState::GAME_START:
-                delete currentState;
-                ///////////////
 
-                ///////////////////////////
+                delete currentState;
                 currentState = new gameStateStart(window, renderer, &skt, playerData);
                 std::cout<<"Entre al juego"<<std::endl;
+
                 break;
             case GameState::GAME_OVER:
+
+                delete currentState;
+                currentState = new MainMenu(window, renderer, playerData);
+
                 break;
             case GameState::VICTORY:
+
+                delete currentState;
+                currentState = new gameStateLobby(window, renderer, &skt, playerData);
+
                 break;
             case GameState::CONTINUE:
                 break;
