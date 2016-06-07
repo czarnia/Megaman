@@ -42,13 +42,8 @@ void Personaje::notificar_observadores(){
 
 void Personaje::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
-	Coordenada pos_inicial(-1, -1);
-	pos_inicial = coordenada;
 	mover(tiempo, mapa);
-	if (!(coordenada == pos_inicial)){
-		std::cout << "PERSONAJE: NOTIFICO OBSERVADORES\n";
-		notificar_observadores();
-	}
+	notificar_observadores();
 }
 
 void Personaje::agregar_movimiento(int direccion){

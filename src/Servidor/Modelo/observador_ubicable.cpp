@@ -17,8 +17,11 @@ void Observador_ubicable::update(Observable *obs){
 		inicial << coordenada.obtener_abscisa() << "," << coordenada.obtener_ordenada() << "\n";
 		std::cout << "OBSERVER_UBICABLE: POS INICIAL " + inicial.str() + "\n";
 		//Un personaje p actualizo su posicion.
-		int x = (int)ubicable->get_coordenada().obtener_abscisa();
-		int y = (int)ubicable->get_coordenada().obtener_ordenada();
+		int alto = ubicable->get_alto();
+		int ancho = ubicable->get_ancho();
+		Coordenada c = ubicable->get_coordenada().arriba(alto/2).izquierda(ancho/2);
+		int x = (int)c.obtener_abscisa();
+		int y = (int)c.obtener_ordenada();
 		std::stringstream pos_final;
 		pos_final << x << "," << y << "\n";
 		std::cout << "OBSERVER_UBICABLE: POS FINAL " + pos_final.str() + "\n";
