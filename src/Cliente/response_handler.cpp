@@ -28,7 +28,7 @@ ResponseHandler::ResponseHandler(Renderer *renderer):
 int ResponseHandler::execute(int command, int objectType, int objectID, std::pair<int,int> coord){
     Sprite *spr = NULL;
     switch (command){
-        case MAPA:
+        case MAPA:{
             /// SI recibi coordenadas negativas destruyo el objeto
             if (coord.first < 0){
                 renderer->erase(objectType+objectID);
@@ -59,6 +59,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         break;
                 }
             }
+        }
             break;
   /*      case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<objectType<<std::endl;

@@ -53,17 +53,17 @@ void Receiver::ejecutar(){
     int coordY;
     std::pair<int,int> coord;
 	std::cout<<"Se comenzo a recibir cosas:"<<std::endl;
-
-    char buffer[TAM_INT] = "";
-    /// COMANDO
-    skt->receive(buffer, TAM_INT);
-    command = *((int*)buffer);
-    strncpy(buffer,"    ",TAM_INT);
-
-    mutex->lock();
-    r_queue.push(command);
-    mutex->unlock();
     while (command != END_OF_RESPONSE){
+        char buffer[TAM_INT] = "";
+        /// COMANDO
+        skt->receive(buffer, TAM_INT);
+        command = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
+
+        mutex->lock();
+        r_queue.push(command);
+        mutex->unlock();
+
         if ( command == MAPA ){
             /// Tipo de objeto
             skt->receive(buffer, TAM_INT);
