@@ -1,6 +1,6 @@
 #Setting compilation flags:
 add_definitions("-g -o0 -Wall -pedantic")
-set(CMAKE_MODULE_PATH ../../FindSDL2TTF.cmake)
+
 #Use the package PkgConfig to detect GTK+ headers/library files.
 #find_package (PkgConfig REQUIRED)
 
@@ -24,13 +24,13 @@ set(CMAKE_MODULE_PATH ../../FindSDL2TTF.cmake)
 include(FindPkgConfig)
 pkg_search_module(SDL2 REQUIRED sdl2)
 pkg_search_module(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
-find_package(SDL_ttf REQUIRED)
+pkg_search_module(SDL2_ttf REQUIRED SDL2_ttf>=2.0.0)
 
 include_directories(
 	${SDL2_INCLUDE_DIRS}
 	${SDL2IMAGE_INCLUDE_DIRS}
 	${SDL_MIXER_INCLUDE_DIRS}
-	${SDL_TTF_INCLUDE_DIRS}
+	${SDL2_TTF_INCLUDE_DIRS}
 )
 
 #Declare variable that combines all *.cpp  and *.h files
@@ -40,4 +40,4 @@ file (GLOB SRCS  *.cpp *.h)
 #Creates an executable with all files found
 #by file command.
 add_executable (cliente ${SRCS})
-target_link_libraries (cliente Megaman -pthread ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES} ${SDL_TTF_LIBRARIES})
+target_link_libraries (cliente Megaman -pthread ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES} -lSDL2_ttf)
