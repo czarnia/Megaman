@@ -208,6 +208,7 @@ void Mapa::agregar_bala(Bala *b){
 
 void Mapa::agregar_personaje(Personaje *p){
 	personajes.insert(std::pair<int, Personaje*>(p->get_id(), p));
+	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
 }
 
 void Mapa::quitar_personaje(int id_pj){
