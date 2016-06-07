@@ -95,7 +95,7 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 		int x = c_act.obtener_abscisa();
 		int y = c_act.obtener_ordenada();
 		Elemento* elem = elementos[x][y];
-		if ((elem==NULL) || (!elem->puede_ocupar(ubic)) || (!tiene_coordenada(c_act))){
+		if (((elem!=NULL) && (!elem->puede_ocupar(ubic))) || (!tiene_coordenada(c_act))){
 			return false;
 		}
 	}
