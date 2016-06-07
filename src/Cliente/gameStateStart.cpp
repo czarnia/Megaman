@@ -168,7 +168,9 @@ void gameStateStart::mainLoop(){
         starting_tick = SDL_GetTicks();
         /// COMUNICACION
         updateInput(&running);
-        renderer->updateCamPos(playerData.first);
+        std::cout << playerData.first<<std::endl;
+        if (renderer->find(playerData.first))
+            renderer->updateCamPos(playerData.first);
         receiver->update(&running);
         ///
 		cap_framerate(starting_tick);
