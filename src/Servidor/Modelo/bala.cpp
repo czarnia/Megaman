@@ -62,15 +62,16 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 	size_t delta_x = 0;
 	size_t delta_y = 0;
 	bool llegue = ((direccion_x == 0) && (direccion_y == 0));
-	bool hay_colision = false;
+	//bool hay_colision = false;
 	Coordenada actual = coord;
 	if (tiempo_pasado >= TIEMPO_MOVER){
 		if (impacto){
 			//si la bala impacto con un objeto en el update anterior
 			//se destruye en este update;
 			actual = Coordenada(-1, -1);
+			mapa->quitar_bala(this);
 		}
-		while (!impacto && !llegue && !hay_colision){
+		while (!impacto && !llegue){
 			if ((direccion_x != 0) && (delta_x != VELOCIDAD)){
 				actual = (direccion_x == DERECHA)? actual.derecha() : actual.izquierda();
 				delta_x += (direccion_x == DERECHA)? AVANZA : RETROCEDE;
@@ -83,13 +84,11 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 					    || ((direccion_y != 0) && (delta_y != VELOCIDAD)));
 
 			if (!llegue){
-				hay_colision = !mapa->puede_ubicarse(this, actual);
-				hay_colision = hay_colision || mapa->hay_personaje(&actual);
-				if (hay_colision){
-					impacto = true;
+				impacto = !mapa->puede_ubicarse(this, actual);
+				impacto = impacto || mapa->hay_personaje(&actual);
+				if (impacto){
 					direccion_x = 0;
 					direccion_y = 0;
-					mapa->quitar_bala(this);
 				}
 			}
 		}
