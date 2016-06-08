@@ -62,10 +62,6 @@ public Elemento{
 		virtual void daniar(Megaman* mega) = 0;
 		//Daña a un Met.
 		virtual void daniar(Met* met) = 0;
-		//Devuelve el id de la bala.
-		int get_id();
-		//Devuelve el id de la bala.
-		int get_tipo();
 		//Recibe un observador de ubicables y lo agrega a
 		//la lista de ubicables:
 		void agregar_observador(Observador_ubicable *observador);

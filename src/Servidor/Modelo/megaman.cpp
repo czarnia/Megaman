@@ -32,6 +32,7 @@ void Megaman::atacar(int dir, Mapa* mapa){
 		bala = armas[arma_act-1]->atacar(dir, 0, pos_inicial);
 	}
 	mapa->agregar_bala(bala);
+	bala->notificar_observadores();
 }
 
 void Megaman::mover(size_t tiempo, Mapa* mapa){

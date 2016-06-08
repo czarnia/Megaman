@@ -107,14 +107,6 @@ Coordenada Bala::get_coordenada(){
 	return coord;
 }
 
-int Bala::get_id(){
-	return id;
-}
-
-int Bala::get_tipo(){
-	return 0;
-}
-
 void Bala::agregar_observador(Observador_ubicable *observador){
 	Observable::agregar_observador(observador);
 }
