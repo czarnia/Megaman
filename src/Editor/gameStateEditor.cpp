@@ -2,16 +2,32 @@
 #include "../Cliente/Sprite.h"
 #include "../Cliente/block_sprite.h"
 #include "../Cliente/character_sprite.h"
+#include "../Cliente/background_sprite.h"
 #include <iostream>
 #include <fstream>
+/// TAMANIOS
+#define ICON_BACKGROUND_WIDTH Block_sprite::width*3
+
+/// PARA ALMACENAR
+#define STATIC_BACKGROUND 1
+#define STATIC_BLOCK 10
+#define STATIC_MEGAMAN 11
+#define STATIC_LADDER 12
+#define STATIC_SPIKE 13
+#define STATIC_MET 14
+#define STATIC 1
+#define NON_STATIC 0
+
+#define ICONS_POS 100
 
 #define BLOCK_EARTH 100
 #define BLOCK_SPIKE 1000
-#define BLOCK_STAIR 1500
+#define BLOCK_LADDER 1500
 #define MEGAMANN 1
 #define METN 8
 #define CAM_SPEEDX 20
 
+/// PARA EXPORTAR
 #define PBLOCK_EARTH 10
 #define PBLOCK_SPIKE 11
 #define PBLOCK_STAIR 12
@@ -27,25 +43,67 @@ gameStateEditor::gameStateEditor(Window *window, Renderer* renderer):
     load();
 }
 
+void gameStateEditor::load(int stack){
+    /// FONDO
+    Sprite *spr = new Background_sprite(renderer->get_renderer(), "../sprites/editor_background.jpeg");
+    spr->setPosX(0);
+    spr->setPosY(0);
+    renderer->addSprite(STATIC_BACKGROUND, spr, 0, STATIC);
+    /// FONDO DE ICONOS
+    spr = new Sprite(renderer->get_renderer(), "../sprites/icons_background.jpeg");
+    spr->setHeight(window->get_height());
+    spr->setWidth(ICON_BACKGROUND_WIDTH);
+    spr->setPosX(0);
+    spr->setPosY(0);
+    renderer->addSprite(STATIC_BACKGROUND, spr, 1, STATIC);
+    /// BLOQUE
+    spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
+    spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
+    spr->setPosY(Block_sprite::height*1);
+    renderer->addSprite(STATIC_BLOCK, spr, 1, STATIC);
+    /// MEGAMAN
+    spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
+    spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
+    spr->setPosY(Block_sprite::height*2);
+    renderer->addSprite(STATIC_MEGAMAN, spr, 1, STATIC);
+    /// ESCALERA
+    spr = new Block_sprite(renderer->get_renderer(), "../sprites/ladder.png");
+    spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
+    spr->setPosY(Block_sprite::height*4);
+    renderer->addSprite(STATIC_LADDER, spr, 1, STATIC);
+    /// PUA
+    spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
+    spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
+    spr->setPosY(Block_sprite::height*5);
+    renderer->addSprite(STATIC_SPIKE, spr, 1, STATIC);
+    /// MET
+    spr = new Block_sprite(renderer->get_renderer(), "../sprites/met.png");
+    spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
+    spr->setPosY(Block_sprite::height*6);
+    renderer->addSprite(STATIC_MET, spr, 1, STATIC);
+}
+
 void gameStateEditor::chooseBlock(SDL_Event *event){
-    switch(event->key.keysym.sym){
-        case SDLK_b:/// BLOQUE
+    int objectPressed = renderer->pressed(event->button.x, event->button.y);
+
+    switch(objectPressed){
+        case STATIC_BLOCK:/// BLOQUE
             object = gameStateEditor::BLOCK;
-            std::cout<<"Se eligio un blocke"<<std::endl;
+            std::cout<<"Se eligio un bloque"<<std::endl;
             break;
-        case SDLK_s:/// PUAS
+        case STATIC_SPIKE:/// PUAS
             object = gameStateEditor::SPIKES;
             std::cout<<"Se eligio puas"<<std::endl;
             break;
-        case SDLK_e:/// ESCALERA
-            object = gameStateEditor::STAIR;
+        case STATIC_LADDER:/// ESCALERA
+            object = gameStateEditor::LADDER;
             std::cout<<"Se eligio escalera"<<std::endl;
             break;
-        case SDLK_m:/// MEGAMAN
+        case STATIC_MEGAMAN:/// MEGAMAN
             object = gameStateEditor::MEGAMAN;
             std::cout<<"Se eligio megaman"<<std::endl;
             break;
-        case SDLK_1: /// MET
+        case STATIC_MET: /// MET
             object = gameStateEditor::MET;
             std::cout<<"Se eligio un met"<<std::endl;
             break;
@@ -59,54 +117,55 @@ void gameStateEditor::updateInput(SDL_Event *event){
     if ( event->button.button == SDL_BUTTON_LEFT && object != gameStateEditor::NOTHING){
         int x = (event->button.x + renderer->camX)/Block_sprite::width*Block_sprite::width;
         int y = (event->button.y + renderer->camY)/Block_sprite::height*Block_sprite::height;
-
-        switch(object){
-            case gameStateEditor::BLOCK:
-                if (!renderer->ocupied(x,y)){
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
-                    spr->setPosX(x);
-                    spr->setPosY(y);
-                    renderer->addMapSprite(BLOCK_EARTH, spr);
-                }
-                break;
-            case gameStateEditor::SPIKES:
-                if (!renderer->ocupied(x,y)){
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
-                    spr->setPosX(x);
-                    spr->setPosY(y);
-                    renderer->addMapSprite(BLOCK_SPIKE, spr);
-                }
-                break;
-            case gameStateEditor::STAIR:
-                if (!renderer->ocupied(x,y)){
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/ladder.png");
-                    spr->setPosX(x);
-                    spr->setPosY(y);
-                    renderer->addMapSprite(BLOCK_STAIR, spr);
-                }
-                break;
-            case gameStateEditor::MEGAMAN:
-                if (!renderer->ocupied(x,y) && !renderer->ocupied(x,y+Block_sprite::width)){
-                    if(renderer->find(MEGAMANN)){
-                        std::cout<< "Ya se coloco un megaman"<<std::endl;
-                    }else{
-                        spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
+        if ( event->button.x > ICONS_POS){
+            switch(object){
+                case gameStateEditor::BLOCK:
+                    if (!renderer->ocupied(x,y)){
+                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
                         spr->setPosX(x);
                         spr->setPosY(y);
-                        renderer->addSprite(MEGAMANN, spr);
+                        renderer->addSprite(BLOCK_EARTH, spr, 0, NON_STATIC);
                     }
-                }
-                break;
-            case gameStateEditor::MET:
-                if (!renderer->ocupied(x,y)){
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/met.png");
-                    spr->setPosX(x);
-                    spr->setPosY(y);
-                    renderer->addSprite(METN, spr);
-                }
-                break;
-            default:
-                break;
+                    break;
+                case gameStateEditor::SPIKES:
+                    if (!renderer->ocupied(x,y)){
+                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
+                        spr->setPosX(x);
+                        spr->setPosY(y);
+                        renderer->addSprite(BLOCK_SPIKE, spr, 0, NON_STATIC);
+                    }
+                    break;
+                case gameStateEditor::LADDER:
+                    if (!renderer->ocupied(x,y)){
+                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/ladder.png");
+                        spr->setPosX(x);
+                        spr->setPosY(y);
+                        renderer->addSprite(BLOCK_LADDER, spr, 0, NON_STATIC);
+                    }
+                    break;
+                case gameStateEditor::MEGAMAN:
+                    if (!renderer->ocupied(x,y) && !renderer->ocupied(x,y+Block_sprite::width)){
+                        if(renderer->find(MEGAMANN)){
+                            std::cout<< "Ya se coloco un megaman"<<std::endl;
+                        }else{
+                            spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
+                            spr->setPosX(x);
+                            spr->setPosY(y);
+                            renderer->addSprite(MEGAMANN, spr, 1, NON_STATIC);
+                        }
+                    }
+                    break;
+                case gameStateEditor::MET:
+                    if (!renderer->ocupied(x,y)){
+                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/met.png");
+                        spr->setPosX(x);
+                        spr->setPosY(y);
+                        renderer->addSprite(METN, spr, 1, NON_STATIC);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }else if (event->button.button == SDL_BUTTON_RIGHT){
         int x = (event->button.x + renderer->camX)/Block_sprite::width*Block_sprite::width;
@@ -114,14 +173,15 @@ void gameStateEditor::updateInput(SDL_Event *event){
         if(renderer->ocupied(x,y)){
             renderer->erase(x,y);
         }
+    }else{
+        std::cout << "No eligio ningun elemento para colocar." << std::endl;
     }
 }
 
-void gameStateEditor::load(int stack){
 
-}
 
 int gameStateEditor::unload(){
+    renderer->clearSprites();
     return 0;
 }
 
@@ -155,10 +215,9 @@ GameState::StateCode gameStateEditor::update(){
             if( pressed.sym == SDLK_UP || pressed.sym == SDLK_DOWN ||
                 pressed.sym == SDLK_LEFT || pressed.sym == SDLK_RIGHT)
                 updateCameraPos(&event);
-            else
-                chooseBlock(&event);
 
         }else if (event.type == SDL_MOUSEBUTTONDOWN){
+            chooseBlock(&event);
             updateInput(&event);
         }
     }
@@ -181,25 +240,26 @@ void gameStateEditor::exportMap(){
     ofile.open(fileName.c_str());
 
     std::map<int,Sprite*>::iterator it;
-    it = renderer->map_sprites.begin();
+    it = renderer->sprites[0].begin();
 
-    for (; it != renderer->map_sprites.end(); ++it){
+    for (; it != renderer->sprites[0].end(); ++it){
 
         if (it->first < BLOCK_SPIKE)
             block_type = PBLOCK_EARTH;
-        else if (it->first > BLOCK_SPIKE && it->first < BLOCK_STAIR)
+        else if (it->first > BLOCK_SPIKE && it->first < BLOCK_LADDER)
             block_type = PBLOCK_SPIKE;
         else
             block_type = PBLOCK_STAIR;
 
+
         ofile << block_type << " ";
-        ofile << it->second->getPosX() + Block_sprite::width/2<< " ";
-        ofile << it->second->getPosY() + Block_sprite::height/2<< " ";
+        ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
+        ofile << it->second->getPosY() + Block_sprite::height/2 << " ";
         ofile << std::endl;
     }
 
-    it = renderer->sprites.begin();
-    for (; it != renderer->sprites.end(); ++it){
+    it = renderer->sprites[1].begin();
+    for (; it != renderer->sprites[1].end(); ++it){
 
         if (it-> first == MEGAMANN)
             char_type = PMEGAMAN;
@@ -209,11 +269,11 @@ void gameStateEditor::exportMap(){
 
         ofile << char_type << " ";
         if (char_type == PMEGAMAN){
-            ofile << it->second->getPosX() + Block_sprite::width/2<< " ";
+            ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
             ofile << it->second->getPosY() + Block_sprite::height<< " ";
             ofile << std::endl;
         }else{
-            ofile << it->second->getPosX() + Block_sprite::width/2<< " ";
+            ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
             ofile << it->second->getPosY() + Block_sprite::height/2<< " ";
             ofile << std::endl;
         }

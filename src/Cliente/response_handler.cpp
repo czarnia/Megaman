@@ -5,8 +5,11 @@
 #include "bullet_sprite.h"
 #include "gameState.h"
 
-#define MAPA 1
+#define STATIC 1
+#define NON_STATIC 0
+
 /// PARA PROTOCOLO
+#define MAPA 1
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
 #define VICTORY 2
@@ -34,8 +37,8 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                 renderer->erase(objectType+objectID);
             /// SI ya existe le cambio la posicion
             }else if (renderer->find(objectType+objectID)){
-                renderer->sprites[objectType+objectID]->setPosX(coord.first);
-                renderer->sprites[objectType+objectID]->setPosY(coord.second);
+                renderer->sprites[1][objectType+objectID]->setPosX(coord.first);
+                renderer->sprites[1][objectType+objectID]->setPosY(coord.second);
             /// Si no existe lo creo y le seteo la posicion
             }else{
                 switch (objectType){
@@ -43,19 +46,19 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         spr = new Character_sprite(renderer->get_renderer(),"../sprites/megaman.png");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
-                        renderer->addSprite(objectType+objectID, spr);
+                        renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
                         break;
                     case METN:
                         spr = new Minion_sprite(renderer->get_renderer(),"../sprites/met.png");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
-                        renderer->addSprite(objectType+objectID, spr);
+                        renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
                         break;
                     case MEGAMAN_BULLETN:
                         spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bullet.png");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
-                        renderer->addSprite(objectType+objectID, spr);
+                        renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
                         break;
                 }
             }

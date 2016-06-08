@@ -6,8 +6,10 @@
 #include "Sprite.h"
 #include "window.h"
 #include <utility>
+#include <vector>
 #include <string>
 #include <map>
+
 
 class Renderer{
     private:
@@ -20,17 +22,15 @@ class Renderer{
         int camX;
         int camY;
         /// vectores que guardan los sprites
-        std::map<int,Sprite*> sprites;
-        std::map<int,Sprite*> map_sprites;
+        std::vector<std::map<int,Sprite*> > sprites;
+        std::vector<std::map<int,Sprite*> > static_sprites;
 
         /// Devuelve el atributo renderer
         SDL_Renderer* get_renderer();
         Renderer(Window *window);
 
-        /// Por cuestion de comodidad diferencio entre sprites regulares
-        /// y sprites de mapas
-        void addSprite(int objectid, Sprite* spr);
-        void addMapSprite(int objectid, Sprite* spr);
+        /// Agrega un sprite
+        void addSprite(int objectid, Sprite* spr, int layer, int locked);
         /// limpia todos los sprites liberando la memoria de cada uno
         void clearSprites();
         /// Establece el tamanio del mapa
@@ -46,11 +46,13 @@ class Renderer{
         /// devuelve true si existe
         bool find(int key);
         /// dibuja un sprite
-        void draw(Sprite *spr);
+        void draw(Sprite *spr, int lockedToScreen);
         /// dibuja todos los sprites cargados en los atributos
         void drawAll();
         /// Se usa en el editor
         bool ocupied(int x, int y);
+        /// Se usa en el editor
+        int pressed(int x, int y);
         /// presenta lo dibujado
         void present();
         ~Renderer();
