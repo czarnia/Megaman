@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-Evento_parar::Evento_parar(int id, int dir): 
+Evento_parar::Evento_parar(int id, int dir):
 id_evento(id),
 direccion(dir){}
 
