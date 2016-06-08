@@ -43,11 +43,11 @@ class Escalera: public Elemento{
 		virtual std::vector<Coordenada> coordenadas(Coordenada c);
 		//Destructor de la Escalera.
 		~Escalera();
-
+		//Notifica a todos sus observadores de un cambio en su estado.
 		virtual void notificar_observadores();
-
+		//Dado un observador_ubicable*, lo agrega a sus observadores.
 		virtual void agregar_observador(Observador_ubicable *observador);
-
+		//Dado un observador_ubicable*, lo quita de sus observadores.
 		virtual void quitar_observador(Observador_ubicable *observador);
 };
 

@@ -7,7 +7,7 @@
 class Elemento;
 class Personaje;
 
-class Elemento: 
+class Elemento:
 public Ubicable{
 	protected:
 		Coordenada coord;
