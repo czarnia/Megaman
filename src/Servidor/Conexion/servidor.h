@@ -28,15 +28,27 @@ public Observador_juego{
     bool termino_ejecucion();
     //Empieza una partida.
     void empezar_partida();
-    
-    virtual void update(Observable *obs);
-    virtual void update_fin_partida();
-    virtual void update_gameover(int id);
-	virtual void update_murio_personaje(int tipo, int id);
-    virtual void update_cantidad_vidas(int tipo, int id, int vidas);
-    virtual void update_porcentaje_vida(int tipo, int id, int cant_vida);
-    virtual void update_energia(int tipo, int id, int energia);
-    virtual void update_posicion(int tipo, int id, int x, int y);
+
+    //Dado un observable, realiza un update.
+		virtual void update(Observable *obs);
+		//Dado un identificador, notifica un gameover del cliente correspondiente.
+		virtual void update_gameover(int id);
+		//Notifica el fin de una partida.
+		virtual void update_fin_partida();
+		//Dado un identificador y un tipo, notifica que un personaje murio.
+		virtual void update_murio_personaje(int tipo, int id);
+		//Dado un identificador, un tipo y una cantidad de vidas, notifica que un
+		//personaje vio modificadas las mismas.
+		virtual void update_cantidad_vidas(int tipo, int id, int vidas);
+		//Dado un identificador, un tipo y una porcentaje de vida, notifica que un
+		//personaje vio modificada la misma.
+		virtual void update_porcentaje_vida(int tipo, int id, int porcentaje_vida);
+		//Dado un identificador, un tipo y una porcentaje de energia, notifica que
+		//un personaje vio modificada la misma.
+		virtual void update_energia(int tipo, int id, int energia);
+		//Dado un identificador, un tipo y nuevas coordenadas en x y en y, notifica
+		//que un personaje vio modificadas la mismas.
+		virtual void update_posicion(int tipo, int id, int x, int y);
 
   private:
     //Dado un socket conectado a un cliente y un id del mismo,

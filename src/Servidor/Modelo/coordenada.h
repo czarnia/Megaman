@@ -12,10 +12,6 @@ class Coordenada{
   public:
     //Dada una ordenada y una abscisa, crea una Coordenada.
     Coordenada(size_t ordenada, size_t abscisa);
-    /*//Dada una coordenada origen y una coordenada destino,
-
-    //agrega a la cola las coordenadas que conforman el camino mínimo entre ambas.
-    static void camino_minimo(Coordenada *origen, Coordenada *destino, std::queue<Coordenada> *camino);*/
     //Suma delta_x a la coordenada x;
     void sumar_abscisa(size_t delta_x);
 	  //Suma delta_y a la coordenada y;

@@ -9,6 +9,7 @@ class Arma{
 		int balas_creadas;
 		Factory_observador_ubicable *fact_ubicables;
 	public:
+		//Dado un Factory_observador_ubicable*, crea una arma.
 		Arma(Factory_observador_ubicable *fact_ubicables):
 		fact_ubicables(fact_ubicables){};
 		//Ataca, es decir, crea una bala.

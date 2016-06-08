@@ -7,6 +7,7 @@ class Personaje;
 
 class Bloque: public Elemento{
 	public:
+		//Dada una coordenada, crea un bloque.
 		Bloque(Coordenada c);
 		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
 		//este.
@@ -40,13 +41,12 @@ class Bloque: public Elemento{
 		//Devuelve todas las coordenadas que ocuparía un bloque si su centro es-
 		//tuviera en c.
 		virtual std::vector<Coordenada> coordenadas(Coordenada c);
-
+		//Notifica a todos sus observadores de un cambio en su estado.
 		virtual void notificar_observadores();
-
+		//Dado un observador_ubicable*, lo agrega a sus observadores.
 		virtual void agregar_observador(Observador_ubicable *observador);
-
+		//Dado un observador_ubicable*, lo quita de sus observadores.
 		virtual void quitar_observador(Observador_ubicable *observador);
-
 		//Destructor del bloque.
 		~Bloque();
 };
