@@ -6,8 +6,9 @@
 
 class Ubicable_factory{
 	public:
-		//Dado un mapa, crea a un personaje.
+		//Dado un mapa y una coordenada, crea a un ubicable.
 		virtual Ubicable* crear(Mapa* mapa, Coordenada coord) = 0;
+		//Destructor del ubicable.
     virtual ~Ubicable_factory() {}
 };
 

@@ -10,8 +10,10 @@ class Observador_ubicable: public Observador{
 		Juego* juego;
 		Coordenada coordenada;
 	public:
+		//Dado un juego y una coordenada, crea a un observador ubicable.
 		Observador_ubicable(Juego* juego, Coordenada *coordenada);
-		virtual void update(Observable *obs);	
+		//Dado un observable, hace un update.
+		virtual void update(Observable *obs);
 };
 
 #endif //OBSERVADOR_UBICABLE_H

@@ -5,6 +5,7 @@ class Observable;
 
 class Observador{
 	public:
+		//Dado un observable, hace un update.
 		virtual void update(Observable *obs) = 0;
 };
 

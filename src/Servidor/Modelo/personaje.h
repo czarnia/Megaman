@@ -81,16 +81,16 @@ public Personaje_observable{
 		int get_ancho();
 		//Devuelve el alto del personaje.
 		int get_alto();
-		//Recibe un observador de ubicables y lo agrega a 
+		//Recibe un observador de ubicables y lo agrega a
 		//su lista de observadores:
 		void agregar_observador(Observador_ubicable *observador);
-		//Recibe un puntero a un observador de ubicables  
+		//Recibe un puntero a un observador de ubicables
 		//y lo remueve de su lista de observadores:
 		void quitar_observador(Observador_ubicable *observador);
-		//Recibe un observador de personajes y lo agrega a 
+		//Recibe un observador de personajes y lo agrega a
 		//su lista de observadores:
 		void agregar_observador(Observador_personaje *observador);
-		//Recibe un puntero a un observador de personajes  
+		//Recibe un puntero a un observador de personajes
 		//y lo remueve de su lista de observadores:
 		void quitar_observador(Observador_personaje *observador);
 		//Devuelve todas las coordenadas que ocupa un personaje dada una coordenada

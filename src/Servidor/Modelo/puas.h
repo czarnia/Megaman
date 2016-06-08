@@ -7,6 +7,7 @@ class Personaje;
 
 class Puas: public Elemento{
 	public:
+		//Dada una coordenada, crea unas puas.
 		Puas(Coordenada c);
 		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
