@@ -78,6 +78,11 @@ std::vector<Coordenada> coord_escaleras(){
 Mapa::Mapa(size_t long_x, size_t long_y):
 long_x(long_x),
 long_y(long_y){
+	for (size_t x = 0; x < long_x; x++){
+		for (size_t y = 0; y < long_y; y++){
+			elementos[x][y] = std::vector<Elemento*>();
+		}
+	}
 	this->cargar();
 }
 
@@ -93,11 +98,17 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 	std::vector<Coordenada> coordenadas = ubic->coordenadas(c);
 	for (size_t i = 0; i < coordenadas.size(); i++){
 		Coordenada c_act = coordenadas[i];
+		if (!tiene_coordenada(c_act)){
+			return false;
+		}
+
 		int x = c_act.obtener_abscisa();
 		int y = c_act.obtener_ordenada();
-		Elemento* elem = elementos[x][y];
-		if (((elem!=NULL) && (!elem->puede_ocupar(ubic))) || (!tiene_coordenada(c_act))){
-			return false;
+		std::vector<Elemento*> elem = elementos[x][y];
+		for (size_t j = 0; j < elem.size(); j++){
+			if (!elem[j]->puede_ocupar(ubic)){
+				return false;
+			}
 		}
 	}
 	return true;
@@ -117,7 +128,7 @@ bool Mapa::ubicar(Elemento* elem, Coordenada c){
 	}
 	int x = c.obtener_abscisa();
 	int y = c.obtener_ordenada();
-	elementos[x][y] = elem;
+	elementos[x][y].push_back(elem);
 	return true;
 }
 
@@ -127,7 +138,7 @@ bool Mapa::ubicar(Bala* bala, Coordenada c){
 	}
 	int x = c.obtener_abscisa();
 	int y = c.obtener_ordenada();
-	elementos[x][y] = bala;
+	elementos[x][y].push_back(bala);
 	balas.push_back(bala);
 	return true;
 }
@@ -198,7 +209,7 @@ void Mapa::cargar(){
 			Coordenada c2 = coordenadas_bloque[j];
 			int x = c2.obtener_abscisa();
 			int y = c2.obtener_ordenada();
-			elementos[x][y] = b;
+			elementos[x][y].push_back(b);
 		}
 	}
 }
@@ -237,8 +248,10 @@ void Mapa::interactuar_con_entorno(Personaje* pj){
 		int x = c_act.obtener_abscisa();
 		int y = c_act.obtener_ordenada();
 
-		Elemento* elem = elementos[x][y];
-		interactivos.insert(elem);
+		std::vector<Elemento*> elem = elementos[x][y];
+		for(size_t j = 0; j < elem.size(); j++){
+			interactivos.insert(elem[j]);
+		}
 	}
 
 	std::set<Elemento*>::iterator it;
@@ -252,7 +265,9 @@ std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	for (size_t i = 0; i < long_x; i++){
 		for (size_t j = 0; j < long_y; j++){
 			if (elementos[i].find(j) != elementos[i].end()){
-				ubicables.insert(elementos[i][j]);
+				for (size_t h = 0; h < elementos[i][j].size(); h++){
+					ubicables.insert(elementos[i][j][h]);
+				}
 			}
 		}
 	}

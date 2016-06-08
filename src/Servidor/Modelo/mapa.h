@@ -22,7 +22,7 @@ class Mapa{
     std::vector<Coordenada*> coord_iniciales_personajes;
     std::vector<Bala*> balas;
     std::map<int, Personaje*> personajes;
-    std::map<int, std::map<int, Elemento*> > elementos;
+    std::map<int, std::map<int, std::vector<Elemento*> > > elementos;
     size_t tam; //TODO: cambiar por long_x y long_y.
   public:
     //Dados un tamanio crea un mapa

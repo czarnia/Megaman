@@ -48,9 +48,7 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 
 void Personaje::agregar_movimiento(int direccion){
 	std::cout << "PERSONAJE: AGREGAR MOVIMIENTO PERSONAJE\n";
-	if (direccion == -1){
-		velocidad_x = 0;
-	}
+	std::cout << "DIRECCION MOV: " << direccion << "\n";
 	if (direccion == SALTAR && !flotando){
 		std::cout << "PERSONAJE agregar_mov:caso salto \n";
 		velocidad_y -= VELOCIDAD_SALTO;
@@ -66,9 +64,6 @@ void Personaje::agregar_movimiento(int direccion){
 }
 
 void Personaje::sacar_movimiento(int direccion){
-	if (direccion == -1){
-		velocidad_x = 0;
-	}
 	if (direccion == DERECHA){
 		std::cout << "PERSONAJE sacar_mov: interrumpo mov derecha\n";
 		velocidad_x = 0;
