@@ -89,6 +89,7 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 					impacto = true;
 					direccion_x = 0;
 					direccion_y = 0;
+					mapa->quitar_bala(this);
 				}
 			}
 		}

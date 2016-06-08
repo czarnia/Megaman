@@ -10,6 +10,7 @@
 #include "escalera.h"
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include <queue>
@@ -23,7 +24,7 @@
 
 typedef std::vector<Coordenada>::iterator ItBloques;
 typedef std::map<int, Personaje*>::iterator ItPersonaje;
-typedef std::map<int, Elemento*>::iterator ItElementos;
+typedef std::vector<Bala*>::iterator ItBalas;
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
@@ -204,6 +205,12 @@ void Mapa::cargar(){
 
 void Mapa::agregar_bala(Bala *b){
 	balas.push_back(b);
+}
+
+void Mapa::quitar_bala(Bala *b){
+	ItBalas it_bala = std::find(balas.begin(), balas.end(), b);
+	balas.erase(it_bala);
+	//TODO: SACAR DEL MAPA DE ELEMENTOOOOSSS!!!	
 }
 
 void Mapa::agregar_personaje(Personaje *p){

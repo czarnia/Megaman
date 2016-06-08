@@ -62,11 +62,13 @@ class Mapa{
     void agregar_personaje(Personaje *p);
     //Recibe uns bala y lo agrega al mapa.
     void agregar_bala(Bala *b);
+    //Recibe un puntero a una bala y la remueve del mapa.
+    void quitar_bala(Bala *b);
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(size_t tiempo);
-	  //Recibe una coordenada y devuelve true si hay un personaje
-	  //posicionado en ella.
+	//Recibe una coordenada y devuelve true si hay un personaje
+	//posicionado en ella.
     bool hay_personaje(Coordenada *coord);
     //Dado un personaje, hace que el mismo interactue con su entorno.
     void interactuar_con_entorno(Personaje* pj);
