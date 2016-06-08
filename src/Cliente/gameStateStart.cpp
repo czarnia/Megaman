@@ -50,7 +50,7 @@ int gameStateStart::unload(){
 void gameStateStart::updateInput(bool *running){
     static Sender sender(skt);
     SDL_Event event;
-    std::string direction;
+    std::string direction = "right";
     while (SDL_PollEvent(&event)){
         if (event.type == SDL_QUIT){
             *running = false;
@@ -173,8 +173,8 @@ void gameStateStart::mainLoop(){
         /// Recibo la entrada y envio al servidor
         updateInput(&running);
         /// Actualizo la posicion de camara
-        if (renderer->find(playerData.first))
-            renderer->updateCamPos(playerData.first);
+      /*  if (renderer->find(playerData.first))
+            renderer->updateCamPos(playerData.first);*/
         /// Si hay algun mensaje del servidor lo recibo
         mutex.lock();
         if (!receiver->r_queue.empty()){
