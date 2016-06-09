@@ -14,8 +14,8 @@
 Receiver_cliente::Receiver_cliente(Socket* conexion, int id, Juego *m,
 Servidor* s) : id_cliente(id), parser_juego(id), handler_juego(m),
 parser_lobby(id), handler_lobby(s){
-  Evento_lobby* e = (Evento_lobby*) new Evento_cliente_conectado();
-  handler_lobby.ejecutar_evento(e);
+  //Evento_lobby* e = (Evento_lobby*) new Evento_cliente_conectado();
+  //handler_lobby.ejecutar_evento(e);
   skt = conexion;
   jugando = false;
   fin = false;
@@ -34,9 +34,9 @@ void Receiver_cliente::ejecutar(){
       if (fin){
         return;
       }
-      Evento_lobby* e = (Evento_lobby*) new Evento_cliente_desconectado(id_cliente);
-      handler_lobby.ejecutar_evento(e);
-      delete e;
+      //Evento_lobby* e = (Evento_lobby*) new Evento_cliente_desconectado(id_cliente);
+      //handler_lobby.ejecutar_evento(e);
+      //delete e;
     }
     if (strcmp(comando, EN_ESPERA) != 0){
       if (jugando){
