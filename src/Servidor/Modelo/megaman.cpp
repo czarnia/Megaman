@@ -9,10 +9,10 @@
 #define IZQUIERDA 4
 #define MEGAMAN 1
 
-Megaman::Megaman(Mapa *mapa, Coordenada c, int id, Factory_observador_ubicable *fact_obs):
-Personaje(mapa, c, id, fact_obs){
-	arma_act = 1;
-	armas.push_back(new Arma_megaman(fact_obs));
+Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
+Personaje(mapa, c, id){
+	armas.push_back(arma);
+	arma_act = 0;
 	tipo = MEGAMAN;
 }
 
@@ -25,11 +25,11 @@ void Megaman::atacar(int dir, Mapa* mapa){
 	Coordenada pos_inicial(-1, -1);
 	if (dir == DERECHA){
 		pos_inicial = coordenada.derecha(ancho/2);
-		bala = armas[arma_act-1]->atacar(dir, 0, pos_inicial);
+		bala = armas[arma_act]->atacar(dir, 0, pos_inicial);
 	}
 	if (dir == IZQUIERDA){
 		pos_inicial = coordenada.izquierda(ancho/2);
-		bala = armas[arma_act-1]->atacar(dir, 0, pos_inicial);
+		bala = armas[arma_act]->atacar(dir, 0, pos_inicial);
 	}
 	mapa->agregar_bala(bala);
 	bala->notificar_observadores();
@@ -78,4 +78,8 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
 
 void Megaman::recibir_ataque(Bala* ataque){
 	//ataque->daniar(this);
+}
+
+void Megaman::agregar_arma(Arma *arma){
+	armas.push_back(arma);
 }

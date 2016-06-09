@@ -4,11 +4,11 @@
 
 #define TIEMPO_ATAQUE 2
 
-Met::Met(Mapa *mapa, Coordenada c, int id, Factory_observador_ubicable *fact_obs): 
-Personaje(mapa, c, id, fact_obs){
+Met::Met(Mapa *mapa, Coordenada c, Arma_met* arma, int id): 
+Personaje(mapa, c, id),
+arma(arma){
   tras_escudo = false;
   tiempo_pasado = 0;
-  arma = new Arma_met(fact_obs);
 }
 
 void Met::atacar(int dir, Mapa* mapa){

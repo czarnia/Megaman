@@ -21,10 +21,9 @@
 #define ALTO 4
 #define ANCHO 2
 
-Personaje::Personaje(Mapa *mapa, Coordenada c, int id, Factory_observador_ubicable *fact_obs):
+Personaje::Personaje(Mapa *mapa, Coordenada c, int id):
 coordenada(c),
-id(id),
-fact_obs(fact_obs){
+id(id){
 	velocidad_y = 0;
 	velocidad_x = 0;
 	alto = ALTO;

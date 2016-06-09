@@ -52,6 +52,7 @@ void gameStateStart::updateInput(bool *running){
     SDL_Event event;
     std::string direction = "right";
     while (SDL_PollEvent(&event)){
+		SDL_Delay(500);
         if (event.type == SDL_QUIT){
             *running = false;
             quit = true;

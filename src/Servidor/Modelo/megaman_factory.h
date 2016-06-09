@@ -2,6 +2,7 @@
 #define MEGAMAN_FACTORY_H
 
 #include "ubicable_factory.h"
+#include "factory_observador_ubicable.h"
 #include "juego.h"
 #include <map>
 
@@ -13,6 +14,7 @@ class Personaje;
 class MegamanFactory : public Ubicable_factory{
 	private:
 		Juego *juego;
+		Factory_observador_ubicable fact_obs;
 		int creados;
 		//std::multimap<Megaman*, Observador*> creados;
 	public:
