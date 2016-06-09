@@ -55,7 +55,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
                         break;
                     case MEGAMAN_BULLETN:
-                        spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bullet.png");
+                        spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bullet.jpeg");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);

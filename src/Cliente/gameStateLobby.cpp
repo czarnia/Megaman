@@ -2,6 +2,7 @@
 #include "background_sprite.h"
 #include "boss_icon_sprite.h"
 #include "selector_sprite.h"
+#include "lobbyreceiver.h"
 
 #include <iostream>
 
@@ -15,13 +16,17 @@
 #define SELECTOR 100
 #define TAM_INT 4
 
+#define START_GAME 1
+#define BOSS_CHOSEN 6
 
 gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
-                                Socket *skt, std::pair<int, std::string> &playerData):
+                                Socket *skt, std::pair<int,
+                                 std::string> &playerData, int *level):
     window(window),
     renderer(renderer),
     skt(skt),
-    playerData(playerData)
+    playerData(playerData),
+    level(level)
 {
     window->setTitle("Megaman: Lobby");
     start = false;
@@ -29,6 +34,7 @@ gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
     startSelect = false;
     playerData.first = 1;
     selectorPos = 1;
+    receiver = new LobbyReceiver(skt, renderer, &mutex);
     load();
 }
 
@@ -94,6 +100,8 @@ void gameStateLobby::load(int stack){
         spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
         spr->setPosY(window->get_height()*3/5);
         renderer->addSprite(BUTTON, spr, 0, STATIC);
+    }else{
+        /// IMPRIMO CARTEL DE ESPERA
     }
 }
 
@@ -118,9 +126,13 @@ void gameStateLobby::updateInput(){
                         moveSelector("left");
                     break;
                 case SDLK_RETURN:
-                    if(startSelect)
+                    if(startSelect){
                         start = true;
-                    /// ACA ENVIO EL NUMERO DE BOSS
+                        /*int command = BOSS_CHOSEN;
+                        skt->send((char*)&command, TAM_INT);
+                        int bossNumber = selectorPos;
+                        skt->send((char*)&bossNumber, TAM_INT);*/
+                    }
                     break;
                 default:
                     break;
@@ -131,10 +143,14 @@ void gameStateLobby::updateInput(){
                 int Ypressed = event.button.y;
                 if(buttonPress(Xpressed,Ypressed,(renderer->static_sprites[0])[BUTTON])){
                     int command = STARTING_SELECTION;
-
                     if(!startSelect){
-                      //  skt->send((char*)&command, TAM_INT);
                         startSelect = true;
+                    /*    /// Mando que voy a empezar a elegir boss
+                        skt->send((char*)&command, TAM_INT);
+                        command = 0;
+                        /// mando algo vacio
+                        skt->send((char*)&command, TAM_INT);
+                        startSelect = true;*/
                     }
                 }
             }
@@ -165,25 +181,37 @@ void gameStateLobby::moveSelector(std::string direction){
 }
 
 GameState::StateCode gameStateLobby::update(){
+
+    /// ACA LANZO UN HILO PARA ESPERAR QUE EL SERVIDOR
+    /// ME INDIQUE EL COMIENZO DE PARTIDA Y NUMERO DE BOSS
+   // receiver->start();
+
     /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
     if (playerData.first == 1){
         updateInput();
-    }else{
-        char buffer[TAM_INT];
-        int command;
-        skt->receive(buffer, TAM_INT);
-        command = *((int*)buffer);
-        if(command == 1)
+    }
+/*
+    while (!receiver->r_queue.empty()){
+        int aux;
+        /// START
+        mutex.lock();
+        aux = receiver->r_queue.front();
+        receiver->r_queue.pop();
+        mutex.unlock();
+        if (aux == START_GAME){
+            /// BOSS
+            *level = receiver->r_queue.front();
+            receiver->r_queue.pop();
             start = true;
-    }
-
-    if (start){
-        return GameState::GAME_START;
-    }else if (quit){
-        return GameState::QUIT;
-    }else{
-        return GameState::CONTINUE;
-    }
+        }
+    }*/
+        if (start){
+            return GameState::GAME_START;
+        }else if (quit){
+            return GameState::QUIT;
+        }else{
+            return GameState::CONTINUE;
+        }
     return GameState::CONTINUE;
 }
 
