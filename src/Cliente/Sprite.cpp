@@ -64,7 +64,7 @@ void Sprite::erase(){
 
 Sprite::~Sprite(){
     if(texture)
-        SDL_DestroyTexture(texture);
+        erase();
 }
 
 

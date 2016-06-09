@@ -1,9 +1,12 @@
 #include "main_menu.h"
-#include "backround_sprite.h"
+#include "background_sprite.h"
 #include "text_sprite.h"
 #include <SDL2/SDL_ttf.h>
 
-#define BACKROUND 0
+#define STATIC 1
+#define NON_STATIC 0
+
+#define BACKGROUND 0
 #define TEXT 100
 
 #include <iostream>
@@ -38,7 +41,7 @@ void MainMenu::updateInput(){
                 spr->setPosX(window->get_width()/2);
                 spr->setPosY(window->get_height()*1/9+10);
                 renderer->erase(TEXT);
-                renderer->addSprite(TEXT, spr);
+                renderer->addSprite(TEXT, spr, 0, STATIC);
             }
         }else if (event.type == SDL_TEXTINPUT){
             playerData.second.append(event.text.text);
@@ -47,7 +50,7 @@ void MainMenu::updateInput(){
             spr->setPosX(window->get_width()/2);
             spr->setPosY(window->get_height()*1/9+10);
             renderer->erase(TEXT);
-            renderer->addSprite(TEXT, spr);
+            renderer->addSprite(TEXT, spr, 0, STATIC);
         }
     }
     SDL_StopTextInput();
@@ -55,10 +58,10 @@ void MainMenu::updateInput(){
 
 void MainMenu::load(int stack){
     /// FONDO
-    Sprite *spr = new Backround_sprite(renderer->get_renderer(), "../sprites/menu_backround.jpeg");
+    Sprite *spr = new Background_sprite(renderer->get_renderer(), "../sprites/menu_background.jpeg");
     spr->setPosX(0);
     spr->setPosY(0);
-    renderer->addSprite(BACKROUND,spr);
+    renderer->addSprite(BACKGROUND, spr, 0, STATIC);
 
     /// ETCs
     spr = new Sprite(renderer->get_renderer(), "../sprites/nickname_sign.png");
@@ -66,14 +69,14 @@ void MainMenu::load(int stack){
     spr->setHeight(60);
     spr->setPosX(window->get_width()/2 -spr->getWidth()-5);
     spr->setPosY(window->get_height()*1/9);
-    renderer->addSprite(BACKROUND, spr);
+    renderer->addSprite(BACKGROUND, spr, 0, STATIC);
 
     spr = new Sprite(renderer->get_renderer(), "../sprites/mensaje.png");
     spr->setWidth(400);
     spr->setHeight(50);
     spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
     spr->setPosY(window->get_height()*3/4);
-    renderer->addSprite(BACKROUND, spr);
+    renderer->addSprite(BACKGROUND, spr, 0, STATIC);
 }
 
 int MainMenu::unload(){

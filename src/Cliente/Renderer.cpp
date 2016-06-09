@@ -3,7 +3,12 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
+#define BACKGROUND 1
 #define CAMSPEEDX 5
+#define NON_STATIC 0
+#define STATIC 1
+
+#define LAYER_NUMBER 2
 
 Renderer::Renderer(Window *window):
     window(window),
@@ -13,37 +18,48 @@ Renderer::Renderer(Window *window):
     renderer = SDL_CreateRenderer(window->get_window(), -1, SDL_RENDERER_ACCELERATED);
     map_size.first = 0;
     map_size.second = 0;
+    std::map<int,Sprite*> slayer1;
+    std::map<int,Sprite*> slayer2;
+    std::map<int,Sprite*> layer1;
+    std::map<int,Sprite*> layer2;
+    sprites.push_back(layer1);
+    sprites.push_back(layer2);
+    static_sprites.push_back(slayer1);
+    static_sprites.push_back(slayer2);
 }
 
 SDL_Renderer* Renderer::get_renderer(){
     return renderer;
 }
 
-void Renderer::addSprite(int objectid, Sprite* spr){
-    while(sprites.find(objectid) != sprites.end()){
-        objectid += 1;
+void Renderer::addSprite(int objectid, Sprite* spr, int layer, int locked){
+    if (!locked){
+        while(sprites[layer].find(objectid) != sprites[layer].end()){
+            objectid += 1;
+        }
+        sprites[layer].insert(std::pair<int,Sprite*>(objectid,spr));
+    }else{
+        while(static_sprites[layer].find(objectid) != static_sprites[layer].end()){
+            objectid += 1;
+        }
+        static_sprites[layer].insert(std::pair<int,Sprite*>(objectid,spr));
     }
-    sprites.insert(std::pair<int,Sprite*>(objectid,spr));
-}
-
-void Renderer::addMapSprite(int objectid, Sprite* spr){
-    while(map_sprites.find(objectid) != map_sprites.end()){
-        objectid += 1;
-    }
-    map_sprites.insert(std::pair<int,Sprite*>(objectid,spr));
 }
 
 void Renderer::clearSprites(){
     /// Limpio sprites
-    std::map<int,Sprite*>::iterator it = sprites.begin();
-    for(; it != sprites.end() ; ++it)
-        delete it->second;
-    sprites.clear();
-    /// Limpio mapa
-    it = map_sprites.begin();
-    for(; it != map_sprites.end() ; ++it)
-        delete it->second;
-    map_sprites.clear();
+    for(int i = 0; i < LAYER_NUMBER; i++){
+        std::map<int,Sprite*>::iterator it = sprites[i].begin();
+        for(; it != sprites[i].end() ; ++it)
+            delete it->second;
+        sprites[i].clear();
+    }
+    for(int i = 0; i < LAYER_NUMBER; i++){
+        std::map<int,Sprite*>::iterator it = static_sprites[i].begin();
+        for(; it != static_sprites[i].end() ; ++it)
+            delete it->second;
+        static_sprites[i].clear();
+    }
 }
 
 void Renderer::setMapSize(int width, int height){
@@ -51,7 +67,7 @@ void Renderer::setMapSize(int width, int height){
     map_size.second = height;
 }
 
-void Renderer::updateCamPos(int player){
+/*void Renderer::updateCamPos(int player){
     int px = sprites[player]->get_rectangle()->x;
     if((px > window->get_width()/2) && (camX+window->get_width() < map_size.first)){
         camX += CAMSPEEDX;
@@ -59,7 +75,7 @@ void Renderer::updateCamPos(int player){
     if((px < window->get_width()/2) && (camX > 0)){
         camX -= CAMSPEEDX;
     }
-}
+}*/
 
 void Renderer::clear(){
     SDL_RenderClear(renderer);
@@ -67,84 +83,100 @@ void Renderer::clear(){
 
 void Renderer::erase(int key){
     std::map<int,Sprite*>::iterator it;
-    it = sprites.find(key);
-    if( it != sprites.end() ){
+    it = sprites[1].find(key);
+    if( it != sprites[1].end() ){
         delete it->second;
-        sprites.erase(it);
-    }
-    it = map_sprites.find(key);
-    if( it != map_sprites.end() ){
-        delete it->second;
-        map_sprites.erase(it);
+        sprites[1].erase(it);
     }
 }
 
 void Renderer::erase(int x, int y){
-    std::map<int,Sprite*>::iterator it = map_sprites.begin();
-    it = map_sprites.begin();
-    for(; it != map_sprites.end(); ++it){
-        if((it->second->getPosX() == x))
-            if((it->second->getPosY() == y))
-                erase(it->first);
-    }
-    it = sprites.begin();
-    for(; it != sprites.end(); ++it){
-        if((it->second->getPosX() == x))
-            if((it->second->getPosY() == y))
-                erase(it->first);
+    for(int i = 0; i<LAYER_NUMBER; i++){
+        std::map<int,Sprite*>::iterator it = sprites[i].begin();
+        for(; it != sprites[i].end(); ++it){
+            if((it->second->getPosX() == x))
+                if((it->second->getPosY() == y))
+                    erase(it->first);
+        }
     }
 }
 
 bool Renderer::find(int key){
+    bool found = false;
     std::map<int,Sprite*>::iterator it;
-    it = sprites.find(key);
-    if( it != sprites.end() )
+    for(int i = 0; i < LAYER_NUMBER; i++){
+        it = sprites[i].find(key);
+        if( it != sprites[i].end() )
+            found = true;
+    }
+    if (found)
         return true;
     else
         return false;
 }
 
-void Renderer::draw(Sprite *spr){
-    auxRect = *(spr->get_rectangle());
-    auxRect.x = spr->getPosX() - camX;
-    auxRect.y = spr->getPosY() - camY;
-    SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), &auxRect);
+void Renderer::draw(Sprite *spr, int lockedToScreen){
+    if(!lockedToScreen){
+        auxRect = *(spr->get_rectangle());
+        auxRect.x = spr->getPosX() - camX;
+        auxRect.y = spr->getPosY() - camY;
+        SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), &auxRect);
+    }else{
+        SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), spr->get_rectangle());
+    }
 }
 
 void Renderer::drawAll(){
-    std::map<int,Sprite*>::iterator it = sprites.begin();
-    for (; it != sprites.end() ; ++it){
-        draw(it->second);
+    std::map<int,Sprite*>::iterator it = static_sprites[0].begin();
+    for(; it != static_sprites[0].end(); ++it){
+        draw(it->second, STATIC);
     }
-    it = map_sprites.begin();
-    for (; it != map_sprites.end() ; ++it){
-        draw(it->second);
+    it = sprites[0].begin();
+    for(; it != sprites[0].end(); ++it){
+        draw(it->second, NON_STATIC);
+    }
+    it = sprites[1].begin();
+    for(; it != sprites[1].end(); ++it){
+        draw(it->second, NON_STATIC);
+    }
+    it = static_sprites[1].begin();
+    for(; it != static_sprites[1].end(); ++it){
+        draw(it->second, STATIC);
     }
 }
 
 bool Renderer::ocupied(int x, int y){
     bool ocupied = false;
-    std::map<int,Sprite*>::iterator it = map_sprites.begin();
-    it = map_sprites.begin();
-    for(; it != map_sprites.end(); ++it){
-        if((it->second->getPosX() == x))
-            if((it->second->getPosY() == y))
-                ocupied = true;
+    for(int i = 0 ; i<LAYER_NUMBER; i++){
+        std::map<int,Sprite*>::iterator it = sprites[i].begin();
+        it = sprites[i].begin();
+        for(; it != sprites[i].end(); ++it){
+            if((it->second->getPosX() == x))
+                if((it->second->getPosY() == y))
+                    ocupied = true;
+        }
     }
-
-    it = sprites.begin();
-    for(; it != sprites.end(); ++it){
-        if((it->second->getPosX() == x))
-            if((it->second->getPosY() == y))
-                ocupied = true;
-    }
-
 
     if(ocupied){
         return true;
     }else{
         return false;
     }
+}
+
+int Renderer::pressed(int x, int y){
+    for(int i = 0; i<LAYER_NUMBER; i++){
+        std::map<int,Sprite*>::iterator it = static_sprites[i].begin();
+        for(; it != static_sprites[i].end(); ++it){
+            if(it->first != BACKGROUND && it->first != BACKGROUND+1){
+                Sprite *current = it->second;
+                if ((x > current->getPosX()) && (x < current->getPosX() + current->getWidth()))
+                    if ((y > current->getPosY()) && (y < current->getPosY() + current->getHeight()))
+                        return it->first;
+            }
+        }
+    }
+    return 0;
 }
 
 void Renderer::present(){
