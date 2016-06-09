@@ -1,9 +1,8 @@
 #ifndef SERVIDOR_H
 #define SERVIDOR_H
 
-#include <map>
 #include <string>
-#include "conexion_cliente.h"
+#include "almacenador_clientes.h"
 #include "entrada_estandar.h"
 #include "observador_juego.h"
 #include "../Modelo/juego.h"
@@ -14,9 +13,8 @@ public Observador_juego{
   private:
     Juego *mundo;
     Entrada_estandar *entrada;
-    //guardo a cada cliente con su id!
-    std::map<int, Conexion_cliente*> clientes;
-	Socket *skt;
+    Almacenador_clientes clientes;
+	  Socket *skt;
   public:
     //Crea un servidor.
     Servidor(char *puerto);
@@ -28,6 +26,13 @@ public Observador_juego{
     bool termino_ejecucion();
     //Empieza una partida.
     void empezar_partida();
+
+    //El servidor deja de aceptar clientes.
+    void cerrar_conexiones();
+    //Se le notifica al servidor que se desconecto un cliente dado un id.
+    void cliente_desconectado(int id_cliente);
+    //Se le notifica al servidor que se conecto un nuevo cliente.
+    void cliente_conectado();
 
     //Dado un observable, realiza un update.
 		virtual void update(Observable *obs);
