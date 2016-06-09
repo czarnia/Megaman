@@ -117,9 +117,6 @@ public Personaje_observable{
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//este.
 		virtual bool puede_ocupar(Puas* puas);
-		//Dadas unas puas_asesinas, dice si puede ubicarse en las mismas coordenadas que
-		//este.
-		virtual bool puede_ocupar(Puas_asesinas* puas);
 };
 
 #endif //PERSONAJE_H

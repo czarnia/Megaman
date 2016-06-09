@@ -1,0 +1,30 @@
+#include "premio.h"
+
+Premio::Premio(Coordenada coord, int tipo):
+Elemento(coord, tipo){}
+
+bool Premio::puede_ocupar(Personaje* pj){
+	return true;
+}
+
+bool Premio::puede_ocupar(Elemento* elem){
+	return true;
+}
+
+bool Premio::puede_ocupar(Bala* bala){
+	return true;
+}
+
+bool Premio::puede_ocupar(Escalera* esc){
+	return true;
+}
+
+bool Premio::puede_ocupar(Bloque* bloque){
+	return false;
+}
+
+bool Premio::puede_ocupar(Puas* puas){
+	return false;
+}
+
+

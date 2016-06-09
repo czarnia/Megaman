@@ -2,7 +2,6 @@
 #include "escalera.h"
 #include "bala.h"
 #include "puas.h"
-#include "puas_asesinas.h"
 #include "bloque.h"
 #include <set>
 
@@ -183,6 +182,3 @@ bool Personaje::puede_ocupar(Puas* puas){
 	return true;
 }
 
-bool Personaje::puede_ocupar(Puas_asesinas* puas){
-	return true;
-}

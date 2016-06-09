@@ -2,7 +2,6 @@
 #include "escalera.h"
 #include "personaje.h"
 #include "puas.h"
-#include "puas_asesinas.h"
 #include "bloque.h"
 
 #define TIEMPO_MOVER 5
@@ -46,10 +45,6 @@ bool Bala::puede_ocupar(Bloque* bloque){
 }
 
 bool Bala::puede_ocupar(Puas* puas){
-	return true;
-}
-
-bool Bala::puede_ocupar(Puas_asesinas* puas){
 	return true;
 }
 
@@ -103,30 +98,3 @@ void Bala::interactuar(Personaje* pj){
 	//pj->recibir_ataque(this);
 }
 
-Coordenada Bala::get_coordenada(){
-	return coord;
-}
-
-void Bala::agregar_observador(Observador_ubicable *observador){
-	Observable::agregar_observador(observador);
-}
-
-void Bala::quitar_observador(Observador_ubicable *observador){
-	Observable::quitar_observador(observador);
-}
-
-void Bala::notificar_observadores(){
-	for (size_t i = 0; i < observadores.size(); i++){
-		observadores[i]->update(this);
-	}
-}
-
-std::vector<Coordenada> Bala::coordenadas(){
-	return coordenadas(coord);
-}
-
-std::vector<Coordenada> Bala::coordenadas(Coordenada c){
-	std::vector<Coordenada> v;
-	v.push_back(c);
-	return v;
-}

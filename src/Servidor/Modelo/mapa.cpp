@@ -6,7 +6,6 @@
 #include "elemento.h"
 #include "bloque.h"
 #include "puas.h"
-#include "puas_asesinas.h"
 #include "escalera.h"
 
 #include <vector>

@@ -1,14 +1,11 @@
-#ifndef PUAS_H
-#define PUAS_H
+#ifndef PREMIO_H
+#define PREMIO_H
 
 #include "elemento.h"
 
-class Personaje;
-
-class Puas: public Elemento{
+class Premio : public Elemento{
 	public:
-		//Dada una coordenada, crea unas puas.
-		Puas(Coordenada c);
+		Premio(Coordenada coord, int tipo);
 		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Personaje* pj);
@@ -27,20 +24,8 @@ class Puas: public Elemento{
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Puas* puas);
-		//Recibe un personaje e interactúa con el mismo para
-		//ocasionarle daño.
-		void interactuar(Personaje *pj);
-		//Notifica a las entidades que observen a este
-		//elemento de un cambio en el estado del mismo;
-		virtual void notificar_observadores();
-		//Agrega un observador de ubicables a la lista de 
-		//observadores de este elemento
-		virtual void agregar_observador(Observador_ubicable *observador);
-		//Recibe un puntero a observador de ubicables y lo
-		//remueve de la lista de observadores de este elemento
-		virtual void quitar_observador(Observador_ubicable *observador);
-		//Destructor de las Puas.
-		~Puas();
+		//Destructor de premio.
+		virtual ~Premio() = 0;
 };
 
-#endif //PUAS_H
+#endif //PREMIO_H
