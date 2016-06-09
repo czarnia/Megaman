@@ -83,6 +83,15 @@ void Conexion_cliente::terminar_ejecucion(){
   rcv.terminar_ejecucion();
 }
 
+void Conexion_cliente::iniciar_nivel(){
+	rcv.iniciar_nivel();
+}
+
+void Conexion_cliente::finalizar_nivel(){
+	rcv.finalizar_nivel();
+}
+
+
 Conexion_cliente::~Conexion_cliente(){
   rcv.join();
 }

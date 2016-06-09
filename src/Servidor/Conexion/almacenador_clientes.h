@@ -36,6 +36,8 @@ class Almacenador_clientes{
 		//Dado un identificador, un tipo y nuevas coordenadas en x y en y, notifica
 		//que un personaje vio modificadas la mismas.
 		void update_posicion(int tipo, int id, int x, int y);
+    //Le notifica a todos los clientes que se ha iniciado un nuevo nivel.
+    void iniciar_nivel();
 };
 
 #endif //ALMACENADOR_CLIENTES_H

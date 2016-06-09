@@ -63,11 +63,11 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
   clientes.agregar_cliente(c);
 }
 
-void Servidor::empezar_partida(){
+void Servidor::empezar_partida(){ //TODO: esto debería ser un empezar_nivel.
 	std::cout << "INICIO PARTIDA\n";
 	mundo->agregar_observador(this);
 	mundo->inicializar_partida(clientes.devolver_tamanio());
-  //clientes.iniciar_ejecucion();
+  //clientes.iniciar_nivel();
 	mundo->jugar();
 }
 
@@ -78,7 +78,7 @@ void Servidor::cerrar_conexiones(){
 
 void Servidor::update(Observable *obs){}
 
-void Servidor::update_fin_partida(){
+void Servidor::update_fin_partida(){ //TODO: habría que agregar un fin_nivel.
   clientes.update_fin_partida();
 }
 

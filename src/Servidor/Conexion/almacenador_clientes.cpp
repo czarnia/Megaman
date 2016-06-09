@@ -92,3 +92,9 @@ void Almacenador_clientes::update_posicion(int tipo, int id, int x, int y){
 		(it->second)->enviar_cambio_posicion(tipo, id, x, y);
 	}
 }
+
+void Almacenador_clientes::iniciar_nivel(){
+  for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+    (it->second)->iniciar_nivel();
+  }
+}
