@@ -10,27 +10,10 @@
 #define TAM_INT 4
 
 enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
-/*
-void Conexion_cliente::mandar_bloques(std::vector<Coordenada> b){
-	int codigo_mapa = POSICION;
-	int tipo_bloque = 100;
-	int id_bloque = 0;
-	int fin_mapa = 6666;
-	for(size_t i = 0; i < b.size(); i++){
-		int x = b[i].obtener_abscisa();
-		int y = b[i].obtener_ordenada();
-		skt->send((char*)&codigo_mapa, TAM_INT);
-		skt->send((char*)&tipo_bloque, TAM_INT);
-		skt->send((char*)&id_bloque, TAM_INT);
-		skt->send((char*)&x, TAM_INT);
-		skt->send((char*)&y, TAM_INT);
-	}
-	skt->send((char*)&fin_mapa, TAM_INT);
-}*/
 
-Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m): 
+Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m):
 skt(conexion), id_cliente(id),
-rcv(conexion, id, m) {
+rcv(conexion, id, m, s) {
 	obtener_nombre_jugador();
 	skt->send((char*)&id, TAM_INT); //le envio al jugador su id
 	enviar_mapa_inicial(m, id);
@@ -106,7 +89,7 @@ Conexion_cliente::~Conexion_cliente(){
 
 void Conexion_cliente::enviar_cambio_posicion(int tipo, int id, int x, int y){
 	int posicion = POSICION;
-	
+
 	skt->send((char*)&posicion, TAM_INT);
 	skt->send((char*)&tipo, TAM_INT);
 	skt->send((char*)&id, TAM_INT);
