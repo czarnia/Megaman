@@ -18,11 +18,10 @@ Game::Game(char* hostname,char* port):
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
-    window = NULL;
     window = new Window(WIDTH,HEIGHT);
-    renderer = NULL;
     renderer = new Renderer(window);
     currentState = new MainMenu(window, renderer, playerData);
+    level = 0;
 }
 
 void Game::run(){
@@ -37,13 +36,13 @@ void Game::run(){
             case GameState::BOSS_SELECT:
 
                 delete currentState;
-                currentState = new gameStateLobby(window, renderer, &skt, playerData);
+                currentState = new gameStateLobby(window, renderer, &skt, playerData, &level);
 
                 break;
             case GameState::GAME_START:
 
                 delete currentState;
-                currentState = new gameStateStart(window, renderer, &skt, playerData);
+                currentState = new gameStateStart(window, renderer, &skt, playerData, level);
                 std::cout<<"Entre al juego"<<std::endl;
 
                 break;
@@ -56,7 +55,7 @@ void Game::run(){
             case GameState::VICTORY:
 
                 delete currentState;
-                currentState = new gameStateLobby(window, renderer, &skt, playerData);
+                currentState = new gameStateLobby(window, renderer, &skt, playerData, &level);
 
                 break;
             case GameState::CONTINUE:

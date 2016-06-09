@@ -9,7 +9,8 @@
 #define MAPA 1
 
 gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
-                                std::pair<int,std::string> &playerData):
+                                std::pair<int,std::string> &playerData,
+                                int level):
     playerData(playerData),
     window(window),
     renderer(renderer),
@@ -25,8 +26,8 @@ gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
 {
     window->setTitle("Megaman: Playing");
     window->maximize();
-    receiver = new Receiver(skt, renderer, &victory, &ko, &mutex);
-    load();
+    receiver = new Receiver(skt, renderer, &mutex);
+    load(level);
 }
 
 void gameStateStart::cap_framerate(const Uint32 &starting_tick){
@@ -35,7 +36,7 @@ void gameStateStart::cap_framerate(const Uint32 &starting_tick){
     }
 }
 
-void gameStateStart::load(int stack){
+void gameStateStart::load(int level){
     /// Recibo el mapa
     receiver->receiveMapSize();
     receiver->receiveMap();
@@ -52,7 +53,6 @@ void gameStateStart::updateInput(bool *running){
     SDL_Event event;
     std::string direction = "right";
     while (SDL_PollEvent(&event)){
-		SDL_Delay(500);
         if (event.type == SDL_QUIT){
             *running = false;
             quit = true;

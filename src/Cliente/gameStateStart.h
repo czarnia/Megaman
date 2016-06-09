@@ -41,8 +41,9 @@ class gameStateStart: public GameState{
 
     public:
         gameStateStart(Window *window, Renderer *renderer, Socket *skt,
-                        std::pair<int,std::string> &playerData);
-        void load(int stack = 0);
+                        std::pair<int,std::string> &playerData,
+                        int level);
+        void load(int level = 0);
         int unload();
         StateCode update();
         ~gameStateStart();
