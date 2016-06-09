@@ -1,4 +1,6 @@
 #include "receiver_cliente.h"
+#include "evento_cliente_desconectado.h"
+#include "evento_cliente_conectado.h"
 #include "../../Comun/socket.h"
 #include <iostream>
 #include <stdio.h>
@@ -12,6 +14,8 @@
 Receiver_cliente::Receiver_cliente(Socket* conexion, int id, Juego *m,
 Servidor* s) : id_cliente(id), parser_juego(id), handler_juego(m),
 parser_lobby(id), handler_lobby(s){
+  Evento_lobby* e = (Evento_lobby*) new Evento_cliente_conectado();
+  handler_lobby.ejecutar_evento(e);
   skt = conexion;
   jugando = false;
   fin = false;
@@ -30,15 +34,19 @@ void Receiver_cliente::ejecutar(){
       if (fin){
         return;
       }
-      std::cout << "-1 al recibir dentro \n";
+      Evento_lobby* e = (Evento_lobby*) new Evento_cliente_desconectado(id_cliente);
+      handler_lobby.ejecutar_evento(e);
+      delete e;
     }
     if (strcmp(comando, EN_ESPERA) != 0){
       if (jugando){
         Evento* e = parser_juego.crear_evento(*((int*)comando), *((int*)argumento));
         handler_juego.ejecutar_evento(e);
+        delete e;
       }else{
         Evento_lobby* e = parser_lobby.crear_evento(*((int*)comando), *((int*)argumento));
         handler_lobby.ejecutar_evento(e);
+        delete e;
       }
     }
     strncpy(comando, EN_ESPERA, TAM_INT);

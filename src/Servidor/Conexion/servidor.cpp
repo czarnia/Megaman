@@ -67,7 +67,7 @@ void Servidor::empezar_partida(){ //TODO: esto debería ser un empezar_nivel.
 	std::cout << "INICIO PARTIDA\n";
 	mundo->agregar_observador(this);
 	mundo->inicializar_partida(clientes.devolver_tamanio());
-  //clientes.iniciar_nivel();
+  clientes.iniciar_nivel();
 	mundo->jugar();
 }
 

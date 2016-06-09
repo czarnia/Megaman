@@ -2,5 +2,5 @@
 #include "servidor.h"
 
 void Evento_elegir_boss::ejecutar(Servidor* s){
-  //algo
+  s->empezar_partida(); //cambiar a empezar_nivel.
 }
