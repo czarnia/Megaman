@@ -1,8 +1,9 @@
 #ifndef PROCESADOR_LOBBY_H
 #define PROCESADOR_LOBBY_H
 
-#include "evento.h"
+#include "evento_lobby.h"
 #include "creador_evento_lobby.h"
+
 #include <vector>
 
 class Procesador_lobby{

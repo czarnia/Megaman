@@ -1,5 +1,6 @@
-#ifndef MANEJADOR_EVENTOS_H
-#define MANEJADOR_EVENTOS_H
+#ifndef MANEJADOR_LOBBY_H
+#define MANEJADOR_LOBBY_H
+
 
 class Evento_lobby;
 class Servidor;
@@ -16,4 +17,4 @@ class Manejador_lobby{
     void ejecutar_evento(Evento_lobby* e);
 };
 
-#endif //MANEJADOR_EVENTOS_H
+#endif //MANEJADOR_LOBBY_H

@@ -59,7 +59,7 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
   //Armo un id para el nuevo cliente con el numero de cliente.
   int id = (clientes.devolver_tamanio() + 1);
   //Agrego al cliente:
-  Conexion_cliente* c = new Conexion_cliente(cliente_nuevo, id, mundo);
+  Conexion_cliente* c = new Conexion_cliente(cliente_nuevo, id, mundo, this);
   clientes.agregar_cliente(c);
 }
 
