@@ -1,8 +1,8 @@
 #ifndef MANEJADOR_EVENTOS_H
 #define MANEJADOR_EVENTOS_H
 
+class Evento_lobby;
 class Servidor;
-#include "evento_lobby.h"
 
 class Manejador_lobby{
   private:
