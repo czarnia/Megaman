@@ -9,6 +9,7 @@ file (GLOB CLIENTE	../Cliente/Sprite.cpp ../Cliente/Sprite.h
 			../Cliente/Renderer.cpp ../Cliente/Renderer.h
 			../Cliente/block_sprite.cpp ../Cliente/block_sprite.h
 			../Cliente/character_sprite.cpp ../Cliente/character_sprite.h
+			../Cliente/background_sprite.cpp ../Cliente/background_sprite.h
 )
 
 file (GLOB MODELO	../Servidor/Modelo/*.cpp ../Servidor/Modelo/*.h
