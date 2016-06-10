@@ -11,6 +11,7 @@
 class Log{
   private:
     std::ofstream log_arch;
+    const char* path;
     std::map<int, std::string> jugadores;
     Mutex proteccion;
   public:

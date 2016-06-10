@@ -19,70 +19,92 @@ const char* obtener_nombre_log(){
 //----------------------------------------------------//
 
 Log::Log(){
-  const char* path = obtener_nombre_log();
+  path = obtener_nombre_log();
   jugadores = std::map<int, std::string>();
-  log_arch.open(path);
 }
 
 Log::~Log(){
-  log_arch.close();
+	//this->log_arch.close();
 }
 
 void Log::inicio_servidor(){
+	std::cout << "Entro al inicio serv.";
 	Lock candado(proteccion);
-  log_arch << "Servidor inicia ejecucion.\n";
+	this->log_arch.open(path, std::ios::out | std::ios::app);
+	this->log_arch << "Servidor inicia ejecucion.\n";
+	this->log_arch.close();
 }
 
 void Log::fin_servidor(){
 	Lock candado(proteccion);
-	log_arch << "Servidor finaliza ejecucion.\n";
+	this->log_arch.open(path, std::ios::out | std::ios::app);
+	this->log_arch << "Servidor finaliza ejecucion.\n";
+	this->log_arch.close();
 }
 
 void Log::cliente_conectado(std::string nombre_cliente){
   Lock candado(proteccion);
-  jugadores[jugadores.size()+1] = nombre_cliente;
-  log_arch << "Cliente " << nombre_cliente << " se ha conectado.\n";
+	jugadores[jugadores.size()+1] = nombre_cliente;
+	this->log_arch.open(path, std::ios::out | std::ios::app);
+	this->log_arch << "Cliente " << nombre_cliente << " se ha conectado.\n";
+	this->log_arch.close();
 }
 
 void Log::cliente_desconectado(int id_cliente){
   Lock candado(proteccion);
-  log_arch << "Cliente " << jugadores[id_cliente] << " se ha desconectado.\n";
+	this->log_arch.open(path, std::ios::out | std::ios::app);
+	this->log_arch << "Cliente " << jugadores[id_cliente] << " se ha desconectado.\n";
+	this->log_arch.close();
 }
 
 void Log::inicio_juego(){
 	Lock candado(proteccion);
-	log_arch << "Se inicia el juego con " << jugadores.size() << " jugadores.\n";
+	this->log_arch.open(path, std::ios::out | std::ios::app);
+	this->log_arch << "Se inicia el juego con " << jugadores.size() << " jugadores.\n";
+	this->log_arch.close();
 }
 
 void Log::fin_juego(){
 	Lock candado(proteccion);
+	this->log_arch.open(path, std::ios::out | std::ios::app);
 	log_arch << "Fin del juego.\n";
+	this->log_arch.close();
 }
 
 void Log::inicio_nivel(int num_nivel){
   Lock candado(proteccion);
+	this->log_arch.open(path, std::ios::out | std::ios::app);
   log_arch << "Se inicia el nivel " << num_nivel << ".\n";
+	this->log_arch.close();
 }
 
 void Log::fin_nivel(){
   Lock candado(proteccion);
+	this->log_arch.open(path, std::ios::out | std::ios::app);
   log_arch << "Se finalizo el nivel.\n";
+	this->log_arch.close();
 }
 
 void Log::jugador_atacar(int id_cliente, int direccion){
   Lock candado(proteccion);
+	this->log_arch.open(path, std::ios::out | std::ios::app);
   log_arch << "El jugador " << jugadores[id_cliente] << " ataca en direccion "
   << direccion << ".\n";
+	this->log_arch.close();
 }
 
 void Log::jugador_mover(int id_cliente, int direccion){
   Lock candado(proteccion);
+	this->log_arch.open(path, std::ios::out | std::ios::app);
   log_arch << "El jugador " << jugadores[id_cliente] << " se mueve en direccion"
   << " " << direccion << ".\n";
+	this->log_arch.close();
 }
 
 void Log::jugador_cambiar_arma(int id_cliente, int arma){
   Lock candado(proteccion);
+	this->log_arch.open(path, std::ios::out | std::ios::app);
   log_arch << "El jugador " << jugadores[id_cliente] << " cambia su arma por "
   << arma << ".\n";
+	this->log_arch.close();
 }
