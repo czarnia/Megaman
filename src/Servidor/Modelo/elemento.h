@@ -21,7 +21,7 @@ public Ubicable{
 		virtual void interactuar(Personaje *pj) = 0;
 		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
-		bool puede_ocupar(Ubicable* ubic);
+		bool puede_ocupar(Ubicable* ubic) = 0;
 		//Devuelve todas las coordenadas que ocupa un elemento
 		//tomando como referencia la coordenada central del mismo.
 		virtual std::vector<Coordenada> coordenadas();

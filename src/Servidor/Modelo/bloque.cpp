@@ -34,10 +34,18 @@ bool Bloque::puede_ocupar(Escalera* esc){
 	return false;
 }
 
+bool Bloque::puede_ocupar(Premio* premio){
+	return false;
+}
+
 bool Bloque::puede_ocupar(Puas* puas){
 	return false;
 }
 
 void Bloque::interactuar(Personaje *pj){} //Los bloques no interactuan!
+
+bool Bloque::puede_ocupar(Ubicable* ubic){
+	return ubic->puede_ocupar(this);
+}
 
 Bloque::~Bloque(){}

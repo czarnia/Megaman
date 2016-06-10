@@ -103,10 +103,15 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 
 		int x = c_act.obtener_abscisa();
 		int y = c_act.obtener_ordenada();
-		std::vector<Elemento*> elem = elementos[x][y];
-		for (size_t j = 0; j < elem.size(); j++){
-			if (!elem[j]->puede_ocupar(ubic)){
-				return false;
+		if (elementos.find(x) == elementos.end()){
+			continue;
+		}
+		if (elementos[x].find(y) != elementos[x].end()){
+			std::vector<Elemento*> elem = elementos[x][y];
+			for (size_t j = 0; j < elem.size(); j++){
+				if (!elem[j]->puede_ocupar(ubic)){
+					return false;
+				}
 			}
 		}
 	}

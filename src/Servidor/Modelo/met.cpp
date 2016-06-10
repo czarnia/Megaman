@@ -43,3 +43,7 @@ void Met::update(size_t tiempo){
   Personaje::update(0, mapa);
   tiempo_pasado -= TIEMPO_ATAQUE;
 }
+
+void Met::sacar_movimiento(int direccion){}
+
+void Met::agregar_movimiento(int direccion){}

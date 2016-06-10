@@ -21,12 +21,18 @@ class Bloque: public Elemento{
 		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
 		//este.
 		virtual bool puede_ocupar(Escalera* esc);
-		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
+		//Dado un Premio, devuelve true si el premio puede ubicarse
+		//en las mismas coordenadas que este elemento.
+		virtual bool puede_ocupar(Premio* premio);
+		//Dado un bloque, dice si puede ubicarse en las mismas coordenadas que
 		//este.
 		virtual bool puede_ocupar(Bloque* bloque);
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//este.
 		virtual bool puede_ocupar(Puas* puas);
+		//Dado un ubicable, dice si puede ubicarse en las mimas
+		//coordendas que este elemento.
+		virtual bool puede_ocupar(Ubicable* ubic);
 		//Recibe un personaje e interactúa con el mismo para
 		//ocasionarle daño.
 		void interactuar(Personaje *pj);

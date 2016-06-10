@@ -7,7 +7,6 @@
 
 Escalera::Escalera(Coordenada c) : Elemento(c, TIPO_ESCALERA) {}
 
-
 bool Escalera::puede_ocupar(Personaje* pj){
 	return true;
 }
@@ -28,12 +27,19 @@ bool Escalera::puede_ocupar(Bloque* bloque){
 	return false;
 }
 
+bool Escalera::puede_ocupar(Premio* premio){
+	return true;
+}
+
+bool Escalera::puede_ocupar(Ubicable* ubic){
+	return ubic->puede_ocupar(this);
+}
+
 bool Escalera::puede_ocupar(Puas* puas){
 	return false;
 }
 
 void Escalera::interactuar(Personaje* pj){
-	
 }
 
 Escalera::~Escalera() {}

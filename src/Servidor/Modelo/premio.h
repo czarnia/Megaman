@@ -24,6 +24,12 @@ class Premio : public Elemento{
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Puas* puas);
+		//Dado un ubicable, dice si puede ubicarse en las mimas
+		//coordendas que este elemento.
+		virtual bool puede_ocupar(Ubicable* ubic);
+		//Dado un Premio, devuelve true si el premio puede ubicarse
+		//en las mismas coordenadas que este elemento.
+		virtual bool puede_ocupar(Premio* premio);
 		//Destructor de premio.
 		virtual ~Premio() = 0;
 };

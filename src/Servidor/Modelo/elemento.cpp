@@ -28,10 +28,6 @@ std::vector<Coordenada> Elemento::coordenadas(){
 	return coordenadas(this->coord);
 }
 
-bool Elemento::puede_ocupar(Ubicable* ubic){
-	return ubic->puede_ocupar(this);
-}
-
 std::vector<Coordenada> Elemento::coordenadas(Coordenada centro){
 	std::vector<Coordenada> s_coord;
 	Coordenada coord_aux(0,0);

@@ -23,8 +23,16 @@ bool Premio::puede_ocupar(Bloque* bloque){
 	return false;
 }
 
+bool Premio::puede_ocupar(Ubicable* ubic){
+	return ubic->puede_ocupar(this);
+}
+
+bool Premio::puede_ocupar(Premio* premio){
+	return false;
+}
+
 bool Premio::puede_ocupar(Puas* puas){
 	return false;
 }
 
-
+Premio::~Premio(){}

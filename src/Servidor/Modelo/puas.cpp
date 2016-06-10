@@ -27,7 +27,15 @@ bool Puas::puede_ocupar(Puas* Puas){
 	return false;
 }
 
+bool Puas::puede_ocupar(Ubicable* ubic){
+	return ubic->puede_ocupar(this);
+}
+
 bool Puas::puede_ocupar(Bloque* bloque){
+	return false;
+}
+
+bool Puas::puede_ocupar(Premio* premio){
 	return false;
 }
 

@@ -9,12 +9,8 @@
 #include <iostream>
 #include <sstream>
 
-#define PERDER_VIDA -1
-#define ARRIBA 1
-#define ABAJO 2
-#define DERECHA 3
-#define IZQUIERDA 4
-#define SALTAR 5
+#define PERDER_MAX -100
+#define GANAR_MAX 100
 #define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 4
@@ -23,13 +19,14 @@
 Personaje::Personaje(Mapa *mapa, Coordenada c, int id):
 coordenada(c),
 id(id){
-	velocidad_y = 0;
-	velocidad_x = 0;
+	//velocidad_y = 0;
+	//velocidad_x = 0;
 	alto = ALTO;
 	ancho = ANCHO;
 	flotando = false; //asumo siempre inicio al personaje no en el aire.
 	tiempo_pasado = 0;
 	tipo = 0;
+	energia = GANAR_MAX;
 }
 
 void Personaje::notificar_observadores(){
@@ -44,7 +41,7 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 	notificar_observadores();
 }
 
-void Personaje::agregar_movimiento(int direccion){
+/*void Personaje::agregar_movimiento(int direccion){
 	std::cout << "PERSONAJE: AGREGAR MOVIMIENTO PERSONAJE\n";
 	std::cout << "DIRECCION MOV: " << direccion << "\n";
 	if (direccion == SALTAR && !flotando){
@@ -59,9 +56,13 @@ void Personaje::agregar_movimiento(int direccion){
 		std::cout << "PERSONAJE agregar_mov:caso izquierda \n";
 		velocidad_x -= VELOCIDAD;
 	}
+}*/
+
+void Personaje::agregar_movimiento(int dir, StrategyMover *movimiento){
+	movimientos.insert(std::pair<int,StrategyMover*>(dir, movimiento));
 }
 
-void Personaje::sacar_movimiento(int direccion){
+/*void Personaje::sacar_movimiento(int direccion){
 	if (direccion == DERECHA){
 		std::cout << "PERSONAJE sacar_mov: interrumpo mov derecha\n";
 		velocidad_x = 0;
@@ -70,7 +71,7 @@ void Personaje::sacar_movimiento(int direccion){
 		std::cout << "PERSONAJE sacar_mov: interrumpo mov izquierda \n";
 		velocidad_x = 0;
 	}
-}
+}*/
 
 Coordenada Personaje::get_coordenada(){
 	return coordenada;
@@ -105,10 +106,34 @@ int Personaje::get_energia(){
 }
 
 void Personaje::perder_vida(int porcentaje){
-	if (porcentaje == PERDER_VIDA){
+	if (porcentaje == PERDER_MAX){
 		vidas.erase(vidas.begin());
 	}else{
 		vidas[0]->perder(porcentaje);
+	}
+}
+
+void Personaje::ganar_vida(int porcentaje){
+	if (porcentaje == GANAR_MAX){
+		vidas.push_back(new Vida());
+	}else{
+		vidas[0]->ganar(porcentaje);
+	}
+}
+
+void Personaje::perder_energia(int porcentaje){
+	if ((energia - porcentaje) <= 0){
+		energia = 0;
+	}else{
+		energia -= porcentaje;
+	}
+}
+
+void Personaje::ganar_energia(int porcentaje){
+	if ((porcentaje - energia) >= GANAR_MAX){
+		energia = GANAR_MAX;
+	}else{
+		energia += porcentaje;
 	}
 }
 
@@ -162,8 +187,8 @@ bool Personaje::puede_ocupar(Personaje* pj){
 	return true;
 }
 
-bool Personaje::puede_ocupar(Elemento* pj){
-	return pj->puede_ocupar(this);
+bool Personaje::puede_ocupar(Elemento* elem){
+	return elem->puede_ocupar(this);
 }
 
 bool Personaje::puede_ocupar(Bala* bala){
@@ -179,6 +204,10 @@ bool Personaje::puede_ocupar(Bloque* bloque){
 }
 
 bool Personaje::puede_ocupar(Puas* puas){
+	return true;
+}
+
+bool Personaje::puede_ocupar(Premio* premio){
 	return true;
 }
 

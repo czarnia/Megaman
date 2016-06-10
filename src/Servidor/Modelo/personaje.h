@@ -13,10 +13,15 @@
 #include "observador_personaje.h"
 #include "observador_ubicable.h"
 
+class StrategyMover;
+class StrategyMoverSinGravedad;
+class StrategySubir;
+class StrategyBajar;
 class Observador_personaje;
 class Bala;
 
-#define PERDER_VIDA -1
+#define PERDER_MAX -100
+#define GANAR_MAX 100
 
 class Personaje:
 public Atacable,
@@ -25,9 +30,11 @@ public Actualizable,
 public Personaje_observable{
 	protected:
 		std::vector<Vida*> vidas;
-		int velocidad_y, velocidad_x;
+		std::map<int, StrategyMover*> movimientos;
+		//int velocidad_y, velocidad_x;
 		size_t ancho, alto;
 		Coordenada coordenada;
+		int energia;
 		int id;
 		int tipo;
 		bool flotando;
@@ -48,20 +55,29 @@ public Personaje_observable{
 		virtual int get_id();
 		//Devuelve el tipo de un personaje.
 		virtual	int get_tipo();
-		//Dado un porcentaje de vida a perder, se la resta al personaje, en caso de
-		//ser -1 (por defecto) le resta una vida completa.
-		virtual void perder_vida(int porcentaje = PERDER_VIDA);
+		//Dado un porcentaje de vida a perder, se la resta al personaje,
+		//en caso de ser -100 (por defecto) una vida completa.
+		virtual void perder_vida(int porcentaje = PERDER_MAX);
+		//Dado un porcentaje de vida a ganar, se la suma al personaje, 
+		//en caso de ser 100 (por defecto) una vida completa.
+		virtual void ganar_vida(int porcentaje = GANAR_MAX);
+		//Dado un porcentaje de energia a perder se le resta al personaje,
+		//en caso de ser -100 (por defecto) toda la energia disponible.
+		virtual void perder_energia(int porcentaje = PERDER_MAX);
+		//Dado un porcentaje de energia a ganar se le suma al personaje,
+		//en caso de ser 100 (por defecto) la energia perdida.
+		virtual void ganar_energia(int porcentaje = GANAR_MAX);
 		//Devuelve true si el personaje está vivo, false en caso contrario.
 		virtual bool esta_vivo();
 		//Dada una direccion representada como un int, agrega un movimiento en dicha
 		//direccion.
-		virtual void agregar_movimiento(int direccion);
+		virtual void agregar_movimiento(int direccion) = 0;
+		//Recibe una estrategia de movimiento y la agrega
+		//a las estrategias de movimiento del personaje.
+		virtual void agregar_movimiento(int dir, StrategyMover *movimiento);
 		//Dada una direccion representada como un int, saca un movimiento en dicha
 		//direccion.
-		virtual void sacar_movimiento(int direccion);
-		//Dada una direccion representada como un int, agrega un ataque en dicha
-		//direccion.
-		//virtual void agregar_ataque(int direccion);
+		virtual void sacar_movimiento(int direccion) = 0;
 		//Devuelve la coordenada central de un personaje.
 		virtual Coordenada get_coordenada();
 		//Notifica a los objetos que observan al personaje de un cambio
@@ -94,8 +110,10 @@ public Personaje_observable{
 		//c central, en caso de no pasarse ninguna, se toma la como central a la
 		//actual.
 		std::vector<Coordenada> coordenadas(Coordenada c);
+		//Devuelve todas las coordenadas ocupadas por el personaje
+		//tomando la coordenada central actual del mismo como
+		//referencia.
 		std::vector<Coordenada> coordenadas();
-
 		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
 		//este.
 		virtual bool puede_ocupar(Ubicable* ubic);
@@ -104,7 +122,7 @@ public Personaje_observable{
 		virtual bool puede_ocupar(Personaje* pj);
 		//Dado un elemento, dice si puede ubicarse en las mismas coordenadas que
 		//este.
-		virtual bool puede_ocupar(Elemento* pj);
+		virtual bool puede_ocupar(Elemento* elem);
 		//Dada una bala, dice si puede ubicarse en las mismas coordenadas que
 		//este.
 		virtual bool puede_ocupar(Bala* bala);
@@ -117,6 +135,14 @@ public Personaje_observable{
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//este.
 		virtual bool puede_ocupar(Puas* puas);
+		//Dado un Premio, devuelve true si el premio puede ubicarse
+		//en las mismas coordenadas que este elemento.
+		virtual bool puede_ocupar(Premio* premio);
+		
+		friend class StrategyMoverSinGravedad;
+		friend class StrategySubir;
+		friend class StrategyBajar;
+		friend class StrategyMoverMegaman;
 };
 
 #endif //PERSONAJE_H
