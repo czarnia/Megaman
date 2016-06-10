@@ -15,8 +15,6 @@
 
 class StrategyMover;
 class StrategyMoverSinGravedad;
-class StrategySubir;
-class StrategyBajar;
 class Observador_personaje;
 class Bala;
 
@@ -140,8 +138,6 @@ public Personaje_observable{
 		virtual bool puede_ocupar(Premio* premio);
 		
 		friend class StrategyMoverSinGravedad;
-		friend class StrategySubir;
-		friend class StrategyBajar;
 		friend class StrategyMoverMegaman;
 };
 

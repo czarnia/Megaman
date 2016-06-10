@@ -1,7 +1,7 @@
 #include "elemento.h"
 #include <algorithm>
 
-Elemento::Elemento(Coordenada c, int tipo, int id): 
+Elemento::Elemento(Coordenada c, int tipo, int id):
 coord(c), tipo(tipo), id(id){}
 
 int Elemento::get_tipo(){
@@ -36,7 +36,7 @@ std::vector<Coordenada> Elemento::coordenadas(Coordenada centro){
 			coord_aux = centro.arriba(i).izquierda(j);
 			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
 				s_coord.push_back(centro.arriba(i).izquierda(j));
-			} 
+			}
 			coord_aux = centro.arriba(i).derecha(j);
 			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
 				s_coord.push_back(centro.arriba(i).derecha(j));
@@ -49,7 +49,7 @@ std::vector<Coordenada> Elemento::coordenadas(Coordenada centro){
 			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
 				s_coord.push_back(centro.abajo(i).derecha(j));
 			}
-			
+
 		}
 	}
 	return s_coord;

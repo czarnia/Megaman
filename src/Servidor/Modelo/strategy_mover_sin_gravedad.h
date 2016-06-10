@@ -5,11 +5,13 @@
 #include "personaje.h"
 
 class StrategyMoverSinGravedad : public StrategyMover{
-	private:
-		StrategyMover* estrategia;
 	public:
+		StrategyMoverSinGravedad();
 		void mover(Mapa *mapa, Personaje *pj);
-		int get_direccion();
+		void set_direccion_abajo();
+		void set_direccion_arriba();
+		void set_direccion_derecha();
+		void set_direccion_izquierda();
 };
 
 #endif //STRATEGY_MOVER_SIN_GRAVEDAD_H

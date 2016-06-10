@@ -2,11 +2,14 @@
 #define ESCALERA_H
 
 #include "elemento.h"
+#include "strategy_mover_sin_gravedad.h"
 class Personaje;
 
 //TODO: LAS ESCALERAS DEBERÍAN TENER UNA COORDENADA DE INICIO Y UNA DE FIN.
 
 class Escalera: public Elemento{
+	private:
+		std::vector<StrategyMoverSinGravedad> estrategias;
 	public:
 		Escalera(Coordenada c);
 		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
