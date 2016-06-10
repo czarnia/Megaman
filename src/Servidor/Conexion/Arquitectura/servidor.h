@@ -4,9 +4,9 @@
 #include <string>
 #include "almacenador_clientes.h"
 #include "entrada_estandar.h"
-#include "observador_juego.h"
-#include "../Modelo/juego.h"
-#include "../../Comun/socket.h"
+#include "../Partida/observador_juego.h"
+#include "../../Modelo/juego.h"
+#include "../../../Comun/socket.h"
 
 class Servidor:
 public Observador_juego{

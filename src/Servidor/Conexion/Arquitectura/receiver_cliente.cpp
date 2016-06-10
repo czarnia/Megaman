@@ -1,7 +1,7 @@
 #include "receiver_cliente.h"
-#include "evento_cliente_desconectado.h"
-#include "evento_cliente_conectado.h"
-#include "../../Comun/socket.h"
+#include "../Lobby/evento_cliente_desconectado.h"
+#include "../Lobby/evento_cliente_conectado.h"
+#include "../../../Comun/socket.h"
 #include <iostream>
 #include <stdio.h>
 #include <string.h>

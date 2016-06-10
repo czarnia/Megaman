@@ -1,9 +1,9 @@
 #ifndef CONEXION_CLIENTE_H
 #define CONEXION_CLIENTE_H
 
-#include "../../Comun/socket.h"
+#include "../../../Comun/socket.h"
 #include "receiver_cliente.h"
-#include "../Modelo/juego.h"
+#include "../../Modelo/juego.h"
 
 #include <string>
 

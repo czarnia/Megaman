@@ -1,7 +1,7 @@
 #ifndef ENTRADA_ESTANDAR_H
 #define ENTRADA_ESTANDAR_H
 
-#include "../../Comun/hilo.h"
+#include "../../../Comun/hilo.h"
 #include <string>
 
 class Entrada_estandar: public Hilo{

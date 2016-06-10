@@ -11,4 +11,3 @@ void Factory_observador_ubicable::crear(Ubicable *obs){
 }
 
 Factory_observador_ubicable::~Factory_observador_ubicable(){}
-

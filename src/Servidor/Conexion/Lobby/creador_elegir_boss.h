@@ -2,7 +2,6 @@
 #define CREADOR_ELEGIR_BOSS_H
 
 #include "creador_evento_lobby.h"
-#include "evento.h"
 
 class Creador_elegir_boss : public Creador_evento_lobby{
   private:

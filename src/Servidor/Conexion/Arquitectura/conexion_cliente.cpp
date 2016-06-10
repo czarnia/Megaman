@@ -1,6 +1,6 @@
 #include "conexion_cliente.h"
-#include "../Modelo/coordenada.h"
-#include "../Modelo/juego.h"
+#include "../../Modelo/coordenada.h"
+#include "../../Modelo/juego.h"
 #include <sstream>
 #include <cstring>
 #include <iostream>

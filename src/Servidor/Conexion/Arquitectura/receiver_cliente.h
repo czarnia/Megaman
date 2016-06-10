@@ -1,12 +1,12 @@
 #ifndef RECEIVER_CLIENTE_H
 #define RECEIVER_CLIENTE_H
 
-#include "../../Comun/hilo.h"
-#include "../../Comun/socket.h"
-#include "procesador_eventos.h"
-#include "manejador_eventos.h"
-#include "procesador_lobby.h"
-#include "manejador_lobby.h"
+#include "../../../Comun/hilo.h"
+#include "../../../Comun/socket.h"
+#include "../Partida/procesador_eventos.h"
+#include "../Partida/manejador_eventos.h"
+#include "../Lobby/procesador_lobby.h"
+#include "../Lobby/manejador_lobby.h"
 
 class Juego;
 class Servidor;

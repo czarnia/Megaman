@@ -1,6 +1,6 @@
 #include "elemento.h"
 
-Elemento::Elemento(Coordenada c, int tipo, int id): 
+Elemento::Elemento(Coordenada c, int tipo, int id):
 coord(c), tipo(tipo), id(id){}
 
 int Elemento::get_tipo(){
@@ -22,4 +22,3 @@ int Elemento::get_alto(){
 Coordenada Elemento::get_coordenada(){
 	return coord;
 }
-

@@ -1,6 +1,6 @@
 #include "manejador_lobby.h"
 #include "evento_lobby.h"
-#include "servidor.h"
+#include "../Arquitectura/servidor.h"
 
 Manejador_lobby::Manejador_lobby(Servidor* s) : srv(s){}
 

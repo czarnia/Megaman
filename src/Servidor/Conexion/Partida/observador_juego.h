@@ -1,8 +1,8 @@
 #ifndef OBSERVADOR_JUEGO_H
 #define OBSERVADOR_JUEGO_H
 
-#include "../Modelo/observador.h"
-#include "../Modelo/juego_observable.h"
+#include "../../Modelo/observador.h"
+#include "../../Modelo/juego_observable.h"
 
 class Juego_observable;
 

@@ -2,7 +2,7 @@
 #define CREADOR_START_H
 
 #include "creador_evento_lobby.h"
-#include "evento.h"
+#include "evento_lobby.h"
 
 class Creador_start : public Creador_evento_lobby{
   private:

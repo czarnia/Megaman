@@ -1,7 +1,7 @@
 #ifndef JUEGO_OBSERVABLE_H
 #define JUEGO_OBSERVABLE_H
 
-#include "../Conexion/observador_juego.h"
+#include "../Conexion/Partida/observador_juego.h"
 
 class Observador_juego;
 

@@ -1,5 +1,5 @@
 #include "evento_atacar.h"
-#include "../Modelo/juego.h"
+#include "../../Modelo/juego.h"
 #include <sstream>
 #include <string>
 #include <iostream>
