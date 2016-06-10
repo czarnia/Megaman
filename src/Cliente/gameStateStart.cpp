@@ -1,7 +1,10 @@
 #include "gameStateStart.h"
 #include <iostream>
+#include <sstream>
+
 #include "sender.h"
 #include "block_sprite.h"
+#include "character_sprite.h"
 #include "response_handler.h"
 
 #define FPS 60
@@ -37,7 +40,11 @@ void gameStateStart::cap_framerate(const Uint32 &starting_tick){
 }
 
 void gameStateStart::load(int level){
-    /// Recibo el mapa
+    /// cargo el fondo del nivel
+    std::ostringstream os;
+    os << "../sprites/level_background"<<level<<".jpeg";
+    std::string mapBackground(os.str());
+    /// Recibo datos del mapa
     receiver->receiveMapSize();
     receiver->receiveMap();
 }
@@ -150,6 +157,7 @@ void gameStateStart::updateInput(bool *running){
             }
         }
     }
+
 }
 
 GameState::StateCode gameStateStart::update(){
@@ -166,9 +174,10 @@ GameState::StateCode gameStateStart::update(){
 
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
-    bool running = true;
+
     static ResponseHandler handler(renderer);
     receiver->start();
+    bool running = true;
     while (running){
         starting_tick = SDL_GetTicks();
         /// Recibo la entrada y envio al servidor
@@ -200,6 +209,7 @@ void gameStateStart::mainLoop(){
                 coord.first = posX;
                 coord.second = posY;
             }
+
             switch(handler.execute(command,objectType,objectID,coord)){
                 case GameState::BOSS_SELECT:
                     running = false;
@@ -211,13 +221,12 @@ void gameStateStart::mainLoop(){
                     break;
                 default:
                     break;
-
             }
         }
         mutex.unlock();
         render();
+        cap_framerate(starting_tick);
 	}
-	cap_framerate(starting_tick);
 }
 
 void gameStateStart::render(){

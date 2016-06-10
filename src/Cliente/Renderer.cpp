@@ -15,7 +15,7 @@ Renderer::Renderer(Window *window):
     camX(0),
     camY(0)
 {
-    renderer = SDL_CreateRenderer(window->get_window(), -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(window->get_window(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     map_size.first = 0;
     map_size.second = 0;
     std::map<int,Sprite*> slayer1;
@@ -94,6 +94,14 @@ void Renderer::erase(int x, int y){
     for(int i = 0; i<LAYER_NUMBER; i++){
         std::map<int,Sprite*>::iterator it = sprites[i].begin();
         for(; it != sprites[i].end(); ++it){
+            if((it->second->getPosX() == x))
+                if((it->second->getPosY() == y))
+                    erase(it->first);
+        }
+    }
+    for(int i = 0; i<LAYER_NUMBER; i++){
+        std::map<int,Sprite*>::iterator it = static_sprites[i].begin();
+        for(; it != static_sprites[i].end(); ++it){
             if((it->second->getPosX() == x))
                 if((it->second->getPosY() == y))
                     erase(it->first);
