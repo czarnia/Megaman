@@ -40,7 +40,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             /// SI ya existe le cambio la posicion
             }else if (renderer->find(objectType+objectID)){
                 /// ANIMACION DE MOVIMIENTO
-               // renderer->sprites[1][objectType+objectID]->setState(coord.first, coord.second);
+                renderer->sprites[1][objectType+objectID]->setState(coord.first, coord.second);
                 renderer->sprites[1][objectType+objectID]->setPosX(coord.first);
                 renderer->sprites[1][objectType+objectID]->setPosY(coord.second);
             /// Si no existe lo creo y le seteo la posicion

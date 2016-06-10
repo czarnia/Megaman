@@ -194,6 +194,7 @@ void gameStateStart::mainLoop(){
             int posX = -1;
             int posY = -1;
             std::pair<int,int> coord;
+            SDL_Delay(15);
             command = receiver->r_queue.front();
             receiver->r_queue.pop();
             if( command == MAPA){
@@ -231,6 +232,7 @@ void gameStateStart::mainLoop(){
 
 void gameStateStart::render(){
     renderer->clear();
+    SDL_Delay(15);
     renderer->drawAll();
     renderer->present();
 }
