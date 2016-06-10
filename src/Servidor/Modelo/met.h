@@ -17,6 +17,8 @@ class Met: public Personaje{
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
 		virtual void update(size_t tiempo);
+		virtual void sacar_movimiento(int direccion);
+		virtual void agregar_movimiento(int direccion);
 };
 
 #endif //MET_H

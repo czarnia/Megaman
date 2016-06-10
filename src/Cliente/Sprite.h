@@ -19,7 +19,7 @@ class Sprite{
         /// getters de los atributos de sdl
         SDL_Rect* get_rectangle();
         SDL_Texture* get_texture();
-        SDL_Rect* get_crop();
+        virtual SDL_Rect* get_crop();
 
         /// devuelve posicion global
         int getPosX();
@@ -32,6 +32,10 @@ class Sprite{
         void setPosY(int y);
         void setWidth(int w);
         void setHeight(int h);
+
+        virtual void setState(int x, int y){}
+        virtual void spawn(){}
+        virtual void destroy(){}
         /// libera la memoria pedida
         void erase();
         virtual ~Sprite();

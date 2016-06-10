@@ -14,7 +14,7 @@ void Bala_normal::update(size_t tiempo, Mapa* mapa) {
 }
 
 void Bala_normal::daniar(Personaje* pj) {
-	pj->perder_vida(-1); //le saca una vida
+	pj->perder_vida(-100); //le saca una vida
 }
 
 void Bala_normal::daniar(Megaman* mega) {
@@ -22,5 +22,5 @@ void Bala_normal::daniar(Megaman* mega) {
 }
 
 void Bala_normal::daniar(Met* met) {
-	met->perder_vida(-1); //el met tiene una sóla vida.
+	met->perder_vida(-100); //el met tiene una sóla vida.
 }

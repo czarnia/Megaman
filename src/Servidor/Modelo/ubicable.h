@@ -10,7 +10,7 @@ class Bala;
 class Escalera;
 class Bloque;
 class Puas;
-class Puas_asesinas;
+class Premio;
 
 class Ubicable:
 public Observable{
@@ -43,13 +43,13 @@ public Observable{
 		//Dadas unas puas, dice si el mismo puedo ubicarse en una posicion donde
 		//hay un elemento.
 		virtual bool puede_ocupar(Puas* puas) = 0;
-		//Dadas unas puas_asesinas, dice si el mismo puedo ubicarse en una posicion donde
-		//hay un elemento.
-		virtual bool puede_ocupar(Puas_asesinas* puas) = 0;
+		//Dado un premio, dice si el mismo puedo ubicarse en una posicion donde
+		//esta el ubicable.
+		virtual bool puede_ocupar(Premio* premio) = 0;
 		//Agrega un observador a la lista de observadores del ubicable.
-		virtual void agregar_observador(Observador_ubicable *observador) = 0;
+		//virtual void agregar_observador(Observador_ubicable *observador) = 0;
 		//Remueve un observador de la lista de observadores del ubicable.
-		virtual void quitar_observador(Observador_ubicable *observador) = 0;
+		//virtual void quitar_observador(Observador_ubicable *observador) = 0;
 		//Devuelve la coordenada central del ubicable.
 		virtual Coordenada get_coordenada() = 0;
 		//Devuelve un entero que representa el tipo de ubicable.

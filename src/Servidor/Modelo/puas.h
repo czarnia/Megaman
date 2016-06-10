@@ -9,9 +9,6 @@ class Puas: public Elemento{
 	public:
 		//Dada una coordenada, crea unas puas.
 		Puas(Coordenada c);
-		//Dado un ubicable, dice si puede ubicarse en las mismas coordenadas que
-		//estas.
-		virtual bool puede_ocupar(Ubicable* ubic);
 		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Personaje* pj);
@@ -27,29 +24,29 @@ class Puas: public Elemento{
 		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Bloque* bloque);
+		//Dado un ubicable, dice si puede ubicarse en las mimas
+		//coordendas que este elemento.
+		virtual bool puede_ocupar(Ubicable* ubic);
+		//Dado un Premio, devuelve true si el premio puede ubicarse
+		//en las mismas coordenadas que este elemento.
+		virtual bool puede_ocupar(Premio* premio);
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Puas* puas);
-		//Dadas unas puas_asesinas, dice si puede ubicarse en las mismas coordenadas que
-		//estas.
-		virtual bool puede_ocupar(Puas_asesinas* puas);
 		//Recibe un personaje e interactúa con el mismo para
 		//ocasionarle daño.
 		void interactuar(Personaje *pj);
-		//Devuelve todas las coordenadas que ocupa una puas.
-		virtual std::vector<Coordenada> coordenadas();
-		//Devuelve todas las coordenadas que ocuparía una puas si su centro es-
-		//tuviera en c.
-		virtual std::vector<Coordenada> coordenadas(Coordenada c);
+		//Notifica a las entidades que observen a este
+		//elemento de un cambio en el estado del mismo;
+		virtual void notificar_observadores();
+		//Agrega un observador de ubicables a la lista de 
+		//observadores de este elemento
+		virtual void agregar_observador(Observador_ubicable *observador);
+		//Recibe un puntero a observador de ubicables y lo
+		//remueve de la lista de observadores de este elemento
+		virtual void quitar_observador(Observador_ubicable *observador);
 		//Destructor de las Puas.
 		~Puas();
-
-		virtual void notificar_observadores();
-
-		virtual void agregar_observador(Observador_ubicable *observador);
-
-		virtual void quitar_observador(Observador_ubicable *observador);
-
 };
 
 #endif //PUAS_H

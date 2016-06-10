@@ -14,6 +14,7 @@ Personaje(mapa, c, id){
 	armas.push_back(arma);
 	arma_act = 0;
 	tipo = MEGAMAN;
+	movimiento_actual = &movimiento_megaman;
 }
 
 void Megaman::update(size_t tiempo){
@@ -36,7 +37,47 @@ void Megaman::atacar(int dir, Mapa* mapa){
 }
 
 void Megaman::mover(size_t tiempo, Mapa* mapa){
-  if (mapa->esta_en_aire(coordenada, alto)){
+	//Me muevo utilizando la estrategia
+	//de movimiento actual:
+	movimiento_actual->mover(mapa, this);
+	//Vuevlo al movimiento normal en caso de que
+	//estuviera usando una estrategia especial:
+	movimiento_actual = &movimiento_megaman;
+	//Elimino todas las estrategias especiales
+	//adquiridas hasta el momento:
+	movimientos.clear();
+	//Interactuo con elementos de la nueva 
+	//ubicacion:
+	mapa->interactuar_con_entorno(this);
+}
+
+void Megaman::agregar_movimiento(int direccion){
+	if (movimientos.find(direccion)!= movimientos.end()){
+		//Si ya tengo una estrategia para moverme en esta
+		//direccion uso esa estrategia:
+		movimiento_actual = movimientos.find(direccion)->second;
+	}else{
+		//Si no tengo una estrategia para moverme
+		//en esta direccion agrego la direccion al
+		//movimiento normal:
+		movimiento_megaman.agregar_movimiento(this, direccion);
+		movimiento_actual = &movimiento_megaman;
+	}
+}
+
+void Megaman::sacar_movimiento(int direccion){
+	movimiento_megaman.sacar_movimiento(this, direccion);
+}
+
+void Megaman::recibir_ataque(Bala* ataque){
+	//ataque->daniar(this);
+}
+
+void Megaman::agregar_arma(Arma *arma){
+	armas.push_back(arma);
+}
+
+ /*if (mapa->esta_en_aire(coordenada, alto)){
     flotando = true;
     velocidad_y += 1; //valor gravedad.
   }
@@ -73,13 +114,4 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
     if (velocidad_y != 0){
 		velocidad_y = 0;
     }
-  }
-}
-
-void Megaman::recibir_ataque(Bala* ataque){
-	//ataque->daniar(this);
-}
-
-void Megaman::agregar_arma(Arma *arma){
-	armas.push_back(arma);
-}
+  }*/

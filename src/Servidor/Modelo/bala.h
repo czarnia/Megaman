@@ -43,17 +43,12 @@ public Elemento{
 		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
 		//esta.
 		virtual bool puede_ocupar(Bloque* bloque);
+		//Dado un Premio, devuelve true si el premio puede ubicarse
+		//en las mismas coordenadas que este elemento.
+		virtual bool puede_ocupar(Premio* premio);
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//esta.
 		virtual bool puede_ocupar(Puas* puas);
-		//Dadas unas puas_asesinas, dice si puede ubicarse en las mismas coordenadas que
-		//esta.
-		virtual bool puede_ocupar(Puas_asesinas* puas);
-		//Devuelve todas las coordenadas que ocupa una bala.
-		virtual std::vector<Coordenada> coordenadas();
-		//Devuelve todas las coordenadas que ocuparía una bala si su centro estuvie-
-		//ra en c.
-		virtual std::vector<Coordenada> coordenadas(Coordenada c);
 		//Hace que pasa el tiempo para la bala.
 		virtual void update(size_t tiempo, Mapa* mapa) = 0;
 		//Daña a un Personaje (caso por defecto).
@@ -62,16 +57,6 @@ public Elemento{
 		virtual void daniar(Megaman* mega) = 0;
 		//Daña a un Met.
 		virtual void daniar(Met* met) = 0;
-		//Recibe un observador de ubicables y lo agrega a
-		//la lista de ubicables:
-		void agregar_observador(Observador_ubicable *observador);
-		//Recibe un puntero a observador de ubicables
-		//y lo remueve de la lista de ubicables:
-		void quitar_observador(Observador_ubicable *observador);
-		//Notifica a sus observadores de un cambio de estado.
-		virtual void notificar_observadores();
-		//Devuelve la coordenada de una bala.
-		virtual Coordenada get_coordenada();
 };
 
 #endif //BALA_H

@@ -1,17 +1,11 @@
-#ifndef ESCALERA_H
-#define ESCALERA_H
+#ifndef PREMIO_H
+#define PREMIO_H
 
 #include "elemento.h"
-#include "strategy_mover_sin_gravedad.h"
-class Personaje;
 
-//TODO: LAS ESCALERAS DEBERÍAN TENER UNA COORDENADA DE INICIO Y UNA DE FIN.
-
-class Escalera: public Elemento{
-	private:
-		std::vector<StrategyMoverSinGravedad> estrategias;
+class Premio : public Elemento{
 	public:
-		Escalera(Coordenada c);
+		Premio(Coordenada coord, int tipo);
 		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Personaje* pj);
@@ -27,20 +21,17 @@ class Escalera: public Elemento{
 		//Dada una escalera, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Bloque* bloque);
-		//Dado un Premio, devuelve true si el premio puede ubicarse
-		//en las mismas coordenadas que este elemento.
-		virtual bool puede_ocupar(Premio* premio);
-		//Dado un ubicable, dice si puede ubicarse en las mimas
-		//coordendas que este elemento.
-		virtual bool puede_ocupar(Ubicable* ubic);
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
 		virtual bool puede_ocupar(Puas* puas);
-		//Recibe un personaje e interactúa con el mismo
-		//para actualizar sus coordenadas:
-		void interactuar(Personaje *pj);
-		//Destructor de la Escalera.
-		~Escalera();
+		//Dado un ubicable, dice si puede ubicarse en las mimas
+		//coordendas que este elemento.
+		virtual bool puede_ocupar(Ubicable* ubic);
+		//Dado un Premio, devuelve true si el premio puede ubicarse
+		//en las mismas coordenadas que este elemento.
+		virtual bool puede_ocupar(Premio* premio);
+		//Destructor de premio.
+		virtual ~Premio() = 0;
 };
 
-#endif //ESCALERA_H
+#endif //PREMIO_H

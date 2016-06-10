@@ -41,7 +41,7 @@ void Bala_met::daniar(Personaje* pj) {
 }
 
 void Bala_met::daniar(Megaman* mega) {
-	mega->perder_vida(0.2);
+	mega->perder_vida(20);
 }
 
 void Bala_met::daniar(Met* met) {

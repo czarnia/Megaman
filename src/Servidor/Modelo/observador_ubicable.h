@@ -5,7 +5,8 @@
 #include "juego.h"
 class Juego;
 
-class Observador_ubicable: public Observador{
+class Observador_ubicable: 
+public Observador{
 	protected:
 		Juego* juego;
 		Coordenada coordenada;

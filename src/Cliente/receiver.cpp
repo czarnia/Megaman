@@ -10,6 +10,8 @@
 #define STATIC 1
 #define NON_STATIC 0
 
+#define SCALE_FACTOR 15
+
 /// PARA PROTOCOLO
 #define MAPA 1
 #define END_OF_MAP 6666
@@ -86,8 +88,8 @@ void Receiver::ejecutar(){
             << objectType << " ID de objeto: "<<objectID <<" Pos: "
             <<coordX<<","<<coordY<<std::endl;
             ///////////////
-            coordX *= 15;
-            coordY *= 15;
+            coordX *= SCALE_FACTOR;
+            coordY *= SCALE_FACTOR;
             /// Etapa de clasificacion de objetos
             if (objectType == MEGAMAN){
                 objectType = MEGAMANN;
@@ -167,31 +169,31 @@ void Receiver::receiveMap(){
             switch (objectType){
                 case BLOCK_EARTH:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
-                    spr->setPosX(coordX*15);
-                    spr->setPosY(coordY*15);
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_EARTHN, spr, 0, NON_STATIC);
                     break;
                 case BLOCK_SPIKES:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
-                    spr->setPosX(coordX*15);
-                    spr->setPosY(coordY*15);
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_SPIKESN, spr, 0, NON_STATIC);
                     break;
                 case BLOCK_LADDER:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
-                    spr->setPosX(coordX*15);
-                    spr->setPosY(coordY*15);
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_LADDERN, spr, 0, NON_STATIC);
                     break;
                 case MEGAMAN:
                     spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
-                    spr->setPosX(coordX*15);
-                    spr->setPosY(coordY*15);
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(MEGAMANN+objectID, spr, 1, NON_STATIC);
                 case MET:
                     spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
-                    spr->setPosX(coordX*15);
-                    spr->setPosY(coordY*15);
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(METN+objectID, spr, 1, NON_STATIC);
                     break;
                 default:
