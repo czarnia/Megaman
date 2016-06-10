@@ -34,19 +34,24 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
         case MAPA:{
             /// SI recibi coordenadas negativas destruyo el objeto
             if (coord.first < 0){
+                /// SI HAY QUE HACER ALGUNA ANIMACION DE DESTRUCCION
+                /// LA METO ACA
                 renderer->erase(objectType+objectID);
             /// SI ya existe le cambio la posicion
             }else if (renderer->find(objectType+objectID)){
+                /// ANIMACION DE MOVIMIENTO
+               // renderer->sprites[1][objectType+objectID]->setState(coord.first, coord.second);
                 renderer->sprites[1][objectType+objectID]->setPosX(coord.first);
                 renderer->sprites[1][objectType+objectID]->setPosY(coord.second);
             /// Si no existe lo creo y le seteo la posicion
             }else{
                 switch (objectType){
                     case MEGAMANN:
-                        spr = new Character_sprite(renderer->get_renderer(),"../sprites/megaman.png");
+                        spr = new Character_sprite(renderer->get_renderer(),"../sprites/8bitmegaman.png");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
+                        /// Si hay que hacer alguna animacion de creacion la meto aca
                         break;
                     case METN:
                         spr = new Minion_sprite(renderer->get_renderer(),"../sprites/met.png");
