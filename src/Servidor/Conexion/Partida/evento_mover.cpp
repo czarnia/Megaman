@@ -12,8 +12,9 @@ int Evento_mover::get_direccion(){
 	return direccion;
 }
 
-void Evento_mover::ejecutar(Juego* j){
+void Evento_mover::ejecutar(Juego* j, Log* l){
   std::cout << "me muevo en direcion " << direccion << "\n";
+	l->jugador_mover(id_evento, direccion);
   j->personaje_mover(id_evento, direccion);
 }
 

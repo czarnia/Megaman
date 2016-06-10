@@ -14,7 +14,7 @@ class Evento_parar : public Evento{
     //Devuelve la direccion del evento parar.
     int get_direccion();
     //Ejecuta un evento parar dado un juego.
-    virtual void ejecutar(Juego* j);
+    virtual void ejecutar(Juego* j, Log* l);
     //Destructor del evento parar.
     virtual ~Evento_parar();
 };

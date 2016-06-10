@@ -12,8 +12,8 @@
 #define FIN_ENTRADA "End"
 
 Receiver_cliente::Receiver_cliente(Socket* conexion, int id, Juego *m,
-Servidor* s) : id_cliente(id), parser_juego(id), handler_juego(m),
-parser_lobby(id), handler_lobby(s){
+Servidor* s, Log* l) :  id_cliente(id), parser_juego(id), handler_juego(m, l),
+parser_lobby(id), handler_lobby(s, l){
   //Evento_lobby* e = (Evento_lobby*) new Evento_cliente_conectado();
   //handler_lobby.ejecutar_evento(e);
   skt = conexion;

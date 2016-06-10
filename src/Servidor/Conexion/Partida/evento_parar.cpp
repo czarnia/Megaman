@@ -12,7 +12,7 @@ int Evento_parar::get_direccion(){
 	return direccion;
 }
 
-void Evento_parar::ejecutar(Juego* j){
+void Evento_parar::ejecutar(Juego* j, Log* l){
   std::cout << "EVENTO: pare de moverme\n";
   j->personaje_parar(id_evento, direccion);
 }

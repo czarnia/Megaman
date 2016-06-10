@@ -5,13 +5,17 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+
 #include "entrada_estandar.h"
 
 #define MAX_CONEXIONES 4
 #define FIN_ENTRADA "q"
 typedef struct sockaddr* Address;
 
+
 Servidor::Servidor(char *puerto){
+	l = new Log();
+	l->inicio_servidor();
 	entrada = new Entrada_estandar(FIN_ENTRADA);
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
@@ -21,6 +25,7 @@ Servidor::Servidor(char *puerto){
 
 Servidor::~Servidor(){
   entrada->join();
+	l->fin_servidor();
 }
 
 void Servidor::aceptar_clientes(){
@@ -59,7 +64,7 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
   //Armo un id para el nuevo cliente con el numero de cliente.
   int id = (clientes.devolver_tamanio() + 1);
   //Agrego al cliente:
-  Conexion_cliente* c = new Conexion_cliente(cliente_nuevo, id, mundo, this);
+  Conexion_cliente* c = new Conexion_cliente(cliente_nuevo, id, mundo, this, l);
   clientes.agregar_cliente(c);
 }
 
