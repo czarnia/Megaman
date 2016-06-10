@@ -23,6 +23,7 @@ class Game{
         char *port;
 
         std::pair<int,std::string> playerData;
+        int level;
 	public:
 		Game(char* hostname,char* port);
 		/// Esta funcion corre el juego

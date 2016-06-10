@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-Evento_atacar::Evento_atacar(int id, int dir): 
+Evento_atacar::Evento_atacar(int id, int dir):
 id_evento(id),
 direccion(dir){}
 

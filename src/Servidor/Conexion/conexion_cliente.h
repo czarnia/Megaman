@@ -7,6 +7,8 @@
 
 #include <string>
 
+class Servidor;
+
 class Conexion_cliente{
   private:
     Socket* skt;
@@ -15,12 +17,15 @@ class Conexion_cliente{
   public:
     //Crea una conexion_cliente recibiendo como parametro un socket ya conecta-
     //do y un id que lo identifica.
-    Conexion_cliente(Socket* conexion, int id, Juego *m);
-
+    Conexion_cliente(Socket* conexion, int id, Juego *m, Servidor* s);
     //Inicia la ejecución, es decir, empieza a recibir información del cliente.
     void iniciar_ejecucion();
     //Le informa a la conexion_cliente que debe dejar de recibir datos.
     void terminar_ejecucion();
+    //Le informa al conexion_cliente que se ha iniciado un nivel.
+    void iniciar_nivel();
+    //Le informa al conexion_cliente que se ha terminado un nivel.
+    void finalizar_nivel();
     //Destructor del Conexion_cliente.
     virtual ~Conexion_cliente();
     //Recibe el id de un personaje y notifica al cliente
@@ -46,4 +51,4 @@ class Conexion_cliente{
     void enviar_tamanio_mapa(Juego* m);
 };
 
-#endif //CONEXION_CLIENTE_H
+#endif //CONEXION_CLIENTE

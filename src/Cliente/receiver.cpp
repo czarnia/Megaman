@@ -1,6 +1,5 @@
 #include "receiver.h"
 #include <iostream>
-#include <string.h>
 #include "block_sprite.h"
 
 #include "character_sprite.h"
@@ -35,11 +34,9 @@
 #define GAMEOVER 3
 
 Receiver::Receiver(Socket* conexion, Renderer *renderer,
-                    bool *victory, bool *ko, Mutex *mutex):
+                    Mutex *mutex):
     skt(conexion),
     renderer(renderer),
-    victory(victory),
-    ko(ko),
     mutex(mutex)
 {
 }
@@ -205,7 +202,7 @@ void Receiver::receiveMap(){
 }
 
 Receiver::~Receiver(){
-    skt->shutdown(SHUT_RDWR);
+
 }
 
 
