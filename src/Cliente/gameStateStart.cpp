@@ -6,6 +6,7 @@
 #include "block_sprite.h"
 #include "character_sprite.h"
 #include "response_handler.h"
+#include "event.h"
 
 #define FPS 60
 #define TAM_INT 4
@@ -174,7 +175,7 @@ GameState::StateCode gameStateStart::update(){
 
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
-
+    Event *event;
     static ResponseHandler handler(renderer);
     receiver->start();
     bool running = true;
@@ -188,29 +189,33 @@ void gameStateStart::mainLoop(){
         /// Si hay algun mensaje del servidor lo recibo
         mutex.lock();
         if (!receiver->r_queue.empty()){
+
             int command = 0;
             int objectType = -1;
             int objectID = -1;
             int posX = -1;
             int posY = -1;
             std::pair<int,int> coord;
-            SDL_Delay(15);
-            command = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            if( command == MAPA){
-                objectType = receiver->r_queue.front();
-                receiver->r_queue.pop();
-                objectID = receiver->r_queue.front();
-                receiver->r_queue.pop();
-                posX = receiver->r_queue.front();
-                receiver->r_queue.pop();
-                posY = receiver->r_queue.front();
-                receiver->r_queue.pop();
+            event = receiver->r_queue.front();
+       //     SDL_Delay(15);
+          //  command = receiver->r_queue.front();
+        //    receiver->r_queue.pop();
+            if( event->command == MAPA){
+                command = event->command;
+                objectType = event->objectType;
+       //         receiver->r_queue.pop();
+                objectID = event->objectID;
+         //       receiver->r_queue.pop();
+                posX = event->posX;
+        //        receiver->r_queue.pop();
+                posY = event->posY;
+        //        receiver->r_queue.pop();
 
                 coord.first = posX;
                 coord.second = posY;
+                std::cout <<objectType <<" "<<objectID<<" "<<posX<<" "<<posY;
             }
-
+            receiver->r_queue.pop();
             switch(handler.execute(command,objectType,objectID,coord)){
                 case GameState::BOSS_SELECT:
                     running = false;
@@ -232,7 +237,7 @@ void gameStateStart::mainLoop(){
 
 void gameStateStart::render(){
     renderer->clear();
-    SDL_Delay(15);
+ //   SDL_Delay(15);
     renderer->drawAll();
     renderer->present();
 }

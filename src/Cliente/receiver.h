@@ -4,6 +4,7 @@
 #include "../Comun/hilo.h"
 #include "../Comun/socket.h"
 #include "../Comun/mutex.h"
+#include "event.h"
 #include "Renderer.h"
 #include <queue>
 
@@ -15,7 +16,7 @@ class Receiver: public Hilo{
 
         Mutex *mutex;
     public:
-        std::queue<int> r_queue;
+        std::queue<Event*> r_queue;
         ///Crea un receiver recibiendo como parametro un socket ya conectado.
         Receiver(Socket* conexion, Renderer *renderer,
                     Mutex *mutex);

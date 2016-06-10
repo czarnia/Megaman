@@ -1,7 +1,6 @@
 #include "receiver.h"
 #include <iostream>
 #include "block_sprite.h"
-
 #include "character_sprite.h"
 #include "background_sprite.h"
 #include "minion_sprite.h"
@@ -47,7 +46,6 @@ Receiver::Receiver(Socket* conexion, Renderer *renderer,
 void Receiver::ejecutar(){
     /// Ahora recibo las actualizaciones de las cosas movibles
     /// o que pueden cambiar
-
     int command;
     int objectType;
     int objectID;
@@ -62,9 +60,6 @@ void Receiver::ejecutar(){
         command = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
 
-        mutex->lock();
-        r_queue.push(command);
-        mutex->unlock();
 
         if ( command == MAPA ){
             /// Tipo de objeto
@@ -104,12 +99,12 @@ void Receiver::ejecutar(){
                 coordY = -1;
             }
             mutex->lock();
-            r_queue.push(objectType);
-            r_queue.push(objectID);
-            r_queue.push(coordX);
-            r_queue.push(coordY);
+            r_queue.push(new Event(command,objectType,objectID,coordX,coordY));
             mutex->unlock();
         }else{
+            mutex->lock();
+            r_queue.push(new Event(command));
+            mutex->unlock();
         }
     }
 }
