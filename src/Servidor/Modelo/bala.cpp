@@ -3,6 +3,7 @@
 #include "personaje.h"
 #include "puas.h"
 #include "bloque.h"
+#include <iostream>
 
 #define TIEMPO_MOVER 5
 #define VELOCIDAD 4
@@ -67,6 +68,7 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 		if (impacto){
 			//si la bala impacto con un objeto en el update anterior
 			//se destruye en este update;
+			std::cout << "BALA: IMPACTO, VA A -1, -1.\n";
 			actual = Coordenada(-1, -1);
 			mapa->quitar_bala(this);
 		}
@@ -86,12 +88,14 @@ void Bala::update(size_t tiempo, Mapa* mapa){
 				impacto = !mapa->puede_ubicarse(this, actual);
 				impacto = impacto || mapa->hay_personaje(&actual);
 				if (impacto){
+					std::cout << "BALA: IMPACTO, VA A -1, -1 en proximo update\n";
 					direccion_x = 0;
 					direccion_y = 0;
 				}
 			}
 		}
 		if (!(actual == coord)){
+			std::cout << "BALA: CAMBIO POSICION\n";
 			coord = actual;
 			notificar_observadores();
 		}

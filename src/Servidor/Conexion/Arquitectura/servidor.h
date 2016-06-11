@@ -14,7 +14,7 @@ public Observador_juego{
     Juego *mundo;
     Entrada_estandar *entrada;
     Almacenador_clientes clientes;
-	  Socket *skt;
+	Socket *skt;
   public:
     //Crea un servidor.
     Servidor(char *puerto);

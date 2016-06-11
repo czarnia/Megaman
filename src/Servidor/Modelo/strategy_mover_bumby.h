@@ -9,7 +9,7 @@ class StrategyMoverBumby : public StrategyMover{
 		int direccion;
 	public:
 		StrategyMoverBumby();
-		virtual void mover(Mapa *mapa, Personaje *pj);	
+		virtual void mover(Mapa *mapa, Personaje *pj, size_t tiempo);	
 };
 
 #endif //STRATEGY_MOVER_BUMBY

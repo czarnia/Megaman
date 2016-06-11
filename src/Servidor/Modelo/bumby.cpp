@@ -11,6 +11,12 @@
 
 enum direcciones_ataque{DERECHA_ABAJO, CENTRO_ABAJO, IZQUIERDA_ABAJO};
 
+Bumby::Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
+Personaje(mapa, c, id),
+arma(arma){
+  tiempo_pasado = 0;
+}
+
 void Bumby::atacar(int dir, Mapa* mapa){
 	Coordenada pos_inicial(-1, -1);
 	int dir_x = 0;
@@ -36,7 +42,7 @@ void Bumby::atacar(int dir, Mapa* mapa){
 void Bumby::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado >= TIEMPO_MOVER){
-		mover_bumby.mover(mapa, this);
+		mover_bumby.mover(mapa, this, tiempo);
 		this->notificar_observadores();
 	}
 	if (tiempo_pasado >= TIEMPO_ATACAR){

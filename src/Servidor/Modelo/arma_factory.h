@@ -9,6 +9,7 @@
 
 class ArmaFactory {
 	private:
+		int creadas;
 		std::map<Arma*, Factory_observador_ubicable *> creados;
 		Juego *juego;
 	public:

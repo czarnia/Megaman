@@ -6,7 +6,7 @@ StrategyMoverBumby::StrategyMoverBumby(){
 	direccion = QUIETO;
 }
 
-void StrategyMoverBumby::mover(Mapa *mapa, Personaje *pj){
+void StrategyMoverBumby::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
 	Coordenada coord_nueva = pj->coordenada;
 	switch(direccion){
 		case QUIETO:
@@ -20,6 +20,7 @@ void StrategyMoverBumby::mover(Mapa *mapa, Personaje *pj){
 	}
 	if (mapa->puede_ubicarse(pj, coord_nueva)){
 		pj->coordenada = coord_nueva;
+		pj->notificar_observadores();
 	}
 }
 

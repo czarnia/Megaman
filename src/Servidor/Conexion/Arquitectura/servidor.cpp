@@ -24,7 +24,7 @@ Servidor::Servidor(char *puerto){
 }
 
 Servidor::~Servidor(){
-  entrada->join();
+	entrada->join();
 	Log::instancia()->fin_servidor();
 }
 
@@ -70,9 +70,10 @@ void Servidor::agregar_cliente(Socket* cliente_nuevo){
 
 void Servidor::empezar_partida(){ //TODO: esto debería ser un empezar_nivel.
 	std::cout << "INICIO PARTIDA\n";
+	Log::instancia()->inicio_juego();
 	mundo->agregar_observador(this);
 	mundo->inicializar_partida(clientes.devolver_tamanio());
-  clientes.iniciar_nivel();
+	clientes.iniciar_nivel();
 	mundo->jugar();
 }
 
@@ -108,5 +109,5 @@ void Servidor::update_energia(int tipo, int id, int energia){
 }
 
 void Servidor::update_posicion(int tipo, int id, int x, int y){
-  clientes.update_posicion(tipo, id, x, y);
+	clientes.update_posicion(tipo, id, x, y);
 }

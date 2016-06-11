@@ -1,17 +1,12 @@
-#ifndef BUMBY_H
-#define BUMBY_H
+#ifndef SNIPPER_H
+#define SNIPPER_H
 
-#include "personaje.h"
-#include "strategy_mover_bumby.h"
-
-class Arma_minion;
-
-class Bumby : public Personaje {
+class Snipper : public Personaje {
 	private:
-		StrategyMoverBumby mover_bumby;
 		Arma_minion* arma;
+		bool tras_escudo;
 	public:
-		Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
+		Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		//Hace que el personaje ataque.
 		virtual void atacar(int dir, Mapa* mapa);		//NO TIENE SENTIDO PARA NPCs!
 		//Le hace un update al personaje.
@@ -25,8 +20,7 @@ class Bumby : public Personaje {
 		virtual void sacar_movimiento(int direccion);	//NO TIENE SENTIDO PARA NPCs!
 		//Dada una direccion representada como un int, agrega un movimiento en dicha
 		//direccion.
-		virtual void agregar_movimiento(int direccion);	//NO TIENE SENTIDO PARA NPCs!
+		virtual void agregar_movimiento(int direccion);	//NO TIENE SENTIDO PARA NPCs!	
 };
 
-#endif //BUMBY_H
-
+#endif //SNIPPER_H

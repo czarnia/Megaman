@@ -10,7 +10,7 @@ class StrategyMoverMegaman : public StrategyMover{
 		int velocidad_y;
 	public:
 		StrategyMoverMegaman();
-		void mover(Mapa *mapa, Personaje *pj);
+		void mover(Mapa *mapa, Personaje *pj, size_t tiempo);
 		void agregar_movimiento(Personaje *pj, int dir);
 		void sacar_movimiento(Personaje *pj, int dir);
 		~StrategyMoverMegaman();

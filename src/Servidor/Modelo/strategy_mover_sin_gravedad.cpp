@@ -6,7 +6,7 @@ StrategyMoverSinGravedad::StrategyMoverSinGravedad(){
 	direccion = QUIETO;
 }
 
-void StrategyMoverSinGravedad::mover(Mapa *mapa, Personaje *pj){
+void StrategyMoverSinGravedad::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
 	Coordenada coord_nueva = pj->coordenada;
 	switch(direccion){
 		case QUIETO:

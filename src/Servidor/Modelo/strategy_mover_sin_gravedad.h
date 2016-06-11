@@ -7,7 +7,7 @@
 class StrategyMoverSinGravedad : public StrategyMover{
 	public:
 		StrategyMoverSinGravedad();
-		void mover(Mapa *mapa, Personaje *pj);
+		void mover(Mapa *mapa, Personaje *pj, size_t tiempo);
 		void set_direccion_abajo();
 		void set_direccion_arriba();
 		void set_direccion_derecha();

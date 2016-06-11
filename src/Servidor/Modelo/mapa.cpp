@@ -205,6 +205,8 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 void Mapa::cargar(){
 	bloques = coord_tierras();
 	coord_iniciales_personajes = coord_personajes();
+	std::vector<Coordenada> escaleras = coord_escaleras();
+	
 	for (size_t i = 0; i < bloques.size(); i++){
 		Coordenada c1 = bloques[i];
 		Bloque* b = new Bloque(c1);
@@ -214,6 +216,17 @@ void Mapa::cargar(){
 			int x = c2.obtener_abscisa();
 			int y = c2.obtener_ordenada();
 			elementos[x][y].push_back(b);
+		}
+	}
+	for (size_t i = 0; i < escaleras.size(); i++){
+		Coordenada c1 = escaleras[i];
+		Escalera* esc = new Escalera(c1);
+		std::vector<Coordenada> coordenadas_esc = esc->coordenadas();
+		for (size_t j = 0; j < coordenadas_esc.size(); j++){
+			Coordenada c2 = coordenadas_esc[j];
+			int x = c2.obtener_abscisa();
+			int y = c2.obtener_ordenada();
+			elementos[x][y].push_back(esc);
 		}
 	}
 }

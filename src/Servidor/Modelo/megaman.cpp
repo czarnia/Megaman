@@ -39,7 +39,7 @@ void Megaman::atacar(int dir, Mapa* mapa){
 void Megaman::mover(size_t tiempo, Mapa* mapa){
 	//Me muevo utilizando la estrategia
 	//de movimiento actual:
-	movimiento_actual->mover(mapa, this);
+	movimiento_actual->mover(mapa, this, tiempo);
 	//Vuevlo al movimiento normal en caso de que
 	//estuviera usando una estrategia especial:
 	movimiento_actual = &movimiento_megaman;
