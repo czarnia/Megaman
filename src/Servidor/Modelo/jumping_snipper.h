@@ -1,10 +1,12 @@
 #ifndef JUMPING_SNIPPER_H
 #define JUMPING_SNIPPER_H
 
+#include "snipper.h"
+#include "strategy_mover_jumping_snipper.h"
+
 class JumpingSnipper : public Snipper {
 	private:
 		StrategyMoverJumpingSnipper salto_snipper;
-		Arma_minion* arma;
 	public:
 		JumpingSnipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		//Le hace un update al personaje.

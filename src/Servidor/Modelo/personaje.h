@@ -16,6 +16,7 @@
 class StrategyMover;
 class StrategyMoverSinGravedad;
 class StrategyMoverBumby;
+class StrategyMoverJumpingSnipper;
 class Observador_personaje;
 class Bala;
 
@@ -141,6 +142,7 @@ public Personaje_observable{
 		friend class StrategyMoverBumby;
 		friend class StrategyMoverSinGravedad;
 		friend class StrategyMoverMegaman;
+		friend class StrategyMoverJumpingSnipper;
 };
 
 #endif //PERSONAJE_H

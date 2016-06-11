@@ -1,9 +1,10 @@
 #include "jumping_snipper.h"
+#include "arma_minion.h"
 #define TIEMPO_ESTADO 4
+#define DERECHA -1
 
 JumpingSnipper::JumpingSnipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id): 
-Personaje(mapa, c, id),
-arma(arma){
+Snipper(mapa, c, arma, id){
   tras_escudo = false;
   flotando = false;
   tiempo_pasado = 0;
@@ -21,9 +22,9 @@ void JumpingSnipper::update(size_t tiempo, Mapa* mapa){
 		return;
 	}
 	//Dispara:
-	Bala *bala = arma->atacar(DERECHA, 0, pos_inicial);
-	mapa->agregar_bala(bala1);
+	Bala *bala = arma->atacar(DERECHA, 0, coordenada.izquierda(ancho/2));
+	mapa->agregar_bala(bala);
 	bala->notificar_observadores();
 	//Salta:
-	salto_snipper->mover(mapa, this);
+	salto_snipper.mover(mapa, this, tiempo_pasado);
 }

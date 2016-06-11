@@ -1,6 +1,9 @@
 #ifndef STRATEGY_MOVER_JUMPING_SNIPPER_H
 #define STRATEGY_MOVER_JUMPING_SNIPPER_H
 
+#include "strategy_mover.h"
+#include "personaje.h"
+
 class StrategyMoverJumpingSnipper : public StrategyMover{
 	protected:
 		int direccion;

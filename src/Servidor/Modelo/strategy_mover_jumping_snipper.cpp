@@ -1,4 +1,4 @@
-#include "stretegy_mover_jumping_snipper.h"
+#include "strategy_mover_jumping_snipper.h"
 #define TIEMPO_SALTO 4
 
 void StrategyMoverJumpingSnipper::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
