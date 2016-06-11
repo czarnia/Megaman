@@ -15,7 +15,7 @@ class Evento_cliente_desconectado : public Evento_lobby{
 		//Destructor del evento.
 		virtual ~Evento_cliente_desconectado() {};
 		//Ejecuta un evento.
-		virtual void ejecutar(Servidor* s, Log* l);
+		virtual void ejecutar(Servidor* s);
 };
 
 #endif //EVENTO_CLIENTE_DESCONECTADO_H

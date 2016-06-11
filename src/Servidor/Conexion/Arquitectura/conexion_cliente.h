@@ -18,7 +18,7 @@ class Conexion_cliente{
   public:
     //Crea una conexion_cliente recibiendo como parametro un socket ya conecta-
     //do y un id que lo identifica.
-    Conexion_cliente(Socket* conexion, int id, Juego *m, Servidor* s, Log* l);
+    Conexion_cliente(Socket* conexion, int id, Juego *m, Servidor* s);
     //Inicia la ejecución, es decir, empieza a recibir información del cliente.
     void iniciar_ejecucion();
     //Le informa a la conexion_cliente que debe dejar de recibir datos.

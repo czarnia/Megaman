@@ -14,7 +14,7 @@ class Evento_mover : public Evento{
     //Devuelve la direccion del evento mover.
     int get_direccion();
     //Ejecuta un evento mover dado un juego.
-    virtual void ejecutar(Juego* j, Log* l);
+    virtual void ejecutar(Juego* j);
     //Destructor del evento mover.
     virtual ~Evento_mover();
 };

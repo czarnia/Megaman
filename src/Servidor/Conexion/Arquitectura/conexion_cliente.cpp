@@ -12,10 +12,10 @@
 enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m,
-Servidor* s, Log* l): skt(conexion), id_cliente(id),
-rcv(conexion, id, m, s, l) {
+Servidor* s): skt(conexion), id_cliente(id),
+rcv(conexion, id, m, s) {
 	std::string jugador = obtener_nombre_jugador();
-	l->cliente_conectado(jugador);
+	Log::instancia()->cliente_conectado(jugador);
 	skt->send((char*)&id, TAM_INT); //le envio al jugador su id
 	enviar_mapa_inicial(m, id);
 }

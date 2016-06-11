@@ -1,5 +1,6 @@
 #include "evento_atacar.h"
 #include "../../Modelo/juego.h"
+#include "../Arquitectura/log.h"
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -10,8 +11,8 @@ direccion(dir){}
 
 Evento_atacar::~Evento_atacar() {}
 
-void Evento_atacar::ejecutar(Juego* j, Log* l){
+void Evento_atacar::ejecutar(Juego* j){
 	std::cout << "ataco en direccion " << direccion << "\n";
-	l->jugador_atacar(id_evento, direccion);
+	Log::instancia()->jugador_atacar(id_evento, direccion);
 	j->personaje_atacar(id_evento, direccion);
 }

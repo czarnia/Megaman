@@ -4,7 +4,6 @@
 #include <string>
 #include "almacenador_clientes.h"
 #include "entrada_estandar.h"
-#include "log.h"
 #include "../Partida/observador_juego.h"
 #include "../../Modelo/juego.h"
 #include "../../../Comun/socket.h"
@@ -16,7 +15,6 @@ public Observador_juego{
     Entrada_estandar *entrada;
     Almacenador_clientes clientes;
 	  Socket *skt;
-    Log* l;
   public:
     //Crea un servidor.
     Servidor(char *puerto);

@@ -11,7 +11,7 @@ class Evento_start : public Evento_lobby{
 		//Destructor del evento.
 		virtual ~Evento_start() {};
 		//Ejecuta un evento.
-		virtual void ejecutar(Servidor* s, Log* l);
+		virtual void ejecutar(Servidor* s);
 };
 
 #endif //EVENTO_START_H

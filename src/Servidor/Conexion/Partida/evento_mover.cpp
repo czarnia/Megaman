@@ -1,5 +1,6 @@
 #include "evento_mover.h"
 #include "../../Modelo/juego.h"
+#include "../Arquitectura/log.h"
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -12,9 +13,9 @@ int Evento_mover::get_direccion(){
 	return direccion;
 }
 
-void Evento_mover::ejecutar(Juego* j, Log* l){
+void Evento_mover::ejecutar(Juego* j){
   std::cout << "me muevo en direcion " << direccion << "\n";
-	l->jugador_mover(id_evento, direccion);
+	Log::instancia()->jugador_mover(id_evento, direccion);
   j->personaje_mover(id_evento, direccion);
 }
 
