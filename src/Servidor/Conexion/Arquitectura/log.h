@@ -10,8 +10,7 @@
 
 class Log{
   private:
-    std::ofstream log_arch;
-    const char* path;
+    std::string path;
     std::map<int, std::string> jugadores;
     Mutex proteccion;
 
@@ -58,6 +57,8 @@ class Log{
   private:
     //Se crea un Log.
     Log();
+    //Exporta un mensaje al log de salida.
+    void exportar(std::string mensaje);
 
 };
 
