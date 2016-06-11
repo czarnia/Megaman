@@ -3,7 +3,7 @@
 #include "bala.h"
 #include "puas.h"
 #include "bloque.h"
-#define TIPO_ESCALERA 2
+#define TIPO_ESCALERA 12
 
 enum dir_estrategias{ARRIBA, ABAJO, DERECHA, IZQUIERDA};
 

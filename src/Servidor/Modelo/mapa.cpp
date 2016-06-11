@@ -65,10 +65,8 @@ std::vector<Coordenada> coord_puas(){
 
 std::vector<Coordenada> coord_escaleras(){
 	std::vector<Coordenada> escaleras;
-	for (size_t i = 0; i < 3; i++){
-		escaleras.push_back(Coordenada(0,i+4));
-		escaleras.push_back(Coordenada(5,i+1));
-	}
+	escaleras.push_back(Coordenada(11,9));
+	escaleras.push_back(Coordenada(0,7));
 	return escaleras;
 }
 
