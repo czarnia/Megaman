@@ -22,6 +22,8 @@ Elemento(c, tipo, id),
 direccion_x(dir_x),
 direccion_y(dir_y)
 {
+	alto = 0;
+	ancho = 0;
 	impacto = false;
 }
 

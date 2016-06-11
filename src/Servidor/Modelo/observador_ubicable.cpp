@@ -20,8 +20,8 @@ void Observador_ubicable::update(Observable *obs){
 		int alto = ubicable->get_alto();
 		int ancho = ubicable->get_ancho();
 		Coordenada c = ubicable->get_coordenada().arriba(alto/2).izquierda(ancho/2);
-		int x = (int)c.obtener_abscisa();
-		int y = (int)c.obtener_ordenada();
+		int x = c.obtener_abscisa();
+		int y = c.obtener_ordenada();
 		std::stringstream pos_final;
 		pos_final << x << "," << y << "\n";
 		std::cout << "OBSERVER_UBICABLE: POS FINAL " + pos_final.str() + "\n";

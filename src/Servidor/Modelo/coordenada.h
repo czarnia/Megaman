@@ -14,8 +14,8 @@ class Coordenada{
     Coordenada(size_t ordenada, size_t abscisa);
     //Suma delta_x a la coordenada x;
     void sumar_abscisa(size_t delta_x);
-	  //Suma delta_y a la coordenada y;
-	  void sumar_ordenada(size_t delta_y);
+	//Suma delta_y a la coordenada y;
+	void sumar_ordenada(size_t delta_y);
     //Devuelve la ordenada de la Coordenada.
     int obtener_ordenada();
     //Devuelve la abscisa de la Coordenada.
