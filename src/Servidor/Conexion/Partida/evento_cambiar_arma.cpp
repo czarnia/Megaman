@@ -1,5 +1,6 @@
 #include "evento_cambiar_arma.h"
 #include "../../Modelo/juego.h"
+#include "../Arquitectura/log.h"
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -10,8 +11,8 @@ num_arma(arma){}
 
 Evento_cambiar_arma::~Evento_cambiar_arma() {}
 
-void Evento_cambiar_arma::ejecutar(Juego* j, Log* l){
+void Evento_cambiar_arma::ejecutar(Juego* j){
   std::cout << "cambio el arma a " << num_arma << "\n";
-  l->jugador_cambiar_arma(id_evento, num_arma);
+  Log::instancia()->jugador_cambiar_arma(id_evento, num_arma);
   //j->cambiar_arma(id_evento, num_arma);
 }
