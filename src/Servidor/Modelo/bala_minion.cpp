@@ -1,15 +1,15 @@
-#include "bala_met.h"
+#include "bala_minion.h"
 #include "personaje.h"
 
 #define TIEMPO_MOVER 1
-#define TIPO_BALA_MET 11
+#define TIPO_BALA_MINION 11
 
-Bala_met::Bala_met(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_MET, id){}
+Bala_minion::Bala_minion(int dir_x, int dir_y, Coordenada c, int id):
+Bala(dir_x, dir_y, c, TIPO_BALA_MINION, id){}
 
-Bala_met::~Bala_met() {}
+Bala_minion::~Bala_minion() {}
 
-void Bala_met::update(size_t tiempo, Mapa* mapa) {
+void Bala_minion::update(size_t tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){
@@ -32,18 +32,18 @@ void Bala_met::update(size_t tiempo, Mapa* mapa) {
 		coord = nueva_coordenada;
 	}else{
 		//TODO: Mover al mapa.
-		//mapa->quitar_bala(this);
+		mapa->quitar_bala(this);
 	}
 }
 
-void Bala_met::daniar(Personaje* pj) {
+void Bala_minion::daniar(Personaje* pj) {
 	pj->perder_vida(0); //sólo le saca vida a megaman.
 }
 
-void Bala_met::daniar(Megaman* mega) {
+void Bala_minion::daniar(Megaman* mega) {
 	mega->perder_vida(20);
 }
 
-void Bala_met::daniar(Met* met) {
+void Bala_minion::daniar(Met* met) {
 	met->perder_vida(0);
 }

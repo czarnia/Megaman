@@ -18,7 +18,7 @@ Ubicable* Met_factory::crear(Mapa* mapa, Coordenada coord){
 	//Creacion del met:
 	int id = creados;
 	ArmaFactory arma_fact(juego);
-	Arma_met *arma = arma_fact.crear_arma_met();
+	Arma_minion *arma = arma_fact.crear_arma_minion();
 	Met *met = new Met(mapa, coord, arma, id);
 	//Se agregan los observadores:
 	//observador de ubicable:

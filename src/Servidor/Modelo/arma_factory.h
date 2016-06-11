@@ -3,7 +3,7 @@
 
 #include "arma.h"
 #include "arma_megaman.h"
-#include "arma_met.h"
+#include "arma_minion.h"
 #include "factory_observador_ubicable.h"
 #include <map>
 
@@ -14,7 +14,7 @@ class ArmaFactory {
 	public:
 		ArmaFactory(Juego *j);
 		Arma_megaman* crear_arma_megaman();
-		Arma_met* crear_arma_met();
+		Arma_minion* crear_arma_minion();
 };
 
 #endif //ARMA_FACTORY_H

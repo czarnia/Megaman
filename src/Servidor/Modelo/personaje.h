@@ -15,6 +15,7 @@
 
 class StrategyMover;
 class StrategyMoverSinGravedad;
+class StrategyMoverBumby;
 class Observador_personaje;
 class Bala;
 
@@ -137,6 +138,7 @@ public Personaje_observable{
 		//en las mismas coordenadas que este elemento.
 		virtual bool puede_ocupar(Premio* premio);
 		
+		friend class StrategyMoverBumby;
 		friend class StrategyMoverSinGravedad;
 		friend class StrategyMoverMegaman;
 };

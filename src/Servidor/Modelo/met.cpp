@@ -1,10 +1,10 @@
 #include "met.h"
 #include "bala.h"
-#include "arma_met.h"
+#include "arma_minion.h"
 
 #define TIEMPO_ATAQUE 2
 
-Met::Met(Mapa *mapa, Coordenada c, Arma_met* arma, int id): 
+Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id): 
 Personaje(mapa, c, id),
 arma(arma){
   tras_escudo = false;

@@ -9,9 +9,9 @@ Arma_megaman* ArmaFactory::crear_arma_megaman(){
 	return arma_megaman;
 }
 
-Arma_met* ArmaFactory::crear_arma_met(){
+Arma_minion* ArmaFactory::crear_arma_minion(){
 	Factory_observador_ubicable *fact_obs = new Factory_observador_ubicable(juego);
-	Arma_met *arma_met = new Arma_met(creados.size(), fact_obs);
-	creados.insert(std::pair<Arma*, Factory_observador_ubicable*>(arma_met, fact_obs));
-	return arma_met;
+	Arma_minion *arma_minion = new Arma_minion(creados.size(), fact_obs);
+	creados.insert(std::pair<Arma*, Factory_observador_ubicable*>(arma_minion, fact_obs));
+	return arma_minion;
 }

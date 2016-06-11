@@ -3,16 +3,16 @@
 
 #include "personaje.h"
 
-class Arma_met;
+class Arma_minion;
 
 class Met: public Personaje{
 	private:
 		Mapa *mapa;
 		bool tras_escudo;
 		size_t tiempo_pasado;
-		Arma_met* arma;
+		Arma_minion* arma;
 	public:
-		Met(Mapa *mapa, Coordenada c, Arma_met* arma, int id);
+		Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
