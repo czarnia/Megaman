@@ -9,7 +9,7 @@ class Personaje;
 
 class Escalera: public Elemento{
 	private:
-		std::vector<StrategyMoverSinGravedad> estrategias;
+		std::vector<StrategyMoverSinGravedad*> estrategias;
 	public:
 		Escalera(Coordenada c);
 		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que

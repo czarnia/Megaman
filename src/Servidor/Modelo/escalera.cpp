@@ -4,18 +4,23 @@
 #include "puas.h"
 #include "bloque.h"
 #define TIPO_ESCALERA 12
+#define ANCHO 2
+#define ALTO 2
 
 enum dir_estrategias{ARRIBA, ABAJO, DERECHA, IZQUIERDA};
 
 Escalera::Escalera(Coordenada c) : Elemento(c, TIPO_ESCALERA) {
-	StrategyMoverSinGravedad estrategia_arriba;
-	estrategia_arriba.set_direccion_arriba();
-	StrategyMoverSinGravedad estrategia_abajo;
-	estrategia_abajo.set_direccion_abajo();
-	StrategyMoverSinGravedad estrategia_derecha;
-	estrategia_derecha.set_direccion_derecha();
-	StrategyMoverSinGravedad estrategia_izquierda;
-	estrategia_izquierda.set_direccion_izquierda();
+	ancho = ANCHO;
+	alto = ALTO;
+	
+	StrategyMoverSinGravedad *estrategia_arriba = new StrategyMoverSinGravedad();
+	estrategia_arriba->set_direccion_arriba();
+	StrategyMoverSinGravedad *estrategia_abajo = new StrategyMoverSinGravedad();
+	estrategia_abajo->set_direccion_abajo();
+	StrategyMoverSinGravedad *estrategia_derecha = new StrategyMoverSinGravedad();
+	estrategia_derecha->set_direccion_derecha();
+	StrategyMoverSinGravedad *estrategia_izquierda = new StrategyMoverSinGravedad();
+	estrategia_izquierda->set_direccion_izquierda();
 	
 	estrategias.push_back(estrategia_arriba);
 	estrategias.push_back(estrategia_abajo);
@@ -74,24 +79,24 @@ void Escalera::interactuar(Personaje* pj){
 	size_t tope_escalera = coord.arriba(alto/2).obtener_ordenada();
 	if (piso_personaje == tope_escalera){
 		//Estrategias para salir de la escalera:
-		pj->agregar_movimiento(estrategias[DERECHA].get_direccion(),
-								&estrategias[DERECHA]);
-		pj->agregar_movimiento(estrategias[IZQUIERDA].get_direccion(),
-								&estrategias[IZQUIERDA]);
-		pj->agregar_movimiento(estrategias[ABAJO].get_direccion(),
-								&estrategias[ABAJO]);
+		pj->agregar_movimiento(estrategias[DERECHA]->get_direccion(),
+								estrategias[DERECHA]);
+		pj->agregar_movimiento(estrategias[IZQUIERDA]->get_direccion(),
+								estrategias[IZQUIERDA]);
+		pj->agregar_movimiento(estrategias[ABAJO]->get_direccion(),
+								estrategias[ABAJO]);
 	}else{
 		//Me fijo que el personaje no este en el borde inferior
 		//de la escalera(es decir, que el tope del personaje no
 		//coincide con el borde inferior externo de la escalera. 
 		//En ese caso no quiero que el personaje pueda subir. 
-		size_t tope_personaje = y + (pj->get_alto() / 2);
+		size_t tope_personaje = y - (pj->get_alto() / 2);
 		size_t piso_escalera = coord.abajo(alto/2).obtener_ordenada();
 		if (tope_personaje != piso_escalera){
-			pj->agregar_movimiento(estrategias[ARRIBA].get_direccion(),
-									&estrategias[ARRIBA]);
-			pj->agregar_movimiento(estrategias[ABAJO].get_direccion(),
-									&estrategias[ABAJO]);
+			pj->agregar_movimiento(estrategias[ARRIBA]->get_direccion(),
+									estrategias[ARRIBA]);
+			pj->agregar_movimiento(estrategias[ABAJO]->get_direccion(),
+									estrategias[ABAJO]);
 		}
 	}
 }

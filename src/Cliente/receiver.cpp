@@ -19,7 +19,7 @@
 #define BLOCK_SPIKES 11
 #define BLOCK_LADDER 12
 #define MEGAMAN 1
-#define MEGAMAN_BULLET 2
+#define MEGAMAN_BULLET 12
 #define MET 8
 
 /// PARA ALMACENAMIENTO
