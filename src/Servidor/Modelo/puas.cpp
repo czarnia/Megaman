@@ -40,7 +40,9 @@ bool Puas::puede_ocupar(Premio* premio){
 }
 
 void Puas::interactuar(Personaje *pj){
-	return pj->perder_vida();
+	if (this->colisiona(pj)){
+		pj->perder_vida();
+	}
 }
 
 void Puas::notificar_observadores(){}
@@ -54,4 +56,3 @@ void Puas::quitar_observador(Observador_ubicable *observador){
 }
 
 Puas::~Puas() {}
-

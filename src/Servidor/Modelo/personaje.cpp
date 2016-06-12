@@ -3,7 +3,8 @@
 #include "bala.h"
 #include "puas.h"
 #include "bloque.h"
-#include <set>
+#include <algorithm>
+#include <vector>
 
 #include <string>
 #include <iostream>
@@ -133,18 +134,31 @@ void Personaje::quitar_observador(Observador_personaje *observador){
 	Observable::quitar_observador(observador);
 }
 
-std::vector<Coordenada> Personaje::coordenadas(Coordenada c){
-	std::set<Coordenada> s_coord;
-	for (size_t i = 0; i < alto/2; i++){
-		for (size_t j = 0; j < ancho/2; j++){
-			s_coord.insert(c.arriba(i).izquierda(j));
-			s_coord.insert(c.arriba(i).derecha(j));
-			s_coord.insert(c.abajo(i).izquierda(j));
-			s_coord.insert(c.abajo(i).derecha(j));
+std::vector<Coordenada> Personaje::coordenadas(Coordenada centro){
+	std::vector<Coordenada> s_coord;
+	Coordenada coord_aux(0,0);
+	for (size_t i = 0; i <= alto/2; i++){
+		for (size_t j = 0; j <= ancho/2; j++){
+			coord_aux = centro.arriba(i).izquierda(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(centro.arriba(i).izquierda(j));
+			}
+			coord_aux = centro.arriba(i).derecha(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(centro.arriba(i).derecha(j));
+			}
+			coord_aux = centro.abajo(i).izquierda(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(centro.abajo(i).izquierda(j));
+			}
+			coord_aux = centro.abajo(i).derecha(j);
+			if (std::find(s_coord.begin(), s_coord.end(), coord_aux) == s_coord.end()){
+				s_coord.push_back(centro.abajo(i).derecha(j));
+			}
+
 		}
 	}
-	std::vector<Coordenada> v(s_coord.begin(), s_coord.end());
-	return v;
+	return s_coord;
 }
 
 std::vector<Coordenada> Personaje::coordenadas(){
@@ -182,4 +196,3 @@ bool Personaje::puede_ocupar(Puas* puas){
 bool Personaje::puede_ocupar(Premio* premio){
 	return true;
 }
-
