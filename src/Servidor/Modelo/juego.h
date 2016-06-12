@@ -20,7 +20,6 @@ public Juego_observable{
 		bool fin_partida;
 		int cant_jugadores;
 		std::map<std::string, MegamanFactory*> factories;
-
 	public:
 		//Dado un tamanio, crea un juego nuevo.
 		Juego(size_t long_x, size_t long_y);
@@ -47,6 +46,7 @@ public Juego_observable{
 		//Dado el id de un personaje y un numero de arma, hace que el mismo cambie a
 		//la misma.
 		void personaje_cambiar_arma(int id_pj, int arma);
+
 		//Devuelve todos los ubicables del mapa.
 		std::vector<Ubicable*> devolver_ubicables();
 		//Devuelve la longitud y del mapa del juego.

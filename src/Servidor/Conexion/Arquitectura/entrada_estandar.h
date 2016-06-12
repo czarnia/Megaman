@@ -4,13 +4,16 @@
 #include "../../../Comun/hilo.h"
 #include <string>
 
+class Servidor;
+
 class Entrada_estandar: public Hilo{
   private:
     bool fin;
     std::string fin_entrada;
+    Servidor* s;
   public:
     //Dada una cadena de fin, crea una entrada_estandar.
-    Entrada_estandar(std::string entrada);
+    Entrada_estandar(std::string entrada, Servidor* srv);
     //Ejecuta el ciclo de la entrada_estandar, leyendo de teclado hasta recibir
     //un fin_entrada.
     virtual void ejecutar();

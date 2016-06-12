@@ -66,7 +66,7 @@ std::vector<Coordenada> coord_puas(){
 std::vector<Coordenada> coord_escaleras(){
 	std::vector<Coordenada> escaleras;
 	escaleras.push_back(Coordenada(11,9));
-	escaleras.push_back(Coordenada(0,7));
+	escaleras.push_back(Coordenada(11,7));
 	return escaleras;
 }
 
@@ -204,7 +204,7 @@ void Mapa::cargar(){
 	bloques = coord_tierras();
 	coord_iniciales_personajes = coord_personajes();
 	std::vector<Coordenada> escaleras = coord_escaleras();
-	
+
 	for (size_t i = 0; i < bloques.size(); i++){
 		Coordenada c1 = bloques[i];
 		Bloque* b = new Bloque(c1);
@@ -236,7 +236,7 @@ void Mapa::agregar_bala(Bala *b){
 void Mapa::quitar_bala(Bala *b){
 	ItBalas it_bala = std::find(balas.begin(), balas.end(), b);
 	balas.erase(it_bala);
-	//TODO: SACAR DEL MAPA DE ELEMENTOOOOSSS!!!	
+	//TODO: SACAR DEL MAPA DE ELEMENTOOOOSSS!!!
 }
 
 void Mapa::agregar_personaje(Personaje *p){

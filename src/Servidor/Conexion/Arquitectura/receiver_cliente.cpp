@@ -30,7 +30,7 @@ void Receiver_cliente::ejecutar(){
   char argumento[TAM_INT];
 
   while (!fin){
-    if ((skt->receive(comando, TAM_INT) < 0) || (skt->receive(argumento, TAM_INT) < 0)){
+    if ((skt->receive(comando, TAM_INT) <= 0) || (skt->receive(argumento, TAM_INT) <= 0)){
       if (fin){
         return;
       }

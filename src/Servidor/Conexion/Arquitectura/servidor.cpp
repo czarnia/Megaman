@@ -16,7 +16,9 @@ typedef struct sockaddr* Address;
 Servidor::Servidor(char *puerto){
 	Log::instancia()->inicio_servidor();
 
-	entrada = new Entrada_estandar(FIN_ENTRADA);
+	entrada = new Entrada_estandar(FIN_ENTRADA, this);
+	entrada->start();
+
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
@@ -30,10 +32,9 @@ Servidor::~Servidor(){
 
 void Servidor::aceptar_clientes(){
   Socket* aceptado = skt->accept(NULL);
-  if (!aceptado){
-    std::cout << "no acepté nada!";
+  if (aceptado){
+		agregar_cliente(aceptado);
   }
-  agregar_cliente(aceptado);
   cerrar_conexiones();
   /*
   Socket* aceptado;
@@ -49,6 +50,12 @@ void Servidor::aceptar_clientes(){
 
 bool Servidor::termino_ejecucion(){
   return entrada->termino();
+}
+
+void Servidor::terminar_ejecucion(){
+	cerrar_conexiones();
+	mundo->terminar_partida();
+	//Enviar a cliente msj de cierre del servidor.
 }
 
 void Servidor::cliente_desconectado(int id_cliente){

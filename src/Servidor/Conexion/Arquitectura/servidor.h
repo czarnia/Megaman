@@ -14,7 +14,7 @@ public Observador_juego{
     Juego *mundo;
     Entrada_estandar *entrada;
     Almacenador_clientes clientes;
-	Socket *skt;
+	  Socket *skt;
   public:
     //Crea un servidor.
     Servidor(char *puerto);
@@ -26,6 +26,8 @@ public Observador_juego{
     bool termino_ejecucion();
     //Empieza una partida.
     void empezar_partida();
+    //Termina la ejecución del servidor.
+    void terminar_ejecucion();
 
     //El servidor deja de aceptar clientes.
     void cerrar_conexiones();
@@ -61,4 +63,4 @@ public Observador_juego{
     void agregar_cliente(Socket* cliente_nuevo);
 };
 
-#endif //SERVIDOR_H
+#endif //SERVIDOR_
