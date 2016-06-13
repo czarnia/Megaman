@@ -2,6 +2,7 @@
 #define JUEGO_H
 
 #include "../../Comun/mutex.h"
+#include "../../Editor/cargador_mapa.h"
 #include "actualizable.h"
 #include "mapa.h"
 #include "juego_observable.h"

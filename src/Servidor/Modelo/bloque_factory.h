@@ -8,9 +8,9 @@
 class Bloque_factory : public Ubicable_factory{
 	public:
 		//Crea un megaman factory.
-		Bloque_factory();
+		Bloque_factory(Cargador_mapa *cargador, Juego *juego);
 		//Dado un mapa y una coordenada, crea a un Bloque.
-		virtual Ubicable* crear(Mapa* mapa, Coordenada coord);
+		virtual Ubicable* crear(Mapa* mapa);
 };
 
 #endif //BLOQUE_FACTORY_H

@@ -6,16 +6,16 @@
 #include "arma_factory.h"
 #include "megaman.h"
 
-MegamanFactory::MegamanFactory(Juego *juego):
-juego(juego),
+MegamanFactory::MegamanFactory(Cargador_mapa * cargador, Juego *juego):
+Ubicable_factory(cargador, juego),
 fact_obs(juego){
 	creados = 0;
 }
-//TODO: ACA PODEMOS LEVANTAR LOS DATOS DEL MEGAMAN DEL XML/JSON
-//VELOCIDAD, ETC...
-//TODO: ACA SE PEDIRAN LAS COORDENADAS INICIALES AL MAPA.
-//TODO: GUARDAR LOS OBJETOS CREADOS CON NEW PARA SU DESTRUCCION.
-Ubicable* MegamanFactory::crear(Mapa* mapa, Coordenada coord){
+
+Ubicable* MegamanFactory::crear(Mapa* mapa){
+	Coordenada coord(-1, -1);
+	
+	
 	//Creacion del megaman:
 	int id = creados;
 	ArmaFactory arma_fact(juego);

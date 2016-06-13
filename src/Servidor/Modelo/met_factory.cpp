@@ -4,8 +4,8 @@
 #include "arma_factory.h"
 #include "met.h"
 
-Met_factory::Met_factory(Juego *juego):
-juego(juego),
+Met_factory::Met_factory(Cargador_mapa *cargador, Juego *juego):
+Ubicable_factory(cargador, juego),
 fact_obs(juego){
 	creados = 0;
 }
@@ -14,7 +14,9 @@ fact_obs(juego){
 //VELOCIDAD, ETC...
 //TODO: ACA SE PEDIRAN LAS COORDENADAS INICIALES AL MAPA.
 //TODO: GUARDAR LOS OBJETOS CREADOS CON NEW PARA SU DESTRUCCION.
-Ubicable* Met_factory::crear(Mapa* mapa, Coordenada coord){
+Ubicable* Met_factory::crear(Mapa* mapa){
+	Coordenada coord(-1, -1);
+	
 	//Creacion del met:
 	int id = creados;
 	ArmaFactory arma_fact(juego);

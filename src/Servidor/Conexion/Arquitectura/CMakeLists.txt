@@ -8,7 +8,8 @@ file (GLOB COMUN ../../../Comun/*.cpp ../../../Comun/*.h)
 file (GLOB LOBBY ../Lobby/*.cpp ../Lobby/*.h)
 file (GLOB PARTIDA ../Partida/*.cpp ../Partida/*.h)
 file (GLOB SRCS *.cpp *.h)
+file (GLOB EDITOR ../../Editor/cargador_mapa.h ../../../Editor/cargador_mapa.cpp)
 #Creates an executable with all files found
 #by file command.
-add_executable (servidor ${COMUN} ${MODELO} ${SRCS} ${PARTIDA} ${LOBBY})
+add_executable (servidor ${COMUN} ${MODELO} ${SRCS} ${PARTIDA} ${LOBBY} ${EDITOR})
 target_link_libraries (servidor Megaman -pthread)

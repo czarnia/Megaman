@@ -8,9 +8,9 @@
 class Puas_factory : public Ubicable_factory{
 	public:
 		//Crea un megaman factory.
-		Puas_factory();
+		Puas_factory(Cargador_mapa *cargador, Juego* juego);
 		//Dado un mapa y una coordenada, crea a un Puas.
-		virtual Ubicable* crear(Mapa* mapa, Coordenada coord);
+		virtual Ubicable* crear(Mapa* mapa);
 };
 
 #endif //PUAS_FACTORY_H

@@ -11,14 +11,15 @@ Juego::Juego(size_t long_x, size_t long_y){
 	mundo = new Mapa(long_x, long_y);
 	fin_partida = false;
 	cant_jugadores = 0;
-	factories.insert(std::pair<std::string, MegamanFactory*>("MEGAMAN", new MegamanFactory(this)));
+	std::string path("path_archivo_mapa");
+	Cargador_mapa cargador(path.c_str());
+	factories.insert(std::pair<std::string, MegamanFactory*>("MEGAMAN", new MegamanFactory(&cargador, this)));
 }
 
 void Juego::inicializar_partida(int num_jugadores){
 	cant_jugadores = num_jugadores;
 	for (int i = 0; i < cant_jugadores; ++i){
-		Coordenada c = Coordenada(3, 6);
-		factories["MEGAMAN"]->crear(mundo, c);
+		factories["MEGAMAN"]->crear(mundo);
 	}
 	//ACA SE PUEDEN CREAR LOS OTROS PERSONAJES.
 }

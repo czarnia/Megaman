@@ -1,4 +1,4 @@
-/*#ifndef ESCRITOR_MAPA_H
+#ifndef ESCRITOR_MAPA_H
 #define ESCRITOR_MAPA_H
 
 #include <iostream>
@@ -12,8 +12,8 @@ class Escritor_mapa{
     std::ofstream mapa_arch;
     Mapa mapa_real;
   public:
-    //Dado un path para un nuevo archivo donde se guardará un mapa y una longi-
-    //tud en x y otra en y para el mismo, se crea un escritor_mapa.
+    //Dado un path para un nuevo archivo donde se guardará un mapa y una
+    //longitud en x y otra en y para el mismo, se crea un escritor_mapa.
     Escritor_mapa(std::string path, int long_x, int long_y);
     //Destructor del escritor_mapa.
     ~Escritor_mapa();
@@ -30,4 +30,4 @@ class Escritor_mapa{
     void agregar_inicio_megamans(Coordenada coord_central);
 };
 
-#endif //ESCRITOR_MAPA_H*/
+#endif //ESCRITOR_MAPA_H
