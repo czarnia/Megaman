@@ -22,12 +22,12 @@ void Fireman::atacar(int dir, Mapa* mapa){
   }
   Bala* bala;
   if (dir == DERECHA){
-    bala = arma->atacar(1, 0, coord.derecha(ancho/2));
+    bala = arma->atacar(1, 0, coordenada.derecha(ancho/2));
   }if (dir == IZQUIERDA){
-    bala = arma->atacar(-1, 0, coord.izquierda(ancho/2));
+    bala = arma->atacar(-1, 0, coordenada.izquierda(ancho/2));
   }
 	mapa->agregar_bala(bala);
-  bala3->notificar_observadores();
+  bala->notificar_observadores();
 }
 
 void Fireman::mover(size_t tiempo, Mapa* mapa){ } //TODO: hacer el mover.

@@ -5,6 +5,9 @@
 #define TIEMPO_ATAQUE 2
 #define TIPO_BOMBMAN -1 //TODO: definir el tipo del bombman
 
+#define DERECHA 3
+#define IZQUIERDA 4
+
 Bombman::Bombman(Mapa *mapa, Coordenada c, Arma_bombman* arma, int id):
 Personaje(mapa, c, id),
 arma(arma){
@@ -16,9 +19,9 @@ arma(arma){
 void Bombman::atacar(int dir, Mapa* mapa){
   Bala* bala;
   if (dir == DERECHA){
-    bala = arma->atacar(1, 3, coord.derecha(ancho/2).arriba(alto/2));
+    bala = arma->atacar(1, 3, coordenada.derecha(ancho/2).arriba(alto/2));
   }if (dir == IZQUIERDA){
-    bala = arma->atacar(-1, 3, coord.izquierda(ancho/2).arriba(alto/2));
+    bala = arma->atacar(-1, 3, coordenada.izquierda(ancho/2).arriba(alto/2));
   }
 	mapa->agregar_bala(bala);
 	bala->notificar_observadores();

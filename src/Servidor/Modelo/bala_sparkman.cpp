@@ -18,7 +18,7 @@ void Bala_sparkman::daniar(Personaje* pj) {
 }
 
 void Bala_sparkman::daniar(Megaman* mega) {
-	mega->perder_vida(-50); //le saca media vida al megaman.
+	mega->perder_vida(25);
 }
 
 void Bala_sparkman::daniar(Met* met) {
