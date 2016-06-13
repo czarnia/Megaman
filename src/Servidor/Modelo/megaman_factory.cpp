@@ -13,7 +13,7 @@ fact_obs(juego){
 }
 
 Ubicable* MegamanFactory::crear(Mapa* mapa){
-	Coordenada coord(-1, -1);
+	Coordenada coord(3, 6);
 	
 	
 	//Creacion del megaman:

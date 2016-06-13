@@ -14,7 +14,8 @@ Personaje(mapa, c, id){
 	armas.push_back(arma);
 	arma_act = 0;
 	tipo = MEGAMAN;
-	movimiento_actual = &movimiento_megaman;
+	movimiento_megaman = new StrategyMoverMegaman();
+	movimiento_actual = movimiento_megaman;
 }
 
 void Megaman::update(size_t tiempo){
@@ -52,18 +53,18 @@ void Megaman::agregar_movimiento(int direccion){
 	if (movimientos.find(direccion)!= movimientos.end()){
 		//Si ya tengo una estrategia para moverme en esta
 		//direccion uso esa estrategia:
-		movimiento_actual = movimientos.find(direccion)->second;
+		movimiento_actual = movimientos[direccion];
 	}else{
 		//Si no tengo una estrategia para moverme
 		//en esta direccion agrego la direccion al
 		//movimiento normal:
-		movimiento_megaman.agregar_movimiento(this, direccion);
-		movimiento_actual = &movimiento_megaman;
+		movimiento_megaman->agregar_movimiento(this, direccion);
+		movimiento_actual = movimiento_megaman;
 	}
 }
 
 void Megaman::sacar_movimiento(int direccion){
-	movimiento_megaman.sacar_movimiento(this, direccion);
+	movimiento_megaman->sacar_movimiento(this, direccion);
 }
 
 void Megaman::recibir_ataque(Bala* ataque){

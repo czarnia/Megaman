@@ -12,7 +12,7 @@ class Megaman: public Personaje{
 	private:
 		Mapa *mapa;
 		std::vector<Arma*> armas;
-		StrategyMoverMegaman movimiento_megaman;
+		StrategyMoverMegaman *movimiento_megaman;
 		StrategyMover *movimiento_actual;
 		size_t arma_act;
 	public:

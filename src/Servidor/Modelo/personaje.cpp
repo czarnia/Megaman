@@ -28,6 +28,7 @@ id(id){
 	tiempo_pasado = 0;
 	tipo = 0;
 	energia = GANAR_MAX;
+	movimientos = std::map<int, StrategyMover*>();
 }
 
 void Personaje::notificar_observadores(){
@@ -43,7 +44,7 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 }
 
 void Personaje::agregar_movimiento(int dir, StrategyMover *movimiento){
-	movimientos.insert(std::pair<int,StrategyMover*>(dir, movimiento));
+	movimientos[dir] = movimiento;
 }
 
 Coordenada Personaje::get_coordenada(){

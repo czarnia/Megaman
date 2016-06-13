@@ -1,4 +1,5 @@
 #include "strategy_mover_sin_gravedad.h"
+#include <iostream>
 
 enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
 
