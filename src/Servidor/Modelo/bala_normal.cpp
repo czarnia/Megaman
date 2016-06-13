@@ -1,5 +1,10 @@
 #include "bala_normal.h"
 #include "personaje.h"
+#include "megaman.h"
+#include "met.h"
+#include "bumby.h"
+#include "snipper.h"
+#include "jumping_snipper.h"
 
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_NORMAL 2
@@ -14,7 +19,7 @@ void Bala_normal::update(size_t tiempo, Mapa* mapa) {
 }
 
 void Bala_normal::daniar(Personaje* pj) {
-	pj->perder_vida(-100); //le saca una vida
+	pj->perder_vida(); //le saca una vida
 }
 
 void Bala_normal::daniar(Megaman* mega) {
@@ -22,5 +27,17 @@ void Bala_normal::daniar(Megaman* mega) {
 }
 
 void Bala_normal::daniar(Met* met) {
-	met->perder_vida(-100); //el met tiene una sóla vida.
+	met->perder_vida(); //el met tiene una sóla vida.
+}
+
+void Bala_normal::daniar(Bumby* b){
+	b->perder_vida();
+}
+
+void Bala_normal::daniar(Snipper* s){
+	s->perder_vida(50);
+}
+
+void Bala_normal::daniar(Jumping_snipper* js){
+	js->perder_vida(50);
 }

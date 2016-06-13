@@ -1,5 +1,10 @@
 #include "bala_bombman.h"
 #include "personaje.h"
+#include "megaman.h"
+#include "met.h"
+#include "bumby.h"
+#include "snipper.h"
+#include "jumping_snipper.h"
 
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_FIREMAN -1 //TODO: definir tipo!
@@ -49,4 +54,16 @@ void Bala_bombman::daniar(Megaman* mega) {
 
 void Bala_bombman::daniar(Met* met) {
 	met->perder_vida(0);
+}
+
+void Bala_bombman::daniar(Bumby* b){
+	b->perder_vida();
+}
+
+void Bala_bombman::daniar(Snipper* s){
+	s->perder_vida();
+}
+
+void Bala_bombman::daniar(Jumping_snipper* js){
+	js->perder_vida();
 }

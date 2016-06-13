@@ -2,9 +2,6 @@
 #define BALA_SPARKMAN_H
 
 #include "bala.h"
-#include "personaje.h"
-#include "megaman.h"
-#include "met.h"
 
 class Bala_sparkman: public Bala {
 	public:
@@ -21,6 +18,12 @@ class Bala_sparkman: public Bala {
 		virtual void daniar(Megaman* mega);
 		//Daña a un Met.
 		virtual void daniar(Met* met);
+		//Daña a un Bumby.
+		virtual void daniar(Bumby* b);
+		//Daña a un Sniper.
+		virtual void daniar(Snipper* s);
+		//Daña a un Jumping_sniper.
+		virtual void daniar(Jumping_snipper* js);
 };
 
 #endif //BALA_SPARKMAN_H

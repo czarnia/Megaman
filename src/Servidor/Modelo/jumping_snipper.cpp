@@ -3,14 +3,14 @@
 #define TIEMPO_ESTADO 4
 #define DERECHA -1
 
-JumpingSnipper::JumpingSnipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id): 
+Jumping_snipper::Jumping_snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Snipper(mapa, c, arma, id){
   tras_escudo = false;
   flotando = false;
   tiempo_pasado = 0;
 }
 
-void JumpingSnipper::update(size_t tiempo, Mapa* mapa){
+void Jumping_snipper::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado >= TIEMPO_ESTADO){
 		//paso el tiempo de estado:

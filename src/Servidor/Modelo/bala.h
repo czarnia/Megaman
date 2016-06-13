@@ -4,9 +4,11 @@
 #include "actualizable.h"
 #include "elemento.h"
 
-
 class Met;
 class Megaman;
+class Bumby;
+class Snipper;
+class Jumping_snipper;
 class Personaje;
 
 class Bala:
@@ -57,6 +59,12 @@ public Elemento{
 		virtual void daniar(Megaman* mega) = 0;
 		//Daña a un Met.
 		virtual void daniar(Met* met) = 0;
+		//Daña a un Bumby.
+		virtual void daniar(Bumby* b) = 0;
+		//Daña a un Sniper.
+		virtual void daniar(Snipper* s) = 0;
+		//Daña a un Jumping_sniper.
+		virtual void daniar(Jumping_snipper* js) = 0;
 };
 
 #endif //BALA_H
