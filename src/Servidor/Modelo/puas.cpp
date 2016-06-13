@@ -40,7 +40,7 @@ bool Puas::puede_ocupar(Premio* premio){
 }
 
 void Puas::interactuar(Personaje *pj){
-	if (this->colisiona(pj)){
+	if (this->colisiona(pj, pj->get_coordenada())){
 		pj->perder_vida();
 	}
 }

@@ -17,4 +17,3 @@ class StrategyMoverMegaman : public StrategyMover{
 };
 
 #endif //STRATEGY_MOVER_MEGAMAN_H
-

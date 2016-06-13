@@ -8,7 +8,7 @@
 #define IZQUIERDA 4
 #define SALTAR 5
 #define VELOCIDAD 2
-#define VELOCIDAD_SALTO 2
+#define VELOCIDAD_SALTO 4
 
 StrategyMoverMegaman::StrategyMoverMegaman():
 velocidad_x(0),
@@ -18,6 +18,8 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
   if (mapa->esta_en_aire(pj->coordenada, pj->alto)){
     pj->flotando = true;
     velocidad_y += 1; //valor gravedad.
+  }else{
+    pj->flotando = false;
   }
   if (velocidad_x == 0 && velocidad_y == 0){
     return;
@@ -47,10 +49,10 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
     std::cout << "MEGAMAN MOVER: COORDENADA RECHAZADA: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
     << nueva_coordenada.obtener_ordenada() << "\n";
     if (velocidad_x != 0){
-		velocidad_x = 0;
+		  velocidad_x = 0;
     }
     if (velocidad_y != 0){
-		velocidad_y = 0;
+		  velocidad_y = 0;
     }
   }
 }
@@ -85,4 +87,3 @@ void StrategyMoverMegaman::sacar_movimiento(Personaje *pj, int dir){
 }
 
 StrategyMoverMegaman::~StrategyMoverMegaman(){}
-

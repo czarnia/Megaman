@@ -48,4 +48,3 @@ void StrategyMoverSinGravedad::set_direccion_derecha(){
 void StrategyMoverSinGravedad::set_direccion_izquierda(){
 	direccion = IZQUIERDA;
 }
-

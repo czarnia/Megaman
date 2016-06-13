@@ -15,4 +15,3 @@ class StrategyMoverSinGravedad : public StrategyMover{
 };
 
 #endif //STRATEGY_MOVER_SIN_GRAVEDAD_H
-

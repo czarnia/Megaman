@@ -63,7 +63,7 @@ public Observable{
 		virtual int get_alto() = 0;
 		//Destructor del ubicable.
 		virtual ~Ubicable() {}
-		virtual bool colisiona(Ubicable* otro_ubic);
+		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);
 };
 
 #endif //UBICABLE_H

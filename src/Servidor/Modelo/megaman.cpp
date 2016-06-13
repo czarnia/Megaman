@@ -43,7 +43,7 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
 	//Elimino todas las estrategias especiales
 	//adquiridas hasta el momento:
 	movimientos.clear();
-	//Interactuo con elementos de la nueva 
+	//Interactuo con elementos de la nueva
 	//ubicacion:
 	mapa->interactuar_con_entorno(this);
 }
