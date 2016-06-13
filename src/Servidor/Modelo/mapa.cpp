@@ -104,14 +104,14 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 		if (elementos.find(x) == elementos.end()){
 			continue;
 		}
-		if (elementos[x].find(y) != elementos[x].end()){
+		//if (elementos[x].find(y) != elementos[x].end()){
 			std::vector<Elemento*> elem = elementos[x][y];
 			for (size_t j = 0; j < elem.size(); j++){
-				if (!elem[j]->puede_ocupar(ubic)){
+				if (elem[j]->colisiona(ubic, c) && !elem[j]->puede_ocupar(ubic)){
 					return false;
 				}
 			}
-		}
+		//}
 	}
 	return true;
 }

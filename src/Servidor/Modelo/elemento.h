@@ -25,7 +25,7 @@ public Ubicable{
 		//Devuelve todas las coordenadas que ocupa un elemento
 		//tomando como referencia la coordenada central del mismo.
 		virtual std::vector<Coordenada> coordenadas();
-		//Devuelve todas las coordenadas que ocuparía un 
+		//Devuelve todas las coordenadas que ocuparía un
 		//elemento si su centro estuviera en c.
 		std::vector<Coordenada> coordenadas(Coordenada c);
 		//Devuelve la coordenada central del elemento.
