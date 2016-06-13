@@ -1,11 +1,13 @@
 #include "juego.h"
 #include <cstddef>
 #include <iosfwd>
+#include <ctime>
+#include <unistd.h>
 #include "../../Comun/lock.h"
 #include "megaman_factory.h"
 #include <iostream>
 
-#define TIEMPO 5
+#define TIEMPO 0.03
 
 Juego::Juego(size_t long_x, size_t long_y){
 	mundo = new Mapa(long_x, long_y);
@@ -26,7 +28,10 @@ void Juego::inicializar_partida(int num_jugadores){
 
 void Juego::jugar(){
 	while (!fin_partida){
-		update(TIEMPO);
+		clock_t iniciar_tiempo = clock();
+		update(0.001);
+		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
+		sleep(delta_tiempo);
 	}
 }
 

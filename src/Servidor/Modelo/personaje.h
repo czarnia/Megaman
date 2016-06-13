@@ -58,7 +58,7 @@ public Personaje_observable{
 		//Dado un porcentaje de vida a perder, se la resta al personaje,
 		//en caso de ser -100 (por defecto) una vida completa.
 		virtual void perder_vida(int porcentaje = PERDER_MAX);
-		//Dado un porcentaje de vida a ganar, se la suma al personaje, 
+		//Dado un porcentaje de vida a ganar, se la suma al personaje,
 		//en caso de ser 100 (por defecto) una vida completa.
 		virtual void ganar_vida(int porcentaje = GANAR_MAX);
 		//Dado un porcentaje de energia a perder se le resta al personaje,
@@ -138,7 +138,7 @@ public Personaje_observable{
 		//Dado un Premio, devuelve true si el premio puede ubicarse
 		//en las mismas coordenadas que este elemento.
 		virtual bool puede_ocupar(Premio* premio);
-		
+
 		friend class StrategyMoverBumby;
 		friend class StrategyMoverSinGravedad;
 		friend class StrategyMoverMegaman;

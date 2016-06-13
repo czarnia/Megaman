@@ -14,7 +14,7 @@ fact_obs(juego){
 
 Ubicable* MegamanFactory::crear(Mapa* mapa){
 	Coordenada coord(3, 6);
-	
+
 	
 	//Creacion del megaman:
 	int id = creados;
@@ -34,4 +34,3 @@ Ubicable* MegamanFactory::crear(Mapa* mapa){
 	creados++;
 	return megaman;
 }
-
