@@ -26,6 +26,7 @@ void Juego::inicializar_partida(int num_jugadores){
 
 void Juego::jugar(){
 	while (!fin_partida){
+		Lock l(proteccion);
 		update(TIEMPO);
 	}
 }

@@ -5,15 +5,19 @@
 #include <sstream>
 #include "bala.h"
 
+
 #define DERECHA 3
 #define IZQUIERDA 4
 #define MEGAMAN 1
+
+typedef std::map<int, StrategyMover*>::iterator movimientosIt;
 
 Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
 Personaje(mapa, c, id){
 	armas.push_back(arma);
 	arma_act = 0;
 	tipo = MEGAMAN;
+	movimientos = std::map<int, StrategyMover*>();
 	movimiento_megaman = new StrategyMoverMegaman();
 	movimiento_actual = movimiento_megaman;
 }

@@ -4,12 +4,14 @@
 #include "mapa.h"
 #include "personaje.h"
 #include "strategy_mover_megaman.h"
-
+#include "../../Comun/lock.h"
+#include "../../Comun/mutex.h"
 class Arma;
 class Arma_megaman;
 
 class Megaman: public Personaje{
 	private:
+		Mutex m;
 		Mapa *mapa;
 		std::vector<Arma*> armas;
 		StrategyMoverMegaman *movimiento_megaman;

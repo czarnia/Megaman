@@ -13,19 +13,19 @@ Escalera::Escalera(Coordenada c) : Elemento(c, TIPO_ESCALERA) {
 	ancho = ANCHO;
 	alto = ALTO;
 
-	StrategyMoverSinGravedad *estrategia_arriba = new StrategyMoverSinGravedad();
+	/*StrategyMoverSinGravedad *estrategia_arriba = new StrategyMoverSinGravedad(this);
 	estrategia_arriba->set_direccion_arriba();
-	StrategyMoverSinGravedad *estrategia_abajo = new StrategyMoverSinGravedad();
+	StrategyMoverSinGravedad *estrategia_abajo = new StrategyMoverSinGravedad(this);
 	estrategia_abajo->set_direccion_abajo();
-	StrategyMoverSinGravedad *estrategia_derecha = new StrategyMoverSinGravedad();
+	StrategyMoverSinGravedad *estrategia_derecha = new StrategyMoverSinGravedad(this);
 	estrategia_derecha->set_direccion_derecha();
-	StrategyMoverSinGravedad *estrategia_izquierda = new StrategyMoverSinGravedad();
+	StrategyMoverSinGravedad *estrategia_izquierda = new StrategyMoverSinGravedad(this);
 	estrategia_izquierda->set_direccion_izquierda();
 
 	estrategias.push_back(estrategia_arriba);
 	estrategias.push_back(estrategia_abajo);
 	estrategias.push_back(estrategia_derecha);
-	estrategias.push_back(estrategia_izquierda);
+	estrategias.push_back(estrategia_izquierda);*/
 }
 
 bool Escalera::puede_ocupar(Personaje* pj){
@@ -75,16 +75,28 @@ void Escalera::interactuar(Personaje* pj){
 	//la escalera, en ese caso, le doy estrategias
 	//para que se mantenga en su lugar o baje pero
 	//no le permito subir mas:
+	
+	StrategyMoverSinGravedad *estrategia_arriba = new StrategyMoverSinGravedad();
+	estrategia_arriba->set_direccion_arriba();
+	StrategyMoverSinGravedad *estrategia_abajo = new StrategyMoverSinGravedad();
+	estrategia_abajo->set_direccion_abajo();
+	StrategyMoverSinGravedad *estrategia_derecha = new StrategyMoverSinGravedad();
+	estrategia_derecha->set_direccion_derecha();
+	StrategyMoverSinGravedad *estrategia_izquierda = new StrategyMoverSinGravedad();
+	estrategia_izquierda->set_direccion_izquierda();
+	
+	
 	size_t piso_personaje = y + (pj->get_alto() / 2);
 	size_t tope_escalera = coord.arriba(alto/2).obtener_ordenada();
 	if (piso_personaje == tope_escalera){
-		//Estrategias para salir de la escalera:
-		pj->agregar_movimiento(estrategias[DERECHA]->get_direccion(),
-								estrategias[DERECHA]);
-		pj->agregar_movimiento(estrategias[IZQUIERDA]->get_direccion(),
-								estrategias[IZQUIERDA]);
-		pj->agregar_movimiento(estrategias[ABAJO]->get_direccion(),
-								estrategias[ABAJO]);
+
+			//Estrategias para salir de la escalera:
+			pj->agregar_movimiento(estrategia_abajo->get_direccion(),
+									estrategia_abajo);
+			pj->agregar_movimiento(estrategia_derecha->get_direccion(),
+									estrategia_derecha);
+			pj->agregar_movimiento(estrategia_izquierda->get_direccion(),
+									estrategia_izquierda);
 	}else{
 		//Me fijo que el personaje no este en el borde inferior
 		//de la escalera(es decir, que el tope del personaje no
@@ -93,10 +105,10 @@ void Escalera::interactuar(Personaje* pj){
 		size_t tope_personaje = y - (pj->get_alto() / 2);
 		size_t piso_escalera = coord.abajo(alto/2).obtener_ordenada();
 		if (tope_personaje != piso_escalera){
-			pj->agregar_movimiento(estrategias[ARRIBA]->get_direccion(),
-									estrategias[ARRIBA]);
-			pj->agregar_movimiento(estrategias[ABAJO]->get_direccion(),
-									estrategias[ABAJO]);
+			pj->agregar_movimiento(estrategia_arriba->get_direccion(),
+									estrategia_arriba);
+			pj->agregar_movimiento(estrategia_abajo->get_direccion(),
+									estrategia_abajo);
 		}
 	}
 }

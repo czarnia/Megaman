@@ -9,6 +9,8 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include "../../Comun/lock.h"
+#include "../../Comun/mutex.h"
 
 #define PERDER_MAX -100
 #define GANAR_MAX 100
@@ -28,7 +30,6 @@ id(id){
 	tiempo_pasado = 0;
 	tipo = 0;
 	energia = GANAR_MAX;
-	movimientos = std::map<int, StrategyMover*>();
 }
 
 void Personaje::notificar_observadores(){
@@ -44,7 +45,9 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 }
 
 void Personaje::agregar_movimiento(int dir, StrategyMover *movimiento){
-	movimientos[dir] = movimiento;
+	if (movimientos.find(dir) == movimientos.end()){
+		movimientos[dir] = movimiento;
+	}
 }
 
 Coordenada Personaje::get_coordenada(){
