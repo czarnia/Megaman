@@ -5,7 +5,7 @@
 #define TIEMPO_ATAQUE 2
 #define TIPO_MET 4
 
-Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id): 
+Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje(mapa, c, id),
 arma(arma){
   tras_escudo = false;

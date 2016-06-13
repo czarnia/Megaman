@@ -15,7 +15,7 @@ Bala* Arma_megaman::atacar(int dir_x, int dir_y, Coordenada c) {
 	int id_bala = id*SHIFT_RIGHT + balas_creadas;
 	Bala *bullet = new Bala_normal(dir_x, dir_y, c, id_bala);
 	//Se agrega un observador a la bala:
-	fact_ubicables->crear(bullet); 
+	fact_ubicables->crear(bullet);
 	balas_creadas++;
 	return bullet;
 }

@@ -70,7 +70,7 @@ public Personaje_observable{
 		virtual bool esta_vivo();
 		//Dada una direccion representada como un int, agrega un movimiento en dicha
 		//direccion.
-		virtual void agregar_movimiento(int direccion) = 0;
+		virtual void agregar_movimiento(int direccion) = 0;  //TODO: esto debería ser de pc.
 		//Recibe una estrategia de movimiento y la agrega
 		//a las estrategias de movimiento del personaje.
 		virtual void agregar_movimiento(int dir, StrategyMover *movimiento);
