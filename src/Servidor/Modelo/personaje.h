@@ -12,7 +12,6 @@
 #include "personaje_observable.h"
 #include "observador_personaje.h"
 #include "observador_ubicable.h"
-
 class StrategyMover;
 class StrategyMoverSinGravedad;
 class StrategyMoverBumby;

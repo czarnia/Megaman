@@ -34,6 +34,7 @@ void StrategyMoverSinGravedad::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
 		pj->coordenada = coord_nueva;
 	}
 }
+
 void StrategyMoverSinGravedad::set_direccion_abajo(){
 	direccion = ABAJO;
 }
