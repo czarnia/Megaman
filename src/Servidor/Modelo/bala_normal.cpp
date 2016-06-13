@@ -41,3 +41,15 @@ void Bala_normal::daniar(Snipper* s){
 void Bala_normal::daniar(Jumping_snipper* js){
 	js->perder_vida(50);
 }
+
+bool Bala_normal::dania_con_escudo(Met* m){
+	return false;
+}
+
+bool Bala_normal::dania_con_escudo(Snipper* s){
+	return false;
+}
+
+bool Bala_normal::dania_con_escudo(Jumping_snipper* js){
+	return false;
+}

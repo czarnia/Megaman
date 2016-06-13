@@ -24,6 +24,15 @@ class Bala_fireman: public Bala{
 		virtual void daniar(Snipper* s);
 		//Daña a un Jumping_sniper.
 		virtual void daniar(Jumping_snipper* js);
+		//Devuelve true si puede dañar a un Met cuando esta tras su escudo, false en
+		//caso contrario.
+		virtual bool dania_con_escudo(Met* m);
+		//Devuelve true si puede dañar a un Snipper cuando esta tras su escudo, fal-
+		//se en caso contrario.
+		virtual bool dania_con_escudo(Snipper* s);
+		//Devuelve true si puede dañar a un Jumping_snipper cuando esta tras su es-
+		//cudo, false en caso contrario.
+		virtual bool dania_con_escudo(Jumping_snipper* js);
 };
 
 #endif //BALA_FIREMAN_H

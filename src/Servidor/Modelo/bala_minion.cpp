@@ -64,3 +64,15 @@ void Bala_minion::daniar(Snipper* s){
 void Bala_minion::daniar(Jumping_snipper* js){
 	js->perder_vida(0);
 }
+
+bool Bala_minion::dania_con_escudo(Met* m){
+	return false;
+}
+
+bool Bala_minion::dania_con_escudo(Snipper* s){
+	return false;
+}
+
+bool Bala_minion::dania_con_escudo(Jumping_snipper* js){
+	return false;
+}

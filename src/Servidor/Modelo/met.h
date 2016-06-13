@@ -19,6 +19,8 @@ class Met: public Personaje{
 		virtual void update(size_t tiempo);
 		virtual void sacar_movimiento(int direccion);
 		virtual void agregar_movimiento(int direccion);
+	private:
+		bool es_vulnerable(Bala* ataque);
 };
 
 #endif //MET_H

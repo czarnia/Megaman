@@ -58,9 +58,29 @@ void Bala_fireman::daniar(Bumby* b){
 }
 
 void Bala_fireman::daniar(Snipper* s){
-	s->perder_vida();
+	if (s->esta_descubierto()){
+		s->perder_vida();
+	}else{
+		s->perder_vida(50);
+	}
 }
 
 void Bala_fireman::daniar(Jumping_snipper* js){
-	js->perder_vida();
+	if (js->esta_descubierto()){
+		js->perder_vida();
+	}else{
+		js->perder_vida(50);
+	}
+}
+
+bool Bala_fireman::dania_con_escudo(Met* m){
+	return false;
+}
+
+bool Bala_fireman::dania_con_escudo(Snipper* s){
+	return true;
+}
+
+bool Bala_fireman::dania_con_escudo(Jumping_snipper* js){
+	return true;
 }

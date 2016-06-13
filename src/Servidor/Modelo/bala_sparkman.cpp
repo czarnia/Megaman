@@ -41,3 +41,15 @@ void Bala_sparkman::daniar(Snipper* s){
 void Bala_sparkman::daniar(Jumping_snipper* js){
 	js->perder_vida();
 }
+
+bool Bala_sparkman::dania_con_escudo(Met* m){
+	return true;
+}
+
+bool Bala_sparkman::dania_con_escudo(Snipper* s){
+	return false;
+}
+
+bool Bala_sparkman::dania_con_escudo(Jumping_snipper* js){
+	return false;
+}
