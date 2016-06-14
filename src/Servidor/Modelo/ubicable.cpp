@@ -1,6 +1,7 @@
 #include "ubicable.h"
 #include <string>
 #include <iostream>
+#include <stdlib.h>
 #include <sstream>
 
 bool Ubicable::colisiona(Ubicable* otro_ubic, Coordenada nueva){
@@ -19,4 +20,12 @@ bool Ubicable::colisiona(Ubicable* otro_ubic, Coordenada nueva){
   size_t x_colision = std::max(0, x_aux);
   size_t y_colision = std::max(0, y_aux);
   return ((x_colision*y_colision) != 0);
+}
+
+int Ubicable::get_id_unico(){
+	std::stringstream converter;
+	converter << this->get_id() << this->get_tipo();
+	std::string id_pj = converter.str();
+	int id_unico = atoi(id_pj.c_str());
+	return id_unico;
 }

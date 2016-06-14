@@ -2,26 +2,45 @@
 #include <cstddef>
 #include <iosfwd>
 #include "../../Comun/lock.h"
+#include "ubicable_factory.h"
 #include "megaman_factory.h"
+#include "met_factory.h"
+#include "escalera_factory.h"
+#include "bloque_factory.h"
+#include "puas_factory.h"
+#include "bumby_factory.h"
+#include "snipper_factory.h"
+#include "../../Editor/cargador_mapa.h"
 #include <iostream>
 
 #define TIEMPO 5
+#define MAIN_PATH_MAPAS "../../../Mapas/"
 
-Juego::Juego(size_t long_x, size_t long_y){
-	mundo = new Mapa(long_x, long_y);
+Juego::Juego(int id_mapa){
 	fin_partida = false;
 	cant_jugadores = 0;
-	std::string path("path_archivo_mapa");
-	Cargador_mapa cargador(path.c_str());
-	factories.insert(std::pair<std::string, MegamanFactory*>("MEGAMAN", new MegamanFactory(&cargador, this)));
+	//Le paso al cargador el numero de mapa
+	//que quiero elegir:
+	std::string root_path(MAIN_PATH_MAPAS);
+	Cargador_mapa cargador(root_path, id_mapa); 
+	mundo = new Mapa(cargador.get_ancho_mapa(), cargador.get_alto_mapa());
+}
+
+void Juego::cargar_factories(Cargador_mapa *cargador){
+	factories.push_back(new Megaman_factory(cargador, this));
+	factories.push_back(new Met_factory(cargador, this));
+	factories.push_back(new Escalera_factory(cargador, this));
+	factories.push_back(new Bloque_factory(cargador, this));
+	factories.push_back(new Puas_factory(cargador, this));
+	factories.push_back(new Bumby_factory(cargador, this));
+	factories.push_back(new Snipper_factory(cargador, this));
 }
 
 void Juego::inicializar_partida(int num_jugadores){
 	cant_jugadores = num_jugadores;
-	for (int i = 0; i < cant_jugadores; ++i){
-		factories["MEGAMAN"]->crear(mundo);
+	for (unsigned int i = 0; i < factories.size(); ++i){
+		factories[i]->crear(mundo);
 	}
-	//ACA SE PUEDEN CREAR LOS OTROS PERSONAJES.
 }
 
 void Juego::jugar(){
@@ -178,6 +197,10 @@ std::vector<Coordenada> Juego::bloques(){
 
 std::vector<Ubicable*> Juego::devolver_ubicables(){
 	return mundo->devolver_ubicables();
+}
+
+int Juego::get_cantidad_jugadores(){
+	return cant_jugadores;
 }
 
 Juego::~Juego(){}

@@ -11,7 +11,7 @@ class Escalera_factory : public Ubicable_factory{
 		//Crea una factory de escaleras.
 		Escalera_factory(Cargador_mapa *cargador, Juego *juego);
 		//Dado un mapa, ubica las escaleras en el mapa.
-		virtual Ubicable* crear(Mapa* mapa);
+		void crear(Mapa* mapa);
 };
 
 #endif //ESCALERA_FACTORY_H

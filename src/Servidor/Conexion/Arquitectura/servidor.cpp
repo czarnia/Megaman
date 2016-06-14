@@ -22,7 +22,7 @@ Servidor::Servidor(char *puerto){
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
-	mundo = new Juego(12, 12);
+	mundo = new Juego(1);
 }
 
 Servidor::~Servidor(){

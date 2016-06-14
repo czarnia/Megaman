@@ -10,8 +10,7 @@
 #include <iosfwd>
 #include <cstddef>
 
-class PersonajeFactory;
-class MegamanFactory;
+class Ubicable_factory;
 
 class Juego:
 public Juego_observable{
@@ -20,10 +19,10 @@ public Juego_observable{
 		Mutex proteccion;
 		bool fin_partida;
 		int cant_jugadores;
-		std::map<std::string, MegamanFactory*> factories;
+		std::vector<Ubicable_factory*> factories;
 	public:
 		//Dado un tamanio, crea un juego nuevo.
-		Juego(size_t long_x, size_t long_y);
+		Juego(int id_mapa);
 		//Dada una cantidad de jugadores, inicializa una partida.
 		void inicializar_partida(int cant_jugadores);
 		//Implementa el ciclo del juego.
@@ -94,11 +93,18 @@ public Juego_observable{
 		//su posicion actual y notifica al servidor de
 		//la nueva posicion.
 		void actualizo_posicion(int tipo, int id, int x, int y);
-
+		//Devuelve una lista de coordenadas correspondientes
+		//a los bloques del mapa.
 		std::vector<Coordenada> bloques();
-
+		//Devuelve la cantidad de jugadores activos.
+		int get_cantidad_jugadores();
 		//Destructor de juego.
 		~Juego();
+		
+	private:
+		//Carga las factories necesarias para crear las entidades del
+		//juego.
+		void cargar_factories(Cargador_mapa *cargador);
 };
 
 #endif //JUEGO_H

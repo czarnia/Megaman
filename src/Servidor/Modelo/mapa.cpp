@@ -120,7 +120,7 @@ bool Mapa::ubicar(Personaje* pj, Coordenada c){
 	if (!puede_ubicarse(pj, c)){
 		return false;
 	}
-	personajes[pj->get_id()] = pj;
+	personajes[pj->get_id_unico()] = pj;
 	return true;
 }
 

@@ -6,13 +6,14 @@
 
 class Arma{
 	protected:
+		int tipo;
 		int id;
 		Factory_observador_ubicable *fact_ubicables;
 		int balas_creadas;
 	public:
 		//Dado un Factory_observador_ubicable*, crea una arma.
-		Arma(int id, Factory_observador_ubicable *fact_ubicables):
-		id(id),fact_ubicables(fact_ubicables){};
+		Arma(int tipo, int id, Factory_observador_ubicable *fact_ubicables):
+		tipo(tipo), id(id),fact_ubicables(fact_ubicables){};
 		//Ataca, es decir, crea una bala.
 		virtual Bala* atacar(int dir_x, int dir_y, Coordenada c) = 0;
 		//Destructor de la arma.

@@ -1,17 +1,14 @@
 #ifndef CARGADOR_MAPA_H
 #define CARGADOR_MAPA_H
 
-#include <iostream>
 #include <fstream>
 #include <vector>
-#include <string>
 
 #include "../Servidor/Modelo/coordenada.h"
-#include "../Servidor/Modelo/mapa.h"
 
 class Cargador_mapa{
 	private:
-		Mapa *mapa_real;
+		int ancho_mapa, alto_mapa;
 		std::ifstream mapa_arch;
 		Coordenada coordenada_inicio_megaman;
 		Coordenada coordenada_inicio_boss;
@@ -22,14 +19,13 @@ class Cargador_mapa{
 		std::vector<Coordenada*> coordenadas_snippers;
 		std::vector<Coordenada*> coordenadas_j_snippers;
 		std::vector<Coordenada*> coordenadas_bumby;
+		
+		//Carga las coordenadas del mapa indicado por el path.
+		void cargar_coordenadas();
 	public:
 		//Dado un path para un nuevo archivo donde se guardará un mapa y una longi-
 		//tud en x y otra en y para el mismo, se crea un Cargador_mapa.
-		Cargador_mapa(const char* path);
-		//Devuelve el mapa elegido.
-		Mapa *get_mapa();    
-		//Carga las coordenadas del mapa indicado por el path.
-		void cargar();
+		Cargador_mapa(std::string root, int id_mapa);
 		//Devuelve la coordenada de inicio de los megamans para
 		//el mapa especificado.
 		Coordenada& get_coordenada_megamans();
@@ -54,6 +50,10 @@ class Cargador_mapa{
 		std::vector<Coordenada*> get_coordenadas_j_snippers(); 
 		//Devuelve las coordenadas de los bumby.
 		std::vector<Coordenada*> get_coordenadas_bumby();
+		//Devuelve el ancho del mapa.
+		int get_ancho_mapa();
+		//Devuelve el alto del mapa.
+		int get_alto_mapa();
 	private:
 		std::vector<std::string> parsear_cadena_palabras(std::string cadena);
 };

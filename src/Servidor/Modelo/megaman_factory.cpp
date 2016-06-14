@@ -6,32 +6,30 @@
 #include "arma_factory.h"
 #include "megaman.h"
 
-MegamanFactory::MegamanFactory(Cargador_mapa * cargador, Juego *juego):
+Megaman_factory::Megaman_factory(Cargador_mapa * cargador, Juego *juego):
 Ubicable_factory(cargador, juego),
-fact_obs(juego){
-	creados = 0;
-}
+fact_obs(juego){}
 
-Ubicable* MegamanFactory::crear(Mapa* mapa){
-	Coordenada coord(3, 6);
+void Megaman_factory::crear(Mapa* mapa){
+	Coordenada &coord = cargador->get_coordenada_megamans();
+	int cantidad_jugadores = juego->get_cantidad_jugadores();
 	
-	
-	//Creacion del megaman:
-	int id = creados;
-	ArmaFactory arma_fact(juego);
-	Arma_megaman *arma = arma_fact.crear_arma_megaman();
-	Megaman *megaman = new Megaman(mapa, coord, arma, id+1);
-	//Se agregan los observadores:
-	//observador de ubicable:
-	fact_obs.crear(megaman);
-	//observador de personaje:
-	Observador_personaje *obs = new Observador_personaje(juego);
-	megaman->agregar_observador(obs);
-	//Se agrega el personaje al mapa:
-	mapa->agregar_personaje(megaman);
-	//Notifico a los observadores de la creacion del personaje:
-	megaman->notificar_observadores();
-	creados++;
-	return megaman;
+	for (int i = 0; i < cantidad_jugadores; i++){
+		//Creacion del megaman:
+		int id = i;
+		ArmaFactory arma_fact(juego);
+		Arma_megaman *arma = arma_fact.crear_arma_megaman();
+		Megaman *megaman = new Megaman(mapa, coord, arma, id+1);
+		//Se agregan los observadores:
+		//observador de ubicable:
+		fact_obs.crear(megaman);
+		//observador de personaje:
+		Observador_personaje *obs = new Observador_personaje(juego);
+		megaman->agregar_observador(obs);
+		//Se agrega el personaje al mapa:
+		mapa->agregar_personaje(megaman);
+		//Notifico a los observadores de la creacion del personaje:
+		megaman->notificar_observadores();
+	}
 }
 

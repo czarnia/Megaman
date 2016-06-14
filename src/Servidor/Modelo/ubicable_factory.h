@@ -9,13 +9,13 @@ class Cargador_mapa;
 
 class Ubicable_factory{
 	protected:
-		Cargador_mapa *cargador_mapa;
+		Cargador_mapa *cargador;
 		Juego *juego;
 	public:
 		Ubicable_factory(Cargador_mapa * cargador, Juego *juego):
-		cargador_mapa(cargador), juego(juego){}
+		cargador(cargador), juego(juego){}
 		//Dado un mapa, crea a un ubicable.
-		virtual Ubicable* crear(Mapa* mapa) = 0;
+		virtual void crear(Mapa* mapa) = 0;
 		//Destructor del ubicable.
 		virtual ~Ubicable_factory() {}
 };

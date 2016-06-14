@@ -1,7 +1,11 @@
 #include "cargador_mapa.h"
-
 #include <sstream>
+#include <string>
+#include <iostream>
 #include <cstdlib>
+
+#define NOMBRE_ARCH_MAPAS "mapa"
+#define EXTENSION_ARCH_MAPAS ".txt"
 
 enum codigos_personajes{MEGAMAN = 1, BUMBY, J_SNIPPER, MET, SNIPPER};
 enum codigos_elementos{BLOQUE = 10, PUAS, ESCALERA};
@@ -22,28 +26,36 @@ std::vector<std::string> Cargador_mapa::parsear_cadena_palabras(std::string cade
 
 //-----------------------------------------------------//
 
-Cargador_mapa::Cargador_mapa(const char* path):
+Cargador_mapa::Cargador_mapa(std::string root, int id_mapa):
 coordenada_inicio_megaman(0,0),
 coordenada_inicio_boss(0,0){
-  mapa_arch.open(path);
+	std::stringstream id;
+	id << id_mapa;
+	std::string nombre_arch(NOMBRE_ARCH_MAPAS);
+	std::string extension_arch(EXTENSION_ARCH_MAPAS);
+	std::string full_path = root + nombre_arch + id.str() + extension_arch;
+	mapa_arch.open(full_path.c_str());
+	ancho_mapa = 0;
+	alto_mapa = 0;
+	cargar_coordenadas();
 }
 
 
-void Cargador_mapa::cargar(){
+void Cargador_mapa::cargar_coordenadas(){
   std::string linea;
   int codigo_obj;
-  int x, y;
+  int x = 0, y = 0;
   //Primero obtengo las dimensiones del mapa
   getline(mapa_arch, linea);
-  int ancho = atoi((const char*)&linea[0]);
-  int alto =  atoi((const char*)&linea[1]);
-  mapa_real = new Mapa(ancho, alto);
+  ancho_mapa = atoi((const char*)&linea[0]);
+  alto_mapa =  atoi((const char*)&linea[2]);
   
   //Ahora obtengo las coordenadas de los objetos del mapa.
   while (getline(mapa_arch, linea)){
     std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
     if (linea_parseada.size() != 3){ //necesito un código + 2 coordenadas.
       //excepcion!
+      return;
     }
     codigo_obj = atoi(linea_parseada[0].c_str());
     x = atoi(linea_parseada[1].c_str());
@@ -74,16 +86,24 @@ void Cargador_mapa::cargar(){
 		case PUAS:
 			coordenadas_puas.push_back(coordenada);
 			break;
-		default:
+		case BOMBMAN:
+			coordenada_inicio_boss = *coordenada;
+			break;
+		case MAGNETMAN:
+			coordenada_inicio_boss = *coordenada;
+			break;
+		case SPARKMAN:
+			coordenada_inicio_boss = *coordenada;
+			break;
+		case RINGMAN:
+			coordenada_inicio_boss = *coordenada;
+			break;
+		case FIREMAN:
 			coordenada_inicio_boss = *coordenada;
 			break;
 	}
   }
   mapa_arch.close();
-}
-
-Mapa* Cargador_mapa::get_mapa(){
-	return mapa_real;
 }
    
 Coordenada& Cargador_mapa::get_coordenada_boss(){
@@ -121,6 +141,15 @@ std::vector<Coordenada*> Cargador_mapa::get_coordenadas_j_snippers(){
 std::vector<Coordenada*> Cargador_mapa::get_coordenadas_bumby(){
 	return coordenadas_bumby;
 }	
+
+int Cargador_mapa::get_ancho_mapa(){
+	return ancho_mapa;
+}
+
+int Cargador_mapa::get_alto_mapa(){
+	return alto_mapa;
+}
+
 
 /*Cargador_mapa::Cargador_mapa(char* path){
   mapa_arch.open(path);

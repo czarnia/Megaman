@@ -10,12 +10,11 @@
 class Met_factory : public Ubicable_factory{
 	private:
 		Factory_observador_ubicable fact_obs;
-		int creados;
 	public:
 		//Dado un puntero a un juego, crea un megaman factory.
 		Met_factory(Cargador_mapa * cargador, Juego *juego);
 		//Dado un mapa, crea y ubica los mets.
-		virtual Ubicable* crear(Mapa* mapa);
+		void crear(Mapa* mapa);
 };
 
 #endif //MET_FACTORY_H

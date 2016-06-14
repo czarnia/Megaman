@@ -11,8 +11,6 @@ class StrategyMoverJumpingSnipper : public StrategyMover{
 		bool flotando;
 	public:
 		virtual void mover(Mapa *mapa, Personaje *pj, size_t tiempo);
-		
-		friend class StrategyMoverJumpingSnipper;	
 };
 
 #endif //STRATEGY_MOVER_JUMPING_SNIPPER_H

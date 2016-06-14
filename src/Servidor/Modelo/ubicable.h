@@ -57,6 +57,9 @@ public Observable{
 		//Devuelve un entero que identifica al ubicable dentro
 		//de su tipo.
 		virtual int get_id() = 0;
+		//Devuelve un id unico que se obtiene concatenando
+		//id con tipo del ubicable.
+		virtual int get_id_unico();
 		//Devuelve el ancho del ubicable.
 		virtual int get_ancho() = 0;
 		//Devuelve el alto del ubicable.

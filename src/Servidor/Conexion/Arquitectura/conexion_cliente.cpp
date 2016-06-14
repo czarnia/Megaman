@@ -22,14 +22,6 @@ rcv(conexion, id, m, s) {
 
 void Conexion_cliente::enviar_mapa_inicial(Juego* m, int id){
 	enviar_tamanio_mapa(m);
-/*	mandar_bloques(m->bloques());
-
-	int megaman_x = 3; //hardcodeo para que axel pruebe hoy.
-	int megaman_y = 6;
-	skt->send((char*)&id, TAM_INT);
-	skt->send((char*)&megaman_x, TAM_INT);
-	skt->send((char*)&megaman_y, TAM_INT);
-*/
 	int fin_mapa = 6666;
 	int codigo_mapa = POSICION;
 	std::vector<Ubicable*> ubicables = m->devolver_ubicables();
