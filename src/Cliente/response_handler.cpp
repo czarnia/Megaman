@@ -10,6 +10,9 @@
 
 /// PARA PROTOCOLO
 #define MAPA 1
+#define BARRA_VIDA 4
+#define BARRA_ENERGIA 5
+#define VIDAS 6
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
 #define VICTORY 2
@@ -91,7 +94,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             }
         }
             break;
-      /*  case BARRA_VIDA:
+        case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<objectType<<std::endl;
 
             break;
@@ -102,7 +105,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
         case VIDAS:
             std::cout<<"Recibi vidas: "<<objectType<<std::endl;
 
-            break;*/
+            break;
 
         case VICTORY:{
             std::cout<<"Recibi victoria: Vuelvo a boss select"<<std::endl;

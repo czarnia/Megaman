@@ -24,7 +24,7 @@ class gameStateStart: public GameState{
         void mainLoop();
         void cap_framerate(const Uint32 &starting_tick);
         ///
-
+        void loadHUD();
         void render();
 
         /// Teclas

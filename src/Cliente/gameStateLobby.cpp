@@ -8,6 +8,8 @@
 
 #define STATIC 1
 #define NON_STATIC 0
+#define FRONT 1
+#define BACK 0
 
 #define BACKROUND 0
 #define STARTING_SELECTION 5
@@ -58,48 +60,48 @@ void gameStateLobby::load(int stack){
     spr = new Background_sprite(renderer->get_renderer(), "../sprites/lobby_background.jpeg");
     spr->setPosX(0);
     spr->setPosY(0);
-    renderer->addSprite(BACKROUND, spr, 0, STATIC);
+    renderer->addSprite(BACKROUND, spr, BACK, STATIC);
     /// CARGO CARAS DE BOSSES
 
     /// BOMBMAN
     spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/bombman.png");
     spr->setPosX(1*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
-    renderer->addSprite(ICON, spr, 0, STATIC);
+    renderer->addSprite(ICON, spr, BACK, STATIC);
     /// FIREMAN
     spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/fireman.png");
     spr->setPosX(3*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
-    renderer->addSprite(ICON, spr, 0, STATIC);
+    renderer->addSprite(ICON, spr, BACK, STATIC);
     /// MAGNETMAN
     spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/magnetman.png");
     spr->setPosX(5*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
-    renderer->addSprite(ICON, spr, 0, STATIC);
+    renderer->addSprite(ICON, spr, BACK, STATIC);
     /// RINGMAN
     spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/ringman.png");
     spr->setPosX(7*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
-    renderer->addSprite(ICON, spr, 0, STATIC);
+    renderer->addSprite(ICON, spr, BACK, STATIC);
     /// SPARKMAN
     spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/sparkman.png");
     spr->setPosX(9*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
-    renderer->addSprite(ICON, spr, 0, STATIC);
+    renderer->addSprite(ICON, spr, BACK, STATIC);
 
     if(playerData.first == 1){
         /// CARGO SELECTOR
         spr = new Selector_sprite(renderer->get_renderer(), "../sprites/selector.png");
         spr->setPosX((selectorPos*2-1)*Boss_icon_sprite::width-5);
         spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
-        renderer->addSprite(SELECTOR, spr, 0, STATIC);
+        renderer->addSprite(SELECTOR, spr, BACK, STATIC);
         /// BOTON START
         spr = new Sprite(renderer->get_renderer(), "../sprites/start_button.png");
         spr->setWidth(100);
-        spr->setHeight(100);
+        spr->setHeight(50);
         spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
         spr->setPosY(window->get_height()*3/5);
-        renderer->addSprite(BUTTON, spr, 0, STATIC);
+        renderer->addSprite(BUTTON, spr, FRONT, STATIC);
     }else{
         /// IMPRIMO CARTEL DE ESPERA
     }
@@ -141,10 +143,9 @@ void gameStateLobby::updateInput(){
             if(event.button.button == SDL_BUTTON_LEFT){
                 int Xpressed = event.button.x;
                 int Ypressed = event.button.y;
-                if(buttonPress(Xpressed,Ypressed,(renderer->static_sprites[0])[BUTTON])){
+                if(buttonPress(Xpressed,Ypressed,(renderer->static_sprites[FRONT])[BUTTON])){
                     int command = STARTING_SELECTION;
                     if(!startSelect){
-                        startSelect = true;
                         /// Mando que voy a empezar a elegir boss
                         command = 5;
                         skt->send((char*)&command, TAM_INT);
@@ -152,6 +153,12 @@ void gameStateLobby::updateInput(){
                         /// mando algo vacio
                         skt->send((char*)&command, TAM_INT);
                         startSelect = true;
+                        Sprite *spr = new Sprite(renderer->get_renderer(), "../sprites/lobbymessage.png");
+                        spr->setWidth(450);
+                        spr->setHeight(100);
+                        spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
+                        spr->setPosY(window->get_height()*3/5+60);
+                        renderer->addSprite(500, spr, FRONT, STATIC);
                     }
                 }
             }
