@@ -10,7 +10,13 @@ class Snipper : public Personaje {
 		Arma_minion* arma;
 		bool tras_escudo;
 	public:
+		//Dado un mapa*, una coordenada, un Arma_minion* y un id, crea a un Snipper.
 		Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
+		//Devuelve true si el Snipper está descubierto, false en caso contrario.
+		bool esta_descubierto();
+		//Devuelve true si el Snipper es vulnerable al ataque, false en caso contra-
+		//rio.
+		bool es_vulnerable(Bala* ataque);
 		//Hace que el personaje ataque.
 		void atacar(int dir, Mapa* mapa);		//NO TIENE SENTIDO PARA NPCs!
 		//Le hace un update al personaje.
@@ -24,7 +30,7 @@ class Snipper : public Personaje {
 		void sacar_movimiento(int direccion);	//NO TIENE SENTIDO PARA NPCs!
 		//Dada una direccion representada como un int, agrega un movimiento en dicha
 		//direccion.
-		void agregar_movimiento(int direccion);	//NO TIENE SENTIDO PARA NPCs!	
+		void agregar_movimiento(int direccion);	//NO TIENE SENTIDO PARA NPCs!
 };
 
 #endif //SNIPPER_H

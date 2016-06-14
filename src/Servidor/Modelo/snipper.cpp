@@ -2,11 +2,19 @@
 #include "arma_minion.h"
 #define DERECHA -1
 
-Snipper::Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id): 
+Snipper::Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje(mapa, c, id),
 arma(arma){
   tras_escudo = false;
   tiempo_pasado = 0;
+}
+
+bool Snipper::esta_descubierto(){
+  return !tras_escudo;
+}
+
+bool Snipper::es_vulnerable(Bala* ataque){
+  return ataque->dania_con_escudo(this);
 }
 
 void Snipper::update(size_t tiempo, Mapa* mapa){
@@ -19,8 +27,12 @@ void Snipper::update(size_t tiempo, Mapa* mapa){
 	bala->notificar_observadores();
 }
 
-void Snipper::recibir_ataque(Bala* ataque){}
-
+void Snipper::recibir_ataque(Bala* ataque){
+  if (tras_escudo && !(es_vulnerable(ataque))){
+    return;
+  }
+  ataque->daniar(this);
+}
 
 void Snipper::atacar(int dir, Mapa* mapa){}
 
@@ -28,5 +40,4 @@ void Snipper::mover(size_t tiempo, Mapa* mapa){}
 
 void Snipper::sacar_movimiento(int direccion){}
 
-void Snipper::agregar_movimiento(int direccion){}	
-
+void Snipper::agregar_movimiento(int direccion){}

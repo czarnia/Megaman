@@ -22,7 +22,7 @@ Servidor::Servidor(char *puerto){
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
-	mundo = new Juego(1);
+	mundo = new Juego();
 }
 
 Servidor::~Servidor(){
@@ -31,12 +31,12 @@ Servidor::~Servidor(){
 }
 
 void Servidor::aceptar_clientes(){
-  Socket* aceptado = skt->accept(NULL);
+  /*Socket* aceptado = skt->accept(NULL);
   if (aceptado){
 		agregar_cliente(aceptado);
   }
-  cerrar_conexiones();
-  /*
+  cerrar_conexiones();*/
+
   Socket* aceptado;
   for (size_t i = 0; i < 4; i++){
     aceptado = skt->accept(NULL);
@@ -45,7 +45,6 @@ void Servidor::aceptar_clientes(){
     }
     agregar_cliente(aceptado);
   }
-  */
 }
 
 bool Servidor::termino_ejecucion(){
@@ -79,7 +78,7 @@ void Servidor::empezar_partida(){ //TODO: esto debería ser un empezar_nivel.
 	std::cout << "INICIO PARTIDA\n";
 	Log::instancia()->inicio_juego();
 	mundo->agregar_observador(this);
-	mundo->inicializar_partida(clientes.devolver_tamanio());
+	mundo->inicializar_partida(clientes.devolver_tamanio(), 1);
 	clientes.iniciar_nivel();
 	mundo->jugar();
 }
@@ -104,15 +103,15 @@ void Servidor::update_murio_personaje(int tipo, int id) {
 }
 
 void Servidor::update_cantidad_vidas(int tipo, int id, int vidas) {
-  clientes.update_cantidad_vidas(tipo, id, vidas);
+	clientes.update_cantidad_vidas(tipo, id, vidas);
 }
 
 void Servidor::update_porcentaje_vida(int tipo, int id, int vida){
-  clientes.update_porcentaje_vida(tipo, id, vida);
+	clientes.update_porcentaje_vida(tipo, id, vida);
 }
 
 void Servidor::update_energia(int tipo, int id, int energia){
-  clientes.update_energia(tipo, id, energia);
+	clientes.update_energia(tipo, id, energia);
 }
 
 void Servidor::update_posicion(int tipo, int id, int x, int y){

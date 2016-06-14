@@ -4,9 +4,11 @@
 #include "actualizable.h"
 #include "elemento.h"
 
-
 class Met;
 class Megaman;
+class Bumby;
+class Snipper;
+class Jumping_snipper;
 class Personaje;
 
 class Bala:
@@ -57,6 +59,21 @@ public Elemento{
 		virtual void daniar(Megaman* mega) = 0;
 		//Daña a un Met.
 		virtual void daniar(Met* met) = 0;
+		//Daña a un Bumby.
+		virtual void daniar(Bumby* b) = 0;
+		//Daña a un Sniper.
+		virtual void daniar(Snipper* s) = 0;
+		//Daña a un Jumping_sniper.
+		virtual void daniar(Jumping_snipper* js) = 0;
+		//Devuelve true si puede dañar a un Met cuando esta tras su escudo, false en
+		//caso contrario.
+		virtual bool dania_con_escudo(Met* m) = 0;
+		//Devuelve true si puede dañar a un Snipper cuando esta tras su escudo, fal-
+		//se en caso contrario.
+		virtual bool dania_con_escudo(Snipper* s) = 0;
+		//Devuelve true si puede dañar a un Jumping_snipper cuando esta tras su es-
+		//cudo, false en caso contrario.
+		virtual bool dania_con_escudo(Jumping_snipper* js) = 0;
 };
 
 #endif //BALA_H

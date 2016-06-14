@@ -15,6 +15,7 @@ class Conexion_cliente{
     Socket* skt;
     int id_cliente;
     Receiver_cliente rcv;
+    Juego* m;
   public:
     //Crea una conexion_cliente recibiendo como parametro un socket ya conecta-
     //do y un id que lo identifica.
@@ -45,7 +46,7 @@ class Conexion_cliente{
 
   private:
     //Envia la informacion del mapa inicial.
-    void enviar_mapa_inicial(Juego* m, int id);
+    void enviar_mapa_inicial();
     //Obtiene el nombre del jugador.
     std::string obtener_nombre_jugador();
     //Envia el tamaño del mapa.

@@ -1,6 +1,8 @@
 #include "juego.h"
 #include <cstddef>
 #include <iosfwd>
+#include <ctime>
+#include <unistd.h>
 #include "../../Comun/lock.h"
 #include "ubicable_factory.h"
 #include "megaman_factory.h"
@@ -13,40 +15,51 @@
 #include "../../Editor/cargador_mapa.h"
 #include <iostream>
 
-#define TIEMPO 5
 #define MAIN_PATH_MAPAS "../../../Mapas/"
+#define TIEMPO 0.03
 
-Juego::Juego(int id_mapa){
+Juego::Juego(){
 	fin_partida = false;
 	cant_jugadores = 0;
 	//Le paso al cargador el numero de mapa
 	//que quiero elegir:
-	std::string root_path(MAIN_PATH_MAPAS);
-	Cargador_mapa cargador(root_path, id_mapa); 
-	mundo = new Mapa(cargador.get_ancho_mapa(), cargador.get_alto_mapa());
+	std::string root_path("../../../Mapas/");
+	cargador = new Cargador_mapa(root_path.c_str()); 
+	cargar_factories(cargador);
+	partida_inicializada = false;
 }
 
 void Juego::cargar_factories(Cargador_mapa *cargador){
-	factories.push_back(new Megaman_factory(cargador, this));
-	factories.push_back(new Met_factory(cargador, this));
-	factories.push_back(new Escalera_factory(cargador, this));
 	factories.push_back(new Bloque_factory(cargador, this));
+	factories.push_back(new Escalera_factory(cargador, this));
 	factories.push_back(new Puas_factory(cargador, this));
 	factories.push_back(new Bumby_factory(cargador, this));
 	factories.push_back(new Snipper_factory(cargador, this));
+	factories.push_back(new Megaman_factory(cargador, this));
+	factories.push_back(new Met_factory(cargador, this));
 }
 
-void Juego::inicializar_partida(int num_jugadores){
-	cant_jugadores = num_jugadores;
+void Juego::inicializar_nivel(int numero_mapa){
+	cargador->cargar_mapa(numero_mapa);
+	mundo = new Mapa(cargador->get_ancho_mapa(), cargador->get_alto_mapa());
 	for (unsigned int i = 0; i < factories.size(); ++i){
 		factories[i]->crear(mundo);
 	}
 }
 
+void Juego::inicializar_partida(int num_jugadores, int numero_mapa){
+	cant_jugadores = num_jugadores;
+	inicializar_nivel(numero_mapa);
+	partida_inicializada = true;
+}
+
 void Juego::jugar(){
 	while (!fin_partida){
+		clock_t iniciar_tiempo = clock();
 		Lock l(proteccion);
-		update(TIEMPO);
+		update(0.01);
+		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
+		sleep(delta_tiempo);
 	}
 }
 
@@ -201,6 +214,10 @@ std::vector<Ubicable*> Juego::devolver_ubicables(){
 
 int Juego::get_cantidad_jugadores(){
 	return cant_jugadores;
+}
+
+bool Juego::inicio_partida(){
+	return partida_inicializada;
 }
 
 Juego::~Juego(){}

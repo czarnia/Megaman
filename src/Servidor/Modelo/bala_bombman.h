@@ -1,15 +1,15 @@
-#ifndef BALA_MINION_H
-#define BALA_MINION_H
+#ifndef BALA_BOMBMAN_H
+#define BALA_BOMBMAN_H
 
 #include "bala.h"
 
-class Bala_minion: public Bala{
+class Bala_bombman: public Bala {
 	public:
 		//Recibe una direccion en 'x', una
 		//direccion en 'y' y una coordenada inicial y construye una bala.
-		Bala_minion(int dir_x, int dir_y, Coordenada c, int id);
+		Bala_bombman(int dir_x, int dir_y, Coordenada c, int id);
 		//Destructor de la bala.
-		virtual ~Bala_minion();
+		virtual ~Bala_bombman();
 		//Hace que pasa el tiempo para la bala.
 		virtual void update(size_t tiempo, Mapa* mapa);
 		//Daña a un Personaje (caso por defecto).
@@ -35,4 +35,4 @@ class Bala_minion: public Bala{
 		virtual bool dania_con_escudo(Jumping_snipper* js);
 };
 
-#endif //BALA_MINION_H
+#endif //BALA_BOMBMAN_H

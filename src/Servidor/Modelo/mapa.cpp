@@ -80,7 +80,6 @@ long_y(long_y){
 			elementos[x][y] = std::vector<Elemento*>();
 		}
 	}
-	this->cargar();
 }
 
 int Mapa::obtener_long_x(){
@@ -145,6 +144,17 @@ bool Mapa::ubicar(Bala* bala, Coordenada c){
 	return true;
 }
 
+bool Mapa::ubicar(Bloque* bloque, Coordenada c){
+	if (!puede_ubicarse(bloque, c)){
+		return false;
+	}
+	int x = c.obtener_abscisa();
+	int y = c.obtener_ordenada();
+	elementos[x][y].push_back(bloque);
+	bloques.push_back(c);
+	return true;
+}
+
 Personaje* Mapa::obtener_pj(int id_pj){
 	Personaje *p = NULL;
 	if (personajes.find(id_pj) != personajes.end()){
@@ -200,7 +210,7 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 	return ((0 <= x) && (x <= long_x) && (0 <= y) && (y <= long_y));
 }
 
-void Mapa::cargar(){
+/*void Mapa::cargar(){
 	bloques = coord_tierras();
 	coord_iniciales_personajes = coord_personajes();
 	std::vector<Coordenada> escaleras = coord_escaleras();
@@ -227,7 +237,7 @@ void Mapa::cargar(){
 			elementos[x][y].push_back(esc);
 		}
 	}
-}
+}*/
 
 void Mapa::agregar_bala(Bala *b){
 	balas.push_back(b);

@@ -9,9 +9,10 @@
 class Cargador_mapa{
 	private:
 		int ancho_mapa, alto_mapa;
+		std::string root_path;
 		std::ifstream mapa_arch;
-		Coordenada coordenada_inicio_megaman;
-		Coordenada coordenada_inicio_boss;
+		std::vector<Coordenada*> coordenada_megaman;
+		std::vector<Coordenada*> coordenada_boss;
 		std::vector<Coordenada*> coordenadas_mets;
 		std::vector<Coordenada*> coordenadas_bloques;
 		std::vector<Coordenada*> coordenadas_puas;
@@ -25,13 +26,15 @@ class Cargador_mapa{
 	public:
 		//Dado un path para un nuevo archivo donde se guardará un mapa y una longi-
 		//tud en x y otra en y para el mismo, se crea un Cargador_mapa.
-		Cargador_mapa(std::string root, int id_mapa);
+		Cargador_mapa(const char *root);
+		//Carga un nuevo mapa:
+		void cargar_mapa(int id_mapa);
 		//Devuelve la coordenada de inicio de los megamans para
 		//el mapa especificado.
-		Coordenada& get_coordenada_megamans();
+		std::vector<Coordenada*> get_coordenada_megamans();
 		//Devuelve las coordenadas del boss
 		//para el mapa especificado.
-		Coordenada& get_coordenada_boss();
+		std::vector<Coordenada*> get_coordenada_boss();
 		//Devuelve las coordenadas de los mets para
 		//el mapa especificado.
 		std::vector<Coordenada*> get_coordenadas_mets();
@@ -54,8 +57,12 @@ class Cargador_mapa{
 		int get_ancho_mapa();
 		//Devuelve el alto del mapa.
 		int get_alto_mapa();
+		
+		
 	private:
 		std::vector<std::string> parsear_cadena_palabras(std::string cadena);
+		//Reinicializa las coordenadas guardadas por el cargador:
+		void limpiar_coordenadas();
 };
 
 #endif //CARGADOR_MAPA_H

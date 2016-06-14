@@ -101,10 +101,6 @@ int Socket::receiveInt(int *integer, size_t tam_max){
 int Socket::send(const char* buffer, size_t tamanio){
   size_t tam_actual = 0; //el tamaño total de lo que ya envié.
   int tam_send = 0; //el tamaño de lo que envio en cada ciclo.
-/***/
-  //std::cout << "SOCKET: Envio un: " << buffer << "\n";
-  //std::cout << "SOCKET: TAM BUFFER: " << tamanio << "\n";
-/***/
   while (tam_actual < tamanio){
     int dif_tam = tamanio-tam_actual;
     tam_send = ::send(this->skt, &buffer[tam_actual], dif_tam, MSG_NOSIGNAL);

@@ -29,7 +29,5 @@ void Met_factory::crear(Mapa* mapa){
 		met->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(met);
-		//Notifico a los observadores de la creacion del personaje:
-		met->notificar_observadores();
 	} 
 }

@@ -13,14 +13,14 @@ enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m,
 Servidor* s): skt(conexion), id_cliente(id),
-rcv(conexion, id, m, s) {
+rcv(conexion, id, m, s), m(m) {
 	std::string jugador = obtener_nombre_jugador();
 	Log::instancia()->cliente_conectado(jugador);
 	skt->send((char*)&id, TAM_INT); //le envio al jugador su id
-	enviar_mapa_inicial(m, id);
+	//enviar_mapa_inicial(m, id);
 }
 
-void Conexion_cliente::enviar_mapa_inicial(Juego* m, int id){
+void Conexion_cliente::enviar_mapa_inicial(){
 	enviar_tamanio_mapa(m);
 	int fin_mapa = 6666;
 	int codigo_mapa = POSICION;
@@ -77,6 +77,7 @@ void Conexion_cliente::terminar_ejecucion(){
 }
 
 void Conexion_cliente::iniciar_nivel(){
+	enviar_mapa_inicial();
 	rcv.iniciar_nivel();
 }
 

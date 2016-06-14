@@ -15,6 +15,7 @@ class Personaje;
 class Megaman_factory : public Ubicable_factory{
 	private:
 		Factory_observador_ubicable fact_obs;
+		std::vector<Megaman*> creados;
 		//std::multimap<Megaman*, Observador*> creados;
 	public:
 		//Dados un puntero a un juego y un puntero a un cargador de 

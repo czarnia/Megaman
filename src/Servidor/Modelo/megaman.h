@@ -26,7 +26,7 @@ class Megaman: public Personaje{
 		virtual void agregar_arma(Arma *arma);
 		virtual void agregar_movimiento(int direccion);
 		virtual void sacar_movimiento(int direccion);
-		
+
 		friend class StrategyMoverMegaman;
 };
 

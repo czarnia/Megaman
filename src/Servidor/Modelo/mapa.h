@@ -47,6 +47,9 @@ class Mapa{
     //Dado una bala y una coordenada, la ubica en la misma, en caso de no
     //ser posible, devuelve false.
     virtual bool ubicar(Bala* bala, Coordenada c);
+    //Recibe un puntero a un bloque y su coordenada
+    //y lo ubica en el mapa.
+    bool ubicar(Bloque* bloque, Coordenada c);
     //Dado el id de un personaje, lo devuelve.
     Personaje *obtener_pj(int id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.
@@ -77,8 +80,6 @@ class Mapa{
 
     std::vector<Coordenada> coord_bloques(); //TODO: quizas se flete.
   private:
-    //Carga un mapa, por ahora, una versión por defecto chica.
-    void cargar();
     //Recibe un elemento y las coordenadas donde se desea posicionar al mismo.
     void ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas);
     //Recibe un vector con coordenadas de donde se quieran agregar las celdas;

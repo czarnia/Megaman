@@ -1,26 +1,26 @@
-#ifndef MET_H
-#define MET_H
+#ifndef SPARKMAN_H
+#define SPARKMAN_H
 
 #include "personaje.h"
+#include <vector>
 
-class Arma_minion;
+class Arma_sparkman;
 
-class Met: public Personaje{
+class Sparkman: public Personaje{
 	private:
 		Mapa *mapa;
-		bool tras_escudo;
 		size_t tiempo_pasado;
-		Arma_minion* arma;
+		Arma_sparkman* arma;
 	public:
-		Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
+		Sparkman(Mapa *mapa, Coordenada c, Arma_sparkman* arma, int id);
 		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
 		virtual void update(size_t tiempo);
 		virtual void sacar_movimiento(int direccion);
 		virtual void agregar_movimiento(int direccion);
-	private:
-		bool es_vulnerable(Bala* ataque);
+  private:
+    std::vector<Bala*> balas_ataque();
 };
 
-#endif //MET_H
+#endif //SPARKMAN_H

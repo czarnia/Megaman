@@ -26,17 +26,19 @@ std::vector<std::string> Cargador_mapa::parsear_cadena_palabras(std::string cade
 
 //-----------------------------------------------------//
 
-Cargador_mapa::Cargador_mapa(std::string root, int id_mapa):
-coordenada_inicio_megaman(0,0),
-coordenada_inicio_boss(0,0){
+Cargador_mapa::Cargador_mapa(const char *root):
+root_path(root){}
+
+void Cargador_mapa::cargar_mapa(int id_mapa){
 	std::stringstream id;
 	id << id_mapa;
 	std::string nombre_arch(NOMBRE_ARCH_MAPAS);
 	std::string extension_arch(EXTENSION_ARCH_MAPAS);
-	std::string full_path = root + nombre_arch + id.str() + extension_arch;
+	std::string full_path = root_path + nombre_arch + id.str() + extension_arch;
 	mapa_arch.open(full_path.c_str());
 	ancho_mapa = 0;
 	alto_mapa = 0;
+	limpiar_coordenadas();
 	cargar_coordenadas();
 }
 
@@ -63,13 +65,13 @@ void Cargador_mapa::cargar_coordenadas(){
 	Coordenada *coordenada = new Coordenada(x, y);
     switch(codigo_obj){
 		case MEGAMAN:
-			coordenada_inicio_megaman = *coordenada;
+			coordenada_megaman.push_back(coordenada);
 			break;
 		case BUMBY:
 			coordenadas_bumby.push_back(coordenada);
 			break;
 		case J_SNIPPER:
-			coordenadas_bumby.push_back(coordenada);
+			coordenadas_j_snippers.push_back(coordenada);
 			break;
 		case MET:
 			coordenadas_mets.push_back(coordenada);
@@ -87,31 +89,42 @@ void Cargador_mapa::cargar_coordenadas(){
 			coordenadas_puas.push_back(coordenada);
 			break;
 		case BOMBMAN:
-			coordenada_inicio_boss = *coordenada;
+			coordenada_boss.push_back(coordenada);
 			break;
 		case MAGNETMAN:
-			coordenada_inicio_boss = *coordenada;
+			coordenada_boss.push_back(coordenada);
 			break;
 		case SPARKMAN:
-			coordenada_inicio_boss = *coordenada;
+			coordenada_boss.push_back(coordenada);
 			break;
 		case RINGMAN:
-			coordenada_inicio_boss = *coordenada;
+			coordenada_boss.push_back(coordenada);
 			break;
 		case FIREMAN:
-			coordenada_inicio_boss = *coordenada;
+			coordenada_boss.push_back(coordenada);
 			break;
 	}
   }
   mapa_arch.close();
 }
-   
-Coordenada& Cargador_mapa::get_coordenada_boss(){
-	return coordenada_inicio_boss;
+
+void Cargador_mapa::limpiar_coordenadas(){
+	coordenada_boss.clear();
+	coordenadas_escaleras.clear();
+	coordenadas_bloques.clear();
+	coordenadas_puas.clear();
+	coordenadas_mets.clear();
+	coordenadas_bumby.clear();
+	coordenadas_j_snippers.clear();
+	coordenadas_snippers.clear();
 }
 
-Coordenada &Cargador_mapa::get_coordenada_megamans(){
-	return coordenada_inicio_megaman;
+std::vector<Coordenada*> Cargador_mapa::get_coordenada_boss(){
+	return coordenada_boss;
+}
+
+std::vector<Coordenada*> Cargador_mapa::get_coordenada_megamans(){
+	return coordenada_megaman;
 }
 
 std::vector<Coordenada*> Cargador_mapa::get_coordenadas_mets(){

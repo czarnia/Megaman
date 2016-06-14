@@ -1,26 +1,24 @@
-#ifndef MET_H
-#define MET_H
+#ifndef BOMBMAN_H
+#define BOMBMAN_H
 
 #include "personaje.h"
 
-class Arma_minion;
+class Arma_bombman;
 
-class Met: public Personaje{
+class Bombman: public Personaje{
 	private:
 		Mapa *mapa;
 		bool tras_escudo;
 		size_t tiempo_pasado;
-		Arma_minion* arma;
+		Arma_bombman* arma;
 	public:
-		Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
+		Bombman(Mapa *mapa, Coordenada c, Arma_bombman* arma, int id);
 		virtual void atacar(int dir, Mapa* mapa);
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
 		virtual void update(size_t tiempo);
 		virtual void sacar_movimiento(int direccion);
 		virtual void agregar_movimiento(int direccion);
-	private:
-		bool es_vulnerable(Bala* ataque);
 };
 
-#endif //MET_H
+#endif //BOMBMAN_H

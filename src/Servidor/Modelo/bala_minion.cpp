@@ -1,5 +1,10 @@
 #include "bala_minion.h"
 #include "personaje.h"
+#include "megaman.h"
+#include "met.h"
+#include "bumby.h"
+#include "snipper.h"
+#include "jumping_snipper.h"
 
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_MINION 11
@@ -46,4 +51,28 @@ void Bala_minion::daniar(Megaman* mega) {
 
 void Bala_minion::daniar(Met* met) {
 	met->perder_vida(0);
+}
+
+void Bala_minion::daniar(Bumby* b){
+	b->perder_vida(0);
+}
+
+void Bala_minion::daniar(Snipper* s){
+	s->perder_vida(0);
+}
+
+void Bala_minion::daniar(Jumping_snipper* js){
+	js->perder_vida(0);
+}
+
+bool Bala_minion::dania_con_escudo(Met* m){
+	return false;
+}
+
+bool Bala_minion::dania_con_escudo(Snipper* s){
+	return false;
+}
+
+bool Bala_minion::dania_con_escudo(Jumping_snipper* js){
+	return false;
 }

@@ -5,7 +5,7 @@
 #define TIEMPO_ATAQUE 2
 #define TIPO_MET 4
 
-Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id): 
+Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje(mapa, c, id),
 arma(arma){
   tras_escudo = false;
@@ -33,7 +33,7 @@ void Met::atacar(int dir, Mapa* mapa){
 void Met::mover(size_t tiempo, Mapa* mapa){ } //el met no se mueve.
 
 void Met::recibir_ataque(Bala* ataque){
-  if (tras_escudo){
+  if (tras_escudo && !(es_vulnerable(ataque))){
     return;
   }
   ataque->daniar(this);
@@ -52,3 +52,7 @@ void Met::update(size_t tiempo){
 void Met::sacar_movimiento(int direccion){}
 
 void Met::agregar_movimiento(int direccion){}
+
+bool Met::es_vulnerable(Bala* ataque){
+  return ataque->dania_con_escudo(this);
+}
