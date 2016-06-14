@@ -7,7 +7,7 @@
 #define NOMBRE_ARCH_MAPAS "mapa"
 #define EXTENSION_ARCH_MAPAS ".txt"
 
-enum codigos_personajes{MEGAMAN = 1, BUMBY, J_SNIPPER, MET, SNIPPER};
+enum codigos_personajes{MEGAMAN = 1, BUMBY, J_SNIPPER, SNIPPER, MET = 8};
 enum codigos_elementos{BLOQUE = 10, PUAS, ESCALERA};
 enum codigos_bosses{BOMBMAN = 20, MAGNETMAN, SPARKMAN, RINGMAN, FIREMAN};
 

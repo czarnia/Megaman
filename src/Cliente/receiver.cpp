@@ -185,6 +185,7 @@ void Receiver::receiveMap(){
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(MEGAMANN+objectID, spr, 1, NON_STATIC);
+                    break;
                 case MET:
                     spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
                     spr->setPosX(coordX*SCALE_FACTOR);
