@@ -5,6 +5,8 @@
 
 #define STATIC 1
 #define NON_STATIC 0
+#define FRONT 1
+#define BACK 0
 
 #define BACKGROUND 0
 #define TEXT 100
@@ -41,7 +43,7 @@ void MainMenu::updateInput(){
                 spr->setPosX(window->get_width()/2);
                 spr->setPosY(window->get_height()*1/9+10);
                 renderer->erase(TEXT);
-                renderer->addSprite(TEXT, spr, 0, STATIC);
+                renderer->addSprite(TEXT, spr, FRONT, NON_STATIC);
             }
         }else if (event.type == SDL_TEXTINPUT){
             playerData.second.append(event.text.text);
@@ -50,7 +52,7 @@ void MainMenu::updateInput(){
             spr->setPosX(window->get_width()/2);
             spr->setPosY(window->get_height()*1/9+10);
             renderer->erase(TEXT);
-            renderer->addSprite(TEXT, spr, 0, STATIC);
+            renderer->addSprite(TEXT, spr, FRONT, NON_STATIC);
         }
     }
     SDL_StopTextInput();

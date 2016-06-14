@@ -185,24 +185,27 @@ GameState::StateCode gameStateLobby::update(){
 
     /// ACA LANZO UN HILO PARA ESPERAR QUE EL SERVIDOR
     /// ME INDIQUE EL COMIENZO DE PARTIDA Y NUMERO DE BOSS
-   // receiver->start();
+   //receiver->start();
 
     /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
     if (playerData.first == 1){
         updateInput();
     }
-/*
-    while (!receiver->r_queue.empty()){
+
+  /*  while (!receiver->r_queue.empty()){
         int aux;
         /// START
         mutex.lock();
         aux = receiver->r_queue.front();
         receiver->r_queue.pop();
         mutex.unlock();
+        SDL_Delay(10);
         if (aux == START_GAME){
             /// BOSS
+            mutex.lock();
             *level = receiver->r_queue.front();
             receiver->r_queue.pop();
+            mutex.unlock();
             start = true;
         }
     }*/

@@ -197,19 +197,13 @@ void gameStateStart::mainLoop(){
             int posY = -1;
             std::pair<int,int> coord;
             event = receiver->r_queue.front();
-       //     SDL_Delay(15);
-          //  command = receiver->r_queue.front();
-        //    receiver->r_queue.pop();
+
             if( event->command == MAPA){
                 command = event->command;
                 objectType = event->objectType;
-       //         receiver->r_queue.pop();
                 objectID = event->objectID;
-         //       receiver->r_queue.pop();
                 posX = event->posX;
-        //        receiver->r_queue.pop();
                 posY = event->posY;
-        //        receiver->r_queue.pop();
 
                 coord.first = posX;
                 coord.second = posY;
@@ -237,7 +231,6 @@ void gameStateStart::mainLoop(){
 
 void gameStateStart::render(){
     renderer->clear();
- //   SDL_Delay(15);
     renderer->drawAll();
     renderer->present();
 }
