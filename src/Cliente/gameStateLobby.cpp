@@ -51,7 +51,7 @@ void gameStateLobby::load(int stack){
     skt->receive(buffer, TAM_INT);
     playerData.first = *((int*)buffer);
     /// POR AHORA
-    playerData.first = 1;
+    //playerData.first = 1;
 
     Sprite *spr;
     /// CARGO FONDO
@@ -128,10 +128,10 @@ void gameStateLobby::updateInput(){
                 case SDLK_RETURN:
                     if(startSelect){
                         start = true;
-                        /*int command = BOSS_CHOSEN;
+                        int command = BOSS_CHOSEN;
                         skt->send((char*)&command, TAM_INT);
                         int bossNumber = selectorPos;
-                        skt->send((char*)&bossNumber, TAM_INT);*/
+                        skt->send((char*)&bossNumber, TAM_INT);
                     }
                     break;
                 default:
@@ -145,12 +145,13 @@ void gameStateLobby::updateInput(){
                     int command = STARTING_SELECTION;
                     if(!startSelect){
                         startSelect = true;
-                    /*    /// Mando que voy a empezar a elegir boss
+                        /// Mando que voy a empezar a elegir boss
+                        command = 5;
                         skt->send((char*)&command, TAM_INT);
                         command = 0;
                         /// mando algo vacio
                         skt->send((char*)&command, TAM_INT);
-                        startSelect = true;*/
+                        startSelect = true;
                     }
                 }
             }

@@ -31,12 +31,12 @@ Servidor::~Servidor(){
 }
 
 void Servidor::aceptar_clientes(){
-  Socket* aceptado = skt->accept(NULL);
+  /*Socket* aceptado = skt->accept(NULL);
   if (aceptado){
 		agregar_cliente(aceptado);
   }
-  cerrar_conexiones();
-  /*
+  cerrar_conexiones();*/
+
   Socket* aceptado;
   for (size_t i = 0; i < 4; i++){
     aceptado = skt->accept(NULL);
@@ -45,7 +45,6 @@ void Servidor::aceptar_clientes(){
     }
     agregar_cliente(aceptado);
   }
-  */
 }
 
 bool Servidor::termino_ejecucion(){
