@@ -42,7 +42,6 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	mover(tiempo, mapa);
 	notificar_observadores();
-	notificar_observadores();
 }
 
 void Personaje::agregar_movimiento(int dir, StrategyMover *movimiento){
