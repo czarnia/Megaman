@@ -3,7 +3,7 @@
 #include "arma_minion.h"
 
 #define TIEMPO_ATAQUE 2
-#define TIPO_MET 8
+#define TIPO_MET 4
 
 Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje(mapa, c, id),
