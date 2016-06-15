@@ -14,7 +14,7 @@ fact_obs(juego){}
 //TODO: GUARDAR LOS OBJETOS CREADOS CON NEW PARA SU DESTRUCCION.
 void Met_factory::crear(Mapa* mapa){
 	std::vector<Coordenada*> coords_mets = cargador->get_coordenadas_mets();
-	
+
 	for (unsigned int i = 0; i < coords_mets.size(); i++){
 		Coordenada *coord = coords_mets[i];
 		//Creacion del met:
@@ -23,11 +23,11 @@ void Met_factory::crear(Mapa* mapa){
 		Met *met = new Met(mapa, *coord, arma, i);
 		//Se agregan los observadores:
 		//observador de ubicable:
-		fact_obs.crear(met); 
+		fact_obs.crear(met);
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje(juego);
+		Observador_personaje *obs = new Observador_personaje(juego, met);
 		met->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(met);
-	} 
+	}
 }

@@ -17,7 +17,7 @@ void Megaman_factory::crear(Mapa* mapa){
 	}
 	Coordenada *coord = coordenada_megaman[0];
 	int cantidad_jugadores = juego->get_cantidad_jugadores();
-	
+
 	if (!juego->inicio_partida()){
 		for (int i = 0; i < cantidad_jugadores; i++){
 			//Creacion del megaman:
@@ -37,7 +37,7 @@ void Megaman_factory::crear(Mapa* mapa){
 			continue;
 		}
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje(juego);
+		Observador_personaje *obs = new Observador_personaje(juego, megaman);
 		megaman->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(megaman);

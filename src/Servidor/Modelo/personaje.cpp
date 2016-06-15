@@ -42,6 +42,7 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	mover(tiempo, mapa);
 	notificar_observadores();
+	notificar_observadores();
 }
 
 void Personaje::agregar_movimiento(int dir, StrategyMover *movimiento){
@@ -63,7 +64,7 @@ int Personaje::get_tipo(){
 }
 
 bool Personaje::esta_vivo(){
-	return vidas.empty();
+	return !vidas.empty();
 }
 
 int Personaje::get_cantidad_vidas(){
@@ -73,7 +74,7 @@ int Personaje::get_cantidad_vidas(){
 int Personaje::get_porcentaje_vida(){
 	int porcentaje = 0;
 	if (!vidas.empty()){
-		porcentaje = vidas[0]->get_porcentaje();
+		porcentaje = vidas[0].get_porcentaje();
 	}
 	return porcentaje;
 }
@@ -86,15 +87,16 @@ void Personaje::perder_vida(int porcentaje){
 	if (porcentaje == PERDER_MAX){
 		vidas.erase(vidas.begin());
 	}else{
-		vidas[0]->perder(porcentaje);
+		vidas[0].perder(porcentaje);
 	}
 }
 
 void Personaje::ganar_vida(int porcentaje){
 	if (porcentaje == GANAR_MAX){
-		vidas.push_back(new Vida());
+		Vida vida_nueva = Vida();
+		vidas.push_back(vida_nueva);
 	}else{
-		vidas[0]->ganar(porcentaje);
+		vidas[0].ganar(porcentaje);
 	}
 }
 
@@ -199,4 +201,8 @@ bool Personaje::puede_ocupar(Puas* puas){
 
 bool Personaje::puede_ocupar(Premio* premio){
 	return true;
+}
+
+void Personaje::respawn(Coordenada posicion_inicial){
+	coordenada = posicion_inicial;
 }

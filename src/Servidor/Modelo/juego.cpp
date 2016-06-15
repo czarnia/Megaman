@@ -24,7 +24,7 @@ Juego::Juego(){
 	//Le paso al cargador el numero de mapa
 	//que quiero elegir:
 	std::string root_path("../../../Mapas/");
-	cargador = new Cargador_mapa(root_path.c_str()); 
+	cargador = new Cargador_mapa(root_path.c_str());
 	cargar_factories(cargador);
 	jugando_nivel = false;
 	fin_partida = false;
@@ -50,7 +50,7 @@ void Juego::inicializar_nivel(int numero_mapa){
 	for (unsigned int i = 0; i < factories.size(); ++i){
 		factories[i]->crear(mundo);
 	}
-	if (!partida_inicializada){ 
+	if (!partida_inicializada){
 		partida_inicializada = true;
 	}
 	if (!jugando_nivel){
@@ -103,6 +103,9 @@ void Juego::personaje_parar(int id_pj, int direccion){
   Lock candado(proteccion);
   std::cout << "JUEGO: OBTENGO AL PERSONAJE\n";
   Personaje* pj = mundo->obtener_pj(id_pj);
+	if (pj == NULL){
+		std::cout << "PERSONAJE ES NULL \n";
+	}
   std::cout << "JUEGO: LE DIGO AL PERSONAJE QUE DEJE DE MOVERSE\n";
   pj->sacar_movimiento(direccion);
 }
@@ -237,5 +240,6 @@ int Juego::get_cantidad_jugadores(){
 bool Juego::inicio_partida(){
 	return partida_inicializada;
 }
+
 
 Juego::~Juego(){}

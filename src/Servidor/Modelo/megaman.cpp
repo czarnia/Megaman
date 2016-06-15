@@ -14,6 +14,10 @@ typedef std::map<int, StrategyMover*>::iterator movimientosIt;
 
 Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
 Personaje(mapa, c, id){
+	for (size_t i = 0; i < 3; i++){
+		Vida v = Vida();
+		vidas.push_back(v);
+	}
 	armas.push_back(arma);
 	arma_act = 0;
 	tipo = MEGAMAN;

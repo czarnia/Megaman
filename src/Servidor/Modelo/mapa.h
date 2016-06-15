@@ -17,7 +17,7 @@ class Bala;
 
 class Mapa{
   private:
-	size_t long_x, long_y;
+	  size_t long_x, long_y;
     std::vector<Coordenada> bloques; //borrar estos bloques!
     std::vector<Coordenada*> coord_iniciales_personajes;
     std::vector<Bala*> balas;
