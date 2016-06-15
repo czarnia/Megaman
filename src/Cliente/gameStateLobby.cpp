@@ -34,7 +34,6 @@ gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
     start = false;
     quit = false;
     startSelect = false;
-    playerData.first = 1;
     selectorPos = 1;
     receiver = new LobbyReceiver(skt, renderer, &mutex);
     load();
@@ -52,9 +51,8 @@ void gameStateLobby::load(int stack){
     char buffer[TAM_INT];
     skt->receive(buffer, TAM_INT);
     playerData.first = *((int*)buffer);
-    /// POR AHORA
-    //playerData.first = 1;
 
+    /// Cargo los sprites de este menu
     Sprite *spr;
     /// CARGO FONDO
     spr = new Background_sprite(renderer->get_renderer(), "../sprites/lobby_background.jpeg");
@@ -89,6 +87,7 @@ void gameStateLobby::load(int stack){
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
     renderer->addSprite(ICON, spr, BACK, STATIC);
 
+    /// Solo el jugador 1 puede presionar el boton y elegir boss
     if(playerData.first == 1){
         /// CARGO SELECTOR
         spr = new Selector_sprite(renderer->get_renderer(), "../sprites/selector.png");
@@ -103,7 +102,13 @@ void gameStateLobby::load(int stack){
         spr->setPosY(window->get_height()*3/5);
         renderer->addSprite(BUTTON, spr, FRONT, STATIC);
     }else{
-        /// IMPRIMO CARTEL DE ESPERA
+        /// CARGO CARTEL DE ESPERA
+        spr = new Sprite(renderer->get_renderer(), "../sprites/lobbysign.png");
+        spr->setWidth(400);
+        spr->setHeight(75);
+        spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
+        spr->setPosY(window->get_height()*3/5);
+        renderer->addSprite(BUTTON, spr, FRONT, STATIC);
     }
 }
 
@@ -112,7 +117,52 @@ int gameStateLobby::unload(){
     return 0;
 }
 
+GameState::StateCode gameStateLobby::update(){
+
+    /// ACA LANZO UN HILO PARA ESPERAR QUE EL SERVIDOR
+    /// ME INDIQUE EL COMIENZO DE PARTIDA Y NUMERO DE BOSS
+   //receiver->start();
+
+    /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
+    if (playerData.first == 1){
+        updateInput();
+    }
+
+    /// Si se recibio el comienzo de juego
+    /// cambio los flags necesarios
+  /*  while (!receiver->r_queue.empty()){
+        int aux;
+        /// START
+        mutex.lock();
+        aux = receiver->r_queue.front();
+        receiver->r_queue.pop();
+        mutex.unlock();
+        SDL_Delay(10);
+        if (aux == START_GAME){
+            /// BOSS
+            mutex.lock();
+            *level = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            mutex.unlock();
+            start = true;
+        }
+    }*/
+    ///
+    if (start){
+        return GameState::GAME_START;
+    }else if (quit){
+        return GameState::QUIT;
+    }else{
+        return GameState::CONTINUE;
+    }
+    return GameState::CONTINUE;
+}
+
 void gameStateLobby::updateInput(){
+    /// Aca se ingresa solo si es el jugador 1
+    /// esto permite el movimiento del selector y el comienzo de la partida
+    /// los datos sobre el boss elegido se mandan inmediatamente despues
+    /// de elegido el boss
     SDL_Event event;
     while (SDL_PollEvent(&event)){
         if (event.type == SDL_QUIT){
@@ -129,6 +179,7 @@ void gameStateLobby::updateInput(){
                     break;
                 case SDLK_RETURN:
                     if(startSelect){
+                        /// Envio el numero de boss elegido
                         start = true;
                         int command = BOSS_CHOSEN;
                         skt->send((char*)&command, TAM_INT);
@@ -153,6 +204,7 @@ void gameStateLobby::updateInput(){
                         /// mando algo vacio
                         skt->send((char*)&command, TAM_INT);
                         startSelect = true;
+                        /// Imprimo un cartel informativo
                         Sprite *spr = new Sprite(renderer->get_renderer(), "../sprites/lobbymessage.png");
                         spr->setWidth(450);
                         spr->setHeight(100);
@@ -167,6 +219,7 @@ void gameStateLobby::updateInput(){
 }
 
 bool gameStateLobby::buttonPress(int x, int y, Sprite *spr){
+    /// Verifico si se apreto el boton
     if (x > spr->getPosX() && x < spr->getPosX()+spr->getWidth())
         if (y > spr->getPosY() && y < spr->getPosY()+spr->getHeight())
             return true;
@@ -174,7 +227,7 @@ bool gameStateLobby::buttonPress(int x, int y, Sprite *spr){
 }
 
 void gameStateLobby::moveSelector(std::string direction){
-
+    /// El nombre explica lo que se hace
     if (!direction.compare("right")){
         if (selectorPos < 5){
             selectorPos++;
@@ -186,44 +239,6 @@ void gameStateLobby::moveSelector(std::string direction){
             renderer->static_sprites[0][SELECTOR]->setPosX((selectorPos*2-1)*Boss_icon_sprite::width-5);
         }
     }
-}
-
-GameState::StateCode gameStateLobby::update(){
-
-    /// ACA LANZO UN HILO PARA ESPERAR QUE EL SERVIDOR
-    /// ME INDIQUE EL COMIENZO DE PARTIDA Y NUMERO DE BOSS
-   //receiver->start();
-
-    /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
-    if (playerData.first == 1){
-        updateInput();
-    }
-
-  /*  while (!receiver->r_queue.empty()){
-        int aux;
-        /// START
-        mutex.lock();
-        aux = receiver->r_queue.front();
-        receiver->r_queue.pop();
-        mutex.unlock();
-        SDL_Delay(10);
-        if (aux == START_GAME){
-            /// BOSS
-            mutex.lock();
-            *level = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            mutex.unlock();
-            start = true;
-        }
-    }*/
-        if (start){
-            return GameState::GAME_START;
-        }else if (quit){
-            return GameState::QUIT;
-        }else{
-            return GameState::CONTINUE;
-        }
-    return GameState::CONTINUE;
 }
 
 void gameStateLobby::render(){

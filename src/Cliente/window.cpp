@@ -15,7 +15,7 @@ Window::Window(int width, int height):
 }
 
 void Window::maximize(){
-   // SDL_MaximizeWindow(window);
+ //   SDL_MaximizeWindow(window);
     SDL_SetWindowSize(window, 640, 480);
 }
 

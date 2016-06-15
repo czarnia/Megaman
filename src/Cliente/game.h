@@ -21,7 +21,7 @@ class Game{
         /// para poder conectarme al servidor en distintos puntos
         char *hostname;
         char *port;
-
+        /// Guardo el nombre y numero del jugador
         std::pair<int,std::string> playerData;
         int level;
 	public:

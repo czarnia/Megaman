@@ -20,6 +20,14 @@
 #define HP_BAR 6001
 #define MP_BAR 6011
 
+void gameStateStart::cap_framerate(const Uint32 &starting_tick){
+    /// Aca limito los cuadros por segundo del juego para mantener
+    /// una velocidad constante en distintas computadoras
+    if ((1000/FPS) > SDL_GetTicks() - starting_tick){
+        SDL_Delay(1000/FPS - (SDL_GetTicks() - starting_tick));
+    }
+}
+
 gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
                                 std::pair<int,std::string> &playerData,
                                 int level):
@@ -42,11 +50,7 @@ gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
     load(level);
 }
 
-void gameStateStart::cap_framerate(const Uint32 &starting_tick){
-    if ((1000/FPS) > SDL_GetTicks() - starting_tick){
-        SDL_Delay(1000/FPS - (SDL_GetTicks() - starting_tick));
-    }
-}
+
 
 void gameStateStart::load(int level){
     /// cargo el fondo del nivel
@@ -112,6 +116,8 @@ int gameStateStart::unload(){
 }
 
 void gameStateStart::updateInput(bool *running){
+    /// Aca se procesa todo lo ingresado por teclado y se envia al servidor
+    /// siguiendo el protocolo establecido
     static Sender sender(skt);
     SDL_Event event;
     std::string direction = "right";
@@ -217,7 +223,10 @@ void gameStateStart::updateInput(bool *running){
 }
 
 GameState::StateCode gameStateStart::update(){
+    /// Main loop del juego
+    /// aca adentro cambio los flags necesarios
     mainLoop();
+    /// dependiendo del flag, le digo al juego que hacer a continuacion
     if (quit)
         return GameState::QUIT;
     else if(victory)
@@ -231,20 +240,25 @@ GameState::StateCode gameStateStart::update(){
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
     Event *event;
+    /// Realiza los cambios acordes a las respuestas del servidor
     static ResponseHandler handler(renderer);
+    /// Hilo receiver, recibe todo lo proveniente del servidor
+    /// y lo almacena en una cola en forma de eventos
     receiver->start();
     bool running = true;
+    /// Loop principal
     while (running){
         starting_tick = SDL_GetTicks();
         /// Recibo la entrada y envio al servidor
+        /// Si se recibe un cierre de ventana, se corta la ejecucion
         updateInput(&running);
         /// Actualizo la posicion de camara
       /*  if (renderer->find(playerData.first))
             renderer->updateCamPos(playerData.first);*/
-        /// Si hay algun mensaje del servidor lo recibo
+        /// Verifico si la cola de eventos provenientes del servidor esta vacia
         mutex.lock();
         if (!receiver->r_queue.empty()){
-
+            /// Si hay algun evento, lo proceso
             int command = 0;
             int objectType = -1;
             int objectID = -1;
@@ -265,6 +279,7 @@ void gameStateStart::mainLoop(){
                 std::cout <<objectType <<" "<<objectID<<" "<<posX<<" "<<posY;
             }
             receiver->r_queue.pop();
+            /// acorde a lo recibido del servidor, seteo los flags correspondientes
             switch(handler.execute(command,objectType,objectID,coord)){
                 case GameState::BOSS_SELECT:
                     running = false;
@@ -279,7 +294,9 @@ void gameStateStart::mainLoop(){
             }
         }
         mutex.unlock();
+        /// dibujo
         render();
+        /// limito FPS
         cap_framerate(starting_tick);
 	}
 }
