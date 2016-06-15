@@ -26,7 +26,7 @@ public Juego_observable{
 		//Dado un tamanio, crea un juego nuevo.
 		Juego();
 		//Dada una cantidad de jugadores, inicializa una partida.
-		void inicializar_partida(int cant_jugadores, int numero_mapa);
+		void inicializar_partida(int cant_jugadores);
 		//Implementa el ciclo del juego.
 		void jugar();
 		//Termina la partida en marcha.
@@ -79,6 +79,8 @@ public Juego_observable{
 		//Recibe id y tipo correspondiente a un personaje y
 		//notifica al servidor de la muerte del mismo.
 		void murio_personaje(int tipo, int id);
+		//Finaliza el nivel.
+		//void murio_boss();
 		//Recibe id y tipo correspondiente a un personaje y
 		//una cantidad de vidas y notifica al servidor
 		//de la nueva cantidad de vidas del mismo.
@@ -102,6 +104,8 @@ public Juego_observable{
 		int get_cantidad_jugadores();
 		//Devuelve true si ya se inicio la partida.
 		bool inicio_partida();
+		//Recibe un numero de mapa e inicializa un nuevo nivel.
+		void inicializar_nivel(int numero_mapa);
 		//Destructor de juego.
 		~Juego();
 		
@@ -110,7 +114,7 @@ public Juego_observable{
 		//juego.
 		void cargar_factories(Cargador_mapa *cargador);
 		
-		void inicializar_nivel(int numero_mapa);
+		
 };
 
 #endif //JUEGO_H

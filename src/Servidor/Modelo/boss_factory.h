@@ -6,7 +6,7 @@
 #include "../../Editor/cargador_mapa.h"
 #include "juego.h"
 #include <map>
-/*
+
 class Juego;
 class Ubicable_factory;
 class Personaje;
@@ -20,6 +20,6 @@ class Boss_factory : public Ubicable_factory{
 		Boss_factory(Cargador_mapa * cargador, Juego *juego);
 		//Dado un mapa, crea a un personaje.
 		void crear(Mapa* mapa);
-};*/
+};
 
 #endif //BOSS_FACTORY_H

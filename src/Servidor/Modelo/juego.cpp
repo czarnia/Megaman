@@ -12,6 +12,7 @@
 #include "puas_factory.h"
 #include "bumby_factory.h"
 #include "snipper_factory.h"
+#include "boss_factory.h"
 #include "../../Editor/cargador_mapa.h"
 #include <iostream>
 
@@ -19,13 +20,13 @@
 #define TIEMPO 0.03
 
 Juego::Juego(){
-	fin_partida = false;
 	cant_jugadores = 0;
 	//Le paso al cargador el numero de mapa
 	//que quiero elegir:
 	std::string root_path("../../../Mapas/");
 	cargador = new Cargador_mapa(root_path.c_str()); 
 	cargar_factories(cargador);
+	fin_partida = false;
 	partida_inicializada = false;
 }
 
@@ -37,24 +38,28 @@ void Juego::cargar_factories(Cargador_mapa *cargador){
 	factories.push_back(new Snipper_factory(cargador, this));
 	factories.push_back(new Megaman_factory(cargador, this));
 	factories.push_back(new Met_factory(cargador, this));
+	factories.push_back(new Boss_factory(cargador, this));
 }
 
 void Juego::inicializar_nivel(int numero_mapa){
 	cargador->cargar_mapa(numero_mapa);
-	mundo = new Mapa(cargador->get_ancho_mapa(), cargador->get_alto_mapa());
+	int ancho = cargador->get_ancho_mapa();
+	int alto = cargador->get_alto_mapa();
+	mundo = new Mapa(ancho, alto);
 	for (unsigned int i = 0; i < factories.size(); ++i){
 		factories[i]->crear(mundo);
 	}
+	if (!partida_inicializada){ 
+		partida_inicializada = true;
+	}
 }
 
-void Juego::inicializar_partida(int num_jugadores, int numero_mapa){
+void Juego::inicializar_partida(int num_jugadores){
 	cant_jugadores = num_jugadores;
-	inicializar_nivel(numero_mapa);
-	partida_inicializada = true;
 }
 
 void Juego::jugar(){
-	while (!fin_partida){
+	while (!fin_partida){ //ESTO EN REALIDAD VA A SER PARA !fin_partida && !fin_nivel(murio boss).
 		clock_t iniciar_tiempo = clock();
 		{
 			Lock l(proteccion);
@@ -145,6 +150,9 @@ void Juego::notificar_gameover(int id){
 		obs->update_gameover(id);
 	}
 }
+
+/*void Juego::murio_boss(){
+}*/
 
 void Juego::notificar_murio_personaje(int tipo, int id){
 	mundo->quitar_personaje(id);

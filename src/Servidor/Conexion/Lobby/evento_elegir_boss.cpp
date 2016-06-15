@@ -4,5 +4,5 @@
 
 void Evento_elegir_boss::ejecutar(Servidor* s){
   Log::instancia()->inicio_nivel(1); //TODO: deshardcodear.
-  s->empezar_partida(); //cambiar a empezar_nivel.
+  s->empezar_nivel(); //TODO: pasar aca el nivel.
 }

@@ -26,6 +26,8 @@ public Observador_juego{
     bool termino_ejecucion();
     //Empieza una partida.
     void empezar_partida();
+    //Empieza un nuevo nivel.
+    void empezar_nivel();
     //Termina la ejecución del servidor.
     void terminar_ejecucion();
 
@@ -35,7 +37,6 @@ public Observador_juego{
     void cliente_desconectado(int id_cliente);
     //Se le notifica al servidor que se conecto un nuevo cliente.
     void cliente_conectado();
-
     //Dado un observable, realiza un update.
 		virtual void update(Observable *obs);
 		//Dado un identificador, notifica un gameover del cliente correspondiente.
