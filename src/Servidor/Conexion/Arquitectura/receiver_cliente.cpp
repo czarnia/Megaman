@@ -42,11 +42,11 @@ void Receiver_cliente::ejecutar(){
       if (jugando){
         Evento* e = parser_juego.crear_evento(*((int*)comando), *((int*)argumento));
         handler_juego.ejecutar_evento(e);
-        delete e;
+        //delete e;
       }else{
         Evento_lobby* e = parser_lobby.crear_evento(*((int*)comando), *((int*)argumento));
         handler_lobby.ejecutar_evento(e);
-        delete e;
+        //delete e;
       }
     }
     strncpy(comando, EN_ESPERA, TAM_INT);

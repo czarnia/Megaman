@@ -7,6 +7,8 @@
 #define CAMSPEEDX 5
 #define NON_STATIC 0
 #define STATIC 1
+#define FRONT 1
+#define BACK 0
 
 #define LAYER_NUMBER 2
 
@@ -83,10 +85,10 @@ void Renderer::clear(){
 
 void Renderer::erase(int key){
     std::map<int,Sprite*>::iterator it;
-    it = sprites[1].find(key);
-    if( it != sprites[1].end() ){
+    it = sprites[FRONT].find(key);
+    if( it != sprites[FRONT].end() ){
         delete it->second;
-        sprites[1].erase(it);
+        sprites[FRONT].erase(it);
     }
 }
 
@@ -135,20 +137,20 @@ void Renderer::draw(Sprite *spr, int lockedToScreen){
 }
 
 void Renderer::drawAll(){
-    std::map<int,Sprite*>::iterator it = static_sprites[0].begin();
-    for(; it != static_sprites[0].end(); ++it){
+    std::map<int,Sprite*>::iterator it = static_sprites[BACK].begin();
+    for(; it != static_sprites[BACK].end(); ++it){
         draw(it->second, STATIC);
     }
-    it = sprites[0].begin();
-    for(; it != sprites[0].end(); ++it){
+    it = sprites[BACK].begin();
+    for(; it != sprites[BACK].end(); ++it){
         draw(it->second, NON_STATIC);
     }
-    it = sprites[1].begin();
-    for(; it != sprites[1].end(); ++it){
+    it = sprites[FRONT].begin();
+    for(; it != sprites[FRONT].end(); ++it){
         draw(it->second, NON_STATIC);
     }
-    it = static_sprites[1].begin();
-    for(; it != static_sprites[1].end(); ++it){
+    it = static_sprites[FRONT].begin();
+    for(; it != static_sprites[FRONT].end(); ++it){
         draw(it->second, STATIC);
     }
 }

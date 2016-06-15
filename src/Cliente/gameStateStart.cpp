@@ -6,11 +6,19 @@
 #include "block_sprite.h"
 #include "character_sprite.h"
 #include "response_handler.h"
+#include "bar_sprite.h"
 #include "event.h"
 
 #define FPS 60
 #define TAM_INT 4
 #define MAPA 1
+#define STATIC 1
+#define NON_STATIC 0
+#define FRONT 1
+#define BACK 0
+
+#define HP_BAR 6001
+#define MP_BAR 6011
 
 gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
                                 std::pair<int,std::string> &playerData,
@@ -48,6 +56,53 @@ void gameStateStart::load(int level){
     /// Recibo datos del mapa
     receiver->receiveMapSize();
     receiver->receiveMap();
+    /// Vida y energia
+    loadHUD();
+}
+
+void gameStateStart::loadHUD(){
+    Sprite *spr;
+    /// VIDAS
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr->setPosX(10);
+    spr->setPosY(10);
+    renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
+
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr->setPosX(120);
+    spr->setPosY(10);
+    renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
+
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr->setPosX(230);
+    spr->setPosY(10);
+    renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
+
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr->setPosX(340);
+    spr->setPosY(10);
+    renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
+    /// ENERGIA
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr->setPosX(10);
+    spr->setPosY(20);
+    renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
+
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr->setPosX(120);
+    spr->setPosY(20);
+    renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
+
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr->setPosX(230);
+    spr->setPosY(20);
+    renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
+
+    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr->setPosX(340);
+    spr->setPosY(20);
+    renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
+
 }
 
 int gameStateStart::unload(){
@@ -197,19 +252,13 @@ void gameStateStart::mainLoop(){
             int posY = -1;
             std::pair<int,int> coord;
             event = receiver->r_queue.front();
-       //     SDL_Delay(15);
-          //  command = receiver->r_queue.front();
-        //    receiver->r_queue.pop();
+
             if( event->command == MAPA){
                 command = event->command;
                 objectType = event->objectType;
-       //         receiver->r_queue.pop();
                 objectID = event->objectID;
-         //       receiver->r_queue.pop();
                 posX = event->posX;
-        //        receiver->r_queue.pop();
                 posY = event->posY;
-        //        receiver->r_queue.pop();
 
                 coord.first = posX;
                 coord.second = posY;
@@ -237,7 +286,6 @@ void gameStateStart::mainLoop(){
 
 void gameStateStart::render(){
     renderer->clear();
- //   SDL_Delay(15);
     renderer->drawAll();
     renderer->present();
 }

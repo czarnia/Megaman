@@ -36,6 +36,7 @@ class Sprite{
         virtual void setState(int x, int y){}
         virtual void spawn(){}
         virtual void destroy(){}
+        virtual void loadAnimations(std::string path){}
         /// libera la memoria pedida
         void erase();
         virtual ~Sprite();

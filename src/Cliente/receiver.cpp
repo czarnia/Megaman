@@ -20,7 +20,10 @@
 #define BLOCK_LADDER 12
 #define MEGAMAN 1
 #define MEGAMAN_BULLET 12
-#define MET 8
+#define BUMBY 2
+#define J_SNIPER 3
+#define MET 4
+#define SNIPER 5
 
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
@@ -28,7 +31,14 @@
 #define BLOCK_LADDERN 1500
 #define MEGAMANN 0
 #define MEGAMAN_BULLETN 10000
-#define METN 2000
+#define BUMBYN 2000
+#define J_SNIPERN 3000
+#define METN 4000
+#define SNIPERN 5000
+
+#define FRONT 1
+#define BACK 0
+
 
 #define TAM_INT 4
 #define VICTORY 2
@@ -92,6 +102,12 @@ void Receiver::ejecutar(){
                 objectType = MEGAMAN_BULLETN;
             }else if (objectType == MET){
                 objectType = METN;
+            }else if (objectType == BUMBY){
+                objectType = BUMBYN;
+            }else if (objectType == J_SNIPER){
+                objectType = J_SNIPERN;
+            }else if (objectType == SNIPER){
+                objectType = SNIPERN;
             }else{
                 objectType = -1;
                 objectID = -1;
@@ -166,19 +182,19 @@ void Receiver::receiveMap(){
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
-                    renderer->addSprite(BLOCK_EARTHN, spr, 0, NON_STATIC);
+                    renderer->addSprite(BLOCK_EARTHN, spr, BACK, NON_STATIC);
                     break;
                 case BLOCK_SPIKES:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
-                    renderer->addSprite(BLOCK_SPIKESN, spr, 0, NON_STATIC);
+                    renderer->addSprite(BLOCK_SPIKESN, spr, BACK, NON_STATIC);
                     break;
                 case BLOCK_LADDER:
                     spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
-                    renderer->addSprite(BLOCK_LADDERN, spr, 0, NON_STATIC);
+                    renderer->addSprite(BLOCK_LADDERN, spr, BACK, NON_STATIC);
                     break;
                 case MEGAMAN:
                     spr = new Character_sprite(renderer->get_renderer(), "../sprites/8bitmegaman.png");
@@ -190,7 +206,25 @@ void Receiver::receiveMap(){
                     spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
-                    renderer->addSprite(METN+objectID, spr, 1, NON_STATIC);
+                    renderer->addSprite(METN+objectID, spr, FRONT, NON_STATIC);
+                    break;
+                case BUMBY:
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/bumby.png");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(BUMBYN+objectID, spr, FRONT, NON_STATIC);
+                    break;
+                case J_SNIPER:
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(J_SNIPERN+objectID, spr, FRONT, NON_STATIC);
+                    break;
+                case SNIPER:
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/sniper.png");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(SNIPERN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 default:
                     break;

@@ -41,7 +41,6 @@ void Servidor::aceptar_clientes(){
   for (size_t i = 0; i < 4; i++){
     aceptado = skt->accept(NULL);
     if (!aceptado){
-		std::cout << "SHUTDOWN\n";
 		return;
     }
     agregar_cliente(aceptado);

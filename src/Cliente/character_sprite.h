@@ -19,11 +19,16 @@ class Character_sprite: public Sprite{
         /// Animaciones
         std::vector<SDL_Rect*> runningAnimation;
         std::vector<SDL_Rect*> idleAnimation;
+        std::vector<SDL_Rect*> jumpingAnimation;
+        std::vector<SDL_Rect*> ladderAnimation;
+        std::vector<SDL_Rect*> spawnAnimation;
+        std::vector<SDL_Rect*> deathAnimation;
         ///
         float currentFrame;
-        void loadAnimations();
+
     public:
         Character_sprite(SDL_Renderer *r, const char* file);
+        void loadAnimations(std::string path);
         void setState(int x, int y);
         void clearStates();
         SDL_Rect* get_crop();

@@ -10,6 +10,9 @@
 
 /// PARA PROTOCOLO
 #define MAPA 1
+#define BARRA_VIDA 4
+#define BARRA_ENERGIA 5
+#define VIDAS 6
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
 #define VICTORY 2
@@ -21,7 +24,10 @@
 #define BLOCK_STAIRN 1500
 #define MEGAMANN 0
 #define MEGAMAN_BULLETN 10000
-#define METN 2000
+#define BUMBYN 2000
+#define J_SNIPERN 3000
+#define METN 4000
+#define SNIPERN 5000
 
 ResponseHandler::ResponseHandler(Renderer *renderer):
     renderer(renderer)
@@ -48,6 +54,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                 switch (objectType){
                     case MEGAMANN:
                         spr = new Character_sprite(renderer->get_renderer(),"../sprites/8bitmegaman.png");
+                        spr->loadAnimations("../AnimationConfig/megaman.txt");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
@@ -55,6 +62,24 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
                         break;
                     case METN:
                         spr = new Minion_sprite(renderer->get_renderer(),"../sprites/met.png");
+                        spr->setPosX(coord.first);
+                        spr->setPosY(coord.second);
+                        renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
+                        break;
+                    case BUMBYN:
+                        spr = new Minion_sprite(renderer->get_renderer(),"../sprites/bumby.png");
+                        spr->setPosX(coord.first);
+                        spr->setPosY(coord.second);
+                        renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
+                        break;
+                    case J_SNIPERN:
+                        spr = new Minion_sprite(renderer->get_renderer(),"../sprites/j_sniper.png");
+                        spr->setPosX(coord.first);
+                        spr->setPosY(coord.second);
+                        renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
+                        break;
+                    case SNIPERN:
+                        spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.png");
                         spr->setPosX(coord.first);
                         spr->setPosY(coord.second);
                         renderer->addSprite(objectType+objectID, spr, 1, NON_STATIC);
@@ -69,7 +94,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             }
         }
             break;
-  /*      case BARRA_VIDA:
+        case BARRA_VIDA:
             std::cout<<"Recibi nivel de vida: "<<objectType<<std::endl;
 
             break;
@@ -80,7 +105,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
         case VIDAS:
             std::cout<<"Recibi vidas: "<<objectType<<std::endl;
 
-            break;*/
+            break;
 
         case VICTORY:{
             std::cout<<"Recibi victoria: Vuelvo a boss select"<<std::endl;

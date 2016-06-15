@@ -13,7 +13,7 @@ class gameStateEditor: public GameState{
         void updateInput(SDL_Event *event);
     public:
         enum objectType{
-            BLOCK, SPIKES, LADDER, MEGAMAN, MET, NOTHING
+            BLOCK, SPIKES, LADDER, MEGAMAN, MET, BUMBY, J_SNIPER, SNIPER, NOTHING
         };
         objectType object;
 

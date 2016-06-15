@@ -1,4 +1,6 @@
 #include "character_sprite.h"
+#include <fstream>
+#include <iostream>
 #include <math.h>
 
 /// Auxiliares
@@ -15,8 +17,6 @@ Character_sprite::Character_sprite(SDL_Renderer *r, const char* file):
 {
     rectangle.w = Character_sprite::width;
     rectangle.h = Character_sprite::height;
-
-    loadAnimations();
 
     currentFrame = 0;
     clearStates();
@@ -71,6 +71,23 @@ SDL_Rect* Character_sprite::get_crop(){
             currentFrame = 0;
         return idleAnimation[round(currentFrame)];
     }
+    if (spawning){
+        currentFrame += 0.01;
+        if ((unsigned)round(currentFrame) == spawnAnimation.size()){
+            currentFrame = 0;
+            spawning = false;
+        }
+        return spawnAnimation[round(currentFrame)];
+    }
+    if (dying){
+        currentFrame += 0.01;
+        if((unsigned)round(currentFrame) == deathAnimation.size()){
+            currentFrame = 0;
+            dying = false;
+
+        }
+        return deathAnimation[round(currentFrame)];
+    }
     return NULL;
 }
 
@@ -81,55 +98,82 @@ Character_sprite::~Character_sprite(){
     it = idleAnimation.begin();
     for (; it != idleAnimation.end(); ++it)
         delete *it;
+    it = jumpingAnimation.begin();
+    for (; it != jumpingAnimation.end(); ++it)
+        delete *it;
+    it = ladderAnimation.begin();
+    for (; it != ladderAnimation.end(); ++it)
+        delete *it;
+    it = spawnAnimation.begin();
+    for (; it != spawnAnimation.end(); ++it)
+        delete *it;
+    it = deathAnimation.begin();
+    for (; it != deathAnimation.end(); ++it)
+        delete *it;
 }
 
-void Character_sprite::loadAnimations(){
-    SDL_Rect *aux = new SDL_Rect;
-    aux->x = 13;
-    aux->y = 46;
-    aux->w = 35;
-    aux->h = 23;
-    runningAnimation.push_back(aux);
+void Character_sprite::loadAnimations(std::string path){
+    std::ifstream ifile;
+    ifile.open(path.c_str());
+    int framesNumber;
 
-    aux = new SDL_Rect;
-    aux->x = 49;
-    aux->y = 46;
-    aux->w = 33;
-    aux->h = 23;
-    runningAnimation.push_back(aux);
+    ifile >> framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        runningAnimation.push_back(aux);
+    }
 
-    aux = new SDL_Rect;
-    aux->x = 83;
-    aux->y = 46;
-    aux->w = 30;
-    aux->h = 23;
-    runningAnimation.push_back(aux);
+    ifile >>framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        idleAnimation.push_back(aux);
+    }
 
-    aux = new SDL_Rect;
-    aux->x = 112;
-    aux->y = 46;
-    aux->w = 33;
-    aux->h = 23;
-    runningAnimation.push_back(aux);
+    ifile >> framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        jumpingAnimation.push_back(aux);
+    }
 
-    aux = new SDL_Rect;
-    aux->x = 102;
-    aux->y = 10;
-    aux->w = 25;
-    aux->h = 23;
-    idleAnimation.push_back(aux);
+    ifile >> framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        ladderAnimation.push_back(aux);
+    }
 
-    aux = new SDL_Rect;
-    aux->x = 132;
-    aux->y = 10;
-    aux->w = 25;
-    aux->h = 23;
-    idleAnimation.push_back(aux);
+    ifile >> framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        spawnAnimation.push_back(aux);
+    }
 
-    aux = new SDL_Rect;
-    aux->x = 159;
-    aux->y = 10;
-    aux->w = 25;
-    aux->h = 23;
-    idleAnimation.push_back(aux);
+    ifile >> framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        deathAnimation.push_back(aux);
+    }
 }
