@@ -28,6 +28,8 @@ public Observador_juego{
     void empezar_partida();
     //Empieza un nuevo nivel.
     void empezar_nivel();
+    //Comienza el juego del nivel.
+    void jugar_nivel();
     //Termina la ejecución del servidor.
     void terminar_ejecucion();
 

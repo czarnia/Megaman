@@ -26,6 +26,7 @@ Juego::Juego(){
 	std::string root_path("../../../Mapas/");
 	cargador = new Cargador_mapa(root_path.c_str()); 
 	cargar_factories(cargador);
+	jugando_nivel = false;
 	fin_partida = false;
 	partida_inicializada = false;
 }
@@ -51,6 +52,9 @@ void Juego::inicializar_nivel(int numero_mapa){
 	}
 	if (!partida_inicializada){ 
 		partida_inicializada = true;
+	}
+	if (!jugando_nivel){
+		jugando_nivel = true;
 	}
 }
 
@@ -130,6 +134,10 @@ void Juego::quitar_observador(Observador_juego *observador){
 			observadores.erase(observadores.begin()+i);
 		}
 	}
+}
+
+bool Juego::esta_jugando_nivel(){
+	return jugando_nivel;
 }
 
 

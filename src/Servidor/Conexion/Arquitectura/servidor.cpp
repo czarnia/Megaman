@@ -15,10 +15,8 @@ typedef struct sockaddr* Address;
 
 Servidor::Servidor(char *puerto){
 	Log::instancia()->inicio_servidor();
-
 	entrada = new Entrada_estandar(FIN_ENTRADA, this);
 	entrada->start();
-
 	skt = new Socket(NULL, puerto);
 	skt->bind(NULL, puerto);
 	skt->listen(MAX_CONEXIONES);
@@ -84,7 +82,13 @@ void Servidor::empezar_nivel(){
 	//TODO OBTENER NUMERO DE MAPA/BOSS
 	mundo->inicializar_nivel(1); 
 	clientes.iniciar_nivel();
-	mundo->jugar();
+	//mundo->jugar();
+}
+
+void Servidor::jugar_nivel(){
+	if (mundo->esta_jugando_nivel()){
+		mundo->jugar();
+	}
 }
 
 void Servidor::cerrar_conexiones(){

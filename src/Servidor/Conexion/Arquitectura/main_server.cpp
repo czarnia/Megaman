@@ -17,6 +17,7 @@ int main(int argc, char *argv[]){
 
   while (!server.termino_ejecucion()){
     server.aceptar_clientes();
+    server.jugar_nivel();
     //server.empezar_partida();
   }
   return 0;

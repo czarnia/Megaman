@@ -17,11 +17,12 @@ public Juego_observable{
 	private:
 		Mapa *mundo;
 		Mutex proteccion;
-		bool fin_partida;
 		int cant_jugadores;
 		std::vector<Ubicable_factory*> factories;
 		Cargador_mapa *cargador;
+		bool fin_partida;
 		bool partida_inicializada;
+		bool jugando_nivel;
 	public:
 		//Dado un tamanio, crea un juego nuevo.
 		Juego();
@@ -106,6 +107,8 @@ public Juego_observable{
 		bool inicio_partida();
 		//Recibe un numero de mapa e inicializa un nuevo nivel.
 		void inicializar_nivel(int numero_mapa);
+		//Devuelve true si ya se inicializo el nivel.
+		bool esta_jugando_nivel();
 		//Destructor de juego.
 		~Juego();
 		
