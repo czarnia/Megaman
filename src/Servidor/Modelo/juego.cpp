@@ -25,6 +25,7 @@ Juego::Juego(){
 	//que quiero elegir:
 	std::string root_path("../../../Mapas/");
 	cargador = new Cargador_mapa(root_path.c_str());
+	mundo = NULL;
 	cargar_factories(cargador);
 	jugando_nivel = false;
 	fin_partida = false;
@@ -242,4 +243,15 @@ bool Juego::inicio_partida(){
 }
 
 
-Juego::~Juego(){}
+Juego::~Juego(){
+	delete cargador;
+	if (mundo != NULL){
+		delete mundo;
+	}
+	size_t tam_factories = factories.size();
+	for (size_t i = 0; i < tam_factories; i++){
+		Ubicable_factory* factory = factories.back();
+    factories.pop_back();
+		delete factory;
+	}
+}

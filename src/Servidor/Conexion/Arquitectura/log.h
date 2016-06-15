@@ -21,6 +21,8 @@ class Log{
     static Log* instancia();
     //Destructor del Log.
     ~Log();
+    //Cierra el Log.
+    static void cerrar();
     //Escribe en el archivo de salida un mensaje referido a que se inicia el
     //servidor.
     void inicio_servidor();
