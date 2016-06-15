@@ -56,8 +56,10 @@ void Juego::inicializar_partida(int num_jugadores, int numero_mapa){
 void Juego::jugar(){
 	while (!fin_partida){
 		clock_t iniciar_tiempo = clock();
-		Lock l(proteccion);
-		update(0.01);
+		{
+			Lock l(proteccion);
+			update(0.01);
+		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
 		sleep(delta_tiempo);
 	}

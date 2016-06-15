@@ -3,9 +3,14 @@
 #include "escalera.h"
 #include "bala.h"
 #include "bloque.h"
-#define TIPO_PUAS 3
+#define TIPO_PUAS 11
+#define ALTO 2
+#define ANCHO 2
 
-Puas::Puas(Coordenada c) : Elemento(c, TIPO_PUAS) {}
+Puas::Puas(Coordenada c) : Elemento(c, TIPO_PUAS) {
+	alto = ALTO;
+	ancho = ANCHO;
+}
 
 bool Puas::puede_ocupar(Personaje* pj){
 	return true;

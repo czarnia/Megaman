@@ -181,7 +181,7 @@ void Receiver::receiveMap(){
                     renderer->addSprite(BLOCK_LADDERN, spr, 0, NON_STATIC);
                     break;
                 case MEGAMAN:
-                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/8bitmegaman.png");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(MEGAMANN+objectID, spr, 1, NON_STATIC);
