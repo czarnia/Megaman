@@ -185,7 +185,7 @@ void Receiver::receiveMap(){
                     renderer->addSprite(BLOCK_EARTHN, spr, BACK, NON_STATIC);
                     break;
                 case BLOCK_SPIKES:
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.gif");
+                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/spike.png");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_SPIKESN, spr, BACK, NON_STATIC);
@@ -198,10 +198,10 @@ void Receiver::receiveMap(){
                     break;
                 case MEGAMAN:
                     spr = new Character_sprite(renderer->get_renderer(), "../sprites/8bitmegaman.png");
+                    spr->loadAnimations("../AnimationConfig/megaman.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
-                    renderer->addSprite(MEGAMANN+objectID, spr, 1, NON_STATIC);
-                    break;
+                    renderer->addSprite(MEGAMANN+objectID, spr, FRONT, NON_STATIC);
                 case MET:
                     spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
                     spr->setPosX(coordX*SCALE_FACTOR);

@@ -10,7 +10,7 @@ LobbyReceiver::LobbyReceiver(Socket* conexion, Renderer *renderer,
 {
 }
 
-/// HILO
+    /// HILO
 void LobbyReceiver::ejecutar(){
     char buffer[TAM_INT] = "";
     int start;
