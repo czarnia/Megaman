@@ -13,7 +13,6 @@ public Observador_ubicable{
 	protected:
 		int cantidad_vidas;
 		int porcentaje_vida;
-		int energia;
 	public:
 		//Dado un Juego* y un Personaje*, crea un observador_personaje.
 		Observador_personaje(Juego* juego, Personaje* pj);
