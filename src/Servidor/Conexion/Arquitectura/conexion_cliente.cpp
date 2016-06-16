@@ -10,7 +10,8 @@
 #define TAM_INT 4
 
 enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS, FIN_NIVEL,
-	 DERROTA, VICTORIA};
+	 DERROTA, VICTORIA, ACCION};
+enum Acciones {ATACAR = 1, ESCALAR, SALTAR, ESCUDO};
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m,
 Servidor* s): skt(conexion), id_cliente(id),

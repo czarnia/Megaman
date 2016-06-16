@@ -33,6 +33,14 @@ typedef std::vector<Bala*>::iterator ItBalas;
 typedef std::map<int, Premio_factory*>::iterator ItPremios;
 
 //-------------->Auxiliares<-----------//
+std::vector<int> obtener_claves(std::map<int, Premio_factory*> hash){
+  std::vector<int> v;
+  for (ItPremios it = hash.begin(); it != hash.end(); it++){
+    v.push_back(it->first);
+  }
+  return v;
+}
+
 std::vector<Coordenada> coord_tierras(){
 	//IMPORTANTE: las coordenadas de los bloques
 	//de tierra son las coordenadas internas
@@ -86,6 +94,15 @@ long_y(long_y){
 		for (size_t y = 0; y < long_y; y++){
 			elementos[x][y] = std::vector<Elemento*>();
 		}
+	}
+}
+
+Mapa::~Mapa(){
+	std::vector<int> claves = obtener_claves(premios);
+	for (size_t i = 0; i < claves.size(); i++){
+		Premio_factory* premio = premios[claves[i]];
+  	premios.erase(claves[i]);
+    delete premio;
 	}
 }
 
