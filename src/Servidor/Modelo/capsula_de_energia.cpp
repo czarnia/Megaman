@@ -1,6 +1,6 @@
 #include "capsula_de_energia.h"
 
-#define TIPO_CAPSULA_CHICA 8
+#define TIPO_CAPSULA_CHICA 14
 
 Capsula_de_energia::Capsula_de_energia(Coordenada coord, int tipo_capsula):
 Premio(coord, tipo_capsula){}

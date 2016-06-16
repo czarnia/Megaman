@@ -1,6 +1,6 @@
 #include "nueva_vida.h"
 
-#define TIPO_NUEVA_VIDA -1
+#define TIPO_NUEVA_VIDA 13
 #define PROBABILIDAD_APARICION 0.01
 
 Nueva_vida::Nueva_vida(Coordenada coord):

@@ -1,6 +1,6 @@
 #include "capsula_de_plasma.h"
 
-#define TIPO_CAPSULA_CHICA 5
+#define TIPO_CAPSULA_CHICA 16
 
 Capsula_de_plasma::Capsula_de_plasma(Coordenada coord, int tipo_capsula):
 Premio(coord, tipo_capsula){}

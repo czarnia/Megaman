@@ -6,8 +6,8 @@
 #define PROBABILIDAD_GRANDE 0.05
 #define PROBABILIDAD_CHICO 0.1
 
-#define TIPO_CAPSULA_CHICA -3 //TODO: define
-#define TIPO_CAPSULA_GRANDE -4 // TODO: define
+#define TIPO_CAPSULA_CHICA 16
+#define TIPO_CAPSULA_GRANDE 17
 
 Premio* Capsula_de_plasma_factory::crear(Coordenada c){
   size_t resultado = rand() % 10 + 1;

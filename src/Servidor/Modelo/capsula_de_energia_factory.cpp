@@ -6,8 +6,8 @@
 #define PROBABILIDAD_GRANDE 0.05
 #define PROBABILIDAD_CHICO 0.1
 
-#define TIPO_CAPSULA_CHICA -1 //TODO: define
-#define TIPO_CAPSULA_GRANDE -2 // TODO: define
+#define TIPO_CAPSULA_CHICA 14
+#define TIPO_CAPSULA_GRANDE 15
 
 Premio* Capsula_de_energia_factory::crear(Coordenada c){
   size_t resultado = rand() % 10 + 1;
