@@ -8,6 +8,10 @@
 #include "puas.h"
 #include "escalera.h"
 
+#include "capsula_de_plasma_factory.h"
+#include "capsula_de_energia_factory.h"
+#include "nueva_vida_factory.h"
+
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -19,6 +23,9 @@
 #include <algorithm>
 
 #define TAM_BLOQUE 1
+#define CAPSULA_DE_PLASMA 1
+#define CAPSULA_DE_ENERGIA 2  //TODO: redefinir
+#define NUEVA_VIDA 3
 
 typedef std::vector<Coordenada>::iterator ItBloques;
 typedef std::map<int, Personaje*>::iterator ItPersonaje;
@@ -346,5 +353,7 @@ bool Mapa::toca_premio(){
 }
 
 void Mapa::cargar_premios_factories(){
-
+	premios[CAPSULA_DE_PLASMA] = new Capsula_de_plasma_factory();
+	premios[CAPSULA_DE_ENERGIA] = new Capsula_de_energia_factory();
+	premios[NUEVA_VIDA] = new Nueva_vida_factory();
 }
