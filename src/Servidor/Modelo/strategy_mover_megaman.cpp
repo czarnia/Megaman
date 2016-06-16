@@ -8,7 +8,7 @@
 #define IZQUIERDA 4
 #define SALTAR 5
 #define VELOCIDAD 2
-#define VELOCIDAD_SALTO 4
+#define VELOCIDAD_SALTO 30
 
 StrategyMoverMegaman::StrategyMoverMegaman():
 velocidad_x(0),

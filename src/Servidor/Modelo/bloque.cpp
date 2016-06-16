@@ -5,8 +5,9 @@
 #include "puas.h"
 #include <algorithm>
 #include <vector>
-#define ALTO 2
-#define ANCHO 2
+
+#define ALTO 30
+#define ANCHO 30
 #define TIPO_BLOQUE 10
 
 Bloque::Bloque(Coordenada c) : Elemento(c, TIPO_BLOQUE) {

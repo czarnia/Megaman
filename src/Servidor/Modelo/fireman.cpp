@@ -3,7 +3,7 @@
 #include "arma_fireman.h"
 
 #define TIEMPO_ACCION 2
-#define TIPO_FIREMAN -1 //TODO: definir el id.
+#define TIPO_FIREMAN 24
 
 #define DERECHA 3
 #define IZQUIERDA 4

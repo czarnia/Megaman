@@ -4,8 +4,8 @@
 #include "bala.h"
 #include "bloque.h"
 #define TIPO_PUAS 11
-#define ALTO 2
-#define ANCHO 2
+#define ALTO 30
+#define ANCHO 30
 
 Puas::Puas(Coordenada c) : Elemento(c, TIPO_PUAS) {
 	alto = ALTO;

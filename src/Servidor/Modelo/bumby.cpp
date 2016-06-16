@@ -8,6 +8,7 @@
 #define AVANZAR_X 1
 #define RETROCEDER_X -1
 #define BAJAR_Y 1
+#define BUMBY 2
 
 enum direcciones_ataque{DERECHA_ABAJO, CENTRO_ABAJO, IZQUIERDA_ABAJO};
 
@@ -15,6 +16,7 @@ Bumby::Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
+  tipo = BUMBY;
 }
 
 void Bumby::atacar(int dir, Mapa* mapa){
@@ -59,7 +61,7 @@ void Bumby::recibir_ataque(Bala* ataque){
 void Bumby::mover(size_t tiempo, Mapa* mapa){
 	//NADA
 }
- 
+
 void Bumby::sacar_movimiento(int direccion){
 	//NADA
 }

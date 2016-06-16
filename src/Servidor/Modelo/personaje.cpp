@@ -16,8 +16,8 @@
 #define GANAR_MAX 100
 #define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
-#define ALTO 4
-#define ANCHO 2
+#define ALTO 60
+#define ANCHO 30
 
 Personaje::Personaje(Mapa *mapa, Coordenada c, int id):
 coordenada(c),

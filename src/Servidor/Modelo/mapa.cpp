@@ -22,7 +22,7 @@
 #include <math.h>
 #include <algorithm>
 
-#define TAM_BLOQUE 1
+#define TAM_BLOQUE 30
 #define CAPSULA_DE_PLASMA 1
 #define CAPSULA_DE_ENERGIA 2  //TODO: redefinir
 #define NUEVA_VIDA 3
@@ -197,7 +197,7 @@ void Mapa::update(size_t tiempo){
 }
 
 bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
-	return !hay_tierra(coord.abajo((alto/2)+1)); //asumo los bloques son de tamaño 2
+	return !hay_tierra(coord.abajo(alto/2).abajo(TAM_BLOQUE/2));
 }
 
 bool Mapa::hay_personaje(Coordenada *coord){

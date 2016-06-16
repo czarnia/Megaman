@@ -1,13 +1,16 @@
 #include "jumping_snipper.h"
 #include "arma_minion.h"
+
 #define TIEMPO_ESTADO 4
 #define DERECHA -1
+#define JUMPING_SNIPPER 3
 
 Jumping_snipper::Jumping_snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Snipper(mapa, c, arma, id){
   tras_escudo = false;
   flotando = false;
   tiempo_pasado = 0;
+  tipo = JUMPING_SNIPPER;
 }
 
 void Jumping_snipper::update(size_t tiempo, Mapa* mapa){
