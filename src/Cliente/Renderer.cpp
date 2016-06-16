@@ -9,6 +9,8 @@
 #define STATIC 1
 #define FRONT 1
 #define BACK 0
+#define LEFT 1
+#define RIGHT 0
 
 #define LAYER_NUMBER 2
 
@@ -130,9 +132,15 @@ void Renderer::draw(Sprite *spr, int lockedToScreen){
         auxRect = *(spr->get_rectangle());
         auxRect.x = spr->getPosX() - camX;
         auxRect.y = spr->getPosY() - camY;
-        SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), &auxRect);
+        if (spr->get_direction() == LEFT)
+            SDL_RenderCopyEx(renderer, spr->get_texture(), spr->get_crop(), &auxRect, 0, NULL, SDL_FLIP_HORIZONTAL);
+        else
+            SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), &auxRect);
     }else{
-        SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), spr->get_rectangle());
+        if (spr->get_direction() == LEFT)
+            SDL_RenderCopyEx(renderer, spr->get_texture(), spr->get_crop(), &auxRect, 0, NULL, SDL_FLIP_HORIZONTAL);
+        else
+            SDL_RenderCopy(renderer, spr->get_texture(), spr->get_crop(), spr->get_rectangle());
     }
 }
 

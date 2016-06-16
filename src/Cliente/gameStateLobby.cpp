@@ -18,7 +18,7 @@
 #define SELECTOR 100
 #define TAM_INT 4
 
-#define START_GAME 1
+#define START_GAME 0
 #define BOSS_CHOSEN 6
 
 gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
@@ -33,6 +33,7 @@ gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
     window->setTitle("Megaman: Lobby");
     start = false;
     quit = false;
+    running = true;
     startSelect = false;
     selectorPos = 1;
     receiver = new LobbyReceiver(skt, renderer, &mutex);
@@ -121,36 +122,39 @@ GameState::StateCode gameStateLobby::update(){
 
     /// ACA LANZO UN HILO PARA ESPERAR QUE EL SERVIDOR
     /// ME INDIQUE EL COMIENZO DE PARTIDA Y NUMERO DE BOSS
-   //receiver->start();
-
-    /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
-    if (playerData.first == 1){
-        updateInput();
+    receiver->start();
+    while (running){
+        /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
+        if (playerData.first == 1){
+            updateInput();
+            render();
+        }
     }
-
     /// Si se recibio el comienzo de juego
     /// cambio los flags necesarios
-  /*  while (!receiver->r_queue.empty()){
-        int aux;
-        /// START
+
+    int aux;
+    /// START
+    mutex.lock();
+    aux = receiver->r_queue.front();
+    receiver->r_queue.pop();
+    mutex.unlock();
+    SDL_Delay(10);
+    if (aux == START_GAME){
+        /// BOSS
         mutex.lock();
-        aux = receiver->r_queue.front();
+        *level = receiver->r_queue.front();
         receiver->r_queue.pop();
         mutex.unlock();
-        SDL_Delay(10);
-        if (aux == START_GAME){
-            /// BOSS
-            mutex.lock();
-            *level = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            mutex.unlock();
-            start = true;
-        }
-    }*/
+        start = true;
+    }
+
     ///
     if (start){
+        receiver->join();
         return GameState::GAME_START;
     }else if (quit){
+        receiver->join();
         return GameState::QUIT;
     }else{
         return GameState::CONTINUE;
@@ -181,6 +185,7 @@ void gameStateLobby::updateInput(){
                     if(startSelect){
                         /// Envio el numero de boss elegido
                         start = true;
+                        running = false;
                         int command = BOSS_CHOSEN;
                         skt->send((char*)&command, TAM_INT);
                         int bossNumber = selectorPos;
@@ -227,7 +232,7 @@ bool gameStateLobby::buttonPress(int x, int y, Sprite *spr){
 }
 
 void gameStateLobby::moveSelector(std::string direction){
-    /// El nombre explica lo que se hace
+    /// El nombre es bastante descriptivo
     if (!direction.compare("right")){
         if (selectorPos < 5){
             selectorPos++;

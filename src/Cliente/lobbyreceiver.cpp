@@ -23,7 +23,7 @@ void LobbyReceiver::ejecutar(){
     skt->receive(buffer, TAM_INT);
     bossNumber = *((int*)&buffer);
     strncpy(buffer, "    ", TAM_INT);
-    std::cout<< "Recibi: "<<start<<" y: "<<bossNumber<<std::endl;
+    std::cout<< "Recibi: "<<start<<" y: "<<bossNumber<< " para empezar la partida"<<std::endl;
     mutex->lock();
     r_queue.push(start);
     r_queue.push(bossNumber);

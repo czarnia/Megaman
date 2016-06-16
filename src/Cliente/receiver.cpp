@@ -25,6 +25,7 @@
 #define MET 4
 #define SNIPER 5
 
+
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
 #define BLOCK_SPIKESN 1000
@@ -93,27 +94,6 @@ void Receiver::ejecutar(){
             << objectType << " ID de objeto: "<<objectID <<" Pos: "
             <<coordX<<","<<coordY<<std::endl;
             ///////////////
-            coordX *= SCALE_FACTOR;
-            coordY *= SCALE_FACTOR;
-            /// Etapa de clasificacion de objetos
-            if (objectType == MEGAMAN){
-                objectType = MEGAMANN;
-            }else if (objectType == MEGAMAN_BULLET){
-                objectType = MEGAMAN_BULLETN;
-            }else if (objectType == MET){
-                objectType = METN;
-            }else if (objectType == BUMBY){
-                objectType = BUMBYN;
-            }else if (objectType == J_SNIPER){
-                objectType = J_SNIPERN;
-            }else if (objectType == SNIPER){
-                objectType = SNIPERN;
-            }else{
-                objectType = -1;
-                objectID = -1;
-                coordX = -1;
-                coordY = -1;
-            }
             mutex->lock();
             r_queue.push(new Event(command,objectType,objectID,coordX,coordY));
             mutex->unlock();
@@ -202,6 +182,7 @@ void Receiver::receiveMap(){
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(MEGAMANN+objectID, spr, FRONT, NON_STATIC);
+                    break;
                 case MET:
                     spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
                     spr->setPosX(coordX*SCALE_FACTOR);

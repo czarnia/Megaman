@@ -33,7 +33,7 @@ class gameStateStart: public GameState{
         bool left;
         bool right;
         bool jump;
-
+        bool shoot;
         /// Estados
         bool quit;
         bool victory;

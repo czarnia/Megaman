@@ -9,10 +9,11 @@ class Character_sprite: public Sprite{
     private:
         static int width;
         static int height;
+        enum State{SPAWNING, DYING, RUNNING, JUMPING, IDLE, EDITORMODE};
         bool spawning;
         bool dying;
         bool movingLeft;
-        bool movingRight;
+        bool running;
         bool jumping;
         bool idle;
         bool editorMode;
@@ -25,13 +26,20 @@ class Character_sprite: public Sprite{
         std::vector<SDL_Rect*> deathAnimation;
         ///
         float currentFrame;
-
+        State currentState;
     public:
         Character_sprite(SDL_Renderer *r, const char* file);
+
+
         void loadAnimations(std::string path);
         void setState(int x, int y);
         void clearStates();
+        void destroy();
+        void spawn();
+        int get_direction();
+
         SDL_Rect* get_crop();
+
         ~Character_sprite();
 };
 

@@ -11,6 +11,8 @@ class ResponseHandler{
         ResponseHandler(Renderer *renderer);
         /// Ejecuta la accion que recibe desde el servidor
         int execute(int command, int objectType, int objectID, std::pair<int,int> coord);
+        void createObject(int objectType, int objectID, std::pair<int,int> coord);
+        void changeHUD(int bar, int barID, int ammount);
         ~ResponseHandler();
 };
 

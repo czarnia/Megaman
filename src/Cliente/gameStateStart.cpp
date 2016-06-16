@@ -9,7 +9,7 @@
 #include "bar_sprite.h"
 #include "event.h"
 
-#define FPS 60
+#define FPS 30
 #define TAM_INT 4
 #define MAPA 1
 #define STATIC 1
@@ -67,42 +67,42 @@ void gameStateStart::load(int level){
 void gameStateStart::loadHUD(){
     Sprite *spr;
     /// VIDAS
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), true);
     spr->setPosX(10);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), true);
     spr->setPosX(120);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), true);
     spr->setPosX(230);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/hpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), true);
     spr->setPosX(340);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
     /// ENERGIA
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), false);
     spr->setPosX(10);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), false);
     spr->setPosX(120);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), false);
     spr->setPosX(230);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), "../sprites/mpbar8.8.png");
+    spr = new Bar_sprite(renderer->get_renderer(), false);
     spr->setPosX(340);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
@@ -166,8 +166,11 @@ void gameStateStart::updateInput(bool *running){
                     }
                     break;
                 case SDLK_a:
-                    std::cout<<"Se disparo"<<std::endl;
-                    sender.send("attack", direction);  // ENVIO LA TECLA
+                    if (!shoot){
+                        std::cout<<"Se disparo"<<std::endl;
+                        sender.send("attack", direction);  // ENVIO LA TECLA
+                        shoot = true;
+                    }
                     break;
                 case SDLK_1:
                     std::cout<<"Se cambio de arma 1"<<std::endl;
@@ -214,6 +217,9 @@ void gameStateStart::updateInput(bool *running){
                     sender.send("stop","jump");
                     jump = false;
                     break;
+                case SDLK_a:
+                    shoot = false;
+                    break;
                 default:
                     break;
             }
@@ -241,7 +247,7 @@ void gameStateStart::mainLoop(){
     Uint32 starting_tick;
     Event *event;
     /// Realiza los cambios acordes a las respuestas del servidor
-    static ResponseHandler handler(renderer);
+    ResponseHandler handler(renderer);
     /// Hilo receiver, recibe todo lo proveniente del servidor
     /// y lo almacena en una cola en forma de eventos
     receiver->start();
@@ -276,7 +282,6 @@ void gameStateStart::mainLoop(){
 
                 coord.first = posX;
                 coord.second = posY;
-                std::cout <<objectType <<" "<<objectID<<" "<<posX<<" "<<posY;
             }
             receiver->r_queue.pop();
             /// acorde a lo recibido del servidor, seteo los flags correspondientes

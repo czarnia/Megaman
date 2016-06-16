@@ -18,7 +18,7 @@ class Sprite{
         Sprite();
         /// getters de los atributos de sdl
         SDL_Rect* get_rectangle();
-        SDL_Texture* get_texture();
+        virtual SDL_Texture* get_texture();
         virtual SDL_Rect* get_crop();
 
         /// devuelve posicion global
@@ -32,11 +32,13 @@ class Sprite{
         void setPosY(int y);
         void setWidth(int w);
         void setHeight(int h);
+        virtual void setAmmount(int ammount){}
 
         virtual void setState(int x, int y){}
         virtual void spawn(){}
         virtual void destroy(){}
         virtual void loadAnimations(std::string path){}
+        virtual int get_direction(){return 0;}
         /// libera la memoria pedida
         void erase();
         virtual ~Sprite();
