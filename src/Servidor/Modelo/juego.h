@@ -113,6 +113,8 @@ public Juego_observable{
 		void notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo);
 		//Devuelve true si ya se inicializo el nivel.
 		bool esta_jugando_nivel();
+		//Devuelve el mapa actual del juego.
+		Mapa* get_mapa();
 		//Destructor de juego.
 		~Juego();
 	private:

@@ -6,7 +6,7 @@
 class Observador_personaje_npc:
 public Observador_personaje{
 	public:
-		//Dado un juego y una coordenada, crea a un 
+		//Dado un juego y una coordenada, crea a un
 		//observador de personaje NPC.
 		Observador_personaje_npc(Juego* juego, Personaje *personaje):
 		Observador_personaje(juego, personaje){}
@@ -15,5 +15,3 @@ public Observador_personaje{
 };
 
 #endif //OBSERVADOR_PERSONAJE_NPC_H
-
-

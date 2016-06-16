@@ -249,6 +249,10 @@ bool Juego::inicio_partida(){
 	return partida_inicializada;
 }
 
+Mapa* Juego::get_mapa(){
+	return mundo;
+}
+
 
 Juego::~Juego(){
 	delete cargador;
