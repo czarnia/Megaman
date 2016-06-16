@@ -64,7 +64,7 @@ void Character_sprite::clearStates(){
 }
 
 SDL_Rect* Character_sprite::get_crop(){
-    if (currentState == IDLE){
+    /*if (currentState == IDLE){
         currentFrame += 0.01;
         if ((unsigned)round(currentFrame) == idleAnimation.size())
             currentFrame = 0;
@@ -77,7 +77,7 @@ SDL_Rect* Character_sprite::get_crop(){
         if ((unsigned)round(currentFrame) == runningAnimation.size())
             currentFrame = 0;
         return runningAnimation[round(currentFrame)];
-    }
+    }*/
    /* if (editorMode)
         return NULL;
     if (idle){

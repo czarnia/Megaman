@@ -100,7 +100,7 @@ void Minion_sprite::clearStates(){
 
 
 SDL_Rect* Minion_sprite::get_crop(){
-    if (editorMode)
+    /*if (editorMode)
         return NULL;
     if (idle){
         currentFrame += 0.01;
@@ -122,7 +122,7 @@ SDL_Rect* Minion_sprite::get_crop(){
         if ((unsigned)round(currentFrame) == runningAnimation.size())
             currentFrame = 0;
         return runningAnimation[round(currentFrame)];
-    }
+    }*/
     return NULL;
 }
 
