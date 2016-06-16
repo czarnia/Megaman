@@ -137,7 +137,7 @@ public Personaje_observable{
 		//Dado un Premio, devuelve true si el premio puede ubicarse
 		//en las mismas coordenadas que este elemento.
 		virtual bool puede_ocupar(Premio* premio);
-
+		//Dada una posicion para respawnear, se mueve al personaje a la misma.
 		virtual void respawn(Coordenada posicion_inicial);
 
 		friend class StrategyMoverBumby;

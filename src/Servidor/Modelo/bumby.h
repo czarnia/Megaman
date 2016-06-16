@@ -11,6 +11,7 @@ class Bumby : public Personaje {
 		StrategyMoverBumby mover_bumby;
 		Arma_minion* arma;
 	public:
+		//Dado un Mapa*, una Coordenada, un Arma_minion* y un id, se crea un bumby.
 		Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		//Hace que el personaje ataque.
 		virtual void atacar(int dir, Mapa* mapa);		//NO TIENE SENTIDO PARA NPCs!
@@ -29,4 +30,3 @@ class Bumby : public Personaje {
 };
 
 #endif //BUMBY_H
-

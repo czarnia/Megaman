@@ -13,8 +13,11 @@ class ArmaFactory {
 		std::map<Arma*, Factory_observador_ubicable *> creados;
 		Juego *juego;
 	public:
+		//Dado un Juego*, crea un ArmaFactory.
 		ArmaFactory(Juego *j);
+		//Crea un Arma_megaman*.
 		Arma_megaman* crear_arma_megaman();
+		//Crea un Arma_minion*.
 		Arma_minion* crear_arma_minion();
 };
 

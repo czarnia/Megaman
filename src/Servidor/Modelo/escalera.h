@@ -11,6 +11,7 @@ class Escalera: public Elemento{
 	private:
 		std::vector<StrategyMoverSinGravedad*> estrategias;
 	public:
+		//Dada una coordenada, crea una escalera.
 		Escalera(Coordenada c);
 		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
