@@ -7,8 +7,7 @@
 #include "megaman.h"
 
 Megaman_factory::Megaman_factory(Cargador_mapa * cargador, Juego *juego):
-Ubicable_factory(cargador, juego),
-fact_obs(juego){}
+Ubicable_factory(cargador, juego){}
 
 void Megaman_factory::crear(Mapa* mapa){
 	std::vector<Coordenada*> coordenada_megaman = cargador->get_coordenada_megamans();
@@ -25,9 +24,9 @@ void Megaman_factory::crear(Mapa* mapa){
 			Arma_megaman *arma = arma_fact.crear_arma_megaman();
 			Megaman *megaman = new Megaman(mapa, *coord, arma, i+1);
 			creados.push_back(megaman);
-			//Se agregan los observadores:
-			//observador de ubicable:
-			fact_obs.crear(megaman);
+			//observador de personaje:
+			Observador_personaje *obs = new Observador_personaje(juego, megaman);
+			megaman->agregar_observador(obs);
 		}
 	}
 	for (unsigned int j = 0; j < creados.size(); j++){
@@ -36,9 +35,6 @@ void Megaman_factory::crear(Mapa* mapa){
 			//delete megaman;
 			continue;
 		}
-		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje(juego, megaman);
-		megaman->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(megaman);
 	}

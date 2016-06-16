@@ -3,7 +3,7 @@
 #include <sstream>
 
 Observador_personaje::Observador_personaje(Juego* juego, Personaje* pj):
-juego(juego), posicion_inicial(pj->get_coordenada()){
+Observador_ubicable(juego, pj->get_coordenada()){
 	cantidad_vidas = pj->get_cantidad_vidas();
 	porcentaje_vida = pj->get_porcentaje_vida();
 	energia = pj->get_energia();

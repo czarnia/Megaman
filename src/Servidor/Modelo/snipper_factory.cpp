@@ -7,8 +7,7 @@
 #include "jumping_snipper.h"
 
 Snipper_factory::Snipper_factory(Cargador_mapa *cargador, Juego *juego):
-Ubicable_factory(cargador, juego),
-fact_obs(juego){}
+Ubicable_factory(cargador, juego){}
 
 void Snipper_factory::crear(Mapa* mapa){
 	std::vector<Coordenada*> coords_snippers = cargador->get_coordenadas_snippers();
@@ -20,9 +19,6 @@ void Snipper_factory::crear(Mapa* mapa){
 		ArmaFactory arma_fact(juego);
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Snipper *snipper = new Snipper(mapa, *coord, arma, i);
-		//Se agregan los observadores:
-		//observador de ubicable:
-		fact_obs.crear(snipper);
 		//observador de personaje:
 		Observador_personaje *obs = new Observador_personaje(juego, snipper);
 		snipper->agregar_observador(obs);
@@ -35,9 +31,6 @@ void Snipper_factory::crear(Mapa* mapa){
 		ArmaFactory arma_fact(juego);
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Jumping_snipper *jsnipper = new Jumping_snipper(mapa, *coord, arma, i);
-		//Se agregan los observadores:
-		//observador de ubicable:
-		fact_obs.crear(jsnipper);
 		//observador de personaje:
 		Observador_personaje *obs = new Observador_personaje(juego, jsnipper);
 		jsnipper->agregar_observador(obs);

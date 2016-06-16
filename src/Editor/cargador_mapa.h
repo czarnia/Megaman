@@ -8,8 +8,9 @@
 
 class Cargador_mapa{
 	private:
-		int ancho_mapa, alto_mapa;
 		std::string root_path;
+		int boss;
+		int ancho_mapa, alto_mapa;
 		std::ifstream mapa_arch;
 		std::vector<Coordenada*> coordenada_megaman;
 		std::vector<Coordenada*> coordenada_boss;
@@ -57,8 +58,8 @@ class Cargador_mapa{
 		int get_ancho_mapa();
 		//Devuelve el alto del mapa.
 		int get_alto_mapa();
-		
-		
+		//Devuelve el codigo de boss
+		int get_boss();
 	private:
 		std::vector<std::string> parsear_cadena_palabras(std::string cadena);
 		//Reinicializa las coordenadas guardadas por el cargador:

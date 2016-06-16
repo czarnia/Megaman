@@ -2,6 +2,7 @@
 #define UBICABLE_H
 #include "observable.h"
 #include "coordenada.h"
+#include "observador_ubicable.h"
 
 class Observador_ubicable;
 class Personaje;

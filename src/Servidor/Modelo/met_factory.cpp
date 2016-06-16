@@ -5,8 +5,7 @@
 #include "met.h"
 
 Met_factory::Met_factory(Cargador_mapa *cargador, Juego *juego):
-Ubicable_factory(cargador, juego),
-fact_obs(juego){}
+Ubicable_factory(cargador, juego){}
 
 //TODO: ACA PODEMOS LEVANTAR LOS DATOS DEL MET DEL XML/JSON
 //VELOCIDAD, ETC...
@@ -21,9 +20,6 @@ void Met_factory::crear(Mapa* mapa){
 		ArmaFactory arma_fact(juego);
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Met *met = new Met(mapa, *coord, arma, i);
-		//Se agregan los observadores:
-		//observador de ubicable:
-		fact_obs.crear(met);
 		//observador de personaje:
 		Observador_personaje *obs = new Observador_personaje(juego, met);
 		met->agregar_observador(obs);
