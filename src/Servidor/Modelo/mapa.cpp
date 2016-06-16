@@ -18,12 +18,12 @@
 #include <math.h>
 #include <algorithm>
 
-
 #define TAM_BLOQUE 1
 
 typedef std::vector<Coordenada>::iterator ItBloques;
 typedef std::map<int, Personaje*>::iterator ItPersonaje;
 typedef std::vector<Bala*>::iterator ItBalas;
+typedef std::map<int, Premio_factory*>::iterator ItPremios;
 
 //-------------->Auxiliares<-----------//
 std::vector<Coordenada> coord_tierras(){
@@ -302,4 +302,49 @@ std::vector<Ubicable*> Mapa::devolver_ubicables(){
 
 	std::vector<Ubicable*> ubicables_v(ubicables.begin(), ubicables.end());
 	return ubicables_v;
+}
+
+bool Mapa::ubicar_premio(Coordenada c){
+	if (!toca_premio()){
+		return true;
+	}
+	Premio* nuevo_premio = premio_al_azar(c);
+	if (!puede_ubicarse(nuevo_premio, c)){
+		return false;
+	}
+	int x = c.obtener_abscisa();
+	int y = c.obtener_ordenada();
+	elementos[x][y].push_back(nuevo_premio);
+	return true;
+}
+
+Premio* Mapa::premio_al_azar(Coordenada c){
+	size_t resultado = rand() % 10 +1;
+	size_t prob_total= 0;
+	for (ItPremios it = premios.begin(); it != premios.end(); ++it){
+		prob_total += (*it).second->probabilidad_de_crear();
+	}
+	size_t prob_ant = 0;
+	for (ItPremios it = premios.begin(); it != premios.end(); ++it){
+		size_t prob_premio = (*it).second->probabilidad_de_crear();
+		size_t rango_premio = (prob_premio/prob_total+prob_ant)*10;
+		if ((resultado < rango_premio) && (rango_premio < resultado + prob_ant)){
+			return (*it).second->crear(c);
+		}
+		prob_ant = prob_premio/prob_total;
+	}
+	return NULL;
+}
+
+bool Mapa::toca_premio(){
+	size_t resultado = rand() % 10 +1;
+	size_t probabilidad = 0;
+	for (ItPremios it = premios.begin(); it != premios.end(); ++it){
+		probabilidad += (*it).second->probabilidad_de_crear();
+	}
+	return (probabilidad*10 < resultado);
+}
+
+void Mapa::cargar_premios_factories(){
+
 }
