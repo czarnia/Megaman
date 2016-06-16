@@ -127,8 +127,8 @@ GameState::StateCode gameStateLobby::update(){
         /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
         if (playerData.first == 1){
             updateInput();
-            render();
         }
+        render();
     }
     /// Si se recibio el comienzo de juego
     /// cambio los flags necesarios
@@ -140,21 +140,20 @@ GameState::StateCode gameStateLobby::update(){
     receiver->r_queue.pop();
     mutex.unlock();
     SDL_Delay(10);
-    if (aux == START_GAME){
-        /// BOSS
-        mutex.lock();
-        *level = receiver->r_queue.front();
-        receiver->r_queue.pop();
-        mutex.unlock();
-        start = true;
-    }
+    /// BOSS
+    mutex.lock();
+    *level = receiver->r_queue.front();
+    receiver->r_queue.pop();
+    mutex.unlock();
+    start = true;
 
+    receiver->join();
     ///
     if (start){
-        receiver->join();
+
         return GameState::GAME_START;
     }else if (quit){
-        receiver->join();
+
         return GameState::QUIT;
     }else{
         return GameState::CONTINUE;

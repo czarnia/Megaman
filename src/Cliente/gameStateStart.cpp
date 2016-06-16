@@ -19,6 +19,8 @@
 
 #define HP_BAR 6001
 #define MP_BAR 6011
+#define HP true
+#define MP false
 
 void gameStateStart::cap_framerate(const Uint32 &starting_tick){
     /// Aca limito los cuadros por segundo del juego para mantener
@@ -67,42 +69,42 @@ void gameStateStart::load(int level){
 void gameStateStart::loadHUD(){
     Sprite *spr;
     /// VIDAS
-    spr = new Bar_sprite(renderer->get_renderer(), true);
+    spr = new Bar_sprite(renderer->get_renderer(), HP);
     spr->setPosX(10);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), true);
+    spr = new Bar_sprite(renderer->get_renderer(), HP);
     spr->setPosX(120);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), true);
+    spr = new Bar_sprite(renderer->get_renderer(), HP);
     spr->setPosX(230);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), true);
+    spr = new Bar_sprite(renderer->get_renderer(), HP);
     spr->setPosX(340);
     spr->setPosY(10);
     renderer->addSprite(HP_BAR, spr, FRONT, STATIC);
     /// ENERGIA
-    spr = new Bar_sprite(renderer->get_renderer(), false);
+    spr = new Bar_sprite(renderer->get_renderer(), MP);
     spr->setPosX(10);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), false);
+    spr = new Bar_sprite(renderer->get_renderer(), MP);
     spr->setPosX(120);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), false);
+    spr = new Bar_sprite(renderer->get_renderer(), MP);
     spr->setPosX(230);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);
 
-    spr = new Bar_sprite(renderer->get_renderer(), false);
+    spr = new Bar_sprite(renderer->get_renderer(), MP);
     spr->setPosX(340);
     spr->setPosY(20);
     renderer->addSprite(MP_BAR, spr, FRONT, STATIC);

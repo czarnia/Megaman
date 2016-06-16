@@ -81,7 +81,7 @@ void Conexion_cliente::iniciar_nivel(int nivel){
 	int iniciar_nivel = INICIAR_NIVEL;
 	skt->send((char*)&iniciar_nivel, TAM_INT);
 	skt->send((char*)&nivel, TAM_INT);
-	skt->send("            ", TAM_INT*3);
+
 	enviar_mapa_inicial();
 	rcv.iniciar_nivel();
 }

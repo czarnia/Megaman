@@ -13,10 +13,7 @@ Bar_sprite::Bar_sprite(SDL_Renderer *r, bool hp)
             std::ostringstream os;
             os << "../sprites/hpbar"<<i<<".8.png";
             std::string file(os.str());
-
             bar_vector.push_back(IMG_LoadTexture(r, file.c_str()));
-            if(!texture)
-                std::cout<<"no se pude cargar"<<std::endl;
         }
     }else{
         for(int i = 0; i < 9; i++){
