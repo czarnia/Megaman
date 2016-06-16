@@ -5,11 +5,13 @@
 #include <cstddef>
 #include <map>
 #include <vector>
+
 #include "coordenada.h"
 #include "actualizable.h"
 #include "personaje.h"
 #include "bala.h"
 #include "ubicable.h"
+#include "premio_factory.h"
 
 class Personaje;
 class Elemento;
@@ -19,11 +21,10 @@ class Mapa{
   private:
 	  size_t long_x, long_y;
     std::vector<Coordenada> bloques; //borrar estos bloques!
-    std::vector<Coordenada*> coord_iniciales_personajes;
     std::vector<Bala*> balas;
     std::map<int, Personaje*> personajes;
     std::map<int, std::map<int, std::vector<Elemento*> > > elementos;
-    size_t tam; //TODO: cambiar por long_x y long_y.
+    std::map<int, Premio_factory*> premios;
   public:
     //Dados un tamanio crea un mapa
     //con tantas divisiones como indique el tamanio.
@@ -43,10 +44,10 @@ class Mapa{
     bool ubicar(Personaje* pj, Coordenada c);
     //Dado un elemento y una coordenada, lo ubica en la misma, en caso de no
     //ser posible, devuelve false.
-    virtual bool ubicar(Elemento* elem, Coordenada c);
+    bool ubicar(Elemento* elem, Coordenada c);
     //Dado una bala y una coordenada, la ubica en la misma, en caso de no
     //ser posible, devuelve false.
-    virtual bool ubicar(Bala* bala, Coordenada c);
+    bool ubicar(Bala* bala, Coordenada c);
     //Recibe un puntero a un bloque y su coordenada
     //y lo ubica en el mapa.
     bool ubicar(Bloque* bloque, Coordenada c);
@@ -70,16 +71,26 @@ class Mapa{
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(size_t tiempo);
-	//Recibe una coordenada y devuelve true si hay un personaje
-	//posicionado en ella.
+	  //Recibe una coordenada y devuelve true si hay un personaje
+	  //posicionado en ella.
     bool hay_personaje(Coordenada *coord);
     //Dado un personaje, hace que el mismo interactue con su entorno.
     void interactuar_con_entorno(Personaje* pj);
     //Devuelve todos los ubicables que tiene un mapa.
     std::vector<Ubicable*> devolver_ubicables();
+    //Dada una coordenada, ubica un premio en la misma con una probabilidad de
+    //0,31, devuelve true si la ubicacion fue exitosa, false en caso contrario.
+    bool ubicar_premio(Coordenada c);
 
     std::vector<Coordenada> coord_bloques(); //TODO: quizas se flete.
   private:
+    //Carga todas las factories de todos los premios disponibles en el juego.
+    void cargar_premios_factories();
+    //Devuelve true si debe aparecer un premio, false en caso contrario.
+    bool toca_premio();
+    //Devuelve un premio al azar ubicado en una Coordenada c según las probabi-
+    //lidades de aparición de cada uno.
+    Premio* premio_al_azar(Coordenada c);
     //Recibe un elemento y las coordenadas donde se desea posicionar al mismo.
     void ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas);
     //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
