@@ -10,6 +10,7 @@
 
 class gameStateLobby: public GameState{
     private:
+        /// Posicion del selector de boss
         int selectorPos;
         ///
         Window *window;
@@ -19,8 +20,9 @@ class gameStateLobby: public GameState{
         LobbyReceiver *receiver;
         ///
         void updateInput();
+        /// Verifica si se apreto el boton
         bool buttonPress(int x, int y, Sprite* spr);
-
+        /// Flags
         bool startSelect;
         bool start;
         bool quit;

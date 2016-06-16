@@ -13,7 +13,7 @@ Ubicable_factory(cargador, juego){}
 //TODO: GUARDAR LOS OBJETOS CREADOS CON NEW PARA SU DESTRUCCION.
 void Met_factory::crear(Mapa* mapa){
 	std::vector<Coordenada*> coords_mets = cargador->get_coordenadas_mets();
-	
+
 	for (unsigned int i = 0; i < coords_mets.size(); i++){
 		Coordenada *coord = coords_mets[i];
 		//Creacion del met:
@@ -21,9 +21,9 @@ void Met_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Met *met = new Met(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje(juego, *coord);
+		Observador_personaje *obs = new Observador_personaje(juego, met);
 		met->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(met);
-	} 
+	}
 }

@@ -113,13 +113,12 @@ public Juego_observable{
 		bool esta_jugando_nivel();
 		//Destructor de juego.
 		~Juego();
-		
 	private:
 		//Carga las factories necesarias para crear las entidades del
 		//juego.
 		void cargar_factories(Cargador_mapa *cargador);
-		
-		
+
+
 };
 
 #endif //JUEGO_H

@@ -8,6 +8,8 @@ class Jumping_snipper : public Snipper {
 	private:
 		StrategyMoverJumpingSnipper salto_snipper;
 	public:
+		//Dado un Mapa*, una coordenada, un Arma_minion* y un id, crea un Jumping_
+		//snippper.
 		Jumping_snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		//Le hace un update al personaje.
 		virtual void update(size_t tiempo, Mapa* mapa);

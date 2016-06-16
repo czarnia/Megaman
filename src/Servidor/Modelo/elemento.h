@@ -16,6 +16,7 @@ public Ubicable{
 		int tipo;
 		int id;
 	public:
+		//Dada una Coordenada, un tipo y un id, crea un Elemento.
 		Elemento(Coordenada c, int tipo, int id = 0);
 		//Dado un personaje, interactua con el mismo.
 		virtual void interactuar(Personaje *pj) = 0;

@@ -8,7 +8,9 @@
 
 class Snipper_factory : public Ubicable_factory{
 	public:
+		//Crea un snipper factory.
 		Snipper_factory(Cargador_mapa *cargador, Juego *juego);
+		//Dado un mapa y una coordenada, crea a un snipper y lo ubica en el mapa.
 		void crear(Mapa* mapa);
 };
 

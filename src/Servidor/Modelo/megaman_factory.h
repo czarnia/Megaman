@@ -16,7 +16,7 @@ class Megaman_factory : public Ubicable_factory{
 		std::vector<Megaman*> creados;
 		//std::multimap<Megaman*, Observador*> creados;
 	public:
-		//Dados un puntero a un juego y un puntero a un cargador de 
+		//Dados un puntero a un juego y un puntero a un cargador de
 		//mapas, crea un megaman factory.
 		Megaman_factory(Cargador_mapa * cargador, Juego *juego);
 		//Dado un mapa, crea a un personaje.

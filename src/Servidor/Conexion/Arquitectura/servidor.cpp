@@ -25,7 +25,11 @@ Servidor::Servidor(char *puerto){
 
 Servidor::~Servidor(){
 	entrada->join();
+	delete entrada;
+	delete skt;
+	delete mundo;
 	Log::instancia()->fin_servidor();
+	Log::cerrar();
 }
 
 void Servidor::aceptar_clientes(){
@@ -78,9 +82,9 @@ void Servidor::empezar_partida(){
 	mundo->agregar_observador(this);
 }
 
-void Servidor::empezar_nivel(){ 
+void Servidor::empezar_nivel(){
 	//TODO OBTENER NUMERO DE MAPA/BOSS
-	mundo->inicializar_nivel(1); 
+	mundo->inicializar_nivel(1);
 	clientes.iniciar_nivel();
 	//mundo->jugar();
 }

@@ -1,13 +1,12 @@
 #include "observador_personaje.h"
 #include <iostream>
 #include <sstream>
-#include "personaje.h"
 
-Observador_personaje::Observador_personaje(Juego* juego, Coordenada coord): 
-Observador_ubicable(juego, coord){
-	cantidad_vidas = 0;
-	porcentaje_vida = 0;
-	energia = 0;
+Observador_personaje::Observador_personaje(Juego* juego, Personaje* pj):
+Observador_ubicable(juego, pj->get_coordenada()){
+	cantidad_vidas = pj->get_cantidad_vidas();
+	porcentaje_vida = pj->get_porcentaje_vida();
+	energia = pj->get_energia();
 }
 
 void Observador_personaje::update(Observable *obs){
@@ -23,6 +22,14 @@ void Observador_personaje::update(Observable *obs){
 			cantidad_vidas = personaje->get_cantidad_vidas();
 			porcentaje_vida = personaje->get_porcentaje_vida();
 			juego->actualizo_cantidad_vidas(tipo, id, cantidad_vidas);
+
+			personaje->respawn(posicion_inicial);
+			int alto = personaje->get_alto();
+			int ancho = personaje->get_ancho();
+			Coordenada c = posicion_inicial.arriba(alto/2).izquierda(ancho/2);
+			int x = c.obtener_abscisa();
+			int y = c.obtener_ordenada();
+			juego->actualizo_posicion(tipo, id, x, y);
 		}
 		if (porcentaje_vida != personaje->get_porcentaje_vida()){
 			std::cout << "OBSERVER_P: PERSONAJE ACTUALIZO % VIDA\n";
@@ -36,4 +43,3 @@ void Observador_personaje::update(Observable *obs){
 		}
 	}
 }
-

@@ -7,6 +7,8 @@
 Observador_ubicable::Observador_ubicable(Juego* juego, Coordenada coord):
 juego(juego),
 coordenada(coord.obtener_abscisa(),
+coord.obtener_ordenada()),
+posicion_inicial(coord.obtener_abscisa(),
 coord.obtener_ordenada()){}
 
 void Observador_ubicable::update(Observable *obs){

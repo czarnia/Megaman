@@ -13,12 +13,12 @@ class MainMenu: public GameState{
         Window *window;
         Renderer *renderer;
         ///
-
         ///
         bool start;
         bool quit;
         ///
         void updateInput();
+        ///
         std::pair<int, std::string> &playerData;
     public:
         MainMenu(Window *window, Renderer *renderer,
@@ -26,7 +26,9 @@ class MainMenu: public GameState{
 
         /// Carga sprites, musica etc
         void load(int stack = 0);
+        /// Libera sprites
         int unload();
+        /// Logica del estado
         StateCode update();
         void render();
         ~MainMenu();

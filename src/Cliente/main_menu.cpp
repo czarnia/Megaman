@@ -25,8 +25,53 @@ MainMenu::MainMenu(Window *window, Renderer *renderer,
     load();
 }
 
-void MainMenu::updateInput(){
+void MainMenu::load(int stack){
+    /// Cargo todos los sprites del menu principal
+    /// FONDO
+    Sprite *spr = new Background_sprite(renderer->get_renderer(), "../sprites/menu_background.jpeg");
+    spr->setPosX(0);
+    spr->setPosY(0);
+    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
+    /// ETCs
+    spr = new Sprite(renderer->get_renderer(), "../sprites/nickname_sign.png");
+    spr->setWidth(80);
+    spr->setHeight(60);
+    spr->setPosX(window->get_width()/2 -spr->getWidth()-5);
+    spr->setPosY(window->get_height()*1/9);
+    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
 
+    spr = new Sprite(renderer->get_renderer(), "../sprites/mensaje.png");
+    spr->setWidth(400);
+    spr->setHeight(50);
+    spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
+    spr->setPosY(window->get_height()*3/4);
+    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
+}
+
+int MainMenu::unload(){
+    /// Libero los sprites cargados
+    renderer->clearSprites();
+    return 0;
+}
+
+GameState::StateCode MainMenu::update(){
+    /// Proceso la entrada por teclado
+    /// desde aca adentro modifico los flags necesarios
+    updateInput();
+
+    /// Si se modifico algun flag, hago lo necesario
+    if (start){
+        return GameState::BOSS_SELECT;
+    }else if (quit){
+        return GameState::QUIT;
+    }else{
+        return GameState::CONTINUE;
+    }
+
+}
+
+void MainMenu::updateInput(){
+    /// Permito el ingreso de texto, y espero un ENTER para comenzar
     SDL_Event event;
     SDL_StartTextInput();
     while (SDL_PollEvent(&event)){
@@ -58,48 +103,8 @@ void MainMenu::updateInput(){
     SDL_StopTextInput();
 }
 
-void MainMenu::load(int stack){
-    /// FONDO
-    Sprite *spr = new Background_sprite(renderer->get_renderer(), "../sprites/menu_background.jpeg");
-    spr->setPosX(0);
-    spr->setPosY(0);
-    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
-
-    /// ETCs
-    spr = new Sprite(renderer->get_renderer(), "../sprites/nickname_sign.png");
-    spr->setWidth(80);
-    spr->setHeight(60);
-    spr->setPosX(window->get_width()/2 -spr->getWidth()-5);
-    spr->setPosY(window->get_height()*1/9);
-    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
-
-    spr = new Sprite(renderer->get_renderer(), "../sprites/mensaje.png");
-    spr->setWidth(400);
-    spr->setHeight(50);
-    spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
-    spr->setPosY(window->get_height()*3/4);
-    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
-}
-
-int MainMenu::unload(){
-    renderer->clearSprites();
-    return 0;
-}
-
-GameState::StateCode MainMenu::update(){
-    updateInput();
-
-    if (start){
-        return GameState::BOSS_SELECT;
-    }else if (quit){
-        return GameState::QUIT;
-    }else{
-        return GameState::CONTINUE;
-    }
-
-}
-
 void MainMenu::render(){
+    /// Limpia la pantalla, dibuja y presenta los sprites cargados
     renderer->clear();
     renderer->drawAll();
     renderer->present();

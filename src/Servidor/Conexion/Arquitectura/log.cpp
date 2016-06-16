@@ -41,6 +41,12 @@ Log::~Log(){
 	hay_instancia = false;
 }
 
+void Log::cerrar(){
+	if (hay_instancia){
+		delete singleton;
+	}
+}
+
 void Log::inicio_servidor(){
 	std::cout << "------------------INICIO SERVIDOR--------------\n";
 	std::stringstream str;

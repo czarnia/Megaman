@@ -8,7 +8,7 @@ public Observador_personaje{
 	public:
 		//Dado un juego y una coordenada, crea a un 
 		//observador de personaje NPC.
-		Observador_personaje_npc(Juego* juego, Coordenada coord);
+		Observador_personaje_npc(Juego* juego, Personaje *personaje);
 		//Dado un observable, hace un update.
 		virtual void update(Observable *obs);
 };

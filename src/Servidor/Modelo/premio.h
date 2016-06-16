@@ -5,6 +5,7 @@
 
 class Premio : public Elemento{
 	public:
+		//Dada una Coordenada y un tipo, se crea a un premio.
 		Premio(Coordenada coord, int tipo);
 		//Dado un personaje, dice si puede ubicarse en las mismas coordenadas que
 		//estas.
