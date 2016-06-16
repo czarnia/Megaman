@@ -13,7 +13,7 @@ void Observador_personaje_npc_con_escudo::update(Observable *obs){
 		//juego->personaje_update_escudo(personaje->get_tipo(),
 		//personaje->get_id(), bajo_escudo);
 	//}
-	if (!personaje->esta_vivo()){
+	if (!personaje->esta_vivo()){ //TODO: esto debería estar en observador_personaje_npc
 		std::cout << "OBSERVER_P_NPC: PERSONAJE MURIO\n";
 		Mapa* m = juego->get_mapa();
 		m->ubicar_premio(coordenada);
