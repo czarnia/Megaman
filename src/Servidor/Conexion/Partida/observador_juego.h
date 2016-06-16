@@ -28,6 +28,8 @@ class Observador_juego: public Observador{
 		//Dado un identificador, un tipo y nuevas coordenadas en x y en y, notifica
 		//que un personaje vio modificadas la mismas.
 		virtual void update_posicion(int tipo, int id, int x, int y) = 0;
+		//Notifica a los clientes de que se modifico la posicion de un personaje.
+		virtual void update_personaje_escudo(int tipo, int id, bool bajo_escudo) = 0;
 };
 
 #endif //OBSERVADOR_JUEGO_H

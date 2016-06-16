@@ -1,7 +1,7 @@
 #ifndef OBSERVADOR_PERSONAJE_NPC_CON_ESCUDO_H
 #define OBSERVADOR_PERSONAJE_NPC_CON_ESCUDO_H
 
-#include "observador_personaje.h"
+#include "observador_personaje_npc.h"
 
 class Observador_personaje_npc_con_escudo:
 public Observador_personaje_npc{

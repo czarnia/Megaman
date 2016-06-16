@@ -31,6 +31,8 @@ public Observable{
 		virtual void notificar_energia(int tipo, int id, int energia) = 0;
 		//Notifica a los observadores que se modifico la posicion de un personaje.
 		virtual void notificar_posicion(int tipo, int id, int x, int y) = 0;
+		//Notifica a los observadores que se modifico la posicion de un personaje.
+		virtual void notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo) = 0;
 };
 
 #endif //JUEGO_OBSERVABLE_H

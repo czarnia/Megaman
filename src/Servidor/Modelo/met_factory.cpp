@@ -1,6 +1,6 @@
 #include "met_factory.h"
 #include "observador_ubicable.h"
-#include "observador_personaje.h"
+#include "observador_personaje_npc_con_escudo.h"
 #include "arma_factory.h"
 #include "met.h"
 
@@ -9,7 +9,6 @@ Ubicable_factory(cargador, juego){}
 
 //TODO: ACA PODEMOS LEVANTAR LOS DATOS DEL MET DEL XML/JSON
 //VELOCIDAD, ETC...
-//TODO: ACA SE PEDIRAN LAS COORDENADAS INICIALES AL MAPA.
 //TODO: GUARDAR LOS OBJETOS CREADOS CON NEW PARA SU DESTRUCCION.
 void Met_factory::crear(Mapa* mapa){
 	std::vector<Coordenada*> coords_mets = cargador->get_coordenadas_mets();
@@ -21,7 +20,7 @@ void Met_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Met *met = new Met(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje(juego, met);
+		Observador_personaje *obs = new Observador_personaje_npc_con_escudo(juego, met);
 		met->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(met);

@@ -129,3 +129,7 @@ void Servidor::update_energia(int tipo, int id, int energia){
 void Servidor::update_posicion(int tipo, int id, int x, int y){
 	clientes.update_posicion(tipo, id, x, y);
 }
+
+void Servidor::update_personaje_escudo(int tipo, int id, bool bajo_escudo){
+	//clientes.update_personaje_escudo(tipo, id, bajo_escudo);
+}

@@ -1,4 +1,4 @@
-#include "observador_personaje_con_escudo.h"
+#include "observador_personaje_npc_con_escudo.h"
 
 Observador_personaje_npc_con_escudo::
 Observador_personaje_npc_con_escudo(Juego* juego, Personaje *personaje):

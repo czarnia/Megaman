@@ -12,6 +12,7 @@ public Observador_personaje{
 		Observador_personaje(juego, personaje){}
 		//Dado un observable, hace un update.
 		//virtual void update(Observable *obs);
+};
 
 #endif //OBSERVADOR_PERSONAJE_NPC_H
 

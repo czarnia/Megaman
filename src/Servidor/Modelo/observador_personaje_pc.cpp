@@ -1,4 +1,4 @@
-#include "observador_personaje.h"
+#include "observador_personaje_pc.h"
 #include <iostream>
 #include <sstream>
 
@@ -12,6 +12,8 @@ void Observador_personaje_pc::update(Observable *obs){
 	if (energia != personaje->get_energia()){
 		std::cout << "OBSERVER_P: PERSONAJE ACTUALIZO ENERGIA\n";
 		energia = personaje->get_energia();
+		int tipo = personaje->get_tipo();
+		int id = personaje->get_id(); 
 		juego->actualizo_energia(tipo, id, energia);
 	}
 	Observador_personaje::update(obs);

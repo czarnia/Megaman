@@ -166,6 +166,13 @@ void Juego::notificar_gameover(int id){
 /*void Juego::murio_boss(){
 }*/
 
+void Juego::notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo){
+	for (size_t i = 0; i < observadores.size(); i++){
+		Observador_juego *obs = (Observador_juego*)observadores[i];
+		obs->update_gameover(id);
+	}
+}
+
 void Juego::notificar_murio_personaje(int tipo, int id){
 	mundo->quitar_personaje(id);
 	for (size_t i = 0; i < observadores.size(); i++){

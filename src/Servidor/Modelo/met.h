@@ -22,6 +22,9 @@ class Met: public Personaje{
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
 		virtual void update(size_t tiempo);
+		//Devuelve true si el personaje no
+		//esta bajo la proteccion de su escudo.
+		virtual bool esta_descubierto();
 
 		virtual void sacar_movimiento(int direccion);
 		virtual void agregar_movimiento(int direccion);
