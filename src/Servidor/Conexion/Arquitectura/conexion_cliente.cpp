@@ -9,7 +9,8 @@
 
 #define TAM_INT 4
 
-enum Codigo {POSICION = 1, VIDA, ENERGIA, CANT_VIDAS, VICTORIA, DERROTA};
+enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS, FIN_NIVEL,
+	 DERROTA, VICTORIA};
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m,
 Servidor* s): skt(conexion), id_cliente(id),
@@ -76,12 +77,20 @@ void Conexion_cliente::terminar_ejecucion(){
   rcv.terminar_ejecucion();
 }
 
-void Conexion_cliente::iniciar_nivel(){
+void Conexion_cliente::iniciar_nivel(int nivel){
+	int iniciar_nivel = INICIAR_NIVEL;
+	skt->send((char*)&iniciar_nivel, TAM_INT);
+	skt->send((char*)&nivel, TAM_INT);
+	skt->send("            ", TAM_INT*3);
 	enviar_mapa_inicial();
 	rcv.iniciar_nivel();
 }
 
 void Conexion_cliente::finalizar_nivel(){
+	int fin_nivel = FIN_NIVEL;
+  skt->send((char*)&fin_nivel, TAM_INT);
+  skt->send("                ", TAM_INT*4);
+  //Envio una cadena vacía de TAM_INT*4 caracteres.
 	rcv.finalizar_nivel();
 }
 
@@ -116,7 +125,7 @@ void Conexion_cliente::enviar_porcentaje_vida(int tipo, int id, int porcentaje){
   skt->send((char*)&tipo, TAM_INT);
   skt->send((char*)&id, TAM_INT);
   skt->send((char*)&porcentaje, TAM_INT);
-  skt->send("        ", TAM_INT);
+  skt->send("    ", TAM_INT);
   //Envio una cadena vacía de TAM_INT caracteres.
 }
 
@@ -126,20 +135,20 @@ void Conexion_cliente::enviar_porcentaje_energia(int tipo, int id, int porcentaj
   skt->send((char*)&tipo, TAM_INT);
   skt->send((char*)&id, TAM_INT);
   skt->send((char*)&porcentaje, TAM_INT);
-  skt->send("        ", TAM_INT);
-  //Envio una cadena vacía de TAM_INT*2 caracteres.
+  skt->send("    ", TAM_INT);
+  //Envio una cadena vacía de TAM_INT caracteres.
 }
 
 void Conexion_cliente::enviar_victoria(){
   int victoria = VICTORIA;
   skt->send((char*)&victoria, TAM_INT);
-  skt->send("            ", TAM_INT*3);
-  //Envio una cadena vacía de TAM_INT*3 caracteres.
+  skt->send("                ", TAM_INT*4);
+  //Envio una cadena vacía de TAM_INT*4 caracteres.
 }
 
 void Conexion_cliente::enviar_gameover(){
   int derrota = DERROTA;
   skt->send((char*)&derrota, TAM_INT);
-  skt->send("            ", TAM_INT*3);
-  //Envio una cadena vacía de TAM_INT*3 caracteres.
+  skt->send("                ", TAM_INT*4);
+  //Envio una cadena vacía de TAM_INT*4 caracteres.
 }

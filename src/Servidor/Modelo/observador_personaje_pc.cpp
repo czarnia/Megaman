@@ -13,9 +13,8 @@ void Observador_personaje_pc::update(Observable *obs){
 		std::cout << "OBSERVER_P: PERSONAJE ACTUALIZO ENERGIA\n";
 		energia = personaje->get_energia();
 		int tipo = personaje->get_tipo();
-		int id = personaje->get_id(); 
+		int id = personaje->get_id();
 		juego->actualizo_energia(tipo, id, energia);
 	}
 	Observador_personaje::update(obs);
 }
-

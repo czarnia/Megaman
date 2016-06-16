@@ -8,7 +8,7 @@ public Observador_personaje_npc{
 	public:
 		bool bajo_escudo;
 	public:
-		//Dado un juego y una coordenada, crea a un 
+		//Dado un juego y una coordenada, crea a un
 		//observador de personaje NPC con escudo.
 		Observador_personaje_npc_con_escudo(Juego* juego, Personaje *personaje);
 		//Dado un observable, hace un update.
@@ -16,4 +16,3 @@ public Observador_personaje_npc{
 };
 
 #endif //OBSERVADOR_PERSONAJE_NPC_CON_ESCUDO_H
-

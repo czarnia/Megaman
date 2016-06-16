@@ -25,7 +25,7 @@ class Conexion_cliente{
     //Le informa a la conexion_cliente que debe dejar de recibir datos.
     void terminar_ejecucion();
     //Le informa al conexion_cliente que se ha iniciado un nivel.
-    void iniciar_nivel();
+    void iniciar_nivel(int nivel);
     //Le informa al conexion_cliente que se ha terminado un nivel.
     void finalizar_nivel();
     //Destructor del Conexion_cliente.
