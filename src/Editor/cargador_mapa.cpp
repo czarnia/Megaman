@@ -51,7 +51,7 @@ void Cargador_mapa::cargar_coordenadas(){
   getline(mapa_arch, linea);
   ancho_mapa = atoi((const char*)&linea[0]);
   alto_mapa =  atoi((const char*)&linea[2]);
-  
+
   //Ahora obtengo las coordenadas de los objetos del mapa.
   while (getline(mapa_arch, linea)){
     std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
@@ -153,7 +153,7 @@ std::vector<Coordenada*> Cargador_mapa::get_coordenadas_j_snippers(){
 
 std::vector<Coordenada*> Cargador_mapa::get_coordenadas_bumby(){
 	return coordenadas_bumby;
-}	
+}
 
 int Cargador_mapa::get_ancho_mapa(){
 	return ancho_mapa;
