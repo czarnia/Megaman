@@ -31,6 +31,7 @@ class Snipper : public Personaje {
 		//Dada una direccion representada como un int, agrega un movimiento en dicha
 		//direccion.
 		void agregar_movimiento(int direccion);	//NO TIENE SENTIDO PARA NPCs!
+
 };
 
 #endif //SNIPPER_H

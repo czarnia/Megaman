@@ -46,7 +46,12 @@ void Met::update(size_t tiempo){
   }
   tras_escudo = !tras_escudo; //cambia al otro estado cada dos segundos.
   Personaje::update(0, mapa);
+  Personaje::notificar_observadores();
   tiempo_pasado -= TIEMPO_ATAQUE;
+}
+
+bool Met::esta_descubierto(){
+	return !tras_escudo;
 }
 
 void Met::sacar_movimiento(int direccion){}

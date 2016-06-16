@@ -109,6 +109,8 @@ public Juego_observable{
 		bool inicio_partida();
 		//Recibe un numero de mapa e inicializa un nuevo nivel.
 		void inicializar_nivel(int numero_mapa);
+		//Notifica a los observadores que se modifico la posicion de un personaje.
+		void notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo);
 		//Devuelve true si ya se inicializo el nivel.
 		bool esta_jugando_nivel();
 		//Destructor de juego.
