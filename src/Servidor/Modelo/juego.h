@@ -5,11 +5,13 @@
 #include "../../Editor/cargador_mapa.h"
 #include "actualizable.h"
 #include "mapa.h"
+#include "ubicable.h"
 #include "juego_observable.h"
 #include <string>
 #include <iosfwd>
 #include <cstddef>
 
+class Ubicable;
 class Ubicable_factory;
 
 class Juego:

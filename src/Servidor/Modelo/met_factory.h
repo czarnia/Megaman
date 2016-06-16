@@ -8,8 +8,6 @@
 #include <map>
 
 class Met_factory : public Ubicable_factory{
-	private:
-		Factory_observador_ubicable fact_obs;
 	public:
 		//Dado un puntero a un juego, crea un megaman factory.
 		Met_factory(Cargador_mapa * cargador, Juego *juego);

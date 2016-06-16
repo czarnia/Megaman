@@ -6,8 +6,7 @@
 #include "bumby.h"
 
 Bumby_factory::Bumby_factory(Cargador_mapa *cargador, Juego *juego):
-Ubicable_factory(cargador, juego),
-fact_obs(juego){}
+Ubicable_factory(cargador, juego){}
 
 void Bumby_factory::crear(Mapa* mapa){
 	std::vector<Coordenada*> coords_bumbys = cargador->get_coordenadas_bumby();
@@ -18,11 +17,8 @@ void Bumby_factory::crear(Mapa* mapa){
 		ArmaFactory arma_fact(juego);
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Bumby *bumby = new Bumby(mapa, *coord, arma, i);
-		//Se agregan los observadores:
-		//observador de ubicable:
-		fact_obs.crear(bumby); 
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje(juego);
+		Observador_personaje *obs = new Observador_personaje(juego, *coord);
 		bumby->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(bumby);

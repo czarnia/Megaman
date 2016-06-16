@@ -3,8 +3,8 @@
 #include <sstream>
 #include "personaje.h"
 
-Observador_personaje::Observador_personaje(Juego* juego): 
-juego(juego){
+Observador_personaje::Observador_personaje(Juego* juego, Coordenada coord): 
+Observador_ubicable(juego, coord){
 	cantidad_vidas = 0;
 	porcentaje_vida = 0;
 	energia = 0;

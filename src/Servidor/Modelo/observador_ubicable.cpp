@@ -1,4 +1,6 @@
 #include "observador_ubicable.h"
+#include "juego.h"
+#include "ubicable.h"
 #include <iostream>
 #include <sstream>
 

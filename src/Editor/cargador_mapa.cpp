@@ -27,7 +27,7 @@ std::vector<std::string> Cargador_mapa::parsear_cadena_palabras(std::string cade
 //-----------------------------------------------------//
 
 Cargador_mapa::Cargador_mapa(const char *root):
-root_path(root){}
+root_path(root),boss(0){}
 
 void Cargador_mapa::cargar_mapa(int id_mapa){
 	std::stringstream id;
@@ -89,18 +89,23 @@ void Cargador_mapa::cargar_coordenadas(){
 			coordenadas_puas.push_back(coordenada);
 			break;
 		case BOMBMAN:
+			boss = BOMBMAN;
 			coordenada_boss.push_back(coordenada);
 			break;
 		case MAGNETMAN:
+			boss = MAGNETMAN;
 			coordenada_boss.push_back(coordenada);
 			break;
 		case SPARKMAN:
+			boss = SPARKMAN;
 			coordenada_boss.push_back(coordenada);
 			break;
 		case RINGMAN:
+			boss = RINGMAN;
 			coordenada_boss.push_back(coordenada);
 			break;
 		case FIREMAN:
+			boss = FIREMAN;
 			coordenada_boss.push_back(coordenada);
 			break;
 	}
@@ -117,6 +122,7 @@ void Cargador_mapa::limpiar_coordenadas(){
 	coordenadas_bumby.clear();
 	coordenadas_j_snippers.clear();
 	coordenadas_snippers.clear();
+	boss = 0;
 }
 
 std::vector<Coordenada*> Cargador_mapa::get_coordenada_boss(){
@@ -163,6 +169,9 @@ int Cargador_mapa::get_alto_mapa(){
 	return alto_mapa;
 }
 
+int Cargador_mapa::get_boss(){
+	return boss;
+}
 
 /*Cargador_mapa::Cargador_mapa(char* path){
   mapa_arch.open(path);

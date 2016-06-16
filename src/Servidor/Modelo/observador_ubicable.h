@@ -2,7 +2,7 @@
 #define OBSERVADOR_UBICABLE_H
 
 #include "observador.h"
-#include "juego.h"
+#include "coordenada.h"
 class Juego;
 
 class Observador_ubicable:

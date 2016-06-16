@@ -2,7 +2,6 @@
 #define MEGAMAN_FACTORY_H
 
 #include "ubicable_factory.h"
-#include "factory_observador_ubicable.h"
 #include "../../Editor/cargador_mapa.h"
 #include "juego.h"
 #include <map>
@@ -14,7 +13,6 @@ class Personaje;
 
 class Megaman_factory : public Ubicable_factory{
 	private:
-		Factory_observador_ubicable fact_obs;
 		std::vector<Megaman*> creados;
 		//std::multimap<Megaman*, Observador*> creados;
 	public:

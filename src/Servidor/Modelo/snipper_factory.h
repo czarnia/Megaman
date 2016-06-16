@@ -7,8 +7,6 @@
 #include <map>
 
 class Snipper_factory : public Ubicable_factory{
-	private:
-		Factory_observador_ubicable fact_obs;
 	public:
 		Snipper_factory(Cargador_mapa *cargador, Juego *juego);
 		void crear(Mapa* mapa);
