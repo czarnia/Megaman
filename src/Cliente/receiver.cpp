@@ -220,16 +220,3 @@ void Receiver::receiveMap(){
 Receiver::~Receiver(){
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
