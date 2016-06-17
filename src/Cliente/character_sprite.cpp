@@ -3,6 +3,10 @@
 #include <iostream>
 #include <math.h>
 
+
+#define PSHOOTING 1
+#define PCLIMBING 3
+
 /// Auxiliares
 int round(float d){
     return (int)floor(d+0.5);
@@ -17,13 +21,12 @@ Character_sprite::Character_sprite(SDL_Renderer *r, const char* file):
 {
     rectangle.w = Character_sprite::width;
     rectangle.h = Character_sprite::height;
-
+    editorMode = false;
     currentFrame = 0;
     currentState = IDLE;
 }
 
-void Character_sprite::setState(int x, int y){
-
+void Character_sprite::changeState(int x, int y){
     if (x < 0){
         editorMode = true;
         return;
@@ -31,53 +34,82 @@ void Character_sprite::setState(int x, int y){
     if (x > rectangle.x){
         movingLeft = false;
         currentState = RUNNING;
-        //idle = false;
         if (y > rectangle.y)
             currentState = JUMPING;
-//            jumping = true;
     }
     if (x < rectangle.x){
         movingLeft = true;
         currentState = RUNNING;
-        //idle = false;
         if (y > rectangle.y)
             currentState = JUMPING;
-          //  jumping = true;
     }
     if (x == rectangle.x){
         if (y == rectangle.y){
             currentState = IDLE;
-         //   running = false;
         }else if (y > rectangle.y || y < rectangle.y)
             currentState = JUMPING;
-            //jumping = true;
+    }
+}
+
+void Character_sprite::setState(int &action){
+    switch(action){
+        case PSHOOTING:
+            currentState = SHOOTING;
+            break;
+        case PCLIMBING:
+            currentState = CLIMBING;
+            break;
+        default:
+            break;
     }
 }
 
 void Character_sprite::clearStates(){
-    spawning = false;
-    dying = false;
-    running = false;
-    jumping = false;
     editorMode = false;
-    idle = true;
+    movingLeft = false;
+    currentState = IDLE;
 }
 
 SDL_Rect* Character_sprite::get_crop(){
-    /*if (currentState == IDLE){
+    /// EDITORMODE
+    if (editorMode){
+        return NULL;
+    /// IDLE
+    }else if (currentState == IDLE){
         currentFrame += 0.01;
         if ((unsigned)round(currentFrame) == idleAnimation.size())
             currentFrame = 0;
         return idleAnimation[round(currentFrame)];
+    /// JUMPING
     }else if (currentState == JUMPING){
         currentFrame = 0;
         return jumpingAnimation[currentFrame];
+    /// RUNNING
     }else if (currentState == RUNNING){
         currentFrame += 0.15 ;
         if ((unsigned)round(currentFrame) == runningAnimation.size())
             currentFrame = 0;
         return runningAnimation[round(currentFrame)];
-    }*/
+    /// SPAWNING
+    }else if (currentState == SPAWNING){
+        currentFrame += 0.08;
+        if ((unsigned)round(currentFrame) == spawnAnimation.size()){
+            currentFrame = 0;
+            currentState = IDLE;
+        }
+        return spawnAnimation[round(currentFrame)];
+    /// CLIMBING
+    }else if (currentState == CLIMBING){
+        currentFrame += 0.05;
+        if ((unsigned)round(currentFrame) == ladderAnimation.size()){
+            currentFrame = 0;
+        }
+        return ladderAnimation[round(currentFrame)];
+    /// SHOOTING
+    }else if (currentState == SHOOTING){
+        currentFrame = 0;
+        return shootingAnimation[currentFrame];
+    }
    /* if (editorMode)
         return NULL;
     if (idle){
@@ -125,17 +157,16 @@ int Character_sprite::get_direction(){
 
 void Character_sprite::destroy(){
     currentFrame = 0;
-    idle = false;
-    dying = true;
+ //   idle = false;
+  //  dying = true;
 }
 
 void Character_sprite::spawn(){
     currentFrame = 0;
-    idle = false;
-    spawning = true;
+    currentState = SPAWNING;
+    /*idle = false;
+    spawning = true;*/
 }
-
-
 
 void Character_sprite::loadAnimations(std::string path){
     std::ifstream ifile;
@@ -201,6 +232,16 @@ void Character_sprite::loadAnimations(std::string path){
         ifile >> aux->h;
         deathAnimation.push_back(aux);
     }
+
+    ifile >> framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        shootingAnimation.push_back(aux);
+    }
 }
 
 Character_sprite::~Character_sprite(){
@@ -221,5 +262,8 @@ Character_sprite::~Character_sprite(){
         delete *it;
     it = deathAnimation.begin();
     for (; it != deathAnimation.end(); ++it)
+        delete *it;
+    it = shootingAnimation.begin();
+    for (; it != shootingAnimation.end(); ++it)
         delete *it;
 }

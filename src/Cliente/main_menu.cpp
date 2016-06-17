@@ -28,7 +28,7 @@ MainMenu::MainMenu(Window *window, Renderer *renderer,
 void MainMenu::load(int stack){
     /// Cargo todos los sprites del menu principal
     /// FONDO
-    Sprite *spr = new Background_sprite(renderer->get_renderer(), "../sprites/menu_background.jpeg");
+    Sprite *spr = new Background_sprite(renderer->get_renderer(), "../sprites/menu_background2.png");
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
@@ -38,6 +38,13 @@ void MainMenu::load(int stack){
     spr->setHeight(60);
     spr->setPosX(window->get_width()/2 -spr->getWidth()-5);
     spr->setPosY(window->get_height()*1/9);
+    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
+
+    spr = new Sprite(renderer->get_renderer(), "../sprites/menu_megaman.png");
+    spr->setWidth(80);
+    spr->setHeight(120);
+    spr->setPosX(window->get_width()-spr->getWidth());
+    spr->setPosY(window->get_height()/2-spr->getHeight()/2);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
 
     spr = new Sprite(renderer->get_renderer(), "../sprites/mensaje.png");

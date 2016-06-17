@@ -56,53 +56,56 @@ Receiver::Receiver(Socket* conexion, Renderer *renderer,
 /// HILO
 void Receiver::ejecutar(){
     /// Ahora recibo las actualizaciones de las cosas movibles
-    /// o que pueden cambiar
+    /// o que pueden cambiar, las recibo en forma de eventos
+	std::cout<<"Se comenzo a recibir cosas:"<<std::endl;
+	bool end = false;
+    while (!end){
+        receiveEventAndQueue(&end);
+    }
+}
+
+void Receiver::receiveEventAndQueue(bool *end){
     int command;
     int objectType;
     int objectID;
     int coordX;
     int coordY;
     std::pair<int,int> coord;
-	std::cout<<"Se comenzo a recibir cosas:"<<std::endl;
-    while (command != END_OF_RESPONSE){
-        char buffer[TAM_INT] = "";
-        /// COMANDO
+    char buffer[TAM_INT] = "";
+
+    /// COMANDO
+    skt->receive(buffer, TAM_INT);
+    command = *((int*)buffer);
+    strncpy(buffer,"    ",TAM_INT);
+    if ( command != END_OF_RESPONSE){
+        /// Tipo de objeto
         skt->receive(buffer, TAM_INT);
-        command = *((int*)buffer);
+        objectType = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
-
-
-        if ( command == MAPA ){
-            /// Tipo de objeto
-            skt->receive(buffer, TAM_INT);
-            objectType = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            /// ID objeto
-            skt->receive(buffer, TAM_INT);
-            objectID = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            /// COORDX
-            skt->receive(buffer, TAM_INT);
-            coordX = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            /// COORDY
-            skt->receive(buffer, TAM_INT);
-            coordY = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
+        /// ID objeto
+        skt->receive(buffer, TAM_INT);
+        objectID = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
+        /// COORDX
+        skt->receive(buffer, TAM_INT);
+        coordX = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
+        /// COORDY
+        skt->receive(buffer, TAM_INT);
+        coordY = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
             ////////////////
-            std::cout<<"Recibi comando: "<<command << " Tipo de Objeto: "
-            << objectType << " ID de objeto: "<<objectID <<" Pos: "
-            <<coordX<<","<<coordY<<std::endl;
-            ///////////////
-            mutex->lock();
-            r_queue.push(new Event(command,objectType,objectID,coordX,coordY));
-            mutex->unlock();
-        }else{
-            mutex->lock();
-            r_queue.push(new Event(command));
-            mutex->unlock();
-        }
+        std::cout<<"Recibi comando: "<<command << " Tipo de Objeto: "
+        << objectType << " ID de objeto: "<<objectID <<" Pos: "
+        <<coordX<<","<<coordY<<std::endl;
+        ///////////////
+        mutex->lock();
+        r_queue.push(new Event(command,objectType,objectID,coordX,coordY));
+        mutex->unlock();
+    }else{
+        *end = true;
     }
+
 }
 
 void Receiver::receiveMapSize(){
@@ -117,7 +120,7 @@ void Receiver::receiveMapSize(){
     skt->receive(buffer,TAM_INT);
     level_height = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
-    renderer->setMapSize(level_width*15, level_height*15);
+    renderer->setMapSize(level_width*SCALE_FACTOR, level_height*SCALE_FACTOR);
     std::cout<<"Recibi tamanio del mapa: "<<level_width<<"x"<<level_height<<std::endl;
 }
 
@@ -217,3 +220,16 @@ void Receiver::receiveMap(){
 Receiver::~Receiver(){
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

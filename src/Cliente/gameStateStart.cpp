@@ -9,7 +9,7 @@
 #include "bar_sprite.h"
 #include "event.h"
 
-#define FPS 30
+#define FPS 60
 #define TAM_INT 4
 #define MAPA 1
 #define STATIC 1

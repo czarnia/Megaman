@@ -34,7 +34,8 @@ class Sprite{
         void setHeight(int h);
         virtual void setAmmount(int ammount){}
 
-        virtual void setState(int x, int y){}
+        virtual void changeState(int x, int y){}
+        virtual void setState(int &action){}
         virtual void spawn(){}
         virtual void destroy(){}
         virtual void loadAnimations(std::string path){}

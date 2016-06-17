@@ -13,7 +13,7 @@ class Receiver: public Hilo{
         Socket* skt;
         Renderer *renderer;
 
-
+        void receiveEventAndQueue(bool *end);
         Mutex *mutex;
     public:
         std::queue<Event*> r_queue;
