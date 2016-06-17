@@ -45,6 +45,8 @@ class Escalera: public Elemento{
 		void interactuar(Personaje_pc *pj);
 		//
 		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);
+		//Devuele true si el elemento actua como piso, false en caso contrario
+		virtual bool es_piso();
 		//Destructor de la Escalera.
 		~Escalera();
 };

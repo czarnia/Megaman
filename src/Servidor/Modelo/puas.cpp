@@ -60,4 +60,8 @@ void Puas::quitar_observador(Observador_ubicable *observador){
 	Observable::agregar_observador(observador);
 }
 
+bool Puas::es_piso(){
+	return false;
+}
+
 Puas::~Puas() {}

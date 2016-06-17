@@ -171,8 +171,8 @@ void Mapa::update(float tiempo){
 bool Mapa::esta_en_aire(Personaje* personaje){
   size_t alto = personaje->get_alto();
   Coordenada c = personaje->get_coordenada().abajo(alto/2);
-  for (size_t i = 0; i < bloques.size(); i++){
-    if (bloques[i]->colisiona(personaje, c)){
+  for (size_t i = 0; i < elementos.size(); i++){
+    if (elementos[i]->colisiona(personaje, c) && elementos[i]->es_piso()){
       return false;
     }
   }

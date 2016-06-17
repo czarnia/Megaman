@@ -31,6 +31,8 @@ class Premio : public Elemento{
 		//Dado un Premio, devuelve true si el premio puede ubicarse
 		//en las mismas coordenadas que este elemento.
 		virtual bool puede_ocupar(Premio* premio);
+		//Devuele true si el elemento actua como piso, false en caso contrario
+		virtual bool es_piso();
 		//Destructor de premio.
 		virtual ~Premio() = 0;
 };

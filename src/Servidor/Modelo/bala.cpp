@@ -107,3 +107,8 @@ void Bala::update(float tiempo, Mapa* mapa){
 void Bala::interactuar(Personaje* pj){
 	//pj->recibir_ataque(this);
 }
+
+
+bool Bala::es_piso(){
+	return false;
+}
