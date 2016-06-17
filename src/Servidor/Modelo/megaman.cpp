@@ -10,6 +10,8 @@
 #define IZQUIERDA 4
 #define MEGAMAN 1
 
+#define TIEMPO_ACCION 0.5
+
 typedef std::map<int, StrategyMoverPersonajePc*>::iterator movimientosIt;
 
 Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
@@ -47,6 +49,10 @@ void Megaman::atacar(int dir, Mapa* mapa){
 }
 
 void Megaman::mover(size_t tiempo, Mapa* mapa){
+	if (tiempo_pasado < TIEMPO_ACCION){
+		return;
+	}
+	tiempo_pasado -= TIEMPO_ACCION;
 	//Me muevo utilizando la estrategia
 	//de movimiento actual:
 	movimiento_actual->mover(mapa, this, tiempo);

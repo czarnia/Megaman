@@ -159,7 +159,7 @@ Personaje* Mapa::obtener_pj(int id_pj){
 	return p;
 }
 
-void Mapa::update(size_t tiempo){
+void Mapa::update(float tiempo){
 	for (ItPersonaje it= personajes.begin(); it != personajes.end(); ++it){
 		(*it).second->update(tiempo, this);
 	}

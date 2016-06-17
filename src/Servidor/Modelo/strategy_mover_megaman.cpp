@@ -7,7 +7,8 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 #define SALTAR 5
-#define VELOCIDAD 10
+#define VELOCIDAD_X 6
+#define VELOCIDAD_Y 10
 #define GRAVEDAD 5
 #define VELOCIDAD_SALTO 30
 
@@ -30,19 +31,19 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
   Coordenada nueva_coordenada = pj->coordenada;
   if (velocidad_x > 0){
     std::cout << "MEGAMAN MOVER: derecha \n";
-    nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD);
+    nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);
   }
   if (velocidad_x < 0){
     std::cout << "MEGAMAN MOVER: izquierda \n";
-    nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD);
+    nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD_X);
   }
   if (velocidad_y < 0){
     std::cout << "MEGAMAN MOVER: arriba \n";
-    nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD);
+    nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
   }
   if (velocidad_y > 0){
     std::cout << "MEGAMAN MOVER: abajo \n";
-    nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD);
+    nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
   }
 
   if (mapa->puede_ubicarse(pj, nueva_coordenada)){
@@ -73,11 +74,11 @@ void StrategyMoverMegaman::agregar_movimiento(Personaje_pc *pj, int dir){
 	}
 	if (dir == DERECHA){
 		std::cout << "STRATEGY_MOV_MEG agregar_mov:caso derecha \n";
-		velocidad_x += VELOCIDAD;
+		velocidad_x += VELOCIDAD_X;
 	}
 	if (dir == IZQUIERDA){
 		std::cout << "STRATEGY_MOV_MEG agregar_mov:caso izquierda \n";
-		velocidad_x -= VELOCIDAD;
+		velocidad_x -= VELOCIDAD_X;
 	}
 }
 

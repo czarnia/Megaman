@@ -14,7 +14,7 @@ Bala(dir_x, dir_y, c, TIPO_BALA_SPARKMAN, id){}
 
 Bala_sparkman::~Bala_sparkman() {}
 
-void Bala_sparkman::update(size_t tiempo, Mapa* mapa) {
+void Bala_sparkman::update(float tiempo, Mapa* mapa) {
 	Bala::update(tiempo, mapa);
 }
 

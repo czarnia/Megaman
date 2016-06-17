@@ -14,7 +14,7 @@ Bala(dir_x, dir_y, c, TIPO_BALA_MINION, id){}
 
 Bala_minion::~Bala_minion() {}
 
-void Bala_minion::update(size_t tiempo, Mapa* mapa) {
+void Bala_minion::update(float tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){

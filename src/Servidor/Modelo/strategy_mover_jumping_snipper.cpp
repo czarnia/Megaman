@@ -20,4 +20,3 @@ void StrategyMoverJumpingSnipper::mover(Mapa *mapa, Jumping_snipper *pj, size_t 
 		pj->notificar_observadores();
 	}
 }
-

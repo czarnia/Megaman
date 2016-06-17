@@ -71,7 +71,7 @@ class Mapa{
     void quitar_bala(Bala *b);
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
-    void update(size_t tiempo);
+    void update(float tiempo);
 	  //Recibe una coordenada y devuelve true si hay un personaje
 	  //posicionado en ella.
     bool hay_personaje(Coordenada *coord);

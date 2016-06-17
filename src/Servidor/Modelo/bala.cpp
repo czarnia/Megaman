@@ -59,7 +59,7 @@ bool Bala::puede_ocupar(Personaje* pj){
 	return true;
 }
 
-void Bala::update(size_t tiempo, Mapa* mapa){
+void Bala::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	size_t delta_x = 0;
 	size_t delta_y = 0;

@@ -69,7 +69,7 @@ void Juego::jugar(){
 		clock_t iniciar_tiempo = clock();
 		{
 			Lock l(proteccion);
-			update(0.01);
+			update(0.0001);
 		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
 		sleep(delta_tiempo);
@@ -80,7 +80,7 @@ void Juego::terminar_partida(){
 	fin_partida = true;
 }
 
-void Juego::update(size_t tiempo){
+void Juego::update(float tiempo){
 	mundo->update(tiempo);
 }
 

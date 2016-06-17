@@ -11,7 +11,7 @@ class Bala_bombman: public Bala {
 		//Destructor de la bala.
 		virtual ~Bala_bombman();
 		//Hace que pasa el tiempo para la bala.
-		virtual void update(size_t tiempo, Mapa* mapa);
+		virtual void update(float tiempo, Mapa* mapa);
 		//Daña a un Personaje (caso por defecto).
 		virtual void daniar(Personaje* pj);
 		//Daña a un Megaman.

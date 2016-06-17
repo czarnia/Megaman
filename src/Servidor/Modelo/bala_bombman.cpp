@@ -14,7 +14,7 @@ Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){}
 
 Bala_bombman::~Bala_bombman() {}
 
-void Bala_bombman::update(size_t tiempo, Mapa* mapa) {
+void Bala_bombman::update(float tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){

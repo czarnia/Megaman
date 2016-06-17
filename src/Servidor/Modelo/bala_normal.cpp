@@ -14,7 +14,7 @@ Bala(dir_x, dir_y, c, TIPO_BALA_NORMAL, id){}
 
 Bala_normal::~Bala_normal() {}
 
-void Bala_normal::update(size_t tiempo, Mapa* mapa) {
+void Bala_normal::update(float tiempo, Mapa* mapa) {
 	Bala::update(tiempo, mapa);
 }
 
