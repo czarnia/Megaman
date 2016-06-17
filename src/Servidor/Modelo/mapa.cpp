@@ -148,6 +148,10 @@ bool Mapa::ubicar(Bloque* bloque, Coordenada c){
 	}
 	elementos.push_back(bloque);
 	bloques.push_back(c);
+	bloques.push_back(c.derecha(TAM_BLOQUE/2));
+	bloques.push_back(c.izquierda(TAM_BLOQUE/2));
+	bloques.push_back(c.arriba(TAM_BLOQUE/2));
+	bloques.push_back(c.abajo(TAM_BLOQUE/2));
 	return true;
 }
 

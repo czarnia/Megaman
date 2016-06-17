@@ -10,11 +10,11 @@ StrategyMoverPersonajePc::StrategyMoverPersonajePc(){
 }
 
 void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
+	if (direccion == QUIETO){
+		return;
+	}
 	Coordenada coord_nueva = pj->coordenada;
 	switch(direccion){
-		case QUIETO:
-			direccion = QUIETO;
-			break;
 		case ARRIBA:
 			coord_nueva = pj->coordenada.arriba();
 			direccion = ARRIBA;

@@ -73,9 +73,7 @@ void Megaman::agregar_movimiento(int direccion){
 }
 
 void Megaman::agregar_movimiento(StrategyMoverPersonajePc *movimiento){
-	if (movimientos.find(movimiento->get_direccion())== movimientos.end()){
-		movimientos[movimiento->get_direccion()] = movimiento;
-	}
+	movimientos[movimiento->get_direccion()] = movimiento;
 }
 
 void Megaman::sacar_movimiento(int direccion){
