@@ -4,6 +4,8 @@
 #include "snipper.h"
 #include "strategy_mover_jumping_snipper.h"
 
+class StrategyMoverJumpingSnipper;
+
 class Jumping_snipper : public Snipper {
 	private:
 		StrategyMoverJumpingSnipper salto_snipper;
@@ -13,6 +15,8 @@ class Jumping_snipper : public Snipper {
 		Jumping_snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		//Le hace un update al personaje.
 		virtual void update(size_t tiempo, Mapa* mapa);
+		
+		friend class StrategyMoverJumpingSnipper;
 };
 
 #endif //JUMPING_SNIPPER_H

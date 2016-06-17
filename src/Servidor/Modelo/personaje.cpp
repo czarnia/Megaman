@@ -20,16 +20,13 @@
 #define ANCHO 30
 
 Personaje::Personaje(Mapa *mapa, Coordenada c, int id):
-coordenada(c),
-id(id){
-	//velocidad_y = 0;
-	//velocidad_x = 0;
+id(id),
+coordenada(c){
 	alto = ALTO;
 	ancho = ANCHO;
-	flotando = false; //asumo siempre inicio al personaje no en el aire.
 	tiempo_pasado = 0;
 	tipo = 0;
-	energia = GANAR_MAX;
+	flotando = false;
 }
 
 void Personaje::notificar_observadores(){
@@ -44,12 +41,6 @@ void Personaje::update(size_t tiempo, Mapa* mapa){
 	notificar_observadores();
 }
 
-void Personaje::agregar_movimiento(int dir, StrategyMover *movimiento){
-	if (movimientos.find(dir) == movimientos.end()){
-		movimientos[dir] = movimiento;
-	}
-}
-
 Coordenada Personaje::get_coordenada(){
 	return coordenada;
 }
@@ -60,59 +51,6 @@ int Personaje::get_id(){
 
 int Personaje::get_tipo(){
 	return tipo;
-}
-
-bool Personaje::esta_vivo(){
-	return !vidas.empty();
-}
-
-int Personaje::get_cantidad_vidas(){
-	return vidas.size();
-}
-
-int Personaje::get_porcentaje_vida(){
-	int porcentaje = 0;
-	if (!vidas.empty()){
-		porcentaje = vidas[0].get_porcentaje();
-	}
-	return porcentaje;
-}
-
-int Personaje::get_energia(){
-	return 0; //TODO: cambiar al valor de la energia actual!
-}
-
-void Personaje::perder_vida(int porcentaje){
-	if (porcentaje == PERDER_MAX){
-		vidas.erase(vidas.begin());
-	}else{
-		vidas[0].perder(porcentaje);
-	}
-}
-
-void Personaje::ganar_vida(int porcentaje){
-	if (porcentaje == GANAR_MAX){
-		Vida vida_nueva = Vida();
-		vidas.push_back(vida_nueva);
-	}else{
-		vidas[0].ganar(porcentaje);
-	}
-}
-
-void Personaje::perder_energia(int porcentaje){
-	if ((energia - porcentaje) <= 0){
-		energia = 0;
-	}else{
-		energia -= porcentaje;
-	}
-}
-
-void Personaje::ganar_energia(int porcentaje){
-	if ((porcentaje - energia) >= GANAR_MAX){
-		energia = GANAR_MAX;
-	}else{
-		energia += porcentaje;
-	}
 }
 
 int Personaje::get_alto(){
@@ -205,3 +143,11 @@ bool Personaje::puede_ocupar(Premio* premio){
 void Personaje::respawn(Coordenada posicion_inicial){
 	coordenada = posicion_inicial;
 }
+
+bool Personaje::esta_flotando(){
+	return flotando;
+}
+
+void Personaje::interactuar(Escalera *esc){}
+
+void Personaje::interactuar(Capsula_de_energia *capsula){}

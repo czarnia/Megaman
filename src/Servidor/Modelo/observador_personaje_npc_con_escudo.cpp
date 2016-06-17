@@ -3,7 +3,7 @@
 #include <sstream>
 
 Observador_personaje_npc_con_escudo::
-Observador_personaje_npc_con_escudo(Juego* juego, Personaje *personaje):
+Observador_personaje_npc_con_escudo(Juego* juego, Personaje_npc *personaje):
 Observador_personaje_npc(juego, personaje){}
 
 void Observador_personaje_npc_con_escudo::update(Observable *obs){

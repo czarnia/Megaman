@@ -9,7 +9,7 @@
 #define IZQUIERDA 4
 
 Bombman::Bombman(Mapa *mapa, Coordenada c, Arma_bombman* arma, int id):
-Personaje(mapa, c, id),
+Personaje_npc(mapa, c, id),
 arma(arma){
   tras_escudo = false;
   tiempo_pasado = 0;
@@ -42,6 +42,3 @@ void Bombman::update(size_t tiempo){
   tiempo_pasado -= TIEMPO_ATAQUE;
 }
 
-void Bombman::sacar_movimiento(int direccion){}
-
-void Bombman::agregar_movimiento(int direccion){}

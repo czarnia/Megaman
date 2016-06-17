@@ -1,11 +1,11 @@
 #ifndef MET_H
 #define MET_H
 
-#include "personaje.h"
+#include "personaje_npc.h"
 
 class Arma_minion;
 
-class Met: public Personaje{
+class Met: public Personaje_npc{
 	private:
 		Mapa *mapa;
 		bool tras_escudo;
@@ -26,8 +26,6 @@ class Met: public Personaje{
 		//esta bajo la proteccion de su escudo.
 		virtual bool esta_descubierto();
 
-		virtual void sacar_movimiento(int direccion);
-		virtual void agregar_movimiento(int direccion);
 	private:
 		//Devuelve true si es vulnerable a un cierto ataque, false en caso contrario.
 		bool es_vulnerable(Bala* ataque);

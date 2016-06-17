@@ -1,18 +1,20 @@
-#include "strategy_mover_sin_gravedad.h"
+#include "strategy_mover_personaje_pc.h"
 #include <iostream>
 
+#define MOVIMIENTO_MAX 1
 enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
 
-StrategyMoverSinGravedad::StrategyMoverSinGravedad(){
+StrategyMoverPersonajePc::StrategyMoverPersonajePc(){
 	direccion = QUIETO;
+	movimientos_realizados = 0;
 }
 
-void StrategyMoverSinGravedad::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
+void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
+	if (direccion == QUIETO){
+		return;
+	}
 	Coordenada coord_nueva = pj->coordenada;
 	switch(direccion){
-		case QUIETO:
-			direccion = QUIETO;
-			break;
 		case ARRIBA:
 			coord_nueva = pj->coordenada.arriba();
 			direccion = ARRIBA;
@@ -32,21 +34,25 @@ void StrategyMoverSinGravedad::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
 	}
 	if (mapa->puede_ubicarse(pj, coord_nueva)){
 		pj->coordenada = coord_nueva;
+		movimientos_realizados++;
+	}
+	if (movimientos_realizados >= MOVIMIENTO_MAX){
+		direccion = QUIETO;
 	}
 }
 
-void StrategyMoverSinGravedad::set_direccion_abajo(){
+void StrategyMoverPersonajePc::set_direccion_abajo(){
 	direccion = ABAJO;
 }
 
-void StrategyMoverSinGravedad::set_direccion_arriba(){
+void StrategyMoverPersonajePc::set_direccion_arriba(){
 	direccion = ARRIBA;
 }
 
-void StrategyMoverSinGravedad::set_direccion_derecha(){
+void StrategyMoverPersonajePc::set_direccion_derecha(){
 	direccion = DERECHA;
 }
 
-void StrategyMoverSinGravedad::set_direccion_izquierda(){
+void StrategyMoverPersonajePc::set_direccion_izquierda(){
 	direccion = IZQUIERDA;
 }

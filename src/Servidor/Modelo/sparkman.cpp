@@ -6,7 +6,7 @@
 #define TIPO_SPARKMAN 22
 
 Sparkman::Sparkman(Mapa *mapa, Coordenada c, Arma_sparkman* arma, int id):
-Personaje(mapa, c, id),
+Personaje_npc(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
   tipo = TIPO_SPARKMAN;
@@ -34,10 +34,6 @@ void Sparkman::update(size_t tiempo){
   //atacar
   //mover
 }
-
-void Sparkman::sacar_movimiento(int direccion){}
-
-void Sparkman::agregar_movimiento(int direccion){}
 
 std::vector<Bala*> Sparkman::balas_ataque(){ //Ataca en un círculo medio defo.
   std::vector<Bala*> balas;

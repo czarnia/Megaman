@@ -12,12 +12,11 @@
 #include "personaje_observable.h"
 #include "observador_personaje.h"
 #include "observador_ubicable.h"
-class StrategyMover;
-class StrategyMoverSinGravedad;
-class StrategyMoverBumby;
-class StrategyMoverJumpingSnipper;
+
 class Observador_personaje;
 class Bala;
+class Escaleras;
+class Capsula_de_energia;
 
 #define PERDER_MAX -100
 #define GANAR_MAX 100
@@ -28,16 +27,12 @@ public Defendible,
 public Actualizable,
 public Personaje_observable{
 	protected:
-		std::vector<Vida> vidas;
-		std::map<int, StrategyMover*> movimientos;
-		//int velocidad_y, velocidad_x;
-		size_t ancho, alto;
-		Coordenada coordenada;
-		int energia;
 		int id;
 		int tipo;
-		bool flotando;
+		size_t ancho, alto;
+		Coordenada coordenada;
 		size_t tiempo_pasado;
+		bool flotando;
 	public:
 		//Dado un mapa, una coordenada y una cadena que usa como identificador, se
 		//crea un personaje.
@@ -56,39 +51,20 @@ public Personaje_observable{
 		virtual	int get_tipo();
 		//Dado un porcentaje de vida a perder, se la resta al personaje,
 		//en caso de ser -100 (por defecto) una vida completa.
-		virtual void perder_vida(int porcentaje = PERDER_MAX);
+		virtual void perder_vida(int porcentaje = PERDER_MAX) = 0;
 		//Dado un porcentaje de vida a ganar, se la suma al personaje,
 		//en caso de ser 100 (por defecto) una vida completa.
-		virtual void ganar_vida(int porcentaje = GANAR_MAX);
-		//Dado un porcentaje de energia a perder se le resta al personaje,
-		//en caso de ser -100 (por defecto) toda la energia disponible.
-		virtual void perder_energia(int porcentaje = PERDER_MAX);
-		//Dado un porcentaje de energia a ganar se le suma al personaje,
-		//en caso de ser 100 (por defecto) la energia perdida.
-		virtual void ganar_energia(int porcentaje = GANAR_MAX);
+		virtual void ganar_vida(int porcentaje = GANAR_MAX) = 0;
 		//Devuelve true si el personaje está vivo, false en caso contrario.
-		virtual bool esta_vivo();
-		//Dada una direccion representada como un int, agrega un movimiento en dicha
-		//direccion.
-		virtual void agregar_movimiento(int direccion) = 0;  //TODO: esto debería ser de pc.
-		//Recibe una estrategia de movimiento y la agrega
-		//a las estrategias de movimiento del personaje.
-		virtual void agregar_movimiento(int dir, StrategyMover *movimiento);
-		//Dada una direccion representada como un int, saca un movimiento en dicha
-		//direccion.
-		virtual void sacar_movimiento(int direccion) = 0;
+		virtual bool esta_vivo() = 0;
 		//Devuelve la coordenada central de un personaje.
 		virtual Coordenada get_coordenada();
 		//Notifica a los objetos que observan al personaje de un cambio
 		//en el estedo del mismo.
 		virtual void notificar_observadores();
-		//Devuelve la cantidad de vidas del personaje.
-		int get_cantidad_vidas();
 		//Devuelve el porcentaje de vida de la vida en uso
 		//o 0 si no hay vidas.
-		int get_porcentaje_vida();
-		//Devuelve el porcentaje de energia actual del persoanje.
-		int get_energia();
+		virtual int get_porcentaje_vida() = 0;
 		//Devuelve el ancho del personaje.
 		int get_ancho();
 		//Devuelve el alto del personaje.
@@ -139,11 +115,13 @@ public Personaje_observable{
 		virtual bool puede_ocupar(Premio* premio);
 		//Dada una posicion para respawnear, se mueve al personaje a la misma.
 		virtual void respawn(Coordenada posicion_inicial);
-
-		friend class StrategyMoverBumby;
-		friend class StrategyMoverSinGravedad;
-		friend class StrategyMoverMegaman;
-		friend class StrategyMoverJumpingSnipper;
+		//Recibe una escalera e interactúa con la misma
+		//para actualizar sus coordenadas:
+		virtual void interactuar(Escalera *esc);
+		//Dada una capsula de energia, se interactura con la misma.
+		virtual void interactuar(Capsula_de_energia *capsula);
+		//Devuelve true si el personaje esta flotanto.
+		bool esta_flotando();
 };
 
 #endif //PERSONAJE_H

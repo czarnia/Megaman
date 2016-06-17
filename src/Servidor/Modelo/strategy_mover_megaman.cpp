@@ -7,7 +7,8 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 #define SALTAR 5
-#define VELOCIDAD 2
+#define VELOCIDAD 10
+#define GRAVEDAD 5
 #define VELOCIDAD_SALTO 30
 
 StrategyMoverMegaman::StrategyMoverMegaman():
@@ -16,10 +17,15 @@ velocidad_y(0){
 	direccion = 0;
 }
 
+<<<<<<< HEAD
 void StrategyMoverMegaman::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
   if (mapa->esta_en_aire(pj)){
+=======
+void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
+  if (mapa->esta_en_aire(pj->coordenada, pj->alto)){
+>>>>>>> f6e0fbd20239e99640ac1283417281c3d29bb472
     pj->flotando = true;
-    velocidad_y += 5; //valor gravedad.
+    velocidad_y += GRAVEDAD; //valor gravedad.
   }else{
     pj->flotando = false;
   }
@@ -29,23 +35,26 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
   Coordenada nueva_coordenada = pj->coordenada;
   if (velocidad_x > 0){
     std::cout << "MEGAMAN MOVER: derecha \n";
-    nueva_coordenada = nueva_coordenada.derecha(10);
+    nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD);
   }
   if (velocidad_x < 0){
     std::cout << "MEGAMAN MOVER: izquierda \n";
-    nueva_coordenada = nueva_coordenada.izquierda(10);
+    nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD);
   }
   if (velocidad_y < 0){
     std::cout << "MEGAMAN MOVER: arriba \n";
-    nueva_coordenada = nueva_coordenada.arriba(10);
+    nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD);
   }
   if (velocidad_y > 0){
     std::cout << "MEGAMAN MOVER: abajo \n";
-    nueva_coordenada = nueva_coordenada.abajo(10);
+    nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD);
   }
 
   if (mapa->puede_ubicarse(pj, nueva_coordenada)){
     std::cout << "MEGAMAN MOVER: PUEDE UBICARSE\n";
+	std::cout << "MEGAMAN MOVER: POS FINAL x: " << nueva_coordenada.obtener_abscisa() << "y: "
+    << nueva_coordenada.obtener_ordenada() << "\n";
+
     pj->coordenada = nueva_coordenada;
   }else{
     std::cout << "MEGAMAN MOVER: COORDENADA RECHAZADA: " <<  "x: " << nueva_coordenada.obtener_abscisa() << "y: "
@@ -59,7 +68,7 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
   }
 }
 
-void StrategyMoverMegaman::agregar_movimiento(Personaje *pj, int dir){
+void StrategyMoverMegaman::agregar_movimiento(Personaje_pc *pj, int dir){
 	direccion = dir;
 	std::cout << "STRATEGY_MOV_MEG: AGREGAR MOVIMIENTO PERSONAJE\n";
 	std::cout << "DIRECCION MOV: " << direccion << "\n";
@@ -77,7 +86,7 @@ void StrategyMoverMegaman::agregar_movimiento(Personaje *pj, int dir){
 	}
 }
 
-void StrategyMoverMegaman::sacar_movimiento(Personaje *pj, int dir){
+void StrategyMoverMegaman::sacar_movimiento(Personaje_pc *pj, int dir){
 	if (direccion == DERECHA){
 		std::cout << "STRATEGY_MOV_MEG sacar_mov: interrumpo mov derecha\n";
 		velocidad_x = 0;
