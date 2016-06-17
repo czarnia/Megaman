@@ -197,7 +197,8 @@ void Mapa::update(size_t tiempo){
 }
 
 bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
-	return !hay_tierra(coord.abajo(alto/2).abajo(TAM_BLOQUE/2));
+  Coordenada c = coord.abajo(alto/2).abajo(TAM_BLOQUE/2);
+	return !hay_tierra(c);
 }
 
 bool Mapa::hay_personaje(Coordenada *coord){

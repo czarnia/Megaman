@@ -50,9 +50,6 @@ void Cargador_mapa::cargar_coordenadas(){
   //Primero obtengo las dimensiones del mapa
   getline(mapa_arch, linea);
   std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
-  if (linea_parseada.size() != 2){
-    std::cout << "skjkasjalskjaKSAJKSLSDJLKSJLAKAJKAJKSJLKASJLKA \n";
-  }
   ancho_mapa = atoi(linea_parseada[0].c_str());
   alto_mapa = atoi(linea_parseada[1].c_str());
   //Ahora obtengo las coordenadas de los objetos del mapa.
