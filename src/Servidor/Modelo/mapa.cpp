@@ -88,13 +88,7 @@ std::vector<Coordenada> coord_escaleras(){
 //------------------------------------//
 
 Mapa::Mapa(size_t long_x, size_t long_y):
-long_x(long_x),
-long_y(long_y){
-	for (size_t x = 0; x < long_x; x++){
-		for (size_t y = 0; y < long_y; y++){
-			elementos[x][y] = std::vector<Elemento*>();
-		}
-	}
+long_x(long_x), long_y(long_y){
 }
 
 Mapa::~Mapa(){
@@ -115,41 +109,12 @@ int Mapa::obtener_long_y(){
 }
 
 bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
-	for (size_t x = 0; x < long_x; x++){
-    for (size_t y = 0; y < long_y; y++){
-      std::vector<Elemento*> elem = elementos[x][y];
-			for (size_t j = 0; j < elem.size(); j++){
-				if (elem[j]->colisiona(ubic, c) && !elem[j]->puede_ocupar(ubic)){
-					return false;
-				}
-			}
-    }
-  }
-  return true;
-
-  /*
-  std::vector<Coordenada> coordenadas = ubic->coordenadas(c);
-	for (size_t i = 0; i < coordenadas.size(); i++){
-		Coordenada c_act = coordenadas[i];
-		if (!tiene_coordenada(c_act)){
+	for (size_t i = 0; i < elementos.size(); i++){
+		if (elementos[i]->colisiona(ubic, c) && !elementos[i]->puede_ocupar(ubic)){
 			return false;
 		}
-
-		int x = c_act.obtener_abscisa();
-		int y = c_act.obtener_ordenada();
-		if (elementos.find(x) == elementos.end()){
-			continue;
-		}
-		if (elementos[x].find(y) != elementos[x].end()){
-			std::vector<Elemento*> elem = elementos[x][y];
-			for (size_t j = 0; j < elem.size(); j++){
-				if (elem[j]->colisiona(ubic, c) && !elem[j]->puede_ocupar(ubic)){
-					return false;
-				}
-			}
-		}
 	}
-	return true;*/
+  return true;
 }
 
 bool Mapa::ubicar(Personaje* pj, Coordenada c){
@@ -164,9 +129,7 @@ bool Mapa::ubicar(Elemento* elem, Coordenada c){
 	if (!puede_ubicarse(elem, c)){
 		return false;
 	}
-	int x = c.obtener_abscisa();
-	int y = c.obtener_ordenada();
-	elementos[x][y].push_back(elem);
+	elementos.push_back(elem);
 	return true;
 }
 
@@ -174,9 +137,7 @@ bool Mapa::ubicar(Bala* bala, Coordenada c){
 	if (!puede_ubicarse(bala, c)){
 		return false;
 	}
-	int x = c.obtener_abscisa();
-	int y = c.obtener_ordenada();
-	elementos[x][y].push_back(bala);
+	elementos.push_back(bala);
 	balas.push_back(bala);
 	return true;
 }
@@ -185,9 +146,7 @@ bool Mapa::ubicar(Bloque* bloque, Coordenada c){
 	if (!puede_ubicarse(bloque, c)){
 		return false;
 	}
-	int x = c.obtener_abscisa();
-	int y = c.obtener_ordenada();
-	elementos[x][y].push_back(bloque);
+	elementos.push_back(bloque);
 	bloques.push_back(c);
 	return true;
 }
@@ -303,43 +262,23 @@ std::vector<Coordenada> Mapa::coord_bloques(){
 }
 
 void Mapa::interactuar_con_entorno(Personaje* pj){
-	std::set<Elemento*> interactivos;
-	std::vector<Coordenada> coordenadas = pj->coordenadas();
-
-	for (size_t i = 0; i < coordenadas.size(); i++){
-		Coordenada c_act = coordenadas[i];
-		int x = c_act.obtener_abscisa();
-		int y = c_act.obtener_ordenada();
-
-		std::vector<Elemento*> elem = elementos[x][y];
-		for(size_t j = 0; j < elem.size(); j++){
-			interactivos.insert(elem[j]);
-		}
-	}
-
-	std::set<Elemento*>::iterator it;
-	for(it = interactivos.begin(); it != interactivos.end(); it++){
-		(*it)->interactuar(pj);
-	}
+  Coordenada c = pj->get_coordenada();
+  for(size_t i = 0; i < elementos.size(); i++){
+    if (elementos[i]->colisiona(pj, c)){
+      elementos[i]->interactuar(pj);
+    }
+  }
 }
 
 std::vector<Ubicable*> Mapa::devolver_ubicables(){
-	std::set<Ubicable*> ubicables;
-	for (size_t i = 0; i < long_x; i++){
-		for (size_t j = 0; j < long_y; j++){
-			if (elementos[i].find(j) != elementos[i].end()){
-				for (size_t h = 0; h < elementos[i][j].size(); h++){
-					ubicables.insert(elementos[i][j][h]);
-				}
-			}
-		}
+	std::vector<Ubicable*> ubicables;
+	for (size_t i = 0; i < elementos.size(); i++){
+		ubicables.push_back(elementos[i]);
 	}
 	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
-		ubicables.insert(it->second);
+		ubicables.push_back(it->second);
 	}
-
-	std::vector<Ubicable*> ubicables_v(ubicables.begin(), ubicables.end());
-	return ubicables_v;
+	return ubicables;
 }
 
 bool Mapa::ubicar_premio(Coordenada c){
@@ -350,9 +289,7 @@ bool Mapa::ubicar_premio(Coordenada c){
 	if (!puede_ubicarse(nuevo_premio, c)){
 		return false;
 	}
-	int x = c.obtener_abscisa();
-	int y = c.obtener_ordenada();
-	elementos[x][y].push_back(nuevo_premio);
+	elementos.push_back(nuevo_premio);
 	return true;
 }
 
