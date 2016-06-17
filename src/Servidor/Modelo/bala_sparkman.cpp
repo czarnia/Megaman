@@ -37,10 +37,10 @@ void Bala_sparkman::daniar(Bumby* b){
 void Bala_sparkman::daniar(Snipper* s){
 	s->perder_vida();
 }
-
+/*
 void Bala_sparkman::daniar(Jumping_snipper* js){
 	js->perder_vida();
-}
+}*/
 
 bool Bala_sparkman::dania_con_escudo(Met* m){
 	return true;

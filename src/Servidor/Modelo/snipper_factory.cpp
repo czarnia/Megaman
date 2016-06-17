@@ -20,7 +20,7 @@ void Snipper_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Snipper *snipper = new Snipper(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje_npc_con_escudo(juego, snipper);
+		Observador_personaje_npc_con_escudo *obs = new Observador_personaje_npc_con_escudo(juego, snipper);
 		snipper->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(snipper);

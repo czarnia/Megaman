@@ -76,6 +76,10 @@ void Juego::jugar(){
 	}
 }
 
+void Juego::personaje_update_escudo(int tipo, int id, bool bajo_escudo){
+	notificar_personaje_update_escudo(tipo, id, bajo_escudo);
+}
+
 void Juego::terminar_partida(){
 	fin_partida = true;
 }
@@ -170,7 +174,7 @@ void Juego::notificar_gameover(int id){
 void Juego::notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo){
 	for (size_t i = 0; i < observadores.size(); i++){
 		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_gameover(id);
+		obs->update_personaje_escudo(tipo, id, bajo_escudo);
 	}
 }
 

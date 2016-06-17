@@ -63,10 +63,10 @@ void Bala_bombman::daniar(Bumby* b){
 void Bala_bombman::daniar(Snipper* s){
 	s->perder_vida();
 }
-
+/*
 void Bala_bombman::daniar(Jumping_snipper* js){
 	js->perder_vida();
-}
+}*/
 
 bool Bala_bombman::dania_con_escudo(Met* m){
 	return true;

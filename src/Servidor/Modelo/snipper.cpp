@@ -5,15 +5,15 @@
 #define SNIPPER 5
 
 Snipper::Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
-Personaje_npc(mapa, c, id),
+Personaje_npc_con_escudo(mapa, c, id),
 arma(arma){
   tras_escudo = false;
   tiempo_pasado = 0;
   tipo = SNIPPER;
 }
 
-bool Snipper::esta_descubierto(){
-  return !tras_escudo;
+bool Snipper::esta_bajo_escudo(){
+  return tras_escudo;
 }
 
 bool Snipper::es_vulnerable(Bala* ataque){
