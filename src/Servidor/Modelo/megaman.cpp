@@ -83,7 +83,7 @@ void Megaman::agregar_movimiento(StrategyMoverPersonajePc *movimiento){
 }
 
 void Megaman::sacar_movimiento(int direccion){
-	movimiento_megaman->sacar_movimiento(this, direccion);
+	movimiento_actual->sacar_movimiento(this, direccion);
 }
 
 void Megaman::recibir_ataque(Bala* ataque){

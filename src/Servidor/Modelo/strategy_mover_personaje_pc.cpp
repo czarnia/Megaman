@@ -36,6 +36,10 @@ void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo
 	}
 }
 
+void StrategyMoverPersonajePc::sacar_movimiento(Personaje_pc *pj, int dir){
+	direccion = QUIETO;	
+}
+
 void StrategyMoverPersonajePc::set_direccion_abajo(){
 	direccion = ABAJO;
 }

@@ -14,6 +14,7 @@ class StrategyMoverPersonajePc : public StrategyMover{
 		virtual void set_direccion_arriba();
 		virtual void set_direccion_derecha();
 		virtual void set_direccion_izquierda();
+		virtual void sacar_movimiento(Personaje_pc *pj, int dir);
 };
 
 #endif //STRATEGY_MOVER_PERSONAJE_PC_H
