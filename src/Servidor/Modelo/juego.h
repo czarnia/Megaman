@@ -79,11 +79,12 @@ public Juego_observable{
 		void notificar_energia(int tipo, int id, int energia);
 		//Notifica a los observadores que se modifico la posicion de un personaje.
 		void notificar_posicion(int tipo, int id, int x, int y);
+		//Notifica a los observadores que un personaje
+		//subio o bajo su escudo.
+		void notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo);
 		//Recibe id y tipo correspondiente a un personaje y
 		//notifica al servidor de la muerte del mismo.
 		void murio_personaje(int tipo, int id);
-		//Finaliza el nivel.
-		//void murio_boss();
 		//Recibe id y tipo correspondiente a un personaje y
 		//una cantidad de vidas y notifica al servidor
 		//de la nueva cantidad de vidas del mismo.
@@ -100,6 +101,9 @@ public Juego_observable{
 		//su posicion actual y notifica al servidor de
 		//la nueva posicion.
 		void actualizo_posicion(int tipo, int id, int x, int y);
+		//Recibe un id y un tipo y notifica al servidor
+		//que el personaje cambio el estado de su escudo.
+		void personaje_update_escudo(int tipo, int id, bool bajo_escudo);
 		//Devuelve una lista de coordenadas correspondientes
 		//a los bloques del mapa.
 		std::vector<Coordenada> bloques();
@@ -109,8 +113,6 @@ public Juego_observable{
 		bool inicio_partida();
 		//Recibe un numero de mapa e inicializa un nuevo nivel.
 		void inicializar_nivel(int numero_mapa);
-		//Notifica a los observadores que se modifico la posicion de un personaje.
-		void notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo);
 		//Devuelve true si ya se inicializo el nivel.
 		bool esta_jugando_nivel();
 		//Devuelve el mapa actual del juego.

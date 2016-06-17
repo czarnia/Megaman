@@ -20,7 +20,7 @@ void Met_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Met *met = new Met(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje_npc_con_escudo(juego, met);
+		Observador_personaje_npc_con_escudo *obs = new Observador_personaje_npc_con_escudo(juego, met);
 		met->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(met);

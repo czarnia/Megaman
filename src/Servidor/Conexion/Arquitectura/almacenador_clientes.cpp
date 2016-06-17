@@ -21,7 +21,7 @@ int Almacenador_clientes::devolver_tamanio(){
   return clientes.size();
 }
 
-void Almacenador_clientes::agregar_cliente (Conexion_cliente* cliente){
+void Almacenador_clientes::agregar_cliente(Conexion_cliente* cliente){
   clientes[clientes.size()+1] = cliente;
   cliente->iniciar_ejecucion();
 }
@@ -98,3 +98,10 @@ void Almacenador_clientes::iniciar_nivel(int num_nivel){
     (it->second)->iniciar_nivel(num_nivel);
   }
 }
+
+void Almacenador_clientes::update_personaje_escudo(int tipo, int id, int bajo_escudo){
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		(it->second)->update_personaje_escudo(tipo, id, bajo_escudo);
+	}
+}
+

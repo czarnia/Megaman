@@ -37,10 +37,10 @@ void Bala_normal::daniar(Bumby* b){
 void Bala_normal::daniar(Snipper* s){
 	s->perder_vida(50);
 }
-
+/*
 void Bala_normal::daniar(Jumping_snipper* js){
 	js->perder_vida(50);
-}
+}*/
 
 bool Bala_normal::dania_con_escudo(Met* m){
 	return false;

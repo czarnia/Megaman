@@ -6,7 +6,6 @@ enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
 
 StrategyMoverPersonajePc::StrategyMoverPersonajePc(){
 	direccion = QUIETO;
-	movimientos_realizados = 0;
 }
 
 void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
@@ -34,10 +33,6 @@ void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo
 	}
 	if (mapa->puede_ubicarse(pj, coord_nueva)){
 		pj->coordenada = coord_nueva;
-		movimientos_realizados++;
-	}
-	if (movimientos_realizados >= MOVIMIENTO_MAX){
-		direccion = QUIETO;
 	}
 }
 

@@ -92,15 +92,25 @@ void Conexion_cliente::iniciar_nivel(int nivel){
 
 void Conexion_cliente::finalizar_nivel(){
 	int fin_nivel = FIN_NIVEL;
-  skt->send((char*)&fin_nivel, TAM_INT);
-  skt->send("                ", TAM_INT*4);
-  //Envio una cadena vacía de TAM_INT*4 caracteres.
+	skt->send((char*)&fin_nivel, TAM_INT);
+	skt->send("                ", TAM_INT*4);
+	//Envio una cadena vacía de TAM_INT*4 caracteres.
 	rcv.finalizar_nivel();
 }
 
 
 Conexion_cliente::~Conexion_cliente(){
   rcv.join();
+}
+
+void Conexion_cliente::update_personaje_escudo(int tipo, int id, int bajo_escudo){
+	int accion = ACCION;
+	int estado_escudo = bajo_escudo? ESCUDO_DOWN : ESCUDO_UP;
+	skt->send((char*)&accion, TAM_INT);
+	skt->send((char*)&tipo, TAM_INT);
+	skt->send((char*)&id, TAM_INT);
+	skt->send((char*)&estado_escudo, TAM_INT);
+	skt->send("        ", TAM_INT);
 }
 
 void Conexion_cliente::enviar_cambio_posicion(int tipo, int id, int x, int y){
@@ -156,3 +166,4 @@ void Conexion_cliente::enviar_gameover(){
   skt->send("                ", TAM_INT*4);
   //Envio una cadena vacía de TAM_INT*4 caracteres.
 }
+

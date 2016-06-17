@@ -7,8 +7,6 @@
 class Personaje_pc;
 
 class StrategyMoverPersonajePc : public StrategyMover{
-	private:
-		int movimientos_realizados;
 	public:
 		StrategyMoverPersonajePc();
 		virtual void mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo);

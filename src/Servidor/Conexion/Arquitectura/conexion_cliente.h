@@ -30,6 +30,8 @@ class Conexion_cliente{
     void finalizar_nivel();
     //Destructor del Conexion_cliente.
     virtual ~Conexion_cliente();
+    //Envia el nuevo estado del escudo de un personaje al cliente.
+	void update_personaje_escudo(int tipo, int id, int bajo_escudo);
     //Recibe el id de un personaje y notifica al cliente
     //de su nueva posicion.
     void enviar_cambio_posicion(int tipo, int id, int x, int y);
@@ -43,7 +45,6 @@ class Conexion_cliente{
     void enviar_victoria();
     //Envia un mensaje de derrota al jugador/cliente.
     void enviar_gameover();
-
   private:
     //Envia la informacion del mapa inicial.
     void enviar_mapa_inicial();

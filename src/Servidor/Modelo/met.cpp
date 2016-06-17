@@ -6,7 +6,7 @@
 #define TIPO_MET 4
 
 Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
-Personaje_npc(mapa, c, id),
+Personaje_npc_con_escudo(mapa, c, id),
 arma(arma){
   tras_escudo = false;
   tiempo_pasado = 0;
@@ -50,8 +50,8 @@ void Met::update(size_t tiempo){
   tiempo_pasado -= TIEMPO_ATAQUE;
 }
 
-bool Met::esta_descubierto(){
-	return !tras_escudo;
+bool Met::esta_bajo_escudo(){
+	return tras_escudo;
 }
 
 bool Met::es_vulnerable(Bala* ataque){

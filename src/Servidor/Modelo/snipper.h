@@ -1,11 +1,11 @@
 #ifndef SNIPPER_H
 #define SNIPPER_H
 
-#include "personaje_npc.h"
+#include "personaje_npc_con_escudo.h"
 
 class Arma_minion;
 
-class Snipper : public Personaje_npc {
+class Snipper : public Personaje_npc_con_escudo {
 	protected:
 		Arma_minion* arma;
 		bool tras_escudo;
@@ -13,7 +13,7 @@ class Snipper : public Personaje_npc {
 		//Dado un mapa*, una coordenada, un Arma_minion* y un id, crea a un Snipper.
 		Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		//Devuelve true si el Snipper está descubierto, false en caso contrario.
-		bool esta_descubierto();
+		bool esta_bajo_escudo();
 		//Devuelve true si el Snipper es vulnerable al ataque, false en caso contra-
 		//rio.
 		bool es_vulnerable(Bala* ataque);

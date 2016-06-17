@@ -60,10 +60,10 @@ void Bala_minion::daniar(Bumby* b){
 void Bala_minion::daniar(Snipper* s){
 	s->perder_vida(0);
 }
-
+/*
 void Bala_minion::daniar(Jumping_snipper* js){
 	js->perder_vida(0);
-}
+}*/
 
 bool Bala_minion::dania_con_escudo(Met* m){
 	return false;
