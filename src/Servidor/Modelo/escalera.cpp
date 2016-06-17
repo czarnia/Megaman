@@ -113,12 +113,11 @@ bool Escalera::colisiona(Ubicable* otro_ubic, Coordenada nueva){
 	size_t x_colision = std::max(0, x_aux);
 	size_t y_colision = std::max(0, y_aux);
 
-	int x2_central = nueva.obtener_abscisa();
-	int x1_min = this->get_coordenada().izquierda(ancho1/2).obtener_abscisa();
-	int x1_max = this->get_coordenada().derecha(ancho1/2).obtener_abscisa();
+	size_t piso_personaje = nueva.abajo(alto2/2).obtener_ordenada();
+	size_t tope_escalera = coord.arriba(alto1/2).obtener_ordenada();
 
-	return (((x_colision*y_colision) != 0) || (y_colision != 0 &&
-		(x1_min < x2_central) && (x2_central < x1_max)));
+	return (((x_colision*y_colision) != 0) || ((y_colision != 0) &&
+	(tope_escalera == piso_personaje)));
 }
 
 Escalera::~Escalera() {}
