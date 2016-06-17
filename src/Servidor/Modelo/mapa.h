@@ -20,10 +20,10 @@ class Bala;
 class Mapa{
   private:
 	  size_t long_x, long_y;
-    std::vector<Coordenada> bloques; //borrar estos bloques!
+    std::vector<Coordenada> bloques;
     std::vector<Bala*> balas;
     std::map<int, Personaje*> personajes;
-    std::map<int, std::map<int, std::vector<Elemento*> > > elementos;
+    std::vector<Elemento*> elementos;
     std::map<int, Premio_factory*> premios;
   public:
     //Dados un tamanio crea un mapa con tantas divisiones como indique el tamanio.
