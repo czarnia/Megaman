@@ -9,7 +9,7 @@
 #define STATIC 1
 #define NON_STATIC 0
 
-#define SCALE_FACTOR 15
+#define SCALE_FACTOR 1
 
 /// PARA PROTOCOLO
 #define MAPA 1
@@ -217,16 +217,3 @@ void Receiver::receiveMap(){
 Receiver::~Receiver(){
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

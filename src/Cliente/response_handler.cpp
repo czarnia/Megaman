@@ -13,7 +13,7 @@
 #define BIG true
 #define SMALL false
 
-#define SCALE_FACTOR 15
+#define SCALE_FACTOR 1
 
 /// PARA PROTOCOLO
 #define MAPA 1
@@ -234,4 +234,3 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
 ResponseHandler::~ResponseHandler(){
 
 }
-
