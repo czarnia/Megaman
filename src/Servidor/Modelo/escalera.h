@@ -43,6 +43,8 @@ class Escalera: public Elemento{
 		//Recibe un personaje pc e interactúa con el mismo
 		//para actualizar sus coordenadas:
 		void interactuar(Personaje_pc *pj);
+		//
+		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);
 		//Destructor de la Escalera.
 		~Escalera();
 };
