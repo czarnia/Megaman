@@ -115,7 +115,20 @@ int Mapa::obtener_long_y(){
 }
 
 bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
-	std::vector<Coordenada> coordenadas = ubic->coordenadas(c);
+	for (size_t x = 0; x < long_x; x++){
+    for (size_t y = 0; y < long_y; y++){
+      std::vector<Elemento*> elem = elementos[x][y];
+			for (size_t j = 0; j < elem.size(); j++){
+				if (elem[j]->colisiona(ubic, c) && !elem[j]->puede_ocupar(ubic)){
+					return false;
+				}
+			}
+    }
+  }
+  return true;
+
+  /*
+  std::vector<Coordenada> coordenadas = ubic->coordenadas(c);
 	for (size_t i = 0; i < coordenadas.size(); i++){
 		Coordenada c_act = coordenadas[i];
 		if (!tiene_coordenada(c_act)){
@@ -136,7 +149,7 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 			}
 		}
 	}
-	return true;
+	return true;*/
 }
 
 bool Mapa::ubicar(Personaje* pj, Coordenada c){
