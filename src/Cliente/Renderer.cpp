@@ -147,19 +147,23 @@ void Renderer::draw(Sprite *spr, int lockedToScreen){
 void Renderer::drawAll(){
     std::map<int,Sprite*>::iterator it = static_sprites[BACK].begin();
     for(; it != static_sprites[BACK].end(); ++it){
-        draw(it->second, STATIC);
+        if(it->second)
+            draw(it->second, STATIC);
     }
     it = sprites[BACK].begin();
     for(; it != sprites[BACK].end(); ++it){
-        draw(it->second, NON_STATIC);
+        if(it->second)
+            draw(it->second, NON_STATIC);
     }
     it = sprites[FRONT].begin();
     for(; it != sprites[FRONT].end(); ++it){
-        draw(it->second, NON_STATIC);
+        if(it->second)
+            draw(it->second, NON_STATIC);
     }
     it = static_sprites[FRONT].begin();
     for(; it != static_sprites[FRONT].end(); ++it){
-        draw(it->second, STATIC);
+        if(it->second)
+            draw(it->second, STATIC);
     }
 }
 

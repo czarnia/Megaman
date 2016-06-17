@@ -9,8 +9,12 @@
 
 #define TAM_INT 4
 
-enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS, FIN_NIVEL,
+#define ALTO_BLOQUE 30
+#define ANCHO_BLOQUE 30
+
+enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS, ACCION, FIN_NIVEL,
 	 DERROTA, VICTORIA};
+enum Acciones {ATACAR = 1, SALTAR, ESCALAR, ESCUDO_UP, ESCUDO_DOWN};
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m,
 Servidor* s): skt(conexion), id_cliente(id),
@@ -60,8 +64,8 @@ std::string Conexion_cliente::obtener_nombre_jugador(){
 }
 
 void Conexion_cliente::enviar_tamanio_mapa(Juego* m){
-	int long_y = m->long_y_mapa();
-	int long_x = m->long_x_mapa();
+	int long_y = m->long_y_mapa()/ALTO_BLOQUE;
+	int long_x = m->long_x_mapa()/ANCHO_BLOQUE;
 
 	skt->send((char*)&long_x, TAM_INT);
 	skt->send((char*)&long_y, TAM_INT);

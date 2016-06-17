@@ -3,7 +3,7 @@
 #include "arma_bombman.h"
 
 #define TIEMPO_ATAQUE 2
-#define TIPO_BOMBMAN -1 //TODO: definir el tipo del bombman
+#define TIPO_BOMBMAN 30
 
 #define DERECHA 3
 #define IZQUIERDA 4

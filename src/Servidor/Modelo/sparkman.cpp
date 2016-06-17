@@ -3,7 +3,7 @@
 #include "arma_sparkman.h"
 
 #define TIEMPO_ACCION 2
-#define TIPO_SPARKMAN -1 //TODO: definir el id.
+#define TIPO_SPARKMAN 22
 
 Sparkman::Sparkman(Mapa *mapa, Coordenada c, Arma_sparkman* arma, int id):
 Personaje_npc(mapa, c, id),

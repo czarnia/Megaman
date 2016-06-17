@@ -7,7 +7,7 @@
 #include "jumping_snipper.h"
 
 #define TIEMPO_MOVER 1
-#define TIPO_BALA_MINION 11
+#define TIPO_BALA_MINION 36
 
 Bala_minion::Bala_minion(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_MINION, id){}

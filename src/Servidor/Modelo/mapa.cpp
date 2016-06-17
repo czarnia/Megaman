@@ -22,7 +22,7 @@
 #include <math.h>
 #include <algorithm>
 
-#define TAM_BLOQUE 1
+#define TAM_BLOQUE 30
 #define CAPSULA_DE_PLASMA 1
 #define CAPSULA_DE_ENERGIA 2  //TODO: redefinir
 #define NUEVA_VIDA 3
@@ -33,6 +33,14 @@ typedef std::vector<Bala*>::iterator ItBalas;
 typedef std::map<int, Premio_factory*>::iterator ItPremios;
 
 //-------------->Auxiliares<-----------//
+std::vector<int> obtener_claves(std::map<int, Premio_factory*> hash){
+  std::vector<int> v;
+  for (ItPremios it = hash.begin(); it != hash.end(); it++){
+    v.push_back(it->first);
+  }
+  return v;
+}
+
 std::vector<Coordenada> coord_tierras(){
 	//IMPORTANTE: las coordenadas de los bloques
 	//de tierra son las coordenadas internas
@@ -89,6 +97,15 @@ long_y(long_y){
 	}
 }
 
+Mapa::~Mapa(){
+	std::vector<int> claves = obtener_claves(premios);
+	for (size_t i = 0; i < claves.size(); i++){
+		Premio_factory* premio = premios[claves[i]];
+  	premios.erase(claves[i]);
+    delete premio;
+	}
+}
+
 int Mapa::obtener_long_x(){
 	return long_x;
 }
@@ -98,7 +115,20 @@ int Mapa::obtener_long_y(){
 }
 
 bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
-	std::vector<Coordenada> coordenadas = ubic->coordenadas(c);
+	for (size_t x = 0; x < long_x; x++){
+    for (size_t y = 0; y < long_y; y++){
+      std::vector<Elemento*> elem = elementos[x][y];
+			for (size_t j = 0; j < elem.size(); j++){
+				if (elem[j]->colisiona(ubic, c) && !elem[j]->puede_ocupar(ubic)){
+					return false;
+				}
+			}
+    }
+  }
+  return true;
+
+  /*
+  std::vector<Coordenada> coordenadas = ubic->coordenadas(c);
 	for (size_t i = 0; i < coordenadas.size(); i++){
 		Coordenada c_act = coordenadas[i];
 		if (!tiene_coordenada(c_act)){
@@ -119,7 +149,7 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 			}
 		}
 	}
-	return true;
+	return true;*/
 }
 
 bool Mapa::ubicar(Personaje* pj, Coordenada c){
@@ -180,7 +210,8 @@ void Mapa::update(size_t tiempo){
 }
 
 bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
-	return !hay_tierra(coord.abajo((alto/2)+1)); //asumo los bloques son de tamaño 2
+	Coordenada c = coord.abajo(alto/2).abajo(TAM_BLOQUE/2);
+	return !hay_tierra(c);
 }
 
 bool Mapa::hay_personaje(Coordenada *coord){

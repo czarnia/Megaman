@@ -9,7 +9,7 @@
 #define STATIC 1
 #define NON_STATIC 0
 
-#define SCALE_FACTOR 15
+#define SCALE_FACTOR 1
 
 /// PARA PROTOCOLO
 #define MAPA 1
@@ -24,13 +24,22 @@
 #define J_SNIPER 3
 #define MET 4
 #define SNIPER 5
-
+#define BOMBMAN 20
+#define MAGNETMAN 21
+#define SPARKMAN 22
+#define RINGMAN 23
+#define FIREMAN 24
 
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
 #define BLOCK_SPIKESN 1000
 #define BLOCK_LADDERN 1500
 #define MEGAMANN 0
+#define BOMBMANN 5
+#define MAGNETMANN 6
+#define SPARKMANN 7
+#define RINGMANN 8
+#define FIREMANN 9
 #define MEGAMAN_BULLETN 10000
 #define BUMBYN 2000
 #define J_SNIPERN 3000
@@ -56,53 +65,56 @@ Receiver::Receiver(Socket* conexion, Renderer *renderer,
 /// HILO
 void Receiver::ejecutar(){
     /// Ahora recibo las actualizaciones de las cosas movibles
-    /// o que pueden cambiar
+    /// o que pueden cambiar, las recibo en forma de eventos
+	std::cout<<"Se comenzo a recibir cosas:"<<std::endl;
+	bool end = false;
+    while (!end){
+        receiveEventAndQueue(&end);
+    }
+}
+
+void Receiver::receiveEventAndQueue(bool *end){
     int command;
     int objectType;
     int objectID;
     int coordX;
     int coordY;
     std::pair<int,int> coord;
-	std::cout<<"Se comenzo a recibir cosas:"<<std::endl;
-    while (command != END_OF_RESPONSE){
-        char buffer[TAM_INT] = "";
-        /// COMANDO
+    char buffer[TAM_INT] = "";
+
+    /// COMANDO
+    skt->receive(buffer, TAM_INT);
+    command = *((int*)buffer);
+    strncpy(buffer,"    ",TAM_INT);
+    if ( command != END_OF_RESPONSE){
+        /// Tipo de objeto
         skt->receive(buffer, TAM_INT);
-        command = *((int*)buffer);
+        objectType = *((int*)buffer);
         strncpy(buffer,"    ",TAM_INT);
-
-
-        if ( command == MAPA ){
-            /// Tipo de objeto
-            skt->receive(buffer, TAM_INT);
-            objectType = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            /// ID objeto
-            skt->receive(buffer, TAM_INT);
-            objectID = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            /// COORDX
-            skt->receive(buffer, TAM_INT);
-            coordX = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
-            /// COORDY
-            skt->receive(buffer, TAM_INT);
-            coordY = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
+        /// ID objeto
+        skt->receive(buffer, TAM_INT);
+        objectID = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
+        /// COORDX
+        skt->receive(buffer, TAM_INT);
+        coordX = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
+        /// COORDY
+        skt->receive(buffer, TAM_INT);
+        coordY = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);
             ////////////////
-            std::cout<<"Recibi comando: "<<command << " Tipo de Objeto: "
-            << objectType << " ID de objeto: "<<objectID <<" Pos: "
-            <<coordX<<","<<coordY<<std::endl;
-            ///////////////
-            mutex->lock();
-            r_queue.push(new Event(command,objectType,objectID,coordX,coordY));
-            mutex->unlock();
-        }else{
-            mutex->lock();
-            r_queue.push(new Event(command));
-            mutex->unlock();
-        }
+        std::cout<<"Recibi comando: "<<command << " Tipo de Objeto: "
+        << objectType << " ID de objeto: "<<objectID <<" Pos: "
+        <<coordX<<","<<coordY<<std::endl;
+        ///////////////
+        mutex->lock();
+        r_queue.push(new Event(command,objectType,objectID,coordX,coordY));
+        mutex->unlock();
+    }else{
+        *end = true;
     }
+
 }
 
 void Receiver::receiveMapSize(){
@@ -117,7 +129,7 @@ void Receiver::receiveMapSize(){
     skt->receive(buffer,TAM_INT);
     level_height = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
-    renderer->setMapSize(level_width*15, level_height*15);
+    renderer->setMapSize(level_width*SCALE_FACTOR, level_height*SCALE_FACTOR);
     std::cout<<"Recibi tamanio del mapa: "<<level_width<<"x"<<level_height<<std::endl;
 }
 
@@ -171,7 +183,7 @@ void Receiver::receiveMap(){
                     renderer->addSprite(BLOCK_SPIKESN, spr, BACK, NON_STATIC);
                     break;
                 case BLOCK_LADDER:
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
+                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/ladder.png");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_LADDERN, spr, BACK, NON_STATIC);
@@ -184,28 +196,67 @@ void Receiver::receiveMap(){
                     renderer->addSprite(MEGAMANN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case MET:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.PNG");
+                    spr->loadAnimations("../AnimationConfig/met.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(METN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case BUMBY:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/bumby.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/bumby.PNG");
+                    spr->loadAnimations("../AnimationConfig/bumby.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BUMBYN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case J_SNIPER:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/j_sniper.PNG");
+                    spr->loadAnimations("../AnimationConfig/j_sniper.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(J_SNIPERN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case SNIPER:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/sniper.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/sniper.PNG");
+                    spr->loadAnimations("../AnimationConfig/sniper.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(SNIPERN+objectID, spr, FRONT, NON_STATIC);
+                    break;
+                case BOMBMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/bombman.gif");
+                    spr->loadAnimations("../AnimationConfig/bombman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(BOMBMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case MAGNETMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/magnetman.gif");
+                    spr->loadAnimations("../AnimationConfig/magnetman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(MAGNETMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case SPARKMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/sparkman.PNG");
+                    spr->loadAnimations("../AnimationConfig/sparkman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(SPARKMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case RINGMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/ringman.PNG");
+                    spr->loadAnimations("../AnimationConfig/ringman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(RINGMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case FIREMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/fireman.PNG");
+                    spr->loadAnimations("../AnimationConfig/fireman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(FIREMAN, spr, FRONT, NON_STATIC);
                     break;
                 default:
                     break;
@@ -217,16 +268,3 @@ void Receiver::receiveMap(){
 Receiver::~Receiver(){
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -15,6 +15,7 @@ class Bar_sprite: public Sprite{
         Bar_sprite(SDL_Renderer *r, bool hp);
         void setAmmount(int ammount);
         SDL_Texture* get_texture();
+        ~Bar_sprite();
 };
 
 #endif

@@ -24,4 +24,3 @@ void StrategyMoverBumby::mover(Mapa *mapa, Bumby *pj, size_t tiempo){
 		pj->notificar_observadores();
 	}
 }
-

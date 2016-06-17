@@ -7,8 +7,8 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 #define SALTAR 5
-#define VELOCIDAD 2
-#define VELOCIDAD_SALTO 4
+#define VELOCIDAD 10
+#define VELOCIDAD_SALTO 30
 
 StrategyMoverMegaman::StrategyMoverMegaman():
 velocidad_x(0),
@@ -19,7 +19,7 @@ velocidad_y(0){
 void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
   if (mapa->esta_en_aire(pj->coordenada, pj->alto)){
     pj->flotando = true;
-    velocidad_y += 1; //valor gravedad.
+    velocidad_y += 10; //valor gravedad.
   }else{
     pj->flotando = false;
   }
@@ -29,19 +29,19 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
   Coordenada nueva_coordenada = pj->coordenada;
   if (velocidad_x > 0){
     std::cout << "MEGAMAN MOVER: derecha \n";
-    nueva_coordenada = nueva_coordenada.derecha(2);
+    nueva_coordenada = nueva_coordenada.derecha(10);
   }
   if (velocidad_x < 0){
     std::cout << "MEGAMAN MOVER: izquierda \n";
-    nueva_coordenada = nueva_coordenada.izquierda(2);
+    nueva_coordenada = nueva_coordenada.izquierda(10);
   }
   if (velocidad_y < 0){
     std::cout << "MEGAMAN MOVER: arriba \n";
-    nueva_coordenada = nueva_coordenada.arriba(2);
+    nueva_coordenada = nueva_coordenada.arriba(10);
   }
   if (velocidad_y > 0){
     std::cout << "MEGAMAN MOVER: abajo \n";
-    nueva_coordenada = nueva_coordenada.abajo(2);
+    nueva_coordenada = nueva_coordenada.abajo(10);
   }
 
   if (mapa->puede_ubicarse(pj, nueva_coordenada)){

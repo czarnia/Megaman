@@ -7,7 +7,7 @@
 #include "jumping_snipper.h"
 
 #define TIEMPO_MOVER 1
-#define TIPO_BALA_FIREMAN -1 //TODO: definir tipo!
+#define TIPO_BALA_FIREMAN 30
 
 Bala_bombman::Bala_bombman(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){}

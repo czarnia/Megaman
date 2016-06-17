@@ -49,12 +49,12 @@ void Cargador_mapa::cargar_coordenadas(){
   int x = 0, y = 0;
   //Primero obtengo las dimensiones del mapa
   getline(mapa_arch, linea);
-  ancho_mapa = atoi((const char*)&linea[0]);
-  alto_mapa =  atoi((const char*)&linea[2]);
-
+  std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
+  ancho_mapa = atoi(linea_parseada[0].c_str());
+  alto_mapa = atoi(linea_parseada[1].c_str());
   //Ahora obtengo las coordenadas de los objetos del mapa.
   while (getline(mapa_arch, linea)){
-    std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
+    linea_parseada = parsear_cadena_palabras(linea);
     if (linea_parseada.size() != 3){ //necesito un código + 2 coordenadas.
       //excepcion!
       return;

@@ -26,9 +26,10 @@ class Mapa{
     std::map<int, std::map<int, std::vector<Elemento*> > > elementos;
     std::map<int, Premio_factory*> premios;
   public:
-    //Dados un tamanio crea un mapa
-    //con tantas divisiones como indique el tamanio.
+    //Dados un tamanio crea un mapa con tantas divisiones como indique el tamanio.
     Mapa(size_t long_x, size_t long_y);
+    //Destructor del mapa.
+    ~Mapa();
     //Devuelve el ancho del mapa.
     int obtener_long_y();
     //Devuelve el ancho del mapa.

@@ -8,6 +8,7 @@ int Bar_sprite::height = 10;
 
 Bar_sprite::Bar_sprite(SDL_Renderer *r, bool hp)
 {
+    texture = NULL;
     if (hp){
         for(int i = 0; i < 9; i++){
             std::ostringstream os;
@@ -35,4 +36,10 @@ void Bar_sprite::setAmmount(int ammount){
 
 SDL_Texture* Bar_sprite::get_texture(){
     return bar_vector[ammount-1];
+}
+
+Bar_sprite::~Bar_sprite(){
+    for(int i = 0; i<9; i++){
+        SDL_DestroyTexture(bar_vector[i]);
+    }
 }

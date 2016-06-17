@@ -11,4 +11,3 @@ class StrategyMover{
 };
 
 #endif //STRATEGY_MOVER_H
-

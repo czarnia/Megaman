@@ -123,30 +123,33 @@ GameState::StateCode gameStateLobby::update(){
     /// ACA LANZO UN HILO PARA ESPERAR QUE EL SERVIDOR
     /// ME INDIQUE EL COMIENZO DE PARTIDA Y NUMERO DE BOSS
     receiver->start();
-    while (running){
-        /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
-        if (playerData.first == 1){
+    if (playerData.first == 1){
+        while (running){
+            /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
             updateInput();
+            render();
+        }
+    }
+
+    /// ESPERO A RECIBIR UNA SEñAL PARA EMPEZAR
+    int starting = 1;
+    while (starting != 0){
+        if (!receiver->r_queue.empty()){
+            /// START
+            mutex.lock();
+            starting = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            SDL_Delay(10);
+            if (starting == START_GAME)
+                std::cout<<"Se esta por empezar un nivel"<<std::endl;
+            /// BOSS
+            *level = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            mutex.unlock();
+            start = true;
         }
         render();
     }
-    /// Si se recibio el comienzo de juego
-    /// cambio los flags necesarios
-
-    int aux;
-    /// START
-    mutex.lock();
-    aux = receiver->r_queue.front();
-    receiver->r_queue.pop();
-    mutex.unlock();
-    SDL_Delay(10);
-    /// BOSS
-    mutex.lock();
-    *level = receiver->r_queue.front();
-    receiver->r_queue.pop();
-    mutex.unlock();
-    start = true;
-
     receiver->join();
     ///
     if (start){

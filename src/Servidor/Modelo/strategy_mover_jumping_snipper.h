@@ -15,4 +15,3 @@ class StrategyMoverJumpingSnipper : public StrategyMover{
 };
 
 #endif //STRATEGY_MOVER_JUMPING_SNIPPER_H
-

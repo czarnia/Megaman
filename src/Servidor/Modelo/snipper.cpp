@@ -1,12 +1,15 @@
 #include "snipper.h"
 #include "arma_minion.h"
+
 #define DERECHA -1
+#define SNIPPER 5
 
 Snipper::Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje_npc(mapa, c, id),
 arma(arma){
   tras_escudo = false;
   tiempo_pasado = 0;
+  tipo = SNIPPER;
 }
 
 bool Snipper::esta_descubierto(){

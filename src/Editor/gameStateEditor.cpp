@@ -74,7 +74,7 @@ void gameStateEditor::load(int stack){
     renderer->addSprite(STATIC_BLOCK, spr, FRONT, STATIC);
     /// MEGAMAN
     spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
-    spr->setState(-1,-1);
+    spr->changeState(-1,-1);
     spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
     spr->setPosY(Block_sprite::height*2);
     renderer->addSprite(STATIC_MEGAMAN, spr, FRONT, STATIC);
@@ -190,7 +190,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                             std::cout<< "Ya se coloco un megaman"<<std::endl;
                         }else{
                             spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
-                            spr->setState(-1,-1);
+                            spr->changeState(-1,-1);
                             spr->setPosX(x);
                             spr->setPosY(y);
                             renderer->addSprite(MEGAMANN, spr, FRONT, NON_STATIC);
@@ -200,6 +200,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 case gameStateEditor::MET:
                     if (!renderer->ocupied(x,y)){
                         spr = new Block_sprite(renderer->get_renderer(), "../sprites/met.png");
+                        spr->changeState(-1,-1);
                         spr->setPosX(x);
                         spr->setPosY(y);
                         renderer->addSprite(METN, spr, FRONT, NON_STATIC);
@@ -208,6 +209,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 case gameStateEditor::BUMBY:
                     if (!renderer->ocupied(x,y)){
                         spr = new Block_sprite(renderer->get_renderer(), "../sprites/bumby.png");
+                        spr->changeState(-1,-1);
                         spr->setPosX(x);
                         spr->setPosY(y);
                         renderer->addSprite(BUMBYN, spr, FRONT, NON_STATIC);
@@ -216,6 +218,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 case gameStateEditor::J_SNIPER:
                     if (!renderer->ocupied(x,y)){
                         spr = new Block_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
+                        spr->changeState(-1,-1);
                         spr->setPosX(x);
                         spr->setPosY(y);
                         renderer->addSprite(J_SNIPERN, spr, FRONT, NON_STATIC);
@@ -224,6 +227,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                 case gameStateEditor::SNIPER:
                     if (!renderer->ocupied(x,y)){
                         spr = new Block_sprite(renderer->get_renderer(), "../sprites/sniper.png");
+                        spr->changeState(-1,-1);
                         spr->setPosX(x);
                         spr->setPosY(y);
                         renderer->addSprite(SNIPERN, spr, FRONT, NON_STATIC);
@@ -312,8 +316,8 @@ void gameStateEditor::exportMap(){
 
     std::map<int,Sprite*>::iterator it;
 
-    it = renderer->sprites[1].begin();
-    for (; it != renderer->sprites[1].end(); ++it){
+    it = renderer->sprites[FRONT].begin();
+    for (; it != renderer->sprites[FRONT].end(); ++it){
 
         if (it->first == MEGAMANN)
             object_type = PMEGAMAN;
@@ -333,11 +337,17 @@ void gameStateEditor::exportMap(){
             object_type = PJ_SNIPER;
 
 
-
-        ofile << object_type << " ";
-        ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
-        ofile << it->second->getPosY() + Block_sprite::height/2 << " ";
-        ofile << std::endl;
+        if(it->first == PMEGAMAN){
+            ofile << object_type << " ";
+            ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
+            ofile << it->second->getPosY() + Block_sprite::height << " ";
+            ofile << std::endl;
+        }else{
+            ofile << object_type << " ";
+            ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
+            ofile << it->second->getPosY() + Block_sprite::height/2 << " ";
+            ofile << std::endl;
+        }
     }
 
     ofile.close();

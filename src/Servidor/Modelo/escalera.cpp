@@ -4,8 +4,8 @@
 #include "puas.h"
 #include "bloque.h"
 #define TIPO_ESCALERA 12
-#define ANCHO 2
-#define ALTO 2
+#define ANCHO 30
+#define ALTO 30
 
 enum dir_estrategias{ARRIBA, ABAJO, DERECHA, IZQUIERDA};
 
@@ -65,7 +65,6 @@ void Escalera::interactuar(Personaje_pc* pj){
 	//la escalera, en ese caso, le doy estrategias
 	//para que se mantenga en su lugar o baje pero
 	//no le permito subir mas:
-	
 	StrategyMoverPersonajePc *estrategia_arriba = new StrategyMoverPersonajePc();
 	estrategia_arriba->set_direccion_arriba();
 	StrategyMoverPersonajePc *estrategia_abajo = new StrategyMoverPersonajePc();
@@ -74,8 +73,8 @@ void Escalera::interactuar(Personaje_pc* pj){
 	estrategia_derecha->set_direccion_derecha();
 	StrategyMoverPersonajePc *estrategia_izquierda = new StrategyMoverPersonajePc();
 	estrategia_izquierda->set_direccion_izquierda();
-	
-	
+
+
 	size_t piso_personaje = y + (pj->get_alto() / 2);
 	size_t tope_escalera = coord.arriba(alto/2).obtener_ordenada();
 	if (piso_personaje == tope_escalera){

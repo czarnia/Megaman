@@ -7,7 +7,7 @@
 #include "jumping_snipper.h"
 
 #define TIEMPO_MOVER 1
-#define TIPO_BALA_NORMAL 2
+#define TIPO_BALA_NORMAL 35
 
 Bala_normal::Bala_normal(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_NORMAL, id){}

@@ -24,6 +24,7 @@ Personaje_pc(mapa, c, id){
 	movimientos = std::map<int, StrategyMoverPersonajePc*>();
 	movimiento_megaman = new StrategyMoverMegaman();
 	movimiento_actual = movimiento_megaman;
+	energia = 0;
 }
 
 void Megaman::update(size_t tiempo){

@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 
+#define PSHOOTING 1
+
 int Minion_sprite::width = 30;
 int Minion_sprite::height = 30;
 
@@ -10,8 +12,8 @@ Minion_sprite::Minion_sprite(SDL_Renderer *r, const char* file):
 {
     rectangle.w = Minion_sprite::width;
     rectangle.h = Minion_sprite::height;
-    //currentFrame = 0;
-    //clearStates();
+    currentFrame = 0;
+    currentState = IDLE;
 }
 
 void Minion_sprite::loadAnimations(std::string path){
@@ -58,66 +60,75 @@ void Minion_sprite::loadAnimations(std::string path){
         ifile >> aux->h;
         deathAnimation.push_back(aux);
     }
+
+    ifile >> framesNumber;
+    for (int i = 0; i <framesNumber; i++){
+        SDL_Rect *aux = new SDL_Rect;
+        ifile >> aux->x;
+        ifile >> aux->y;
+        ifile >> aux->w;
+        ifile >> aux->h;
+        shieldUpAnimation.push_back(aux);
+    }
 }
 
-void Minion_sprite::setState(int x, int y){
-    clearStates();
+void Minion_sprite::changeState(int x, int y){
+
     if (x < 0){
         editorMode = true;
         return;
     }
     if (x > rectangle.x){
         movingLeft = false;
-        running = true;
-        idle = false;
+        currentState = RUNNING;
         if (y > rectangle.y)
-            jumping = true;
+            currentState = JUMPING;
     }
     if (x < rectangle.x){
         movingLeft = true;
-        running = true;
-        idle = false;
+        currentState = RUNNING;
         if (y > rectangle.y)
-            jumping = true;
+            currentState = JUMPING;
     }
     if (x == rectangle.x){
         if (y == rectangle.y){
-            idle = true;
-            running = false;
+            currentState = IDLE;
         }else if (y > rectangle.y)
-            jumping = true;
+            currentState = JUMPING;
     }
 }
 
 void Minion_sprite::clearStates(){
-    spawning = false;
-    dying = false;
-    running = false;
-    jumping = false;
     editorMode = false;
-    idle = true;
 }
 
+void Minion_sprite::setState(int &action){
+    switch(action){
+        case PSHOOTING:
+            currentState = SHIELD_UP;
+            break;
+        default:
+            break;
+    }
+}
 
 SDL_Rect* Minion_sprite::get_crop(){
     if (editorMode)
         return NULL;
-    if (idle){
+    if (currentState == IDLE){
         currentFrame += 0.01;
         if ((unsigned)round(currentFrame) == idleAnimation.size())
             currentFrame = 0;
         return idleAnimation[round(currentFrame)];
     }
-    else if (dying){
+    else if (currentState == DYING){
         currentFrame += 0.01;
         if((unsigned)round(currentFrame) == deathAnimation.size()){
             currentFrame = 0;
-            dying = false;
-            idle = true;
         }
         return deathAnimation[round(currentFrame)];
     }
-    if (running){
+    if (currentState == RUNNING){
         currentFrame += 0.15 ;
         if ((unsigned)round(currentFrame) == runningAnimation.size())
             currentFrame = 0;
@@ -138,5 +149,8 @@ Minion_sprite::~Minion_sprite(){
         delete *it;
     it = deathAnimation.begin();
     for (; it != deathAnimation.end(); ++it)
+        delete *it;
+    it = shieldUpAnimation.begin();
+    for (; it != shieldUpAnimation.end(); ++it)
         delete *it;
 }

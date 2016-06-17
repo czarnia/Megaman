@@ -7,15 +7,9 @@
 
 class Character_sprite: public Sprite{
     private:
-        static int width;
-        static int height;
-        enum State{SPAWNING, DYING, RUNNING, JUMPING, IDLE, EDITORMODE};
-        bool spawning;
-        bool dying;
+
+        enum State{SPAWNING, DYING, RUNNING, JUMPING, IDLE, EDITORMODE, SHOOTING, CLIMBING};
         bool movingLeft;
-        bool running;
-        bool jumping;
-        bool idle;
         bool editorMode;
         /// Animaciones
         std::vector<SDL_Rect*> runningAnimation;
@@ -24,15 +18,18 @@ class Character_sprite: public Sprite{
         std::vector<SDL_Rect*> ladderAnimation;
         std::vector<SDL_Rect*> spawnAnimation;
         std::vector<SDL_Rect*> deathAnimation;
+        std::vector<SDL_Rect*> shootingAnimation;
         ///
         float currentFrame;
         State currentState;
     public:
         Character_sprite(SDL_Renderer *r, const char* file);
-
+        static int width;
+        static int height;
 
         void loadAnimations(std::string path);
-        void setState(int x, int y);
+        void changeState(int x, int y);
+        void setState(int &action);
         void clearStates();
         void destroy();
         void spawn();

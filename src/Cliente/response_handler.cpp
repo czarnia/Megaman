@@ -13,17 +13,21 @@
 #define BIG true
 #define SMALL false
 
-#define SCALE_FACTOR 15
+#define SCALE_FACTOR 1
 
 /// PARA PROTOCOLO
 #define MAPA 1
 #define HP_BAR 2
 #define MP_BAR 3
 #define LIFE 4
+#define ACTION 5
+#define LEVEL_COMPLETE 6
+#define VICTORY 8
+#define GAMEOVER 7
+
 #define END_OF_MAP 6666
 #define END_OF_RESPONSE 6666
 #define MEGAMAN 1
-#define MEGAMAN_BULLET 12
 #define BUMBY 2
 #define J_SNIPER 3
 #define MET 4
@@ -32,10 +36,12 @@
 #define BIG_HP 15
 #define SMALL_MP 16
 #define BIG_MP 17
-
-#define LEVEL_COMPLETE 5
-#define VICTORY 7
-#define GAMEOVER 6
+#define MEGAMAN_BULLET 35
+#define BOMBMAN_BULLET 30
+#define MAGNETMAN_BULLET 31
+#define SPARKMAN_BULLET 32
+#define RINGMAN_BULLET 33
+#define FIREMAN_BULLET 34
 
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
@@ -43,6 +49,11 @@
 #define BLOCK_LADDERN 1500
 #define MEGAMANN 0
 #define MEGAMAN_BULLETN 10000
+#define BOMBMAN_BULLETN 20000
+#define MAGNETMAN_BULLETN 30000
+#define SPARKMAN_BULLETN 40000
+#define RINGMAN_BULLETN 50000
+#define FIREMAN_BULLETN 60000
 #define BUMBYN 2000
 #define J_SNIPERN 3000
 #define METN 4000
@@ -61,6 +72,16 @@ void sortObject(int *objectType){
         *objectType = MEGAMANN;
     }else if (*objectType == MEGAMAN_BULLET){
         *objectType = MEGAMAN_BULLETN;
+    }else if (*objectType == BOMBMAN_BULLET){
+        *objectType = BOMBMAN_BULLETN;
+    }else if (*objectType == MAGNETMAN_BULLET){
+        *objectType = MAGNETMAN_BULLETN;
+    }else if (*objectType == SPARKMAN_BULLET){
+        *objectType = SPARKMAN_BULLETN;
+    }else if (*objectType == RINGMAN_BULLET){
+        *objectType = RINGMAN_BULLETN;
+    }else if (*objectType == FIREMAN_BULLET){
+        *objectType = FIREMAN_BULLETN;
     }else if (*objectType == MET){
         *objectType = METN;
     }else if (*objectType == BUMBY){
@@ -94,7 +115,7 @@ ResponseHandler::ResponseHandler(Renderer *renderer):
 {
 }
 
-void ResponseHandler::createObject(int objectType, int objectID, std::pair<int,int> coord){
+void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int,int> &coord){
     Sprite *spr = NULL;
     switch (objectType){
         case MEGAMANN:
@@ -120,24 +141,50 @@ void ResponseHandler::createObject(int objectType, int objectID, std::pair<int,i
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
         case J_SNIPERN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/j_sniper.png");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/j_sniper.PNG");
             spr->loadAnimations("../AnimationConfig/j_sniper.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
                 break;
         case SNIPERN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.png");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.PNG");
             spr->loadAnimations("../AnimationConfig/sniper.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-            case MEGAMAN_BULLETN:
-            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bullet.jpeg");
+        case MEGAMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/megaman_bullet.png");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case BOMBMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bombman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case MAGNETMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/magnetman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case SPARKMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/sparkman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case RINGMAN_BULLET:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/ringman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case FIREMAN_BULLET:
             break;
         case BIG_HP:
             spr = new Pickable_sprite(renderer->get_renderer(), "../sprites/big_hp.png", BIG);
@@ -172,61 +219,68 @@ void ResponseHandler::createObject(int objectType, int objectID, std::pair<int,i
     }
 }
 
-void ResponseHandler::changeHUD(int bar, int barID, int ammount){
+void ResponseHandler::changeHUD(int bar, int &barID, int &ammount){
     renderer->static_sprites[FRONT][bar+barID]->setAmmount(ammount);
 }
 
-int ResponseHandler::execute(int command, int objectType, int objectID, std::pair<int,int> coord){
+void ResponseHandler::executeAction(int &objectType, int &objectID, int &action){
+    renderer->sprites[FRONT][objectType+objectID]->setState(action);
+}
 
+void ResponseHandler::changePosition(int &objectType, int &objectID, std::pair<int,int> &coord){
+    /// PARA LA ANIMACION
+    renderer->sprites[FRONT][objectType+objectID]->changeState(coord.first, coord.second);
+    renderer->sprites[FRONT][objectType+objectID]->setPosX(coord.first);
+    renderer->sprites[FRONT][objectType+objectID]->setPosY(coord.second);
+}
 
-    coord.first *= SCALE_FACTOR;
-    coord.second *= SCALE_FACTOR;
+int ResponseHandler::execute(int command, int objectType, int objectID, std::pair<int,int> option){
+    option.first *= SCALE_FACTOR;
+    option.second *= SCALE_FACTOR;
     /// Etapa de clasificacion de objetos
     sortObject(&objectType);
 
     switch (command){
         case MAPA:
             /// SI recibi coordenadas negativas destruyo el objeto
-            if (coord.first < 0){
+            if (option.first < 0){
                 /// SI HAY QUE HACER ALGUNA ANIMACION DE DESTRUCCION
                 /// LA METO ACA
                 //renderer->sprites[FRONT][objectType+objectID]->destroy();
                 renderer->erase(objectType+objectID);
             /// SI ya existe le cambio la posicion
             }else if (renderer->find(objectType+objectID)){
-                /// ANIMACION DE MOVIMIENTO
-                renderer->sprites[FRONT][objectType+objectID]->setState(coord.first, coord.second);
-                renderer->sprites[FRONT][objectType+objectID]->setPosX(coord.first);
-                renderer->sprites[FRONT][objectType+objectID]->setPosY(coord.second);
-            /// Si no existe lo creo y le seteo la posicion
+                changePosition(objectType, objectID, option);
             }else{
-                createObject(objectType, objectID, coord);
+                /// Si no existe lo creo y le seteo la posicion
+                createObject(objectType, objectID, option);
             }
             break;
         case HP_BAR:
-            changeHUD(objectType, objectID, coord.first);
+            changeHUD(HP_BARN, objectID, option.first);
             break;
         case MP_BAR:
-            changeHUD(objectType, objectID, coord.first);
+            changeHUD(MP_BARN, objectID, option.first);
             break;
         case LIFE:
-            changeHUD(objectType, objectID, coord.first);
+            changeHUD(LIFEN, objectID, option.first);
             break;
-        case VICTORY:{
+        case ACTION:
+            executeAction(objectType, objectID, option.first);
+            break;
+        case VICTORY:
             std::cout<<"Recibi victoria: Vuelvo a boss select"<<std::endl;
             return GameState::BOSS_SELECT;
             break;
-        }
-        case GAMEOVER:{
+        case GAMEOVER:
             std::cout<<"Recibi gameover: Vuelvo al menu inicio"<<std::endl;
             return GameState::GAME_OVER;
             break;
-        }
         case END_OF_RESPONSE:
             break;
         default:
             return GameState::CONTINUE;
-        break;
+            break;
     }
     return GameState::CONTINUE;
 }
