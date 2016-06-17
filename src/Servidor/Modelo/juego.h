@@ -35,7 +35,7 @@ public Juego_observable{
 		//Termina la partida en marcha.
 		void terminar_partida();
 		//Dado un determinado tiempo, actualiza al juego.
-		virtual void update(size_t tiempo);
+		virtual void update(float tiempo);
 
 		void notificar_observadores();
 		virtual void update(Observable *obs);

@@ -14,7 +14,7 @@ Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){}
 
 Bala_bombman::~Bala_bombman() {}
 
-void Bala_bombman::update(size_t tiempo, Mapa* mapa) {
+void Bala_bombman::update(float tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){
@@ -35,9 +35,9 @@ void Bala_bombman::update(size_t tiempo, Mapa* mapa) {
 
 	if (mapa->puede_ubicarse(this, nueva_coordenada)){
 		coord = nueva_coordenada;
-    if (mapa->esta_en_aire(this->coord, this->alto)){
+    /*if (mapa->esta_en_aire(this->coord, this->alto)){
       direccion_y += 1;                    //es una bomba y cae por su peso.
-    }
+    }*/
 	}else{
 		//TODO: Mover al mapa.
 		mapa->quitar_bala(this);

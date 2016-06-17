@@ -20,7 +20,7 @@ class Bala;
 class Mapa{
   private:
 	  size_t long_x, long_y;
-    std::vector<Coordenada> bloques;
+    std::vector<Bloque*> bloques;
     std::vector<Bala*> balas;
     std::map<int, Personaje*> personajes;
     std::vector<Elemento*> elementos;
@@ -58,9 +58,9 @@ class Mapa{
     std::vector<Actualizable*> obtener_actualizables();
     //Devuelve true si abajo de un objeto de un alto determinado hay aire, false
     //en caso contrario.
-    bool esta_en_aire(Coordenada coord, size_t alto);
+    bool esta_en_aire(Personaje* pj);
     //Devuelve true si hay tierra en dicha coordenada, false en caso contrario.
-    bool hay_tierra(Coordenada coord);
+    //bool hay_tierra(Coordenada coord);
     //Recibe el id de un personaje y lo remueve del mapa.
     void quitar_personaje(int id);
     //Recibe un personaje y lo agrega al mapa.
@@ -71,7 +71,7 @@ class Mapa{
     void quitar_bala(Bala *b);
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
-    void update(size_t tiempo);
+    void update(float tiempo);
 	  //Recibe una coordenada y devuelve true si hay un personaje
 	  //posicionado en ella.
     bool hay_personaje(Coordenada *coord);
@@ -83,7 +83,6 @@ class Mapa{
     //0,31, devuelve true si la ubicacion fue exitosa, false en caso contrario.
     bool ubicar_premio(Coordenada c);
 
-    std::vector<Coordenada> coord_bloques(); //TODO: quizas se flete.
   private:
     //Carga todas las factories de todos los premios disponibles en el juego.
     void cargar_premios_factories();

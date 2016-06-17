@@ -69,7 +69,7 @@ void Juego::jugar(){
 		clock_t iniciar_tiempo = clock();
 		{
 			Lock l(proteccion);
-			update(0.01);
+			update(0.0001);
 		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
 		sleep(delta_tiempo);
@@ -84,7 +84,7 @@ void Juego::terminar_partida(){
 	fin_partida = true;
 }
 
-void Juego::update(size_t tiempo){
+void Juego::update(float tiempo){
 	mundo->update(tiempo);
 }
 
@@ -97,7 +97,7 @@ void Juego::personaje_atacar(int id_pj, int direccion){ //debería ser sólo par
 void Juego::personaje_mover(int id_pj, int direccion){
 	Lock candado(proteccion);
 	std::cout << "JUEGO: AGREGAR MOVIMIENTO PERSONAJE\n";
-	std::cout << "ID PERSONAJE: " << id_pj << "\n"; 
+	std::cout << "ID PERSONAJE: " << id_pj << "\n";
 	Personaje_pc* pj = (Personaje_pc*)mundo->obtener_pj(id_pj); //TODO:DYNAMIC CAST
 	if (pj == NULL){
 		std::cout << "PJ ES NULL \n";
@@ -238,9 +238,9 @@ void Juego::actualizo_posicion(int tipo, int id, int x, int y){
 	notificar_posicion(tipo, id, x, y);
 }
 
-std::vector<Coordenada> Juego::bloques(){
+/*std::vector<Coordenada> Juego::bloques(){
 	return mundo->coord_bloques();
-}
+}*/
 
 std::vector<Ubicable*> Juego::devolver_ubicables(){
 	return mundo->devolver_ubicables();

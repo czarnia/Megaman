@@ -1,7 +1,7 @@
 #include "strategy_mover_personaje_pc.h"
 #include <iostream>
 
-#define MOVIMIENTO_MAX 1
+#define MOVIMIENTO_MAX 6
 enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
 
 StrategyMoverPersonajePc::StrategyMoverPersonajePc(){

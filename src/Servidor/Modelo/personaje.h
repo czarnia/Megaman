@@ -31,7 +31,7 @@ public Personaje_observable{
 		int tipo;
 		size_t ancho, alto;
 		Coordenada coordenada;
-		size_t tiempo_pasado;
+		float tiempo_pasado;
 		bool flotando;
 	public:
 		//Dado un mapa, una coordenada y una cadena que usa como identificador, se
@@ -42,7 +42,7 @@ public Personaje_observable{
 		//Hace que el personaje ataque.
 		virtual void atacar(int dir, Mapa* mapa) = 0;
 		//Le hace un update al personaje.
-		virtual void update(size_t tiempo, Mapa* mapa);
+		virtual void update(float tiempo, Mapa* mapa);
 		//Dada una bala, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque) = 0;
 		//Devuelve el id de un personaje.

@@ -7,7 +7,7 @@ class Mapa;
 class Actualizable{
 	public:
 		//Hace que pase un tiempo para un actualizable.
-		virtual void update(size_t tiempo, Mapa* mapa) = 0;
+		virtual void update(float tiempo, Mapa* mapa) = 0;
 		//Destructor del actualizable.
 		virtual ~Actualizable() {}
 };
