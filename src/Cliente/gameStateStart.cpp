@@ -3,19 +3,21 @@
 #include <sstream>
 
 #include "sender.h"
+#include "background_sprite.h"
 #include "block_sprite.h"
 #include "character_sprite.h"
 #include "response_handler.h"
 #include "bar_sprite.h"
 #include "event.h"
 
-#define FPS 60
+#define FPS 120
 #define TAM_INT 4
 #define MAPA 1
 #define STATIC 1
 #define NON_STATIC 0
 #define FRONT 1
 #define BACK 0
+#define BACKGROUND 1
 
 #define HP_BAR 6001
 #define MP_BAR 6011
@@ -57,8 +59,12 @@ gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
 void gameStateStart::load(int level){
     /// cargo el fondo del nivel
     std::ostringstream os;
-    os << "../sprites/level_background"<<level<<".jpeg";
+    os << "../sprites/background"<<level<<".png";
     std::string mapBackground(os.str());
+    Sprite *spr = new Background_sprite(renderer->get_renderer(), mapBackground.c_str());
+    spr->setPosX(0);
+    spr->setPosY(0);
+    renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
     /// Recibo datos del mapa
     receiver->receiveMapSize();
     receiver->receiveMap();

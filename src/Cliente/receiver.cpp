@@ -174,7 +174,7 @@ void Receiver::receiveMap(){
                     renderer->addSprite(BLOCK_SPIKESN, spr, BACK, NON_STATIC);
                     break;
                 case BLOCK_LADDER:
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/stair.jpeg");
+                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/ladder.png");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_LADDERN, spr, BACK, NON_STATIC);
