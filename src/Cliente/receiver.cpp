@@ -24,13 +24,22 @@
 #define J_SNIPER 3
 #define MET 4
 #define SNIPER 5
-
+#define BOMBMAN 20
+#define MAGNETMAN 21
+#define SPARKMAN 22
+#define RINGMAN 23
+#define FIREMAN 24
 
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
 #define BLOCK_SPIKESN 1000
 #define BLOCK_LADDERN 1500
 #define MEGAMANN 0
+#define BOMBMANN 5
+#define MAGNETMANN 6
+#define SPARKMANN 7
+#define RINGMANN 8
+#define FIREMANN 9
 #define MEGAMAN_BULLETN 10000
 #define BUMBYN 2000
 #define J_SNIPERN 3000
@@ -187,28 +196,67 @@ void Receiver::receiveMap(){
                     renderer->addSprite(MEGAMANN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case MET:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.PNG");
+                    spr->loadAnimations("../AnimationConfig/met.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(METN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case BUMBY:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/bumby.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/bumby.PNG");
+                    spr->loadAnimations("../AnimationConfig/bumby.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BUMBYN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case J_SNIPER:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/j_sniper.PNG");
+                    spr->loadAnimations("../AnimationConfig/j_sniper.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(J_SNIPERN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case SNIPER:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/sniper.png");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/sniper.PNG");
+                    spr->loadAnimations("../AnimationConfig/sniper.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(SNIPERN+objectID, spr, FRONT, NON_STATIC);
+                    break;
+                case BOMBMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/bombman.gif");
+                    spr->loadAnimations("../AnimationConfig/bombman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(BOMBMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case MAGNETMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/magnetman.gif");
+                    spr->loadAnimations("../AnimationConfig/magnetman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(MAGNETMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case SPARKMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/sparkman.PNG");
+                    spr->loadAnimations("../AnimationConfig/sparkman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(SPARKMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case RINGMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/ringman.PNG");
+                    spr->loadAnimations("../AnimationConfig/ringman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(RINGMANN, spr, FRONT, NON_STATIC);
+                    break;
+                case FIREMAN:
+                    spr = new Character_sprite(renderer->get_renderer(), "../sprites/fireman.PNG");
+                    spr->loadAnimations("../AnimationConfig/fireman.txt");
+                    spr->setPosX(coordX*SCALE_FACTOR);
+                    spr->setPosY(coordY*SCALE_FACTOR);
+                    renderer->addSprite(FIREMAN, spr, FRONT, NON_STATIC);
                     break;
                 default:
                     break;

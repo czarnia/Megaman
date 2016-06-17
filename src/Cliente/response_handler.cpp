@@ -37,6 +37,11 @@
 #define SMALL_MP 16
 #define BIG_MP 17
 #define MEGAMAN_BULLET 35
+#define BOMBMAN_BULLET 30
+#define MAGNETMAN_BULLET 31
+#define SPARKMAN_BULLET 32
+#define RINGMAN_BULLET 33
+#define FIREMAN_BULLET 34
 
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
@@ -44,6 +49,11 @@
 #define BLOCK_LADDERN 1500
 #define MEGAMANN 0
 #define MEGAMAN_BULLETN 10000
+#define BOMBMAN_BULLETN 20000
+#define MAGNETMAN_BULLETN 30000
+#define SPARKMAN_BULLETN 40000
+#define RINGMAN_BULLETN 50000
+#define FIREMAN_BULLETN 60000
 #define BUMBYN 2000
 #define J_SNIPERN 3000
 #define METN 4000
@@ -62,6 +72,16 @@ void sortObject(int *objectType){
         *objectType = MEGAMANN;
     }else if (*objectType == MEGAMAN_BULLET){
         *objectType = MEGAMAN_BULLETN;
+    }else if (*objectType == BOMBMAN_BULLET){
+        *objectType = BOMBMAN_BULLETN;
+    }else if (*objectType == MAGNETMAN_BULLET){
+        *objectType = MAGNETMAN_BULLETN;
+    }else if (*objectType == SPARKMAN_BULLET){
+        *objectType = SPARKMAN_BULLETN;
+    }else if (*objectType == RINGMAN_BULLET){
+        *objectType = RINGMAN_BULLETN;
+    }else if (*objectType == FIREMAN_BULLET){
+        *objectType = FIREMAN_BULLETN;
     }else if (*objectType == MET){
         *objectType = METN;
     }else if (*objectType == BUMBY){
@@ -121,24 +141,50 @@ void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
         case J_SNIPERN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/j_sniper.png");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/j_sniper.PNG");
             spr->loadAnimations("../AnimationConfig/j_sniper.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
                 break;
         case SNIPERN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.png");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.PNG");
             spr->loadAnimations("../AnimationConfig/sniper.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-            case MEGAMAN_BULLETN:
-            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bullet.jpeg");
+        case MEGAMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/megaman_bullet.png");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case BOMBMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/bombman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case MAGNETMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/magnetman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case SPARKMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/sparkman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case RINGMAN_BULLET:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/ringman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case FIREMAN_BULLET:
             break;
         case BIG_HP:
             spr = new Pickable_sprite(renderer->get_renderer(), "../sprites/big_hp.png", BIG);
