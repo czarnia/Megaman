@@ -147,7 +147,7 @@ bool Mapa::ubicar(Bloque* bloque, Coordenada c){
 		return false;
 	}
 	elementos.push_back(bloque);
-	bloques.push_back(c);
+	bloques.push_back(bloque);
 	return true;
 }
 
@@ -168,9 +168,15 @@ void Mapa::update(size_t tiempo){
 	}
 }
 
-bool Mapa::esta_en_aire(Coordenada coord, size_t alto){
-  Coordenada c = coord.abajo(alto/2).abajo(TAM_BLOQUE/2);
-	return !hay_tierra(c);
+bool Mapa::esta_en_aire(Personaje* personaje){
+  size_t alto = personaje->get_alto();
+  Coordenada c = personaje->get_coordenada().abajo(alto/2);
+  for (size_t i = 0; i < bloques.size(); i++){
+    if (bloques[i]->colisiona(personaje, c)){
+      return false;
+    }
+  }
+	return true;
 }
 
 bool Mapa::hay_personaje(Coordenada *coord){
@@ -192,14 +198,14 @@ bool Mapa::hay_personaje(Coordenada *coord){
 	return false;
 }
 
-bool Mapa::hay_tierra(Coordenada coord){
+/*bool Mapa::hay_tierra(Coordenada coord){
 	for (size_t i = 0; i < bloques.size(); i++){
 		if (bloques[i] == coord){
 			return true;
 		}
 	}
 	return false;
-}
+}*/
 
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	unsigned int x = coordenada.obtener_abscisa();
@@ -255,10 +261,6 @@ void Mapa::quitar_personaje(int id_pj){
 	if (personajes.find(id_pj) != personajes.end()){
 		personajes.erase(id_pj);
 	}
-}
-
-std::vector<Coordenada> Mapa::coord_bloques(){
-	return bloques;
 }
 
 void Mapa::interactuar_con_entorno(Personaje* pj){

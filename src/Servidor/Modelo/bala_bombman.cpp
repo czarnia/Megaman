@@ -35,9 +35,9 @@ void Bala_bombman::update(size_t tiempo, Mapa* mapa) {
 
 	if (mapa->puede_ubicarse(this, nueva_coordenada)){
 		coord = nueva_coordenada;
-    if (mapa->esta_en_aire(this->coord, this->alto)){
+    /*if (mapa->esta_en_aire(this->coord, this->alto)){
       direccion_y += 1;                    //es una bomba y cae por su peso.
-    }
+    }*/
 	}else{
 		//TODO: Mover al mapa.
 		mapa->quitar_bala(this);

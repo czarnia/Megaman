@@ -233,9 +233,9 @@ void Juego::actualizo_posicion(int tipo, int id, int x, int y){
 	notificar_posicion(tipo, id, x, y);
 }
 
-std::vector<Coordenada> Juego::bloques(){
+/*std::vector<Coordenada> Juego::bloques(){
 	return mundo->coord_bloques();
-}
+}*/
 
 std::vector<Ubicable*> Juego::devolver_ubicables(){
 	return mundo->devolver_ubicables();
