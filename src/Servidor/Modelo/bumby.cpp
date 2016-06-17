@@ -12,7 +12,7 @@
 enum direcciones_ataque{DERECHA_ABAJO, CENTRO_ABAJO, IZQUIERDA_ABAJO};
 
 Bumby::Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
-Personaje(mapa, c, id),
+Personaje_npc(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
 }
@@ -60,10 +60,3 @@ void Bumby::mover(size_t tiempo, Mapa* mapa){
 	//NADA
 }
  
-void Bumby::sacar_movimiento(int direccion){
-	//NADA
-}
-
-void Bumby::agregar_movimiento(int direccion){
-	//NADA
-}

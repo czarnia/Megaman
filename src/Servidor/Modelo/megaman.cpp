@@ -10,10 +10,10 @@
 #define IZQUIERDA 4
 #define MEGAMAN 1
 
-typedef std::map<int, StrategyMover*>::iterator movimientosIt;
+typedef std::map<int, StrategyMoverPersonajePc*>::iterator movimientosIt;
 
 Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
-Personaje(mapa, c, id){
+Personaje_pc(mapa, c, id){
 	for (size_t i = 0; i < 3; i++){
 		Vida v = Vida();
 		vidas.push_back(v);
@@ -21,7 +21,7 @@ Personaje(mapa, c, id){
 	armas.push_back(arma);
 	arma_act = 0;
 	tipo = MEGAMAN;
-	movimientos = std::map<int, StrategyMover*>();
+	movimientos = std::map<int, StrategyMoverPersonajePc*>();
 	movimiento_megaman = new StrategyMoverMegaman();
 	movimiento_actual = movimiento_megaman;
 }
@@ -71,6 +71,12 @@ void Megaman::agregar_movimiento(int direccion){
 	}
 }
 
+void Megaman::agregar_movimiento(StrategyMoverPersonajePc *movimiento){
+	if (movimientos.find(movimiento->get_direccion())== movimientos.end()){
+		movimientos[movimiento->get_direccion()] = movimiento;
+	}
+}
+
 void Megaman::sacar_movimiento(int direccion){
 	movimiento_megaman->sacar_movimiento(this, direccion);
 }
@@ -81,4 +87,66 @@ void Megaman::recibir_ataque(Bala* ataque){
 
 void Megaman::agregar_arma(Arma *arma){
 	armas.push_back(arma);
+}
+
+
+void Megaman::interactuar(Escalera *esc){
+	esc->interactuar(this);
+}
+
+void Megaman::perder_energia(int porcentaje){
+	if ((energia - porcentaje) <= 0){
+		energia = 0;
+	}else{
+		energia -= porcentaje;
+	}
+}
+
+void Megaman::ganar_energia(int porcentaje){
+	if ((porcentaje - energia) >= GANAR_MAX){
+		energia = GANAR_MAX;
+	}else{
+		energia += porcentaje;
+	}
+}
+
+int Megaman::get_energia(){
+	return 0; //TODO: cambiar al valor de la energia actual!
+}
+
+void Megaman::perder_vida(int porcentaje){
+	if (porcentaje == PERDER_MAX){
+		vidas.erase(vidas.begin());
+	}else{
+		vidas[0].perder(porcentaje);
+	}
+}
+
+void Megaman::ganar_vida(int porcentaje){
+	if (porcentaje == GANAR_MAX){
+		Vida vida_nueva = Vida();
+		vidas.push_back(vida_nueva);
+	}else{
+		vidas[0].ganar(porcentaje);
+	}
+}
+
+bool Megaman::esta_vivo(){
+	return !vidas.empty();
+}
+
+int Megaman::get_cantidad_vidas(){
+	return vidas.size();
+}
+
+int Megaman::get_porcentaje_vida(){
+	int porcentaje = 0;
+	if (!vidas.empty()){
+		porcentaje = vidas[0].get_porcentaje();
+	}
+	return porcentaje;
+}
+
+void Megaman::interactuar(Capsula_de_energia *capsula){
+	capsula->interactuar(this);
 }

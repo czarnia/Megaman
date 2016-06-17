@@ -10,7 +10,7 @@ public Observador_personaje_npc{
 	public:
 		//Dado un juego y una coordenada, crea a un
 		//observador de personaje NPC con escudo.
-		Observador_personaje_npc_con_escudo(Juego* juego, Personaje *personaje);
+		Observador_personaje_npc_con_escudo(Juego* juego, Personaje_npc *personaje);
 		//Dado un observable, hace un update.
 		virtual void update(Observable *obs);
 };

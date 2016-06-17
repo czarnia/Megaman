@@ -16,7 +16,7 @@ velocidad_y(0){
 	direccion = 0;
 }
 
-void StrategyMoverMegaman::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
+void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
   if (mapa->esta_en_aire(pj->coordenada, pj->alto)){
     pj->flotando = true;
     velocidad_y += 1; //valor gravedad.
@@ -59,7 +59,7 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
   }
 }
 
-void StrategyMoverMegaman::agregar_movimiento(Personaje *pj, int dir){
+void StrategyMoverMegaman::agregar_movimiento(Personaje_pc *pj, int dir){
 	direccion = dir;
 	std::cout << "STRATEGY_MOV_MEG: AGREGAR MOVIMIENTO PERSONAJE\n";
 	std::cout << "DIRECCION MOV: " << direccion << "\n";
@@ -77,7 +77,7 @@ void StrategyMoverMegaman::agregar_movimiento(Personaje *pj, int dir){
 	}
 }
 
-void StrategyMoverMegaman::sacar_movimiento(Personaje *pj, int dir){
+void StrategyMoverMegaman::sacar_movimiento(Personaje_pc *pj, int dir){
 	if (direccion == DERECHA){
 		std::cout << "STRATEGY_MOV_MEG sacar_mov: interrumpo mov derecha\n";
 		velocidad_x = 0;

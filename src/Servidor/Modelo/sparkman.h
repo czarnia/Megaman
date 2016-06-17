@@ -1,12 +1,12 @@
 #ifndef SPARKMAN_H
 #define SPARKMAN_H
 
-#include "personaje.h"
+#include "personaje_npc.h"
 #include <vector>
 
 class Arma_sparkman;
 
-class Sparkman: public Personaje{
+class Sparkman: public Personaje_npc{
 	private:
 		Mapa *mapa;
 		size_t tiempo_pasado;
@@ -17,8 +17,6 @@ class Sparkman: public Personaje{
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
 		virtual void update(size_t tiempo);
-		virtual void sacar_movimiento(int direccion);
-		virtual void agregar_movimiento(int direccion);
   private:
     std::vector<Bala*> balas_ataque();
 };

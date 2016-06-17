@@ -1,12 +1,12 @@
 #ifndef FIREMAN_H
 #define FIREMAN_H
 
-#include "personaje.h"
+#include "personaje_npc.h"
 #include <vector>
 
 class Arma_fireman;
 
-class Fireman: public Personaje{
+class Fireman: public Personaje_npc{
 	private:
 		Mapa *mapa;
 		size_t tiempo_pasado;
@@ -23,9 +23,6 @@ class Fireman: public Personaje{
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
 		virtual void update(size_t tiempo);
-
-		virtual void sacar_movimiento(int direccion);
-		virtual void agregar_movimiento(int direccion);
 };
 
 #endif //FIREMAN_H

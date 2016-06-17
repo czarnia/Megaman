@@ -9,7 +9,7 @@
 #define IZQUIERDA 4
 
 Fireman::Fireman(Mapa *mapa, Coordenada c, Arma_fireman* arma, int id):
-Personaje(mapa, c, id),
+Personaje_npc(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
   tipo = TIPO_FIREMAN;
@@ -48,7 +48,3 @@ void Fireman::update(size_t tiempo){
   //}
   //mover
 }
-
-void Fireman::sacar_movimiento(int direccion){}
-
-void Fireman::agregar_movimiento(int direccion){}

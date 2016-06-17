@@ -1,11 +1,11 @@
 #ifndef BOMBMAN_H
 #define BOMBMAN_H
 
-#include "personaje.h"
+#include "personaje_npc.h"
 
 class Arma_bombman;
 
-class Bombman: public Personaje{
+class Bombman: public Personaje_npc{
 	private:
 		Mapa *mapa;
 		bool tras_escudo;
@@ -22,9 +22,6 @@ class Bombman: public Personaje{
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
 		virtual void update(size_t tiempo);
-
-		virtual void sacar_movimiento(int direccion);
-		virtual void agregar_movimiento(int direccion);
 };
 
 #endif //BOMBMAN_H

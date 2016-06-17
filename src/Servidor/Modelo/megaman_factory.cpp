@@ -1,8 +1,7 @@
 #include "megaman_factory.h"
 #include <sstream>
 #include <iostream>
-#include "observador_ubicable.h"
-#include "observador_personaje.h"
+#include "observador_personaje_pc.h"
 #include "arma_factory.h"
 #include "megaman.h"
 
@@ -25,7 +24,7 @@ void Megaman_factory::crear(Mapa* mapa){
 			Megaman *megaman = new Megaman(mapa, *coord, arma, i+1);
 			creados.push_back(megaman);
 			//observador de personaje:
-			Observador_personaje *obs = new Observador_personaje(juego, megaman);
+			Observador_personaje_pc *obs = new Observador_personaje_pc(juego, megaman);
 			megaman->agregar_observador(obs);
 		}
 	}

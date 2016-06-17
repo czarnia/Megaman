@@ -1,4 +1,5 @@
 #include "strategy_mover_bumby.h"
+#include "bumby.h"
 
 enum movimientos{QUIETO = 0, DERECHA = 3, IZQUIERDA = 4};
 
@@ -6,7 +7,7 @@ StrategyMoverBumby::StrategyMoverBumby(){
 	direccion = QUIETO;
 }
 
-void StrategyMoverBumby::mover(Mapa *mapa, Personaje *pj, size_t tiempo){
+void StrategyMoverBumby::mover(Mapa *mapa, Bumby *pj, size_t tiempo){
 	Coordenada coord_nueva = pj->coordenada;
 	switch(direccion){
 		case QUIETO:
