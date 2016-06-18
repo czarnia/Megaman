@@ -1,5 +1,5 @@
 #include "snipper_factory.h"
-#include "observador_personaje_npc_con_escudo.h"
+#include "observador_personaje_npc.h"
 #include "observador_ubicable.h"
 #include "arma_minion.h"
 #include "arma_factory.h"
@@ -20,7 +20,7 @@ void Snipper_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Snipper *snipper = new Snipper(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje_npc_con_escudo *obs = new Observador_personaje_npc_con_escudo(juego, snipper);
+		Observador_personaje_npc *obs = new Observador_personaje_npc(juego, snipper);
 		snipper->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(snipper);
@@ -32,7 +32,7 @@ void Snipper_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Jumping_snipper *jsnipper = new Jumping_snipper(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje_npc_con_escudo(juego, jsnipper);
+		Observador_personaje_npc *obs = new Observador_personaje_npc(juego, jsnipper);
 		jsnipper->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(jsnipper);

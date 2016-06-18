@@ -1,6 +1,6 @@
 #include "met_factory.h"
 #include "observador_ubicable.h"
-#include "observador_personaje_npc_con_escudo.h"
+#include "observador_personaje_npc.h"
 #include "arma_factory.h"
 #include "met.h"
 
@@ -20,7 +20,7 @@ void Met_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Met *met = new Met(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje_npc_con_escudo *obs = new Observador_personaje_npc_con_escudo(juego, met);
+		Observador_personaje_npc *obs = new Observador_personaje_npc(juego, met);
 		met->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(met);

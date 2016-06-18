@@ -8,7 +8,6 @@ class Arma_minion;
 class Snipper : public Personaje_npc_con_escudo {
 	protected:
 		Arma_minion* arma;
-		bool tras_escudo;
 	public:
 		//Dado un mapa*, una coordenada, un Arma_minion* y un id, crea a un Snipper.
 		Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);

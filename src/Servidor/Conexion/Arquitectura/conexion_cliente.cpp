@@ -12,9 +12,9 @@
 #define ALTO_BLOQUE 30
 #define ANCHO_BLOQUE 30
 
-enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS, ACCION, FIN_NIVEL,
-	 DERROTA, VICTORIA};
-enum Acciones {ATACAR = 1, SALTAR, ESCALAR, ESCUDO_UP, ESCUDO_DOWN};
+enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS, 
+	CAMBIO_ESTADO, FIN_NIVEL, DERROTA, VICTORIA};
+//enum Acciones {ATACAR = 1, SALTAR, ESCALAR, ESCUDO_UP, ESCUDO_DOWN, FRENAR};
 
 Conexion_cliente::Conexion_cliente(Socket* conexion, int id, Juego *m,
 Servidor* s): skt(conexion), id_cliente(id),
@@ -103,6 +103,15 @@ Conexion_cliente::~Conexion_cliente(){
   rcv.join();
 }
 
+void Conexion_cliente::update_estado_personaje(int tipo, int id, int estado){
+	int cambio_estado = CAMBIO_ESTADO;
+	skt->send((char*)&cambio_estado, TAM_INT);
+	skt->send((char*)&tipo, TAM_INT);
+	skt->send((char*)&id, TAM_INT);
+	skt->send((char*)&estado, TAM_INT);
+	skt->send("        ", TAM_INT);
+}
+/*
 void Conexion_cliente::update_personaje_escudo(int tipo, int id, int bajo_escudo){
 	int accion = ACCION;
 	int estado_escudo = bajo_escudo? ESCUDO_DOWN : ESCUDO_UP;
@@ -111,7 +120,7 @@ void Conexion_cliente::update_personaje_escudo(int tipo, int id, int bajo_escudo
 	skt->send((char*)&id, TAM_INT);
 	skt->send((char*)&estado_escudo, TAM_INT);
 	skt->send("        ", TAM_INT);
-}
+}*/
 
 void Conexion_cliente::enviar_cambio_posicion(int tipo, int id, int x, int y){
 	int posicion = POSICION;

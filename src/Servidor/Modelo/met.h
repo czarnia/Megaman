@@ -8,7 +8,6 @@ class Arma_minion;
 class Met: public Personaje_npc_con_escudo{
 	private:
 		Mapa *mapa;
-		bool tras_escudo;
 		size_t tiempo_pasado;
 		Arma_minion* arma;
 	public:

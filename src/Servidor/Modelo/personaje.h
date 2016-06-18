@@ -33,6 +33,7 @@ public Personaje_observable{
 		Coordenada coordenada;
 		float tiempo_pasado;
 		bool flotando;
+		int estado_actual;
 	public:
 		//Dado un mapa, una coordenada y una cadena que usa como identificador, se
 		//crea un personaje.
@@ -122,6 +123,9 @@ public Personaje_observable{
 		virtual void interactuar(Capsula_de_energia *capsula);
 		//Devuelve true si el personaje esta flotanto.
 		bool esta_flotando();
+		//Devuelve un int que representa
+		//el estado actual del personaje.
+		int get_estado_actual();
 };
 
 #endif //PERSONAJE_H

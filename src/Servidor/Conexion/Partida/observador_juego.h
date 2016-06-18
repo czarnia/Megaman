@@ -15,7 +15,7 @@ class Observador_juego: public Observador{
 		//Notifica el fin de una partida.
 		virtual void update_fin_partida() = 0;
 		//Dado un identificador y un tipo, notifica que un personaje murio.
-		virtual void update_murio_personaje(int tipo, int id) = 0;
+		//virtual void update_murio_personaje(int tipo, int id) = 0;
 		//Dado un identificador, un tipo y una cantidad de vidas, notifica que un
 		//personaje vio modificadas las mismas.
 		virtual void update_cantidad_vidas(int tipo, int id, int vidas) = 0;
@@ -28,9 +28,9 @@ class Observador_juego: public Observador{
 		//Dado un identificador, un tipo y nuevas coordenadas en x y en y, notifica
 		//que un personaje vio modificadas la mismas.
 		virtual void update_posicion(int tipo, int id, int x, int y) = 0;
-		//Notifica a los clientes de que se modifico el estado del 
-		//escudo de un personaje.
-		virtual void update_personaje_escudo(int tipo, int id, bool bajo_escudo) = 0;
+		//Dado un id, un tipo y un codigo de accion, notifica a los  
+		// clientes de que hubo un cambio en el estado del personaje.
+		virtual void update_estado_personaje(int tipo, int id, int accion) = 0;
 };
 
 #endif //OBSERVADOR_JUEGO_H

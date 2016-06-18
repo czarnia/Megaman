@@ -1,5 +1,5 @@
 #include "bumby_factory.h"
-#include "observador_personaje.h"
+#include "observador_personaje_npc.h"
 #include "observador_ubicable.h"
 #include "arma_minion.h"
 #include "arma_factory.h"
@@ -18,7 +18,7 @@ void Bumby_factory::crear(Mapa* mapa){
 		Arma_minion *arma = arma_fact.crear_arma_minion();
 		Bumby *bumby = new Bumby(mapa, *coord, arma, i);
 		//observador de personaje:
-		Observador_personaje *obs = new Observador_personaje(juego, bumby);
+		Observador_personaje_npc *obs = new Observador_personaje_npc(juego, bumby);
 		bumby->agregar_observador(obs);
 		//Se agrega el personaje al mapa:
 		mapa->agregar_personaje(bumby);

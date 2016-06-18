@@ -30,8 +30,8 @@ class Conexion_cliente{
     void finalizar_nivel();
     //Destructor del Conexion_cliente.
     virtual ~Conexion_cliente();
-    //Envia el nuevo estado del escudo de un personaje al cliente.
-	void update_personaje_escudo(int tipo, int id, int bajo_escudo);
+	//Envia el nuevo estado de un personaje al cliente.
+	void update_estado_personaje(int tipo, int id, int accion);
     //Recibe el id de un personaje y notifica al cliente
     //de su nueva posicion.
     void enviar_cambio_posicion(int tipo, int id, int x, int y);

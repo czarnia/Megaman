@@ -53,14 +53,14 @@ void Almacenador_clientes::update_gameover(int id){
 		clientes.erase(id);
 	}
 }
-
+/*
 void Almacenador_clientes::update_murio_personaje(int tipo, int id) {
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE MURIO
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		(it->second)->enviar_cambio_posicion(tipo, id, -1, -1);
 	}
 }
-
+*/
 void Almacenador_clientes::update_cantidad_vidas(int tipo, int id, int vidas) {
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO
 	// PORCENTAJE DE VIDA
@@ -99,9 +99,9 @@ void Almacenador_clientes::iniciar_nivel(int num_nivel){
   }
 }
 
-void Almacenador_clientes::update_personaje_escudo(int tipo, int id, int bajo_escudo){
+void Almacenador_clientes::update_estado_personaje(int tipo, int id, int accion){
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->update_personaje_escudo(tipo, id, bajo_escudo);
+		(it->second)->update_estado_personaje(tipo, id, accion);
 	}
 }
 

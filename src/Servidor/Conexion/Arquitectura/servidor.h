@@ -45,8 +45,9 @@ public Observador_juego{
 	  virtual void update_gameover(int id);
 	  //Notifica el fin de una partida.
 	  virtual void update_fin_partida();
-	  //Dado un identificador y un tipo, notifica que un personaje murio.
-	  virtual void update_murio_personaje(int tipo, int id);
+	  //Dado un id, un tipo y un codigo de accion, notifica que un 
+	  //hubo un cambio en el estado del personaje.
+	  void update_estado_personaje(int tipo, int id, int accion);
 	  //Dado un identificador, un tipo y una cantidad de vidas, notifica que un
 	  //personaje vio modificadas las mismas.
 	  virtual void update_cantidad_vidas(int tipo, int id, int vidas);
@@ -59,8 +60,6 @@ public Observador_juego{
 	  //Dado un identificador, un tipo y nuevas coordenadas en x y en y, notifica
 	  //que un personaje vio modificadas la mismas.
 	  virtual void update_posicion(int tipo, int id, int x, int y);
-	  //Notifica a los clientes de que se modifico la posicion de un personaje.
-	  virtual void update_personaje_escudo(int tipo, int id, bool bajo_escudo);
 
   private:
     //Dado un socket conectado a un cliente y un id del mismo,

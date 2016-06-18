@@ -109,10 +109,6 @@ void Servidor::update_gameover(int id){
   clientes.update_gameover(id);
 }
 
-void Servidor::update_murio_personaje(int tipo, int id) {
-  clientes.update_murio_personaje(tipo, id);
-}
-
 void Servidor::update_cantidad_vidas(int tipo, int id, int vidas) {
 	clientes.update_cantidad_vidas(tipo, id, vidas);
 }
@@ -129,6 +125,6 @@ void Servidor::update_posicion(int tipo, int id, int x, int y){
 	clientes.update_posicion(tipo, id, x, y);
 }
 
-void Servidor::update_personaje_escudo(int tipo, int id, bool bajo_escudo){
-	//clientes.update_personaje_escudo(tipo, id, bajo_escudo);
+void Servidor::update_estado_personaje(int tipo, int id, int accion){
+	clientes.update_estado_personaje(tipo, id, accion);
 }

@@ -36,8 +36,8 @@ void Personaje::notificar_observadores(){
 }
 
 void Personaje::update(float tiempo, Mapa* mapa){
-	tiempo_pasado += tiempo;
-	mover(tiempo, mapa);
+	//tiempo_pasado += tiempo;
+	//mover(tiempo, mapa);
 	notificar_observadores();
 }
 
@@ -151,3 +151,7 @@ bool Personaje::esta_flotando(){
 void Personaje::interactuar(Escalera *esc){}
 
 void Personaje::interactuar(Capsula_de_energia *capsula){}
+
+int Personaje::get_estado_actual(){
+	return estado_actual;
+}

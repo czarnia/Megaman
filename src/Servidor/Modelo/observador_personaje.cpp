@@ -5,6 +5,7 @@
 Observador_personaje::Observador_personaje(Juego* juego, Personaje* pj):
 Observador_ubicable(juego, pj->get_coordenada()){
 	porcentaje_vida = pj->get_porcentaje_vida();
+	estado_actual = pj->get_estado_actual();
 }
 
 void Observador_personaje::update(Observable *obs){
@@ -13,7 +14,7 @@ void Observador_personaje::update(Observable *obs){
 	int tipo = personaje->get_tipo();
 	if (!personaje->esta_vivo()){
 		std::cout << "OBSERVER_P: PERSONAJE MURIO\n";
-		juego->murio_personaje(tipo, id);
+		juego->murio_personaje(personaje);
 	}else{
 		if (porcentaje_vida != personaje->get_porcentaje_vida()){
 			std::cout << "OBSERVER_P: PERSONAJE ACTUALIZO % VIDA\n";
@@ -21,5 +22,9 @@ void Observador_personaje::update(Observable *obs){
 			juego->actualizo_porcentaje_vida(tipo, id, cantidad_vidas);
 		}
 		Observador_ubicable::update(obs);
+	}
+	if (estado_actual != personaje->get_estado_actual()){
+		juego->actualizo_estado_personaje(tipo, id,
+		personaje->get_estado_actual());
 	}
 }

@@ -66,8 +66,9 @@ public Juego_observable{
 		void notificar_termino_partida();
 		//Notifica a los observadores que se produjo un gameover.
 		void notificar_gameover(int id);
-		//Notifica a los observadores que murio un determinado pj.
-		void notificar_murio_personaje(int tipo, int id);
+		//Notifica a los observadores que cambio 
+		//el estado de un personaje.
+		void notificar_estado_personaje(int tipo, int id, int accion);
 		//Notifica a los observadores que se modifico la cantidad de vidas de un
 		//personaje.
 		void notificar_cantidad_vidas(int tipo, int id, int vidas);
@@ -79,12 +80,9 @@ public Juego_observable{
 		void notificar_energia(int tipo, int id, int energia);
 		//Notifica a los observadores que se modifico la posicion de un personaje.
 		void notificar_posicion(int tipo, int id, int x, int y);
-		//Notifica a los observadores que un personaje
-		//subio o bajo su escudo.
-		void notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo);
-		//Recibe id y tipo correspondiente a un personaje y
-		//notifica al servidor de la muerte del mismo.
-		void murio_personaje(int tipo, int id);
+		//Recibe id y tipo y un estado correspondientes a un personaje y
+		//y notifica al servidor del cambio de estado.
+		void actualizo_estado_personaje(int tipo, int id, int estado);
 		//Recibe id y tipo correspondiente a un personaje y
 		//una cantidad de vidas y notifica al servidor
 		//de la nueva cantidad de vidas del mismo.
@@ -101,9 +99,9 @@ public Juego_observable{
 		//su posicion actual y notifica al servidor de
 		//la nueva posicion.
 		void actualizo_posicion(int tipo, int id, int x, int y);
-		//Recibe un id y un tipo y notifica al servidor
-		//que el personaje cambio el estado de su escudo.
-		void personaje_update_escudo(int tipo, int id, bool bajo_escudo);
+		//Recibe un id y un tipo y remueve al personaje
+		//muerto del juego.		
+		void murio_personaje(Personaje *p);
 		//Devuelve una lista de coordenadas correspondientes
 		//a los bloques del mapa.
 		std::vector<Coordenada> bloques();

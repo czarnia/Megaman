@@ -8,6 +8,7 @@ class Observador_personaje_pc:
 public Observador_personaje{
 	protected:
 		int energia;
+		int accion_actual;
 	public:
 		//Dado un juego y una coordenada, crea a un 
 		//observador de personaje PC.

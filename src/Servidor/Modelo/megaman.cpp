@@ -9,11 +9,12 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 #define MEGAMAN 1
-
 #define TIEMPO_ACCION 0.5
 
 typedef std::map<int, StrategyMoverPersonajePc*>::iterator movimientosIt;
-
+enum estados_pc{MURIENDO, RESPAWNEANDO, CORRIENDO, SALTANDO, IDLE, 
+		DISPARANDO, ESCALANDO};	
+		
 Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
 Personaje_pc(mapa, c, id){
 	for (size_t i = 0; i < 3; i++){
@@ -27,9 +28,12 @@ Personaje_pc(mapa, c, id){
 	movimiento_megaman = new StrategyMoverMegaman();
 	movimiento_actual = movimiento_megaman;
 	energia = 0;
+	estado_actual = IDLE;
 }
 
 void Megaman::update(size_t tiempo){
+	tiempo_pasado += tiempo;
+	mover(tiempo, mapa);
 	Personaje::update(tiempo, mapa);
 }
 
@@ -44,6 +48,7 @@ void Megaman::atacar(int dir, Mapa* mapa){
 		pos_inicial = coordenada.izquierda(ancho/2);
 		bala = armas[arma_act]->atacar(dir, 0, pos_inicial);
 	}
+	estado_actual = DISPARANDO;
 	mapa->agregar_bala(bala);
 	bala->notificar_observadores();
 }
@@ -83,6 +88,7 @@ void Megaman::agregar_movimiento(StrategyMoverPersonajePc *movimiento){
 }
 
 void Megaman::sacar_movimiento(int direccion){
+	estado_actual = IDLE;
 	movimiento_actual->sacar_movimiento(this, direccion);
 }
 
@@ -124,6 +130,9 @@ void Megaman::perder_vida(int porcentaje){
 		vidas.erase(vidas.begin());
 	}else{
 		vidas[0].perder(porcentaje);
+	}
+	if(!this->esta_vivo()){
+		estado_actual = MURIENDO;
 	}
 }
 

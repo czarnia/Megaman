@@ -18,8 +18,6 @@ public Observable{
 		virtual void notificar_termino_partida() = 0;
 		//Notifica a los observadores que se produjo un gameover.
 		virtual void notificar_gameover(int id) = 0;
-		//Notifica a los observadores que murio un determinado pj.
-		virtual void notificar_murio_personaje(int tipo, int id) = 0;
 		//Notifica a los observadores que se modifico la cantidad de vidas de un
 		//personaje.
 		virtual void notificar_cantidad_vidas(int tipo, int id, int vidas) = 0;
@@ -31,8 +29,9 @@ public Observable{
 		virtual void notificar_energia(int tipo, int id, int energia) = 0;
 		//Notifica a los observadores que se modifico la posicion de un personaje.
 		virtual void notificar_posicion(int tipo, int id, int x, int y) = 0;
-		//Notifica a los observadores que se modifico la posicion de un personaje.
-		virtual void notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo) = 0;
+		//Recibe id y tipo y un estado correspondientes a un personaje y
+		//y notifica al servidor del cambio de estado.
+		virtual void actualizo_estado_personaje(int tipo, int id, int estado) = 0;
 };
 
 #endif //JUEGO_OBSERVABLE_H

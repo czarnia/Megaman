@@ -76,10 +76,6 @@ void Juego::jugar(){
 	}
 }
 
-void Juego::personaje_update_escudo(int tipo, int id, bool bajo_escudo){
-	notificar_personaje_update_escudo(tipo, id, bajo_escudo);
-}
-
 void Juego::terminar_partida(){
 	fin_partida = true;
 }
@@ -149,7 +145,6 @@ bool Juego::esta_jugando_nivel(){
 	return jugando_nivel;
 }
 
-
 void Juego::notificar_observadores(){}
 
 void Juego::update(Observable *obs){}
@@ -168,9 +163,13 @@ void Juego::notificar_gameover(int id){
 	}
 }
 
-/*void Juego::murio_boss(){
-}*/
-
+void Juego::actualizo_estado_personaje(int tipo, int id, int estado_act){
+	for (size_t i = 0; i < observadores.size(); i++){
+		Observador_juego *obs = (Observador_juego*)observadores[i];
+		obs->update_estado_personaje(tipo, id, estado_act);
+	}
+}
+/*
 void Juego::notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo){
 	for (size_t i = 0; i < observadores.size(); i++){
 		Observador_juego *obs = (Observador_juego*)observadores[i];
@@ -188,10 +187,14 @@ void Juego::notificar_murio_personaje(int tipo, int id){
 			terminar_partida();
 		}
 	}
-}
+}*/
 
-void Juego::murio_personaje(int tipo, int id){
-	notificar_murio_personaje(tipo, id);
+void Juego::murio_personaje(Personaje *p){
+	mundo->quitar_personaje(p->get_id_unico());
+	if (cant_jugadores == 0){
+		notificar_termino_partida();
+		terminar_partida();
+	}
 }
 
 void Juego::notificar_cantidad_vidas(int tipo, int id, int cant_vidas){

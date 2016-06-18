@@ -12,6 +12,9 @@
 #define GRAVEDAD 5
 #define VELOCIDAD_SALTO 30
 
+enum estados_pc{RESPAWNEANDO = 1, CORRIENDO, SALTANDO, IDLE, 
+	DISPARANDO, ESCALANDO};	
+
 StrategyMoverMegaman::StrategyMoverMegaman():
 velocidad_x(0),
 velocidad_y(0){
@@ -32,10 +35,12 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
   if (velocidad_x > 0){
     std::cout << "MEGAMAN MOVER: derecha \n";
     nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);
+    pj->estado_actual = CORRIENDO;
   }
   if (velocidad_x < 0){
     std::cout << "MEGAMAN MOVER: izquierda \n";
     nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD_X);
+    pj->estado_actual = CORRIENDO;
   }
   if (velocidad_y < 0){
     std::cout << "MEGAMAN MOVER: arriba \n";
@@ -44,6 +49,7 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
   if (velocidad_y > 0){
     std::cout << "MEGAMAN MOVER: abajo \n";
     nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
+    pj->estado_actual = SALTANDO;
   }
 
   if (mapa->puede_ubicarse(pj, nueva_coordenada)){

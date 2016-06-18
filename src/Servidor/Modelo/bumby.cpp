@@ -11,6 +11,7 @@
 #define BUMBY 2
 
 enum direcciones_ataque{DERECHA_ABAJO, CENTRO_ABAJO, IZQUIERDA_ABAJO};
+enum estado_npc{MURIENDO};
 
 Bumby::Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje_npc(mapa, c, id),
@@ -52,10 +53,14 @@ void Bumby::update(size_t tiempo, Mapa* mapa){
 		int dir = std::rand() % CANT_DIRECCIONES;
 		atacar(dir, mapa);
 	}
+	Personaje::update(tiempo, mapa);
 }
 
 void Bumby::recibir_ataque(Bala* ataque){
 	//TODO: A implementar!
+	if(!this->esta_vivo()){
+		estado_actual = MURIENDO;
+	}
 }
 
 void Bumby::mover(size_t tiempo, Mapa* mapa){
