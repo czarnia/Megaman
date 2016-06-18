@@ -3,9 +3,15 @@
 #include <iostream>
 #include <math.h>
 
-
+#define PDYING 0
 #define PSHOOTING 1
-#define PCLIMBING 3
+#define PRESPAWN 2
+#define PRUNNING 3
+#define PJUMPING 4
+#define PIDLE 5
+#define PCLIMBING 6
+
+#define PSHIELDUP 7
 
 /// Auxiliares
 int round(float d){
@@ -22,6 +28,7 @@ Character_sprite::Character_sprite(SDL_Renderer *r, const char* file):
     rectangle.w = Character_sprite::width;
     rectangle.h = Character_sprite::height;
     editorMode = false;
+    movingLeft = false;
     currentFrame = 0;
     currentState = IDLE;
 }
@@ -52,12 +59,28 @@ void Character_sprite::changeState(int x, int y){
 }
 
 void Character_sprite::setState(int &action){
+    currentFrame = 0;
     switch(action){
         case PSHOOTING:
             currentState = SHOOTING;
             break;
         case PCLIMBING:
             currentState = CLIMBING;
+            break;
+        case PDYING:
+            currentState = DYING;
+            break;
+        case PRUNNING:
+            currentState = RUNNING;
+            break;
+        case PJUMPING:
+            currentState = JUMPING;
+            break;
+        case PRESPAWN:
+            currentState = SPAWNING;
+            break;
+        case PIDLE:
+            currentState = IDLE;
             break;
         default:
             break;
@@ -110,41 +133,6 @@ SDL_Rect* Character_sprite::get_crop(){
         currentFrame = 0;
         return shootingAnimation[currentFrame];
     }
-   /* if (editorMode)
-        return NULL;
-    if (idle){
-        currentFrame += 0.01;
-        if ((unsigned)round(currentFrame) == idleAnimation.size())
-            currentFrame = 0;
-        return idleAnimation[round(currentFrame)];
-    }
-    else if (spawning){
-        currentFrame += 0.08;
-        if ((unsigned)round(currentFrame) == spawnAnimation.size()){
-            currentFrame = 0;
-            spawning = false;
-            idle = true;
-        }
-        return spawnAnimation[round(currentFrame)];
-    }
-    else if (dying){
-        currentFrame += 0.01;
-        if((unsigned)round(currentFrame) == deathAnimation.size()){
-            currentFrame = 0;
-            dying = false;
-            idle = true;
-        }
-        return deathAnimation[round(currentFrame)];
-    }else if (jumping){
-        currentFrame = 0;
-        return jumpingAnimation[currentFrame];
-    }
-    if (running){
-        currentFrame += 0.15 ;
-        if ((unsigned)round(currentFrame) == runningAnimation.size())
-            currentFrame = 0;
-        return runningAnimation[round(currentFrame)];
-    }*/
     return NULL;
 }
 
@@ -157,15 +145,11 @@ int Character_sprite::get_direction(){
 
 void Character_sprite::destroy(){
     currentFrame = 0;
- //   idle = false;
-  //  dying = true;
 }
 
 void Character_sprite::spawn(){
     currentFrame = 0;
     currentState = SPAWNING;
-    /*idle = false;
-    spawning = true;*/
 }
 
 void Character_sprite::loadAnimations(std::string path){

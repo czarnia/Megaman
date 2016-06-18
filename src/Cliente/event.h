@@ -5,6 +5,8 @@ class Event{
     public:
         Event(int,int,int,int,int);
         Event(int);
+        Event(){}
+        Event& operator=(Event &origin);
         int command;
         int objectType;
         int objectID;

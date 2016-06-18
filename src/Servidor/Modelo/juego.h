@@ -66,7 +66,7 @@ public Juego_observable{
 		void notificar_termino_partida();
 		//Notifica a los observadores que se produjo un gameover.
 		void notificar_gameover(int id);
-		//Notifica a los observadores que cambio 
+		//Notifica a los observadores que cambio
 		//el estado de un personaje.
 		void notificar_estado_personaje(int tipo, int id, int accion);
 		//Notifica a los observadores que se modifico la cantidad de vidas de un
@@ -100,7 +100,7 @@ public Juego_observable{
 		//la nueva posicion.
 		void actualizo_posicion(int tipo, int id, int x, int y);
 		//Recibe un id y un tipo y remueve al personaje
-		//muerto del juego.		
+		//muerto del juego.
 		void murio_personaje(Personaje *p);
 		//Devuelve una lista de coordenadas correspondientes
 		//a los bloques del mapa.

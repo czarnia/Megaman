@@ -28,6 +28,7 @@ class Game{
 		Game(char* hostname,char* port);
 		/// Esta funcion corre el juego
 		void run();
+
 		~Game();
 };
 

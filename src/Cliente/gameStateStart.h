@@ -7,6 +7,7 @@
 #include "../Comun/socket.h"
 #include "receiver.h"
 #include "window.h"
+#include "music.h"
 
 class gameStateStart: public GameState{
     private:
@@ -38,7 +39,7 @@ class gameStateStart: public GameState{
         bool quit;
         bool victory;
         bool ko;
-
+        Music music;
     public:
         gameStateStart(Window *window, Renderer *renderer, Socket *skt,
                         std::pair<int,std::string> &playerData,

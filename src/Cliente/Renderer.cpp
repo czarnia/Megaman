@@ -71,15 +71,15 @@ void Renderer::setMapSize(int width, int height){
     map_size.second = height;
 }
 
-/*void Renderer::updateCamPos(int player){
-    int px = sprites[player]->get_rectangle()->x;
-    if((px > window->get_width()/2) && (camX+window->get_width() < map_size.first)){
+void Renderer::updateCamPos(int player){
+    int px = sprites[FRONT][player]->get_rectangle()->x;
+    if((px > window->get_width()/2) /*&& (camX+window->get_width() < map_size.first)*/){
         camX += CAMSPEEDX;
     }
-    if((px < window->get_width()/2) && (camX > 0)){
+    if((px < window->get_width()/2) /*&& (camX > 0)*/){
         camX -= CAMSPEEDX;
     }
-}*/
+}
 
 void Renderer::clear(){
     SDL_RenderClear(renderer);

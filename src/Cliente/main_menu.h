@@ -6,6 +6,7 @@
 #include <string>
 #include <utility>
 #include "window.h"
+#include "music.h"
 
 class MainMenu: public GameState{
     private:
@@ -18,6 +19,7 @@ class MainMenu: public GameState{
         bool quit;
         ///
         void updateInput();
+        Music music;
         ///
         std::pair<int, std::string> &playerData;
     public:

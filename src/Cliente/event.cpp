@@ -11,6 +11,15 @@ Event::Event(int command, int objectType, int objectID,
 
 }
 
+Event& Event::operator=(Event &origin){
+    command = origin.command;
+    objectType = origin.objectType;
+    objectID = origin.objectID;
+    posX = origin.posX;
+    posY = origin.posY;
+    return *this;
+}
+
 Event::Event(int command):
     command(command),
     objectType(-5),

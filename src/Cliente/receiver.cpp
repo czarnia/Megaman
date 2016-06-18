@@ -1,5 +1,6 @@
 #include "receiver.h"
 #include <iostream>
+#include <sstream>
 #include "block_sprite.h"
 #include "character_sprite.h"
 #include "background_sprite.h"
@@ -109,7 +110,7 @@ void Receiver::receiveEventAndQueue(bool *end){
         <<coordX<<","<<coordY<<std::endl;
         ///////////////
         mutex->lock();
-        r_queue.push(new Event(command,objectType,objectID,coordX,coordY));
+        r_queue.push(Event(command,objectType,objectID,coordX,coordY));
         mutex->unlock();
     }else{
         *end = true;
@@ -133,7 +134,15 @@ void Receiver::receiveMapSize(){
     std::cout<<"Recibi tamanio del mapa: "<<level_width<<"x"<<level_height<<std::endl;
 }
 
-void Receiver::receiveMap(){
+void Receiver::receiveMap(const int &level){
+
+    std::ostringstream bs;
+    bs<<"../sprites/block"<<level<<".png";
+    std::string blockpath(bs.str());
+
+    std::ostringstream ls;
+    ls<<"../sprites/ladder"<<level<<".png";
+    std::string ladderpath(ls.str());
     char buffer[TAM_INT] = "";
     int command;
     int objectType;
@@ -171,7 +180,7 @@ void Receiver::receiveMap(){
             /// CARGO EL OBJETO QUE RECIBI
             switch (objectType){
                 case BLOCK_EARTH:
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/block.png");
+                    spr = new Block_sprite(renderer->get_renderer(), blockpath.c_str());
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_EARTHN, spr, BACK, NON_STATIC);
@@ -183,7 +192,7 @@ void Receiver::receiveMap(){
                     renderer->addSprite(BLOCK_SPIKESN, spr, BACK, NON_STATIC);
                     break;
                 case BLOCK_LADDER:
-                    spr = new Block_sprite(renderer->get_renderer(), "../sprites/ladder.png");
+                    spr = new Block_sprite(renderer->get_renderer(), ladderpath.c_str());
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BLOCK_LADDERN, spr, BACK, NON_STATIC);
@@ -268,3 +277,16 @@ void Receiver::receiveMap(){
 Receiver::~Receiver(){
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

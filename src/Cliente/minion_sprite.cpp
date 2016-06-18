@@ -80,13 +80,11 @@ void Minion_sprite::changeState(int x, int y){
     }
     if (x > rectangle.x){
         movingLeft = false;
-        currentState = RUNNING;
-        if (y > rectangle.y)
-            currentState = JUMPING;
+
     }
     if (x < rectangle.x){
         movingLeft = true;
-        currentState = RUNNING;
+
         if (y > rectangle.y)
             currentState = JUMPING;
     }
@@ -127,12 +125,6 @@ SDL_Rect* Minion_sprite::get_crop(){
             currentFrame = 0;
         }
         return deathAnimation[round(currentFrame)];
-    }
-    if (currentState == RUNNING){
-        currentFrame += 0.15 ;
-        if ((unsigned)round(currentFrame) == runningAnimation.size())
-            currentFrame = 0;
-        return runningAnimation[round(currentFrame)];
     }
     return NULL;
 }

@@ -10,7 +10,7 @@
 #include "bar_sprite.h"
 #include "event.h"
 
-#define FPS 120
+#define FPS 30
 #define TAM_INT 4
 #define MAPA 1
 #define STATIC 1
@@ -65,9 +65,15 @@ void gameStateStart::load(int level){
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
+    /// Cargo musica del nivel
+    std::ostringstream ms;
+    ms <<"../Media/boss"<<level<<"_soundtrack.mp3";
+    std::string musicpath(ms.str());
+    music.changeTrack(musicpath.c_str());
+    music.play();
     /// Recibo datos del mapa
     receiver->receiveMapSize();
-    receiver->receiveMap();
+    receiver->receiveMap(level);
     /// Vida y energia
     loadHUD();
 }
@@ -118,6 +124,7 @@ void gameStateStart::loadHUD(){
 }
 
 int gameStateStart::unload(){
+    music.stop();
     receiver->join();
     renderer->clearSprites();
     return 0;
@@ -253,7 +260,7 @@ GameState::StateCode gameStateStart::update(){
 
 void gameStateStart::mainLoop(){
     Uint32 starting_tick;
-    Event *event;
+    Event event;
     /// Realiza los cambios acordes a las respuestas del servidor
     ResponseHandler handler(renderer);
     /// Hilo receiver, recibe todo lo proveniente del servidor
@@ -267,33 +274,25 @@ void gameStateStart::mainLoop(){
         /// Si se recibe un cierre de ventana, se corta la ejecucion
         updateInput(&running);
         /// Actualizo la posicion de camara
-      /*  if (renderer->find(playerData.first))
-            renderer->updateCamPos(playerData.first);*/
+        if (renderer->find(playerData.first))
+            renderer->updateCamPos(playerData.first);
         /// Verifico si la cola de eventos provenientes del servidor esta vacia
-        mutex.lock();
+
         if (!receiver->r_queue.empty()){
             /// Si hay algun evento, lo proceso
-            int command = 0;
-            int objectType = -1;
-            int objectID = -1;
-            int posX = -1;
-            int posY = -1;
             std::pair<int,int> coord;
+
+            mutex.lock();
             event = receiver->r_queue.front();
-
-            if( event->command == MAPA){
-                command = event->command;
-                objectType = event->objectType;
-                objectID = event->objectID;
-                posX = event->posX;
-                posY = event->posY;
-
-                coord.first = posX;
-                coord.second = posY;
-            }
             receiver->r_queue.pop();
+            mutex.unlock();
+
+            coord.first = event.posX;
+            coord.second = event.posY;
+
             /// acorde a lo recibido del servidor, seteo los flags correspondientes
-            switch(handler.execute(command,objectType,objectID,coord)){
+            switch(handler.execute(event.command, event.objectType,
+                    event.objectID, coord)){
                 case GameState::BOSS_SELECT:
                     running = false;
                     victory = true;
@@ -306,11 +305,11 @@ void gameStateStart::mainLoop(){
                     break;
             }
         }
-        mutex.unlock();
+
         /// dibujo
         render();
         /// limito FPS
-        cap_framerate(starting_tick);
+        //cap_framerate(starting_tick);
 	}
 }
 

@@ -220,7 +220,7 @@ void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int
 }
 
 void ResponseHandler::changeHUD(int bar, int &barID, int &ammount){
-    renderer->static_sprites[FRONT][bar+barID]->setAmmount(ammount);
+   // renderer->static_sprites[FRONT][bar+barID]->setAmmount(ammount);
 }
 
 void ResponseHandler::executeAction(int &objectType, int &objectID, int &action){
@@ -235,13 +235,14 @@ void ResponseHandler::changePosition(int &objectType, int &objectID, std::pair<i
 }
 
 int ResponseHandler::execute(int command, int objectType, int objectID, std::pair<int,int> option){
-    option.first *= SCALE_FACTOR;
-    option.second *= SCALE_FACTOR;
+
     /// Etapa de clasificacion de objetos
     sortObject(&objectType);
 
     switch (command){
         case MAPA:
+            option.first *= SCALE_FACTOR;
+            option.second *= SCALE_FACTOR;
             /// SI recibi coordenadas negativas destruyo el objeto
             if (option.first < 0){
                 /// SI HAY QUE HACER ALGUNA ANIMACION DE DESTRUCCION
