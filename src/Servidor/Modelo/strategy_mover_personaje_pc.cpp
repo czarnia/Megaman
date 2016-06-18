@@ -3,8 +3,8 @@
 
 #define MOVIMIENTO_MAX 6
 enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
-enum estados_pc{RESPAWNEANDO = 1, CORRIENDO, SALTANDO, IDLE, 
-		DISPARANDO, ESCALANDO};	
+enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,  
+		IDLE, ESCALANDO};	
 		
 StrategyMoverPersonajePc::StrategyMoverPersonajePc(){
 	direccion = QUIETO;
