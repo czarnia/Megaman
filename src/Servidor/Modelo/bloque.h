@@ -36,6 +36,8 @@ class Bloque: public Elemento{
 		//Recibe un personaje e interactúa con el mismo para
 		//ocasionarle daño.
 		void interactuar(Personaje *pj);
+		//Devuele true si el elemento actua como piso, false en caso contrario
+		virtual bool es_piso();
 		//Destructor del bloque.
 		~Bloque();
 };

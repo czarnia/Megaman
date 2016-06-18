@@ -46,6 +46,8 @@ public Ubicable{
 		virtual void agregar_observador(Observador_ubicable *observador);
 		//Dado un observador_ubicable*, lo quita de sus observadores.
 		virtual void quitar_observador(Observador_ubicable *observador);
+		//Devuele true si el elementos actua como piso, false en caso contrario
+		virtual bool es_piso() = 0;
 };
 
 #endif //ELEMENTO_H

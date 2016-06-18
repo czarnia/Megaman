@@ -49,4 +49,8 @@ bool Bloque::puede_ocupar(Ubicable* ubic){
 	return ubic->puede_ocupar(this);
 }
 
+bool Bloque::es_piso(){
+	return true;
+}
+
 Bloque::~Bloque(){}

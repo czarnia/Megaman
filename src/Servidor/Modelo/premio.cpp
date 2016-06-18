@@ -35,4 +35,8 @@ bool Premio::puede_ocupar(Puas* puas){
 	return false;
 }
 
+bool Premio::es_piso(){
+	return false;
+}
+
 Premio::~Premio(){}

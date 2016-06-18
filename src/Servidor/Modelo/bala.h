@@ -48,6 +48,8 @@ public Elemento{
 		//Dado un Premio, devuelve true si el premio puede ubicarse
 		//en las mismas coordenadas que este elemento.
 		virtual bool puede_ocupar(Premio* premio);
+		//Devuele true si el elemento actua como piso, false en caso contrario
+		virtual bool es_piso();
 		//Dadas unas puas, dice si puede ubicarse en las mismas coordenadas que
 		//esta.
 		virtual bool puede_ocupar(Puas* puas);

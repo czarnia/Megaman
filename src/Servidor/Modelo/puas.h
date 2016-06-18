@@ -39,12 +39,14 @@ class Puas: public Elemento{
 		//Notifica a las entidades que observen a este
 		//elemento de un cambio en el estado del mismo;
 		virtual void notificar_observadores();
-		//Agrega un observador de ubicables a la lista de 
+		//Agrega un observador de ubicables a la lista de
 		//observadores de este elemento
 		virtual void agregar_observador(Observador_ubicable *observador);
 		//Recibe un puntero a observador de ubicables y lo
 		//remueve de la lista de observadores de este elemento
 		virtual void quitar_observador(Observador_ubicable *observador);
+		//Devuele true si el elemento actua como piso, false en caso contrario
+		virtual bool es_piso();
 		//Destructor de las Puas.
 		~Puas();
 };

@@ -109,6 +109,12 @@ int Mapa::obtener_long_y(){
 }
 
 bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
+  int ancho = ubic->get_ancho();
+  int alto = ubic->get_alto();
+  if (!tiene_coordenada(c.arriba(alto/2)) || !tiene_coordenada(c.abajo(alto/2))
+  || !tiene_coordenada(c.izquierda(ancho/2)) || !tiene_coordenada(c.izquierda(ancho/2))){
+      return false;
+  }
 	for (size_t i = 0; i < elementos.size(); i++){
 		if (elementos[i]->colisiona(ubic, c) && !elementos[i]->puede_ocupar(ubic)){
 			return false;
@@ -171,8 +177,8 @@ void Mapa::update(float tiempo){
 bool Mapa::esta_en_aire(Personaje* personaje){
   size_t alto = personaje->get_alto();
   Coordenada c = personaje->get_coordenada().abajo(alto/2);
-  for (size_t i = 0; i < bloques.size(); i++){
-    if (bloques[i]->colisiona(personaje, c)){
+  for (size_t i = 0; i < elementos.size(); i++){
+    if (elementos[i]->colisiona(personaje, c) && elementos[i]->es_piso()){
       return false;
     }
   }

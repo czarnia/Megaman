@@ -116,8 +116,12 @@ bool Escalera::colisiona(Ubicable* otro_ubic, Coordenada nueva){
 	size_t piso_personaje = nueva.abajo(alto2/2).obtener_ordenada();
 	size_t tope_escalera = coord.arriba(alto1/2).obtener_ordenada();
 
-	return (((x_colision*y_colision) != 0) || ((y_colision != 0) &&
-	(tope_escalera == piso_personaje)));
+	return (((x_colision*y_colision) != 0) || ((x_colision != 0) &&
+	(tope_escalera == piso_personaje) && otro_ubic->puede_ocupar(this)));
+}
+
+bool Escalera::es_piso(){
+	return true;
 }
 
 Escalera::~Escalera() {}
