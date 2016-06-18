@@ -3,6 +3,7 @@
 #include "main_menu.h"
 #include "gameStateStart.h"
 #include "gameStateLobby.h"
+#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 
 #define FPS 60
@@ -18,6 +19,7 @@ Game::Game(char* hostname,char* port):
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
+    Mix_Init(0);
     window = new Window(WIDTH,HEIGHT);
     renderer = new Renderer(window);
     currentState = new MainMenu(window, renderer, playerData);
@@ -90,6 +92,7 @@ Game::~Game(){
     delete renderer;
     window = NULL;
     TTF_Quit();
+    Mix_Quit();
     SDL_Quit();
 }
 

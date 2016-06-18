@@ -63,22 +63,22 @@ void gameStateLobby::load(int stack){
     /// CARGO CARAS DE BOSSES
 
     /// BOMBMAN
-    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/bombman.png");
+    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/bombman_icon.png");
     spr->setPosX(1*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
     renderer->addSprite(ICON, spr, BACK, STATIC);
     /// FIREMAN
-    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/fireman.png");
+    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/fireman_icon.png");
     spr->setPosX(3*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
     renderer->addSprite(ICON, spr, BACK, STATIC);
     /// MAGNETMAN
-    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/magnetman.png");
+    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/magnetman_icon.png");
     spr->setPosX(5*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
     renderer->addSprite(ICON, spr, BACK, STATIC);
     /// RINGMAN
-    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/ringman.png");
+    spr = new Boss_icon_sprite(renderer->get_renderer(), "../sprites/ringman_icon.png");
     spr->setPosX(7*Boss_icon_sprite::width);
     spr->setPosY(window->get_height()/3-Boss_icon_sprite::height);
     renderer->addSprite(ICON, spr, BACK, STATIC);
@@ -111,9 +111,12 @@ void gameStateLobby::load(int stack){
         spr->setPosY(window->get_height()*3/5);
         renderer->addSprite(BUTTON, spr, FRONT, STATIC);
     }
+    music.changeTrack("../Media/lobby_soundtrack.mp3");
+    music.play();
 }
 
 int gameStateLobby::unload(){
+    music.stop();
     renderer->clearSprites();
     return 0;
 }

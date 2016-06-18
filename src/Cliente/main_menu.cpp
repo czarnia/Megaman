@@ -53,10 +53,14 @@ void MainMenu::load(int stack){
     spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
     spr->setPosY(window->get_height()*3/4);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
+
+    music.changeTrack("../Media/menu_soundtrack.mp3");
+    music.play();
 }
 
 int MainMenu::unload(){
     /// Libero los sprites cargados
+    music.stop();
     renderer->clearSprites();
     return 0;
 }

@@ -8,7 +8,8 @@
 class Character_sprite: public Sprite{
     private:
 
-        enum State{SPAWNING, DYING, RUNNING, JUMPING, IDLE, EDITORMODE, SHOOTING, CLIMBING};
+        enum State{SPAWNING, DYING, RUNNING, JUMPING,
+                    IDLE, EDITORMODE, SHOOTING, CLIMBING};
         bool movingLeft;
         bool editorMode;
         /// Animaciones

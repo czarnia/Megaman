@@ -16,12 +16,12 @@ class Receiver: public Hilo{
         void receiveEventAndQueue(bool *end);
         Mutex *mutex;
     public:
-        std::queue<Event*> r_queue;
+        std::queue<Event> r_queue;
         ///Crea un receiver recibiendo como parametro un socket ya conectado.
         Receiver(Socket* conexion, Renderer *renderer,
                     Mutex *mutex);
         /// Recibo bloques, minions, escaleras, puas etc...
-        void receiveMap();
+        void receiveMap(const int &level);
         /// Cuando empieza la partida se recibe el tamanio del mapa
         void receiveMapSize();
         ///"Ciclo" del receiver, recibe informacion del servidor hasta que el mismo

@@ -7,6 +7,7 @@
 #include "../Comun/socket.h"
 #include "../Comun/mutex.h"
 #include "lobbyreceiver.h"
+#include "music.h"
 
 class gameStateLobby: public GameState{
     private:
@@ -29,6 +30,7 @@ class gameStateLobby: public GameState{
         bool running;
         std::pair<int,std::string> playerData;
         int *level;
+        Music music;
     public:
         gameStateLobby(Window *window, Renderer *renderer,
                         Socket *skt, std::pair<int, std::string> &playerData,
