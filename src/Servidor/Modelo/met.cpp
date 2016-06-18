@@ -5,7 +5,7 @@
 #define TIEMPO_ATAQUE 2
 #define TIPO_MET 4
 
-enum estado_npc_escudo{MURIENDO, ESCUDO_UP, ESCUDO_DOWN};
+enum estado_npc_escudo{MURIENDO, ESCUDO_UP = 7, ESCUDO_DOWN};
 
 Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje_npc_con_escudo(mapa, c, id),

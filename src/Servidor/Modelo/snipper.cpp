@@ -5,7 +5,7 @@
 #define SNIPPER 5
 #define TIEMPO_ESTADO 4
 
-enum estado_npc_escudo{MURIENDO, ESCUDO_UP, ESCUDO_DOWN};
+enum estado_npc_escudo{MURIENDO, ESCUDO_UP = 7, ESCUDO_DOWN};
 
 Snipper::Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje_npc_con_escudo(mapa, c, id),
