@@ -26,5 +26,6 @@ void Observador_personaje::update(Observable *obs){
 	if (estado_actual != personaje->get_estado_actual()){
 		juego->actualizo_estado_personaje(tipo, id,
 		personaje->get_estado_actual());
+		estado_actual =  personaje->get_estado_actual();
 	}
 }
