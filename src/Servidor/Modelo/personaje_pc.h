@@ -4,7 +4,7 @@
 #include "personaje.h"
 #include "strategy_mover_personaje_pc.h"
 
-#define PERDER_MAX -100
+#define PERDER_MAX 100
 #define GANAR_MAX 100
 
 class StrategyMoverPersonajePc;

@@ -5,18 +5,18 @@
 #define TIEMPO_ATAQUE 2
 #define TIPO_MET 4
 
-enum estado_npc_escudo{MURIENDO, ESCUDO_UP = 7, ESCUDO_DOWN};
+enum estado_npc_escudo{MURIENDO, USA_ESCUDO = 7, NO_USA_ESCUDO};
 
 Met::Met(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje_npc_con_escudo(mapa, c, id),
 arma(arma){
-  estado_actual = ESCUDO_DOWN;
+  estado_actual = NO_USA_ESCUDO;
   tiempo_pasado = 0;
   tipo = TIPO_MET;
 }
 
 void Met::atacar(int dir, Mapa* mapa){
-	if (estado_actual == ESCUDO_UP){
+	if (estado_actual == USA_ESCUDO){
 		return;
 	}
 	Bala *bala1, *bala2, *bala3;
@@ -32,32 +32,34 @@ void Met::atacar(int dir, Mapa* mapa){
 	bala3->notificar_observadores();
 }
 
-void Met::mover(size_t tiempo, Mapa* mapa){ } //el met no se mueve.
+void Met::mover(size_t tiempo, Mapa* mapa){ 
+	//mapa->interactuar_con_entorno(this);
+}
 
 void Met::recibir_ataque(Bala* ataque){
-	if ((estado_actual == ESCUDO_UP) && !(es_vulnerable(ataque))){
+	if ((estado_actual == USA_ESCUDO) && !(es_vulnerable(ataque))){
 		return;
 	}
 	ataque->daniar(this);
 	if(!this->esta_vivo()){
 		estado_actual = MURIENDO;
 	}
+	notificar_observadores();
 }
 
 void Met::update(size_t tiempo){
-  tiempo_pasado += tiempo;
+  Personaje::update(tiempo, mapa);
   if (tiempo_pasado < TIEMPO_ATAQUE){
     return;
   }
-  estado_actual = (estado_actual == ESCUDO_UP)? ESCUDO_DOWN : ESCUDO_UP;
-  Personaje::update(0, mapa);
-  Personaje::notificar_observadores();
+  estado_actual = (estado_actual == USA_ESCUDO)? NO_USA_ESCUDO : USA_ESCUDO;
+ // Personaje::update(0, mapa);
+ // Personaje::notificar_observadores();
   tiempo_pasado -= TIEMPO_ATAQUE;
-  Personaje::update(tiempo, mapa);
 }
 
 bool Met::esta_bajo_escudo(){
-	return (estado_actual == ESCUDO_UP);
+	return (estado_actual == USA_ESCUDO);
 }
 
 bool Met::es_vulnerable(Bala* ataque){

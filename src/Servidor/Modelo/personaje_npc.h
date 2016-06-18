@@ -5,12 +5,9 @@ class Escaleras;
 
 #include "personaje.h"
 
-#define PERDER_MAX -100
-#define GANAR_MAX 100
-
 class Personaje_npc: public Personaje{
 	private:
-		Vida *vida;
+		Vida vida;
 	public:
 		Personaje_npc(Mapa *mapa, Coordenada c, int id):
 		Personaje(mapa, c, id){}

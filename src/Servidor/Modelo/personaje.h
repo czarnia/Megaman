@@ -18,7 +18,7 @@ class Bala;
 class Escaleras;
 class Capsula_de_energia;
 
-#define PERDER_MAX -100
+#define PERDER_MAX 100
 #define GANAR_MAX 100
 
 class Personaje:
@@ -123,6 +123,9 @@ public Personaje_observable{
 		virtual void interactuar(Capsula_de_energia *capsula);
 		//Devuelve true si el personaje esta flotanto.
 		bool esta_flotando();
+		//Devuelve true si la bala colsiona con el ubicable
+		//en la coordenada coord.
+		bool colisiona(Bala *bala, Coordenada coord);
 		//Devuelve un int que representa
 		//el estado actual del personaje.
 		int get_estado_actual();

@@ -76,6 +76,9 @@ public Elemento{
 		//Devuelve true si puede dañar a un Jumping_snipper cuando esta tras su es-
 		//cudo, false en caso contrario.
 		virtual bool dania_con_escudo(Jumping_snipper* js) = 0;
+		//Devuelve true si la bala colsiona con el ubicable
+		//en la coordenada coord.
+		virtual bool colisiona(Ubicable *ubic, Coordenada coord);
 };
 
 #endif //BALA_H

@@ -19,12 +19,11 @@ class Bala;
 
 class Mapa{
   private:
-	  size_t long_x, long_y;
-    std::vector<Bloque*> bloques;
-    std::vector<Bala*> balas;
-    std::map<int, Personaje*> personajes;
-    std::vector<Elemento*> elementos;
-    std::map<int, Premio_factory*> premios;
+		size_t long_x, long_y;
+		std::vector<Bala*> balas;
+		std::map<int, Personaje*> personajes;
+		std::vector<Elemento*> elementos;
+		std::map<int, Premio_factory*> premios;
   public:
     //Dados un tamanio crea un mapa con tantas divisiones como indique el tamanio.
     Mapa(size_t long_x, size_t long_y);
@@ -74,7 +73,7 @@ class Mapa{
     void update(float tiempo);
 	  //Recibe una coordenada y devuelve true si hay un personaje
 	  //posicionado en ella.
-    bool hay_personaje(Coordenada *coord);
+    bool bala_colisiona_con_pj(Bala *b, Coordenada *coord);
     //Dado un personaje, hace que el mismo interactue con su entorno.
     void interactuar_con_entorno(Personaje* pj);
     //Devuelve todos los ubicables que tiene un mapa.

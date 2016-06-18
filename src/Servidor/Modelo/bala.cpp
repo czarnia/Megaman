@@ -88,7 +88,9 @@ void Bala::update(float tiempo, Mapa* mapa){
 
 			if (!llegue){
 				impacto = !mapa->puede_ubicarse(this, actual);
-				impacto = impacto || mapa->hay_personaje(&actual);
+				if (impacto ) std::cout << "BALA: IMPACTO, ESTA FUERA DEL MAPA\n";
+				impacto = impacto || mapa-> bala_colisiona_con_pj(this, &actual);
+				if (impacto ) std::cout << "BALA: IMPACTO CON PERSONAJE\n";
 				if (impacto){
 					std::cout << "BALA: IMPACTO, VA A -1, -1 en proximo update\n";
 					direccion_x = 0;
@@ -104,8 +106,20 @@ void Bala::update(float tiempo, Mapa* mapa){
 	}
 }
 
+bool Bala::colisiona(Ubicable *ubic, Coordenada c){
+		size_t x = coord.obtener_abscisa();
+		size_t y = coord.obtener_ordenada();
+		size_t alto = ubic->get_alto();
+		size_t ancho = ubic->get_ancho();
+		size_t ancho_max = c.derecha(ancho/2).obtener_abscisa();
+		size_t ancho_min = c.izquierda(ancho/2).obtener_abscisa();
+		size_t alto_min = c.arriba(alto/2).obtener_ordenada();
+		size_t alto_max = c.abajo(alto/2).obtener_ordenada();
+		return (x >= ancho_min) && (x <= ancho_max) && (y >= alto_min) && (y <= alto_max);
+}
+
 void Bala::interactuar(Personaje* pj){
-	//pj->recibir_ataque(this);
+	pj->recibir_ataque(this);
 }
 
 

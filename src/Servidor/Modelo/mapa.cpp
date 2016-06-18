@@ -24,7 +24,7 @@
 
 #define TAM_BLOQUE 30
 #define CAPSULA_DE_PLASMA 1
-#define CAPSULA_DE_ENERGIA 2  //TODO: redefinir
+#define CAPSULA_DE_ENERGIA 2
 #define NUEVA_VIDA 3
 
 typedef std::vector<Coordenada>::iterator ItBloques;
@@ -39,50 +39,6 @@ std::vector<int> obtener_claves(std::map<int, Premio_factory*> hash){
     v.push_back(it->first);
   }
   return v;
-}
-
-std::vector<Coordenada> coord_tierras(){
-	//IMPORTANTE: las coordenadas de los bloques
-	//de tierra son las coordenadas internas
-	//ya que los bordes de los bloque
-	//pueden ser ocupados.
-
-	std::vector<Coordenada> tierras;
-
-	tierras.push_back(Coordenada(1,11));
-	tierras.push_back(Coordenada(3,11));
-	tierras.push_back(Coordenada(5,11));
-	tierras.push_back(Coordenada(7,11));
-	tierras.push_back(Coordenada(9,11));
-	tierras.push_back(Coordenada(11,11));
-	tierras.push_back(Coordenada(1,9));
-	tierras.push_back(Coordenada(3,9));
-	tierras.push_back(Coordenada(5,9));
-	return tierras;
-}
-
-std::vector<Coordenada*> coord_personajes(){
-	std::vector<Coordenada*> c_personajes;
-	c_personajes.push_back(new Coordenada(3,6));
-
-	return c_personajes;
-}
-
-std::vector<Coordenada> coord_puas(){
-	std::vector<Coordenada> puas;
-
-	puas.push_back(Coordenada(2,0));
-	puas.push_back(Coordenada(1,3));
-	puas.push_back(Coordenada(6,3));
-
-	return puas;
-}
-
-std::vector<Coordenada> coord_escaleras(){
-	std::vector<Coordenada> escaleras;
-	escaleras.push_back(Coordenada(11,9));
-	escaleras.push_back(Coordenada(11,7));
-	return escaleras;
 }
 
 //------------------------------------//
@@ -121,6 +77,9 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
       return false;
   }
 	for (size_t i = 0; i < elementos.size(); i++){
+		if (elementos[i] == ubic){
+			continue;
+		}
 		if (elementos[i]->colisiona(ubic, c) && !elementos[i]->puede_ocupar(ubic)){
 			return false;
 		}
@@ -158,7 +117,6 @@ bool Mapa::ubicar(Bloque* bloque, Coordenada c){
 		return false;
 	}
 	elementos.push_back(bloque);
-	bloques.push_back(bloque);
 	return true;
 }
 
@@ -171,12 +129,22 @@ Personaje* Mapa::obtener_pj(int id_pj){
 }
 
 void Mapa::update(float tiempo){
-	for (ItPersonaje it= personajes.begin(); it != personajes.end(); ++it){
-		(*it).second->update(tiempo, this);
-	}
 	for (size_t j = 0; j < balas.size(); j++){
 		balas[j]->update(tiempo, this);
 	}
+	for (ItPersonaje it= personajes.begin(); it != personajes.end(); ++it){
+		(*it).second->update(tiempo, this);
+		interactuar_con_entorno(it->second);
+	}
+}
+
+void Mapa::interactuar_con_entorno(Personaje* pj){
+  Coordenada c = pj->get_coordenada();
+  for(size_t i = 0; i < elementos.size(); i++){
+    if (elementos[i]->colisiona(pj, c)){
+      elementos[i]->interactuar(pj);
+    }
+  }
 }
 
 bool Mapa::esta_en_aire(Personaje* personaje){
@@ -190,19 +158,12 @@ bool Mapa::esta_en_aire(Personaje* personaje){
 	return true;
 }
 
-bool Mapa::hay_personaje(Coordenada *coord){
+bool Mapa::bala_colisiona_con_pj(Bala *bala, Coordenada *coord){
 	size_t x = coord->obtener_abscisa();
 	size_t y = coord->obtener_ordenada();
 	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
 		Personaje *p = it->second;
-		Coordenada coord_personaje = p->get_coordenada();
-		size_t alto = p->get_alto();
-		size_t ancho = p->get_ancho();
-		size_t ancho_max = coord_personaje.derecha(ancho/2).obtener_abscisa();
-		size_t ancho_min = coord_personaje.izquierda(ancho/2).obtener_abscisa();
-		size_t alto_max = coord_personaje.arriba(alto/2).obtener_ordenada();
-		size_t alto_min = coord_personaje.abajo(alto/2).obtener_ordenada();
-		if ( (x > ancho_min) && (x < ancho_max) && (y > alto_min) && (y < alto_max) ){
+		if (p->colisiona(bala, *coord)){
 			return true;
 		}
 	}
@@ -224,43 +185,14 @@ bool Mapa::tiene_coordenada(Coordenada coordenada){
 	return ((0 <= x) && (x <= long_x) && (0 <= y) && (y <= long_y));
 }
 
-/*void Mapa::cargar(){
-	bloques = coord_tierras();
-	coord_iniciales_personajes = coord_personajes();
-	std::vector<Coordenada> escaleras = coord_escaleras();
-
-	for (size_t i = 0; i < bloques.size(); i++){
-		Coordenada c1 = bloques[i];
-		Bloque* b = new Bloque(c1);
-		std::vector<Coordenada> coordenadas_bloque = b->coordenadas();
-		for (size_t j = 0; j < coordenadas_bloque.size(); j++){
-			Coordenada c2 = coordenadas_bloque[j];
-			int x = c2.obtener_abscisa();
-			int y = c2.obtener_ordenada();
-			elementos[x][y].push_back(b);
-		}
-	}
-	for (size_t i = 0; i < escaleras.size(); i++){
-		Coordenada c1 = escaleras[i];
-		Escalera* esc = new Escalera(c1);
-		std::vector<Coordenada> coordenadas_esc = esc->coordenadas();
-		for (size_t j = 0; j < coordenadas_esc.size(); j++){
-			Coordenada c2 = coordenadas_esc[j];
-			int x = c2.obtener_abscisa();
-			int y = c2.obtener_ordenada();
-			elementos[x][y].push_back(esc);
-		}
-	}
-}*/
-
 void Mapa::agregar_bala(Bala *b){
 	balas.push_back(b);
+	elementos.push_back(b);
 }
 
 void Mapa::quitar_bala(Bala *b){
 	ItBalas it_bala = std::find(balas.begin(), balas.end(), b);
 	balas.erase(it_bala);
-	//TODO: SACAR DEL MAPA DE ELEMENTOOOOSSS!!!
 }
 
 void Mapa::agregar_personaje(Personaje *p){
@@ -274,14 +206,6 @@ void Mapa::quitar_personaje(int id_pj){
 	}
 }
 
-void Mapa::interactuar_con_entorno(Personaje* pj){
-  Coordenada c = pj->get_coordenada();
-  for(size_t i = 0; i < elementos.size(); i++){
-    if (elementos[i]->colisiona(pj, c)){
-      elementos[i]->interactuar(pj);
-    }
-  }
-}
 
 std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	std::vector<Ubicable*> ubicables;

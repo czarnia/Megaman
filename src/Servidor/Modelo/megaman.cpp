@@ -65,7 +65,7 @@ void Megaman::mover(size_t tiempo, Mapa* mapa){
 	movimientos.clear();
 	//Interactuo con elementos de la nueva
 	//ubicacion:
-	mapa->interactuar_con_entorno(this);
+	//mapa->interactuar_con_entorno(this);
 }
 
 void Megaman::agregar_movimiento(int direccion){

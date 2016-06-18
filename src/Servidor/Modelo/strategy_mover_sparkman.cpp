@@ -34,7 +34,7 @@ size_t tiempo){
 }
 
 void StrategyMoverSparkman::saltar(Mapa *mapa, Sparkman *pj){
-	Coordenada nueva_coordenada(-1, -1);
+	Coordenada nueva_coordenada = pj->coordenada;
 	if (velocidad_y < 0){
 		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
 		actualizar_coordenada(mapa, pj, &nueva_coordenada);

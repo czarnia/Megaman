@@ -16,8 +16,6 @@ void Observador_ubicable::update(Observable *obs){
 	int id = ubicable->get_id();
 	int tipo = ubicable->get_tipo();
 	if (!(coordenada == ubicable->get_coordenada())){
-		//std::cout << "OBSERVER_UBICABLE: UBICABLE ACTUALIZO POSICION\n";
-		//Un personaje p actualizo su posicion.
 		int alto = ubicable->get_alto();
 		int ancho = ubicable->get_ancho();
 		Coordenada c = ubicable->get_coordenada().arriba(alto/2).izquierda(ancho/2);

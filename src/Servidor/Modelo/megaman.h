@@ -13,7 +13,7 @@ class Arma;
 class Arma_megaman;
 class StrategyMoverMegaman;
 
-#define PERDER_MAX -100
+#define PERDER_MAX 100
 #define GANAR_MAX 100
 
 class Megaman: public Personaje_pc{
