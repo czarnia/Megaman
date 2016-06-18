@@ -12,7 +12,7 @@
 #define ALTO_BLOQUE 30
 #define ANCHO_BLOQUE 30
 
-enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS, 
+enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS,
 	CAMBIO_ESTADO, FIN_NIVEL, DERROTA, VICTORIA};
 //enum Acciones {ATACAR = 1, SALTAR, ESCALAR, ESCUDO_UP, ESCUDO_DOWN, FRENAR};
 
@@ -76,6 +76,9 @@ void Conexion_cliente::iniciar_ejecucion(){
 }
 
 void Conexion_cliente::terminar_ejecucion(){
+	int derrota = DERROTA;
+	skt->send((char*)&derrota, TAM_INT);
+	skt->send("                ", TAM_INT*4);
   rcv.terminar_ejecucion();
 }
 

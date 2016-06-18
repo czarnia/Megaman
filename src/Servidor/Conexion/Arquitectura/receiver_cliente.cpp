@@ -55,7 +55,7 @@ void Receiver_cliente::ejecutar(){
 
 void Receiver_cliente::terminar_ejecucion(){
   fin = true;
-  (*skt).send(FIN_ENTRADA, strlen(FIN_ENTRADA));
+  //(*skt).send(FIN_ENTRADA, strlen(FIN_ENTRADA));
   (*skt).shutdown(SHUT_RDWR);
 }
 

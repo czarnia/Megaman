@@ -10,7 +10,7 @@ public Observador_personaje{
 		int energia;
 		int accion_actual;
 	public:
-		//Dado un juego y una coordenada, crea a un 
+		//Dado un juego y una coordenada, crea a un
 		//observador de personaje PC.
 		Observador_personaje_pc(Juego* juego, Personaje_pc *personaje);
 		//Dado un observable, hace un update.

@@ -176,6 +176,9 @@ void Juego::actualizo_estado_personaje(int tipo, int id, int estado_act){
 
 void Juego::murio_personaje(Personaje *p){
 	mundo->quitar_personaje(p->get_id_unico());
+	if (p->get_id_unico() > 0 && p->get_id_unico() <= 4){ //IDS de los megamans
+		cant_jugadores -= 1;
+	}
 	if (cant_jugadores == 0){
 		notificar_termino_partida();
 		terminar_partida();

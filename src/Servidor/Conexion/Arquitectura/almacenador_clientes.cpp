@@ -104,4 +104,3 @@ void Almacenador_clientes::update_estado_personaje(int tipo, int id, int accion)
 		(it->second)->update_estado_personaje(tipo, id, accion);
 	}
 }
-
