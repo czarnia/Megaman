@@ -38,6 +38,7 @@ void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo
 	}
 	if (mapa->puede_ubicarse(pj, coord_nueva)){
 		pj->coordenada = coord_nueva;
+		pj->notificar_observadores();
 	}
 }
 

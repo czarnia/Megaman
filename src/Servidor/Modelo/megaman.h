@@ -65,7 +65,7 @@ class Megaman: public Personaje_pc{
 		//Devuelve el porcentaje de energia actual del persoanje.
 		virtual int get_energia();
 		//Devuelve la cantidad actual de vidas del personaje.
-		int get_cantidad_vidas();
+		size_t get_cantidad_vidas();
 		//Devuelve el porcentaje de vida que le queda al personaje.
 		int get_porcentaje_vida();
 		//Devuelve true si el personaje esta vivo.

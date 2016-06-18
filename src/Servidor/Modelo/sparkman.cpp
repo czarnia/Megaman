@@ -20,7 +20,9 @@ void Sparkman::atacar(int dir, Mapa* mapa){
   }
 }
 
-void Sparkman::mover(size_t tiempo, Mapa* mapa){ } //TODO: hacer el mover.
+void Sparkman::mover(size_t tiempo, Mapa* mapa){ 
+	movimiento.mover(mapa, this, tiempo);
+} 
 
 void Sparkman::recibir_ataque(Bala* ataque){
   ataque->daniar(this);
@@ -28,11 +30,11 @@ void Sparkman::recibir_ataque(Bala* ataque){
 
 void Sparkman::update(size_t tiempo){
   tiempo_pasado += tiempo;
+  mover(tiempo, mapa);
   if (tiempo_pasado < TIEMPO_ACCION){
     return;
   }
   //atacar
-  //mover
 }
 
 std::vector<Bala*> Sparkman::balas_ataque(){ //Ataca en un círculo medio defo.

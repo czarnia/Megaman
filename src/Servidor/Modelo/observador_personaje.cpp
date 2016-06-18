@@ -19,13 +19,13 @@ void Observador_personaje::update(Observable *obs){
 		if (porcentaje_vida != personaje->get_porcentaje_vida()){
 			std::cout << "OBSERVER_P: PERSONAJE ACTUALIZO % VIDA\n";
 			porcentaje_vida = personaje->get_porcentaje_vida();
-			juego->actualizo_porcentaje_vida(tipo, id, cantidad_vidas);
+			juego->actualizo_porcentaje_vida(tipo, id, porcentaje_vida);
 		}
 		Observador_ubicable::update(obs);
 	}
 	if (estado_actual != personaje->get_estado_actual()){
 		juego->actualizo_estado_personaje(tipo, id,
 		personaje->get_estado_actual());
-		estado_actual =  personaje->get_estado_actual();
+		estado_actual = personaje->get_estado_actual();
 	}
 }

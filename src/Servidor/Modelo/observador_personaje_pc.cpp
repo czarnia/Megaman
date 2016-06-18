@@ -20,12 +20,12 @@ void Observador_personaje_pc::update(Observable *obs){
 		energia = personaje->get_energia();
 		juego->actualizo_energia(tipo, id, energia);
 	}
-	if (cantidad_vidas != personaje->get_cantidad_vidas()){
-		std::cout << "OBSERVER_P: PERSONAJE ACTUALIZO CANTIDAD VIDAS\n";
+	if (cantidad_vidas != personaje->get_cantidad_vidas() && personaje->esta_vivo()){
+		std::cout << "OBSERVER_P: PERSONAJE ACTUALIZO CANTIDAD VIDAS "<< personaje->get_cantidad_vidas() <<"\n";
 		cantidad_vidas = personaje->get_cantidad_vidas();
 		porcentaje_vida = personaje->get_porcentaje_vida();
 		juego->actualizo_cantidad_vidas(tipo, id, cantidad_vidas);
-
+		
 		personaje->respawn(posicion_inicial);
 		int alto = personaje->get_alto();
 		int ancho = personaje->get_ancho();

@@ -34,7 +34,7 @@ class Personaje_pc: public Personaje{
 		//Devuelve el porcentaje de energia actual del persoanje.
 		virtual int get_energia() = 0;
 		//Devuelve la cantidad de vidas del personaje.
-		virtual int get_cantidad_vidas() = 0;
+		virtual size_t get_cantidad_vidas() = 0;
 		
 		friend class StrategyMoverMegaman;
 		friend class StrategyMoverPersonajePc;

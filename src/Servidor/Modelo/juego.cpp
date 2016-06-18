@@ -95,11 +95,11 @@ void Juego::personaje_atacar(int id_pj, int direccion){ //debería ser sólo par
 void Juego::personaje_mover(int id_pj, int direccion){
 	Lock candado(proteccion);
 	std::cout << "JUEGO: AGREGAR MOVIMIENTO PERSONAJE\n";
-	std::cout << "ID PERSONAJE: " << id_pj << "\n";
 	int id = Megaman::construir_id_megaman(id_pj);
 	Personaje_pc* pj = (Personaje_pc*)mundo->obtener_pj(id); //TODO:DYNAMIC CAST
 	if (pj == NULL){
-		std::cout << "PJ ES NULL \n";
+		std::cout << "JUEGO: PERSONAJE NO ESTA EN MAPA\n";
+		return;
 	}
 	pj->agregar_movimiento(direccion);
 }
@@ -110,7 +110,8 @@ void Juego::personaje_parar(int id_pj, int direccion){
 	int id = Megaman::construir_id_megaman(id_pj);
 	Personaje_pc* pj = (Personaje_pc*)mundo->obtener_pj(id); //TODO:DYNAMIC CAST
 	if (pj == NULL){
-		std::cout << "PERSONAJE ES NULL \n";
+		std::cout << "JUEGO: PERSONAJE NO ESTA EN MAPA\n";
+		return;
 	}
 	std::cout << "JUEGO: LE DIGO AL PERSONAJE QUE DEJE DE MOVERSE\n";
 	pj->sacar_movimiento(direccion);

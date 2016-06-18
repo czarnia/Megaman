@@ -30,6 +30,10 @@ class Cargador_mapa{
 		Cargador_mapa(const char *root);
 		//Carga un nuevo mapa:
 		void cargar_mapa(int id_mapa);
+		//Carga un mapa de boss:
+		//void cargar_mapa_boss(int id_mapa);
+		//Carga un mapa dado un path:
+		void cargar(std::string path);
 		//Devuelve la coordenada de inicio de los megamans para
 		//el mapa especificado.
 		std::vector<Coordenada*> get_coordenada_megamans();

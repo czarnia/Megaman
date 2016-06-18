@@ -11,7 +11,6 @@ class Juego;
 class Observador_personaje:
 public Observador_ubicable{
 	protected:
-		int cantidad_vidas;
 		int porcentaje_vida;
 		int estado_actual;
 	public:

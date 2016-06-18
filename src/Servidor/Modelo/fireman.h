@@ -13,7 +13,8 @@ class Fireman: public Personaje_npc{
 		Arma_fireman* arma;
     bool atacando;
 	public:
-		//Dado un Mapa*, una coordenada, un Arma_bombman* y un id, crea un fireman.
+		//Dado un Mapa*, una coordenada, un Arma_fireman* 
+		//y un id, crea un fireman.
 		Fireman(Mapa *mapa, Coordenada c, Arma_fireman* arma, int id);
 		//Dado una Mapa* y una direccion, ataca.
 		virtual void atacar(int dir, Mapa* mapa);

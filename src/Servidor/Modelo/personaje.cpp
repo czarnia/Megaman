@@ -38,7 +38,6 @@ void Personaje::notificar_observadores(){
 void Personaje::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	mover(tiempo, mapa);
-	notificar_observadores();
 }
 
 Coordenada Personaje::get_coordenada(){

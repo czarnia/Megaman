@@ -9,6 +9,7 @@ public Observador_personaje{
 	protected:
 		int energia;
 		int accion_actual;
+		size_t cantidad_vidas;
 	public:
 		//Dado un juego y una coordenada, crea a un 
 		//observador de personaje PC.

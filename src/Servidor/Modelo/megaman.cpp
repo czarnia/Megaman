@@ -10,6 +10,7 @@
 #define IZQUIERDA 4
 #define MEGAMAN 1
 #define TIEMPO_ACCION 0.5
+#define CANTIDAD_VIDAS 3
 
 typedef std::map<int, StrategyMoverPersonajePc*>::iterator movimientosIt;
 enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,  
@@ -17,7 +18,8 @@ enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		
 Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
 Personaje_pc(mapa, c, id){
-	for (size_t i = 0; i < 3; i++){
+	energia = 0;
+	for (size_t i = 0; i < CANTIDAD_VIDAS; i++){
 		Vida v = Vida();
 		vidas.push_back(v);
 	}
@@ -27,7 +29,6 @@ Personaje_pc(mapa, c, id){
 	movimientos = std::map<int, StrategyMoverPersonajePc*>();
 	movimiento_megaman = new StrategyMoverMegaman();
 	movimiento_actual = movimiento_megaman;
-	energia = 0;
 	estado_actual = IDLE;
 }
 /*
@@ -124,10 +125,15 @@ int Megaman::get_energia(){
 }
 
 void Megaman::perder_vida(int porcentaje){
+	if(!this->esta_vivo()){
+		return;
+	}
 	if (porcentaje == PERDER_MAX){
 		vidas.erase(vidas.begin());
+		notificar_observadores();
 	}else{
 		vidas[0].perder(porcentaje);
+		notificar_observadores();
 	}
 	if(!this->esta_vivo()){
 		estado_actual = MURIENDO;
@@ -147,7 +153,7 @@ bool Megaman::esta_vivo(){
 	return !vidas.empty();
 }
 
-int Megaman::get_cantidad_vidas(){
+size_t Megaman::get_cantidad_vidas(){
 	return vidas.size();
 }
 
