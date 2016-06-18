@@ -13,7 +13,7 @@ Bala_minion::Bala_minion(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_MINION, id){}
 
 Bala_minion::~Bala_minion() {}
-
+/*
 void Bala_minion::update(float tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
@@ -33,13 +33,16 @@ void Bala_minion::update(float tiempo, Mapa* mapa) {
 		nueva_coordenada = nueva_coordenada.abajo(2);
 	}
 
-	if (mapa->puede_ubicarse(this, nueva_coordenada)){
+	if (mapa->puede_ubicarse(this, nueva_coordenada) ||  
+		mapa->bala_colisiona_con_pj(this, &nueva_coordenada);){
 		coord = nueva_coordenada;
 	}else{
 		//TODO: Mover al mapa.
 		mapa->quitar_bala(this);
+		coord = Coordenada(-1, -1);
 	}
-}
+	notificar_observadores();
+}*/
 
 void Bala_minion::daniar(Personaje* pj) {
 	pj->perder_vida(0); //sólo le saca vida a megaman.

@@ -70,7 +70,7 @@ void Bala::update(float tiempo, Mapa* mapa){
 		if (impacto){
 			//si la bala impacto con un objeto en el update anterior
 			//se destruye en este update;
-			std::cout << "BALA: IMPACTO, VA A -1, -1.\n";
+			//std::cout << "BALA: IMPACTO, VA A -1, -1.\n";
 			actual = Coordenada(-1, -1);
 			mapa->quitar_bala(this);
 		}
@@ -88,18 +88,14 @@ void Bala::update(float tiempo, Mapa* mapa){
 
 			if (!llegue){
 				impacto = !mapa->puede_ubicarse(this, actual);
-				if (impacto ) std::cout << "BALA: IMPACTO, ESTA FUERA DEL MAPA\n";
 				impacto = impacto || mapa-> bala_colisiona_con_pj(this, &actual);
-				if (impacto ) std::cout << "BALA: IMPACTO CON PERSONAJE\n";
 				if (impacto){
-					std::cout << "BALA: IMPACTO, VA A -1, -1 en proximo update\n";
 					direccion_x = 0;
 					direccion_y = 0;
 				}
 			}
 		}
 		if (!(actual == coord)){
-			std::cout << "BALA: CAMBIO POSICION\n";
 			coord = actual;
 			notificar_observadores();
 		}

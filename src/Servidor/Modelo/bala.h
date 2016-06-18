@@ -54,7 +54,7 @@ public Elemento{
 		//esta.
 		virtual bool puede_ocupar(Puas* puas);
 		//Hace que pasa el tiempo para la bala.
-		virtual void update(float tiempo, Mapa* mapa) = 0;
+		virtual void update(float tiempo, Mapa* mapa);
 		//Daña a un Personaje (caso por defecto).
 		virtual void daniar(Personaje* pj) = 0;
 		//Daña a un Megaman.
