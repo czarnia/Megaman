@@ -64,14 +64,12 @@ std::string Conexion_cliente::obtener_nombre_jugador(){
 }
 
 void Conexion_cliente::enviar_tamanio_mapa(Juego* m){
-	int long_y = m->long_y_mapa()/ALTO_BLOQUE;
+	int long_y = m->long_y_mapa()/ALTO_BLOQUE - 1;
 	int long_x = m->long_x_mapa()/ANCHO_BLOQUE;
 
 	skt->send((char*)&long_x, TAM_INT);
 	skt->send((char*)&long_y, TAM_INT);
 }
-
-
 
 void Conexion_cliente::iniciar_ejecucion(){
 	rcv.start();
@@ -175,4 +173,3 @@ void Conexion_cliente::enviar_gameover(){
   skt->send("                ", TAM_INT*4);
   //Envio una cadena vacía de TAM_INT*4 caracteres.
 }
-

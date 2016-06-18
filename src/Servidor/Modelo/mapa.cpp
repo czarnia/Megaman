@@ -87,8 +87,13 @@ std::vector<Coordenada> coord_escaleras(){
 
 //------------------------------------//
 
-Mapa::Mapa(size_t long_x, size_t long_y):
-long_x(long_x), long_y(long_y){
+Mapa::Mapa(size_t l_x, size_t l_y):
+long_x(l_x), long_y(l_y+TAM_BLOQUE){
+  int y = long_y - TAM_BLOQUE/2;
+  for (size_t x = 0; x < long_x; x++){
+    Puas* puas_asesinas = new Puas(Coordenada(x,y));
+    elementos.push_back(puas_asesinas);
+  }
 }
 
 Mapa::~Mapa(){
@@ -281,7 +286,10 @@ void Mapa::interactuar_con_entorno(Personaje* pj){
 std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	std::vector<Ubicable*> ubicables;
 	for (size_t i = 0; i < elementos.size(); i++){
-		ubicables.push_back(elementos[i]);
+    size_t y_elemento = elementos[i]->get_coordenada().obtener_ordenada();
+    if ((y_elemento + elementos[i]->get_alto()/2) <= (long_y - TAM_BLOQUE)){
+      ubicables.push_back(elementos[i]);
+    }
 	}
 	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
 		ubicables.push_back(it->second);
