@@ -35,7 +35,7 @@ class Megaman: public Personaje_pc{
 		//Dada una Bala*, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
-		virtual void update(size_t tiempo);
+		//virtual void update(size_t tiempo);
 		//Dada un Arma*, se la agrega a la armeria del megaman.
 		virtual void agregar_arma(Arma *arma);
 		//Dado una direccion, se agrega un movimiento en dicha direccion.
@@ -70,6 +70,9 @@ class Megaman: public Personaje_pc{
 		int get_porcentaje_vida();
 		//Devuelve true si el personaje esta vivo.
 		virtual bool esta_vivo();
+		//Dado un id devuelve un id
+		//de megaman.
+		static int construir_id_megaman(int id);
 		
 		friend class StrategyMoverMegaman;
 		friend class StrategyMoverPersonajePc;

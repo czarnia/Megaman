@@ -109,16 +109,6 @@ void Conexion_cliente::update_estado_personaje(int tipo, int id, int estado){
 	skt->send((char*)&estado, TAM_INT);
 	skt->send("        ", TAM_INT);
 }
-/*
-void Conexion_cliente::update_personaje_escudo(int tipo, int id, int bajo_escudo){
-	int accion = ACCION;
-	int estado_escudo = bajo_escudo? ESCUDO_DOWN : ESCUDO_UP;
-	skt->send((char*)&accion, TAM_INT);
-	skt->send((char*)&tipo, TAM_INT);
-	skt->send((char*)&id, TAM_INT);
-	skt->send((char*)&estado_escudo, TAM_INT);
-	skt->send("        ", TAM_INT);
-}*/
 
 void Conexion_cliente::enviar_cambio_posicion(int tipo, int id, int x, int y){
 	int posicion = POSICION;

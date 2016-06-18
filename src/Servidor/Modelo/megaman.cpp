@@ -30,12 +30,10 @@ Personaje_pc(mapa, c, id){
 	energia = 0;
 	estado_actual = IDLE;
 }
-
+/*
 void Megaman::update(size_t tiempo){
-	tiempo_pasado += tiempo;
-	mover(tiempo, mapa);
 	Personaje::update(tiempo, mapa);
-}
+}*/
 
 void Megaman::atacar(int dir, Mapa* mapa){
 	Bala* bala;
@@ -163,4 +161,8 @@ int Megaman::get_porcentaje_vida(){
 
 void Megaman::interactuar(Capsula_de_energia *capsula){
 	capsula->interactuar(this);
+}
+
+int Megaman::construir_id_megaman(int id){
+	return Ubicable::construir_id_unico(MEGAMAN, id);
 }

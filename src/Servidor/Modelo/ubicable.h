@@ -18,11 +18,11 @@ public Observable{
 	public:
 		//Devuelve la coordenada central de un ubicable.
 		//virtual Coordenada devolver_coordenada_central() = 0;
-    //Devuelve todas las coordenadas que ocupa un ubicable.
-    virtual std::vector<Coordenada> coordenadas() = 0;
-    //Devuelve todas las coordenadas que ocuparía un ubicable si su centro estuvie-
-    //ra en c.
-    virtual std::vector<Coordenada> coordenadas(Coordenada c) = 0;
+		//Devuelve todas las coordenadas que ocupa un ubicable.
+		virtual std::vector<Coordenada> coordenadas() = 0;
+		//Devuelve todas las coordenadas que ocuparía un ubicable si su centro estuvie-
+		//ra en c.
+		virtual std::vector<Coordenada> coordenadas(Coordenada c) = 0;
 		//Dado un ubicable, dice si el mismo puedo ubicarse en una posicion donde
 		//hay un otro ubicable.
 		virtual bool puede_ocupar(Ubicable* ubic) = 0;
@@ -65,6 +65,9 @@ public Observable{
 		virtual int get_ancho() = 0;
 		//Devuelve el alto del ubicable.
 		virtual int get_alto() = 0;
+		//Dado un id y un tipo
+		//devuelve un id unico.
+		static int construir_id_unico(int tipo, int id);
 		//Destructor del ubicable.
 		//virtual ~Ubicable() {}
 		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);

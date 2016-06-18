@@ -22,10 +22,14 @@ bool Ubicable::colisiona(Ubicable* otro_ubic, Coordenada nueva){
   return ((x_colision*y_colision) != 0);
 }
 
-int Ubicable::get_id_unico(){
+int Ubicable::construir_id_unico(int tipo, int id){
 	std::stringstream converter;
-	converter << this->get_id() << this->get_tipo();
+	converter << tipo << id;
 	std::string id_pj = converter.str();
 	int id_unico = atoi(id_pj.c_str());
 	return id_unico;
+}
+
+int Ubicable::get_id_unico(){
+	return construir_id_unico(this->get_tipo(), this->get_id());
 }

@@ -6,6 +6,7 @@
 #include "../../Comun/lock.h"
 #include "ubicable_factory.h"
 #include "megaman_factory.h"
+#include "megaman.h"
 #include "met_factory.h"
 #include "escalera_factory.h"
 #include "bloque_factory.h"
@@ -86,7 +87,8 @@ void Juego::update(float tiempo){
 
 void Juego::personaje_atacar(int id_pj, int direccion){ //debería ser sólo para megaman!
 	Lock candado(proteccion);
-	Personaje* pj = mundo->obtener_pj(id_pj);
+	int id = Megaman::construir_id_megaman(id_pj);
+	Personaje* pj = mundo->obtener_pj(id);
 	pj->atacar(direccion, mundo);
 }
 
@@ -94,7 +96,8 @@ void Juego::personaje_mover(int id_pj, int direccion){
 	Lock candado(proteccion);
 	std::cout << "JUEGO: AGREGAR MOVIMIENTO PERSONAJE\n";
 	std::cout << "ID PERSONAJE: " << id_pj << "\n";
-	Personaje_pc* pj = (Personaje_pc*)mundo->obtener_pj(id_pj); //TODO:DYNAMIC CAST
+	int id = Megaman::construir_id_megaman(id_pj);
+	Personaje_pc* pj = (Personaje_pc*)mundo->obtener_pj(id); //TODO:DYNAMIC CAST
 	if (pj == NULL){
 		std::cout << "PJ ES NULL \n";
 	}
@@ -104,7 +107,8 @@ void Juego::personaje_mover(int id_pj, int direccion){
 void Juego::personaje_parar(int id_pj, int direccion){
 	Lock candado(proteccion);
 	std::cout << "JUEGO: OBTENGO AL PERSONAJE\n";
-	Personaje_pc* pj = (Personaje_pc*)mundo->obtener_pj(id_pj); //TODO:DYNAMIC CAST
+	int id = Megaman::construir_id_megaman(id_pj);
+	Personaje_pc* pj = (Personaje_pc*)mundo->obtener_pj(id); //TODO:DYNAMIC CAST
 	if (pj == NULL){
 		std::cout << "PERSONAJE ES NULL \n";
 	}
@@ -169,25 +173,6 @@ void Juego::actualizo_estado_personaje(int tipo, int id, int estado_act){
 		obs->update_estado_personaje(tipo, id, estado_act);
 	}
 }
-/*
-void Juego::notificar_personaje_update_escudo(int tipo, int id, bool bajo_escudo){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_personaje_escudo(tipo, id, bajo_escudo);
-	}
-}
-
-void Juego::notificar_murio_personaje(int tipo, int id){
-	mundo->quitar_personaje(id);
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_murio_personaje(tipo, id);
-		if (cant_jugadores == 0){
-			notificar_termino_partida();
-			terminar_partida();
-		}
-	}
-}*/
 
 void Juego::murio_personaje(Personaje *p){
 	mundo->quitar_personaje(p->get_id_unico());
