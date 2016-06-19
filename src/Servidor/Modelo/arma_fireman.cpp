@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <sstream>
 
-#define TIPO_ARMA_FIREMAN 32
+#define TIPO_ARMA_FIREMAN 44
 
 Arma_fireman::Arma_fireman(int id,
 Factory_observador_ubicable *fact_ubicables):

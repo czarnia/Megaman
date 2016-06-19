@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <sstream>
 
-#define TIPO_ARMA_MEGAMAN 30
+#define TIPO_ARMA_MEGAMAN 45
 
 Arma_megaman::Arma_megaman(int id,
 Factory_observador_ubicable *fact_ubicables):

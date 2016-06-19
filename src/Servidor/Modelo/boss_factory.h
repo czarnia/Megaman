@@ -13,7 +13,7 @@ class Personaje;
 
 class Boss_factory : public Ubicable_factory{
 	private:
-		Factory_observador_ubicable fact_obs;
+		std::vector<Personaje_npc*> creados;
 	public:
 		//Dados un puntero a un juego y un puntero a un cargador de
 		//mapas, crea un un boss factory.

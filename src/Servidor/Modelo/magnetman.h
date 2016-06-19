@@ -4,18 +4,18 @@
 #include "personaje_npc.h"
 #include <vector>
 
-class Arma_fireman;
+class Arma_magnetman;
 
 class Magnetman: public Personaje_npc{
 	private:
 		Mapa *mapa;
 		float tiempo_pasado;
-		Arma_fireman* arma;
+		Arma_magnetman* arma;
     bool atacando;
 	public:
 		//Dado un Mapa*, una coordenada, un Arma_magnetman* 
 		//y un id, crea un magnetan.
-		Magnetman(Mapa *mapa, Coordenada c, Arma_fireman* arma, int id);
+		Magnetman(Mapa *mapa, Coordenada c, Arma_magnetman* arma, int id);
 		//Dado una Mapa* y una direccion, ataca.
 		virtual void atacar(int dir, Mapa* mapa);
 		//Dado un tiempo pasado y un Mapa*, se mueve.

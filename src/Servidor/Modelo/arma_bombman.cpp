@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <sstream>
 
-#define TIPO_ARMA_BOMBMAN 34
+#define TIPO_ARMA_BOMBMAN 40
 
 Arma_bombman::Arma_bombman(int id,
 Factory_observador_ubicable *fact_ubicables):

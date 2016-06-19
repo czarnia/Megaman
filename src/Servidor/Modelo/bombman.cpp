@@ -3,7 +3,7 @@
 #include "arma_bombman.h"
 
 #define TIEMPO_ATAQUE 2
-#define TIPO_BOMBMAN 30
+#define TIPO_BOMBMAN 20
 
 #define DERECHA 3
 #define IZQUIERDA 4
@@ -11,7 +11,6 @@
 Bombman::Bombman(Mapa *mapa, Coordenada c, Arma_bombman* arma, int id):
 Personaje_npc(mapa, c, id),
 arma(arma){
-  tras_escudo = false;
   tiempo_pasado = 0;
   tipo = TIPO_BOMBMAN;
 }

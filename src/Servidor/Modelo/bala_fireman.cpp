@@ -64,14 +64,6 @@ void Bala_fireman::daniar(Snipper* s){
 		s->perder_vida(50);
 	}
 }
-/*
-void Bala_fireman::daniar(Jumping_snipper* js){
-	if (!js->esta_bajo_escudo()){
-		js->perder_vida();
-	}else{
-		js->perder_vida(50);
-	}
-}*/
 
 bool Bala_fireman::dania_con_escudo(Met* m){
 	return false;
