@@ -64,7 +64,6 @@ void Bala::update(float tiempo, Mapa* mapa){
 	int delta_x = 0;
 	int delta_y = 0;
 	bool llegue = ((direccion_x == 0) && (direccion_y == 0));
-	//bool hay_colision = false;
 	Coordenada actual = coord;
 	if (tiempo_pasado >= TIEMPO_MOVER){
 		if (impacto){
@@ -75,16 +74,16 @@ void Bala::update(float tiempo, Mapa* mapa){
 			mapa->quitar_bala(this);
 		}
 		while (!impacto && !llegue){
-			if ((direccion_x != 0) && ((delta_x != VELOCIDAD) || (delta_x != -VELOCIDAD))){
+			if ((direccion_x != 0) && (delta_x != VELOCIDAD)){
 				actual = (direccion_x == DERECHA)? actual.derecha() : actual.izquierda();
-				delta_x += (direccion_x == DERECHA)? AVANZA : RETROCEDE;
+				delta_x += AVANZA;
 			}
-			if ((direccion_y != 0) && ((delta_y != VELOCIDAD) || (delta_y != -VELOCIDAD))){
-				actual = (direccion_x == ABAJO)? actual.abajo() : actual.arriba();
-				delta_y += (direccion_y == ABAJO)? BAJA : SUBE;
+			if ((direccion_y != 0) && (delta_y != VELOCIDAD)){
+				actual = (direccion_y == ABAJO)? actual.abajo() : actual.arriba();
+				delta_y += AVANZA;
 			}
-			llegue = !(((direccion_x != 0) && ((delta_x != VELOCIDAD) || (delta_x != -VELOCIDAD)))
-					    || ((direccion_y != 0) && ((delta_y != VELOCIDAD) || (delta_y != -VELOCIDAD))));
+			llegue = !(((direccion_x != 0) && (delta_x != VELOCIDAD))
+					    || ((direccion_y != 0) && (delta_y != VELOCIDAD)));
 
 			if (!llegue){
 				impacto = !mapa->puede_ubicarse(this, actual);
