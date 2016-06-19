@@ -1,10 +1,10 @@
 #include "strategy_mover_sparkman.h"
 #include "sparkman.h"
 
-#define TIEMPO_SALTO 2
+#define TIEMPO_SALTO 1
 #define GRAVEDAD 5
-#define VELOCIDAD_Y 30
-#define VELOCIDAD_X 10
+#define VELOCIDAD_Y 10
+#define VELOCIDAD_X 2
 
 StrategyMoverSparkman::StrategyMoverSparkman():
 velocidad_x(0),
@@ -28,22 +28,34 @@ size_t tiempo){
 	}
 	if ((tiempo_salto >= TIEMPO_SALTO) && !pj->flotando){
 		velocidad_y -= VELOCIDAD_Y;
-		tiempo_salto = 0;
-		saltar(mapa, pj);
+		tiempo_salto -= TIEMPO_SALTO;
+		Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(pj);
+		int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+		if (delta_x > 0){
+			velocidad_x += VELOCIDAD_X;
+		}else if (delta_x < 0){ //Si justo es 0 estan la misma posicion!
+			velocidad_x -= VELOCIDAD_X;
+		}
+		aplicar_movimiento(mapa, pj);
 	}
 }
 
-void StrategyMoverSparkman::saltar(Mapa *mapa, Sparkman *pj){
+void StrategyMoverSparkman::aplicar_movimiento(Mapa *mapa, Sparkman *pj){
 	Coordenada nueva_coordenada = pj->coordenada;
 	if (velocidad_y < 0){
 		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
-		actualizar_coordenada(mapa, pj, &nueva_coordenada);
 	}
 	if (velocidad_y > 0){
 		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
 		//pj->estado_actual = SALTANDO;
-		actualizar_coordenada(mapa, pj, &nueva_coordenada);
 	}
+	if (velocidad_x > 0){
+		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_Y);
+	}
+	if (velocidad_x < 0){
+		nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD_Y);
+	}
+	actualizar_coordenada(mapa, pj, &nueva_coordenada);
 }
 
 void StrategyMoverSparkman::actualizar_coordenada(Mapa *mapa,
