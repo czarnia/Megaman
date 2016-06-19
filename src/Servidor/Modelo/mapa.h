@@ -36,6 +36,8 @@ class Mapa{
     int obtener_long_y();
     //Devuelve el ancho del mapa.
     int obtener_long_x();
+    //Activa a todos los npcs del mapa.
+    void activar_npcs();
     //Devuelve true si la coordenada pertenece al mapa y false en el caso con-
     //trario.
     bool tiene_coordenada(Coordenada coordenada);

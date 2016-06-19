@@ -50,6 +50,7 @@ void Conexion_cliente::enviar_mapa_inicial(){
 		skt->send((char*)&y, TAM_INT);
 	}
 	skt->sendInt(&fin_mapa, TAM_INT);
+	m->get_mapa()->activar_npcs();
 }
 
 std::string Conexion_cliente::obtener_nombre_jugador(){

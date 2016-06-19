@@ -73,6 +73,13 @@ int Mapa::obtener_long_y(){
 	return long_y;
 }
 
+
+void Mapa::activar_npcs(){
+  for (ItPersonajeNpc i= personajes_npc.begin(); i != personajes_npc.end(); ++i){
+    (*i).second->activar();
+  }
+}
+
 bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
   int ancho = ubic->get_ancho();
   int alto = ubic->get_alto();
