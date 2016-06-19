@@ -20,7 +20,7 @@ void Sparkman::atacar(int dir, Mapa* mapa){
   }
 }
 
-void Sparkman::mover(size_t tiempo, Mapa* mapa){
+void Sparkman::mover(float tiempo, Mapa* mapa){
 	movimiento.mover(mapa, this, tiempo);
 }
 
@@ -28,7 +28,7 @@ void Sparkman::recibir_ataque(Bala* ataque){
   ataque->daniar(this);
 }
 
-void Sparkman::update(size_t tiempo){
+void Sparkman::update(float tiempo){
   tiempo_pasado += tiempo;
   mover(tiempo, mapa);
   if (tiempo_pasado < TIEMPO_ACCION){

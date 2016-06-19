@@ -9,7 +9,7 @@ class Arma_minion;
 
 class Bumby : public Personaje_npc {
 	private:
-		StrategyMoverBumby mover_bumby;
+		StrategyMoverBumby* mover_bumby;
 		Arma_minion* arma;
 	public:
 		//Dado un Mapa*, una Coordenada, un Arma_minion* y un id, se crea un bumby.
@@ -21,7 +21,7 @@ class Bumby : public Personaje_npc {
 		//Dada una bala, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque);
 		//Hace que el personaje se mueva;
-		virtual void mover(size_t, Mapa* mapa); 
+		virtual void mover(float tiempo, Mapa* mapa);
 
 		friend class StrategyMoverBumby;
 };

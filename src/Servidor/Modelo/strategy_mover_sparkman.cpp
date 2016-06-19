@@ -12,7 +12,7 @@ velocidad_y(0),
 tiempo_salto(0){}
 
 void StrategyMoverSparkman::mover(Mapa *mapa, Sparkman *pj,
-size_t tiempo){
+float tiempo){
 	bool personaje_flotando = pj->flotando;
 	bool personaje_en_aire = mapa->esta_en_aire(pj);
 	if (!personaje_flotando && personaje_en_aire){

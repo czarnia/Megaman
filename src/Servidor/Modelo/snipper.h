@@ -19,11 +19,11 @@ class Snipper : public Personaje_npc_con_escudo {
 		//Hace que el personaje ataque.
 		void atacar(int dir, Mapa* mapa);
 		//Le hace un update al personaje.
-		virtual void update(size_t tiempo, Mapa* mapa);
+		virtual void update(float tiempo, Mapa* mapa);
 		//Dada una bala, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque);
 		//Hace que el personaje se mueva;
-		void mover(size_t tiempo, Mapa* mapa);
+		void mover(float tiempo, Mapa* mapa);
 };
 
 #endif //SNIPPER_H

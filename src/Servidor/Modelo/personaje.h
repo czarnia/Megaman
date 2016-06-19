@@ -39,7 +39,7 @@ public Personaje_observable{
 		//crea un personaje.
 		Personaje(Mapa *mapa, Coordenada c, int id);
 		//Hace que el personaje se mueva;
-		virtual void mover(size_t tiempo, Mapa* mapa) = 0;
+		virtual void mover(float tiempo, Mapa* mapa) = 0;
 		//Hace que el personaje ataque.
 		virtual void atacar(int dir, Mapa* mapa) = 0;
 		//Le hace un update al personaje.

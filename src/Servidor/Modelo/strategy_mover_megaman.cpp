@@ -21,7 +21,7 @@ velocidad_y(0){
 	direccion = 0;
 }
 
-void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
+void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, float tiempo){
   if (mapa->esta_en_aire(pj)){
     pj->flotando = true;
     velocidad_y += GRAVEDAD; //valor gravedad.

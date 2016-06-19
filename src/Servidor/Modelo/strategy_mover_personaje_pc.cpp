@@ -10,7 +10,7 @@ StrategyMoverPersonajePc::StrategyMoverPersonajePc(){
 	direccion = QUIETO;
 }
 
-void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo){
+void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, float tiempo){
 	if (direccion == QUIETO){
 		return;
 	}

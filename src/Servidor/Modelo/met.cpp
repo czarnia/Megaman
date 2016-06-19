@@ -32,7 +32,7 @@ void Met::atacar(int dir, Mapa* mapa){
 	bala3->notificar_observadores();
 }
 
-void Met::mover(size_t tiempo, Mapa* mapa){
+void Met::mover(float tiempo, Mapa* mapa){
 	//mapa->interactuar_con_entorno(this);
 }
 

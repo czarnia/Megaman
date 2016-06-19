@@ -11,7 +11,7 @@ class StrategyMoverPersonajePc : public StrategyMover{
 		//Crea un StrategyMoverPersonajePc.
 		StrategyMoverPersonajePc();
 		//Dado un Mapa*, un Personaje_pc* y un tiempo, hace que el segundo se mueva.
-		virtual void mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo);
+		virtual void mover(Mapa *mapa, Personaje_pc *pj, float tiempo);
 		//Setea la direccion abajo.
 		virtual void set_direccion_abajo();
 		//Setea la direccion arriba.

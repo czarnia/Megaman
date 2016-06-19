@@ -30,13 +30,13 @@ void Fireman::atacar(int dir, Mapa* mapa){
   bala->notificar_observadores();
 }
 
-void Fireman::mover(size_t tiempo, Mapa* mapa){ } //TODO: hacer el mover.
+void Fireman::mover(float tiempo, Mapa* mapa){ } //TODO: hacer el mover.
 
 void Fireman::recibir_ataque(Bala* ataque){
   ataque->daniar(this);
 }
 
-void Fireman::update(size_t tiempo){
+void Fireman::update(float tiempo){
   tiempo_pasado += tiempo;
   if (tiempo_pasado < TIEMPO_ACCION){
     return;

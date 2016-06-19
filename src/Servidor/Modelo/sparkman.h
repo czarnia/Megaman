@@ -11,7 +11,7 @@ class StrategyMoverSparkman;
 class Sparkman: public Personaje_npc{
 	private:
 		Mapa *mapa;
-		size_t tiempo_pasado;
+		float tiempo_pasado;
 		Arma_sparkman* arma;
 		StrategyMoverSparkman movimiento;
 	public:
@@ -21,11 +21,11 @@ class Sparkman: public Personaje_npc{
 		//Dado un Mapa* y una dirección, ataca en la misma.
 		virtual void atacar(int dir, Mapa* mapa);
 		//Dado un tiempo y un Mapa*, realiza un ataque.
-		virtual void mover(size_t tiempo, Mapa* mapa);
+		virtual void mover(float tiempo, Mapa* mapa);
 		//Dada una Bala*, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
-		virtual void update(size_t tiempo);
+		virtual void update(float tiempo);
 
 		friend class StrategyMoverSparkman;
 	private:

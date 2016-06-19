@@ -31,11 +31,11 @@ class Megaman: public Personaje_pc{
 		//Dado una Mapa* y una direccion, ataca.
 		virtual void atacar(int dir, Mapa* mapa);
 		//Dado un tiempo pasado y un Mapa*, se mueve.
-		virtual void mover(size_t tiempo, Mapa* mapa);
+		virtual void mover(float tiempo, Mapa* mapa);
 		//Dada una Bala*, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
-		//virtual void update(size_t tiempo);
+		//virtual void update(float tiempo);
 		//Dada un Arma*, se la agrega a la armeria del megaman.
 		virtual void agregar_arma(Arma *arma);
 		//Dado una direccion, se agrega un movimiento en dicha direccion.
@@ -73,7 +73,7 @@ class Megaman: public Personaje_pc{
 		//Dado un id devuelve un id
 		//de megaman.
 		static int construir_id_megaman(int id);
-		
+
 		friend class StrategyMoverMegaman;
 		friend class StrategyMoverPersonajePc;
 };
