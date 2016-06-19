@@ -9,9 +9,6 @@
 void StrategyMoverJumpingSnipper::mover(Mapa *mapa, Jumping_snipper *pj, float tiempo){
 	tiempo_pasado += tiempo;
 	Coordenada nueva_coordenada = pj->coordenada;
-	if (tiempo_pasado <= TIEMPO_SALTO){
-		return;
-	}
 	if (mapa->esta_en_aire(pj)){
 		pj->flotando = true;
 		velocidad_y += GRAVEDAD; //valor gravedad.
