@@ -122,6 +122,21 @@ void Log::jugador_cambiar_arma(int id_cliente, int arma){
 	exportar(str.str());
 }
 
+void Log::no_hay_coordenada(int x, int y){
+	std::stringstream str;
+  str << "---------------NO EXISTE LA COORDENADA" << x << y << "-----------------\n";
+	exportar(str.str());
+}
+
+void  Log::colision_personaje(int id_pj, int x_pj, int y_pj, int id_elem, int x_elem, int y_elem){
+	std::stringstream str;
+  str << "---------------El PJ: " << id_pj <<" COLISIONA CON: " << id_elem << " y tienen coordenadas: "
+	<< x_pj << " "<< y_pj << " " << x_elem << " " << y_elem << "-----------------\n";
+	exportar(str.str());
+
+}
+
+
 void Log::exportar(std::string mensaje){
 	Lock candado(proteccion);
 	std::ofstream log_arch;

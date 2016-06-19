@@ -29,8 +29,8 @@ std::vector<std::string> Cargador_mapa::parsear_cadena_palabras(std::string cade
 //-----------------------------------------------------//
 
 Cargador_mapa::Cargador_mapa(const char *root):
-root_path(root), 
-boss(0), 
+root_path(root),
+boss(0),
 id_mapa_elegido(1),
 ancho_mapa(0),
 alto_mapa(0),
@@ -210,4 +210,3 @@ int Cargador_mapa::get_alto_mapa(){
 int Cargador_mapa::get_boss(){
 	return boss;
 }
-
