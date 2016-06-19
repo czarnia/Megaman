@@ -13,7 +13,7 @@ class StrategyMoverMegaman : public StrategyMoverPersonajePc{
 		//Crea un StrategyMoverMegaman.
 		StrategyMoverMegaman();
 		//Dado un Mapa*, un Personaje_pc* y un tiempo, hace que el segundo se mueva.
-		virtual void mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo);
+		virtual void mover(Mapa *mapa, Personaje_pc *pj, float tiempo);
 		//Dado un Personaje_pc*, le agrega un movimiento.
 		void agregar_movimiento(Personaje_pc *pj, int dir);
 		//Dado un Personaje_pc*, le saca un movimiento.

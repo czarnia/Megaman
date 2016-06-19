@@ -163,29 +163,29 @@ Personaje* Mapa::obtener_pj(int id_pj){
 }
 
 void Mapa::update(float tiempo){
-  std::vector<Updater> hilos_updater;
+  //std::vector<Updater> hilos_updater;
 	for (size_t j = 0; j < balas.size(); j++){
-    hilos_updater.push_back(Updater(balas[j], this, tiempo));
-		//balas[j]->update(tiempo, this);
+    //hilos_updater.push_back(Updater(balas[j], this, tiempo));
+		balas[j]->update(tiempo, this);
 	}
 	for (ItPersonajePc it= personajes_pc.begin(); it != personajes_pc.end(); ++it){
-		//(*it).second->update(tiempo, this);
+		(*it).second->update(tiempo, this);
     interactuar_con_entorno(it->second);
-    hilos_updater.push_back(Updater(it->second, this, tiempo));
+    //hilos_updater.push_back(Updater(it->second, this, tiempo));
 
 	}
   for (ItPersonajeNpc i= personajes_npc.begin(); i != personajes_npc.end(); ++i){
     interactuar_con_entorno(i->second);
-    hilos_updater.push_back(Updater(i->second, this, tiempo));
-    //(*i).second->update(tiempo, this);
+    //hilos_updater.push_back(Updater(i->second, this, tiempo));
+    (*i).second->update(tiempo, this);
   }
 
-  for (size_t j = 0; j < hilos_updater.size(); j++){
+  /*for (size_t j = 0; j < hilos_updater.size(); j++){
     hilos_updater[j].ejecutar();
-  }
-  for (size_t j = 0; j < hilos_updater.size(); j++){
+  }*/
+  /*for (size_t j = 0; j < hilos_updater.size(); j++){
     hilos_updater[j].join();
-  }
+  }*/
 }
 
 void Mapa::interactuar_con_entorno(Personaje* pj){

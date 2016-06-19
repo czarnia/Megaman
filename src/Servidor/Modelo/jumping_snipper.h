@@ -14,7 +14,7 @@ class Jumping_snipper : public Snipper {
 		//snippper.
 		Jumping_snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);
 		//Le hace un update al personaje.
-		virtual void update(size_t tiempo, Mapa* mapa);
+		virtual void update(float tiempo, Mapa* mapa);
 		
 		friend class StrategyMoverJumpingSnipper;
 };

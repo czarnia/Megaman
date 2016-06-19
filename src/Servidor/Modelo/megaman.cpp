@@ -32,7 +32,7 @@ Personaje_pc(mapa, c, id){
 	estado_actual = IDLE;
 }
 /*
-void Megaman::update(size_t tiempo){
+void Megaman::update(float tiempo){
 	Personaje::update(tiempo, mapa);
 }*/
 
@@ -52,7 +52,7 @@ void Megaman::atacar(int dir, Mapa* mapa){
 	bala->notificar_observadores();
 }
 
-void Megaman::mover(size_t tiempo, Mapa* mapa){
+void Megaman::mover(float tiempo, Mapa* mapa){
 	if (tiempo_pasado < TIEMPO_ACCION){
 		return;
 	}

@@ -27,13 +27,13 @@ void Bombman::atacar(int dir, Mapa* mapa){
 	bala->notificar_observadores();
 }
 
-void Bombman::mover(size_t tiempo, Mapa* mapa){ }
+void Bombman::mover(float tiempo, Mapa* mapa){ }
 
 void Bombman::recibir_ataque(Bala* ataque){
   ataque->daniar(this);
 }
 
-void Bombman::update(size_t tiempo){
+void Bombman::update(float tiempo){
   tiempo_pasado += tiempo;
   if (tiempo_pasado < TIEMPO_ATAQUE){
     return;
@@ -41,4 +41,3 @@ void Bombman::update(size_t tiempo){
   Personaje::update(0, mapa);
   tiempo_pasado -= TIEMPO_ATAQUE;
 }
-

@@ -14,7 +14,7 @@ Snipper(mapa, c, arma, id){
   tipo = JUMPING_SNIPPER;
 }
 
-void Jumping_snipper::update(size_t tiempo, Mapa* mapa){
+void Jumping_snipper::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado >= TIEMPO_ESTADO){
 		//paso el tiempo de estado:

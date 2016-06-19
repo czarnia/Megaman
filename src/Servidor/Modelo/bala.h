@@ -17,7 +17,7 @@ public Elemento{
 	protected:
 		int direccion_x;
 		int direccion_y;
-		size_t tiempo_pasado;
+		float tiempo_pasado;
 		bool impacto;
 	public:
 		//Dada una direccion en x, una en y (hacia donde se movera) y una coordenada

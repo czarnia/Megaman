@@ -2,7 +2,7 @@
 #include "bala.h"
 #include "arma_minion.h"
 
-#define TIEMPO_ATAQUE 1
+#define TIEMPO_ATAQUE 4
 #define TIPO_MET 4
 
 enum estado_npc_escudo{MURIENDO, USA_ESCUDO = 7, NO_USA_ESCUDO};
@@ -32,7 +32,7 @@ void Met::atacar(int dir, Mapa* mapa){
 	bala3->notificar_observadores();
 }
 
-void Met::mover(size_t tiempo, Mapa* mapa){
+void Met::mover(float tiempo, Mapa* mapa){
 	//mapa->interactuar_con_entorno(this);
 }
 
