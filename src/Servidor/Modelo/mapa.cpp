@@ -46,6 +46,15 @@ std::vector<int> obtener_claves(std::map<int, Premio_factory*> hash){
   return v;
 }
 
+std::vector<int> obtener_claves_pc(std::map<int, Personaje_pc*> hash){  //TODO: TEMPLATE
+  std::vector<int> v;
+  for (ItPersonajePc it = hash.begin(); it != hash.end(); it++){
+    v.push_back(it->first);
+  }
+  return v;
+}
+
+
 //------------------------------------//
 
 Mapa::Mapa(size_t l_x, size_t l_y):
@@ -254,6 +263,12 @@ std::vector<Ubicable*> Mapa::devolver_ubicables(){
     ubicables.push_back(i->second);
   }
 	return ubicables;
+}
+
+Coordenada Mapa::obtener_coordenada_enemigo(Personaje_npc* pj){
+  std::vector<int> claves_enemigos = obtener_claves_pc(personajes_pc);
+  size_t seleccionado = rand() % claves_enemigos.size();
+  return personajes_pc[claves_enemigos[seleccionado]]->get_coordenada();
 }
 
 bool Mapa::ubicar_premio(Coordenada c){

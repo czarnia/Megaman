@@ -16,7 +16,7 @@ class Fireman: public Personaje_npc{
 		bool atacando;
 		StrategyMoverFireman movimiento;
 	public:
-		//Dado un Mapa*, una coordenada, un Arma_fireman* 
+		//Dado un Mapa*, una coordenada, un Arma_fireman*
 		//y un id, crea un fireman.
 		Fireman(Mapa *mapa, Coordenada c, Arma_fireman* arma, int id);
 		//Dado una Mapa* y una direccion, ataca.
@@ -27,7 +27,7 @@ class Fireman: public Personaje_npc{
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
 		virtual void update(size_t tiempo);
-		
+
 		friend class StrategyMoverFireman;
 };
 

@@ -93,6 +93,8 @@ class Mapa{
     bool ubicar_premio(Coordenada c);
 	//Ubica una puerta de boss en la coordenada c.
 	void ubicar_puerta_boss(Coordenada c);
+    //Dado un Personaje_npc* le da la coordenada de un enemigo.
+    Coordenada obtener_coordenada_enemigo(Personaje_npc* pj);
   private:
     //Carga todas las factories de todos los premios disponibles en el juego.
     void cargar_premios_factories();
