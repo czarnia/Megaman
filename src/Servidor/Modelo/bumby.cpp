@@ -42,7 +42,7 @@ void Bumby::atacar(int dir, Mapa* mapa){
 	bala->notificar_observadores();
 }
 
-void Bumby::update(size_t tiempo, Mapa* mapa){
+void Bumby::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado >= TIEMPO_MOVER){
 		mover_bumby.mover(mapa, this, tiempo);
@@ -53,7 +53,7 @@ void Bumby::update(size_t tiempo, Mapa* mapa){
 		int dir = std::rand() % CANT_DIRECCIONES;
 		atacar(dir, mapa);
 	}
-	Personaje::update(tiempo, mapa);
+	//Personaje::update(tiempo, mapa);
 }
 
 void Bumby::recibir_ataque(Bala* ataque){

@@ -5,8 +5,8 @@
 #include "bloque.h"
 #include <iostream>
 
-#define TIEMPO_MOVER 5
-#define VELOCIDAD 30
+#define TIEMPO_MOVER 0.5
+#define VELOCIDAD 20
 #define ARRIBA 1
 #define ABAJO 2
 #define DERECHA 3

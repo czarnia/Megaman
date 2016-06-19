@@ -3,7 +3,7 @@
 
 #include "personaje_npc.h"
 
-class Personaje_npc_con_escudo: 
+class Personaje_npc_con_escudo:
 public Personaje_npc{
 	public:
 		Personaje_npc_con_escudo(Mapa *mapa, Coordenada c, int id):
@@ -14,4 +14,3 @@ public Personaje_npc{
 };
 
 #endif //PERSONAJE_NPC_CON_ESCUDO_H
-

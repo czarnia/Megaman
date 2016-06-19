@@ -17,12 +17,12 @@ class Bumby : public Personaje_npc {
 		//Hace que el personaje ataque.
 		virtual void atacar(int dir, Mapa* mapa);
 		//Le hace un update al personaje.
-		virtual void update(size_t tiempo, Mapa* mapa);
+		virtual void update(float tiempo, Mapa* mapa);
 		//Dada una bala, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque);
 		//Hace que el personaje se mueva;
-		virtual void mover(size_t tiempo, Mapa* mapa); 
-		
+		virtual void mover(size_t, Mapa* mapa); 
+
 		friend class StrategyMoverBumby;
 };
 
