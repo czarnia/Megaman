@@ -14,6 +14,7 @@ public Observador_ubicable{
 		int porcentaje_vida;
 		int estado_actual;
 	public:
+		Observador_personaje();
 		//Dado un Juego* y un Personaje*, crea un observador_personaje.
 		Observador_personaje(Juego* juego, Personaje* pj);
 		//Dado un observable*, hace un update.

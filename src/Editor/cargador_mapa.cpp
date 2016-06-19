@@ -10,7 +10,7 @@
 #define MAX_MAPAS_PRDEFINIDOS 5
 
 enum codigos_personajes{MEGAMAN = 1, BUMBY, J_SNIPPER, MET, SNIPPER};
-enum codigos_elementos{BLOQUE = 10, PUAS, ESCALERA};
+enum codigos_elementos{BLOQUE = 10, PUAS, ESCALERA, PUERTA_BOSS = 18};
 enum codigos_bosses{BOMBMAN = 20, MAGNETMAN, SPARKMAN, RINGMAN, FIREMAN};
 
 //---------------------->Auxiliares<-------------------//
@@ -33,7 +33,8 @@ root_path(root),
 boss(0), 
 id_mapa_elegido(1),
 ancho_mapa(0),
-alto_mapa(0){}
+alto_mapa(0),
+coordenada_puerta_boss(0,0){}
 
 void Cargador_mapa::cargar_mapa(int id_mapa){
 	id_mapa_elegido = id_mapa;
@@ -117,6 +118,9 @@ void Cargador_mapa::cargar_coordenadas(int delta_x){
 		case PUAS:
 			coordenadas_puas.push_back(coordenada);
 			break;
+		case PUERTA_BOSS:
+			coordenada_puerta_boss = *coordenada;
+			break;
 		case BOMBMAN:
 			boss = BOMBMAN;
 			coordenada_boss.push_back(coordenada);
@@ -189,6 +193,10 @@ std::vector<Coordenada*> Cargador_mapa::get_coordenadas_j_snippers(){
 
 std::vector<Coordenada*> Cargador_mapa::get_coordenadas_bumby(){
 	return coordenadas_bumby;
+}
+
+Coordenada Cargador_mapa::get_coordenada_puerta_boss(){
+	return coordenada_puerta_boss;
 }
 
 int Cargador_mapa::get_ancho_mapa(){

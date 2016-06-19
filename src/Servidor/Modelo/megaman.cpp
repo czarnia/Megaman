@@ -13,9 +13,9 @@
 #define CANTIDAD_VIDAS 3
 
 typedef std::map<int, StrategyMoverPersonajePc*>::iterator movimientosIt;
-enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,  
-		IDLE, ESCALANDO};	
-		
+enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO};
+
 Megaman::Megaman(Mapa *mapa, Coordenada c, Arma_megaman *arma, int id):
 Personaje_pc(mapa, c, id){
 	energia = 0;

@@ -13,6 +13,7 @@ class Cargador_mapa{
 		int id_mapa_elegido;
 		int ancho_mapa, alto_mapa;
 		std::ifstream mapa_arch;
+		Coordenada coordenada_puerta_boss;
 		std::vector<Coordenada*> coordenada_megaman;
 		std::vector<Coordenada*> coordenada_boss;
 		std::vector<Coordenada*> coordenadas_mets;
@@ -60,6 +61,8 @@ class Cargador_mapa{
 		std::vector<Coordenada*> get_coordenadas_j_snippers(); 
 		//Devuelve las coordenadas de los bumby.
 		std::vector<Coordenada*> get_coordenadas_bumby();
+		//Devuelve la coordenada de la puerta del boss.
+		Coordenada get_coordenada_puerta_boss();
 		//Devuelve el ancho del mapa.
 		int get_ancho_mapa();
 		//Devuelve el alto del mapa.

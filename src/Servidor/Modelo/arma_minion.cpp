@@ -7,7 +7,9 @@
 
 Arma_minion::Arma_minion(int id,
 Factory_observador_ubicable *fact_ubicables):
-Arma(TIPO_ARMA_MINION, id, fact_ubicables){}
+Arma(TIPO_ARMA_MINION, id, fact_ubicables){
+	balas_creadas = 0;
+}
 
 int Arma_minion::nuevo_id_bala(){
 	std::stringstream converter;

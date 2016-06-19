@@ -55,7 +55,6 @@ std::vector<Coordenada> Elemento::coordenadas(Coordenada centro){
 	return s_coord;
 }
 
-
 void Elemento::notificar_observadores(){
 	for (size_t i = 0; i < observadores.size(); i++){
 		observadores[i]->update(this);

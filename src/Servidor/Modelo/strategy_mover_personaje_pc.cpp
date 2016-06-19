@@ -3,9 +3,9 @@
 
 #define MOVIMIENTO_MAX 6
 enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
-enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,  
-		IDLE, ESCALANDO};	
-		
+enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO};
+
 StrategyMoverPersonajePc::StrategyMoverPersonajePc(){
 	direccion = QUIETO;
 }
@@ -43,7 +43,7 @@ void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, size_t tiempo
 }
 
 void StrategyMoverPersonajePc::sacar_movimiento(Personaje_pc *pj, int dir){
-	direccion = QUIETO;	
+	direccion = QUIETO;
 	pj->estado_actual = IDLE;
 }
 

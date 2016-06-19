@@ -8,22 +8,27 @@
 
 #include "coordenada.h"
 #include "actualizable.h"
-#include "personaje.h"
+
 #include "bala.h"
 #include "ubicable.h"
 #include "premio_factory.h"
 
 class Personaje;
+class Personaje_npc;
+class Personaje_pc;
 class Elemento;
 class Bala;
+class Puerta_boss;
 
 class Mapa{
   private:
 		size_t long_x, long_y;
 		std::vector<Bala*> balas;
-		std::map<int, Personaje*> personajes;
+		std::map<int, Personaje_pc*> personajes_pc;
+		std::map<int, Personaje_npc*> personajes_npc;
 		std::vector<Elemento*> elementos;
 		std::map<int, Premio_factory*> premios;
+		Puerta_boss *puerta_boss;
   public:
     //Dados un tamanio crea un mapa con tantas divisiones como indique el tamanio.
     Mapa(size_t long_x, size_t long_y);
@@ -39,9 +44,12 @@ class Mapa{
     //Dado un ubicable y una coordenada, devuelve true si el mismo puede
     //ubicarse en la misma.
     bool puede_ubicarse(Ubicable* ubic, Coordenada c);
-    //Dado un personaje y una coordenada, lo ubica en la misma, en caso de no
+    //Dado un personaje_npc y una coordenada, lo ubica en la misma, en caso de no
     //ser posible, devuelve false.
-    bool ubicar(Personaje* pj, Coordenada c);
+    bool ubicar(Personaje_npc* pj, Coordenada c);
+    //Dado un personaje_pc y una coordenada, lo ubica en la misma, en caso de no
+    //ser posible, devuelve false.
+    bool ubicar(Personaje_pc* pj, Coordenada c);
     //Dado un elemento y una coordenada, lo ubica en la misma, en caso de no
     //ser posible, devuelve false.
     bool ubicar(Elemento* elem, Coordenada c);
@@ -51,19 +59,19 @@ class Mapa{
     //Recibe un puntero a un bloque y su coordenada
     //y lo ubica en el mapa.
     bool ubicar(Bloque* bloque, Coordenada c);
-    //Dado el id de un personaje, lo devuelve.
+    //Dado el id de un personaje_pc, lo devuelve.
     Personaje *obtener_pj(int id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.
     std::vector<Actualizable*> obtener_actualizables();
     //Devuelve true si abajo de un objeto de un alto determinado hay aire, false
     //en caso contrario.
     bool esta_en_aire(Personaje* pj);
-    //Devuelve true si hay tierra en dicha coordenada, false en caso contrario.
-    //bool hay_tierra(Coordenada coord);
     //Recibe el id de un personaje y lo remueve del mapa.
     void quitar_personaje(int id);
-    //Recibe un personaje y lo agrega al mapa.
-    void agregar_personaje(Personaje *p);
+    //Recibe un personaje_npc y lo agrega al mapa.
+    void agregar_personaje(Personaje_npc *p);
+    //Recibe un personaje_pc y lo agrega al mapa.
+    void agregar_personaje(Personaje_pc *p);
     //Recibe uns bala y lo agrega al mapa.
     void agregar_bala(Bala *b);
     //Recibe un puntero a una bala y la remueve del mapa.
@@ -71,8 +79,8 @@ class Mapa{
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(float tiempo);
-	  //Recibe una coordenada y devuelve true si hay un personaje
-	  //posicionado en ella.
+	//Recibe una coordenada y devuelve true si hay un personaje
+	//posicionado en ella.
     bool bala_colisiona_con_pj(Bala *b, Coordenada *coord);
     //Dado un personaje, hace que el mismo interactue con su entorno.
     void interactuar_con_entorno(Personaje* pj);
@@ -81,7 +89,8 @@ class Mapa{
     //Dada una coordenada, ubica un premio en la misma con una probabilidad de
     //0,31, devuelve true si la ubicacion fue exitosa, false en caso contrario.
     bool ubicar_premio(Coordenada c);
-
+	//Ubica una puerta de boss en la coordenada c.
+	void ubicar_puerta_boss(Coordenada c);
   private:
     //Carga todas las factories de todos los premios disponibles en el juego.
     void cargar_premios_factories();

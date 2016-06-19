@@ -11,7 +11,7 @@ velocidad_x(0),
 velocidad_y(0),
 tiempo_salto(0){}
 
-void StrategyMoverSparkman::mover(Mapa *mapa, Sparkman *pj, 
+void StrategyMoverSparkman::mover(Mapa *mapa, Sparkman *pj,
 size_t tiempo){
 	bool personaje_flotando = pj->flotando;
 	bool personaje_en_aire = mapa->esta_en_aire(pj);
@@ -46,7 +46,7 @@ void StrategyMoverSparkman::saltar(Mapa *mapa, Sparkman *pj){
 	}
 }
 
-void StrategyMoverSparkman::actualizar_coordenada(Mapa *mapa, 
+void StrategyMoverSparkman::actualizar_coordenada(Mapa *mapa,
 Sparkman *pj, Coordenada *coord){
 	if (mapa->puede_ubicarse(pj, *coord)){
 		pj->coordenada = *coord;

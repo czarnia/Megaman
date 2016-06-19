@@ -22,17 +22,17 @@ void Met::atacar(int dir, Mapa* mapa){
 	Bala *bala1, *bala2, *bala3;
 	Coordenada pos_inicial = coordenada.izquierda(ancho/2);
 	bala1 = arma->atacar(-1, 0, pos_inicial);
-	bala2 = arma->atacar(-1, 1, pos_inicial);
-	bala3 = arma->atacar(-1, -1, pos_inicial);
+	//bala2 = arma->atacar(-1, 1, pos_inicial);
+	//bala3 = arma->atacar(-1, -1, pos_inicial);
 	mapa->agregar_bala(bala1);
-	mapa->agregar_bala(bala2);
-	mapa->agregar_bala(bala3);
-	bala1->notificar_observadores();
-	bala2->notificar_observadores();
-	bala3->notificar_observadores();
+	//mapa->agregar_bala(bala2);
+	//mapa->agregar_bala(bala3);
+	//bala1->notificar_observadores();
+	//bala2->notificar_observadores();
+	//bala3->notificar_observadores();
 }
 
-void Met::mover(size_t tiempo, Mapa* mapa){ 
+void Met::mover(size_t tiempo, Mapa* mapa){
 	//mapa->interactuar_con_entorno(this);
 }
 
@@ -48,8 +48,10 @@ void Met::recibir_ataque(Bala* ataque){
 }
 
 void Met::update(float tiempo, Mapa *mapa){
-  Personaje::update(tiempo, mapa);
-  if (tiempo_pasado < TIEMPO_ATAQUE){
+  if (activo){
+    tiempo_pasado += tiempo;
+  }
+  if (tiempo_pasado < TIEMPO_ATAQUE || !activo){
     return;
   }
   estado_actual = (estado_actual == USA_ESCUDO)? NO_USA_ESCUDO : USA_ESCUDO;

@@ -50,6 +50,7 @@ void Juego::inicializar_nivel(int numero_mapa){
 	int ancho = cargador->get_ancho_mapa();
 	int alto = cargador->get_alto_mapa();
 	mundo = new Mapa(ancho, alto);
+	mundo->ubicar_puerta_boss(cargador->get_coordenada_puerta_boss());
 	for (unsigned int i = 0; i < factories.size(); ++i){
 		factories[i]->crear(mundo);
 	}
