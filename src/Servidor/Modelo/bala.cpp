@@ -6,7 +6,7 @@
 #include <iostream>
 
 #define TIEMPO_MOVER 5
-#define VELOCIDAD 4
+#define VELOCIDAD 30
 #define ARRIBA 1
 #define ABAJO 2
 #define DERECHA 3
@@ -22,6 +22,7 @@ Elemento(c, tipo, id),
 direccion_x(dir_x),
 direccion_y(dir_y)
 {
+	tiempo_pasado = 0;
 	alto = 0;
 	ancho = 0;
 	impacto = false;
@@ -66,6 +67,7 @@ void Bala::update(float tiempo, Mapa* mapa){
 	bool llegue = ((direccion_x == 0) && (direccion_y == 0));
 	Coordenada actual = coord;
 	if (tiempo_pasado >= TIEMPO_MOVER){
+		tiempo_pasado -= TIEMPO_MOVER;
 		if (impacto){
 			//si la bala impacto con un objeto en el update anterior
 			//se destruye en este update;
