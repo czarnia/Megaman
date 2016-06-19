@@ -14,6 +14,7 @@ void Megaman_factory::crear(Mapa* mapa){
 		return;
 	}
 	Coordenada *coord = coordenada_megaman[0];
+	Observador_personaje_pc::set_coordenada_respawn(*coord);
 	int cantidad_jugadores = juego->get_cantidad_jugadores();
 
 	if (!juego->inicio_partida()){

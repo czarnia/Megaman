@@ -29,6 +29,9 @@ void Puerta_boss::interactuar(Personaje *pj){
 		if (cantidad_personajes >= ids_personajes_pc.size()){
 			abierta = false;
 			//Resettar coordenada de respawn.
+			size_t ancho_pj = pj->get_ancho();
+			Coordenada coord_r = coord.derecha(ancho/2 + ancho_pj);
+			Observador_personaje_pc::set_coordenada_respawn(coord_r);
 		}
 	} 																								
 }

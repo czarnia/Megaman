@@ -187,6 +187,12 @@ void Juego::murio_personaje(Personaje *p){
 	}
 }
 
+void Juego::murio_boss(){
+	//FINALIZAR EL NIVEL.
+	//VOLVER A MENU DE BOSSES.
+	//NOTIFICAR VICTORIA.
+}
+
 void Juego::notificar_cantidad_vidas(int tipo, int id, int cant_vidas){
 	for (size_t i = 0; i < observadores.size(); i++){
 		Observador_juego *obs = (Observador_juego*)observadores[i];

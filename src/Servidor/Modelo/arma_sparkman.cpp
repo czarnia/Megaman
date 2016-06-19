@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <sstream>
 
-#define TIPO_ARMA_SPARKMAN 33
+#define TIPO_ARMA_SPARKMAN 46
 
 Arma_sparkman::Arma_sparkman(int id,
 Factory_observador_ubicable *fact_ubicables):

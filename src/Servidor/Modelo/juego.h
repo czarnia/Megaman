@@ -103,6 +103,8 @@ public Juego_observable{
 		//Recibe un id y un tipo y remueve al personaje
 		//muerto del juego.
 		void murio_personaje(Personaje *p);
+		//Finaliza el nivel.
+		void murio_boss();
 		//Devuelve una lista de coordenadas correspondientes
 		//a los bloques del mapa.
 		std::vector<Coordenada> bloques();

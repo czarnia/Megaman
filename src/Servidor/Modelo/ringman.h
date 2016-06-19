@@ -1,21 +1,18 @@
-#ifndef MAGNETMAN_H
-#define MAGNETMAN_H
+#ifndef RINGMAN_H
+#define RINGMAN_H
 
 #include "personaje_npc.h"
-#include <vector>
 
-class Arma_magnetman;
+class Arma_ringman;
 
-class Magnetman: public Personaje_npc{
+class Ringman: public Personaje_npc{
 	private:
 		Mapa *mapa;
 		float tiempo_pasado;
-		Arma_magnetman* arma;
-    bool atacando;
+		Arma_ringman* arma;
 	public:
-		//Dado un Mapa*, una coordenada, un Arma_magnetman* 
-		//y un id, crea un magnetan.
-		Magnetman(Mapa *mapa, Coordenada c, Arma_magnetman* arma, int id);
+		//Dado un Mapa*, una coordenada, un Arma_ringman* y un id, crea un ringman.
+		Ringman(Mapa *mapa, Coordenada c, Arma_ringman* arma, int id);
 		//Dado una Mapa* y una direccion, ataca.
 		virtual void atacar(int dir, Mapa* mapa);
 		//Dado un tiempo pasado y un Mapa*, se mueve.
@@ -26,5 +23,5 @@ class Magnetman: public Personaje_npc{
 		virtual void update(float tiempo);
 };
 
-#endif //MAGNETMAN_H
+#endif //RINGMAN_H
 

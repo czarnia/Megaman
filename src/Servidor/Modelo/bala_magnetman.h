@@ -1,15 +1,15 @@
-#ifndef BALA_BOMBMAN_H
-#define BALA_BOMBMAN_H
+#ifndef BALA_MAGNETMAN_H
+#define BALA_MAGNETMAN_H
 
 #include "bala.h"
 
-class Bala_bombman: public Bala {
+class Bala_magnetman: public Bala{
 	public:
 		//Recibe una direccion en 'x', una
 		//direccion en 'y' y una coordenada inicial y construye una bala.
-		Bala_bombman(int dir_x, int dir_y, Coordenada c, int id);
+		Bala_magnetman(int dir_x, int dir_y, Coordenada c, int id);
 		//Destructor de la bala.
-		virtual ~Bala_bombman();
+		virtual ~Bala_magnetman();
 		//Hace que pasa el tiempo para la bala.
 		virtual void update(float tiempo, Mapa* mapa);
 		//Daña a un Personaje (caso por defecto).
@@ -22,6 +22,8 @@ class Bala_bombman: public Bala {
 		virtual void daniar(Bumby* b);
 		//Daña a un Sniper.
 		virtual void daniar(Snipper* s);
+		//Daña a un Jumping_sniper.
+		//virtual void daniar(Jumping_snipper* js);
 		//Devuelve true si puede dañar a un Met cuando esta tras su escudo, false en
 		//caso contrario.
 		virtual bool dania_con_escudo(Met* m);
@@ -33,4 +35,5 @@ class Bala_bombman: public Bala {
 		virtual bool dania_con_escudo(Jumping_snipper* js);
 };
 
-#endif //BALA_BOMBMAN_H
+#endif //BALA_MAGNETMAN_H
+

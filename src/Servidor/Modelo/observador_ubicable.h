@@ -9,7 +9,6 @@ class Observador_ubicable:
 public Observador{
 	protected:
 		Coordenada coordenada;
-		Coordenada posicion_inicial;
 		Juego* juego;
 	public:
 		Observador_ubicable();

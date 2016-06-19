@@ -8,7 +8,6 @@ class Arma_bombman;
 class Bombman: public Personaje_npc{
 	private:
 		Mapa *mapa;
-		bool tras_escudo;
 		float tiempo_pasado;
 		Arma_bombman* arma;
 	public:

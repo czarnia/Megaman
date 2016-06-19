@@ -1,4 +1,4 @@
-#include "bala_fireman.h"
+#include "bala_ringman.h"
 #include "personaje.h"
 #include "megaman.h"
 #include "met.h"
@@ -7,14 +7,14 @@
 #include "jumping_snipper.h"
 
 #define TIEMPO_MOVER 1
-#define TIPO_BALA_FIREMAN 34
+#define TIPO_BALA_RINGMAN 33
 
-Bala_fireman::Bala_fireman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){}
+Bala_ringman::Bala_ringman(int dir_x, int dir_y, Coordenada c, int id):
+Bala(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){}
 
-Bala_fireman::~Bala_fireman() {}
+Bala_ringman::~Bala_ringman() {}
 
-void Bala_fireman::update(float tiempo, Mapa* mapa) {
+void Bala_ringman::update(float tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){
@@ -41,23 +41,23 @@ void Bala_fireman::update(float tiempo, Mapa* mapa) {
 	}
 }
 
-void Bala_fireman::daniar(Personaje* pj) {
+void Bala_ringman::daniar(Personaje* pj) {
 	pj->perder_vida(0); //sólo le saca vida a megaman.
 }
 
-void Bala_fireman::daniar(Megaman* mega) {
+void Bala_ringman::daniar(Megaman* mega) {
 	mega->perder_vida(20);
 }
 
-void Bala_fireman::daniar(Met* met) {
+void Bala_ringman::daniar(Met* met) {
 	met->perder_vida(0);
 }
 
-void Bala_fireman::daniar(Bumby* b){
+void Bala_ringman::daniar(Bumby* b){
 	b->perder_vida();
 }
 
-void Bala_fireman::daniar(Snipper* s){
+void Bala_ringman::daniar(Snipper* s){
 	if (!s->esta_bajo_escudo()){
 		s->perder_vida();
 	}else{
@@ -65,14 +65,15 @@ void Bala_fireman::daniar(Snipper* s){
 	}
 }
 
-bool Bala_fireman::dania_con_escudo(Met* m){
+bool Bala_ringman::dania_con_escudo(Met* m){
 	return false;
 }
 
-bool Bala_fireman::dania_con_escudo(Snipper* s){
+bool Bala_ringman::dania_con_escudo(Snipper* s){
 	return true;
 }
 
-bool Bala_fireman::dania_con_escudo(Jumping_snipper* js){
+bool Bala_ringman::dania_con_escudo(Jumping_snipper* js){
 	return true;
 }
+
