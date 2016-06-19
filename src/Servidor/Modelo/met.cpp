@@ -27,7 +27,7 @@ void Met::atacar(int dir, Mapa* mapa){
 	mapa->agregar_bala(bala1);
 	//mapa->agregar_bala(bala2);
 	//mapa->agregar_bala(bala3);
-	//bala1->notificar_observadores();
+	bala1->notificar_observadores();
 	//bala2->notificar_observadores();
 	//bala3->notificar_observadores();
 }
