@@ -91,6 +91,8 @@ class Mapa{
     //Dada una coordenada, ubica un premio en la misma con una probabilidad de
     //0,31, devuelve true si la ubicacion fue exitosa, false en caso contrario.
     bool ubicar_premio(Coordenada c);
+    //Dado un Personaje_npc* le da la coordenada de un enemigo.
+    Coordenada obtener_coordenada_enemigo(Personaje_npc* pj);
 
   private:
     //Carga todas las factories de todos los premios disponibles en el juego.
