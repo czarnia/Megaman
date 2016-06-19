@@ -11,6 +11,7 @@ class Bumby : public Personaje_npc {
 	private:
 		StrategyMoverBumby* mover_bumby;
 		Arma_minion* arma;
+		float t_ataque, t_mover;
 	public:
 		//Dado un Mapa*, una Coordenada, un Arma_minion* y un id, se crea un bumby.
 		Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id);

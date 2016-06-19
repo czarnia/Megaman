@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 #define TIEMPO_MOVER 2
-#define TIEMPO_ATACAR 3
+#define TIEMPO_ATACAR 4
 #define CANT_DIRECCIONES 3
 #define AVANZAR_X 1
 #define RETROCEDER_X -1
@@ -17,6 +17,8 @@ Bumby::Bumby(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje_npc(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
+  t_ataque = 0;
+  t_mover = 0;
   tipo = BUMBY;
   mover_bumby = new StrategyMoverBumby();
 }
@@ -44,20 +46,23 @@ void Bumby::atacar(int dir, Mapa* mapa){
 }
 
 void Bumby::update(float tiempo, Mapa* mapa){
-	tiempo_pasado += tiempo;
-  if (tiempo_pasado < TIEMPO_MOVER){
+  if (activo){
+    t_ataque += tiempo;
+    t_mover += tiempo;
+  }
+  if ((t_ataque < TIEMPO_ATACAR ||t_mover < TIEMPO_MOVER) || !activo){
     return;
   }
-	if (tiempo_pasado >= TIEMPO_MOVER){
+	if (t_mover >= TIEMPO_MOVER){ //Se mueve cada 2 segundos!
     mover(tiempo, mapa);
+    t_mover -= TIEMPO_MOVER;
 	}
-	/*if (tiempo_pasado >= TIEMPO_ATACAR){
+	if (tiempo_pasado >= TIEMPO_ATACAR){
 		tiempo_pasado = 0;
 		int dir = std::rand() % CANT_DIRECCIONES;
 		atacar(dir, mapa);
-	}*/
-  tiempo_pasado -= TIEMPO_MOVER;
-	//Personaje::update(tiempo, mapa);
+    t_ataque -= TIEMPO_ATACAR;
+	}
 }
 
 void Bumby::recibir_ataque(Bala* ataque){
