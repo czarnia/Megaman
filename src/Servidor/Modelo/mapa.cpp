@@ -1,5 +1,7 @@
 #include "mapa.h"
+
 #include "../../Comun/lock.h"
+#include "updater.h"
 
 #include "coordenada.h"
 
@@ -58,7 +60,7 @@ std::vector<int> obtener_claves_pc(std::map<int, Personaje_pc*> hash){  //TODO: 
 //------------------------------------//
 
 Mapa::Mapa(size_t l_x, size_t l_y):
-long_x(l_x), 
+long_x(l_x),
 long_y(l_y+TAM_BLOQUE){
   int y = long_y - TAM_BLOQUE/2;
   for (size_t x = 0; x < long_x; x++){
@@ -161,16 +163,28 @@ Personaje* Mapa::obtener_pj(int id_pj){
 }
 
 void Mapa::update(float tiempo){
+  std::vector<Updater> hilos_updater;
 	for (size_t j = 0; j < balas.size(); j++){
-		balas[j]->update(tiempo, this);
+    hilos_updater.push_back(Updater(balas[j], this, tiempo));
+		//balas[j]->update(tiempo, this);
 	}
 	for (ItPersonajePc it= personajes_pc.begin(); it != personajes_pc.end(); ++it){
-		(*it).second->update(tiempo, this);
-		interactuar_con_entorno(it->second);
+		//(*it).second->update(tiempo, this);
+    interactuar_con_entorno(it->second);
+    hilos_updater.push_back(Updater(it->second, this, tiempo));
+
 	}
   for (ItPersonajeNpc i= personajes_npc.begin(); i != personajes_npc.end(); ++i){
-    (*i).second->update(tiempo, this);
     interactuar_con_entorno(i->second);
+    hilos_updater.push_back(Updater(i->second, this, tiempo));
+    //(*i).second->update(tiempo, this);
+  }
+
+  for (size_t j = 0; j < hilos_updater.size(); j++){
+    hilos_updater[j].ejecutar();
+  }
+  for (size_t j = 0; j < hilos_updater.size(); j++){
+    hilos_updater[j].join();
   }
 }
 
