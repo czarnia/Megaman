@@ -309,7 +309,7 @@ void gameStateStart::mainLoop(){
         /// dibujo
         render();
         /// limito FPS
-        //cap_framerate(starting_tick);
+        cap_framerate(starting_tick);
 	}
 }
 

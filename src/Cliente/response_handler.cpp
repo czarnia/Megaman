@@ -36,12 +36,14 @@
 #define BIG_HP 15
 #define SMALL_MP 16
 #define BIG_MP 17
-#define MEGAMAN_BULLET 35
+
 #define BOMBMAN_BULLET 30
 #define MAGNETMAN_BULLET 31
 #define SPARKMAN_BULLET 32
 #define RINGMAN_BULLET 33
 #define FIREMAN_BULLET 34
+#define MEGAMAN_BULLET 35
+#define MINION_BULLET 36
 
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
@@ -54,6 +56,7 @@
 #define SPARKMAN_BULLETN 40000
 #define RINGMAN_BULLETN 50000
 #define FIREMAN_BULLETN 60000
+#define MINION_BULLETN 70000
 #define BUMBYN 2000
 #define J_SNIPERN 3000
 #define METN 4000
@@ -82,6 +85,8 @@ void sortObject(int *objectType){
         *objectType = RINGMAN_BULLETN;
     }else if (*objectType == FIREMAN_BULLET){
         *objectType = FIREMAN_BULLETN;
+    }else if (*objectType == MINION_BULLET){
+        *objectType = MINION_BULLETN;
     }else if (*objectType == MET){
         *objectType = METN;
     }else if (*objectType == BUMBY){
@@ -178,39 +183,49 @@ void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-        case RINGMAN_BULLET:
+        case RINGMAN_BULLETN:
             spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/ringman_bullet.png");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-        case FIREMAN_BULLET:
+        case FIREMAN_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/fireman_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-        case BIG_HP:
+        case MINION_BULLETN:
+            spr = new Bullet_sprite(renderer->get_renderer(),"../sprites/minion_bullet.png");
+            spr->setPosX(coord.first);
+            spr->setPosY(coord.second);
+            renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
+            break;
+        case BIG_HPN:
             spr = new Pickable_sprite(renderer->get_renderer(), "../sprites/big_hp.png", BIG);
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-        case SMALL_HP:
+        case SMALL_HPN:
             spr = new Pickable_sprite(renderer->get_renderer(), "../sprites/small_hp.png", SMALL);
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-        case BIG_MP:
+        case BIG_MPN:
             spr = new Pickable_sprite(renderer->get_renderer(), "../sprites/big_mp.png", BIG);
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-        case SMALL_MP:
+        case SMALL_MPN:
             spr = new Pickable_sprite(renderer->get_renderer(), "../sprites/small_mp.png", SMALL);
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
-        case LIFE:
+        case LIFEN:
             spr = new Pickable_sprite(renderer->get_renderer(), "../sprites/life.png", BIG);
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
