@@ -10,6 +10,7 @@ class Cargador_mapa{
 	private:
 		std::string root_path;
 		int boss;
+		int id_mapa_elegido;
 		int ancho_mapa, alto_mapa;
 		std::ifstream mapa_arch;
 		std::vector<Coordenada*> coordenada_megaman;
@@ -23,7 +24,8 @@ class Cargador_mapa{
 		std::vector<Coordenada*> coordenadas_bumby;
 		
 		//Carga las coordenadas del mapa indicado por el path.
-		void cargar_coordenadas();
+		void cargar_coordenadas(int delta_x = 0);
+		void cargar_mapa_boss();
 	public:
 		//Dado un path para un nuevo archivo donde se guardará un mapa y una longi-
 		//tud en x y otra en y para el mismo, se crea un Cargador_mapa.
@@ -67,7 +69,7 @@ class Cargador_mapa{
 	private:
 		std::vector<std::string> parsear_cadena_palabras(std::string cadena);
 		//Reinicializa las coordenadas guardadas por el cargador:
-		void limpiar_coordenadas();
+		void limpiar_mapa();
 };
 
 #endif //CARGADOR_MAPA_H

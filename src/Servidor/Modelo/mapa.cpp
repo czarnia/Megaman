@@ -159,8 +159,6 @@ bool Mapa::esta_en_aire(Personaje* personaje){
 }
 
 bool Mapa::bala_colisiona_con_pj(Bala *bala, Coordenada *coord){
-	size_t x = coord->obtener_abscisa();
-	size_t y = coord->obtener_ordenada();
 	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
 		Personaje *p = it->second;
 		if (p->colisiona(bala, *coord)){
@@ -169,15 +167,6 @@ bool Mapa::bala_colisiona_con_pj(Bala *bala, Coordenada *coord){
 	}
 	return false;
 }
-
-/*bool Mapa::hay_tierra(Coordenada coord){
-	for (size_t i = 0; i < bloques.size(); i++){
-		if (bloques[i] == coord){
-			return true;
-		}
-	}
-	return false;
-}*/
 
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	unsigned int x = coordenada.obtener_abscisa();

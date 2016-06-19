@@ -7,6 +7,7 @@
 #define NOMBRE_ARCH_MAPAS "mapa"
 #define NOMBRE_ARCH_MAPAS_BOSS "mapa_boss"
 #define EXTENSION_ARCH_MAPAS ".txt"
+#define MAX_MAPAS_PRDEFINIDOS 5
 
 enum codigos_personajes{MEGAMAN = 1, BUMBY, J_SNIPPER, MET, SNIPPER};
 enum codigos_elementos{BLOQUE = 10, PUAS, ESCALERA};
@@ -28,35 +29,50 @@ std::vector<std::string> Cargador_mapa::parsear_cadena_palabras(std::string cade
 //-----------------------------------------------------//
 
 Cargador_mapa::Cargador_mapa(const char *root):
-root_path(root),boss(0){}
+root_path(root), 
+boss(0), 
+id_mapa_elegido(1),
+ancho_mapa(0),
+alto_mapa(0){}
 
 void Cargador_mapa::cargar_mapa(int id_mapa){
+	id_mapa_elegido = id_mapa;
 	std::stringstream id;
 	id << id_mapa;
 	std::string nombre_arch(NOMBRE_ARCH_MAPAS);
 	std::string extension_arch(EXTENSION_ARCH_MAPAS);
-	std::string full_path = root_path + nombre_arch + id.str() + extension_arch;
-	cargar(full_path);
+	std::string path = root_path + nombre_arch + id.str() + extension_arch;
+	cargar(path);
 }
-/*
-void Cargador_mapa::cargar_mapa_boss(int id_mapa){
+
+void Cargador_mapa::cargar_mapa_boss(){
 	std::stringstream id;
-	id << id_mapa;
+	id << id_mapa_elegido;
 	std::string nombre_arch(NOMBRE_ARCH_MAPAS_BOSS);
 	std::string extension_arch(EXTENSION_ARCH_MAPAS);
-	std::string full_path = root_path + nombre_arch + id.str() + extension_arch;
-	cargar(full_path);
-}*/
-
-void Cargador_mapa::cargar(std::string path){
+	std::string path = root_path + nombre_arch + id.str() + extension_arch;
+	int ancho_mapa_juego = ancho_mapa;
 	mapa_arch.open(path.c_str());
-	ancho_mapa = 0;
-	alto_mapa = 0;
-	limpiar_coordenadas();
-	cargar_coordenadas();
+	cargar_coordenadas(ancho_mapa);
+	mapa_arch.close();
+	//El ancho se obtiene con la suma
+	//los anchos de ambos mapas (mapa juego + mapa boss).
+	ancho_mapa += ancho_mapa_juego;
 }
 
-void Cargador_mapa::cargar_coordenadas(){
+void Cargador_mapa::cargar(std::string path){
+	ancho_mapa = 0;
+	alto_mapa = 0;
+	limpiar_mapa();
+	mapa_arch.open(path.c_str());
+	cargar_coordenadas();
+	mapa_arch.close();
+	if (id_mapa_elegido <= MAX_MAPAS_PRDEFINIDOS){
+		cargar_mapa_boss();
+	}
+}
+
+void Cargador_mapa::cargar_coordenadas(int delta_x){
   std::string linea;
   int codigo_obj;
   int x = 0, y = 0;
@@ -75,7 +91,7 @@ void Cargador_mapa::cargar_coordenadas(){
     codigo_obj = atoi(linea_parseada[0].c_str());
     x = atoi(linea_parseada[1].c_str());
     y = atoi(linea_parseada[2].c_str());
-	Coordenada *coordenada = new Coordenada(x, y);
+	Coordenada *coordenada = new Coordenada(x + delta_x, y);
     switch(codigo_obj){
 		case MEGAMAN:
 			coordenada_megaman.push_back(coordenada);
@@ -123,10 +139,9 @@ void Cargador_mapa::cargar_coordenadas(){
 			break;
 	}
   }
-  mapa_arch.close();
 }
 
-void Cargador_mapa::limpiar_coordenadas(){
+void Cargador_mapa::limpiar_mapa(){
 	coordenada_boss.clear();
 	coordenadas_escaleras.clear();
 	coordenadas_bloques.clear();
@@ -136,6 +151,8 @@ void Cargador_mapa::limpiar_coordenadas(){
 	coordenadas_j_snippers.clear();
 	coordenadas_snippers.clear();
 	boss = 0;
+	alto_mapa = 0;
+	ancho_mapa = 0;
 }
 
 std::vector<Coordenada*> Cargador_mapa::get_coordenada_boss(){
