@@ -29,4 +29,4 @@ file (GLOB SRCS *.cpp *.h)
 #Creates an executable with all files found
 #by file command.
 add_executable (editor ${MODELO} ${CLIENTE} ${SRCS})
-target_link_libraries (editor Megaman ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES})
+target_link_libraries (editor Megaman -pthread ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES})
