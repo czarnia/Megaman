@@ -229,12 +229,12 @@ void Mapa::quitar_bala(Bala *b){
 void Mapa::agregar_personaje(Personaje_pc *p){
 	puerta_boss->sumar_personaje(p->get_id_unico());
 	personajes_pc.insert(std::pair<int, Personaje_pc*>(p->get_id_unico(), p));
-	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
+//	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
 }
 
 void Mapa::agregar_personaje(Personaje_npc *p){
 	personajes_npc.insert(std::pair<int, Personaje_npc*>(p->get_id_unico(), p));
-	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
+//	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
 }
 
 void Mapa::quitar_personaje(int id_pj){
