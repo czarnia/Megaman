@@ -12,8 +12,8 @@
 #define GRAVEDAD 5
 #define VELOCIDAD_SALTO 30
 
-enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,  
-		IDLE, ESCALANDO};	
+enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO};
 
 StrategyMoverMegaman::StrategyMoverMegaman():
 velocidad_x(0),

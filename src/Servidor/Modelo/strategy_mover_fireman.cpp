@@ -24,7 +24,7 @@ void StrategyMoverFireman::saltar(Mapa *mapa, Fireman *pj){
 	}
 }
 
-void StrategyMoverFireman::actualizar_coordenada(Mapa *mapa, 
+void StrategyMoverFireman::actualizar_coordenada(Mapa *mapa,
 Fireman *pj, Coordenada *coord){
 	if (mapa->puede_ubicarse(pj, *coord)){
 		pj->coordenada = *coord;
@@ -35,7 +35,7 @@ Fireman *pj, Coordenada *coord){
 	}
 }
 
-void StrategyMoverFireman::mover(Mapa *mapa, Fireman *pj, 
+void StrategyMoverFireman::mover(Mapa *mapa, Fireman *pj,
 size_t tiempo){
 	bool personaje_flotando = pj->flotando;
 	bool personaje_en_aire = mapa->esta_en_aire(pj);

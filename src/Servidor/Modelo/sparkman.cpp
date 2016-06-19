@@ -20,9 +20,9 @@ void Sparkman::atacar(int dir, Mapa* mapa){
   }
 }
 
-void Sparkman::mover(size_t tiempo, Mapa* mapa){ 
+void Sparkman::mover(size_t tiempo, Mapa* mapa){
 	movimiento.mover(mapa, this, tiempo);
-} 
+}
 
 void Sparkman::recibir_ataque(Bala* ataque){
   ataque->daniar(this);

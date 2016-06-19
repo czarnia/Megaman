@@ -12,9 +12,9 @@ class StrategyMoverFireman : public StrategyMover{
 		int velocidad_x;
 		int velocidad_y;
 		size_t tiempo_salto;
-		
+
 		void saltar(Mapa *mapa, Fireman *pj);
-		void actualizar_coordenada(Mapa *mapa, Fireman *pj, 
+		void actualizar_coordenada(Mapa *mapa, Fireman *pj,
 		Coordenada *coord);
 	public:
 		StrategyMoverFireman();

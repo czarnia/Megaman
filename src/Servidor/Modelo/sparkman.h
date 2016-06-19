@@ -20,7 +20,7 @@ class Sparkman: public Personaje_npc{
 		virtual void mover(size_t tiempo, Mapa* mapa);
 		virtual void recibir_ataque(Bala* ataque);
 		virtual void update(size_t tiempo);
-		
+
 		friend class StrategyMoverSparkman;
 	private:
 		std::vector<Bala*> balas_ataque();

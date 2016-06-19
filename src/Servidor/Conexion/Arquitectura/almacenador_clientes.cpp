@@ -86,7 +86,7 @@ void Almacenador_clientes::update_energia(int tipo, int id, int energia){
 void Almacenador_clientes::update_posicion(int tipo, int id, int x, int y){
 	std::stringstream s;
 	s << id;
-	std::cout << "PERSONAJE "+s.str()+"ACTUALIZA POSICION\n";
+	//std::cout << "PERSONAJE "+s.str()+"ACTUALIZA POSICION\n";
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		(it->second)->enviar_cambio_posicion(tipo, id, x, y);
