@@ -3,6 +3,9 @@
 
 #include "coordenada.h"
 
+#include "personaje_pc.h"
+#include "personaje_npc.h"
+
 #include "elemento.h"
 #include "bloque.h"
 #include "puas.h"
@@ -28,7 +31,8 @@
 #define NUEVA_VIDA 3
 
 typedef std::vector<Coordenada>::iterator ItBloques;
-typedef std::map<int, Personaje*>::iterator ItPersonaje;
+typedef std::map<int, Personaje_pc*>::iterator ItPersonajePc;
+typedef std::map<int, Personaje_npc*>::iterator ItPersonajeNpc;
 typedef std::vector<Bala*>::iterator ItBalas;
 typedef std::map<int, Premio_factory*>::iterator ItPremios;
 
@@ -87,11 +91,19 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
   return true;
 }
 
-bool Mapa::ubicar(Personaje* pj, Coordenada c){
+bool Mapa::ubicar(Personaje_pc* pj, Coordenada c){
 	if (!puede_ubicarse(pj, c)){
 		return false;
 	}
-	personajes[pj->get_id_unico()] = pj;
+	personajes_pc[pj->get_id_unico()] = pj;
+	return true;
+}
+
+bool Mapa::ubicar(Personaje_npc* pj, Coordenada c){
+	if (!puede_ubicarse(pj, c)){
+		return false;
+	}
+  personajes_npc[pj->get_id_unico()] = pj;
 	return true;
 }
 
@@ -121,21 +133,27 @@ bool Mapa::ubicar(Bloque* bloque, Coordenada c){
 }
 
 Personaje* Mapa::obtener_pj(int id_pj){
-	Personaje *p = NULL;
-	if (personajes.find(id_pj) != personajes.end()){
-		p = personajes[id_pj];
+	if (personajes_pc.find(id_pj) != personajes_pc.end()){
+		return personajes_pc[id_pj];
 	}
-	return p;
+  if (personajes_npc.find(id_pj) != personajes_npc.end()){
+		return personajes_npc[id_pj];
+	}
+	return NULL;
 }
 
 void Mapa::update(float tiempo){
 	for (size_t j = 0; j < balas.size(); j++){
 		balas[j]->update(tiempo, this);
 	}
-	for (ItPersonaje it= personajes.begin(); it != personajes.end(); ++it){
+	for (ItPersonajePc it= personajes_pc.begin(); it != personajes_pc.end(); ++it){
 		(*it).second->update(tiempo, this);
 		interactuar_con_entorno(it->second);
 	}
+  for (ItPersonajeNpc i= personajes_npc.begin(); i != personajes_npc.end(); ++i){
+    (*i).second->update(tiempo, this);
+    interactuar_con_entorno(i->second);
+  }
 }
 
 void Mapa::interactuar_con_entorno(Personaje* pj){
@@ -159,10 +177,14 @@ bool Mapa::esta_en_aire(Personaje* personaje){
 }
 
 bool Mapa::bala_colisiona_con_pj(Bala *bala, Coordenada *coord){
-	size_t x = coord->obtener_abscisa();
-	size_t y = coord->obtener_ordenada();
-	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
+	for (ItPersonajePc it = personajes_pc.begin(); it != personajes_pc.end(); ++it){
 		Personaje *p = it->second;
+		if (p->colisiona(bala, *coord)){
+			return true;
+		}
+	}
+  for (ItPersonajeNpc i = personajes_npc.begin(); i != personajes_npc.end(); ++i){
+		Personaje *p = i->second;
 		if (p->colisiona(bala, *coord)){
 			return true;
 		}
@@ -195,14 +217,22 @@ void Mapa::quitar_bala(Bala *b){
 	balas.erase(it_bala);
 }
 
-void Mapa::agregar_personaje(Personaje *p){
-	personajes.insert(std::pair<int, Personaje*>(p->get_id_unico(), p));
+void Mapa::agregar_personaje(Personaje_pc *p){
+	personajes_pc.insert(std::pair<int, Personaje_pc*>(p->get_id_unico(), p));
+	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
+}
+
+void Mapa::agregar_personaje(Personaje_npc *p){
+	personajes_npc.insert(std::pair<int, Personaje_npc*>(p->get_id_unico(), p));
 	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
 }
 
 void Mapa::quitar_personaje(int id_pj){
-	if (personajes.find(id_pj) != personajes.end()){
-		personajes.erase(id_pj);
+	if (personajes_pc.find(id_pj) != personajes_pc.end()){
+		personajes_pc.erase(id_pj);
+	}
+  if (personajes_npc.find(id_pj) != personajes_npc.end()){
+		personajes_npc.erase(id_pj);
 	}
 }
 
@@ -215,9 +245,12 @@ std::vector<Ubicable*> Mapa::devolver_ubicables(){
       ubicables.push_back(elementos[i]);
     }
 	}
-	for (ItPersonaje it = personajes.begin(); it != personajes.end(); ++it){
+	for (ItPersonajePc it = personajes_pc.begin(); it != personajes_pc.end(); ++it){
 		ubicables.push_back(it->second);
 	}
+  for (ItPersonajeNpc i = personajes_npc.begin(); i != personajes_npc.end(); ++i){
+    ubicables.push_back(i->second);
+  }
 	return ubicables;
 }
 

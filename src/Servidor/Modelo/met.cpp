@@ -48,8 +48,10 @@ void Met::recibir_ataque(Bala* ataque){
 }
 
 void Met::update(float tiempo, Mapa *mapa){
-  Personaje::update(tiempo, mapa);
-  if (tiempo_pasado < TIEMPO_ATAQUE){
+  if (activo){
+    tiempo_pasado += tiempo;
+  }
+  if (tiempo_pasado < TIEMPO_ATAQUE || !activo){
     return;
   }
   estado_actual = (estado_actual == USA_ESCUDO)? NO_USA_ESCUDO : USA_ESCUDO;

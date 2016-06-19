@@ -22,7 +22,7 @@ class Almacenador_clientes{
 		void update_gameover(int id);
 		//Notifica el fin de una partida.
 		void update_fin_partida();
-		//Dado un id, un tipo y un codigo de accion, notifica que un 
+		//Dado un id, un tipo y un codigo de accion, notifica que un
 		//hubo un cambio en el estado del personaje.
 		void update_estado_personaje(int tipo, int id, int accion);
 		//Dado un identificador, un tipo y una cantidad de vidas, notifica que un

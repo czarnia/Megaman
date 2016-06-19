@@ -8,12 +8,14 @@
 
 #include "coordenada.h"
 #include "actualizable.h"
-#include "personaje.h"
+
 #include "bala.h"
 #include "ubicable.h"
 #include "premio_factory.h"
 
 class Personaje;
+class Personaje_npc;
+class Personaje_pc;
 class Elemento;
 class Bala;
 
@@ -21,7 +23,8 @@ class Mapa{
   private:
 		size_t long_x, long_y;
 		std::vector<Bala*> balas;
-		std::map<int, Personaje*> personajes;
+		std::map<int, Personaje_pc*> personajes_pc;
+    std::map<int, Personaje_npc*> personajes_npc;
 		std::vector<Elemento*> elementos;
 		std::map<int, Premio_factory*> premios;
   public:
@@ -39,9 +42,12 @@ class Mapa{
     //Dado un ubicable y una coordenada, devuelve true si el mismo puede
     //ubicarse en la misma.
     bool puede_ubicarse(Ubicable* ubic, Coordenada c);
-    //Dado un personaje y una coordenada, lo ubica en la misma, en caso de no
+    //Dado un personaje_npc y una coordenada, lo ubica en la misma, en caso de no
     //ser posible, devuelve false.
-    bool ubicar(Personaje* pj, Coordenada c);
+    bool ubicar(Personaje_npc* pj, Coordenada c);
+    //Dado un personaje_pc y una coordenada, lo ubica en la misma, en caso de no
+    //ser posible, devuelve false.
+    bool ubicar(Personaje_pc* pj, Coordenada c);
     //Dado un elemento y una coordenada, lo ubica en la misma, en caso de no
     //ser posible, devuelve false.
     bool ubicar(Elemento* elem, Coordenada c);
@@ -51,7 +57,7 @@ class Mapa{
     //Recibe un puntero a un bloque y su coordenada
     //y lo ubica en el mapa.
     bool ubicar(Bloque* bloque, Coordenada c);
-    //Dado el id de un personaje, lo devuelve.
+    //Dado el id de un personaje_pc, lo devuelve.
     Personaje *obtener_pj(int id_pj);
     //Devuelve un vector con todos los actualizables que se ubican en el mapa.
     std::vector<Actualizable*> obtener_actualizables();
@@ -62,8 +68,10 @@ class Mapa{
     //bool hay_tierra(Coordenada coord);
     //Recibe el id de un personaje y lo remueve del mapa.
     void quitar_personaje(int id);
-    //Recibe un personaje y lo agrega al mapa.
-    void agregar_personaje(Personaje *p);
+    //Recibe un personaje_npc y lo agrega al mapa.
+    void agregar_personaje(Personaje_npc *p);
+    //Recibe un personaje_pc y lo agrega al mapa.
+    void agregar_personaje(Personaje_pc *p);
     //Recibe uns bala y lo agrega al mapa.
     void agregar_bala(Bala *b);
     //Recibe un puntero a una bala y la remueve del mapa.
