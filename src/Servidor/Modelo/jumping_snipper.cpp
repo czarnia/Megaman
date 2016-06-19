@@ -16,20 +16,21 @@ Snipper(mapa, c, arma, id){
 
 void Jumping_snipper::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
+  //Salta:
+	salto_snipper.mover(mapa, this, tiempo);
 	if (tiempo_pasado >= TIEMPO_ESTADO){
 		//paso el tiempo de estado:
 		estado_actual = (estado_actual == ESCUDO_UP)? ESCUDO_DOWN : ESCUDO_UP;
 		tiempo_pasado = 0;
 		this->notificar_observadores();
 	}
-	if (this->esta_bajo_escudo() || flotando){
+	if (this->esta_bajo_escudo()){
 		return;
 	}
 	//Dispara:
 	Bala *bala = arma->atacar(DERECHA, 0, coordenada.izquierda(ancho/2));
 	mapa->agregar_bala(bala);
 	bala->notificar_observadores();
-	//Salta:
-	salto_snipper.mover(mapa, this, tiempo_pasado);
-	Personaje::update(tiempo, mapa);
+
+	//Personaje::update(tiempo, mapa);
 }
