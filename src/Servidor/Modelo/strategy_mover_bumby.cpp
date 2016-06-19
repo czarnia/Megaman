@@ -1,7 +1,7 @@
 #include "strategy_mover_bumby.h"
 #include "bumby.h"
 
-#define VELOCIDAD 5
+#define VELOCIDAD 1
 #define TIEMPO_DIRECCION 2
 
 enum movimientos{ARRIBA_DERECHA, ARRIBA_IZQUIERDA, ABAJO_DERECHA, ABAJO_IZQUIERDA};
