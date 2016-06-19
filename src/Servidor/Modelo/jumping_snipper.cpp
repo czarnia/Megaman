@@ -2,7 +2,7 @@
 #include "arma_minion.h"
 
 #define TIEMPO_ESTADO 4
-#define DERECHA -1
+#define IZQUIERDA -1
 #define JUMPING_SNIPPER 3
 
 enum estado_npc_escudo{MURIENDO, ESCUDO_UP, ESCUDO_DOWN};
@@ -28,7 +28,7 @@ void Jumping_snipper::update(float tiempo, Mapa* mapa){
 		return;
 	}
 	//Dispara:
-	Bala *bala = arma->atacar(DERECHA, 0, coordenada.izquierda(ancho/2));
+	Bala *bala = arma->atacar(IZQUIERDA, 0, coordenada.izquierda(ancho/2));
 	mapa->agregar_bala(bala);
 	bala->notificar_observadores();
 
