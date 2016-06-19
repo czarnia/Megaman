@@ -17,8 +17,11 @@ class StrategyMoverSparkman : public StrategyMover{
 		void actualizar_coordenada(Mapa *mapa, Sparkman *pj,
 		Coordenada *coord);
 	public:
+		//Crea un StrategyMoverSparkman.
 		StrategyMoverSparkman();
+		//Dado un Mapa*, un Sparkman* y un tiempo, hace que el segundo se mueva.
 		virtual void mover(Mapa *mapa, Sparkman *pj, size_t tiempo);
+		//Destructor del StrategyMoverSparkman.
 		virtual ~StrategyMoverSparkman();
 };
 

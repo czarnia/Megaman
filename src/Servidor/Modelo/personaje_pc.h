@@ -14,6 +14,7 @@ class Personaje_pc: public Personaje{
 		int energia;
 		std::vector<Vida> vidas;
 	public:
+		//Dado un Mapa*, una coordenada y un id, crea a un personaje pc.
 		Personaje_pc(Mapa *mapa, Coordenada c, int id):
 		Personaje(mapa, c, id){}
 		//Dado un porcentaje de energia a perder se le resta al personaje,
@@ -35,7 +36,7 @@ class Personaje_pc: public Personaje{
 		virtual int get_energia() = 0;
 		//Devuelve la cantidad de vidas del personaje.
 		virtual size_t get_cantidad_vidas() = 0;
-		
+
 		friend class StrategyMoverMegaman;
 		friend class StrategyMoverPersonajePc;
 };

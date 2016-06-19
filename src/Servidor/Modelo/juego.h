@@ -36,8 +36,9 @@ public Juego_observable{
 		void terminar_partida();
 		//Dado un determinado tiempo, actualiza al juego.
 		virtual void update(float tiempo);
-
+		//Notifica a los observadores de un cambio en el estado.
 		void notificar_observadores();
+		//Hace un update.
 		virtual void update(Observable *obs);
 		//Dado el id de un personaje, hace que el mismo ataque en una direccion
 		//dada.

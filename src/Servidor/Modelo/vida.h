@@ -13,8 +13,10 @@ class Vida{
 		int get_porcentaje();
 		//Devuelve si la vida esta vacia.
 		bool esta_vacia();
-		void ganar(int porcentaje_reduccion = VIDA_INICIAL);
-		void perder(int porcentaje_aumento = VIDA_INICIAL);
+		//Dado un porcentaje de aumento, lo agrega a la cantidad de vida.
+		void ganar(int porcentaje_aumento = VIDA_INICIAL);
+		//Dado un porcentaje de reduccion, lo disminuye a la cantidad de vida.
+		void perder(int porcentaje_reducion = VIDA_INICIAL);
 
 };
 

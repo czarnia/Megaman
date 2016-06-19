@@ -17,8 +17,11 @@ class StrategyMoverFireman : public StrategyMover{
 		void actualizar_coordenada(Mapa *mapa, Fireman *pj,
 		Coordenada *coord);
 	public:
+		//Crea un StrategyMoverFireman.
 		StrategyMoverFireman();
+		//Dado un Mapa*, un Fireman* y un tiempo, hace que el segundo se mueva.
 		virtual void mover(Mapa *mapa, Fireman *pj, size_t tiempo);
+		//Destructor del StrategyMoverFireman.
 		virtual ~StrategyMoverFireman();
 };
 

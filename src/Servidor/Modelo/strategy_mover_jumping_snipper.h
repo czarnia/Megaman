@@ -11,7 +11,10 @@ class StrategyMoverJumpingSnipper : public StrategyMover{
 		size_t tiempo_pasado;
 		bool flotando;
 	public:
+		//Dado un Mapa*, un JumpingSnipper* y un tiempo, hace que el segundo se mueva.
 		virtual void mover(Mapa *mapa, Jumping_snipper *pj, size_t tiempo);
+		//Destructor del StrategyMoverJumpingSnipper.
+		virtual ~StrategyMoverJumpingSnipper() {}
 };
 
 #endif //STRATEGY_MOVER_JUMPING_SNIPPER_H

@@ -43,7 +43,8 @@ class Escalera: public Elemento{
 		//Recibe un personaje pc e interactúa con el mismo
 		//para actualizar sus coordenadas:
 		void interactuar(Personaje_pc *pj);
-		//
+		//Devuelve true si la escalera colisiona con otro_ubic ubicado en la coorde-
+		//nada nueva, false en caso contrario.
 		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);
 		//Devuele true si el elemento actua como piso, false en caso contrario
 		virtual bool es_piso();

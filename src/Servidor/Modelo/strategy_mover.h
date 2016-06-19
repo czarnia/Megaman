@@ -7,6 +7,7 @@ class StrategyMover{
 	protected:
 		int direccion;
 	public:
+		//Devuelve una direccion de movimiento.
 		int get_direccion(){ return direccion; }
 };
 
