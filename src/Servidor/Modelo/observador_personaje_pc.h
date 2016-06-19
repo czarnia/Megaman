@@ -10,6 +10,7 @@ public Observador_personaje{
 		int energia;
 		int accion_actual;
 		size_t cantidad_vidas;
+		static Coordenada coordenada_respawn;
 	public:
 		Observador_personaje_pc();
 		//Dado un juego y una coordenada, crea a un
@@ -17,6 +18,9 @@ public Observador_personaje{
 		Observador_personaje_pc(Juego* juego, Personaje_pc *personaje);
 		//Dado un observable, hace un update.
 		virtual void update(Observable *obs);
+		//Modifica el valor de la coordenada de respawn 
+		//para los personajes pc.
+		static void set_coordenada_respawn(Coordenada coord);
 };
 
 #endif //OBSERVADOR_PERSONAJE_PC_H

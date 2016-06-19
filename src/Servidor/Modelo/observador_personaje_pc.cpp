@@ -4,7 +4,9 @@
 
 enum estado{RESPAWNEANDO, MURIENDO, CORRIENDO, SALTANDO, IDLE,
 	DISPARANDO, ESCALANDO};
-	
+
+Coordenada Observador_personaje_pc::coordenada_respawn(0,0);
+
 Observador_personaje_pc::Observador_personaje_pc(){}
 
 Observador_personaje_pc::Observador_personaje_pc(Juego* juego, Personaje_pc* pj):
@@ -28,13 +30,17 @@ void Observador_personaje_pc::update(Observable *obs){
 		porcentaje_vida = personaje->get_porcentaje_vida();
 		juego->actualizo_cantidad_vidas(tipo, id, cantidad_vidas);
 		
-		personaje->respawn(posicion_inicial);
+		personaje->respawn(Observador_personaje_pc::coordenada_respawn);
 		int alto = personaje->get_alto();
 		int ancho = personaje->get_ancho();
-		Coordenada c = posicion_inicial.arriba(alto/2).izquierda(ancho/2);
+		Coordenada c = coordenada_respawn.arriba(alto/2).izquierda(ancho/2);
 		int x = c.obtener_abscisa();
 		int y = c.obtener_ordenada();
 		juego->actualizo_posicion(tipo, id, x, y);
 	}
 	Observador_personaje::update(obs);
+}
+
+void Observador_personaje_pc::set_coordenada_respawn(Coordenada coord){
+	Observador_personaje_pc::coordenada_respawn = coord;
 }
