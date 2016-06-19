@@ -11,6 +11,7 @@ public Observador_personaje{
 		int accion_actual;
 		size_t cantidad_vidas;
 	public:
+		Observador_personaje_pc();
 		//Dado un juego y una coordenada, crea a un
 		//observador de personaje PC.
 		Observador_personaje_pc(Juego* juego, Personaje_pc *personaje);

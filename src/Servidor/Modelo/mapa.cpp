@@ -14,6 +14,7 @@
 #include "capsula_de_plasma_factory.h"
 #include "capsula_de_energia_factory.h"
 #include "nueva_vida_factory.h"
+#include "puerta_boss.h"
 
 #include <vector>
 #include <algorithm>
@@ -57,7 +58,8 @@ std::vector<int> obtener_claves_pc(std::map<int, Personaje_pc*> hash){  //TODO: 
 //------------------------------------//
 
 Mapa::Mapa(size_t l_x, size_t l_y):
-long_x(l_x), long_y(l_y+TAM_BLOQUE){
+long_x(l_x), 
+long_y(l_y+TAM_BLOQUE){
   int y = long_y - TAM_BLOQUE/2;
   for (size_t x = 0; x < long_x; x++){
     Puas* puas_asesinas = new Puas(Coordenada(x,y));
@@ -208,15 +210,6 @@ bool Mapa::bala_colisiona_con_pj(Bala *bala, Coordenada *coord){
 	return false;
 }
 
-/*bool Mapa::hay_tierra(Coordenada coord){
-	for (size_t i = 0; i < bloques.size(); i++){
-		if (bloques[i] == coord){
-			return true;
-		}
-	}
-	return false;
-}*/
-
 bool Mapa::tiene_coordenada(Coordenada coordenada){
 	unsigned int x = coordenada.obtener_abscisa();
 	unsigned int y = coordenada.obtener_ordenada();
@@ -234,6 +227,7 @@ void Mapa::quitar_bala(Bala *b){
 }
 
 void Mapa::agregar_personaje(Personaje_pc *p){
+	puerta_boss->sumar_personaje(p->get_id_unico());
 	personajes_pc.insert(std::pair<int, Personaje_pc*>(p->get_id_unico(), p));
 	std::cout << "ID PJ AGREGADO: " << p->get_id() << "\n";
 }
@@ -245,9 +239,10 @@ void Mapa::agregar_personaje(Personaje_npc *p){
 
 void Mapa::quitar_personaje(int id_pj){
 	if (personajes_pc.find(id_pj) != personajes_pc.end()){
+		puerta_boss->restar_personaje(id_pj);
 		personajes_pc.erase(id_pj);
 	}
-  if (personajes_npc.find(id_pj) != personajes_npc.end()){
+	if (personajes_npc.find(id_pj) != personajes_npc.end()){
 		personajes_npc.erase(id_pj);
 	}
 }
@@ -319,4 +314,9 @@ void Mapa::cargar_premios_factories(){
 	premios[CAPSULA_DE_PLASMA] = new Capsula_de_plasma_factory();
 	premios[CAPSULA_DE_ENERGIA] = new Capsula_de_energia_factory();
 	premios[NUEVA_VIDA] = new Nueva_vida_factory();
+}
+
+void Mapa::ubicar_puerta_boss(Coordenada c){
+	puerta_boss = new Puerta_boss(c);
+	elementos.push_back(puerta_boss);
 }

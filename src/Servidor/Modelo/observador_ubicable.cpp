@@ -4,12 +4,16 @@
 #include <iostream>
 #include <sstream>
 
+Observador_ubicable::Observador_ubicable():
+coordenada(0,0),
+posicion_inicial(0,0){}
+
 Observador_ubicable::Observador_ubicable(Juego* juego, Coordenada coord):
-juego(juego),
 coordenada(coord.obtener_abscisa(),
 coord.obtener_ordenada()),
 posicion_inicial(coord.obtener_abscisa(),
-coord.obtener_ordenada()){}
+coord.obtener_ordenada()),
+juego(juego){}
 
 void Observador_ubicable::update(Observable *obs){
 	Ubicable *ubicable = (Ubicable*)obs;

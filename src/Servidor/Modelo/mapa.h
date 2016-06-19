@@ -18,15 +18,17 @@ class Personaje_npc;
 class Personaje_pc;
 class Elemento;
 class Bala;
+class Puerta_boss;
 
 class Mapa{
   private:
 		size_t long_x, long_y;
 		std::vector<Bala*> balas;
 		std::map<int, Personaje_pc*> personajes_pc;
-    std::map<int, Personaje_npc*> personajes_npc;
+		std::map<int, Personaje_npc*> personajes_npc;
 		std::vector<Elemento*> elementos;
 		std::map<int, Premio_factory*> premios;
+		Puerta_boss *puerta_boss;
   public:
     //Dados un tamanio crea un mapa con tantas divisiones como indique el tamanio.
     Mapa(size_t long_x, size_t long_y);
@@ -66,8 +68,6 @@ class Mapa{
     //Devuelve true si abajo de un objeto de un alto determinado hay aire, false
     //en caso contrario.
     bool esta_en_aire(Personaje* pj);
-    //Devuelve true si hay tierra en dicha coordenada, false en caso contrario.
-    //bool hay_tierra(Coordenada coord);
     //Recibe el id de un personaje y lo remueve del mapa.
     void quitar_personaje(int id);
     //Recibe un personaje_npc y lo agrega al mapa.
@@ -81,8 +81,8 @@ class Mapa{
     //Recibe un tiempo de update y actualiza el estado de
     //todos los actualizables en el mapa.
     void update(float tiempo);
-	  //Recibe una coordenada y devuelve true si hay un personaje
-	  //posicionado en ella.
+	//Recibe una coordenada y devuelve true si hay un personaje
+	//posicionado en ella.
     bool bala_colisiona_con_pj(Bala *b, Coordenada *coord);
     //Dado un personaje, hace que el mismo interactue con su entorno.
     void interactuar_con_entorno(Personaje* pj);
@@ -91,9 +91,10 @@ class Mapa{
     //Dada una coordenada, ubica un premio en la misma con una probabilidad de
     //0,31, devuelve true si la ubicacion fue exitosa, false en caso contrario.
     bool ubicar_premio(Coordenada c);
+	//Ubica una puerta de boss en la coordenada c.
+	void ubicar_puerta_boss(Coordenada c);
     //Dado un Personaje_npc* le da la coordenada de un enemigo.
     Coordenada obtener_coordenada_enemigo(Personaje_npc* pj);
-
   private:
     //Carga todas las factories de todos los premios disponibles en el juego.
     void cargar_premios_factories();

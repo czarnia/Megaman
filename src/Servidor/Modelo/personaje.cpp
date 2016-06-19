@@ -12,8 +12,6 @@
 #include "../../Comun/lock.h"
 #include "../../Comun/mutex.h"
 
-//#define PERDER_MAX -100
-//#define GANAR_MAX 100
 #define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 60

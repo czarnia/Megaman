@@ -4,6 +4,8 @@
 
 enum estado{RESPAWNEANDO, MURIENDO, CORRIENDO, SALTANDO, IDLE,
 	DISPARANDO, ESCALANDO};
+	
+Observador_personaje_pc::Observador_personaje_pc(){}
 
 Observador_personaje_pc::Observador_personaje_pc(Juego* juego, Personaje_pc* pj):
 Observador_personaje(juego, pj){

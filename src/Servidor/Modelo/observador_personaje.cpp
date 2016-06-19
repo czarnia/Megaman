@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 
+Observador_personaje::Observador_personaje(){}
+
 Observador_personaje::Observador_personaje(Juego* juego, Personaje* pj):
 Observador_ubicable(juego, pj->get_coordenada()){
 	porcentaje_vida = pj->get_porcentaje_vida();

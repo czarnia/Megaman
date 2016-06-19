@@ -7,6 +7,7 @@
 #define PERDER_MAX 100
 #define GANAR_MAX 100
 
+class Mapa;
 class StrategyMoverPersonajePc;
 
 class Personaje_pc: public Personaje{
