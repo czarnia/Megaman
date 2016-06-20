@@ -17,9 +17,13 @@
 #include "../../Editor/cargador_mapa.h"
 #include "personaje_pc.h"
 #include <iostream>
+#include <algorithm>
 
 #define MAIN_PATH_MAPAS "../../../Mapas/"
 #define TIEMPO 0.03
+#define TOT_NIVELES 5
+
+typedef std::vector<int>::iterator ItNiveles;
 
 Juego::Juego(){
 	cant_jugadores = 0;
@@ -49,7 +53,8 @@ void Juego::inicializar_nivel(int numero_mapa){
 	cargador->cargar_mapa(numero_mapa);
 	int ancho = cargador->get_ancho_mapa();
 	int alto = cargador->get_alto_mapa();
-	mundo = new Mapa(ancho, alto);
+	bool es_nivel = cargador->mapa_es_predefinido();
+	mundo = new Mapa(ancho, alto, es_nivel);
 	mundo->ubicar_puerta_boss(cargador->get_coordenada_puerta_boss());
 	for (unsigned int i = 0; i < factories.size(); ++i){
 		factories[i]->crear(mundo);
@@ -189,8 +194,30 @@ void Juego::murio_personaje(Personaje *p){
 
 void Juego::murio_boss(){
 	//FINALIZAR EL NIVEL.
-	//VOLVER A MENU DE BOSSES.
-	//NOTIFICAR VICTORIA.
+	jugando_nivel = false;
+	int id = mundo->get_id();
+	bool mapa_es_nivel = mundo->es_mapa_nivel();
+	ItNiveles it = std::find(niveles_ganados.begin(), 
+	niveles_ganados.end(), id);
+	if (it == niveles_ganados.end() && mapa_es_nivel){
+		niveles_ganados.push_back(id);
+	}
+	if (niveles_ganados.size() == TOT_NIVELES){
+		//NOTIFICAR VICTORIA JUEGO:
+		fin_partida = true;
+		//clientes.update_victoria();
+		notificar_termino_partida();
+	}else{
+		//NOTIFICAR VICTORIA NIVEL:
+		notificar_termino_nivel();
+	}
+}
+
+void Juego::notificar_termino_nivel(){
+	for (size_t i = 0; i < observadores.size(); i++){
+		Observador_juego *obs = (Observador_juego*)observadores[i];
+		obs->update_fin_nivel();
+	}
 }
 
 void Juego::notificar_cantidad_vidas(int tipo, int id, int cant_vidas){

@@ -60,6 +60,8 @@ public Observador_juego{
 	  //Dado un identificador, un tipo y nuevas coordenadas en x y en y, notifica
 	  //que un personaje vio modificadas la mismas.
 	  virtual void update_posicion(int tipo, int id, int x, int y);
+		//Notifica a los clientes de que se gano el nivel.
+		virtual void update_fin_nivel();
 
   private:
     //Dado un socket conectado a un cliente y un id del mismo,

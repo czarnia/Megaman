@@ -29,17 +29,26 @@ class Mapa{
 		std::vector<Elemento*> elementos;
 		std::map<int, Premio_factory*> premios;
 		Puerta_boss *puerta_boss;
+		int id;
+		bool es_nivel;
+		
+		static int contador_id_mapa;
   public:
     //Dados un tamanio crea un mapa con tantas divisiones como indique el tamanio.
-    Mapa(size_t long_x, size_t long_y);
+    Mapa(size_t long_x, size_t long_y, bool es_nivel = false);
     //Destructor del mapa.
     ~Mapa();
+    //Devuelve el id de mapa que es 0 por default.
+    int get_id();
     //Devuelve el ancho del mapa.
     int obtener_long_y();
     //Devuelve el ancho del mapa.
     int obtener_long_x();
     //Activa a todos los npcs del mapa.
     void activar_npcs();
+    //Devuelve true si el mapa
+    //es un mapa de nivel.
+    bool es_mapa_nivel();
     //Devuelve true si la coordenada pertenece al mapa y false en el caso con-
     //trario.
     bool tiene_coordenada(Coordenada coordenada);
@@ -95,6 +104,8 @@ class Mapa{
 	void ubicar_puerta_boss(Coordenada c);
     //Dado un Personaje_npc* le da la coordenada de un enemigo.
     Coordenada obtener_coordenada_enemigo(Personaje_npc* pj);
+    //Devuelve un id para el mapa.
+    static int get_id_mapa();
   private:
     //Carga todas las factories de todos los premios disponibles en el juego.
     void cargar_premios_factories();
@@ -107,6 +118,7 @@ class Mapa{
     void ocupar_elemento(Elemento& elem, std::vector<Coordenada> &coordenadas);
     //Recibe un vector con coordenadas de donde se quieran agregar las celdas;
     void ocupar_tierra(std::vector<Coordenada> &coordenadas);
+
 };
 
 #endif //MAPA_H

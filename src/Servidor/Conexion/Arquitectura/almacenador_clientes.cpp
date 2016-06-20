@@ -43,24 +43,29 @@ void Almacenador_clientes::update_fin_partida(){
 	}
 }
 
+void Almacenador_clientes::update_fin_nivel(){
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		it->second->finalizar_nivel();
+	}
+}
+
+void Almacenador_clientes::update_victoria(){
+	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		it->second->enviar_victoria();
+	}
+}
+
+
 void Almacenador_clientes::update_gameover(int id){
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN JUGADOR PERDIO.
 	ItClientes it = clientes.find(id);
 	if (it->first == id){
-		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
 		(it->second)->enviar_gameover();
 		(it->second)->terminar_ejecucion();
 		clientes.erase(id);
 	}
 }
-/*
-void Almacenador_clientes::update_murio_personaje(int tipo, int id) {
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE MURIO
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cambio_posicion(tipo, id, -1, -1);
-	}
-}
-*/
+
 void Almacenador_clientes::update_cantidad_vidas(int tipo, int id, int vidas) {
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO
 	// PORCENTAJE DE VIDA
@@ -70,7 +75,7 @@ void Almacenador_clientes::update_cantidad_vidas(int tipo, int id, int vidas) {
 }
 
 void Almacenador_clientes::update_porcentaje_vida(int tipo, int id, int vida){
-//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO VIDA
+	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO VIDA
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		(it->second)->enviar_porcentaje_vida(tipo, id, vida);
 	}
@@ -84,9 +89,6 @@ void Almacenador_clientes::update_energia(int tipo, int id, int energia){
 }
 
 void Almacenador_clientes::update_posicion(int tipo, int id, int x, int y){
-	std::stringstream s;
-	s << id;
-	//std::cout << "PERSONAJE "+s.str()+"ACTUALIZA POSICION\n";
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		(it->second)->enviar_cambio_posicion(tipo, id, x, y);

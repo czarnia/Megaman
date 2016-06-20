@@ -101,8 +101,13 @@ void Servidor::cerrar_conexiones(){
 
 void Servidor::update(Observable *obs){}
 
-void Servidor::update_fin_partida(){ //TODO: habría que agregar un fin_nivel.
-  clientes.update_fin_partida();
+void Servidor::update_fin_partida(){ 
+	clientes.update_victoria();
+	clientes.update_fin_partida();
+}
+
+void Servidor::update_fin_nivel(){ 
+  clientes.update_fin_nivel();
 }
 
 void Servidor::update_gameover(int id){

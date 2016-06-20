@@ -32,6 +32,8 @@ public Observable{
 		//Recibe id y tipo y un estado correspondientes a un personaje y
 		//y notifica al servidor del cambio de estado.
 		virtual void actualizo_estado_personaje(int tipo, int id, int estado) = 0;
+		//Notifica a los observadores de que se gano el nivel actual.
+		virtual void notificar_termino_nivel() = 0;
 };
 
 #endif //JUEGO_OBSERVABLE_H

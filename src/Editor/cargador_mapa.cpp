@@ -34,7 +34,8 @@ boss(0),
 id_mapa_elegido(1),
 ancho_mapa(0),
 alto_mapa(0),
-coordenada_puerta_boss(0,0){}
+coordenada_puerta_boss(0,0),
+es_predefinido(false){}
 
 void Cargador_mapa::cargar_mapa(int id_mapa){
 	id_mapa_elegido = id_mapa;
@@ -70,6 +71,7 @@ void Cargador_mapa::cargar(std::string path){
 	mapa_arch.close();
 	if (id_mapa_elegido <= MAX_MAPAS_PRDEFINIDOS){
 		cargar_mapa_boss();
+		es_predefinido = true;
 	}
 }
 
@@ -77,8 +79,8 @@ void Cargador_mapa::cargar_coordenadas(int delta_x){
   std::string linea;
   int codigo_obj;
   int x = 0, y = 0;
-  //Primero obtengo las dimensiones del mapa
   getline(mapa_arch, linea);
+  //Primero obtengo las dimensiones del mapa
   std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
   ancho_mapa = atoi(linea_parseada[0].c_str());
   alto_mapa = atoi(linea_parseada[1].c_str());
@@ -211,3 +213,6 @@ int Cargador_mapa::get_boss(){
 	return boss;
 }
 
+bool Cargador_mapa::mapa_es_predefinido(){
+	return es_predefinido;
+}

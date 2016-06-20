@@ -23,6 +23,7 @@ class Cargador_mapa{
 		std::vector<Coordenada*> coordenadas_snippers;
 		std::vector<Coordenada*> coordenadas_j_snippers;
 		std::vector<Coordenada*> coordenadas_bumby;
+		bool es_predefinido;
 		
 		//Carga las coordenadas del mapa indicado por el path.
 		void cargar_coordenadas(int delta_x = 0);
@@ -69,6 +70,9 @@ class Cargador_mapa{
 		int get_alto_mapa();
 		//Devuelve el codigo de boss
 		int get_boss();
+		//Devuelve true si el mapa es un
+		//mapa predefinido;
+		bool mapa_es_predefinido();
 	private:
 		std::vector<std::string> parsear_cadena_palabras(std::string cadena);
 		//Reinicializa las coordenadas guardadas por el cargador:

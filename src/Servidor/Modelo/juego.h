@@ -25,6 +25,8 @@ public Juego_observable{
 		bool fin_partida;
 		bool partida_inicializada;
 		bool jugando_nivel;
+		std::vector<int> niveles_ganados;
+		
 	public:
 		//Dado un tamanio, crea un juego nuevo.
 		Juego();
@@ -114,6 +116,8 @@ public Juego_observable{
 		bool inicio_partida();
 		//Recibe un numero de mapa e inicializa un nuevo nivel.
 		void inicializar_nivel(int numero_mapa);
+		//Notifica a los observadores de que se gano el nivel actual.
+		virtual void notificar_termino_nivel();
 		//Devuelve true si ya se inicializo el nivel.
 		bool esta_jugando_nivel();
 		//Devuelve el mapa actual del juego.

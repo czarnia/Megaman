@@ -31,6 +31,8 @@ class Observador_juego: public Observador{
 		//Dado un id, un tipo y un codigo de accion, notifica a los  
 		// clientes de que hubo un cambio en el estado del personaje.
 		virtual void update_estado_personaje(int tipo, int id, int accion) = 0;
+		//Notifica a los clientes de que sa gano el nivel actual.
+		virtual void update_fin_nivel() = 0;
 };
 
 #endif //OBSERVADOR_JUEGO_H

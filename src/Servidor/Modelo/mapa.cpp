@@ -55,18 +55,34 @@ std::vector<int> obtener_claves_pc(std::map<int, Personaje_pc*> hash){  //TODO: 
   }
   return v;
 }
-
-
 //------------------------------------//
 
-Mapa::Mapa(size_t l_x, size_t l_y):
+
+int Mapa::contador_id_mapa = 0;
+
+Mapa::Mapa(size_t l_x, size_t l_y, bool es_nivel):
 long_x(l_x),
-long_y(l_y+TAM_BLOQUE){
+long_y(l_y+TAM_BLOQUE),
+es_nivel(es_nivel){
   int y = long_y - TAM_BLOQUE/2;
   for (size_t x = 0; x < long_x; x++){
     Puas* puas_asesinas = new Puas(Coordenada(x,y));
     elementos.push_back(puas_asesinas);
   }
+  id = Mapa::get_id_mapa();
+}
+
+int Mapa::get_id_mapa(){
+	contador_id_mapa++;
+	return contador_id_mapa;
+}
+
+int Mapa::get_id(){
+	return id;
+}
+
+bool Mapa::es_mapa_nivel(){
+	return es_nivel;
 }
 
 Mapa::~Mapa(){
