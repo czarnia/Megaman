@@ -85,6 +85,7 @@ void Juego::jugar(){
 
 void Juego::terminar_partida(){
 	fin_partida = true;
+	jugando_nivel = false;
 }
 
 void Juego::update(float tiempo){
@@ -205,7 +206,6 @@ void Juego::murio_boss(){
 	if (niveles_ganados.size() == TOT_NIVELES){
 		//NOTIFICAR VICTORIA JUEGO:
 		fin_partida = true;
-		//clientes.update_victoria();
 		notificar_termino_partida();
 	}else{
 		//NOTIFICAR VICTORIA NIVEL:
