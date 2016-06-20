@@ -76,7 +76,7 @@ void Juego::jugar(){
 		clock_t iniciar_tiempo = clock();
 		{
 			Lock l(proteccion);
-			update(0.05);
+			update(0.005);
 		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
 		sleep(delta_tiempo);
@@ -198,7 +198,7 @@ void Juego::murio_boss(){
 	jugando_nivel = false;
 	int id = mundo->get_id();
 	bool mapa_es_nivel = mundo->es_mapa_nivel();
-	ItNiveles it = std::find(niveles_ganados.begin(), 
+	ItNiveles it = std::find(niveles_ganados.begin(),
 	niveles_ganados.end(), id);
 	if (it == niveles_ganados.end() && mapa_es_nivel){
 		niveles_ganados.push_back(id);
