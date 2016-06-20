@@ -16,35 +16,43 @@ arma(arma){
   atacando = false;
 }
 
-void Fireman::atacar(int dir, Mapa* mapa){
-  if (!atacando){
-    return;
-  }
-  Bala* bala;
-  if (dir == DERECHA){
-    bala = arma->atacar(1, 0, coordenada.derecha(ancho/2));
-  }if (dir == IZQUIERDA){
-    bala = arma->atacar(-1, 0, coordenada.izquierda(ancho/2));
-  }
-	mapa->agregar_bala(bala);
-  bala->notificar_observadores();
+void Fireman::atacar(int dir_x, Mapa* mapa){
+	if (!atacando){
+		return;
+	}
+	Bala *bala1, *bala2, *bala3;
+	if (dir == DERECHA){
+		bala1 = arma->atacar(dir_x, 0, coordenada.derecha(ancho/2).arriba(alto/2));
+		bala2 = arma->atacar(dir_x, 0, coordenada.derecha(ancho/2));
+		bala3 = arma->atacar(dir_x, 0, coordenada.derecha(ancho/2).abajo(alto/2));
+	}
+	if (dir == IZQUIERDA){
+		bala1 = arma->atacar(dir_x, 0, coordenada.izquierda(ancho/2).arriba(alto/2));
+		bala2 = arma->atacar(dir_x, 0, coordenada.izquierda(ancho/2));
+		bala3 = arma->atacar(dir_x, 0, coordenada.izquierda(ancho/2).abajo(alto/2));
+	}
+	mapa->agregar_bala(bala1);
+	mapa->agregar_bala(bala2);
+	mapa->agregar_bala(bala3);
+	bala1->notificar_observadores();
+	bala2->notificar_observadores();
+	bala3->notificar_observadores();
 }
 
-void Fireman::mover(float tiempo, Mapa* mapa){ } //TODO: hacer el mover.
+void Fireman::mover(float tiempo, Mapa* mapa){ } 
 
 void Fireman::recibir_ataque(Bala* ataque){
   ataque->daniar(this);
 }
 
 void Fireman::update(float tiempo){
-  tiempo_pasado += tiempo;
-  if (tiempo_pasado < TIEMPO_ACCION){
-    return;
-  }
-  atacando = !atacando;
-  tiempo_pasado -= TIEMPO_ACCION;
-  //if (tiempo_pasado%0.25){ //lanza una llamarada continua, es decir, son
-  //  atacar();              //varias balas seguidas.
-  //}
-  //mover
+	tiempo_pasado += tiempo;
+	if (tiempo_pasado < TIEMPO_ACCION){
+		return;
+	}
+	atacando = !atacando;
+	tiempo_pasado -= TIEMPO_ACCION;
+	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+	int dir = delta_x < 0? IZQUIERDA : DERECHA;
+	atacar(dir, mapa);
 }

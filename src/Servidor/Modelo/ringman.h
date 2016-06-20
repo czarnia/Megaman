@@ -10,6 +10,7 @@ class Ringman: public Personaje_npc{
 		Mapa *mapa;
 		float tiempo_pasado;
 		Arma_ringman* arma;
+		StrategyMoverRingman movimiento;
 	public:
 		//Dado un Mapa*, una coordenada, un Arma_ringman* y un id, crea un ringman.
 		Ringman(Mapa *mapa, Coordenada c, Arma_ringman* arma, int id);

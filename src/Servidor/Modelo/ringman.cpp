@@ -16,18 +16,33 @@ arma(arma){
 }
 
 void Ringman::atacar(int dir, Mapa* mapa){
-  Bala* bala;
-  if (dir == DERECHA){
-    bala = arma->atacar(1, 3, coordenada.derecha(ancho/2).arriba(alto/2));
-  }if (dir == IZQUIERDA){
-    bala = arma->atacar(-1, 3, coordenada.izquierda(ancho/2).arriba(alto/2));
-  }
+	/*Bala* bala;
+  	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+	int dir = delta_x < 0? IZQUIERDA : DERECHA;
+	if (dir == DERECHA){
+		bala = arma->atacar(1, 3, coordenada.derecha(ancho/2).arriba(alto/2));
+	}if (dir == IZQUIERDA){
+		bala = arma->atacar(-1, 3, coordenada.izquierda(ancho/2).arriba(alto/2));
+	}
 	mapa->agregar_bala(bala);
-	bala->notificar_observadores();
+	bala->notificar_observadores();*/
 }
 
-void Ringman::mover(float tiempo, Mapa* mapa){ }
+void Ringman::mover(float tiempo, Mapa* mapa){
+	movimiento.mover(mapa, this, tiempo); 
+}
 
-void Ringman::recibir_ataque(Bala* ataque){}
+void Ringman::recibir_ataque(Bala* ataque){
+	ataque->daniar(this);
+}
 
-void Ringman::update(float tiempo){}
+void Ringman::update(float tiempo){
+	movimiento.mover(tiempo, mapa);
+	tiempo_pasado += tiempo;
+	if (tiempo_pasado < TIEMPO_ATAQUE){
+		return;
+	}
+	atacando = !atacando;
+	tiempo_pasado -= TIEMPO_ATAQUE;
+	atacar(0, mapa);
+}
