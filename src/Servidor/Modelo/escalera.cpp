@@ -124,4 +124,8 @@ bool Escalera::es_piso(){
 	return true;
 }
 
+bool Escalera::recibe_danio(Bala* ataque){
+	return false;
+}
+
 Escalera::~Escalera() {}

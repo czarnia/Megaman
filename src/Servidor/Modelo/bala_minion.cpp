@@ -1,5 +1,7 @@
 #include "bala_minion.h"
 #include "personaje.h"
+#include "personaje_pc.h"
+#include "personaje_npc.h"
 #include "megaman.h"
 #include "met.h"
 #include "bumby.h"
@@ -82,5 +84,13 @@ bool Bala_minion::dania_con_escudo(Snipper* s){
 }
 
 bool Bala_minion::dania_con_escudo(Jumping_snipper* js){
+	return false;
+}
+
+bool Bala_minion::dania(Personaje_pc* pj){
+	return true;
+}
+
+bool Bala_minion::dania(Personaje_npc* pj){
 	return false;
 }

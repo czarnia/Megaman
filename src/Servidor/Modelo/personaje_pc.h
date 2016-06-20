@@ -37,6 +37,8 @@ class Personaje_pc: public Personaje{
 		virtual int get_energia() = 0;
 		//Devuelve la cantidad de vidas del personaje.
 		virtual size_t get_cantidad_vidas() = 0;
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque);
 
 		friend class StrategyMoverMegaman;
 		friend class StrategyMoverPersonajePc;

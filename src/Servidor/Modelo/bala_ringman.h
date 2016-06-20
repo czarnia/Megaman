@@ -4,6 +4,8 @@
 #include "bala.h"
 
 class Bala_ringman: public Bala{
+	private:
+		bool equipo_pc;
 	public:
 		//Recibe una direccion en 'x', una
 		//direccion en 'y' y una coordenada inicial y construye una bala.
@@ -31,6 +33,10 @@ class Bala_ringman: public Bala{
 		//Devuelve true si puede dañar a un Jumping_snipper cuando esta tras su es-
 		//cudo, false en caso contrario.
 		virtual bool dania_con_escudo(Jumping_snipper* js);
+		//Dado un personaje pc, dice si puede daniar al mismo.
+		virtual bool dania(Personaje_pc* pj);
+		//Dado un personaje npc, dice si puede daniar al mismo.
+		virtual bool dania(Personaje_npc* pj);
 };
 
 #endif //BALA_RINGMAN_H

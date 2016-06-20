@@ -1,6 +1,6 @@
 #include "puerta_boss.h"
 #include <vector>
-#include <algorithm> 
+#include <algorithm>
 
 #define TIPO_PUERTA_BOSS 18
 #define ANCHO 1
@@ -20,7 +20,7 @@ void Puerta_boss::interactuar(Personaje *pj){
 	int id_pj = pj->get_id_unico();
 	//Si el personaje es uno de los personajes pc existentes
 	//sumo +1 a la cantidad de personajes que pasaron por la puerta:
-	ItIdPersonajePc it = std::find(ids_personajes_pc.begin(), 
+	ItIdPersonajePc it = std::find(ids_personajes_pc.begin(),
 	ids_personajes_pc.end(), id_pj);
 	bool personaje_es_pc = (it != ids_personajes_pc.end());
 	if (personaje_es_pc){
@@ -33,7 +33,7 @@ void Puerta_boss::interactuar(Personaje *pj){
 			Coordenada coord_r = coord.derecha(ancho/2 + ancho_pj);
 			Observador_personaje_pc::set_coordenada_respawn(coord_r);
 		}
-	} 																								
+	}
 }
 
 bool Puerta_boss::es_piso(){
@@ -100,5 +100,7 @@ bool Puerta_boss::puede_ocupar(Puas* puas){
 bool Puerta_boss::puede_ocupar(Premio* premio){
 	return true;
 }
-		
-		
+
+bool Puerta_boss::recibe_danio(Bala* ataque){
+	return false;
+}

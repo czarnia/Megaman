@@ -1,5 +1,7 @@
 #include "bala_normal.h"
 #include "personaje.h"
+#include "personaje_pc.h"
+#include "personaje_npc.h"
 #include "megaman.h"
 #include "met.h"
 #include "bumby.h"
@@ -52,4 +54,12 @@ bool Bala_normal::dania_con_escudo(Snipper* s){
 
 bool Bala_normal::dania_con_escudo(Jumping_snipper* js){
 	return false;
+}
+
+bool Bala_normal::dania(Personaje_pc* pj){
+	return false;
+}
+
+bool Bala_normal::dania(Personaje_npc* pj){
+	return true;
 }

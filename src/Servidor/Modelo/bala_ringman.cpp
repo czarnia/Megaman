@@ -1,5 +1,7 @@
 #include "bala_ringman.h"
 #include "personaje.h"
+#include "personaje_pc.h"
+#include "personaje_npc.h"
 #include "megaman.h"
 #include "met.h"
 #include "bumby.h"
@@ -10,7 +12,9 @@
 #define TIPO_BALA_RINGMAN 33
 
 Bala_ringman::Bala_ringman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){}
+Bala(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){
+	equipo_pc = false;
+}
 
 Bala_ringman::~Bala_ringman() {}
 
@@ -77,3 +81,10 @@ bool Bala_ringman::dania_con_escudo(Jumping_snipper* js){
 	return true;
 }
 
+bool Bala_ringman::dania(Personaje_pc* pj){
+	return !equipo_pc;
+}
+
+bool Bala_ringman::dania(Personaje_npc* pj){
+	return equipo_pc;
+}

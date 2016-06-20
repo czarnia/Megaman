@@ -10,6 +10,8 @@ class Bumby;
 class Snipper;
 class Jumping_snipper;
 class Personaje;
+class Personaje_pc;
+class Personaje_npc;
 
 class Bala:
 public Actualizable,
@@ -79,6 +81,12 @@ public Elemento{
 		//Devuelve true si la bala colsiona con el ubicable
 		//en la coordenada coord.
 		virtual bool colisiona(Ubicable *ubic, Coordenada coord);
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque);
+		//Dado un personaje pc, dice si puede daniar al mismo.
+		virtual bool dania(Personaje_pc* pj) = 0;
+		//Dado un personaje npc, dice si puede daniar al mismo.
+		virtual bool dania(Personaje_npc* pj) = 0;
 };
 
 #endif //BALA_H

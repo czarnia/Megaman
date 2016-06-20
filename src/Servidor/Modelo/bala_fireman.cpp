@@ -1,5 +1,7 @@
 #include "bala_fireman.h"
 #include "personaje.h"
+#include "personaje_pc.h"
+#include "personaje_npc.h"
 #include "megaman.h"
 #include "met.h"
 #include "bumby.h"
@@ -10,7 +12,9 @@
 #define TIPO_BALA_FIREMAN 34
 
 Bala_fireman::Bala_fireman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){}
+Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){
+	equipo_pc = false;
+}
 
 Bala_fireman::~Bala_fireman() {}
 
@@ -75,4 +79,12 @@ bool Bala_fireman::dania_con_escudo(Snipper* s){
 
 bool Bala_fireman::dania_con_escudo(Jumping_snipper* js){
 	return true;
+}
+
+bool Bala_fireman::dania(Personaje_pc* pj){
+	return !equipo_pc;
+}
+
+bool Bala_fireman::dania(Personaje_npc* pj){
+	return equipo_pc;
 }

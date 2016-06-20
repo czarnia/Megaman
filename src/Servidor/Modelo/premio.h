@@ -33,6 +33,8 @@ class Premio : public Elemento{
 		virtual bool puede_ocupar(Premio* premio);
 		//Devuele true si el elemento actua como piso, false en caso contrario
 		virtual bool es_piso();
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque);
 		//Destructor de premio.
 		virtual ~Premio() = 0;
 };

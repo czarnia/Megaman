@@ -16,4 +16,14 @@ bool Personaje_npc::esta_vivo(){
 	return !vida.esta_vacia();
 }
 
+void Personaje_npc::activar(){
+	activo = true;
+}
 
+void Personaje_npc::desactivar(){
+	activo = false;
+}
+
+bool Personaje_npc::recibe_danio(Bala* ataque){
+	return ataque->dania(this);
+}

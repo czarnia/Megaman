@@ -64,4 +64,8 @@ bool Puas::es_piso(){
 	return false;
 }
 
+bool Puas::recibe_danio(Bala* ataque){
+	return false;
+}
+
 Puas::~Puas() {}
