@@ -1,9 +1,9 @@
 #ifndef ARMA_MAGNETMAN_H
 #define ARMA_MAGNETMAN_H
 
-#include "arma.h"
+#include "arma_boss.h"
 
-class Arma_magnetman : public Arma{
+class Arma_magnetman : public Arma_boss{
 	private:
 		int nuevo_id_bala();
 	public:

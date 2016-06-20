@@ -8,8 +8,9 @@
 
 Arma_fireman::Arma_fireman(int id,
 Factory_observador_ubicable *fact_ubicables):
-Arma(TIPO_ARMA_FIREMAN, id, fact_ubicables){
+Arma_boss(TIPO_ARMA_FIREMAN, id, fact_ubicables){
 	balas_creadas = 0;
+	bool equipo_pc = false;
 }
 
 int Arma_fireman::nuevo_id_bala(){
@@ -24,7 +25,10 @@ int Arma_fireman::nuevo_id_bala(){
 Bala* Arma_fireman::atacar(int dir_x, int dir_y, Coordenada c) {
 	//Creo una bala:
 	int id_bala = nuevo_id_bala();
-	Bala *bullet = new Bala_fireman(dir_x, dir_y, c, id_bala);
+	Bala_especial *bullet = new Bala_fireman(dir_x, dir_y, c, id_bala);
+	if (equipo_pc){
+		bullet->cambiar_enemigo();
+	}
 	//Se agrega un observador a la bala:
 	fact_ubicables->crear(bullet);
 	balas_creadas++;

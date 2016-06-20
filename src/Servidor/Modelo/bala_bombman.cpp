@@ -12,7 +12,7 @@
 #define TIPO_BALA_FIREMAN 30
 
 Bala_bombman::Bala_bombman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){
+Bala_especial(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){
 	equipo_pc = false;
 }
 
@@ -78,12 +78,4 @@ bool Bala_bombman::dania_con_escudo(Snipper* s){
 
 bool Bala_bombman::dania_con_escudo(Jumping_snipper* js){
 	return false;
-}
-
-bool Bala_bombman::dania(Personaje_pc* pj){
-	return !equipo_pc;
-}
-
-bool Bala_bombman::dania(Personaje_npc* pj){
-	return equipo_pc;
 }

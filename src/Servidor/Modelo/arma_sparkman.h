@@ -1,9 +1,9 @@
 #ifndef ARMA_SPARKMAN_H
 #define ARMA_SPARKMAN_H
 
-#include "arma.h"
+#include "arma_boss.h"
 
-class Arma_sparkman : public Arma{
+class Arma_sparkman : public Arma_boss{
 	private:
 		int nuevo_id_bala();
 	public:

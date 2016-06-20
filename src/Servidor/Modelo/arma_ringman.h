@@ -1,9 +1,9 @@
 #ifndef ARMA_RINGMAN_H
 #define ARMA_RINGMAN_H
 
-#include "arma.h"
+#include "arma_boss.h"
 
-class Arma_ringman : public Arma{
+class Arma_ringman : public Arma_boss{
 	private:
 		int nuevo_id_bala();
 	public:

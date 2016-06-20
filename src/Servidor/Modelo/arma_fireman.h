@@ -1,9 +1,9 @@
 #ifndef ARMA_FIREMAN_H
 #define ARMA_FIREMAN_H
 
-#include "arma.h"
+#include "arma_boss.h"
 
-class Arma_fireman : public Arma{
+class Arma_fireman : public Arma_boss{
 	private:
 		int nuevo_id_bala();
 	public:
