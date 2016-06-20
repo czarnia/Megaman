@@ -1,0 +1,4 @@
+/home/poisson/Megaman/Comun/CMakeFiles/Megaman.dir
+/home/poisson/Megaman/Cliente/CMakeFiles/cliente.dir
+/home/poisson/Megaman/Editor/CMakeFiles/editor.dir
+/home/poisson/Megaman/Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir

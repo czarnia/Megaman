@@ -10,7 +10,7 @@
 #include "bar_sprite.h"
 #include "event.h"
 
-#define FPS 200
+#define FPS 60
 #define TAM_INT 4
 #define MAPA 1
 #define STATIC 1
@@ -279,34 +279,35 @@ void gameStateStart::mainLoop(){
             renderer->updateCamPos(playerData.first);
         /// Verifico si la cola de eventos provenientes del servidor esta vacia
 
-        while (!receiver->r_queue.empty()){
-            /// Si hay algun evento, lo proceso
-            std::pair<int,int> coord;
+            while (!receiver->r_queue.empty()){
+                /// Si hay algun evento, lo proceso
+                std::pair<int,int> coord;
 
-            mutex.lock();
-            event = receiver->r_queue.front();
-            receiver->r_queue.pop();
-            mutex.unlock();
+                mutex.lock();
+                event = receiver->r_queue.front();
+                receiver->r_queue.pop();
+                mutex.unlock();
 
-            coord.first = event.posX;
-            coord.second = event.posY;
+                coord.first = event.posX;
+                coord.second = event.posY;
 
-            /// acorde a lo recibido del servidor, seteo los flags correspondientes
-            switch(handler.execute(event.command, event.objectType,
-                    event.objectID, coord)){
-                case GameState::BOSS_SELECT:
-                    running = false;
-                    victory = true;
-                    break;
-                case GameState::GAME_OVER:
-                    running = false;
-                    ko = true;
-                    break;
-                default:
-                    break;
+                /// acorde a lo recibido del servidor, seteo los flags correspondientes
+                switch(handler.execute(event.command, event.objectType,
+                        event.objectID, coord)){
+                    case GameState::BOSS_SELECT:
+                        running = false;
+                        victory = true;
+                        break;
+                    case GameState::GAME_OVER:
+                        running = false;
+                        ko = true;
+                        break;
+                    default:
+                        break;
+                }
+                //render();
             }
-            render();
-        }
+
 
         /// dibujo
         mutex.lock();

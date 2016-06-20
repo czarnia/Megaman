@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 #define TIEMPO_MOVER 2
-#define TIEMPO_ATACAR 15
+#define TIEMPO_ATACAR 8
 #define CANT_DIRECCIONES 3
 #define AVANZAR_X 1
 #define RETROCEDER_X -1
