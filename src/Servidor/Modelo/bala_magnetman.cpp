@@ -39,8 +39,8 @@ void Bala_magnetman::update(float tiempo, Mapa* mapa) {
 	}
 	Coordenada nueva_coordenada = coord;
 	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo_pc_cercano(this);
-	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
-	int delta_y = c_enemigo.obtener_ordenada()-(pj->coordenada.obtener_ordenada());
+	int delta_x = c_enemigo.obtener_abscisa()-(coord.obtener_abscisa());
+	int delta_y = c_enemigo.obtener_ordenada()-(coord.obtener_ordenada());
 	
 	if (delta_x > 0){
 		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);

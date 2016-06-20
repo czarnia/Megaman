@@ -21,12 +21,12 @@ void Fireman::atacar(int dir_x, Mapa* mapa){
 		return;
 	}
 	Bala *bala1, *bala2, *bala3;
-	if (dir == DERECHA){
+	if (dir_x == DERECHA){
 		bala1 = arma->atacar(dir_x, 0, coordenada.derecha(ancho/2).arriba(alto/2));
 		bala2 = arma->atacar(dir_x, 0, coordenada.derecha(ancho/2));
 		bala3 = arma->atacar(dir_x, 0, coordenada.derecha(ancho/2).abajo(alto/2));
 	}
-	if (dir == IZQUIERDA){
+	if (dir_x == IZQUIERDA){
 		bala1 = arma->atacar(dir_x, 0, coordenada.izquierda(ancho/2).arriba(alto/2));
 		bala2 = arma->atacar(dir_x, 0, coordenada.izquierda(ancho/2));
 		bala3 = arma->atacar(dir_x, 0, coordenada.izquierda(ancho/2).abajo(alto/2));
@@ -42,7 +42,7 @@ void Fireman::atacar(int dir_x, Mapa* mapa){
 void Fireman::mover(float tiempo, Mapa* mapa){ } 
 
 void Fireman::recibir_ataque(Bala* ataque){
-  ataque->daniar(this);
+	ataque->daniar(this);
 }
 
 void Fireman::update(float tiempo){
@@ -52,7 +52,8 @@ void Fireman::update(float tiempo){
 	}
 	atacando = !atacando;
 	tiempo_pasado -= TIEMPO_ACCION;
-	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(this);
+	int delta_x = c_enemigo.obtener_abscisa()-(coordenada.obtener_abscisa());
 	int dir = delta_x < 0? IZQUIERDA : DERECHA;
 	atacar(dir, mapa);
 }
