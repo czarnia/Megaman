@@ -72,11 +72,11 @@ void Juego::inicializar_partida(int num_jugadores){
 }
 
 void Juego::jugar(){
-	while (!fin_partida){ //ESTO EN REALIDAD VA A SER PARA !fin_partida && !fin_nivel(murio boss).
+	while (!fin_partida && jugando_nivel){
 		clock_t iniciar_tiempo = clock();
 		{
 			Lock l(proteccion);
-			update(0.05);
+			update(0.5);
 		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
 		sleep(delta_tiempo);
@@ -205,12 +205,13 @@ void Juego::murio_boss(){
 	}
 	if (niveles_ganados.size() == TOT_NIVELES){
 		//NOTIFICAR VICTORIA JUEGO:
-		fin_partida = true;
+		terminar_partida();
 		notificar_termino_partida();
 	}else{
 		//NOTIFICAR VICTORIA NIVEL:
 		notificar_termino_nivel();
 	}
+	jugando_nivel = false;
 }
 
 void Juego::notificar_termino_nivel(){
@@ -263,10 +264,6 @@ void Juego::actualizo_energia(int tipo, int id, int energia){
 void Juego::actualizo_posicion(int tipo, int id, int x, int y){
 	notificar_posicion(tipo, id, x, y);
 }
-
-/*std::vector<Coordenada> Juego::bloques(){
-	return mundo->coord_bloques();
-}*/
 
 std::vector<Ubicable*> Juego::devolver_ubicables(){
 	return mundo->devolver_ubicables();
