@@ -110,7 +110,7 @@ void sortObject(int *objectType){
     }else if (*objectType == MP_BAR){
         *objectType = MP_BARN;
     }else{
-        *objectType = -1;
+      //  *objectType = -1;
     }
 
 }

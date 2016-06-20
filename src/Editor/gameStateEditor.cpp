@@ -287,7 +287,7 @@ GameState::StateCode gameStateEditor::update(){
                 pressed.sym == SDLK_LEFT || pressed.sym == SDLK_RIGHT)
                 updateCameraPos(&event);
             else if ( pressed.sym == SDLK_c){
-                loadChamber();
+             //   loadChamber();
             }
 
         }else if (event.type == SDL_MOUSEBUTTONDOWN){

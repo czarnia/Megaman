@@ -36,11 +36,11 @@
 #define BLOCK_SPIKESN 1000
 #define BLOCK_LADDERN 1500
 #define MEGAMANN 0
-#define BOMBMANN 5
-#define MAGNETMANN 6
-#define SPARKMANN 7
-#define RINGMANN 8
-#define FIREMANN 9
+#define BOMBMANN 20
+#define MAGNETMANN 21
+#define SPARKMANN 22
+#define RINGMANN 23
+#define FIREMANN 24
 #define MEGAMAN_BULLETN 10000
 #define BUMBYN 2000
 #define J_SNIPERN 3000
@@ -75,8 +75,6 @@ void Receiver::ejecutar(){
 }
 
 void Receiver::receiveEventAndQueue(bool *end){
-
-    ResponseHandler handler(renderer);
 
     int command;
     int objectType;
@@ -115,20 +113,14 @@ void Receiver::receiveEventAndQueue(bool *end){
         std::pair<int,int> coord;
         coord.first = coordX;
         coord.second = coordY;
-       /* mutex->lock();
-        handler.execute(command, objectType, objectID, coord);
-        mutex->unlock();*/
+
         mutex->lock();
         r_queue.push(Event(command,objectType,objectID,coordX,coordY));
         mutex->unlock();
     }else{
         *end = true;
     }
-   /* mutex->lock();
-    renderer->clear();
-    renderer->drawAll();
-    renderer->present();
-    mutex->unlock();*/
+
 }
 
 void Receiver::receiveMapSize(){
