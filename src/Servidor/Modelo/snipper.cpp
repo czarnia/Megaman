@@ -3,7 +3,7 @@
 
 #define IZQUIERDA -1
 #define SNIPPER 5
-#define TIEMPO_ESTADO 3
+#define TIEMPO_ESTADO 0.5
 
 enum estado_npc_escudo{MURIENDO, ESCUDO_UP = 7, ESCUDO_DOWN};
 
