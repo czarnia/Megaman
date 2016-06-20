@@ -1,20 +1,16 @@
 #include "strategy_mover_bombman.h"
 #include "bombman.h"
 
-#define TIEMPO_SALTO 4
+#define TIEMPO_SALTO 5
 #define GRAVEDAD 5
-#define VELOCIDAD_Y 40
-#define VELOCIDAD_X 10
-#define VELOCIDAD_SALTO 10
-
-enum estados{SALTANDO, PERSIGUIENDO};
+#define VELOCIDAD_Y 60
+#define VELOCIDAD_X 5
+#define VELOCIDAD_SALTO 25
 
 StrategyMoverBombman::StrategyMoverBombman():
 velocidad_x(0),
 velocidad_y(0),
-tiempo_salto(0){
-	estado = PERSIGUIENDO;
-}
+tiempo_salto(0){}
 
 void StrategyMoverBombman::mover(Mapa *mapa, Bombman *pj, float tiempo){
 	bool personaje_flotando = pj->flotando;
