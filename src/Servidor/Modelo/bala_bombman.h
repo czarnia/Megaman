@@ -4,6 +4,9 @@
 #include "bala_especial.h"
 
 class Bala_bombman: public Bala_especial {
+	private:
+		bool impacto;
+		bool equipo_pc;
 	public:
 		//Recibe una direccion en 'x', una
 		//direccion en 'y' y una coordenada inicial y construye una bala.
@@ -16,6 +19,16 @@ class Bala_bombman: public Bala_especial {
 		virtual void daniar(Personaje* pj);
 		//Daña a un Megaman.
 		virtual void daniar(Megaman* mega);
+		//Daña a un Bombman.
+		virtual void daniar(Bombman* b);
+		//Daña a un Sparkman.
+		virtual void daniar(Sparkman* s);
+		//Daña a un Magnetman.
+		virtual void daniar(Magnetman* m);
+		//Daña a un Ringman.
+		virtual void daniar(Ringman* r);
+		//Daña a un Fireman.
+		virtual void daniar(Fireman* f);
 		//Daña a un Met.
 		virtual void daniar(Met* met);
 		//Daña a un Bumby.

@@ -7,9 +7,15 @@
 #include "bumby.h"
 #include "snipper.h"
 #include "jumping_snipper.h"
+#include "bombman.h"
+#include "ringman.h"
+#include "sparkman.h"
+#include "magnetman.h"
+#include "fireman.h"
 
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_NORMAL 35
+#define PERDIDA_VIDA_BOSS 10
 
 Bala_normal::Bala_normal(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_NORMAL, id){}
@@ -39,10 +45,26 @@ void Bala_normal::daniar(Bumby* b){
 void Bala_normal::daniar(Snipper* s){
 	s->perder_vida(50);
 }
-/*
-void Bala_normal::daniar(Jumping_snipper* js){
-	js->perder_vida(50);
-}*/
+
+void Bala_normal::daniar(Bombman* b){
+	b->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_normal::daniar(Sparkman* s){
+	s->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_normal::daniar(Magnetman* m){
+	m->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_normal::daniar(Ringman* r){
+	r->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_normal::daniar(Fireman* f){
+	f->perder_vida(PERDIDA_VIDA_BOSS);
+}
 
 bool Bala_normal::dania_con_escudo(Met* m){
 	return false;

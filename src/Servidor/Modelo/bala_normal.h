@@ -22,8 +22,16 @@ class Bala_normal: public Bala {
 		virtual void daniar(Bumby* b);
 		//Daña a un Sniper.
 		virtual void daniar(Snipper* s);
-		//Daña a un Jumping_sniper.
-		//virtual void daniar(Jumping_snipper* js);
+		//Daña a un Bombman.
+		virtual void daniar(Bombman* b);
+		//Daña a un Sparkman.
+		virtual void daniar(Sparkman* s);
+		//Daña a un Magnetman.
+		virtual void daniar(Magnetman* m);
+		//Daña a un Ringman.
+		virtual void daniar(Ringman* r);
+		//Daña a un Fireman.
+		virtual void daniar(Fireman* f);
 		//Devuelve true si puede dañar a un Met cuando esta tras su escudo, false en
 		//caso contrario.
 		virtual bool dania_con_escudo(Met* m);

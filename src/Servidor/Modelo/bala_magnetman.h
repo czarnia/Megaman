@@ -16,6 +16,16 @@ class Bala_magnetman: public Bala_especial{
 		virtual void daniar(Personaje* pj);
 		//Daña a un Megaman.
 		virtual void daniar(Megaman* mega);
+		//Daña a un Bombman.
+		virtual void daniar(Bombman* b);
+		//Daña a un Sparkman.
+		virtual void daniar(Sparkman* s);
+		//Daña a un Magnetman.
+		virtual void daniar(Magnetman* m);
+		//Daña a un Ringman.
+		virtual void daniar(Ringman* r);
+		//Daña a un Fireman.
+		virtual void daniar(Fireman* f);
 		//Daña a un Met.
 		virtual void daniar(Met* met);
 		//Daña a un Bumby.

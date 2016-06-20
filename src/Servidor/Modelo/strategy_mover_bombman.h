@@ -13,7 +13,6 @@ class StrategyMoverBombman : public StrategyMover{
 		int velocidad_y;
 		float tiempo_salto;
 
-		//void aplicar_movimiento(Mapa *mapa, Bombman *pj);
 		void actualizar_coordenada(Mapa *mapa, Bombman *pj,
 		Coordenada *coord);
 	public:
