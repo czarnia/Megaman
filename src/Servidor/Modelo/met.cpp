@@ -58,7 +58,7 @@ void Met::update(float tiempo, Mapa *mapa){
   //Personaje::update(0, mapa);
   //Personaje::notificar_observadores();
   tiempo_pasado -= TIEMPO_ATAQUE;
-  //atacar(0, mapa);
+  atacar(0, mapa);
 }
 
 bool Met::esta_bajo_escudo(){
