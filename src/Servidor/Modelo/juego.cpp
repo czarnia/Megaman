@@ -19,6 +19,8 @@
 #include <iostream>
 #include <algorithm>
 
+#include <SDL2/SDL.h>
+
 enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS,
 	CAMBIO_ESTADO, FIN_NIVEL, DERROTA, VICTORIA};
 
@@ -83,7 +85,7 @@ void Juego::jugar(){
 			enviar_estados();
 		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
-		sleep(delta_tiempo);
+		SDL_Delay(delta_tiempo);
 	}
 }
 
