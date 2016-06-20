@@ -4,6 +4,7 @@
 #include "block_sprite.h"
 #include "character_sprite.h"
 #include "background_sprite.h"
+#include "response_handler.h"
 #include "minion_sprite.h"
 #include "gameState.h"
 
@@ -20,7 +21,6 @@
 #define BLOCK_SPIKES 11
 #define BLOCK_LADDER 12
 #define MEGAMAN 1
-#define MEGAMAN_BULLET 12
 #define BUMBY 2
 #define J_SNIPER 3
 #define MET 4
@@ -75,6 +75,9 @@ void Receiver::ejecutar(){
 }
 
 void Receiver::receiveEventAndQueue(bool *end){
+
+    ResponseHandler handler(renderer);
+
     int command;
     int objectType;
     int objectID;
@@ -109,13 +112,23 @@ void Receiver::receiveEventAndQueue(bool *end){
         << objectType << " ID de objeto: "<<objectID <<" Pos: "
         <<coordX<<","<<coordY<<std::endl;
         ///////////////
+        std::pair<int,int> coord;
+        coord.first = coordX;
+        coord.second = coordY;
+       /* mutex->lock();
+        handler.execute(command, objectType, objectID, coord);
+        mutex->unlock();*/
         mutex->lock();
         r_queue.push(Event(command,objectType,objectID,coordX,coordY));
         mutex->unlock();
     }else{
         *end = true;
     }
-
+   /* mutex->lock();
+    renderer->clear();
+    renderer->drawAll();
+    renderer->present();
+    mutex->unlock();*/
 }
 
 void Receiver::receiveMapSize(){
@@ -130,7 +143,7 @@ void Receiver::receiveMapSize(){
     skt->receive(buffer,TAM_INT);
     level_height = *((int*)buffer);
     strncpy(buffer,"    ",TAM_INT);
-    renderer->setMapSize(level_width*SCALE_FACTOR, level_height*SCALE_FACTOR);
+    renderer->setMapSize(level_width*Block_sprite::width, level_height*Block_sprite::height);
     std::cout<<"Recibi tamanio del mapa: "<<level_width<<"x"<<level_height<<std::endl;
 }
 
@@ -143,6 +156,7 @@ void Receiver::receiveMap(const int &level){
     std::ostringstream ls;
     ls<<"../sprites/ladder"<<level<<".png";
     std::string ladderpath(ls.str());
+
     char buffer[TAM_INT] = "";
     int command;
     int objectType;
@@ -153,26 +167,26 @@ void Receiver::receiveMap(const int &level){
     std::cout << "Comence a recibir mapa"<<std::endl;
     do{
         /// recibo COMANDO y lo ignoro aca
-        skt->receive(buffer,TAM_INT);
-        command = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);
+        skt->receiveInt(&command,TAM_INT);
+       /* command = *((int*)buffer);
+        strncpy(buffer,"    ",TAM_INT);*/
         if (command != END_OF_MAP){
             /// Recibo el tipo de OBJETO
-            skt->receive(buffer,TAM_INT);
-            objectType = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
+            skt->receiveInt(&objectType,TAM_INT);
+           /* objectType = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);*/
             /// Recibo el id del OBJETO
-            skt->receive(buffer,TAM_INT);
-            objectID = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
+            skt->receiveInt(&objectID,TAM_INT);
+            /*objectID = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);*/
             /// Recibo COORD X
-            skt->receive(buffer,TAM_INT);
-            coordX = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
+            skt->receiveInt(&coordX,TAM_INT);
+            /*coordX = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);*/
             /// Recibo COORD Y
-            skt->receive(buffer,TAM_INT);
-            coordY = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);
+            skt->receiveInt(&coordY,TAM_INT);
+            /*coordY = *((int*)buffer);
+            strncpy(buffer,"    ",TAM_INT);*/
 
             std::cout<< "Recibo comando: "<<command << " "
             <<"Tipo de objeto: "<< objectType<< " " <<
@@ -205,28 +219,28 @@ void Receiver::receiveMap(const int &level){
                     renderer->addSprite(MEGAMANN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case MET:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.PNG");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/met.PNG", 0);
                     spr->loadAnimations("../AnimationConfig/met.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(METN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case BUMBY:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/bumby.PNG");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/bumby.PNG", 0);
                     spr->loadAnimations("../AnimationConfig/bumby.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(BUMBYN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case J_SNIPER:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/j_sniper.PNG");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/j_sniper.PNG", 1);
                     spr->loadAnimations("../AnimationConfig/j_sniper.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
                     renderer->addSprite(J_SNIPERN+objectID, spr, FRONT, NON_STATIC);
                     break;
                 case SNIPER:
-                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/sniper.PNG");
+                    spr = new Minion_sprite(renderer->get_renderer(), "../sprites/sniper.PNG", 1);
                     spr->loadAnimations("../AnimationConfig/sniper.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
@@ -265,7 +279,7 @@ void Receiver::receiveMap(const int &level){
                     spr->loadAnimations("../AnimationConfig/fireman.txt");
                     spr->setPosX(coordX*SCALE_FACTOR);
                     spr->setPosY(coordY*SCALE_FACTOR);
-                    renderer->addSprite(FIREMAN, spr, FRONT, NON_STATIC);
+                    renderer->addSprite(FIREMANN, spr, FRONT, NON_STATIC);
                     break;
                 default:
                     break;

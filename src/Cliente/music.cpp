@@ -8,7 +8,7 @@ Music::Music(){
 }
 
 void Music::play(){
-   // Mix_PlayMusic(piece, FOREVER);
+    //Mix_PlayMusic(piece, FOREVER);
 }
 
 void Music::changeTrack(std::string file){

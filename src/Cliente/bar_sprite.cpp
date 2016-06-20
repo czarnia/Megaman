@@ -26,7 +26,7 @@ Bar_sprite::Bar_sprite(SDL_Renderer *r, bool hp)
     }
     rectangle.w = Bar_sprite::width;
     rectangle.h = Bar_sprite::height;
-    ammount = 8;
+    ammount = 9;
     crop = NULL;
 }
 

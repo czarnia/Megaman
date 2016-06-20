@@ -7,8 +7,8 @@
 
 class Minion_sprite: public Sprite{
     private:
-        static int width;
-        static int height;
+         int width;
+         int height;
 
         bool movingLeft;
         bool editorMode;
@@ -22,7 +22,7 @@ class Minion_sprite: public Sprite{
         float currentFrame;
         State currentState;
     public:
-        Minion_sprite(SDL_Renderer *r, const char* file);
+        Minion_sprite(SDL_Renderer *r, const char* file, int big);
         void loadAnimations(std::string path);
         void changeState(int x, int y);
         void setState(int &action);

@@ -23,7 +23,7 @@
 
 gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
                                 Socket *skt, std::pair<int,
-                                 std::string> &playerData, int *level):
+                                 std::string> *playerData, int *level):
     window(window),
     renderer(renderer),
     skt(skt),
@@ -42,16 +42,16 @@ gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
 
 void gameStateLobby::load(int stack){
     /// MANDO EL NOMBRE QUE SE INGRESO
-    int namebytes = playerData.second.size();
+    int namebytes = playerData->second.size();
     if(namebytes == 0)
-        playerData.second = "unnamed";
-    namebytes = playerData.second.size();
+        playerData->second = "unnamed";
+    namebytes = playerData->second.size();
     skt->send((char*)&namebytes, TAM_INT);
-    skt->send((char*)playerData.second.c_str(), namebytes);
+    skt->send((char*)playerData->second.c_str(), namebytes);
     /// ACA RECIBO MI NUMERO DE JUGADOR
     char buffer[TAM_INT];
     skt->receive(buffer, TAM_INT);
-    playerData.first = *((int*)buffer);
+    playerData->first = *((int*)buffer);
 
     /// Cargo los sprites de este menu
     Sprite *spr;
@@ -89,7 +89,7 @@ void gameStateLobby::load(int stack){
     renderer->addSprite(ICON, spr, BACK, STATIC);
 
     /// Solo el jugador 1 puede presionar el boton y elegir boss
-    if(playerData.first == 1){
+    if(playerData->first == 1){
         /// CARGO SELECTOR
         spr = new Selector_sprite(renderer->get_renderer(), "../sprites/selector.png");
         spr->setPosX((selectorPos*2-1)*Boss_icon_sprite::width-5);
@@ -126,7 +126,7 @@ GameState::StateCode gameStateLobby::update(){
     /// ACA LANZO UN HILO PARA ESPERAR QUE EL SERVIDOR
     /// ME INDIQUE EL COMIENZO DE PARTIDA Y NUMERO DE BOSS
     receiver->start();
-    if (playerData.first == 1){
+    if (playerData->first == 1){
         while (running){
             /// SOLO EL JUGADOR 1 PUEDE ELEGIR BOSS
             updateInput();
