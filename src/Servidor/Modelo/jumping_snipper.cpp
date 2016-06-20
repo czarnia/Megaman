@@ -15,10 +15,12 @@ Snipper(mapa, c, arma, id){
 }
 
 void Jumping_snipper::update(float tiempo, Mapa* mapa){
-	tiempo_pasado += tiempo;
+  if (activo){
+    tiempo_pasado += tiempo;
+  }
   //Salta:
 	salto_snipper.mover(mapa, this, tiempo);
-  if (tiempo_pasado < TIEMPO_ESTADO){
+  if ((tiempo_pasado < TIEMPO_ESTADO) || !activo){
     return;
   }
 	//paso el tiempo de estado:

@@ -32,7 +32,7 @@ class Mapa{
 		Puerta_boss *puerta_boss;
 		int id;
 		bool es_nivel;
-		
+
 		static int contador_id_mapa;
   public:
     //Dados un tamanio crea un mapa con tantas divisiones como indique el tamanio.

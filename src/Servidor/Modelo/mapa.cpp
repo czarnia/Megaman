@@ -104,8 +104,18 @@ int Mapa::obtener_long_y(){
 
 
 void Mapa::activar_npcs(){
-  for (ItPersonajeNpc i= personajes_npc.begin(); i != personajes_npc.end(); ++i){
-    (*i).second->activar();
+  bool fue_activado;
+  for (ItPersonajeNpc i = personajes_npc.begin(); i != personajes_npc.end(); ++i){
+    fue_activado = false;
+    for (ItPersonajePc j = personajes_pc.begin(); j != personajes_pc.end(); j++){
+      if ((*i).second->esta_en_rango((*j).second)){
+        (*i).second->activar();
+        fue_activado = true;
+      }
+    }
+    if (!fue_activado){
+      (*i).second->desactivar();
+    }
   }
 }
 
@@ -205,6 +215,8 @@ void Mapa::update(float tiempo){
     //hilos_updater.push_back(Updater(i->second, this, tiempo));
     (*i).second->update(tiempo, this);
   }
+
+  activar_npcs();
 
   /*for (size_t j = 0; j < hilos_updater.size(); j++){
     hilos_updater[j].ejecutar();
