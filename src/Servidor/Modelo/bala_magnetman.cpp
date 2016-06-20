@@ -14,40 +14,52 @@
 #include "fireman.h"
 
 #define TIEMPO_MOVER 1
+#define VELOCIDAD_X 2
+#define VELOCIDAD_Y 2
 #define TIPO_BALA_MAGNETMAN 31
 #define PERDIDA_VIDA_BOSS 10
 
 Bala_magnetman::Bala_magnetman(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_MAGNETMAN, id){
 	equipo_pc = false;
+	impacto = false;
 }
 
 Bala_magnetman::~Bala_magnetman() {}
 
 void Bala_magnetman::update(float tiempo, Mapa* mapa) {
-	Coordenada nueva_coordenada = coord;
+	if (impacto){
+		mapa->quitar_bala(this);
+		coord = Coordenada(-1, -1);
+		notificar_observadores();
+	}
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){
 		return;
 	}
-	if (direccion_x > 0){
-		nueva_coordenada = nueva_coordenada.derecha(2);
-    }
-	if (direccion_x < 0){
-		nueva_coordenada = nueva_coordenada.izquierda(2);
-    }
-	if (direccion_y < 0){
-		nueva_coordenada = nueva_coordenada.arriba(2);
+	Coordenada nueva_coordenada = coord;
+	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo_pc_cercano(this);
+	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+	int delta_y = c_enemigo.obtener_ordenada()-(pj->coordenada.obtener_ordenada());
+	
+	if (delta_x > 0){
+		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);
 	}
-	if (direccion_y > 0){
-		nueva_coordenada = nueva_coordenada.abajo(2);
+	if (delta_x < 0){
+		nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD_X);
+	}
+	if (delta_y > 0){
+		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
+	}
+	if (delta_y < 0){
+		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
 	}
 
+	impacto = !mapa->puede_ubicarse(this, nueva_coordenada) || 
+				mapa->bala_colisiona_con_pj(this, &nueva_coordenada);
 	if (mapa->puede_ubicarse(this, nueva_coordenada)){
 		coord = nueva_coordenada;
-	}else{
-		//TODO: Mover al mapa.
-		mapa->quitar_bala(this);
+		notificar_observadores();
 	}
 }
 
@@ -59,9 +71,7 @@ void Bala_magnetman::daniar(Megaman* mega) {
 	mega->perder_vida(20);
 }
 
-void Bala_magnetman::daniar(Met* met) {
-	met->perder_vida(0);
-}
+void Bala_magnetman::daniar(Met* met) {}
 
 void Bala_magnetman::daniar(Bumby* b){
 	b->perder_vida();

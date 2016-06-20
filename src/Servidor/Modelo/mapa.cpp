@@ -317,6 +317,23 @@ std::vector<Ubicable*> Mapa::devolver_ubicables(){
 	return ubicables;
 }
 
+Coordenada Mapa::obtener_coordenada_enemigo_pc_cercano(Bala* bala){
+	std::vector<int> claves_enemigos = obtener_claves_pc(personajes_pc);
+	ItPersonajePc it = personajes_pc.begin();
+	Personaje_pc *perseguido = it->second;
+	int dst_min = perseguido->get_coordenada().obtener_distancia(bala->get_coordenada());
+	int dst_pj = 0;
+	it++; 
+	for (it; it != personajes_pc.end(); ++it){
+		dst_pj = (it->second->get_coordenada()).obtener_distancia(bala->get_coordenada());
+		if (dst_pj < dst_min){
+			perseguido = it->second;
+			dst_min = dst_pj;
+		}
+	}
+	return perseguido->get_coordenada();
+}
+
 Coordenada Mapa::obtener_coordenada_enemigo(Personaje_npc* pj){
   std::vector<int> claves_enemigos = obtener_claves_pc(personajes_pc);
   size_t seleccionado = rand() % claves_enemigos.size();
