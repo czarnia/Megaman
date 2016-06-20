@@ -1,6 +1,8 @@
 #include "bala.h"
 #include "escalera.h"
 #include "personaje.h"
+#include "personaje_pc.h"
+#include "personaje_npc.h"
 #include "puas.h"
 #include "bloque.h"
 #include <iostream>
@@ -104,6 +106,9 @@ void Bala::update(float tiempo, Mapa* mapa){
 }
 
 bool Bala::colisiona(Ubicable *ubic, Coordenada c){
+		if (!ubic->recibe_danio(this)){
+			return false;
+		}
 		size_t x = coord.obtener_abscisa();
 		size_t y = coord.obtener_ordenada();
 		size_t alto = ubic->get_alto();
@@ -121,5 +126,9 @@ void Bala::interactuar(Personaje* pj){
 
 
 bool Bala::es_piso(){
+	return false;
+}
+
+bool Bala::recibe_danio(Bala* ataque){
 	return false;
 }

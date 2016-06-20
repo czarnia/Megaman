@@ -24,8 +24,10 @@ bool Snipper::es_vulnerable(Bala* ataque){
 }
 
 void Snipper::update(float tiempo, Mapa* mapa){
-	tiempo_pasado += tiempo;
-  if (tiempo_pasado < TIEMPO_ESTADO){
+  if (activo){
+    tiempo_pasado += tiempo;
+  }
+  if ((tiempo_pasado < TIEMPO_ESTADO) || !activo){
     return;
 	}
 	//paso el tiempo de estado:

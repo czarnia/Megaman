@@ -6,7 +6,7 @@
 
 class Observador_personaje_pc;
 
-class Puerta_boss : 
+class Puerta_boss :
 public Elemento,
 public Observador_personaje_pc{
 	private:
@@ -22,7 +22,7 @@ public Observador_personaje_pc{
 		virtual void interactuar(Personaje *pj);
 		//Devuele true si el elementos actua como piso, false en caso contrario
 		virtual bool es_piso();
-		//Devuelve false si el personaje quiere pasar a la cueva 
+		//Devuelve false si el personaje quiere pasar a la cueva
 		//del boss y true si quiere salir.
 		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);
 		//Suma 1 a la cantidad actual de personajes
@@ -31,7 +31,7 @@ public Observador_personaje_pc{
 		//Resta 1 a la cantidad actual de personajes
 		//a considerar para cerrar la puerta.
 		virtual void restar_personaje(int id_pj);
-	
+
 		//Dado un observable, actualiza su estado.
 		virtual void update(Observable *obs);
 		//Dado un ubicable, dice si el mismo puedo ubicarse en una posicion donde
@@ -58,7 +58,8 @@ public Observador_personaje_pc{
 		//Dado un premio, dice si el mismo puedo ubicarse en una posicion donde
 		//esta el ubicable.
 		virtual bool puede_ocupar(Premio* premio);
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque);
 };
 
 #endif //PUERTA_BOSS_H
-

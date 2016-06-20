@@ -1,5 +1,7 @@
 #include "bala_magnetman.h"
 #include "personaje.h"
+#include "personaje_pc.h"
+#include "personaje_npc.h"
 #include "megaman.h"
 #include "met.h"
 #include "bumby.h"
@@ -16,7 +18,9 @@
 #define PERDIDA_VIDA_BOSS 10
 
 Bala_magnetman::Bala_magnetman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_MAGNETMAN, id){}
+Bala(dir_x, dir_y, c, TIPO_BALA_MAGNETMAN, id){
+	equipo_pc = false;
+}
 
 Bala_magnetman::~Bala_magnetman() {}
 
@@ -99,4 +103,12 @@ bool Bala_magnetman::dania_con_escudo(Snipper* s){
 
 bool Bala_magnetman::dania_con_escudo(Jumping_snipper* js){
 	return true;
+}
+
+bool Bala_magnetman::dania(Personaje_pc* pj){
+	return !equipo_pc;
+}
+
+bool Bala_magnetman::dania(Personaje_npc* pj){
+	return equipo_pc;
 }

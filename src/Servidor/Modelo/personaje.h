@@ -129,6 +129,12 @@ public Personaje_observable{
 		//Devuelve un int que representa
 		//el estado actual del personaje.
 		int get_estado_actual();
+		//Dado un segundo personaje, devuelve true si el primero está en rango con
+		//el segundo (es decir, su distancia es menor a un radio r), false en caso
+		//contrario.
+		bool esta_en_rango(Personaje* otro_pj);
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque) = 0;
 };
 
 #endif //PERSONAJE_H

@@ -24,9 +24,11 @@ class Personaje_npc: public Personaje{
 		//Devuelve el porcentaje de vida del personaje.
 		virtual int get_porcentaje_vida();
 		//Activa a un npc.
-		virtual void activar() { activo = true; }
+		virtual void activar();
 		//Desactuva a un npc.
-		virtual void desactivar() { activo = false; }
+		virtual void desactivar();
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque);
 };
 
 #endif //PERSONAJE_NPC_H

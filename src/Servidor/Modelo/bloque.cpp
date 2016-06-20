@@ -53,4 +53,8 @@ bool Bloque::es_piso(){
 	return true;
 }
 
+bool Bloque::recibe_danio(Bala* ataque){
+	return true; //TRUCHADA PARA QUE NO ATRAVIESE BLOQUES!
+}
+
 Bloque::~Bloque(){}

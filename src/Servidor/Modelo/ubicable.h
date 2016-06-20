@@ -8,6 +8,13 @@ class Observador_ubicable;
 class Personaje;
 class Elemento;
 class Bala;
+class Bala_normal;
+class Bala_minion;
+class Bala_bombman;
+class Bala_fireman;
+class Bala_magnetman;
+class Bala_ringman;
+class Bala_sparkman;
 class Escalera;
 class Bloque;
 class Puas;
@@ -71,6 +78,8 @@ public Observable{
 		//Destructor del ubicable.
 		//virtual ~Ubicable() {}
 		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque) = 0;
 };
 
 #endif //UBICABLE_H

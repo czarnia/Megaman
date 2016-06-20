@@ -39,4 +39,8 @@ bool Premio::es_piso(){
 	return false;
 }
 
+bool Premio::recibe_danio(Bala* ataque){
+	return false;
+}
+
 Premio::~Premio(){}

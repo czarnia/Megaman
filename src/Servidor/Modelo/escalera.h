@@ -48,6 +48,8 @@ class Escalera: public Elemento{
 		virtual bool colisiona(Ubicable* otro_ubic, Coordenada nueva);
 		//Devuele true si el elemento actua como piso, false en caso contrario
 		virtual bool es_piso();
+		//Dada una bala, dice si la misma le hace danio.
+		virtual bool recibe_danio(Bala* ataque);
 		//Destructor de la Escalera.
 		~Escalera();
 };

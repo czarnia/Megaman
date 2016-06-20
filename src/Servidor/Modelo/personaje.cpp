@@ -12,6 +12,8 @@
 #include "../../Comun/lock.h"
 #include "../../Comun/mutex.h"
 
+#define DISTANCIA_MAXIMA 500
+
 #define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
 #define ALTO 60
@@ -164,4 +166,11 @@ bool Personaje::colisiona(Bala *bala, Coordenada c){
 
 int Personaje::get_estado_actual(){
 	return estado_actual;
+}
+
+bool Personaje::esta_en_rango(Personaje* otro_pj){
+	Coordenada pj1 = this->get_coordenada();
+	Coordenada pj2 = otro_pj->get_coordenada();
+	int distancia =  pj1.obtener_distancia(pj2);
+	return (distancia < DISTANCIA_MAXIMA);
 }
