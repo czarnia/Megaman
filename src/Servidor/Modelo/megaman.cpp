@@ -9,7 +9,7 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 #define MEGAMAN 1
-#define TIEMPO_ACCION 0.5
+#define TIEMPO_ACCION 0.4
 #define CANTIDAD_VIDAS 3
 
 typedef std::map<int, StrategyMoverPersonajePc*>::iterator movimientosIt;

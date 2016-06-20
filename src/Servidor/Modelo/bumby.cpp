@@ -46,7 +46,7 @@ void Bumby::atacar(int dir, Mapa* mapa){
 }
 
 void Bumby::update(float tiempo, Mapa* mapa){
-  /*if (activo){
+  if (activo){
     t_ataque += tiempo;
     t_mover += tiempo;
   }
@@ -57,7 +57,7 @@ void Bumby::update(float tiempo, Mapa* mapa){
     mover(tiempo, mapa);
     t_mover -= TIEMPO_MOVER;
 	}
-	if (tiempo_pasado >= TIEMPO_ATACAR){
+	/*if (tiempo_pasado >= TIEMPO_ATACAR){
 		tiempo_pasado = 0;
 		int dir = std::rand() % CANT_DIRECCIONES;
 		atacar(dir, mapa);
