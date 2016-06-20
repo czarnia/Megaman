@@ -5,9 +5,15 @@
 #include "bumby.h"
 #include "snipper.h"
 #include "jumping_snipper.h"
+#include "bombman.h"
+#include "ringman.h"
+#include "sparkman.h"
+#include "magnetman.h"
+#include "fireman.h"
 
 #define TIEMPO_MOVER 1
-#define TIPO_BALA_SPARKMAN 2
+#define TIPO_BALA_SPARKMAN 36
+#define PERDIDA_VIDA_BOSS 10
 
 Bala_sparkman::Bala_sparkman(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_SPARKMAN, id){}
@@ -37,10 +43,24 @@ void Bala_sparkman::daniar(Bumby* b){
 void Bala_sparkman::daniar(Snipper* s){
 	s->perder_vida();
 }
-/*
-void Bala_sparkman::daniar(Jumping_snipper* js){
-	js->perder_vida();
-}*/
+
+void Bala_sparkman::daniar(Bombman* b){
+	b->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_sparkman::daniar(Sparkman* s){}
+
+void Bala_sparkman::daniar(Magnetman* m){
+	m->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_sparkman::daniar(Ringman* r){
+	r->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_sparkman::daniar(Fireman* f){
+	f->perder_vida(PERDIDA_VIDA_BOSS);
+}
 
 bool Bala_sparkman::dania_con_escudo(Met* m){
 	return true;

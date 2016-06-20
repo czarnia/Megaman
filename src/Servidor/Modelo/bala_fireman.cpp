@@ -5,9 +5,15 @@
 #include "bumby.h"
 #include "snipper.h"
 #include "jumping_snipper.h"
+#include "bombman.h"
+#include "ringman.h"
+#include "sparkman.h"
+#include "magnetman.h"
+#include "fireman.h"
 
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_FIREMAN 34
+#define PERDIDA_VIDA_BOSS 10
 
 Bala_fireman::Bala_fireman(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){}
@@ -48,6 +54,25 @@ void Bala_fireman::daniar(Personaje* pj) {
 void Bala_fireman::daniar(Megaman* mega) {
 	mega->perder_vida(20);
 }
+
+
+void Bala_fireman::daniar(Bombman* b){
+	b->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_fireman::daniar(Sparkman* s){
+	s->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_fireman::daniar(Magnetman* m){
+	m->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_fireman::daniar(Ringman* r){
+	r->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_fireman::daniar(Fireman* f){}
 
 void Bala_fireman::daniar(Met* met) {
 	met->perder_vida(0);

@@ -5,9 +5,15 @@
 #include "bumby.h"
 #include "snipper.h"
 #include "jumping_snipper.h"
+#include "bombman.h"
+#include "ringman.h"
+#include "sparkman.h"
+#include "magnetman.h"
+#include "fireman.h"
 
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_MAGNETMAN 31
+#define PERDIDA_VIDA_BOSS 10
 
 Bala_magnetman::Bala_magnetman(int dir_x, int dir_y, Coordenada c, int id):
 Bala(dir_x, dir_y, c, TIPO_BALA_MAGNETMAN, id){}
@@ -63,6 +69,24 @@ void Bala_magnetman::daniar(Snipper* s){
 	}else{
 		s->perder_vida(50);
 	}
+}
+
+void Bala_magnetman::daniar(Bombman* b){
+	b->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_magnetman::daniar(Sparkman* s){
+	s->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_magnetman::daniar(Magnetman* m){}
+
+void Bala_magnetman::daniar(Ringman* r){
+	r->perder_vida(PERDIDA_VIDA_BOSS);
+}
+
+void Bala_magnetman::daniar(Fireman* f){
+	f->perder_vida(PERDIDA_VIDA_BOSS);
 }
 
 bool Bala_magnetman::dania_con_escudo(Met* m){

@@ -9,6 +9,11 @@ class Megaman;
 class Bumby;
 class Snipper;
 class Jumping_snipper;
+class Bombman;
+class Sparkman;
+class Ringman;
+class Magnetman;
+class Fireman;
 class Personaje;
 
 class Bala:
@@ -57,16 +62,24 @@ public Elemento{
 		virtual void update(float tiempo, Mapa* mapa);
 		//Daña a un Personaje (caso por defecto).
 		virtual void daniar(Personaje* pj) = 0;
-		//Daña a un Megaman.
-		virtual void daniar(Megaman* mega) = 0;
 		//Daña a un Met.
 		virtual void daniar(Met* met) = 0;
 		//Daña a un Bumby.
 		virtual void daniar(Bumby* b) = 0;
 		//Daña a un Sniper.
 		virtual void daniar(Snipper* s) = 0;
-		//Daña a un Jumping_sniper.
-		//virtual void daniar(Jumping_snipper* js) = 0;
+		//Daña a un Megaman.
+		virtual void daniar(Megaman* mega) = 0;
+		//Daña a un Bombman.
+		virtual void daniar(Bombman* b) = 0;
+		//Daña a un Sparkman.
+		virtual void daniar(Sparkman* s) = 0;
+		//Daña a un Magnetman.
+		virtual void daniar(Magnetman* m) = 0;
+		//Daña a un Ringman.
+		virtual void daniar(Ringman* r) = 0;
+		//Daña a un Fireman.
+		virtual void daniar(Fireman* f) = 0;
 		//Devuelve true si puede dañar a un Met cuando esta tras su escudo, false en
 		//caso contrario.
 		virtual bool dania_con_escudo(Met* m) = 0;
