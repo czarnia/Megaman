@@ -21,7 +21,7 @@
 #define PERDIDA_VIDA_BOSS 10
 
 Bala_bombman::Bala_bombman(int dir_x, int dir_y, Coordenada c, int id):
-Bala_especial(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){
+Bala_especial(dir_x, dir_y, c, TIPO_BALA_BOMBMAN, id){
 	impacto = false;
 	equipo_pc = false;
 }
