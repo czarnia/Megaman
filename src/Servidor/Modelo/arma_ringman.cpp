@@ -6,10 +6,11 @@
 
 #define TIPO_ARMA_RINGMAN 43
 
-Arma_ringman::Arma_ringman(int id, 
+Arma_ringman::Arma_ringman(int id,
 Factory_observador_ubicable *fact_ubicables):
-Arma(TIPO_ARMA_RINGMAN, id, fact_ubicables){
+Arma_boss(TIPO_ARMA_RINGMAN, id, fact_ubicables){
 	balas_creadas = 0;
+	equipo_pc = false;
 }
 
 int Arma_ringman::nuevo_id_bala(){
@@ -23,7 +24,10 @@ int Arma_ringman::nuevo_id_bala(){
 Bala* Arma_ringman::atacar(int dir_x, int dir_y, Coordenada c){
 	//Creo una bala:
 	int id_bala = nuevo_id_bala();
-	Bala *bullet = new Bala_ringman(dir_x, dir_y, c, id_bala);
+	Bala_especial *bullet = new Bala_ringman(dir_x, dir_y, c, id_bala);
+	if (equipo_pc){
+		bullet->cambiar_enemigo();
+	}
 	//Se agrega un observador a la bala:
 	fact_ubicables->crear(bullet);
 	balas_creadas++;

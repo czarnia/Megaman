@@ -21,7 +21,7 @@
 #define PERDIDA_VIDA_BOSS 10
 
 Bala_bombman::Bala_bombman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_BOMBMAN, id){
+Bala_especial(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){
 	impacto = false;
 	equipo_pc = false;
 }
@@ -53,7 +53,7 @@ void Bala_bombman::update(float tiempo, Mapa* mapa) {
 		nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD_X);
     }
 
-	impacto = !mapa->puede_ubicarse(this, nueva_coordenada) || 
+	impacto = !mapa->puede_ubicarse(this, nueva_coordenada) ||
 				mapa->bala_colisiona_con_pj(this, &nueva_coordenada);
 	if (mapa->puede_ubicarse(this, nueva_coordenada)){
 		coord = nueva_coordenada;
@@ -63,12 +63,12 @@ void Bala_bombman::update(float tiempo, Mapa* mapa) {
 
 void Bala_bombman::daniar(Personaje* pj) {
 	//sólo le saca vida a megaman.
-	pj->perder_vida(0); 
+	pj->perder_vida(0);
 }
 
 void Bala_bombman::daniar(Megaman* mega) {
 	//le saca media vida al megaman
-	mega->perder_vida(50); 
+	mega->perder_vida(50);
 }
 
 void Bala_bombman::daniar(Bombman* b){}
@@ -111,12 +111,4 @@ bool Bala_bombman::dania_con_escudo(Snipper* s){
 
 bool Bala_bombman::dania_con_escudo(Jumping_snipper* js){
 	return false;
-}
-
-bool Bala_bombman::dania(Personaje_pc* pj){
-	return !equipo_pc;
-}
-
-bool Bala_bombman::dania(Personaje_npc* pj){
-	return equipo_pc;
 }

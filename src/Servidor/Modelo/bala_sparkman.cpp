@@ -18,7 +18,7 @@
 #define PERDIDA_VIDA_BOSS 10
 
 Bala_sparkman::Bala_sparkman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_SPARKMAN, id){
+Bala_especial(dir_x, dir_y, c, TIPO_BALA_SPARKMAN, id){
 	equipo_pc = false;
 }
 
@@ -76,12 +76,4 @@ bool Bala_sparkman::dania_con_escudo(Snipper* s){
 
 bool Bala_sparkman::dania_con_escudo(Jumping_snipper* js){
 	return false;
-}
-
-bool Bala_sparkman::dania(Personaje_pc* pj){
-	return !equipo_pc;
-}
-
-bool Bala_sparkman::dania(Personaje_npc* pj){
-	return equipo_pc;
 }

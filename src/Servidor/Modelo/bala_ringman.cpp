@@ -18,7 +18,7 @@
 #define PERDIDA_VIDA_BOSS 10
 
 Bala_ringman::Bala_ringman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){
+Bala_especial(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){
 	equipo_pc = false;
 }
 
@@ -103,12 +103,4 @@ bool Bala_ringman::dania_con_escudo(Snipper* s){
 
 bool Bala_ringman::dania_con_escudo(Jumping_snipper* js){
 	return true;
-}
-
-bool Bala_ringman::dania(Personaje_pc* pj){
-	return !equipo_pc;
-}
-
-bool Bala_ringman::dania(Personaje_npc* pj){
-	return equipo_pc;
 }

@@ -20,7 +20,7 @@
 #define PERDIDA_VIDA_BOSS 10
 
 Bala_magnetman::Bala_magnetman(int dir_x, int dir_y, Coordenada c, int id):
-Bala(dir_x, dir_y, c, TIPO_BALA_MAGNETMAN, id){
+Bala_especial(dir_x, dir_y, c, TIPO_BALA_MAGNETMAN, id){
 	equipo_pc = false;
 	impacto = false;
 }
@@ -113,12 +113,4 @@ bool Bala_magnetman::dania_con_escudo(Snipper* s){
 
 bool Bala_magnetman::dania_con_escudo(Jumping_snipper* js){
 	return true;
-}
-
-bool Bala_magnetman::dania(Personaje_pc* pj){
-	return !equipo_pc;
-}
-
-bool Bala_magnetman::dania(Personaje_npc* pj){
-	return equipo_pc;
 }

@@ -1,11 +1,12 @@
 #ifndef ARMA_BOMBMAN_H
 #define ARMA_BOMBMAN_H
 
-#include "arma.h"
+#include "arma_boss.h"
 
-class Arma_bombman : public Arma{
+class Arma_bombman : public Arma_boss{
 	private:
 		int nuevo_id_bala();
+		bool equipo_pc;
 	public:
 		//Dado un Factory_observador_ubicable*, crea una arma bombman.
 		Arma_bombman(int id, Factory_observador_ubicable *fact_ubicables);
