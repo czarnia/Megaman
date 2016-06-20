@@ -4,12 +4,17 @@
 
 #define PSHOOTING 1
 
-int Minion_sprite::width = 30;
-int Minion_sprite::height = 30;
 
-Minion_sprite::Minion_sprite(SDL_Renderer *r, const char* file):
+Minion_sprite::Minion_sprite(SDL_Renderer *r, const char* file, int big):
     Sprite(r,file)
 {
+    if(big){
+        Minion_sprite::height = 60;
+    }else{
+        Minion_sprite::height = 30;
+    }
+    Minion_sprite::width = 30;
+
     rectangle.w = Minion_sprite::width;
     rectangle.h = Minion_sprite::height;
     currentFrame = 0;

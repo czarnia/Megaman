@@ -41,21 +41,18 @@ void Character_sprite::changeState(int x, int y){
     if (x > rectangle.x){
         movingLeft = false;
         currentState = RUNNING;
-        if (y > rectangle.y)
-            currentState = JUMPING;
+
     }
     if (x < rectangle.x){
         movingLeft = true;
         currentState = RUNNING;
-        if (y > rectangle.y)
-            currentState = JUMPING;
+
     }
     if (x == rectangle.x){
         if (y == rectangle.y){
             currentState = IDLE;
-        }else if (y > rectangle.y || y < rectangle.y)
-            currentState = JUMPING;
-    }
+
+    }}
 }
 
 void Character_sprite::setState(int &action){

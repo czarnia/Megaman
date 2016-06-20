@@ -28,12 +28,12 @@ class gameStateLobby: public GameState{
         bool start;
         bool quit;
         bool running;
-        std::pair<int,std::string> playerData;
+        std::pair<int,std::string> *playerData;
         int *level;
         Music music;
     public:
         gameStateLobby(Window *window, Renderer *renderer,
-                        Socket *skt, std::pair<int, std::string> &playerData,
+                        Socket *skt, std::pair<int, std::string> *playerData,
                         int *level);
         void moveSelector(std::string direction);
         ///

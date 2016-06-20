@@ -51,7 +51,8 @@ void Game::run(){
                 skt.conect(hostname,port);
                 if(currentState)
                     delete currentState;
-                currentState = new gameStateLobby(window, renderer, &skt, playerData, &level);
+
+                currentState = new gameStateLobby(window, renderer, &skt, &playerData, &level);
                 break;
             /// El juego en si, este estado presenta un loop infinito propio
             case GameState::GAME_START:
