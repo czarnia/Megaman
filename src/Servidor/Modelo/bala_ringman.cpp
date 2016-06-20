@@ -16,6 +16,7 @@
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_RINGMAN 33
 #define PERDIDA_VIDA_BOSS 10
+#define TIEMPO_REBOTE 10
 
 Bala_ringman::Bala_ringman(int dir_x, int dir_y, Coordenada c, int id):
 Bala_especial(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){
@@ -30,7 +31,7 @@ void Bala_ringman::update(float tiempo, Mapa* mapa) {
 	if (tiempo_pasado < TIEMPO_MOVER){
 		return;
 	}
-	if (direccion_x > 0){
+	/*if (direccion_x > 0){
 		nueva_coordenada = nueva_coordenada.derecha(2);
     }
 	if (direccion_x < 0){
@@ -48,7 +49,7 @@ void Bala_ringman::update(float tiempo, Mapa* mapa) {
 	}else{
 		//TODO: Mover al mapa.
 		mapa->quitar_bala(this);
-	}
+	}*/
 }
 
 void Bala_ringman::daniar(Personaje* pj) {

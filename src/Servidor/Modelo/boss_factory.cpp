@@ -34,23 +34,23 @@ void Boss_factory::crear(Mapa* mapa){
 	switch (codigo_boss){
 		case BOMBMAN:
 			arma_b = arma_fact.crear_arma_bombman();
-			boss = new Bombman(mapa, *coord_boss, arma_b, BOMBMAN);
+			boss = new Bombman(mapa, *coord_boss, arma_b, 0);
 			break;
 		case MAGNETMAN:
 			arma_m = arma_fact.crear_arma_magnetman();
-			boss = new Magnetman(mapa, *coord_boss, arma_m, MAGNETMAN);
+			boss = new Magnetman(mapa, *coord_boss, arma_m, 0);
 			break;
 		case SPARKMAN:
 			arma_s = arma_fact.crear_arma_sparkman();
-			boss = new Sparkman(mapa, *coord_boss, arma_s, SPARKMAN);
+			boss = new Sparkman(mapa, *coord_boss, arma_s, 0);
 			break;
 		case RINGMAN:
 			arma_r = arma_fact.crear_arma_ringman();
-			boss = new Ringman(mapa, *coord_boss, arma_r, RINGMAN);
+			boss = new Ringman(mapa, *coord_boss, arma_r, 0);
 			break;
 		case FIREMAN:
 			arma_f = arma_fact.crear_arma_fireman();
-			boss = new Fireman(mapa, *coord_boss, arma_f, FIREMAN);
+			boss = new Fireman(mapa, *coord_boss, arma_f, 0);
 			break;
 		default:
 			return;

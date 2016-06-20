@@ -110,7 +110,7 @@ void sortObject(int *objectType){
     }else if (*objectType == MP_BAR){
         *objectType = MP_BARN;
     }else{
-        *objectType = -1;
+      //  *objectType = -1;
     }
 
 }
@@ -132,28 +132,28 @@ void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int
             renderer->sprites[FRONT][objectType+objectID]->spawn();
             break;
         case METN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/met.png");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/met.png", 0);
             spr->loadAnimations("../AnimationConfig/met.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
         case BUMBYN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/bumby.PNG");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/bumby.PNG", 0);
             spr->loadAnimations("../AnimationConfig/bumby.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
             break;
         case J_SNIPERN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/j_sniper.PNG");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/j_sniper.PNG", 1);
             spr->loadAnimations("../AnimationConfig/j_sniper.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
                 break;
         case SNIPERN:
-            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.PNG");
+            spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.PNG", 1);
             spr->loadAnimations("../AnimationConfig/sniper.txt");
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
@@ -244,7 +244,7 @@ void ResponseHandler::executeAction(int &objectType, int &objectID, int &action)
 
 void ResponseHandler::changePosition(int &objectType, int &objectID, std::pair<int,int> &coord){
     /// PARA LA ANIMACION
-    renderer->sprites[FRONT][objectType+objectID]->changeState(coord.first, coord.second);
+   // renderer->sprites[FRONT][objectType+objectID]->changeState(coord.first, coord.second);
     renderer->sprites[FRONT][objectType+objectID]->setPosX(coord.first);
     renderer->sprites[FRONT][objectType+objectID]->setPosY(coord.second);
 }

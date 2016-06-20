@@ -92,7 +92,7 @@ void Megaman::sacar_movimiento(int direccion){
 }
 
 void Megaman::recibir_ataque(Bala* ataque){
-	//ataque->daniar(this);
+	ataque->daniar(this);
 }
 
 void Megaman::agregar_arma(Arma *arma){

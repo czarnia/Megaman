@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "../Comun/mutex.h"
 
+
 class ResponseHandler{
     private:
         Renderer *renderer;

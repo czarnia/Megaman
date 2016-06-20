@@ -16,6 +16,8 @@
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_FIREMAN 34
 #define PERDIDA_VIDA_BOSS 10
+#define VELOCIDAD_X 2
+#define VELOCIDAD_Y 2
 
 Bala_fireman::Bala_fireman(int dir_x, int dir_y, Coordenada c, int id):
 Bala_especial(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){
@@ -23,7 +25,7 @@ Bala_especial(dir_x, dir_y, c, TIPO_BALA_FIREMAN, id){
 }
 
 Bala_fireman::~Bala_fireman() {}
-
+/*
 void Bala_fireman::update(float tiempo, Mapa* mapa) {
 	Coordenada nueva_coordenada = coord;
 	tiempo_pasado += tiempo;
@@ -31,16 +33,16 @@ void Bala_fireman::update(float tiempo, Mapa* mapa) {
 		return;
 	}
 	if (direccion_x > 0){
-		nueva_coordenada = nueva_coordenada.derecha(2);
+		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);
     }
 	if (direccion_x < 0){
-		nueva_coordenada = nueva_coordenada.izquierda(2);
+		nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD_X);
     }
 	if (direccion_y < 0){
-		nueva_coordenada = nueva_coordenada.arriba(2);
+		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
 	}
 	if (direccion_y > 0){
-		nueva_coordenada = nueva_coordenada.abajo(2);
+		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
 	}
 
 	if (mapa->puede_ubicarse(this, nueva_coordenada)){
@@ -50,7 +52,7 @@ void Bala_fireman::update(float tiempo, Mapa* mapa) {
 		mapa->quitar_bala(this);
 	}
 }
-
+*/
 void Bala_fireman::daniar(Personaje* pj) {
 	pj->perder_vida(0); //sólo le saca vida a megaman.
 }

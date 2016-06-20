@@ -45,6 +45,8 @@
 #define PJ_SNIPER 3
 #define PSNIPER 5
 
+#include <fstream>
+
 gameStateEditor::gameStateEditor(Window *window, Renderer* renderer):
     window(window),
     renderer(renderer)
@@ -99,14 +101,16 @@ void gameStateEditor::load(int stack){
     spr->setPosY(Block_sprite::height*7);
     renderer->addSprite(STATIC_BUMBY, spr, FRONT, STATIC);
     /// JUMPING SNIPER
-    spr = new Block_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
+    spr = new Character_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
+    spr->changeState(-1,-1);
     spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
     spr->setPosY(Block_sprite::height*8);
     renderer->addSprite(STATIC_J_SNIPER, spr, FRONT, STATIC);
     /// SNIPER
-    spr = new Block_sprite(renderer->get_renderer(), "../sprites/sniper.png");
+    spr = new Character_sprite(renderer->get_renderer(), "../sprites/sniper.png");
+    spr->changeState(-1,-1);
     spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
-    spr->setPosY(Block_sprite::height*9);
+    spr->setPosY(Block_sprite::height*10);
     renderer->addSprite(STATIC_SNIPER, spr, FRONT, STATIC);
 }
 
@@ -217,7 +221,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                     break;
                 case gameStateEditor::J_SNIPER:
                     if (!renderer->ocupied(x,y)){
-                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
+                        spr = new Character_sprite(renderer->get_renderer(), "../sprites/j_sniper.png");
                         spr->changeState(-1,-1);
                         spr->setPosX(x);
                         spr->setPosY(y);
@@ -226,7 +230,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                     break;
                 case gameStateEditor::SNIPER:
                     if (!renderer->ocupied(x,y)){
-                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/sniper.png");
+                        spr = new Character_sprite(renderer->get_renderer(), "../sprites/sniper.png");
                         spr->changeState(-1,-1);
                         spr->setPosX(x);
                         spr->setPosY(y);
@@ -245,8 +249,6 @@ void gameStateEditor::updateInput(SDL_Event *event){
         }
     }
 }
-
-
 
 int gameStateEditor::unload(){
     renderer->clearSprites();
@@ -284,6 +286,9 @@ GameState::StateCode gameStateEditor::update(){
             if( pressed.sym == SDLK_UP || pressed.sym == SDLK_DOWN ||
                 pressed.sym == SDLK_LEFT || pressed.sym == SDLK_RIGHT)
                 updateCameraPos(&event);
+            else if ( pressed.sym == SDLK_c){
+             //   loadChamber();
+            }
 
         }else if (event.type == SDL_MOUSEBUTTONDOWN){
             click = true;
@@ -308,6 +313,8 @@ void gameStateEditor::render(){
 
 void gameStateEditor::exportMap(){
     std::string fileName;
+    int sizeX = 0;
+    int sizeY = 0;
     std::ofstream ofile;
     std::cout<<"Ingrese un nombre para el nuevo mapa:"<<std::endl;
     int object_type;
@@ -315,7 +322,23 @@ void gameStateEditor::exportMap(){
     ofile.open(fileName.c_str());
 
     std::map<int,Sprite*>::iterator it;
+    /// CALCULO EL TAMANIO DEL MAPA
+    it = renderer->sprites[FRONT].begin();
+    for(; it!= renderer->sprites[FRONT].end(); ++it){
+        if (it->second->getPosX() > sizeX){
+            sizeX = it->second->getPosX();
+        }
+        if (it->second->getPosY() > sizeY){
+            sizeY = it->second->getPosY();
+        }
+    }
+    sizeX /= Block_sprite::width;
+    sizeY /= Block_sprite::height;
 
+    ofile << sizeX << " ";
+    ofile << sizeY << " ";
+
+    std::cout << sizeX << " " << sizeY << std::endl;
     it = renderer->sprites[FRONT].begin();
     for (; it != renderer->sprites[FRONT].end(); ++it){
 
@@ -337,7 +360,7 @@ void gameStateEditor::exportMap(){
             object_type = PJ_SNIPER;
 
 
-        if(it->first == PMEGAMAN){
+        if(it->first == PMEGAMAN || it->first == PSNIPER || it->first == J_SNIPERN){
             ofile << object_type << " ";
             ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
             ofile << it->second->getPosY() + Block_sprite::height << " ";

@@ -105,6 +105,8 @@ class Mapa{
 	void ubicar_puerta_boss(Coordenada c);
     //Dado un Personaje_npc* le da la coordenada de un enemigo.
     Coordenada obtener_coordenada_enemigo(Personaje_npc* pj);
+    //Dado una bala de magnetman le da la coordenada de un enemigo.
+    Coordenada obtener_coordenada_enemigo_pc_cercano(Bala* pj);
     //Devuelve un id para el mapa.
     static int get_id_mapa();
   private:

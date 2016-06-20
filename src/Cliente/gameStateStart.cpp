@@ -10,7 +10,7 @@
 #include "bar_sprite.h"
 #include "event.h"
 
-#define FPS 30
+#define FPS 200
 #define TAM_INT 4
 #define MAPA 1
 #define STATIC 1
@@ -145,21 +145,21 @@ void gameStateStart::updateInput(bool *running){
             switch (event.key.keysym.sym){
                 case SDLK_UP:
                     if(!up){
-                        std::cout<<"se apreto arriba"<<std::endl;
+                       // std::cout<<"se apreto arriba"<<std::endl;
                         sender.send("move", "up"); // ENVIO LA TECLA
                         up = true;
                     }
                     break;
                 case SDLK_DOWN:
                     if(!down){
-                        std::cout<<"se apreto abajo"<<std::endl;
+                      //  std::cout<<"se apreto abajo"<<std::endl;
                         sender.send("move", "down");  // ENVIO LA TECLA
                         down = true;
                     }
                     break;
                 case SDLK_LEFT:
                     if(!left){
-                        std::cout<<"se apreto izquierda"<<std::endl;
+                      //  std::cout<<"se apreto izquierda"<<std::endl;
                         sender.send("move", "left");  // ENVIO LA TECLA
                         direction = "left";
                         left = true;
@@ -167,7 +167,7 @@ void gameStateStart::updateInput(bool *running){
                     break;
                 case SDLK_RIGHT:
                     if(!right){
-                        std::cout<<"se apreto derecha"<<std::endl;
+                      //  std::cout<<"se apreto derecha"<<std::endl;
                         sender.send("move", "right");  // ENVIO LA TECLA
                         direction = "right";
                         right = true;
@@ -175,36 +175,36 @@ void gameStateStart::updateInput(bool *running){
                     break;
                 case SDLK_s:
                     if(!jump){
-                        std::cout<<"Se salto"<<std::endl;
+                     //   std::cout<<"Se salto"<<std::endl;
                         sender.send("move","jump");
                         jump = true;
                     }
                     break;
                 case SDLK_a:
                     if (!shoot){
-                        std::cout<<"Se disparo"<<std::endl;
+                     //   std::cout<<"Se disparo"<<std::endl;
                         sender.send("attack", direction);  // ENVIO LA TECLA
                         shoot = true;
                     }
                     break;
                 case SDLK_1:
-                    std::cout<<"Se cambio de arma 1"<<std::endl;
+                    //std::cout<<"Se cambio de arma 1"<<std::endl;
                     sender.send("gunChange","gun1");  // ENVIO LA TECLA
                     break;
                 case SDLK_2:
-                    std::cout<<"Se cambio de arma 2"<<std::endl;
+                   // std::cout<<"Se cambio de arma 2"<<std::endl;
                     sender.send("gunChange","gun2");  // ENVIO LA TECLA
                     break;
                 case SDLK_3:
-                    std::cout<<"Se cambio de arma 3"<<std::endl;
+                   // std::cout<<"Se cambio de arma 3"<<std::endl;
                     sender.send("gunChange","gun3");  // ENVIO LA TECLA
                     break;
                 case SDLK_4:
-                    std::cout<<"Se cambio de arma 4"<<std::endl;
+                   // std::cout<<"Se cambio de arma 4"<<std::endl;
                     sender.send("gunChange","gun4");  // ENVIO LA TECLA
                     break;
                 case SDLK_5:
-                    std::cout<<"Se cambio de arma 5"<<std::endl;
+                   // std::cout<<"Se cambio de arma 5"<<std::endl;
                     sender.send("gunChange","gun5");  // ENVIO LA TECLA
                     break;
                 default:
@@ -272,13 +272,14 @@ void gameStateStart::mainLoop(){
         starting_tick = SDL_GetTicks();
         /// Recibo la entrada y envio al servidor
         /// Si se recibe un cierre de ventana, se corta la ejecucion
+
         updateInput(&running);
         /// Actualizo la posicion de camara
         if (renderer->find(playerData.first))
             renderer->updateCamPos(playerData.first);
         /// Verifico si la cola de eventos provenientes del servidor esta vacia
 
-        if (!receiver->r_queue.empty()){
+        while (!receiver->r_queue.empty()){
             /// Si hay algun evento, lo proceso
             std::pair<int,int> coord;
 
@@ -304,11 +305,15 @@ void gameStateStart::mainLoop(){
                 default:
                     break;
             }
+            render();
         }
 
         /// dibujo
+        mutex.lock();
         render();
+        mutex.unlock();
         /// limito FPS
+
         cap_framerate(starting_tick);
 	}
 }
