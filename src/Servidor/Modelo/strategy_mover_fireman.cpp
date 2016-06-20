@@ -1,7 +1,7 @@
 #include "strategy_mover_fireman.h"
 #include "fireman.h"
 
-#define TIEMPO_SALTO 3
+#define TIEMPO_SALTO 3.5
 #define GRAVEDAD 5
 #define VELOCIDAD_Y 20
 #define VELOCIDAD_X 20

@@ -83,12 +83,12 @@ void Servidor::empezar_partida(){
 }
 
 void Servidor::empezar_nivel(int num_nivel){
-	//mundo->inicializar_nivel(num_nivel);
-	//clientes.iniciar_nivel(num_nivel);
+	mundo->inicializar_nivel(num_nivel);
+	clientes.iniciar_nivel(num_nivel);
 	//PARA PRUEBAS
 	//NO BORRAR!!!!!!!!!!!
-	mundo->inicializar_nivel(6);
-	clientes.iniciar_nivel(6);
+	//mundo->inicializar_nivel(6);
+	//clientes.iniciar_nivel(6);
 }
 
 void Servidor::jugar_nivel(){
@@ -104,35 +104,6 @@ void Servidor::cerrar_conexiones(){
 
 void Servidor::update(Observable *obs){}
 
-void Servidor::update_fin_partida(){ 
-	clientes.update_victoria();
-	clientes.update_fin_partida();
-}
-
-void Servidor::update_fin_nivel(){ 
-  clientes.update_fin_nivel();
-}
-
-void Servidor::update_gameover(int id){
-  clientes.update_gameover(id);
-}
-
-void Servidor::update_cantidad_vidas(int tipo, int id, int vidas) {
-	clientes.update_cantidad_vidas(tipo, id, vidas);
-}
-
-void Servidor::update_porcentaje_vida(int tipo, int id, int vida){
-	clientes.update_porcentaje_vida(tipo, id, vida);
-}
-
-void Servidor::update_energia(int tipo, int id, int energia){
-	clientes.update_energia(tipo, id, energia);
-}
-
-void Servidor::update_posicion(int tipo, int id, int x, int y){
-	clientes.update_posicion(tipo, id, x, y);
-}
-
-void Servidor::update_estado_personaje(int tipo, int id, int accion){
-	clientes.update_estado_personaje(tipo, id, accion);
+void Servidor::update_estado(Estado e){
+	clientes.update_estado(e);
 }

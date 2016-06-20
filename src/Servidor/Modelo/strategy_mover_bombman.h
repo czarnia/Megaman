@@ -25,4 +25,3 @@ class StrategyMoverBombman : public StrategyMover{
 };
 
 #endif //STRATEGY_MOVER_BOMBMAN_H
-

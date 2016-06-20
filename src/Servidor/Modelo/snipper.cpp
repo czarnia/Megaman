@@ -3,7 +3,7 @@
 
 #define IZQUIERDA -1
 #define SNIPPER 5
-#define TIEMPO_ESTADO 0.5
+#define TIEMPO_ESTADO 0.25
 
 enum estado_npc_escudo{MURIENDO, ESCUDO_UP = 7, ESCUDO_DOWN};
 
@@ -37,7 +37,7 @@ void Snipper::update(float tiempo, Mapa* mapa){
 	if (estado_actual != ESCUDO_UP){
     //atacar(IZQUIERDA, mapa);
 	}
-  mover(tiempo, mapa);
+  //mover(tiempo, mapa);
 	//Personaje::update(tiempo, mapa);
 }
 

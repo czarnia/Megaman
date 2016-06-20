@@ -152,16 +152,19 @@ void Personaje::interactuar(Escalera *esc){}
 void Personaje::interactuar(Capsula_de_energia *capsula){}
 
 bool Personaje::colisiona(Bala *bala, Coordenada c){
-		size_t x = c.obtener_abscisa();
-		size_t y = c.obtener_ordenada();
-		size_t ancho_max = coordenada.derecha(ancho/2).obtener_abscisa();
-		size_t ancho_min = coordenada.izquierda(ancho/2).obtener_abscisa();
-		size_t alto_max = coordenada.arriba(alto/2).obtener_ordenada();
-		size_t alto_min = coordenada.abajo(alto/2).obtener_ordenada();
-		if ( (x >= ancho_min) && (x <= ancho_max) && (y <= alto_min) && (y >= alto_max) ){
-			return true;
-		}
+	if (!this->recibe_danio(bala)){
 		return false;
+	}
+	size_t x = c.obtener_abscisa();
+	size_t y = c.obtener_ordenada();
+	size_t ancho_max = coordenada.derecha(ancho/2).obtener_abscisa();
+	size_t ancho_min = coordenada.izquierda(ancho/2).obtener_abscisa();
+	size_t alto_max = coordenada.arriba(alto/2).obtener_ordenada();
+	size_t alto_min = coordenada.abajo(alto/2).obtener_ordenada();
+	if ( (x >= ancho_min) && (x <= ancho_max) && (y <= alto_min) && (y >= alto_max) ){
+		return true;
+	}
+	return false;
 }
 
 int Personaje::get_estado_actual(){

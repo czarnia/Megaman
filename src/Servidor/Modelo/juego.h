@@ -7,9 +7,12 @@
 #include "mapa.h"
 #include "ubicable.h"
 #include "juego_observable.h"
+#include "../Conexion/Partida/estado.h"
+
 #include <string>
 #include <iosfwd>
 #include <cstddef>
+#include <queue>
 
 class Ubicable;
 class Ubicable_factory;
@@ -26,7 +29,7 @@ public Juego_observable{
 		bool partida_inicializada;
 		bool jugando_nivel;
 		std::vector<int> niveles_ganados;
-		
+		std::queue<Estado> cola_estados;
 	public:
 		//Dado un tamanio, crea un juego nuevo.
 		Juego();
@@ -38,10 +41,12 @@ public Juego_observable{
 		void terminar_partida();
 		//Dado un determinado tiempo, actualiza al juego.
 		virtual void update(float tiempo);
+
 		//Notifica a los observadores de un cambio en el estado.
 		void notificar_observadores();
 		//Hace un update.
 		virtual void update(Observable *obs);
+
 		//Dado el id de un personaje, hace que el mismo ataque en una direccion
 		//dada.
 		void personaje_atacar(int id_pj, int direccion);
@@ -65,24 +70,7 @@ public Juego_observable{
 		void quitar_observador(Observador_juego *observador);
 		//Agrega un observador al juego.
 		void agregar_observador(Observador_juego *observador);
-		//Notifica a los observadores que finalizo la partida.
-		void notificar_termino_partida();
-		//Notifica a los observadores que se produjo un gameover.
-		void notificar_gameover(int id);
-		//Notifica a los observadores que cambio
-		//el estado de un personaje.
-		void notificar_estado_personaje(int tipo, int id, int accion);
-		//Notifica a los observadores que se modifico la cantidad de vidas de un
-		//personaje.
-		void notificar_cantidad_vidas(int tipo, int id, int vidas);
-		//Notifica a los observadores que se modifico el porcentaje de vida de un
-		//personaje.
-		void notificar_porcentaje_vida(int tipo, int id, int cant_vida);
-		//Notifica a los observadores que se modifico el porcentaje de energia de un
-		//personaje.
-		void notificar_energia(int tipo, int id, int energia);
-		//Notifica a los observadores que se modifico la posicion de un personaje.
-		void notificar_posicion(int tipo, int id, int x, int y);
+
 		//Recibe id y tipo y un estado correspondientes a un personaje y
 		//y notifica al servidor del cambio de estado.
 		void actualizo_estado_personaje(int tipo, int id, int estado);
@@ -102,22 +90,25 @@ public Juego_observable{
 		//su posicion actual y notifica al servidor de
 		//la nueva posicion.
 		void actualizo_posicion(int tipo, int id, int x, int y);
+		//Notifica al servidor de una victoria.
+		void actualizo_victoria();
+		//Notifica al servidor de un fin de nivel.
+		void actualizo_termino_nivel();
+
 		//Recibe un id y un tipo y remueve al personaje
 		//muerto del juego.
 		void murio_personaje(Personaje *p);
 		//Finaliza el nivel.
 		void murio_boss();
-		//Devuelve una lista de coordenadas correspondientes
-		//a los bloques del mapa.
-		std::vector<Coordenada> bloques();
+
+
 		//Devuelve la cantidad de jugadores activos.
 		int get_cantidad_jugadores();
 		//Devuelve true si ya se inicio la partida.
 		bool inicio_partida();
 		//Recibe un numero de mapa e inicializa un nuevo nivel.
 		void inicializar_nivel(int numero_mapa);
-		//Notifica a los observadores de que se gano el nivel actual.
-		virtual void notificar_termino_nivel();
+
 		//Devuelve true si ya se inicializo el nivel.
 		bool esta_jugando_nivel();
 		//Devuelve el mapa actual del juego.
@@ -129,6 +120,7 @@ public Juego_observable{
 		//juego.
 		void cargar_factories(Cargador_mapa *cargador);
 
+		void enviar_estados();
 
 };
 

@@ -105,13 +105,33 @@ Conexion_cliente::~Conexion_cliente(){
   rcv.join();
 }
 
-void Conexion_cliente::update_estado_personaje(int tipo, int id, int estado){
-	/*int cambio_estado = CAMBIO_ESTADO;
+
+void Conexion_cliente::update_estado(Estado estado){
+	estado.enviar(skt);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*void Conexion_cliente::update_estado_personaje(int tipo, int id, int estado){
+	int cambio_estado = CAMBIO_ESTADO;
 	skt->send((char*)&cambio_estado, TAM_INT);
 	skt->send((char*)&tipo, TAM_INT);
 	skt->send((char*)&id, TAM_INT);
 	skt->send((char*)&estado, TAM_INT);
-	skt->send("        ", TAM_INT);*/
+	skt->send("        ", TAM_INT);
 }
 
 void Conexion_cliente::enviar_cambio_posicion(int tipo, int id, int x, int y){
@@ -166,4 +186,4 @@ void Conexion_cliente::enviar_gameover(){
   skt->send((char*)&derrota, TAM_INT);
   skt->send("                ", TAM_INT*4);
   //Envio una cadena vacía de TAM_INT*4 caracteres.
-}
+}*/

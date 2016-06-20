@@ -19,8 +19,11 @@
 #include <iostream>
 #include <algorithm>
 
+enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS,
+	CAMBIO_ESTADO, FIN_NIVEL, DERROTA, VICTORIA};
+
 #define MAIN_PATH_MAPAS "../../../Mapas/"
-#define TIEMPO 0.03
+#define TIEMPO 0.04
 #define TOT_NIVELES 5
 
 typedef std::vector<int>::iterator ItNiveles;
@@ -76,7 +79,8 @@ void Juego::jugar(){
 		clock_t iniciar_tiempo = clock();
 		{
 			Lock l(proteccion);
-			update(0.005);
+			update(0.04);
+			enviar_estados();
 		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
 		sleep(delta_tiempo);
@@ -157,30 +161,21 @@ bool Juego::esta_jugando_nivel(){
 	return jugando_nivel;
 }
 
-void Juego::notificar_observadores(){}
+//--------------------------HASTA ACÁ TODO BIEN-------------------------------//
 
+
+void Juego::notificar_observadores(){}
 void Juego::update(Observable *obs){}
 
-void Juego::notificar_termino_partida(){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_fin_partida();
-	}
-}
 
-void Juego::notificar_gameover(int id){
+
+/*void Juego::notificar_gameover(int id){
 	for (size_t i = 0; i < observadores.size(); i++){
 		Observador_juego *obs = (Observador_juego*)observadores[i];
 		obs->update_gameover(id);
 	}
-}
+}*/
 
-void Juego::actualizo_estado_personaje(int tipo, int id, int estado_act){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_estado_personaje(tipo, id, estado_act);
-	}
-}
 
 void Juego::murio_personaje(Personaje *p){
 	mundo->quitar_personaje(p->get_id_unico());
@@ -188,7 +183,7 @@ void Juego::murio_personaje(Personaje *p){
 		cant_jugadores -= 1;
 	}
 	if (cant_jugadores == 0){
-		notificar_termino_partida();
+		//actualizo_gameover();
 		terminar_partida();
 	}
 }
@@ -206,64 +201,66 @@ void Juego::murio_boss(){
 	if (niveles_ganados.size() == TOT_NIVELES){
 		//NOTIFICAR VICTORIA JUEGO:
 		terminar_partida();
-		notificar_termino_partida();
+		actualizo_victoria();
 	}else{
 		//NOTIFICAR VICTORIA NIVEL:
-		notificar_termino_nivel();
+		actualizo_termino_nivel();
 	}
 	jugando_nivel = false;
 }
 
-void Juego::notificar_termino_nivel(){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_fin_nivel();
-	}
+
+
+//-------------------------------------------------------------------//
+void Juego::actualizo_victoria(){
+	Estado nuevo_estado(VICTORIA);
+	cola_estados.push(nuevo_estado);
 }
 
-void Juego::notificar_cantidad_vidas(int tipo, int id, int cant_vidas){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_cantidad_vidas(tipo, id, cant_vidas);
-	}
-}
-
-void Juego::notificar_porcentaje_vida(int tipo, int id, int cant_vida){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_porcentaje_vida(tipo, id, cant_vida);
-	}
-}
-
-void Juego::notificar_energia(int tipo, int id, int energia){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_energia(tipo, id, energia);
-	}
-}
-
-void Juego::notificar_posicion(int tipo, int id, int x, int y){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_posicion(tipo, id, x, y);
-	}
+void Juego::actualizo_termino_nivel(){
+	Estado nuevo_estado(FIN_NIVEL);
+	cola_estados.push(nuevo_estado);
 }
 
 void Juego::actualizo_cantidad_vidas(int tipo, int id, int vidas){
-	notificar_cantidad_vidas(tipo, id, vidas);
+	Estado nuevo_estado(CANT_VIDAS, tipo, id, vidas);
+	cola_estados.push(nuevo_estado);
+
 }
 
 void Juego::actualizo_porcentaje_vida(int tipo, int id, int cant_vida){
-	notificar_porcentaje_vida(tipo, id, cant_vida);
+	Estado nuevo_estado(VIDA, tipo, id, cant_vida);
+	cola_estados.push(nuevo_estado);
 }
 
 void Juego::actualizo_energia(int tipo, int id, int energia){
-	notificar_energia(tipo, id, energia);
+	Estado nuevo_estado(ENERGIA, tipo, id, energia);
+	cola_estados.push(nuevo_estado);
 }
 
 void Juego::actualizo_posicion(int tipo, int id, int x, int y){
-	notificar_posicion(tipo, id, x, y);
+	Estado nuevo_estado(POSICION, tipo, id, x, y);
+	cola_estados.push(nuevo_estado);
 }
+
+void Juego::actualizo_estado_personaje(int tipo, int id, int estado){
+	Estado nuevo_estado(CAMBIO_ESTADO, tipo, id, estado);
+	cola_estados.push(nuevo_estado);
+}
+
+void Juego::enviar_estados(){
+	while(!cola_estados.empty()){
+		Estado e = cola_estados.front();
+		for (size_t i = 0; i < observadores.size(); i++){
+			Observador_juego *obs = (Observador_juego*)observadores[i];
+			obs->update_estado(e);
+		}
+		cola_estados.pop();
+	}
+}
+
+//-------------------------------------------------------------------//
+
 
 std::vector<Ubicable*> Juego::devolver_ubicables(){
 	return mundo->devolver_ubicables();

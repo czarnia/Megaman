@@ -67,4 +67,3 @@ Bombman *pj, Coordenada *coord){
 }
 
 StrategyMoverBombman::~StrategyMoverBombman(){}
-

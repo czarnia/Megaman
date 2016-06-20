@@ -41,28 +41,8 @@ public Observador_juego{
     void cliente_conectado();
     //Dado un observable, realiza un update.
 	  virtual void update(Observable *obs);
-	  //Dado un identificador, notifica un gameover del cliente correspondiente.
-	  virtual void update_gameover(int id);
-	  //Notifica el fin de una partida.
-	  virtual void update_fin_partida();
-	  //Dado un id, un tipo y un codigo de accion, notifica que un 
-	  //hubo un cambio en el estado del personaje.
-	  void update_estado_personaje(int tipo, int id, int accion);
-	  //Dado un identificador, un tipo y una cantidad de vidas, notifica que un
-	  //personaje vio modificadas las mismas.
-	  virtual void update_cantidad_vidas(int tipo, int id, int vidas);
-	  //Dado un identificador, un tipo y una porcentaje de vida, notifica que un
-	  //personaje vio modificada la misma.
-	  virtual void update_porcentaje_vida(int tipo, int id, int porcentaje_vida);
-	  //Dado un identificador, un tipo y una porcentaje de energia, notifica que
-	  //un personaje vio modificada la misma.
-	  virtual void update_energia(int tipo, int id, int energia);
-	  //Dado un identificador, un tipo y nuevas coordenadas en x y en y, notifica
-	  //que un personaje vio modificadas la mismas.
-	  virtual void update_posicion(int tipo, int id, int x, int y);
-		//Notifica a los clientes de que se gano el nivel.
-		virtual void update_fin_nivel();
-
+    //Dado un estado, hace un update.
+    virtual void update_estado(Estado e);
   private:
     //Dado un socket conectado a un cliente y un id del mismo,
     //se agrega un cliente al servidor.

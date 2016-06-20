@@ -2,7 +2,7 @@
 #include "arma_minion.h"
 #include <cstdlib>
 
-#define TIEMPO_MOVER 1
+#define TIEMPO_MOVER 2
 #define TIEMPO_ATACAR 8
 #define CANT_DIRECCIONES 3
 #define AVANZAR_X 1

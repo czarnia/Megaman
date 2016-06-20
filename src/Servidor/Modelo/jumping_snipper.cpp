@@ -19,7 +19,7 @@ void Jumping_snipper::update(float tiempo, Mapa* mapa){
     tiempo_pasado += tiempo;
   }
   //Salta:
-	salto_snipper.mover(mapa, this, tiempo);
+	//salto_snipper.mover(mapa, this, tiempo);
   if ((tiempo_pasado < TIEMPO_ESTADO) || !activo){
     return;
   }

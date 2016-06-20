@@ -5,6 +5,7 @@
 #include "receiver_cliente.h"
 #include "../../Modelo/juego.h"
 #include "log.h"
+#include "../Partida/estado.h"
 
 #include <string>
 
@@ -30,8 +31,11 @@ class Conexion_cliente{
     void finalizar_nivel();
     //Destructor del Conexion_cliente.
     virtual ~Conexion_cliente();
-	//Envia el nuevo estado de un personaje al cliente.
-	void update_estado_personaje(int tipo, int id, int accion);
+
+    void update_estado(Estado estado);
+
+	  /*//Envia el nuevo estado de un personaje al cliente.
+	  void update_estado_personaje(int tipo, int id, int accion);
     //Recibe el id de un personaje y notifica al cliente
     //de su nueva posicion.
     void enviar_cambio_posicion(int tipo, int id, int x, int y);
@@ -44,7 +48,7 @@ class Conexion_cliente{
     //Envia un mensaje de victoria al jugador/cliente.
     void enviar_victoria();
     //Envia un mensaje de derrota al jugador/cliente.
-    void enviar_gameover();
+    void enviar_gameover();*/
   private:
     //Envia la informacion del mapa inicial.
     void enviar_mapa_inicial();

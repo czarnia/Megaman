@@ -51,7 +51,7 @@ void Almacenador_clientes::update_fin_nivel(){
 
 void Almacenador_clientes::update_victoria(){
 	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		it->second->enviar_victoria();
+		//it->second->enviar_victoria();
 	}
 }
 
@@ -60,40 +60,12 @@ void Almacenador_clientes::update_gameover(int id){
 	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN JUGADOR PERDIO.
 	ItClientes it = clientes.find(id);
 	if (it->first == id){
-		(it->second)->enviar_gameover();
+		//(it->second)->enviar_gameover();
 		(it->second)->terminar_ejecucion();
 		clientes.erase(id);
 	}
 }
 
-void Almacenador_clientes::update_cantidad_vidas(int tipo, int id, int vidas) {
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO
-	// PORCENTAJE DE VIDA
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cantidad_vidas(tipo, id, vidas);
-	}
-}
-
-void Almacenador_clientes::update_porcentaje_vida(int tipo, int id, int vida){
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE PERDIO VIDA
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_porcentaje_vida(tipo, id, vida);
-	}
-}
-
-void Almacenador_clientes::update_energia(int tipo, int id, int energia){
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		//HAY QUE NOTIFICARLE A LOS OTROS CLIENTES TMB(?)
-		(it->second)->enviar_porcentaje_energia(tipo, id, energia);
-	}
-}
-
-void Almacenador_clientes::update_posicion(int tipo, int id, int x, int y){
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN PERSONAJE ACTUALIZO SU POSICION
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->enviar_cambio_posicion(tipo, id, x, y);
-	}
-}
 
 void Almacenador_clientes::iniciar_nivel(int num_nivel){
   for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
@@ -101,8 +73,8 @@ void Almacenador_clientes::iniciar_nivel(int num_nivel){
   }
 }
 
-void Almacenador_clientes::update_estado_personaje(int tipo, int id, int accion){
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		(it->second)->update_estado_personaje(tipo, id, accion);
+void Almacenador_clientes::update_estado(Estado e){
+  for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
+		it->second->update_estado(e);
 	}
 }
