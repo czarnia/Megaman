@@ -24,7 +24,11 @@ void Observador_ubicable::update(Observable *obs){
 		int y = c.obtener_ordenada();
 		std::stringstream pos_final;
 
-		juego->actualizo_posicion(tipo, id, x, y);
+		Coordenada coord_nueva = ubicable->get_coordenada();
+		if (coordenada.obtener_distancia(coord_nueva) > 6){
+			juego->actualizo_posicion(tipo, id, x, y);
+		}
+
 		coordenada = ubicable->get_coordenada();
 	}
 }
