@@ -106,7 +106,7 @@ class Mapa{
     //Dado un Personaje_npc* le da la coordenada de un enemigo.
     Coordenada obtener_coordenada_enemigo(Personaje_npc* pj);
     //Dado una bala de magnetman le da la coordenada de un enemigo.
-    Coordenada obtener_coordenada_enemigo(Bala_boss* pj);
+    Coordenada obtener_coordenada_enemigo_pc_cercano(Bala_boss* pj);
     //Devuelve un id para el mapa.
     static int get_id_mapa();
   private:
