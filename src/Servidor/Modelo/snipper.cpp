@@ -33,7 +33,7 @@ void Snipper::update(float tiempo, Mapa* mapa){
 	tiempo_pasado -= TIEMPO_ESTADO;
 	this->notificar_observadores();
 	if (estado_actual != ESCUDO_UP){
-    atacar(IZQUIERDA, mapa);
+    //atacar(IZQUIERDA, mapa);
 	}
   mover(tiempo, mapa);
 	//Personaje::update(tiempo, mapa);

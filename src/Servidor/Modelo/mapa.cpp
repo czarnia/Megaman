@@ -1,4 +1,5 @@
 #include "mapa.h"
+#include "../Conexion/Arquitectura/log.h"
 
 #include "../../Comun/lock.h"
 #include "updater.h"
@@ -114,6 +115,9 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
   int alto = ubic->get_alto();
   if (!tiene_coordenada(c.arriba(alto/2)) || !tiene_coordenada(c.abajo(alto/2))
   || !tiene_coordenada(c.izquierda(ancho/2)) || !tiene_coordenada(c.izquierda(ancho/2))){
+      int x = ubic->get_coordenada().obtener_abscisa();
+      int y = ubic->get_coordenada().obtener_ordenada();
+      Log::instancia()->no_hay_coordenada(x, y);
       return false;
   }
 	for (size_t i = 0; i < elementos.size(); i++){
@@ -121,6 +125,13 @@ bool Mapa::puede_ubicarse(Ubicable* ubic, Coordenada c){
 			continue;
 		}
 		if (elementos[i]->colisiona(ubic, c) && !elementos[i]->puede_ocupar(ubic)){
+      int id_pj = ubic->get_id();
+      int id_elem = elementos[i]->get_id();
+      int x_pj = ubic->get_coordenada().obtener_abscisa();
+      int y_pj = ubic->get_coordenada().obtener_ordenada();
+      int x_elem = elementos[i]->get_coordenada().obtener_abscisa();
+      int y_elem = elementos[i]->get_coordenada().obtener_ordenada();
+      Log::instancia()->colision_personaje(id_pj, x_pj, y_pj, id_elem, x_elem, y_elem);
 			return false;
 		}
 	}

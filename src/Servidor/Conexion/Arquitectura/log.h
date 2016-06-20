@@ -56,6 +56,9 @@ class Log{
     //Escribe en el archivo de salida un mensaje referido a que un jugador cam-
     //bia su arma.
     void jugador_cambiar_arma(int id_cliente, int arma);
+
+    void no_hay_coordenada(int x, int y);
+    void colision_personaje(int id_pj, int x_pj, int y_pj, int id_elem, int x_elem, int y_elem);
   private:
     //Se crea un Log.
     Log();
