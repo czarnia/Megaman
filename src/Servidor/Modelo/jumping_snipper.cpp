@@ -18,12 +18,13 @@ void Jumping_snipper::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
   //Salta:
 	salto_snipper.mover(mapa, this, tiempo);
-	if (tiempo_pasado >= TIEMPO_ESTADO){
-		//paso el tiempo de estado:
-		estado_actual = (estado_actual == ESCUDO_UP)? ESCUDO_DOWN : ESCUDO_UP;
-		tiempo_pasado = 0;
-		this->notificar_observadores();
-	}
+  if (tiempo_pasado < TIEMPO_ESTADO){
+    return;
+  }
+	//paso el tiempo de estado:
+	estado_actual = (estado_actual == ESCUDO_UP)? ESCUDO_DOWN : ESCUDO_UP;
+	tiempo_pasado -= TIEMPO_ESTADO;
+	this->notificar_observadores();
 	if (this->esta_bajo_escudo()){
 		return;
 	}

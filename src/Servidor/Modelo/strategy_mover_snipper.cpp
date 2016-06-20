@@ -1,8 +1,8 @@
 #include "strategy_mover_snipper.h"
 #include "snipper.h"
 
-#define VELOCIDAD 5
-#define TIEMPO_DIRECCION 1
+#define VELOCIDAD 10
+#define TIEMPO_DIRECCION 0.1
 
 enum direccion{DERECHA, IZQUIERDA};
 
@@ -14,7 +14,7 @@ StrategyMoverSnipper::StrategyMoverSnipper(){
 void StrategyMoverSnipper::mover(Mapa *mapa, Snipper *pj, float tiempo){
 	Coordenada coord_nueva = pj->coordenada;
 	tiempo_pasado += tiempo;
-	if (tiempo_pasado > TIEMPO_DIRECCION){
+	if (tiempo_pasado >= TIEMPO_DIRECCION){
 		cambiar_direccion();
 		tiempo_pasado -= TIEMPO_DIRECCION;
 	}

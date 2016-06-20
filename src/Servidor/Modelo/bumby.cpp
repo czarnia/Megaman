@@ -2,8 +2,8 @@
 #include "arma_minion.h"
 #include <cstdlib>
 
-#define TIEMPO_MOVER 2
-#define TIEMPO_ATACAR 16
+#define TIEMPO_MOVER 1
+#define TIEMPO_ATACAR 8
 #define CANT_DIRECCIONES 3
 #define AVANZAR_X 1
 #define RETROCEDER_X -1
@@ -57,12 +57,11 @@ void Bumby::update(float tiempo, Mapa* mapa){
     mover(tiempo, mapa);
     t_mover -= TIEMPO_MOVER;
 	}
-	/*if (tiempo_pasado >= TIEMPO_ATACAR){
-		tiempo_pasado = 0;
+	if (t_ataque >= TIEMPO_ATACAR){
 		int dir = std::rand() % CANT_DIRECCIONES;
 		atacar(dir, mapa);
     t_ataque -= TIEMPO_ATACAR;
-	}*/
+	}
 }
 
 void Bumby::recibir_ataque(Bala* ataque){

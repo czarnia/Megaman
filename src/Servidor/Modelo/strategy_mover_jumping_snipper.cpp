@@ -6,6 +6,11 @@
 #define VELOCIDAD_Y 10
 #define GRAVEDAD 5
 
+StrategyMoverJumpingSnipper::StrategyMoverJumpingSnipper(){
+	tiempo_pasado = 0;
+	velocidad_y = 0;
+}
+
 void StrategyMoverJumpingSnipper::mover(Mapa *mapa, Jumping_snipper *pj, float tiempo){
 	tiempo_pasado += tiempo;
 	Coordenada nueva_coordenada = pj->coordenada;
