@@ -1,5 +1,4 @@
 #include "mapa.h"
-#include "../Conexion/Arquitectura/log.h"
 
 #include "../../Comun/lock.h"
 #include "updater.h"

@@ -12,7 +12,26 @@ file (GLOB CLIENTE	../Cliente/Sprite.cpp ../Cliente/Sprite.h
 			../Cliente/background_sprite.cpp ../Cliente/background_sprite.h
 )
 
+file (GLOB COMUN ../Comun/*h ../Comun/*.cpp)
+
 file (GLOB MODELO	../Servidor/Modelo/*.cpp ../Servidor/Modelo/*.h
+			../Servidor/Conexion/Arquitectura/servidor.cpp 
+			../Servidor/Conexion/Arquitectura/servidor.h
+			../Servidor/Conexion/Arquitectura/almacenador_clientes.cpp 
+			../Servidor/Conexion/Arquitectura/almacenador_clientes.h
+			../Servidor/Conexion/Arquitectura/receiver_cliente.cpp 
+			../Servidor/Conexion/Arquitectura/receiver_cliente.h
+			../Servidor/Conexion/Arquitectura/conexion_cliente.cpp 
+			../Servidor/Conexion/Arquitectura/conexion_cliente.h
+			../Servidor/Conexion/Arquitectura/entrada_estandar.cpp 
+			../Servidor/Conexion/Arquitectura/entrada_estandar.h
+			../Servidor/Conexion/Arquitectura/log.cpp 
+			../Servidor/Conexion/Arquitectura/log.h
+			../Servidor/Conexion/Lobby/*.cpp 
+			../Servidor/Conexion/Lobby/*.h
+			../Servidor/Conexion/Partida/*.cpp 
+			../Servidor/Conexion/Partida/*.h
+
 )
 
 #Set up CMake to use SDL, SDL_image:
@@ -28,5 +47,5 @@ file (GLOB SRCS *.cpp *.h)
 
 #Creates an executable with all files found
 #by file command.
-add_executable (editor ${MODELO} ${CLIENTE} ${SRCS})
+add_executable (editor ${COMUN} ${MODELO} ${CLIENTE} ${SRCS})
 target_link_libraries (editor Megaman -pthread ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${SDL_MIXER_LIBRARIES})

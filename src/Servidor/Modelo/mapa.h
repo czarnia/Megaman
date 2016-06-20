@@ -9,6 +9,7 @@
 #include "coordenada.h"
 #include "actualizable.h"
 
+#include "../Conexion/Arquitectura/log.h"
 #include "bala.h"
 #include "ubicable.h"
 #include "premio_factory.h"
