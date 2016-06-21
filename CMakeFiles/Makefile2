@@ -47,17 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/ana/Desktop/Megaman/src
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/ana/Desktop/Megaman
-=======
-CMAKE_SOURCE_DIR = /home/eugenia/Desktop/Megaman/src
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/eugenia/Desktop/Megaman
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 
 #=============================================================================
 # Directory level rules for directory Cliente
@@ -81,11 +74,7 @@ Cliente/preinstall:
 Cliente/CMakeFiles/cliente.dir/all: Comun/CMakeFiles/Megaman.dir/all
 	$(MAKE) -f Cliente/CMakeFiles/cliente.dir/build.make Cliente/CMakeFiles/cliente.dir/depend
 	$(MAKE) -f Cliente/CMakeFiles/cliente.dir/build.make Cliente/CMakeFiles/cliente.dir/build
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ana/Desktop/Megaman/CMakeFiles  2 3 4 5 6 7 8 9 10 11
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Desktop/Megaman/CMakeFiles  2 3 4 5 6 7 8 9 10 11
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 	@echo "Built target cliente"
 .PHONY : Cliente/CMakeFiles/cliente.dir/all
 
@@ -95,15 +84,9 @@ all: Cliente/CMakeFiles/cliente.dir/all
 
 # Build rule for subdir invocation for target.
 Cliente/CMakeFiles/cliente.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 Cliente/CMakeFiles/cliente.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 11
-	$(MAKE) -f CMakeFiles/Makefile2 Cliente/CMakeFiles/cliente.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 0
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 .PHONY : Cliente/CMakeFiles/cliente.dir/rule
 
 # Convenience name for target.
@@ -141,11 +124,7 @@ Comun/preinstall:
 Comun/CMakeFiles/Megaman.dir/all:
 	$(MAKE) -f Comun/CMakeFiles/Megaman.dir/build.make Comun/CMakeFiles/Megaman.dir/depend
 	$(MAKE) -f Comun/CMakeFiles/Megaman.dir/build.make Comun/CMakeFiles/Megaman.dir/build
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ana/Desktop/Megaman/CMakeFiles  1
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Desktop/Megaman/CMakeFiles  1
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 	@echo "Built target Megaman"
 .PHONY : Comun/CMakeFiles/Megaman.dir/all
 
@@ -155,15 +134,9 @@ all: Comun/CMakeFiles/Megaman.dir/all
 
 # Build rule for subdir invocation for target.
 Comun/CMakeFiles/Megaman.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 Comun/CMakeFiles/Megaman.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 Comun/CMakeFiles/Megaman.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 0
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 .PHONY : Comun/CMakeFiles/Megaman.dir/rule
 
 # Convenience name for target.
@@ -240,11 +213,7 @@ Servidor/Conexion/Arquitectura/preinstall:
 Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/all: Comun/CMakeFiles/Megaman.dir/all
 	$(MAKE) -f Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/build.make Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/depend
 	$(MAKE) -f Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/build.make Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/build
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ana/Desktop/Megaman/CMakeFiles  58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Desktop/Megaman/CMakeFiles  58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 	@echo "Built target servidor"
 .PHONY : Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/all
 
@@ -254,15 +223,9 @@ all: Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/all
 
 # Build rule for subdir invocation for target.
 Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 44
 	$(MAKE) -f CMakeFiles/Makefile2 Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 44
-	$(MAKE) -f CMakeFiles/Makefile2 Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 0
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 .PHONY : Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir/rule
 
 # Convenience name for target.
@@ -345,11 +308,7 @@ Editor/preinstall:
 Editor/CMakeFiles/editor.dir/all: Comun/CMakeFiles/Megaman.dir/all
 	$(MAKE) -f Editor/CMakeFiles/editor.dir/build.make Editor/CMakeFiles/editor.dir/depend
 	$(MAKE) -f Editor/CMakeFiles/editor.dir/build.make Editor/CMakeFiles/editor.dir/build
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ana/Desktop/Megaman/CMakeFiles  12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/eugenia/Desktop/Megaman/CMakeFiles  12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 	@echo "Built target editor"
 .PHONY : Editor/CMakeFiles/editor.dir/all
 
@@ -359,15 +318,9 @@ all: Editor/CMakeFiles/editor.dir/all
 
 # Build rule for subdir invocation for target.
 Editor/CMakeFiles/editor.dir/rule: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 47
 	$(MAKE) -f CMakeFiles/Makefile2 Editor/CMakeFiles/editor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ana/Desktop/Megaman/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 47
-	$(MAKE) -f CMakeFiles/Makefile2 Editor/CMakeFiles/editor.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/eugenia/Desktop/Megaman/CMakeFiles 0
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
 .PHONY : Editor/CMakeFiles/editor.dir/rule
 
 # Convenience name for target.

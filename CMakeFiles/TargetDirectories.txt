@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 /home/ana/Desktop/Megaman/Comun/CMakeFiles/Megaman.dir
 /home/ana/Desktop/Megaman/Cliente/CMakeFiles/cliente.dir
 /home/ana/Desktop/Megaman/Editor/CMakeFiles/editor.dir
 /home/ana/Desktop/Megaman/Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir
-=======
-/home/eugenia/Desktop/Megaman/Comun/CMakeFiles/Megaman.dir
-/home/eugenia/Desktop/Megaman/Cliente/CMakeFiles/cliente.dir
-/home/eugenia/Desktop/Megaman/Editor/CMakeFiles/editor.dir
-/home/eugenia/Desktop/Megaman/Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir
->>>>>>> c569d0f86fa5c663f55d05b061aad3fa04cb6c0a
