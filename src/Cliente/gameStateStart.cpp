@@ -18,6 +18,7 @@
 #define FRONT 1
 #define BACK 0
 #define BACKGROUND 1
+#define STATIC_SAVE 100
 
 #define HP_BAR 6001
 #define MP_BAR 6011
@@ -73,18 +74,18 @@ void gameStateStart::load(int level){
     std::string musicpath(ms.str());
     music.changeTrack(musicpath.c_str());
     music.play();
-    spr = new Sprite(renderer->get_renderer(), "cargando.png");
+   /* spr = new Sprite(renderer->get_renderer(), "cargando.png");
     spr->setWidth(100);
     spr->setHeight(70);
     spr->setPosX(window->get_width()/2-spr->getWidth()/2);
     spr->setPosY(window->get_height()/2-spr->getHeight()/2);
-    renderer->addSprite(100, spr, FRONT, NON_STATIC);
+    renderer->addSprite(100, spr, FRONT, NON_STATIC);*/
     /// Recibo datos del mapa
     receiver->receiveMapSize();
     receiver->receiveMap(level);
     /// Vida y energia
     loadHUD();
-    renderer->erase(100);
+    //renderer->erase(100);
 }
 
 void gameStateStart::loadHUD(){
@@ -166,7 +167,6 @@ void gameStateStart::updateInput(bool *running){
                     break;
                 case SDLK_LEFT:
                     if(!left){
-                      //  std::cout<<"se apreto izquierda"<<std::endl;
                         sender.send("move", "left");  // ENVIO LA TECLA
                         direction = "left";
                         left = true;
@@ -205,6 +205,10 @@ void gameStateStart::updateInput(bool *running){
                     break;
                 case SDLK_5:
                     sender.send("gunChange","gun5");  // ENVIO LA TECLA
+                    break;
+                case SDLK_ESCAPE:
+                    *running = false;
+                    quit = true;
                     break;
                 default:
                     break;
@@ -278,34 +282,34 @@ void gameStateStart::mainLoop(){
             renderer->updateCamPos(playerData.first);
         /// Verifico si la cola de eventos provenientes del servidor esta vacia
 
-            while (!receiver->r_queue.empty()){
-                /// Si hay algun evento, lo proceso
-                std::pair<int,int> coord;
+        while (!receiver->r_queue.empty()){
+            /// Si hay algun evento, lo proceso
+            std::pair<int,int> coord;
 
-                mutex.lock();
-                event = receiver->r_queue.front();
-                receiver->r_queue.pop();
-                mutex.unlock();
+            mutex.lock();
+            event = receiver->r_queue.front();
+            receiver->r_queue.pop();
+            mutex.unlock();
 
-                coord.first = event.posX;
-                coord.second = event.posY;
+            coord.first = event.posX;
+            coord.second = event.posY;
 
-                /// acorde a lo recibido del servidor, seteo los flags correspondientes
-                switch(handler.execute(event.command, event.objectType,
-                        event.objectID, coord)){
-                    case GameState::BOSS_SELECT:
-                        running = false;
-                        victory = true;
-                        break;
-                    case GameState::GAME_OVER:
-                        running = false;
-                        ko = true;
-                        break;
-                    default:
-                        break;
-                }
-                //render();
+            /// acorde a lo recibido del servidor, seteo los flags correspondientes
+            switch(handler.execute(event.command, event.objectType,
+                    event.objectID, coord)){
+                case GameState::BOSS_SELECT:
+                    running = false;
+                    victory = true;
+                    break;
+                case GameState::GAME_OVER:
+                    running = false;
+                    ko = true;
+                    break;
+                default:
+                    break;
             }
+            //render();
+        }
 
 
         /// dibujo

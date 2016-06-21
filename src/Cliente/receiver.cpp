@@ -149,7 +149,7 @@ void Receiver::receiveMap(const int &level){
     ls<<"../sprites/ladder"<<level<<".png";
     std::string ladderpath(ls.str());
 
-    char buffer[TAM_INT] = "";
+
     int command;
     int objectType;
     int objectID;
@@ -160,25 +160,19 @@ void Receiver::receiveMap(const int &level){
     do{
         /// recibo COMANDO y lo ignoro aca
         skt->receiveInt(&command,TAM_INT);
-       /* command = *((int*)buffer);
-        strncpy(buffer,"    ",TAM_INT);*/
+
         if (command != END_OF_MAP){
             /// Recibo el tipo de OBJETO
             skt->receiveInt(&objectType,TAM_INT);
-           /* objectType = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);*/
+
             /// Recibo el id del OBJETO
             skt->receiveInt(&objectID,TAM_INT);
-            /*objectID = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);*/
+
             /// Recibo COORD X
             skt->receiveInt(&coordX,TAM_INT);
-            /*coordX = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);*/
+
             /// Recibo COORD Y
             skt->receiveInt(&coordY,TAM_INT);
-            /*coordY = *((int*)buffer);
-            strncpy(buffer,"    ",TAM_INT);*/
 
             std::cout<< "Recibo comando: "<<command << " "
             <<"Tipo de objeto: "<< objectType<< " " <<
