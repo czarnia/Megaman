@@ -1,4 +1,0 @@
-/home/ana/Desktop/Megaman/Comun/CMakeFiles/Megaman.dir
-/home/ana/Desktop/Megaman/Cliente/CMakeFiles/cliente.dir
-/home/ana/Desktop/Megaman/Editor/CMakeFiles/editor.dir
-/home/ana/Desktop/Megaman/Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir
