@@ -133,16 +133,16 @@ void Cargador_mapa::agregar_objeto(int codigo_obj, int x, int y){
 void Cargador_mapa::cargar_coordenadas(){
 	std::string linea;
 	getline(mapa_arch, linea);
-	
+	int x = 0, y = 0, codigo_obj = 0;
 	//Primero obtengo las dimensiones del mapa
 	std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
 	ancho_mapa = atoi(linea_parseada[0].c_str())*MULT_X;
 	alto_mapa = atoi(linea_parseada[1].c_str())*MULT_Y;
   
-	int codigo_obj = atoi(linea_parseada[2].c_str());
+	/*int codigo_obj = atoi(linea_parseada[2].c_str());
 	int x = atoi(linea_parseada[3].c_str());
 	int y = atoi(linea_parseada[4].c_str());
-	agregar_objeto(codigo_obj, x, y);
+	agregar_objeto(codigo_obj, x, y);*/
 	//Ahora obtengo las coordenadas de los objetos del mapa.
 	while (getline(mapa_arch, linea)){
 		linea_parseada = parsear_cadena_palabras(linea);

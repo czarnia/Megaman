@@ -27,6 +27,7 @@ enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS,
 #define MAIN_PATH_MAPAS "../../../Mapas/"
 #define TIEMPO 0.04
 #define TOT_NIVELES 5
+#define MEGAMAN 1
 
 typedef std::vector<int>::iterator ItNiveles;
 
@@ -172,7 +173,7 @@ void Juego::update(Observable *obs){}
 
 void Juego::murio_personaje(Personaje *p){
 	mundo->quitar_personaje(p->get_id_unico());
-	if (p->get_id_unico() > 0 && p->get_id_unico() <= 4){ //IDS de los megamans
+	if (p->get_tipo() == MEGAMAN){
 		cant_jugadores -= 1;
 		actualizo_gameover(p->get_id_unico());
 	}
