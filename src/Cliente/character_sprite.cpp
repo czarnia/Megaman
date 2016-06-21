@@ -129,8 +129,15 @@ SDL_Rect* Character_sprite::get_crop(){
     }else if (currentState == SHOOTING){
         currentFrame = 0;
         return shootingAnimation[currentFrame];
+    }else if (currentState == DYING){
+        currentFrame = 0;
+        return deathAnimation[currentFrame];
+    }else{
+        currentFrame += 0.01;
+        if ((unsigned)round(currentFrame) == idleAnimation.size())
+            currentFrame = 0;
+        return idleAnimation[round(currentFrame)];
     }
-    return NULL;
 }
 
 int Character_sprite::get_direction(){

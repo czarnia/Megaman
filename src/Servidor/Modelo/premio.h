@@ -36,7 +36,7 @@ class Premio : public Elemento{
 		//Dada una bala, dice si la misma le hace danio.
 		virtual bool recibe_danio(Bala* ataque);
 		//Destructor de premio.
-		virtual ~Premio() = 0;
+		virtual ~Premio() {};
 };
 
 #endif //PREMIO_H

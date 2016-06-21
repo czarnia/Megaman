@@ -5,6 +5,7 @@
 
 #define BACKGROUND 1
 #define CAMSPEEDX 5
+#define CAMSPEEDY 5
 #define NON_STATIC 0
 #define STATIC 1
 #define FRONT 1
@@ -73,11 +74,17 @@ void Renderer::setMapSize(int width, int height){
 
 void Renderer::updateCamPos(int player){
     int px = sprites[FRONT][player]->get_rectangle()->x;
-    if((px > (window->get_width()/2) + camX) && (camX+window->get_width() < map_size.first)){
+    int py = sprites[FRONT][player]->get_rectangle()->y;
+    if ((px > (window->get_width()/2) + camX) && (camX+window->get_width() < map_size.first)){
         camX += CAMSPEEDX;
     }
-    if((px < window->get_width()/2+camX) && (camX > 0)){
+    if ((px < window->get_width()/2+camX) && (camX > 0)){
         camX -= CAMSPEEDX;
+    }
+    if (py > (window->get_height()/2 + camY) && (camY+window->get_height() < map_size.second))
+        camY += CAMSPEEDY;
+    if (py < (window->get_height()/2+camY) && camY > 0){
+        camY -= CAMSPEEDY;
     }
 }
 

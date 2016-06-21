@@ -11,7 +11,7 @@ class Coordenada{
     int y;
   public:
     //Dada una ordenada y una abscisa, crea una Coordenada.
-    Coordenada(size_t ordenada, size_t abscisa);
+    Coordenada(int ordenada, int abscisa);
     //Suma delta_x a la coordenada x;
     void sumar_abscisa(size_t delta_x);
 	//Suma delta_y a la coordenada y;

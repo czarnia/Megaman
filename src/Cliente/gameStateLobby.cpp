@@ -31,6 +31,7 @@ gameStateLobby::gameStateLobby(Window *window, Renderer *renderer,
     level(level)
 {
     window->setTitle("Megaman: Lobby");
+    window->setWindowed();
     start = false;
     quit = false;
     running = true;

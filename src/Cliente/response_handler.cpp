@@ -235,11 +235,14 @@ void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int
 }
 
 void ResponseHandler::changeHUD(int bar, int &barID, int &ammount){
-   // renderer->static_sprites[FRONT][bar+barID]->setAmmount(ammount);
+    ammount = ammount /10;
+    if( ammount < 9)
+        renderer->static_sprites[FRONT][bar+barID]->setAmmount(ammount);
 }
 
 void ResponseHandler::executeAction(int &objectType, int &objectID, int &action){
-    renderer->sprites[FRONT][objectType+objectID]->setState(action);
+    if (renderer->find(objectType+objectID))
+        renderer->sprites[FRONT][objectType+objectID]->setState(action);
 }
 
 void ResponseHandler::changePosition(int &objectType, int &objectID, std::pair<int,int> &coord){
@@ -279,7 +282,7 @@ int ResponseHandler::execute(int command, int objectType, int objectID, std::pai
             changeHUD(MP_BARN, objectID, option.first);
             break;
         case LIFE:
-            changeHUD(LIFEN, objectID, option.first);
+    //        changeHUD(LIFEN, objectID, option.first);
             break;
         case ACTION:
             executeAction(objectType, objectID, option.first);

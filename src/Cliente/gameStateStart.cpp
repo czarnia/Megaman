@@ -50,11 +50,10 @@ gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
     ko(false)
 {
     window->setTitle("Megaman: Playing");
-    //window->maximize();
+    window->maximize();
     receiver = new Receiver(skt, renderer, &mutex);
     load(level);
 }
-
 
 
 void gameStateStart::load(int level){
@@ -74,18 +73,12 @@ void gameStateStart::load(int level){
     std::string musicpath(ms.str());
     music.changeTrack(musicpath.c_str());
     music.play();
-   /* spr = new Sprite(renderer->get_renderer(), "cargando.png");
-    spr->setWidth(100);
-    spr->setHeight(70);
-    spr->setPosX(window->get_width()/2-spr->getWidth()/2);
-    spr->setPosY(window->get_height()/2-spr->getHeight()/2);
-    renderer->addSprite(100, spr, FRONT, NON_STATIC);*/
     /// Recibo datos del mapa
     receiver->receiveMapSize();
     receiver->receiveMap(level);
     /// Vida y energia
     loadHUD();
-    //renderer->erase(100);
+
 }
 
 void gameStateStart::loadHUD(){
@@ -135,7 +128,7 @@ void gameStateStart::loadHUD(){
 
 int gameStateStart::unload(){
     music.stop();
-    receiver->join();
+  //  receiver->join();
     renderer->clearSprites();
     return 0;
 }
@@ -282,7 +275,7 @@ void gameStateStart::mainLoop(){
             renderer->updateCamPos(playerData.first);
         /// Verifico si la cola de eventos provenientes del servidor esta vacia
 
-        while (!receiver->r_queue.empty()){
+        if (!receiver->r_queue.empty()){
             /// Si hay algun evento, lo proceso
             std::pair<int,int> coord;
 
@@ -320,6 +313,7 @@ void gameStateStart::mainLoop(){
 
         cap_framerate(starting_tick);
 	}
+	receiver->join();
 }
 
 void gameStateStart::render(){
