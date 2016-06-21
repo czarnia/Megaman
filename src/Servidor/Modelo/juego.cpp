@@ -172,6 +172,10 @@ void Juego::update(Observable *obs){}
 
 
 void Juego::murio_personaje(Personaje *p){
+	int id = p->get_id();
+	int tipo = p->get_tipo();
+	actualizo_posicion(tipo, id, -1, -1);
+
 	mundo->quitar_personaje(p->get_id_unico());
 	if (p->get_tipo() == MEGAMAN){
 		//Esto es mejor pero es casi lo mismo:

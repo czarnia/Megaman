@@ -29,7 +29,7 @@ void Observador_personaje_pc::update(Observable *obs){
 		cantidad_vidas = personaje->get_cantidad_vidas();
 		porcentaje_vida = personaje->get_porcentaje_vida();
 		juego->actualizo_cantidad_vidas(tipo, id, cantidad_vidas);
-		
+
 		personaje->respawn(Observador_personaje_pc::coordenada_respawn);
 		int alto = personaje->get_alto();
 		int ancho = personaje->get_ancho();

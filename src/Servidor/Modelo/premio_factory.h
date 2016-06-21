@@ -13,6 +13,8 @@ class Premio_factory{
     virtual Premio* crear(Coordenada c) = 0;
     //Devuelve la probabilidad de que un premio sea creado.
     virtual size_t probabilidad_de_crear() = 0;
+		//Destructor del premio_factory.
+		virtual ~Premio_factory() {};
 };
 
 #endif //PREMIO_FACTORY_H

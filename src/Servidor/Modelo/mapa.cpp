@@ -323,7 +323,7 @@ Coordenada Mapa::obtener_coordenada_enemigo_pc_cercano(Bala* bala){
 	Coordenada coord_bala = bala->get_coordenada();
 	int dst_min = perseguido->get_coordenada().obtener_distancia(coord_bala);
 	int dst_pj = 0;
-	it++; 
+	it++;
 	for (; it != personajes_pc.end(); ++it){
 		dst_pj = (it->second->get_coordenada()).obtener_distancia(coord_bala);
 		if (dst_pj < dst_min){
