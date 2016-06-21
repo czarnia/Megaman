@@ -9,7 +9,7 @@
 #define RETROCEDER -1
 #define AVANZAR 1
 
-Coordenada::Coordenada(size_t ordenada, size_t abscisa){
+Coordenada::Coordenada(int ordenada, int abscisa){
 	x = ordenada;
 	y = abscisa;
 }

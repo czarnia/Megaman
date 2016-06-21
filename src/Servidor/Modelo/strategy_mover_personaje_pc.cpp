@@ -1,7 +1,7 @@
 #include "strategy_mover_personaje_pc.h"
 #include <iostream>
 
-#define MOVIMIENTO_MAX 6
+#define MOVIMIENTO_MAX 20
 enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
 enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO};

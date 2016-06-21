@@ -12,7 +12,7 @@
 #include "../../Comun/lock.h"
 #include "../../Comun/mutex.h"
 
-#define DISTANCIA_MAXIMA 100
+#define DISTANCIA_MAXIMA 150
 
 #define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
