@@ -4,5 +4,5 @@
 
 void Evento_elegir_boss::ejecutar(Servidor* s){
   Log::instancia()->inicio_nivel(boss);
-  s->empezar_nivel(boss); 
+  s->empezar_nivel(boss);
 }
