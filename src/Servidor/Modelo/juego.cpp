@@ -174,6 +174,9 @@ void Juego::update(Observable *obs){}
 void Juego::murio_personaje(Personaje *p){
 	mundo->quitar_personaje(p->get_id_unico());
 	if (p->get_tipo() == MEGAMAN){
+		//Esto es mejor pero es casi lo mismo:
+	//bool es_pj_pc = (Ubicable::construir_id_unico(MEGAMAN, p->get_id()) == pj->get_id_unico());
+	//if (es_pj_pc){
 		cant_jugadores -= 1;
 		actualizo_gameover(p->get_id_unico());
 	}
