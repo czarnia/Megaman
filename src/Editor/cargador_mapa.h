@@ -26,8 +26,8 @@ class Cargador_mapa{
 		bool es_predefinido;
 		
 		//Carga las coordenadas del mapa indicado por el path.
-		void cargar_coordenadas(int delta_x = 0);
-		void cargar_mapa_boss();
+		void cargar_coordenadas();
+		void agregar_objeto(int codigo, int x, int y);
 	public:
 		//Dado un path para un nuevo archivo donde se guardará un mapa y una longi-
 		//tud en x y otra en y para el mismo, se crea un Cargador_mapa.

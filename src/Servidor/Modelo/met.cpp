@@ -56,8 +56,6 @@ void Met::update(float tiempo, Mapa *mapa){
     return;
   }
   estado_actual = (estado_actual == USA_ESCUDO)? NO_USA_ESCUDO : USA_ESCUDO;
-  //Personaje::update(0, mapa);
-  //Personaje::notificar_observadores();
   tiempo_pasado -= TIEMPO_ATAQUE;
   atacar(0, mapa);
 }

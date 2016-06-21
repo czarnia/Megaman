@@ -73,7 +73,6 @@ void Bala::update(float tiempo, Mapa* mapa){
 		if (impacto){
 			//si la bala impacto con un objeto en el update anterior
 			//se destruye en este update;
-			//std::cout << "BALA: IMPACTO, VA A -1, -1.\n";
 			actual = Coordenada(-1, -1);
 			mapa->quitar_bala(this);
 		}
