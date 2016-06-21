@@ -206,17 +206,16 @@ void Mapa::update(float tiempo){
 	}
 	for (ItPersonajePc it= personajes_pc.begin(); it != personajes_pc.end(); ++it){
 		(*it).second->update(tiempo, this);
-    interactuar_con_entorno(it->second);
-    //hilos_updater.push_back(Updater(it->second, this, tiempo));
-
+		interactuar_con_entorno(it->second);
+		//hilos_updater.push_back(Updater(it->second, this, tiempo));
 	}
-  for (ItPersonajeNpc i= personajes_npc.begin(); i != personajes_npc.end(); ++i){
-    interactuar_con_entorno(i->second);
-    //hilos_updater.push_back(Updater(i->second, this, tiempo));
-    (*i).second->update(tiempo, this);
-  }
+	for (ItPersonajeNpc i= personajes_npc.begin(); i != personajes_npc.end(); ++i){
+		interactuar_con_entorno(i->second);
+		//hilos_updater.push_back(Updater(i->second, this, tiempo));
+		(*i).second->update(tiempo, this);
+	}
 
-  activar_npcs();
+	activar_npcs();
 
   /*for (size_t j = 0; j < hilos_updater.size(); j++){
     hilos_updater[j].ejecutar();
@@ -336,9 +335,12 @@ Coordenada Mapa::obtener_coordenada_enemigo_pc_cercano(Bala* bala){
 }
 
 Coordenada Mapa::obtener_coordenada_enemigo(Personaje_npc* pj){
-  std::vector<int> claves_enemigos = obtener_claves_pc(personajes_pc);
-  size_t seleccionado = rand() % claves_enemigos.size();
-  return personajes_pc[claves_enemigos[seleccionado]]->get_coordenada();
+	std::vector<int> claves_enemigos = obtener_claves_pc(personajes_pc);
+	if(!claves_enemigos.empty()){
+		size_t seleccionado = rand() % claves_enemigos.size();
+		return personajes_pc[claves_enemigos[seleccionado]]->get_coordenada();
+	}
+	return Coordenada(0,0);
 }
 
 bool Mapa::ubicar_premio(Coordenada c){

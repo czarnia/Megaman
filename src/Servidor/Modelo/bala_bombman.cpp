@@ -16,9 +16,11 @@
 #define TIEMPO_MOVER 1
 #define TIEMPO_SUBIDA 3
 #define VELOCIDAD_X 2
-#define VELOCIDAD_y 2
+#define VELOCIDAD_Y 2
 #define TIPO_BALA_BOMBMAN 30
 #define PERDIDA_VIDA_BOSS 10
+#define DERECHA 3
+#define IZQUIERDA 4
 
 Bala_bombman::Bala_bombman(int dir_x, int dir_y, Coordenada c, int id):
 Bala_especial(dir_x, dir_y, c, TIPO_BALA_BOMBMAN, id){
@@ -41,10 +43,10 @@ void Bala_bombman::update(float tiempo, Mapa* mapa) {
 	}
 	if (tiempo_pasado < TIEMPO_SUBIDA){
 		//Sube:
-		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_y);
+		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
 	}else{
 		//Cae:
-		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_y);
+		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
 	}
 	if (direccion_x > 0){
 		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);

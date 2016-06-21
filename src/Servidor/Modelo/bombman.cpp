@@ -7,8 +7,8 @@
 #define TIPO_BOMBMAN 20
 #define RAND_RANGE 2
 #define ARRIBA 1
-#define DERECHA 3
-#define IZQUIERDA 4
+#define DERECHA 1
+#define IZQUIERDA -1
 
 Bombman::Bombman(Mapa *mapa, Coordenada c, Arma_bombman* arma, int id):
 Personaje_npc(mapa, c, id),
@@ -19,15 +19,15 @@ arma(arma){
 
 void Bombman::atacar(int dir, Mapa* mapa){
 	Bala* bala;
-	//Coordenada default:
-	Coordenada coord_ataque = coordenada.derecha(ancho/2).arriba(alto/2);
-	if (dir == DERECHA){
+	if (dir > 0){
 		bala = arma->atacar(DERECHA, ARRIBA, coordenada.derecha(ancho/2).arriba(alto/2));
-	}if (dir == IZQUIERDA){
+	}if (dir < 0){
 		bala = arma->atacar(IZQUIERDA, ARRIBA, coordenada.izquierda(ancho/2).arriba(alto/2));
 	}
-	mapa->agregar_bala(bala);
-	bala->notificar_observadores();
+	if (bala != NULL){
+		mapa->agregar_bala(bala);
+		bala->notificar_observadores();
+	}
 }
 
 void Bombman::mover(float tiempo, Mapa* mapa){ 
@@ -38,13 +38,14 @@ void Bombman::recibir_ataque(Bala* ataque){
 	ataque->daniar(this);
 }
 
-void Bombman::update(float tiempo){
+void Bombman::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
-	if (tiempo_pasado < TIEMPO_ATAQUE){
+	if (tiempo_pasado < TIEMPO_ATAQUE || !activo){
 		return;
 	}
-	Personaje::update(tiempo, mapa);
+	mover(tiempo, mapa);
 	tiempo_pasado -= TIEMPO_ATAQUE;
-	int dir_ataque = rand() %RAND_RANGE + DERECHA;
-	atacar(dir_ataque, mapa);
+	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(this);
+	int delta_x = c_enemigo.obtener_abscisa()-coordenada.obtener_abscisa();
+	atacar(delta_x, mapa);
 }

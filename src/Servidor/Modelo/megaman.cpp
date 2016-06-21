@@ -128,16 +128,14 @@ void Megaman::perder_vida(int porcentaje){
 	if(!this->esta_vivo()){
 		return;
 	}
-	if (porcentaje == PERDER_MAX){
+	vidas[0].perder(porcentaje);
+	if (vidas[0].esta_vacia()){
 		vidas.erase(vidas.begin());
-		notificar_observadores();
-	}else{
-		vidas[0].perder(porcentaje);
-		notificar_observadores();
 	}
 	if(!this->esta_vivo()){
 		estado_actual = MURIENDO;
 	}
+	notificar_observadores();
 }
 
 void Megaman::ganar_vida(int porcentaje){
