@@ -50,11 +50,10 @@ gameStateStart::gameStateStart(Window *window, Renderer *renderer, Socket *skt,
     ko(false)
 {
     window->setTitle("Megaman: Playing");
-    window->maximize();
+    //window->maximize();
     receiver = new Receiver(skt, renderer, &mutex);
     load(level);
 }
-
 
 
 void gameStateStart::load(int level){

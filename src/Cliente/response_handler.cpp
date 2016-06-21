@@ -241,7 +241,8 @@ void ResponseHandler::changeHUD(int bar, int &barID, int &ammount){
 }
 
 void ResponseHandler::executeAction(int &objectType, int &objectID, int &action){
-    renderer->sprites[FRONT][objectType+objectID]->setState(action);
+    if (renderer->find(objectType+objectID))
+        renderer->sprites[FRONT][objectType+objectID]->setState(action);
 }
 
 void ResponseHandler::changePosition(int &objectType, int &objectID, std::pair<int,int> &coord){
