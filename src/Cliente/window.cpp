@@ -23,6 +23,10 @@ void Window::maximize(){
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
 
+void Window::setWindowed(){
+    SDL_SetWindowFullscreen(window, 0);
+}
+
 int Window::get_width(){
     return width;
 }

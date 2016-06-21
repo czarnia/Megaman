@@ -5,8 +5,11 @@
 #include "../Cliente/background_sprite.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 /// TAMANIOS
 #define ICON_BACKGROUND_WIDTH Block_sprite::width*3
+
+#define CHAMBER_SIZE 33
 
 /// PARA ALMACENAR
 #define STATIC_BACKGROUND 1
@@ -18,6 +21,8 @@
 #define STATIC_BUMBY 15
 #define STATIC_J_SNIPER 16
 #define STATIC_SNIPER 17
+#define STATIC_SAVE 18
+#define STATIC_EXIT 19
 
 #define STATIC 1
 #define NON_STATIC 0
@@ -51,6 +56,9 @@ gameStateEditor::gameStateEditor(Window *window, Renderer* renderer):
     window(window),
     renderer(renderer)
 {
+    bossSelected = 0;
+    megamanPlaced = false;
+    quit = false;
     window->setTitle("Megaman: Level editor");
     window->maximize();
     object = gameStateEditor::NOTHING;
@@ -115,6 +123,20 @@ void gameStateEditor::load(int stack){
     spr->setPosX(ICON_BACKGROUND_WIDTH/2-Block_sprite::width/2);
     spr->setPosY(Block_sprite::height*10);
     renderer->addSprite(STATIC_SNIPER, spr, FRONT, STATIC);
+    /// BOTON GUARDAR
+    spr = new Sprite(renderer->get_renderer(), "../sprites/save.png");
+    spr->setHeight(50);
+    spr->setWidth(50);
+    spr->setPosX(window->get_width()*3/4+100);
+    spr->setPosY(10);
+    renderer->addSprite(STATIC_SAVE, spr, FRONT, STATIC);
+    /// BOTON SALIR
+    spr = new Sprite(renderer->get_renderer(), "../sprites/exit.png");
+    spr->setHeight(50);
+    spr->setWidth(50);
+    spr->setPosX(window->get_width()*3/4+160);
+    spr->setPosY(10);
+    renderer->addSprite(STATIC_SAVE, spr, FRONT, STATIC);
 }
 
 void gameStateEditor::chooseBlock(SDL_Event *event){
@@ -153,7 +175,12 @@ void gameStateEditor::chooseBlock(SDL_Event *event){
             object = gameStateEditor::SNIPER;
             std::cout<<"Se eligio un sniper"<<std::endl;
             break;
-
+        case STATIC_SAVE:
+            object = gameStateEditor::SAVE;
+            break;
+        case STATIC_EXIT:
+            object = gameStateEditor::EXIT;
+            break;
         default:
             break;
     }
@@ -196,6 +223,7 @@ void gameStateEditor::updateInput(SDL_Event *event){
                         if(renderer->find(MEGAMANN)){
                             std::cout<< "Ya se coloco un megaman"<<std::endl;
                         }else{
+                            megamanPlaced = true;
                             spr = new Character_sprite(renderer->get_renderer(), "../sprites/megaman.png");
                             spr->changeState(-1,-1);
                             spr->setPosX(x);
@@ -252,6 +280,16 @@ void gameStateEditor::updateInput(SDL_Event *event){
                         renderer->addSprite(0, spr, BACK, NON_STATIC);
                     }
                     break;
+                case gameStateEditor::SAVE:
+                    if (megamanPlaced && bossSelected != 0)
+                        exportMap();
+                    else
+                        std::cout<<"No se coloco un megaman o no se eligio un jefe"<<std::endl;
+                    object = gameStateEditor::BLOCK;
+                    break;
+                case gameStateEditor::EXIT:
+                    quit = true;
+                    break;
                 default:
                     break;
             }
@@ -262,6 +300,8 @@ void gameStateEditor::updateInput(SDL_Event *event){
         if(renderer->ocupied(x,y)){
             renderer->erase(x,y);
         }
+        if(!renderer->find(MEGAMANN))
+            megamanPlaced = false;
     }
 }
 
@@ -292,8 +332,7 @@ GameState::StateCode gameStateEditor::update(){
     bool click;
     while (SDL_PollEvent(&event)){
 
-        if (event.type == SDL_QUIT){
-            addChamber();
+        if (event.type == SDL_QUIT || quit){
             return GameState::QUIT;
             break;
 
@@ -302,6 +341,16 @@ GameState::StateCode gameStateEditor::update(){
             if( pressed.sym == SDLK_UP || pressed.sym == SDLK_DOWN ||
                 pressed.sym == SDLK_LEFT || pressed.sym == SDLK_RIGHT)
                 updateCameraPos(&event);
+            else if (pressed.sym == SDLK_1)
+                bossSelected = 20;
+            else if (pressed.sym == SDLK_2)
+                bossSelected = 21;
+            else if (pressed.sym == SDLK_3)
+                bossSelected = 22;
+            else if (pressed.sym == SDLK_4)
+                bossSelected = 23;
+            else if (pressed.sym == SDLK_5)
+                bossSelected = 24;
 
         }else if (event.type == SDL_MOUSEBUTTONDOWN){
             click = true;
@@ -318,29 +367,6 @@ GameState::StateCode gameStateEditor::update(){
     return GameState::CONTINUE;
 }
 
-void gameStateEditor::addChamber(){
-    std::fstream chamberfile;
-    chamberfile.open("camara.txt");
-
-    int sizeX = 0;
-    std::map<int,Sprite*>::iterator it;
-    /// CALCULO EL TAMANIO DEL MAPA
-    it = renderer->sprites[FRONT].begin();
-    for(; it!= renderer->sprites[FRONT].end(); ++it){
-        if (it->second->getPosX() > sizeX){
-            sizeX = it->second->getPosX();
-        }
-    }
-
-    while (chamberfile.eof()){
-        int blocktype;
-        int blockposX;
-        chamberfile >> blocktype;
-        chamberfile >> blockposX;
-    }
-
-}
-
 void gameStateEditor::render(){
     renderer->clear();
     renderer->drawAll();
@@ -348,12 +374,13 @@ void gameStateEditor::render(){
 }
 
 void gameStateEditor::exportMap(){
-    std::string fileName;
     int object_type;
-
-    std::cout<<"Ingrese un nombre para el nuevo mapa:"<<std::endl;
-    std::cin>>fileName;
-
+    static int i = 0;
+    /// NOMBRE PARA EL ARCHIVO
+    std::ostringstream os;
+    os << "mapa" << i << ".txt";
+    std::string fileName(os.str());
+    i++;
 
     std::map<int,Sprite*>::iterator it;
     int sizeX = 0;
@@ -371,12 +398,16 @@ void gameStateEditor::exportMap(){
 
     sizeX /= Block_sprite::width;
     sizeY /= Block_sprite::height;
+    /// LE AGREGO EL TAMANIO DE LA CAMARA DEL BOSS
+    sizeX += CHAMBER_SIZE;
+    /// ABRO EL ARCHIVO PARA IMPRIMIR
     std::ofstream ofile;
     ofile.open(fileName.c_str());
+    /// IMPRIMOP TAMANIO DEL MAPA
     ofile << sizeX << " ";
     ofile << sizeY << " ";
     ofile << std::endl;
-
+    /// MODIFICO CODIGOS PARA SER COHERENTE CON EL PROTOCOLO
     it = renderer->sprites[FRONT].begin();
     for (; it != renderer->sprites[FRONT].end(); ++it){
 
@@ -397,7 +428,7 @@ void gameStateEditor::exportMap(){
         else if (it->first >=J_SNIPERN)
             object_type = PJ_SNIPER;
 
-
+    /// IMPRIMO POSICIONES DE CADA COSA
         if(it->first == PMEGAMAN || it->first == PSNIPER || it->first == J_SNIPERN){
             ofile << object_type << " ";
             ofile << it->second->getPosX() + Block_sprite::width/2 - ICON_BACKGROUND_WIDTH<< " ";
@@ -416,24 +447,26 @@ void gameStateEditor::exportMap(){
     int posX;
     int posY;
     std::fstream chamberfile;
-    chamberfile.open("camara.txt");
-
+    chamberfile.open("chamber.txt");
+    /// LE AGREGO LA CAMARA DEL BOSS AL FINAL
     while (!chamberfile.eof()){
         chamberfile >> blocktype;
         chamberfile >> posX;
         chamberfile >> posY;
 
+        if (blocktype == 1)
+            blocktype = bossSelected;
+        if (!chamberfile.eof()){
         ofile << blocktype << " ";
         ofile << posX + sizeX + Block_sprite::width<< " ";
         ofile << posY;
         ofile << std::endl;
+        }
     }
-
     chamberfile.close();
     ofile.close();
 }
 
 gameStateEditor::~gameStateEditor(){
-    exportMap();
     unload();
 }

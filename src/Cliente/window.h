@@ -13,6 +13,7 @@ class Window{
     public:
         Window(int width, int height);
         void maximize();
+        void setWindowed();
         void setTitle(std::string title);
         int get_width();
         int get_height();

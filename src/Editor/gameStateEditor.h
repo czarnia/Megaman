@@ -11,11 +11,13 @@ class gameStateEditor: public GameState{
         Renderer *renderer;
         void chooseBlock(SDL_Event *event);
         void updateInput(SDL_Event *event);
-        void addChamber();
+        int bossSelected;
+        bool megamanPlaced;
+        bool quit;
     public:
         enum objectType{
             BLOCK, SPIKES, LADDER, MEGAMAN, MET,
-            BUMBY, J_SNIPER, SNIPER, NOTHING
+            BUMBY, J_SNIPER, SNIPER, EXIT, SAVE, NOTHING
         };
         objectType object;
 
