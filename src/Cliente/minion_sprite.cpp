@@ -82,7 +82,6 @@ void Minion_sprite::changeState(int x, int y){
     }
     if (x > rectangle.x){
         movingLeft = false;
-
     }
     if (x < rectangle.x){
         movingLeft = true;
@@ -100,6 +99,7 @@ void Minion_sprite::changeState(int x, int y){
 
 void Minion_sprite::clearStates(){
     editorMode = false;
+    currentState = IDLE;
 }
 
 void Minion_sprite::setState(int &action){
@@ -117,6 +117,7 @@ void Minion_sprite::setState(int &action){
         case PSHIELDUP:
             currentState = SHIELD_UP;
             break;
+
         default:
             break;
     }
@@ -140,8 +141,17 @@ SDL_Rect* Minion_sprite::get_crop(){
     }else if (currentState == JUMPING){
         currentFrame = 0;
         return jumpingAnimation[currentFrame];
+    }else if (currentState == DYING){
+
+
+    }else {
+        currentFrame += 0.01;
+        if ((unsigned)round(currentFrame) == idleAnimation.size())
+            currentFrame = 0;
+        return idleAnimation[round(currentFrame)];
     }
-    return NULL;
+    currentFrame = 0;
+    return idleAnimation[round(currentFrame)];
 }
 
 Minion_sprite::~Minion_sprite(){

@@ -20,6 +20,7 @@ MainMenu::MainMenu(Window *window, Renderer *renderer,
     playerData(playerData)
 {
     window->setTitle("Megaman: Main menu");
+    window->setWindowed();
     start = false;
     quit = false;
     load();

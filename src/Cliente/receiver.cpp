@@ -30,6 +30,8 @@
 #define SPARKMAN 22
 #define RINGMAN 23
 #define FIREMAN 24
+#define GAME_OVER 7
+#define LEVEL_COMPLETE 6
 
 /// PARA ALMACENAMIENTO
 #define BLOCK_EARTHN 100
@@ -117,6 +119,9 @@ void Receiver::receiveEventAndQueue(bool *end){
         mutex->lock();
         r_queue.push(Event(command,objectType,objectID,coordX,coordY));
         mutex->unlock();
+        if (command == GAME_OVER || command == LEVEL_COMPLETE || command == VICTORY)
+            command = END_OF_RESPONSE;
+
     }else{
         *end = true;
     }

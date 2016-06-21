@@ -17,8 +17,6 @@ void Music::changeTrack(std::string file){
         piece = NULL;
     }
     piece = Mix_LoadMUS(file.c_str());
-    Mix_Music *a = piece;
-    int b = 3;
 }
 
 void Music::stop(){

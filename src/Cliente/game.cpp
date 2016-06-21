@@ -44,6 +44,8 @@ void Game::run(){
         switch (whatToDo){
             /// Menu principal
             case GameState::MAIN_MENU:
+                if (currentState)
+                    delete currentState;
                 currentState = new MainMenu(window, renderer, playerData);
                 break;
             /// Boss select, ni bien entro aca, me conecto al servidor
