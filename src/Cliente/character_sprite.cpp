@@ -25,12 +25,13 @@ int Character_sprite::height = 60;
 Character_sprite::Character_sprite(SDL_Renderer *r, const char* file):
     Sprite(r,file)
 {
+    currentState = IDLE;
     rectangle.w = Character_sprite::width;
     rectangle.h = Character_sprite::height;
     editorMode = false;
     movingLeft = false;
     currentFrame = 0;
-    currentState = IDLE;
+
 }
 
 void Character_sprite::changeState(int x, int y){
@@ -41,7 +42,6 @@ void Character_sprite::changeState(int x, int y){
     if (x > rectangle.x){
         movingLeft = false;
         currentState = RUNNING;
-
     }
     if (x < rectangle.x){
         movingLeft = true;
@@ -51,8 +51,8 @@ void Character_sprite::changeState(int x, int y){
     if (x == rectangle.x){
         if (y == rectangle.y){
             currentState = IDLE;
-
-    }}
+        }
+    }
 }
 
 void Character_sprite::setState(int &action){

@@ -33,7 +33,7 @@
 #define SNIPERN 3000
 #define METN 4000
 #define J_SNIPERN 5000
-#define CAM_SPEEDX 20
+#define CAM_SPEEDX 35
 
 /// PARA EXPORTAR
 #define PBLOCK_EARTH 10
@@ -52,13 +52,16 @@ gameStateEditor::gameStateEditor(Window *window, Renderer* renderer):
     renderer(renderer)
 {
     window->setTitle("Megaman: Level editor");
+    window->maximize();
     object = gameStateEditor::NOTHING;
     load();
 }
 
 void gameStateEditor::load(int stack){
     /// FONDO
-    Sprite *spr = new Background_sprite(renderer->get_renderer(), "../sprites/editor_background.jpeg");
+    Sprite *spr = new Sprite(renderer->get_renderer(), "../sprites/editor_background.jpeg");
+    spr->setWidth(window->get_width());
+    spr->setHeight(window->get_height());
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(STATIC_BACKGROUND, spr, BACK, STATIC);
@@ -154,8 +157,8 @@ void gameStateEditor::chooseBlock(SDL_Event *event){
         default:
             break;
     }
-}
 
+}
 
 void gameStateEditor::updateInput(SDL_Event *event){
     Sprite *spr;
@@ -198,6 +201,10 @@ void gameStateEditor::updateInput(SDL_Event *event){
                             spr->setPosX(x);
                             spr->setPosY(y);
                             renderer->addSprite(MEGAMANN, spr, FRONT, NON_STATIC);
+                            spr = new Block_sprite(renderer->get_renderer(), "../sprites/nothing.png");
+                            spr->setPosX(x);
+                            spr->setPosY(y+Block_sprite::height);
+                            renderer->addSprite(0, spr, BACK, NON_STATIC);
                         }
                     }
                     break;
@@ -226,6 +233,10 @@ void gameStateEditor::updateInput(SDL_Event *event){
                         spr->setPosX(x);
                         spr->setPosY(y);
                         renderer->addSprite(J_SNIPERN, spr, FRONT, NON_STATIC);
+                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/nothing.png");
+                        spr->setPosX(x);
+                        spr->setPosY(y+Block_sprite::height);
+                        renderer->addSprite(0, spr, BACK, NON_STATIC);
                     }
                     break;
                 case gameStateEditor::SNIPER:
@@ -235,6 +246,10 @@ void gameStateEditor::updateInput(SDL_Event *event){
                         spr->setPosX(x);
                         spr->setPosY(y);
                         renderer->addSprite(SNIPERN, spr, FRONT, NON_STATIC);
+                        spr = new Block_sprite(renderer->get_renderer(), "../sprites/nothing.png");
+                        spr->setPosX(x);
+                        spr->setPosY(y+Block_sprite::height);
+                        renderer->addSprite(0, spr, BACK, NON_STATIC);
                     }
                     break;
                 default:
@@ -278,6 +293,7 @@ GameState::StateCode gameStateEditor::update(){
     while (SDL_PollEvent(&event)){
 
         if (event.type == SDL_QUIT){
+            addChamber();
             return GameState::QUIT;
             break;
 
@@ -286,9 +302,6 @@ GameState::StateCode gameStateEditor::update(){
             if( pressed.sym == SDLK_UP || pressed.sym == SDLK_DOWN ||
                 pressed.sym == SDLK_LEFT || pressed.sym == SDLK_RIGHT)
                 updateCameraPos(&event);
-            else if ( pressed.sym == SDLK_c){
-             //   loadChamber();
-            }
 
         }else if (event.type == SDL_MOUSEBUTTONDOWN){
             click = true;
@@ -305,6 +318,29 @@ GameState::StateCode gameStateEditor::update(){
     return GameState::CONTINUE;
 }
 
+void gameStateEditor::addChamber(){
+    std::fstream chamberfile;
+    chamberfile.open("camara.txt");
+
+    int sizeX = 0;
+    std::map<int,Sprite*>::iterator it;
+    /// CALCULO EL TAMANIO DEL MAPA
+    it = renderer->sprites[FRONT].begin();
+    for(; it!= renderer->sprites[FRONT].end(); ++it){
+        if (it->second->getPosX() > sizeX){
+            sizeX = it->second->getPosX();
+        }
+    }
+
+    while (chamberfile.eof()){
+        int blocktype;
+        int blockposX;
+        chamberfile >> blocktype;
+        chamberfile >> blockposX;
+    }
+
+}
+
 void gameStateEditor::render(){
     renderer->clear();
     renderer->drawAll();
@@ -313,15 +349,15 @@ void gameStateEditor::render(){
 
 void gameStateEditor::exportMap(){
     std::string fileName;
-    int sizeX = 0;
-    int sizeY = 0;
-    std::ofstream ofile;
-    std::cout<<"Ingrese un nombre para el nuevo mapa:"<<std::endl;
     int object_type;
+
+    std::cout<<"Ingrese un nombre para el nuevo mapa:"<<std::endl;
     std::cin>>fileName;
-    ofile.open(fileName.c_str());
+
 
     std::map<int,Sprite*>::iterator it;
+    int sizeX = 0;
+    int sizeY = 0;
     /// CALCULO EL TAMANIO DEL MAPA
     it = renderer->sprites[FRONT].begin();
     for(; it!= renderer->sprites[FRONT].end(); ++it){
@@ -332,13 +368,15 @@ void gameStateEditor::exportMap(){
             sizeY = it->second->getPosY();
         }
     }
+
     sizeX /= Block_sprite::width;
     sizeY /= Block_sprite::height;
-
+    std::ofstream ofile;
+    ofile.open(fileName.c_str());
     ofile << sizeX << " ";
     ofile << sizeY << " ";
+    ofile << std::endl;
 
-    std::cout << sizeX << " " << sizeY << std::endl;
     it = renderer->sprites[FRONT].begin();
     for (; it != renderer->sprites[FRONT].end(); ++it){
 
@@ -372,7 +410,26 @@ void gameStateEditor::exportMap(){
             ofile << std::endl;
         }
     }
+    sizeX *= Block_sprite::width;
 
+    int blocktype;
+    int posX;
+    int posY;
+    std::fstream chamberfile;
+    chamberfile.open("camara.txt");
+
+    while (!chamberfile.eof()){
+        chamberfile >> blocktype;
+        chamberfile >> posX;
+        chamberfile >> posY;
+
+        ofile << blocktype << " ";
+        ofile << posX + sizeX + Block_sprite::width<< " ";
+        ofile << posY;
+        ofile << std::endl;
+    }
+
+    chamberfile.close();
     ofile.close();
 }
 

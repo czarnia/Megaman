@@ -33,9 +33,9 @@ void MainMenu::load(int stack){
     spr->setPosY(0);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
     /// ETCs
-    spr = new Sprite(renderer->get_renderer(), "../sprites/nickname_sign.png");
+    spr = new Sprite(renderer->get_renderer(), "../sprites/apodo.png");
     spr->setWidth(80);
-    spr->setHeight(60);
+    spr->setHeight(50);
     spr->setPosX(window->get_width()/2 -spr->getWidth()-5);
     spr->setPosY(window->get_height()*1/9);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
@@ -47,9 +47,9 @@ void MainMenu::load(int stack){
     spr->setPosY(window->get_height()/2-spr->getHeight()/2);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
 
-    spr = new Sprite(renderer->get_renderer(), "../sprites/mensaje.png");
+    spr = new Sprite(renderer->get_renderer(), "../sprites/menu_message.png");
     spr->setWidth(400);
-    spr->setHeight(50);
+    spr->setHeight(80);
     spr->setPosX(window->get_width()/2 - spr->getWidth()/2);
     spr->setPosY(window->get_height()*3/4);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);

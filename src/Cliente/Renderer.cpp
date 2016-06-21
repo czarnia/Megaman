@@ -92,6 +92,11 @@ void Renderer::erase(int key){
         delete it->second;
         sprites[FRONT].erase(it);
     }
+    it = sprites[BACK].find(key);
+    if( it != sprites[BACK].end() ){
+        delete it->second;
+        sprites[BACK].erase(it);
+    }
 }
 
 void Renderer::erase(int x, int y){
@@ -99,18 +104,19 @@ void Renderer::erase(int x, int y){
         std::map<int,Sprite*>::iterator it = sprites[i].begin();
         for(; it != sprites[i].end(); ++it){
             if((it->second->getPosX() == x))
-                if((it->second->getPosY() == y))
+                if((it->second->getPosY() == y)){
                     erase(it->first);
+                }
         }
     }
-    for(int i = 0; i<LAYER_NUMBER; i++){
+   /* for(int i = 0; i<LAYER_NUMBER; i++){
         std::map<int,Sprite*>::iterator it = static_sprites[i].begin();
         for(; it != static_sprites[i].end(); ++it){
             if((it->second->getPosX() == x))
                 if((it->second->getPosY() == y))
                     erase(it->first);
         }
-    }
+    }*/
 }
 
 bool Renderer::find(int key){
