@@ -9,7 +9,8 @@
 /// TAMANIOS
 #define ICON_BACKGROUND_WIDTH Block_sprite::width*3
 
-#define CHAMBER_SIZE 33
+#define CHAMBER_SIZEX 33
+#define CHAMBER_SIZEY 25
 
 /// PARA ALMACENAR
 #define STATIC_BACKGROUND 1
@@ -398,14 +399,16 @@ void gameStateEditor::exportMap(){
 
     sizeX /= Block_sprite::width;
     sizeY /= Block_sprite::height;
+
     /// LE AGREGO EL TAMANIO DE LA CAMARA DEL BOSS
-    sizeX += CHAMBER_SIZE;
+    sizeX += CHAMBER_SIZEX;
+
     /// ABRO EL ARCHIVO PARA IMPRIMIR
     std::ofstream ofile;
     ofile.open(fileName.c_str());
     /// IMPRIMOP TAMANIO DEL MAPA
     ofile << sizeX << " ";
-    ofile << sizeY << " ";
+    ofile << CHAMBER_SIZEY << " ";
     ofile << std::endl;
     /// MODIFICO CODIGOS PARA SER COHERENTE CON EL PROTOCOLO
     it = renderer->sprites[FRONT].begin();
@@ -441,6 +444,7 @@ void gameStateEditor::exportMap(){
             ofile << std::endl;
         }
     }
+    sizeX -= CHAMBER_SIZEX;
     sizeX *= Block_sprite::width;
 
     int blocktype;
@@ -448,6 +452,7 @@ void gameStateEditor::exportMap(){
     int posY;
     std::fstream chamberfile;
     chamberfile.open("chamber.txt");
+
     /// LE AGREGO LA CAMARA DEL BOSS AL FINAL
     while (!chamberfile.eof()){
         chamberfile >> blocktype;
@@ -458,10 +463,11 @@ void gameStateEditor::exportMap(){
             blocktype = bossSelected;
         if (!chamberfile.eof()){
         ofile << blocktype << " ";
-        ofile << posX + sizeX + Block_sprite::width<< " ";
+        ofile << posX + sizeX << " ";
         ofile << posY;
         ofile << std::endl;
         }
+
     }
     chamberfile.close();
     ofile.close();
