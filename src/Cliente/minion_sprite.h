@@ -16,9 +16,8 @@ class Minion_sprite: public Sprite{
         std::vector<SDL_Rect*> idleAnimation;
         std::vector<SDL_Rect*> runningAnimation;
         std::vector<SDL_Rect*> jumpingAnimation;
-        std::vector<SDL_Rect*> deathAnimation;
         std::vector<SDL_Rect*> shieldUpAnimation;
-        enum State{DYING, JUMPING, IDLE, SHIELD_UP, RUNNING, EDITORMODE};
+        enum State{JUMPING, IDLE, SHIELD_UP, RUNNING, EDITORMODE};
         float currentFrame;
         State currentState;
     public:

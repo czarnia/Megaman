@@ -73,11 +73,18 @@ void gameStateStart::load(int level){
     std::string musicpath(ms.str());
     music.changeTrack(musicpath.c_str());
     music.play();
+    spr = new Sprite(renderer->get_renderer(), "cargando.png");
+    spr->setWidth(100);
+    spr->setHeight(70);
+    spr->setPosX(window->get_width()/2-spr->getWidth()/2);
+    spr->setPosY(window->get_height()/2-spr->getHeight()/2);
+    renderer->addSprite(100, spr, FRONT, NON_STATIC);
     /// Recibo datos del mapa
     receiver->receiveMapSize();
     receiver->receiveMap(level);
     /// Vida y energia
     loadHUD();
+    renderer->erase(100);
 }
 
 void gameStateStart::loadHUD(){

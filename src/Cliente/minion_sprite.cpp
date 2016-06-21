@@ -70,16 +70,6 @@ void Minion_sprite::loadAnimations(std::string path){
         ifile >> aux->y;
         ifile >> aux->w;
         ifile >> aux->h;
-        deathAnimation.push_back(aux);
-    }
-
-    ifile >> framesNumber;
-    for (int i = 0; i <framesNumber; i++){
-        SDL_Rect *aux = new SDL_Rect;
-        ifile >> aux->x;
-        ifile >> aux->y;
-        ifile >> aux->w;
-        ifile >> aux->h;
         shieldUpAnimation.push_back(aux);
     }
 }
@@ -115,9 +105,6 @@ void Minion_sprite::clearStates(){
 void Minion_sprite::setState(int &action){
     currentFrame = 0;
     switch(action){
-        case PDYING:
-            currentState = DYING;
-            break;
         case PRUNNING:
             currentState = RUNNING;
             break;
@@ -143,15 +130,10 @@ SDL_Rect* Minion_sprite::get_crop(){
         if ((unsigned)round(currentFrame) == idleAnimation.size())
             currentFrame = 0;
         return idleAnimation[round(currentFrame)];
-    }else if (currentState == DYING){
-        currentFrame += 0.01;
-        if((unsigned)round(currentFrame) == deathAnimation.size()){
-            currentFrame = 0;
-        }
-        return deathAnimation[round(currentFrame)];
+
     }else if (currentState == SHIELD_UP){
         currentFrame += 0.01;
-        if((unsigned)round(currentFrame) == deathAnimation.size()){
+        if((unsigned)round(currentFrame) == shieldUpAnimation.size()){
             currentFrame = 0;
         }
         return shieldUpAnimation[round(currentFrame)];
@@ -171,9 +153,6 @@ Minion_sprite::~Minion_sprite(){
         delete *it;
     it = jumpingAnimation.begin();
     for (; it != jumpingAnimation.end(); ++it)
-        delete *it;
-    it = deathAnimation.begin();
-    for (; it != deathAnimation.end(); ++it)
         delete *it;
     it = shieldUpAnimation.begin();
     for (; it != shieldUpAnimation.end(); ++it)
