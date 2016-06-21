@@ -15,6 +15,10 @@ class Estado{
 		Estado(int op, int t = 0, int i = 0, int x = 0, int y = 0);
 		//Envia un estado.
 		void enviar(Socket* skt);
+    //Devuelve el comando del estado.
+    int get_comando();
+    //Devuelve el primer argumento del estado.
+    int get_arg1();
 };
 
 #endif //ESTADO_H

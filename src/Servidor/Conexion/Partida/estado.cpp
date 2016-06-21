@@ -12,3 +12,11 @@ void Estado::enviar(Socket* skt){
   skt->send((char*)&coord_x, TAM_INT);
   skt->send((char*)&coord_y, TAM_INT);
 }
+
+int Estado::get_comando(){
+  return comando;
+}
+
+int Estado::get_arg1(){
+  return tipo;
+}

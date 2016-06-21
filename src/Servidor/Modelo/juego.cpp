@@ -170,22 +170,13 @@ void Juego::notificar_observadores(){}
 void Juego::update(Observable *obs){}
 
 
-
-/*void Juego::notificar_gameover(int id){
-	for (size_t i = 0; i < observadores.size(); i++){
-		Observador_juego *obs = (Observador_juego*)observadores[i];
-		obs->update_gameover(id);
-	}
-}*/
-
-
 void Juego::murio_personaje(Personaje *p){
 	mundo->quitar_personaje(p->get_id_unico());
 	if (p->get_id_unico() > 0 && p->get_id_unico() <= 4){ //IDS de los megamans
 		cant_jugadores -= 1;
+		actualizo_gameover(p->get_id_unico());
 	}
 	if (cant_jugadores == 0){
-		//actualizo_gameover();
 		terminar_partida();
 	}
 }
@@ -214,6 +205,12 @@ void Juego::murio_boss(){
 
 
 //-------------------------------------------------------------------//
+
+void Juego::actualizo_gameover(int id){
+	Estado nuevo_estado(DERROTA, id);
+	cola_estados.push(nuevo_estado);
+}
+
 void Juego::actualizo_victoria(){
 	Estado nuevo_estado(VICTORIA);
 	cola_estados.push(nuevo_estado);
