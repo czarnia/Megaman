@@ -83,8 +83,10 @@ void Servidor::empezar_partida(){
 }
 
 void Servidor::empezar_nivel(int num_nivel){
-	mundo->inicializar_nivel(num_nivel);
-	clientes.iniciar_nivel(num_nivel);
+	//mundo->inicializar_nivel(num_nivel);
+	//clientes.iniciar_nivel(num_nivel);
+	mundo->inicializar_nivel(1);
+	clientes.iniciar_nivel(1);
 }
 
 void Servidor::jugar_nivel(){
