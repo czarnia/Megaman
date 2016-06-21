@@ -7,6 +7,9 @@
 #define VELOCIDAD_X 5
 #define VELOCIDAD_SALTO 25
 
+enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO};
+
 StrategyMoverBombman::StrategyMoverBombman():
 velocidad_x(0),
 velocidad_y(0),
@@ -44,17 +47,20 @@ void StrategyMoverBombman::mover(Mapa *mapa, Bombman *pj, float tiempo){
 void StrategyMoverBombman::actualizar_coordenada(Mapa *mapa,
 Bombman *pj){
 	Coordenada nueva_coordenada = pj->coordenada;
-	if (velocidad_y > 0){
-		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_SALTO);
-	}
-	if (velocidad_y < 0){
-		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_SALTO);
-	}
 	if (velocidad_x > 0){
 		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);
+		pj->estado_actual = CORRIENDO;
 	}
 	if (velocidad_x < 0){
 		nueva_coordenada = nueva_coordenada.izquierda(VELOCIDAD_X);
+		pj->estado_actual = CORRIENDO;
+	}
+	if (velocidad_y > 0){
+		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_SALTO);
+		pj->estado_actual = SALTANDO;
+	}
+	if (velocidad_y < 0){
+		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_SALTO);
 	}
 	if (nueva_coordenada == pj->get_coordenada()){
 		return;
@@ -65,6 +71,7 @@ Bombman *pj){
 	}else{
 		velocidad_x = (velocidad_x != 0)? 0 : velocidad_x;
 		velocidad_y = (velocidad_y != 0)? 0 : velocidad_y;
+		pj->estado_actual = IDLE;
 	}
 }
 

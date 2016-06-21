@@ -6,6 +6,9 @@
 
 enum direccion{DERECHA, IZQUIERDA};
 
+enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO, ESCUDO_UP, ESCUDO_DOWN};
+
 StrategyMoverSnipper::StrategyMoverSnipper(){
 	direccion = DERECHA;
 	tiempo_pasado = 0;
@@ -21,9 +24,11 @@ void StrategyMoverSnipper::mover(Mapa *mapa, Snipper *pj, float tiempo){
 	switch(direccion){
 		case DERECHA:
 			coord_nueva = pj->coordenada.derecha(VELOCIDAD);
+			pj->estado_actual = CORRIENDO;
 			break;
 		case IZQUIERDA:
 			coord_nueva = pj->coordenada.izquierda(VELOCIDAD);
+			pj->estado_actual = CORRIENDO;
 			break;
 	}
 	if (mapa->puede_ubicarse(pj, coord_nueva)){

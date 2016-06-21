@@ -6,6 +6,9 @@
 #define VELOCIDAD_Y 10
 #define GRAVEDAD 5
 
+enum estados {MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO, ESCUDO_UP, ESCUDO_DOWN};
+
 StrategyMoverJumpingSnipper::StrategyMoverJumpingSnipper(){
 	tiempo_pasado = 0;
 	velocidad_y = 0;
@@ -24,13 +27,16 @@ void StrategyMoverJumpingSnipper::mover(Mapa *mapa, Jumping_snipper *pj, float t
 			tiempo_pasado -= TIEMPO_SALTO;
 	}if (velocidad_y < 0){
 		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
+		pj->estado_actual = SALTANDO;
 	}
 	if (velocidad_y > 0){
 		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
-		//pj->estado_actual = SALTANDO;
 	}
 	if (mapa->puede_ubicarse(pj, nueva_coordenada)){
 		pj->coordenada = nueva_coordenada;
 		pj->notificar_observadores();
+	}
+	if (velocidad_y == 0){
+		pj->estado_actual = IDLE;
 	}
 }
