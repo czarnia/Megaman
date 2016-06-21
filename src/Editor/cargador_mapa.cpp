@@ -7,7 +7,8 @@
 #define NOMBRE_ARCH_MAPAS "mapa"
 #define NOMBRE_ARCH_MAPAS_BOSS "mapa_boss"
 #define EXTENSION_ARCH_MAPAS ".txt"
-#define MAX_MAPAS_PRDEFINIDOS 5
+#define MIN_NIVELES 0
+#define MAX_NIVELES 4
 #define MULT_X 30
 #define MULT_Y 30
 
@@ -48,22 +49,7 @@ void Cargador_mapa::cargar_mapa(int id_mapa){
 	std::string path = root_path + nombre_arch + id.str() + extension_arch;
 	cargar(path);
 }
-/*
-void Cargador_mapa::cargar_mapa_boss(){
-	std::stringstream id;
-	id << id_mapa_elegido;
-	std::string nombre_arch(NOMBRE_ARCH_MAPAS_BOSS);
-	std::string extension_arch(EXTENSION_ARCH_MAPAS);
-	std::string path = root_path + nombre_arch + id.str() + extension_arch;
-	int ancho_mapa_juego = ancho_mapa;
-	mapa_arch.open(path.c_str());
-	cargar_coordenadas(ancho_mapa);
-	mapa_arch.close();
-	//El ancho se obtiene con la suma
-	//los anchos de ambos mapas (mapa juego + mapa boss).
-	ancho_mapa += ancho_mapa_juego;
-}
-*/
+
 void Cargador_mapa::cargar(std::string path){
 	ancho_mapa = 0;
 	alto_mapa = 0;
@@ -71,8 +57,7 @@ void Cargador_mapa::cargar(std::string path){
 	mapa_arch.open(path.c_str());
 	cargar_coordenadas();
 	mapa_arch.close();
-	if (id_mapa_elegido <= MAX_MAPAS_PRDEFINIDOS){
-		//cargar_mapa_boss();
+	if (id_mapa_elegido >= MIN_NIVELES && id_mapa_elegido <= MAX_NIVELES){
 		es_predefinido = true;
 	}
 }
@@ -139,10 +124,6 @@ void Cargador_mapa::cargar_coordenadas(){
 	ancho_mapa = atoi(linea_parseada[0].c_str())*MULT_X;
 	alto_mapa = atoi(linea_parseada[1].c_str())*MULT_Y;
   
-	/*int codigo_obj = atoi(linea_parseada[2].c_str());
-	int x = atoi(linea_parseada[3].c_str());
-	int y = atoi(linea_parseada[4].c_str());
-	agregar_objeto(codigo_obj, x, y);*/
 	//Ahora obtengo las coordenadas de los objetos del mapa.
 	while (getline(mapa_arch, linea)){
 		linea_parseada = parsear_cadena_palabras(linea);
