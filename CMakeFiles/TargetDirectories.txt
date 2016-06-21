@@ -1,4 +1,0 @@
-/home/eugenia/Desktop/Megaman/Comun/CMakeFiles/Megaman.dir
-/home/eugenia/Desktop/Megaman/Cliente/CMakeFiles/cliente.dir
-/home/eugenia/Desktop/Megaman/Editor/CMakeFiles/editor.dir
-/home/eugenia/Desktop/Megaman/Servidor/Conexion/Arquitectura/CMakeFiles/servidor.dir

@@ -2,6 +2,8 @@
 #include "creador_start.h"
 #include "creador_elegir_boss.h"
 
+#include "evento_null_lobby.h"
+
 #include <vector>
 
 #define COMANDO_MINIMO 5
@@ -11,9 +13,11 @@ Procesador_lobby::Procesador_lobby(int id_procesador) : id(id_procesador){
 }
 
 Evento_lobby* Procesador_lobby::crear_evento(int comando, int parametro){
-  Evento_lobby* e = creadores[comando-COMANDO_MINIMO]->crear(parametro); //TODO: if comando-1
-  // < 0, lanzar excepcion.
-
+  if ((comando-COMANDO_MINIMO > creadores.size()) || (comando-COMANDO_MINIMO < 0)){
+    Evento_lobby* e = new Evento_null_lobby();
+    return e;
+  }
+  Evento_lobby* e = creadores[comando-COMANDO_MINIMO]->crear(parametro);
   return e;
 }
 

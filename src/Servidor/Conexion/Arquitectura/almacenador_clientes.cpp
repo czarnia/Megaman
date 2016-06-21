@@ -1,5 +1,7 @@
 #include "almacenador_clientes.h"
 
+#define GAMEOVER 7
+
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -49,24 +51,6 @@ void Almacenador_clientes::update_fin_nivel(){
 	}
 }
 
-void Almacenador_clientes::update_victoria(){
-	for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
-		//it->second->enviar_victoria();
-	}
-}
-
-
-void Almacenador_clientes::update_gameover(int id){
-	//LE AVISO A TODOS LOS JUGADORES QUE ALGUN JUGADOR PERDIO.
-	ItClientes it = clientes.find(id);
-	if (it->first == id){
-		//(it->second)->enviar_gameover();
-		(it->second)->terminar_ejecucion();
-		clientes.erase(id);
-	}
-}
-
-
 void Almacenador_clientes::iniciar_nivel(int num_nivel){
   for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
     (it->second)->iniciar_nivel(num_nivel);
@@ -77,4 +61,11 @@ void Almacenador_clientes::update_estado(Estado e){
   for (ItClientes it = clientes.begin(); it != clientes.end(); ++it){
 		it->second->update_estado(e);
 	}
+  if (e.get_comando() == GAMEOVER){
+    ItClientes it = clientes.find(e.get_arg1());
+    if (it->first == e.get_arg1()){
+  		(it->second)->terminar_ejecucion();
+  		clientes.erase(e.get_arg1());
+  	}
+  }
 }

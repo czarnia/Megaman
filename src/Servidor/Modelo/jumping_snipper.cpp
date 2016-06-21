@@ -5,7 +5,8 @@
 #define IZQUIERDA -1
 #define JUMPING_SNIPPER 3
 
-enum estado_npc_escudo{MURIENDO, ESCUDO_UP, ESCUDO_DOWN};
+enum estados {MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO, ESCUDO_UP, ESCUDO_DOWN};
 
 Jumping_snipper::Jumping_snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Snipper(mapa, c, arma, id){
@@ -21,6 +22,7 @@ void Jumping_snipper::update(float tiempo, Mapa* mapa){
   //Salta:
 	//salto_snipper.mover(mapa, this, tiempo);
   if ((tiempo_pasado < TIEMPO_ESTADO) || !activo){
+    estado_actual = IDLE;
     return;
   }
 	//paso el tiempo de estado:
@@ -31,6 +33,7 @@ void Jumping_snipper::update(float tiempo, Mapa* mapa){
 		return;
 	}
 	//Dispara:
+  estado_actual = DISPARANDO;
 	Bala *bala = arma->atacar(IZQUIERDA, 0, coordenada.izquierda(ancho/2));
 	mapa->agregar_bala(bala);
 	bala->notificar_observadores();

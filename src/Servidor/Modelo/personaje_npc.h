@@ -11,8 +11,7 @@ class Personaje_npc: public Personaje{
 		bool activo;
 	public:
 		//Crea a un personaje npc, por definicion, todos se crean desactivados.
-		Personaje_npc(Mapa *mapa, Coordenada c, int id):
-		Personaje(mapa, c, id){ activo = false;}
+		Personaje_npc(Mapa *mapa, Coordenada c, int id);
 		//Dado un porcentaje de vida a perder, se la resta al personaje,
 		//en caso de ser -100 (por defecto) una vida completa.
 		virtual void perder_vida(int porcentaje = PERDER_MAX);

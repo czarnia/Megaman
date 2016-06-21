@@ -45,11 +45,11 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, float tiempo){
   if (velocidad_y < 0){
     //std::cout << "MEGAMAN MOVER: arriba \n";
     nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_Y);
+		pj->estado_actual = SALTANDO;
   }
   if (velocidad_y > 0){
     //std::cout << "MEGAMAN MOVER: abajo \n";
     nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_Y);
-    pj->estado_actual = SALTANDO;
   }
 
   if (mapa->puede_ubicarse(pj, nueva_coordenada)){
@@ -68,6 +68,7 @@ void StrategyMoverMegaman::mover(Mapa *mapa, Personaje_pc *pj, float tiempo){
     if (velocidad_y != 0){
 		  velocidad_y = 0;
     }
+		pj->estado_actual = IDLE;
   }
 }
 
@@ -97,6 +98,10 @@ void StrategyMoverMegaman::sacar_movimiento(Personaje_pc *pj, int dir){
 	if (direccion == IZQUIERDA){
 		//std::cout << "STRATEGY_MOV_MEG sacar_mov: interrumpo mov izquierda \n";
 		velocidad_x = 0;
+	}
+
+	if ((velocidad_x == 0) && (velocidad_y == 0)){
+		pj->estado_actual = IDLE;
 	}
 }
 

@@ -5,7 +5,8 @@
 #define SNIPPER 5
 #define TIEMPO_ESTADO 0.25
 
-enum estado_npc_escudo{MURIENDO, ESCUDO_UP = 7, ESCUDO_DOWN};
+enum estados {MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
+		IDLE, ESCALANDO, ESCUDO_UP, ESCUDO_DOWN};
 
 Snipper::Snipper(Mapa *mapa, Coordenada c, Arma_minion* arma, int id):
 Personaje_npc_con_escudo(mapa, c, id),
@@ -28,6 +29,7 @@ void Snipper::update(float tiempo, Mapa* mapa){
     tiempo_pasado += tiempo;
   }
   if ((tiempo_pasado < TIEMPO_ESTADO) || !activo){
+    estado_actual = IDLE;
     return;
 	}
 	//paso el tiempo de estado:
@@ -35,9 +37,9 @@ void Snipper::update(float tiempo, Mapa* mapa){
 	tiempo_pasado -= TIEMPO_ESTADO;
 	this->notificar_observadores();
 	if (estado_actual != ESCUDO_UP){
-    //atacar(IZQUIERDA, mapa);
+    atacar(IZQUIERDA, mapa);
 	}
-  //mover(tiempo, mapa);
+  mover(tiempo, mapa);
 	//Personaje::update(tiempo, mapa);
 }
 
@@ -52,6 +54,7 @@ void Snipper::recibir_ataque(Bala* ataque){
 }
 
 void Snipper::atacar(int dir, Mapa* mapa){
+  estado_actual = DISPARANDO;
   Bala *bala = arma->atacar(IZQUIERDA, 0, coordenada.izquierda(ancho/2));
 	mapa->agregar_bala(bala);
 	bala->notificar_observadores();

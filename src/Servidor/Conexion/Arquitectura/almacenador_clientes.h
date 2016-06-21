@@ -22,14 +22,10 @@ class Almacenador_clientes{
     //Dado un estado, notifica del mismo a todos los cleintes
     void update_estado(Estado e);
 
-		//Dado un identificador, notifica un gameover del cliente correspondiente.
-		void update_gameover(int id);
 		//Notifica el fin de una partida.
 		void update_fin_partida();
 		//Notifica el fin de una partida.
 		void update_fin_nivel();
-		//Notifica a los clientes de que ganaron el juego.
-		void update_victoria();
 
 		//Le notifica a todos los clientes que se ha iniciado un nuevo nivel.
 		void iniciar_nivel(int num_nivel);

@@ -1,5 +1,10 @@
 #include "personaje_npc.h"
 
+Personaje_npc::Personaje_npc(Mapa *mapa, Coordenada c, int id):
+Personaje(mapa, c, id){ 
+	activo = false;
+}
+
 void Personaje_npc::perder_vida(int porcentaje){
 	vida.perder(porcentaje);
 }

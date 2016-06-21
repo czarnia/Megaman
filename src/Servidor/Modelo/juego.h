@@ -94,6 +94,8 @@ public Juego_observable{
 		void actualizo_victoria();
 		//Notifica al servidor de un fin de nivel.
 		void actualizo_termino_nivel();
+		//Notifica al servidor de un gameover para el jugador de identificador id.
+		void actualizo_gameover(int id);
 
 		//Recibe un id y un tipo y remueve al personaje
 		//muerto del juego.

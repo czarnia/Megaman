@@ -8,6 +8,8 @@
 #define NOMBRE_ARCH_MAPAS_BOSS "mapa_boss"
 #define EXTENSION_ARCH_MAPAS ".txt"
 #define MAX_MAPAS_PRDEFINIDOS 5
+#define MULT_X 30
+#define MULT_Y 30
 
 enum codigos_personajes{MEGAMAN = 1, BUMBY, J_SNIPPER, MET, SNIPPER};
 enum codigos_elementos{BLOQUE = 10, PUAS, ESCALERA, PUERTA_BOSS = 18};
@@ -46,7 +48,7 @@ void Cargador_mapa::cargar_mapa(int id_mapa){
 	std::string path = root_path + nombre_arch + id.str() + extension_arch;
 	cargar(path);
 }
-
+/*
 void Cargador_mapa::cargar_mapa_boss(){
 	std::stringstream id;
 	id << id_mapa_elegido;
@@ -61,7 +63,7 @@ void Cargador_mapa::cargar_mapa_boss(){
 	//los anchos de ambos mapas (mapa juego + mapa boss).
 	ancho_mapa += ancho_mapa_juego;
 }
-
+*/
 void Cargador_mapa::cargar(std::string path){
 	ancho_mapa = 0;
 	alto_mapa = 0;
@@ -70,31 +72,13 @@ void Cargador_mapa::cargar(std::string path){
 	cargar_coordenadas();
 	mapa_arch.close();
 	if (id_mapa_elegido <= MAX_MAPAS_PRDEFINIDOS){
-		cargar_mapa_boss();
+		//cargar_mapa_boss();
 		es_predefinido = true;
 	}
 }
 
-void Cargador_mapa::cargar_coordenadas(int delta_x){
-  std::string linea;
-  int codigo_obj;
-  int x = 0, y = 0;
-  getline(mapa_arch, linea);
-  //Primero obtengo las dimensiones del mapa
-  std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
-  ancho_mapa = atoi(linea_parseada[0].c_str());
-  alto_mapa = atoi(linea_parseada[1].c_str());
-  //Ahora obtengo las coordenadas de los objetos del mapa.
-  while (getline(mapa_arch, linea)){
-    linea_parseada = parsear_cadena_palabras(linea);
-    if (linea_parseada.size() != 3){ //necesito un código + 2 coordenadas.
-      //excepcion!
-      return;
-    }
-    codigo_obj = atoi(linea_parseada[0].c_str());
-    x = atoi(linea_parseada[1].c_str());
-    y = atoi(linea_parseada[2].c_str());
-	Coordenada *coordenada = new Coordenada(x + delta_x, y);
+void Cargador_mapa::agregar_objeto(int codigo_obj, int x, int y){
+	Coordenada *coordenada = new Coordenada(x , y);
     switch(codigo_obj){
 		case MEGAMAN:
 			coordenada_megaman.push_back(coordenada);
@@ -144,7 +128,33 @@ void Cargador_mapa::cargar_coordenadas(int delta_x){
 			coordenada_boss.push_back(coordenada);
 			break;
 	}
-  }
+}
+
+void Cargador_mapa::cargar_coordenadas(){
+	std::string linea;
+	getline(mapa_arch, linea);
+	
+	//Primero obtengo las dimensiones del mapa
+	std::vector<std::string> linea_parseada = parsear_cadena_palabras(linea);
+	ancho_mapa = atoi(linea_parseada[0].c_str())*MULT_X;
+	alto_mapa = atoi(linea_parseada[1].c_str())*MULT_Y;
+  
+	int codigo_obj = atoi(linea_parseada[2].c_str());
+	int x = atoi(linea_parseada[3].c_str());
+	int y = atoi(linea_parseada[4].c_str());
+	agregar_objeto(codigo_obj, x, y);
+	//Ahora obtengo las coordenadas de los objetos del mapa.
+	while (getline(mapa_arch, linea)){
+		linea_parseada = parsear_cadena_palabras(linea);
+		if (linea_parseada.size() < 3){ //necesito un código + 2 coordenadas.
+			//excepcion!
+			return;
+		}
+		codigo_obj = atoi(linea_parseada[0].c_str());
+		x = atoi(linea_parseada[1].c_str());
+		y = atoi(linea_parseada[2].c_str());
+		agregar_objeto(codigo_obj, x, y);
+	}
 }
 
 void Cargador_mapa::limpiar_mapa(){
