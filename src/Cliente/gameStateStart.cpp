@@ -61,7 +61,9 @@ void gameStateStart::load(int level){
     std::ostringstream os;
     os << "../sprites/background"<<level<<".png";
     std::string mapBackground(os.str());
-    Sprite *spr = new Background_sprite(renderer->get_renderer(), mapBackground.c_str());
+    Sprite *spr = new Sprite(renderer->get_renderer(), mapBackground.c_str());
+    spr->setWidth(window->get_width());
+    spr->setHeight(window->get_height());
     spr->setPosX(0);
     spr->setPosY(0);
     renderer->addSprite(BACKGROUND, spr, BACK, STATIC);
@@ -135,7 +137,7 @@ void gameStateStart::updateInput(bool *running){
     /// siguiendo el protocolo establecido
     static Sender sender(skt);
     SDL_Event event;
-    std::string direction = "right";
+    static std::string direction = "right";
     while (SDL_PollEvent(&event)){
         if (event.type == SDL_QUIT){
             *running = false;
@@ -145,14 +147,12 @@ void gameStateStart::updateInput(bool *running){
             switch (event.key.keysym.sym){
                 case SDLK_UP:
                     if(!up){
-                       // std::cout<<"se apreto arriba"<<std::endl;
                         sender.send("move", "up"); // ENVIO LA TECLA
                         up = true;
                     }
                     break;
                 case SDLK_DOWN:
                     if(!down){
-                      //  std::cout<<"se apreto abajo"<<std::endl;
                         sender.send("move", "down");  // ENVIO LA TECLA
                         down = true;
                     }
@@ -167,7 +167,6 @@ void gameStateStart::updateInput(bool *running){
                     break;
                 case SDLK_RIGHT:
                     if(!right){
-                      //  std::cout<<"se apreto derecha"<<std::endl;
                         sender.send("move", "right");  // ENVIO LA TECLA
                         direction = "right";
                         right = true;
@@ -175,36 +174,29 @@ void gameStateStart::updateInput(bool *running){
                     break;
                 case SDLK_s:
                     if(!jump){
-                     //   std::cout<<"Se salto"<<std::endl;
                         sender.send("move","jump");
                         jump = true;
                     }
                     break;
                 case SDLK_a:
                     if (!shoot){
-                     //   std::cout<<"Se disparo"<<std::endl;
                         sender.send("attack", direction);  // ENVIO LA TECLA
                         shoot = true;
                     }
                     break;
                 case SDLK_1:
-                    //std::cout<<"Se cambio de arma 1"<<std::endl;
                     sender.send("gunChange","gun1");  // ENVIO LA TECLA
                     break;
                 case SDLK_2:
-                   // std::cout<<"Se cambio de arma 2"<<std::endl;
                     sender.send("gunChange","gun2");  // ENVIO LA TECLA
                     break;
                 case SDLK_3:
-                   // std::cout<<"Se cambio de arma 3"<<std::endl;
                     sender.send("gunChange","gun3");  // ENVIO LA TECLA
                     break;
                 case SDLK_4:
-                   // std::cout<<"Se cambio de arma 4"<<std::endl;
                     sender.send("gunChange","gun4");  // ENVIO LA TECLA
                     break;
                 case SDLK_5:
-                   // std::cout<<"Se cambio de arma 5"<<std::endl;
                     sender.send("gunChange","gun5");  // ENVIO LA TECLA
                     break;
                 default:
