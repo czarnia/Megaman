@@ -151,7 +151,7 @@ void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int
             spr->setPosX(coord.first);
             spr->setPosY(coord.second);
             renderer->addSprite(objectType+objectID, spr, FRONT, NON_STATIC);
-                break;
+            break;
         case SNIPERN:
             spr = new Minion_sprite(renderer->get_renderer(),"../sprites/sniper.PNG", 1);
             spr->loadAnimations("../AnimationConfig/sniper.txt");
@@ -244,7 +244,7 @@ void ResponseHandler::executeAction(int &objectType, int &objectID, int &action)
 
 void ResponseHandler::changePosition(int &objectType, int &objectID, std::pair<int,int> &coord){
     /// PARA LA ANIMACION
-   // renderer->sprites[FRONT][objectType+objectID]->changeState(coord.first, coord.second);
+    renderer->sprites[FRONT][objectType+objectID]->changeState(coord.first, coord.second);
     renderer->sprites[FRONT][objectType+objectID]->setPosX(coord.first);
     renderer->sprites[FRONT][objectType+objectID]->setPosY(coord.second);
 }
