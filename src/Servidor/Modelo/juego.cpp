@@ -25,7 +25,7 @@ enum Codigo {INICIAR_NIVEL, POSICION, VIDA, ENERGIA, CANT_VIDAS,
 	CAMBIO_ESTADO, FIN_NIVEL, DERROTA, VICTORIA};
 
 #define MAIN_PATH_MAPAS "../../../Mapas/"
-#define TIEMPO 0.04
+#define TIEMPO 20
 #define TOT_NIVELES 5
 #define MEGAMAN 1
 
@@ -82,11 +82,11 @@ void Juego::jugar(){
 		clock_t iniciar_tiempo = clock();
 		{
 			Lock l(proteccion);
-			update(0.04);
+			update(TIEMPO);
 			enviar_estados();
 		}
 		float delta_tiempo = TIEMPO-float(clock()-iniciar_tiempo)/CLOCKS_PER_SEC;
-		SDL_Delay(1);
+		SDL_Delay(delta_tiempo);
 	}
 }
 
