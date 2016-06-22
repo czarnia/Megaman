@@ -65,10 +65,11 @@ void Bumby::update(float tiempo, Mapa* mapa){
 }
 
 void Bumby::recibir_ataque(Bala* ataque){
-	//TODO: A implementar!
+	ataque->daniar(this);
 	if(!this->esta_vivo()){
 		estado_actual = MURIENDO;
 	}
+	notificar_observadores();
 }
 
 void Bumby::mover(float tiempo, Mapa* mapa){

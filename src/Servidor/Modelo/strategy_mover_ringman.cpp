@@ -1,7 +1,7 @@
-#include "strategy_mover_sparkman.h"
-#include "sparkman.h"
+#include "strategy_mover_ringman.h"
+#include "ringman.h"
 
-#define TIEMPO_SALTO 5
+#define TIEMPO_SALTO 20
 #define GRAVEDAD 5
 #define VELOCIDAD_Y 60
 #define VELOCIDAD_X 5
@@ -10,12 +10,12 @@
 enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO};
 
-StrategyMoverSparkman::StrategyMoverSparkman():
+StrategyMoverRingman::StrategyMoverRingman():
 velocidad_x(0),
 velocidad_y(0),
 tiempo_salto(0){}
 
-void StrategyMoverSparkman::mover(Mapa *mapa, Sparkman *pj,
+void StrategyMoverRingman::mover(Mapa *mapa, Ringman *pj,
 float tiempo){
 	bool personaje_en_aire = mapa->esta_en_aire(pj);
 	if (personaje_en_aire){
@@ -43,8 +43,8 @@ float tiempo){
 	actualizar_coordenada(mapa, pj);
 }
 
-void StrategyMoverSparkman::actualizar_coordenada(Mapa *mapa,
-Sparkman *pj){
+void StrategyMoverRingman::actualizar_coordenada(Mapa *mapa,
+Ringman *pj){
 	Coordenada nueva_coordenada = pj->coordenada;
 	if (velocidad_x > 0){
 		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);
@@ -74,4 +74,5 @@ Sparkman *pj){
 	}
 }
 
-StrategyMoverSparkman::~StrategyMoverSparkman(){}
+StrategyMoverRingman::~StrategyMoverRingman(){}
+

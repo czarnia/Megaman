@@ -13,9 +13,7 @@ class StrategyMoverSparkman : public StrategyMover{
 		int velocidad_y;
 		float tiempo_salto;
 
-		void aplicar_movimiento(Mapa *mapa, Sparkman *pj);
-		void actualizar_coordenada(Mapa *mapa, Sparkman *pj,
-		Coordenada *coord);
+		void actualizar_coordenada(Mapa *mapa, Sparkman *pj);
 	public:
 		//Crea un StrategyMoverSparkman.
 		StrategyMoverSparkman();

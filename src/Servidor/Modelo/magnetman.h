@@ -2,6 +2,7 @@
 #define MAGNETMAN_H
 
 #include "personaje_npc.h"
+#include "strategy_mover_magnetman.h"
 #include <vector>
 
 class Arma_magnetman;
@@ -11,7 +12,8 @@ class Magnetman: public Personaje_npc{
 		Mapa *mapa;
 		float tiempo_pasado;
 		Arma_magnetman* arma;
-    bool atacando;
+		bool atacando;
+		StrategyMoverMagnetman movimiento;
 	public:
 		//Dado un Mapa*, una coordenada, un Arma_magnetman* 
 		//y un id, crea un magnetan.
@@ -24,6 +26,8 @@ class Magnetman: public Personaje_npc{
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
 		virtual void update(float tiempo);
+		
+		friend class StrategyMoverMagnetman;
 };
 
 #endif //MAGNETMAN_H

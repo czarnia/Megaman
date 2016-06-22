@@ -1,5 +1,5 @@
-#include "strategy_mover_sparkman.h"
-#include "sparkman.h"
+#include "strategy_mover_magnetman.h"
+#include "magnetman.h"
 
 #define TIEMPO_SALTO 5
 #define GRAVEDAD 5
@@ -10,12 +10,12 @@
 enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO};
 
-StrategyMoverSparkman::StrategyMoverSparkman():
+StrategyMoverMagnetman::StrategyMoverMagnetman():
 velocidad_x(0),
 velocidad_y(0),
 tiempo_salto(0){}
 
-void StrategyMoverSparkman::mover(Mapa *mapa, Sparkman *pj,
+void StrategyMoverMagnetman::mover(Mapa *mapa, Magnetman *pj,
 float tiempo){
 	bool personaje_en_aire = mapa->esta_en_aire(pj);
 	if (personaje_en_aire){
@@ -43,8 +43,8 @@ float tiempo){
 	actualizar_coordenada(mapa, pj);
 }
 
-void StrategyMoverSparkman::actualizar_coordenada(Mapa *mapa,
-Sparkman *pj){
+void StrategyMoverMagnetman::actualizar_coordenada(Mapa *mapa,
+Magnetman *pj){
 	Coordenada nueva_coordenada = pj->coordenada;
 	if (velocidad_x > 0){
 		nueva_coordenada = nueva_coordenada.derecha(VELOCIDAD_X);
@@ -74,4 +74,4 @@ Sparkman *pj){
 	}
 }
 
-StrategyMoverSparkman::~StrategyMoverSparkman(){}
+StrategyMoverMagnetman::~StrategyMoverMagnetman(){}
