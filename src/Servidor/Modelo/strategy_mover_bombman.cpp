@@ -16,9 +16,7 @@ velocidad_y(0),
 tiempo_salto(0){}
 
 void StrategyMoverBombman::mover(Mapa *mapa, Bombman *pj, float tiempo){
-	bool personaje_flotando = pj->flotando;
 	bool personaje_en_aire = mapa->esta_en_aire(pj);
-	//Coordenada nueva_coordenada = pj->coordenada;
 	if (personaje_en_aire){
 		pj->flotando = true;
 	}

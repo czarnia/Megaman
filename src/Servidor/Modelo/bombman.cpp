@@ -3,7 +3,7 @@
 #include "arma_bombman.h"
 #include <cstdlib>
 
-#define TIEMPO_ATAQUE 2
+#define TIEMPO_ATAQUE 10
 #define TIPO_BOMBMAN 20
 #define RAND_RANGE 2
 #define ARRIBA 1
