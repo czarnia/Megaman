@@ -16,7 +16,10 @@
 #define TIEMPO_MOVER 1
 #define TIPO_BALA_RINGMAN 33
 #define PERDIDA_VIDA_BOSS 10
+#define PERDIDA_VIDA_MEGA 20
 #define TIEMPO_REBOTE 10
+#define VELOCIDAD_X 2
+#define VELOCIDAD_Y 2
 
 Bala_ringman::Bala_ringman(int dir_x, int dir_y, Coordenada c, int id):
 Bala_especial(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){
@@ -26,38 +29,56 @@ Bala_especial(dir_x, dir_y, c, TIPO_BALA_RINGMAN, id){
 Bala_ringman::~Bala_ringman() {}
 
 void Bala_ringman::update(float tiempo, Mapa* mapa) {
-	Coordenada nueva_coordenada = coord;
+	if (impacto){
+		mapa->quitar_bala(this);
+	}
+
 	tiempo_pasado += tiempo;
 	if (tiempo_pasado < TIEMPO_MOVER){
 		return;
+	}		
+	if(tiempo_pasado >= TIEMPO_REBOTE){
+		impacto = true;
+		direccion_x = 0;
+		direccion_y = 0;
+		return;
 	}
-	/*if (direccion_x > 0){
-		nueva_coordenada = nueva_coordenada.derecha(2);
-    }
-	if (direccion_x < 0){
-		nueva_coordenada = nueva_coordenada.izquierda(2);
-    }
-	if (direccion_y < 0){
-		nueva_coordenada = nueva_coordenada.arriba(2);
-	}
-	if (direccion_y > 0){
-		nueva_coordenada = nueva_coordenada.abajo(2);
-	}
-
+	int delta_x = 0, delta_y = 0;
+	delta_x = (direccion_x > 0)? VELOCIDAD_X : -VELOCIDAD_X;
+	delta_y = (direccion_y > 0)? -VELOCIDAD_Y : VELOCIDAD_Y;
+	Coordenada nueva_coordenada = coord;
+	Coordenada coord_rebote_x = coord;
+	Coordenada coord_rebote_y = coord;
+	Coordenada coord_rebote = coord;
+	//REFACTOREAR ESTO...
 	if (mapa->puede_ubicarse(this, nueva_coordenada)){
 		coord = nueva_coordenada;
-	}else{
-		//TODO: Mover al mapa.
-		mapa->quitar_bala(this);
-	}*/
+	}else{ 
+		coord_rebote_y.sumar_abscisa(delta_x);
+		if(mapa->puede_ubicarse(this, coord_rebote_y)){
+			direccion_y = -direccion_y;
+			coord = coord_rebote_y;
+		}
+		coord_rebote_x.sumar_ordenada(delta_y);
+		else if(mapa->puede_ubicarse(this, coord_rebote_x)){
+			direccion_x = -direccion_x;
+			coord = coord_rebote_x;
+		}else{
+			coord_rebote.sumar_abscisa(delta_x);
+			coord_rebote.sumar_ordenada(delta_y);
+			if(mapa->puede_ubicarse(this, coord_rebote){
+				direccion_x = -direccion_x;
+				direccion_y = -direccion_y;
+				coord = coord_rebote;
+			}
+		}
+	}
 }
 
-void Bala_ringman::daniar(Personaje* pj) {
-	pj->perder_vida(0); //sólo le saca vida a megaman.
-}
+void Bala_ringman::daniar(Personaje* pj) {}
 
 void Bala_ringman::daniar(Megaman* mega) {
-	mega->perder_vida(20);
+	mega->perder_vida(PERDIDA_VIDA_MEGA);
 }
 
 void Bala_ringman::daniar(Bombman* b){
@@ -78,9 +99,7 @@ void Bala_ringman::daniar(Fireman* f){
 	f->perder_vida(PERDIDA_VIDA_BOSS);
 }
 
-void Bala_ringman::daniar(Met* met) {
-	met->perder_vida(0);
-}
+void Bala_ringman::daniar(Met* met) {}
 
 void Bala_ringman::daniar(Bumby* b){
 	b->perder_vida();

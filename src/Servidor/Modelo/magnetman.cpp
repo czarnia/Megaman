@@ -27,7 +27,6 @@ void Magnetman::atacar(int dir, Mapa* mapa){
 		mapa->agregar_bala(bala);
 		bala->notificar_observadores();
 	}
-
 }
 
 void Magnetman::mover(float tiempo, Mapa* mapa){ 
