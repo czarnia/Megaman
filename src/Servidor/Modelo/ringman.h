@@ -2,15 +2,16 @@
 #define RINGMAN_H
 
 #include "personaje_npc.h"
-
+#include "strategy_mover_ringman.h"
 class Arma_ringman;
+class StrategyMoverRingman;
 
 class Ringman: public Personaje_npc{
 	private:
 		Mapa *mapa;
 		float tiempo_pasado;
 		Arma_ringman* arma;
-		//StrategyMoverRingman movimiento;
+		StrategyMoverRingman movimiento;
 	public:
 		//Dado un Mapa*, una coordenada, un Arma_ringman* y un id, crea un ringman.
 		Ringman(Mapa *mapa, Coordenada c, Arma_ringman* arma, int id);
@@ -22,6 +23,8 @@ class Ringman: public Personaje_npc{
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
 		virtual void update(float tiempo);
+		
+		friend class StrategyMoverRingman;
 };
 
 #endif //RINGMAN_H
