@@ -58,18 +58,19 @@ void Bala_ringman::update(float tiempo, Mapa* mapa) {
 		if(mapa->puede_ubicarse(this, coord_rebote_y)){
 			direccion_y = -direccion_y;
 			coord = coord_rebote_y;
-		}
-		coord_rebote_x.sumar_ordenada(delta_y);
-		else if(mapa->puede_ubicarse(this, coord_rebote_x)){
-			direccion_x = -direccion_x;
-			coord = coord_rebote_x;
-		}else{
-			coord_rebote.sumar_abscisa(delta_x);
-			coord_rebote.sumar_ordenada(delta_y);
-			if(mapa->puede_ubicarse(this, coord_rebote){
+		}else{ 
+			coord_rebote_x.sumar_ordenada(delta_y);
+			if(mapa->puede_ubicarse(this, coord_rebote_x)){
 				direccion_x = -direccion_x;
-				direccion_y = -direccion_y;
-				coord = coord_rebote;
+				coord = coord_rebote_x;
+			}else{
+				coord_rebote.sumar_abscisa(delta_x);
+				coord_rebote.sumar_ordenada(delta_y);
+				if(mapa->puede_ubicarse(this, coord_rebote)){
+					direccion_x = -direccion_x;
+					direccion_y = -direccion_y;
+					coord = coord_rebote;
+				}
 			}
 		}
 	}
