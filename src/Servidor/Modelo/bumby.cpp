@@ -3,12 +3,14 @@
 #include <cstdlib>
 
 #define TIEMPO_MOVER 2
-#define TIEMPO_ATACAR 15
+#define TIEMPO_ATACAR 50
 #define CANT_DIRECCIONES 3
-#define AVANZAR_X 1
-#define RETROCEDER_X -1
+#define AVANZAR_X 3
+#define RETROCEDER_X 4
 #define BAJAR_Y 2
 #define BUMBY 2
+#define ANCHO 30
+#define ALTO 30
 
 enum direcciones_ataque{DERECHA_ABAJO, CENTRO_ABAJO, IZQUIERDA_ABAJO};
 enum estado_npc{MURIENDO};
@@ -20,6 +22,8 @@ arma(arma){
   t_ataque = 0;
   t_mover = 0;
   tipo = BUMBY;
+  alto = ALTO;
+  ancho = ANCHO;
   mover_bumby = new StrategyMoverBumby();
 }
 
@@ -30,14 +34,15 @@ void Bumby::atacar(int dir, Mapa* mapa){
 	switch(dir){
 		case DERECHA_ABAJO:
 			pos_inicial = coordenada.derecha(ancho/2).abajo(alto/2);
-			dir_x = RETROCEDER_X;
+			dir_x = AVANZAR_X;
 			break;
 		case CENTRO_ABAJO:
 			pos_inicial = coordenada.abajo(alto/2);
-			dir_x = AVANZAR_X;
+			//dir_x = AVANZAR_X;
 			break;
 		case IZQUIERDA_ABAJO:
 			pos_inicial = coordenada.izquierda(ancho/2).abajo(alto/2);
+			dir_x = RETROCEDER_X;
 			break;
 	}
 	Bala *bala = arma->atacar(dir_x, dir_y, pos_inicial);
