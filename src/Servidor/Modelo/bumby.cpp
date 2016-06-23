@@ -7,7 +7,7 @@
 #define CANT_DIRECCIONES 3
 #define AVANZAR_X 1
 #define RETROCEDER_X -1
-#define BAJAR_Y 1
+#define BAJAR_Y 2
 #define BUMBY 2
 
 enum direcciones_ataque{DERECHA_ABAJO, CENTRO_ABAJO, IZQUIERDA_ABAJO};

@@ -16,8 +16,8 @@
 
 #define AVANZA 1
 #define RETROCEDE -1
-#define SUBE -1
-#define BAJA 1
+//#define SUBE -1
+//#define BAJA 1
 
 Bala::Bala(int dir_x, int dir_y, Coordenada c, int tipo, int id):
 Elemento(c, tipo, id),
