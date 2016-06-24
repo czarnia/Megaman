@@ -2,7 +2,7 @@
 #include "bumby.h"
 
 #define VELOCIDAD 5
-#define TIEMPO_DIRECCION 0.1
+#define TIEMPO_DIRECCION 75
 
 enum movimientos{ARRIBA_DERECHA, ARRIBA_IZQUIERDA, ABAJO_DERECHA, ABAJO_IZQUIERDA};
 

@@ -1,8 +1,8 @@
 #include "strategy_mover_snipper.h"
 #include "snipper.h"
 
-#define VELOCIDAD 15
-#define TIEMPO_DIRECCION 0.5
+#define VELOCIDAD 18
+#define TIEMPO_DIRECCION 100
 
 enum direccion{DERECHA, IZQUIERDA};
 

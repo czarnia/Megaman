@@ -3,7 +3,7 @@
 
 #define IZQUIERDA -1
 #define SNIPPER 5
-#define TIEMPO_ESTADO 0.25
+#define TIEMPO_ESTADO 100
 
 #define ALTO 60
 #define ANCHO 30

@@ -2,7 +2,7 @@
 #include "bala.h"
 #include "arma_minion.h"
 
-#define TIEMPO_ATAQUE 40
+#define TIEMPO_ATAQUE 100
 #define TIPO_MET 4
 
 #define ALTO 30
