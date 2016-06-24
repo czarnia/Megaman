@@ -1,7 +1,7 @@
 #include "strategy_mover_personaje_pc.h"
 #include <iostream>
 
-#define MOVIMIENTO_MAX 20
+#define MOVIMIENTO_MAX 15
 enum movimientos{QUIETO, ARRIBA, ABAJO, DERECHA, IZQUIERDA, SALTAR};
 enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO};
@@ -17,21 +17,21 @@ void StrategyMoverPersonajePc::mover(Mapa *mapa, Personaje_pc *pj, float tiempo)
 	Coordenada coord_nueva = pj->coordenada;
 	switch(direccion){
 		case ARRIBA:
-			coord_nueva = pj->coordenada.arriba();
+			coord_nueva = pj->coordenada.arriba(MOVIMIENTO_MAX);
 			direccion = ARRIBA;
 			pj->estado_actual = ESCALANDO;
 			break;
 		case ABAJO:
-			coord_nueva = pj->coordenada.abajo();
+			coord_nueva = pj->coordenada.abajo(MOVIMIENTO_MAX);
 			direccion = ABAJO;
 			break;
 		case DERECHA:
-			coord_nueva = pj->coordenada.derecha();
+			coord_nueva = pj->coordenada.derecha(MOVIMIENTO_MAX);
 			direccion = DERECHA;
 			pj->estado_actual = CORRIENDO;
 			break;
 		case IZQUIERDA:
-			coord_nueva = pj->coordenada.izquierda();
+			coord_nueva = pj->coordenada.izquierda(MOVIMIENTO_MAX);
 			direccion = IZQUIERDA;
 			pj->estado_actual = CORRIENDO;
 			break;
