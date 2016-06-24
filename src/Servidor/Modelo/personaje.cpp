@@ -16,14 +16,10 @@
 
 #define VELOCIDAD 2
 #define VELOCIDAD_SALTO 2  //La velocidad se toma respecto de las divisiones del mapa: div/seg.
-#define ALTO 60
-#define ANCHO 30
 
 Personaje::Personaje(Mapa *mapa, Coordenada c, int id):
 id(id),
 coordenada(c){
-	alto = ALTO;
-	ancho = ANCHO;
 	tiempo_pasado = 0;
 	tipo = 0;
 	flotando = false;

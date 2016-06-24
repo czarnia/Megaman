@@ -5,11 +5,16 @@
 #define TIEMPO_ACCION 2
 #define TIPO_SPARKMAN 22
 
+#define ALTO 60
+#define ANCHO 30
+
 Sparkman::Sparkman(Mapa *mapa, Coordenada c, Arma_sparkman* arma, int id):
 Personaje_npc(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
   tipo = TIPO_SPARKMAN;
+  alto = ALTO;
+  ancho = ANCHO;
 }
 
 void Sparkman::atacar(int dir, Mapa* mapa){

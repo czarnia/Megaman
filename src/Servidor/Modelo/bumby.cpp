@@ -9,6 +9,7 @@
 #define RETROCEDER_X 4
 #define BAJAR_Y 2
 #define BUMBY 2
+
 #define ANCHO 30
 #define ALTO 30
 

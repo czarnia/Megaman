@@ -12,6 +12,9 @@
 #define TIEMPO_ACCION 0.4
 #define CANTIDAD_VIDAS 3
 
+#define ALTO 60
+#define ANCHO 30
+
 typedef std::map<int, StrategyMoverPersonajePc*>::iterator movimientosIt;
 enum estados_pc{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO};
@@ -30,6 +33,8 @@ Personaje_pc(mapa, c, id){
 	movimiento_megaman = new StrategyMoverMegaman();
 	movimiento_actual = movimiento_megaman;
 	estado_actual = IDLE;
+	ancho = ANCHO;
+	alto = ALTO;
 }
 /*
 void Megaman::update(float tiempo){

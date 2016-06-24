@@ -5,6 +5,9 @@
 #define TIEMPO_ATAQUE 40
 #define TIPO_MET 4
 
+#define ALTO 30
+#define ANCHO 30
+
 enum estados {MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO, USA_ESCUDO,  NO_USA_ESCUDO};
 
@@ -14,6 +17,8 @@ arma(arma){
   estado_actual = NO_USA_ESCUDO;
   tiempo_pasado = 0;
   tipo = TIPO_MET;
+	alto = ALTO;
+	ancho = ANCHO;
 }
 
 void Met::atacar(int dir, Mapa* mapa){

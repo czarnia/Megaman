@@ -8,12 +8,17 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 
+#define ALTO 60
+#define ANCHO 30
+
 Fireman::Fireman(Mapa *mapa, Coordenada c, Arma_fireman* arma, int id):
 Personaje_npc(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
   tipo = TIPO_FIREMAN;
   atacando = false;
+  alto = ALTO;
+  ancho = ANCHO;
 }
 
 void Fireman::atacar(int dir_x, Mapa* mapa){
@@ -39,7 +44,7 @@ void Fireman::atacar(int dir_x, Mapa* mapa){
 	bala3->notificar_observadores();
 }
 
-void Fireman::mover(float tiempo, Mapa* mapa){ } 
+void Fireman::mover(float tiempo, Mapa* mapa){ }
 
 void Fireman::recibir_ataque(Bala* ataque){
 	ataque->daniar(this);

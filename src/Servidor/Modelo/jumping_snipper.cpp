@@ -5,6 +5,9 @@
 #define IZQUIERDA -1
 #define JUMPING_SNIPPER 3
 
+#define ALTO 60
+#define ANCHO 30
+
 enum estados {MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO, ESCUDO_UP, ESCUDO_DOWN};
 
@@ -13,6 +16,8 @@ Snipper(mapa, c, arma, id){
   flotando = false;
   tiempo_pasado = 0;
   tipo = JUMPING_SNIPPER;
+	alto = ALTO;
+	ancho = ANCHO;
 }
 
 void Jumping_snipper::update(float tiempo, Mapa* mapa){

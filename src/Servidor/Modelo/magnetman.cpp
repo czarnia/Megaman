@@ -8,12 +8,17 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 
-Magnetman::Magnetman(Mapa *mapa, Coordenada c, 
+#define ALTO 60
+#define ANCHO 30
+
+Magnetman::Magnetman(Mapa *mapa, Coordenada c,
 Arma_magnetman* arma, int id):
 Personaje_npc(mapa, c, id),
 arma(arma){
 	tiempo_pasado = 0;
 	tipo = TIPO_MAGNETMAN;
+	alto = ALTO;
+	ancho = ANCHO;
 }
 
 void Magnetman::atacar(int dir, Mapa* mapa){
@@ -29,11 +34,10 @@ void Magnetman::atacar(int dir, Mapa* mapa){
 	}
 }
 
-void Magnetman::mover(float tiempo, Mapa* mapa){ 
+void Magnetman::mover(float tiempo, Mapa* mapa){
 	movimiento.mover(mapa, this, tiempo);
 }
 
 void Magnetman::recibir_ataque(Bala* ataque){}
 
 void Magnetman::update(float tiempo){}
-

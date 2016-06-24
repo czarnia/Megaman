@@ -8,11 +8,16 @@
 #define DERECHA 3
 #define IZQUIERDA 4
 
+#define ALTO 60
+#define ANCHO 30
+
 Ringman::Ringman(Mapa *mapa, Coordenada c, Arma_ringman* arma, int id):
 Personaje_npc(mapa, c, id),
 arma(arma){
   tiempo_pasado = 0;
   tipo = TIPO_RINGMAN;
+  alto = ALTO;
+  ancho = ANCHO;
 }
 
 void Ringman::atacar(int dir, Mapa* mapa){
@@ -29,7 +34,7 @@ void Ringman::atacar(int dir, Mapa* mapa){
 }
 
 void Ringman::mover(float tiempo, Mapa* mapa){
-	//movimiento.mover(mapa, this, tiempo); 
+	//movimiento.mover(mapa, this, tiempo);
 }
 
 void Ringman::recibir_ataque(Bala* ataque){

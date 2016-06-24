@@ -5,6 +5,9 @@
 #define SNIPPER 5
 #define TIEMPO_ESTADO 0.25
 
+#define ALTO 60
+#define ANCHO 30
+
 enum estados {MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO, ESCUDO_UP, ESCUDO_DOWN};
 
@@ -14,6 +17,8 @@ arma(arma){
   estado_actual = ESCUDO_DOWN;
   tiempo_pasado = 0;
   tipo = SNIPPER;
+	alto = ALTO;
+	ancho = ANCHO;
 }
 
 bool Snipper::esta_bajo_escudo(){
