@@ -1,10 +1,11 @@
 #include "strategy_mover_fireman.h"
 #include "fireman.h"
 
-#define TIEMPO_SALTO 5
+#define TIEMPO_SALTO 1000
+#define TIEMPO_MOVER 200
 #define GRAVEDAD 5
 #define VELOCIDAD_Y 60
-#define VELOCIDAD_X 5
+#define VELOCIDAD_X 7
 #define VELOCIDAD_SALTO 25
 
 
@@ -14,9 +15,11 @@ enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 StrategyMoverFireman::StrategyMoverFireman():
 velocidad_x(0),
 velocidad_y(0),
-tiempo_salto(0){}
+tiempo_salto(0),
+tiempo_mover(0){}
 
 void StrategyMoverFireman::mover(Mapa *mapa, Fireman *pj, float tiempo){
+	tiempo_mover += tiempo;
 	bool personaje_en_aire = mapa->esta_en_aire(pj);
 	if (personaje_en_aire){
 		pj->flotando = true;
@@ -25,22 +28,31 @@ void StrategyMoverFireman::mover(Mapa *mapa, Fireman *pj, float tiempo){
 		pj->flotando = false;
 		//Espero para volver a saltar.
 		tiempo_salto += tiempo;
-	}
-	if (personaje_en_aire){
-		velocidad_y -= GRAVEDAD; //valor gravedad.
-	}
-	if ((tiempo_salto >= TIEMPO_SALTO) && !pj->flotando){
-		velocidad_y += VELOCIDAD_Y;
-		tiempo_salto -= TIEMPO_SALTO;
-		Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(pj);
-		int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
-		if (delta_x > 0){
-			velocidad_x = VELOCIDAD_X;
-		}else if (delta_x < 0){ //Si justo es 0 estan la misma posicion!
-			velocidad_x = -VELOCIDAD_X;
+		if (pj->activo && tiempo_mover >= TIEMPO_MOVER){
+			tiempo_mover = 0;
+			perseguir_enemigo(mapa, pj);
 		}
 	}
+	if (pj->flotando){
+		velocidad_y -= GRAVEDAD; //valor gravedad.
+	}
+	if ((tiempo_salto >= TIEMPO_SALTO) && !pj->flotando && pj->activo){
+		velocidad_y += VELOCIDAD_Y;
+		pj->estado_actual = SALTANDO;
+		tiempo_salto = 0;
+		perseguir_enemigo(mapa, pj);
+	}
 	actualizar_coordenada(mapa, pj);
+}
+
+void StrategyMoverFireman::perseguir_enemigo(Mapa *mapa, Fireman *pj){
+	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(pj);
+	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+	if (delta_x > 0){
+		velocidad_x = VELOCIDAD_X;
+	}else if (delta_x < 0){ 
+		velocidad_x = -VELOCIDAD_X;
+	}
 }
 
 void StrategyMoverFireman::actualizar_coordenada(Mapa *mapa,
@@ -56,7 +68,6 @@ Fireman *pj){
 	}
 	if (velocidad_y > 0){
 		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_SALTO);
-		pj->estado_actual = SALTANDO;
 	}
 	if (velocidad_y < 0){
 		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_SALTO);

@@ -8,7 +8,7 @@
 #include <iostream>
 
 #define TIEMPO_MOVER 0.5
-#define VELOCIDAD 20
+#define VELOCIDAD 10
 #define ARRIBA 1
 #define ABAJO 2
 #define DERECHA 3
@@ -16,8 +16,6 @@
 
 #define AVANZA 1
 #define RETROCEDE -1
-//#define SUBE -1
-//#define BAJA 1
 
 Bala::Bala(int dir_x, int dir_y, Coordenada c, int tipo, int id):
 Elemento(c, tipo, id),

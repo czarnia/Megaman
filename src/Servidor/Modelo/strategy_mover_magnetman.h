@@ -12,7 +12,9 @@ class StrategyMoverMagnetman : public StrategyMover{
 		int velocidad_x;
 		int velocidad_y;
 		float tiempo_salto;
-
+		float tiempo_mover;
+		
+		void perseguir_enemigo(Mapa *mapa, Magnetman *pj);
 		void actualizar_coordenada(Mapa *mapa, Magnetman *pj);
 	public:
 		//Crea un StrategyMoverMagnetman.

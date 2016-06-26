@@ -12,7 +12,9 @@ class StrategyMoverRingman : public StrategyMover{
 		int velocidad_x;
 		int velocidad_y;
 		float tiempo_salto;
-
+		float tiempo_mover;
+		
+		void perseguir_enemigo(Mapa *mapa, Ringman *pj);
 		void actualizar_coordenada(Mapa *mapa, Ringman *pj);
 	public:
 		//Crea un StrategyMoverRingman.

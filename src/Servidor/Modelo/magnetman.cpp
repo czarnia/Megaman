@@ -2,7 +2,7 @@
 #include "bala.h"
 #include "arma_magnetman.h"
 
-#define TIEMPO_ATAQUE 2
+#define TIEMPO_ATAQUE 200
 #define TIPO_MAGNETMAN 21
 
 #define DERECHA 3
@@ -40,4 +40,14 @@ void Magnetman::mover(float tiempo, Mapa* mapa){
 
 void Magnetman::recibir_ataque(Bala* ataque){}
 
-void Magnetman::update(float tiempo){}
+void Magnetman::update(float tiempo, Mapa *mapa){
+	tiempo_pasado += tiempo;
+	mover(tiempo, mapa);
+	if (tiempo_pasado < TIEMPO_ATAQUE|| !activo){
+		return;
+	}
+	tiempo_pasado = 0;
+	//Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(this);
+	//int delta_x = c_enemigo.obtener_abscisa()-coordenada.obtener_abscisa();
+	//atacar(delta_x, mapa);
+}

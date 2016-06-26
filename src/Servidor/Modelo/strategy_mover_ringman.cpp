@@ -1,11 +1,15 @@
 #include "strategy_mover_ringman.h"
 #include "ringman.h"
+#include <stdlib.h>
 
-#define TIEMPO_SALTO 20
+#define TIEMPO_SALTO 2000
 #define GRAVEDAD 5
 #define VELOCIDAD_Y 60
-#define VELOCIDAD_X 5
+#define VELOCIDAD_X 6
 #define VELOCIDAD_SALTO 25
+#define VELOCIDAD_SALTO_ALTO 50
+#define SALTO_ALTO 0
+#define TIEMPO_MOVER 500
 
 enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 		IDLE, ESCALANDO};
@@ -13,10 +17,12 @@ enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
 StrategyMoverRingman::StrategyMoverRingman():
 velocidad_x(0),
 velocidad_y(0),
-tiempo_salto(0){}
+tiempo_salto(0),
+tiempo_mover(0){}
 
 void StrategyMoverRingman::mover(Mapa *mapa, Ringman *pj,
 float tiempo){
+	tiempo_mover += tiempo;
 	bool personaje_en_aire = mapa->esta_en_aire(pj);
 	if (personaje_en_aire){
 		pj->flotando = true;
@@ -25,22 +31,32 @@ float tiempo){
 		pj->flotando = false;
 		//Espero para volver a saltar.
 		tiempo_salto += tiempo;
-	}
-	if (personaje_en_aire){
-		velocidad_y -= GRAVEDAD; //valor gravedad.
-	}
-	if ((tiempo_salto >= TIEMPO_SALTO) && !pj->flotando){
-		velocidad_y += VELOCIDAD_Y;
-		tiempo_salto -= TIEMPO_SALTO;
-		Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(pj);
-		int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
-		if (delta_x > 0){
-			velocidad_x = VELOCIDAD_X;
-		}else if (delta_x < 0){ //Si justo es 0 estan la misma posicion!
-			velocidad_x = -VELOCIDAD_X;
+		if (pj->activo && tiempo_mover >= TIEMPO_MOVER){
+			tiempo_mover = 0;
+			perseguir_enemigo(mapa, pj);
 		}
 	}
+	if (pj->flotando){
+		velocidad_y -= GRAVEDAD; //valor gravedad.
+	}
+	if ((tiempo_salto >= TIEMPO_SALTO) && !pj->flotando && pj->activo){
+		size_t tipo_salto = rand() % 3;
+		velocidad_y += (tipo_salto == SALTO_ALTO)? VELOCIDAD_SALTO_ALTO : VELOCIDAD_SALTO;
+		pj->estado_actual = SALTANDO;
+		tiempo_salto = 0;
+		perseguir_enemigo(mapa, pj);
+	}
 	actualizar_coordenada(mapa, pj);
+}
+
+void StrategyMoverRingman::perseguir_enemigo(Mapa *mapa, Ringman *pj){
+	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(pj);
+	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+	if (delta_x > 0){
+		velocidad_x = VELOCIDAD_X;
+	}else if (delta_x < 0){ 
+		velocidad_x = -VELOCIDAD_X;
+	}
 }
 
 void StrategyMoverRingman::actualizar_coordenada(Mapa *mapa,
@@ -55,8 +71,7 @@ Ringman *pj){
 		pj->estado_actual = CORRIENDO;
 	}
 	if (velocidad_y > 0){
-		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_SALTO);
-		pj->estado_actual = SALTANDO;
+		nueva_coordenada = nueva_coordenada.arriba(velocidad_y);
 	}
 	if (velocidad_y < 0){
 		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_SALTO);

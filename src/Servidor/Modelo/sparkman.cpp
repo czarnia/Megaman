@@ -33,7 +33,7 @@ void Sparkman::recibir_ataque(Bala* ataque){
   ataque->daniar(this);
 }
 
-void Sparkman::update(float tiempo){
+void Sparkman::update(float tiempo, Mapa *mapa){
   tiempo_pasado += tiempo;
   mover(tiempo, mapa);
   if (tiempo_pasado < TIEMPO_ACCION){

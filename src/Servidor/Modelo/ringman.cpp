@@ -34,20 +34,20 @@ void Ringman::atacar(int dir, Mapa* mapa){
 }
 
 void Ringman::mover(float tiempo, Mapa* mapa){
-	//movimiento.mover(mapa, this, tiempo);
+	movimiento.mover(mapa, this, tiempo);
 }
 
 void Ringman::recibir_ataque(Bala* ataque){
 	ataque->daniar(this);
 }
 
-void Ringman::update(float tiempo){
-	mover(tiempo, mapa);
+void Ringman::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
+	mover(tiempo, mapa);
 	if (tiempo_pasado < TIEMPO_ATAQUE){
 		return;
 	}
 	//atacando = !atacando;
-	tiempo_pasado -= TIEMPO_ATAQUE;
-	atacar(0, mapa);
+	//tiempo_pasado -= TIEMPO_ATAQUE;
+	//atacar(0, mapa);
 }

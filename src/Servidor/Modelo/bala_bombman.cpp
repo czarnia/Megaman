@@ -15,8 +15,8 @@
 
 #define TIEMPO_MOVER 1
 #define TIEMPO_SUBIDA 3
-#define VELOCIDAD_X 2
-#define VELOCIDAD_Y 2
+#define VELOCIDAD_X 20
+#define VELOCIDAD_Y 6
 #define TIPO_BALA_BOMBMAN 30
 #define PERDIDA_VIDA_BOSS 10
 #define DERECHA 3

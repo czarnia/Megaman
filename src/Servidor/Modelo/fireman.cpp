@@ -44,21 +44,24 @@ void Fireman::atacar(int dir_x, Mapa* mapa){
 	bala3->notificar_observadores();
 }
 
-void Fireman::mover(float tiempo, Mapa* mapa){ }
+void Fireman::mover(float tiempo, Mapa* mapa){
+	movimiento.mover(mapa, this, tiempo);
+}
 
 void Fireman::recibir_ataque(Bala* ataque){
 	ataque->daniar(this);
 }
 
-void Fireman::update(float tiempo){
+void Fireman::update(float tiempo, Mapa* mapa){
 	tiempo_pasado += tiempo;
+	mover(tiempo, mapa);
 	if (tiempo_pasado < TIEMPO_ACCION){
 		return;
 	}
 	atacando = !atacando;
 	tiempo_pasado -= TIEMPO_ACCION;
-	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(this);
-	int delta_x = c_enemigo.obtener_abscisa()-(coordenada.obtener_abscisa());
-	int dir = delta_x < 0? IZQUIERDA : DERECHA;
-	atacar(dir, mapa);
+	//Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(this);
+	//int delta_x = c_enemigo.obtener_abscisa()-(coordenada.obtener_abscisa());
+	//int dir = delta_x < 0? IZQUIERDA : DERECHA;
+	//atacar(dir, mapa);
 }

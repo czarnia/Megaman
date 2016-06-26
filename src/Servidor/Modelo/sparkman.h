@@ -25,7 +25,7 @@ class Sparkman: public Personaje_npc{
 		//Dada una Bala*, recibe un ataque.
 		virtual void recibir_ataque(Bala* ataque);
 		//Dado un tiempo, realiza un update.
-		virtual void update(float tiempo);
+		virtual void update(float tiempo, Mapa *mapa);
 
 		friend class StrategyMoverSparkman;
 	private:

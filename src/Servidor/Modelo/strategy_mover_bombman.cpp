@@ -1,10 +1,10 @@
 #include "strategy_mover_bombman.h"
 #include "bombman.h"
 
-#define TIEMPO_SALTO 5
-#define GRAVEDAD 5
+#define TIEMPO_SALTO 1000
+#define GRAVEDAD 10
 #define VELOCIDAD_Y 60
-#define VELOCIDAD_X 5
+#define VELOCIDAD_X 3 
 #define VELOCIDAD_SALTO 25
 
 enum estados{MURIENDO, DISPARANDO, RESPAWNEANDO, CORRIENDO, SALTANDO,
@@ -24,22 +24,30 @@ void StrategyMoverBombman::mover(Mapa *mapa, Bombman *pj, float tiempo){
 		pj->flotando = false;
 		//Espero para volver a saltar.
 		tiempo_salto += tiempo;
-	}
-	if (personaje_en_aire){
-		velocidad_y -= GRAVEDAD; //valor gravedad.
-	}
-	if ((tiempo_salto >= TIEMPO_SALTO) && !pj->flotando){
-		velocidad_y += VELOCIDAD_Y;
-		tiempo_salto -= TIEMPO_SALTO;
-		Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(pj);
-		int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
-		if (delta_x > 0){
-			velocidad_x = VELOCIDAD_X;
-		}else if (delta_x < 0){ //Si justo es 0 estan la misma posicion!
-			velocidad_x = -VELOCIDAD_X;
+		if (pj->activo){
+			perseguir_enemigo(mapa, pj);
 		}
 	}
+	if (pj->flotando){
+		velocidad_y -= GRAVEDAD; //valor gravedad.
+	}
+	if ((tiempo_salto >= TIEMPO_SALTO) && !pj->flotando && pj->activo){
+		velocidad_y += VELOCIDAD_Y;
+		pj->estado_actual = SALTANDO;
+		tiempo_salto = 0;
+		perseguir_enemigo(mapa, pj);
+	}
 	actualizar_coordenada(mapa, pj);
+}
+
+void StrategyMoverBombman::perseguir_enemigo(Mapa *mapa, Bombman *pj){
+	Coordenada c_enemigo = mapa->obtener_coordenada_enemigo(pj);
+	int delta_x = c_enemigo.obtener_abscisa()-(pj->coordenada.obtener_abscisa());
+	if (delta_x > 0){
+		velocidad_x = VELOCIDAD_X;
+	}else if (delta_x < 0){ 
+		velocidad_x = -VELOCIDAD_X;
+	}
 }
 
 void StrategyMoverBombman::actualizar_coordenada(Mapa *mapa,
@@ -55,7 +63,6 @@ Bombman *pj){
 	}
 	if (velocidad_y > 0){
 		nueva_coordenada = nueva_coordenada.arriba(VELOCIDAD_SALTO);
-		pj->estado_actual = SALTANDO;
 	}
 	if (velocidad_y < 0){
 		nueva_coordenada = nueva_coordenada.abajo(VELOCIDAD_SALTO);
