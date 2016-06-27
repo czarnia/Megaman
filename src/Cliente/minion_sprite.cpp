@@ -133,11 +133,11 @@ SDL_Rect* Minion_sprite::get_crop(){
         return idleAnimation[round(currentFrame)];
 
     }else if (currentState == SHIELD_UP){
-        //currentFrame += 0.01;
-        //if((unsigned)round(currentFrame) == shieldUpAnimation.size()){
-        //    currentFrame = 0;
-        //}
-        //return shieldUpAnimation[round(currentFrame)];
+        currentFrame += 0.01;
+        if((unsigned)round(currentFrame) == shieldUpAnimation.size()){
+            currentFrame = 0;
+        }
+        return shieldUpAnimation[round(currentFrame)];
     }else if (currentState == JUMPING){
         currentFrame = 0;
         return jumpingAnimation[currentFrame];

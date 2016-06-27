@@ -275,7 +275,7 @@ void gameStateStart::mainLoop(){
             renderer->updateCamPos(playerData.first);
         /// Verifico si la cola de eventos provenientes del servidor esta vacia
 
-        if (!receiver->r_queue.empty()){
+        while (!receiver->r_queue.empty()){
             /// Si hay algun evento, lo proceso
             std::pair<int,int> coord;
 

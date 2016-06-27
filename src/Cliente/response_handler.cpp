@@ -236,8 +236,8 @@ void ResponseHandler::createObject(int &objectType, int &objectID, std::pair<int
 
 void ResponseHandler::changeHUD(int bar, int &barID, int &ammount){
     ammount = ammount /10;
-    if( ammount < 9)
-        renderer->static_sprites[FRONT][bar+barID]->setAmmount(ammount);
+    if( ammount < 9);
+    //    renderer->static_sprites[FRONT][bar+barID]->setAmmount(ammount);
 }
 
 void ResponseHandler::executeAction(int &objectType, int &objectID, int &action){
